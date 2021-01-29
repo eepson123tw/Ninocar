@@ -1,0 +1,86 @@
+// color---------------------------------------------------------------
+$primary: #FADD61;
+$primary-light: #FFF9ED;
+$secondary: #E59807;
+$secondary-dark: #B57700;
+
+$coffee: #522613;
+$red: #AC0404;
+$green: #38A707;
+$blue: #3490B5;
+
+$white: #ffffff;
+$gray-100: #F8F8F8;
+$gray-300: #F2F2F2; //bg-grid-color
+$gray-500: #D8D8D8; //disabled button color
+$gray-700: #9D9D9D; //placeholder
+$gray-900: #646464;
+$black: #333333; //body-color
+
+
+$colors: (
+  primary:$primary,
+  primary-light:$primary-light,
+  secondary:$secondary,
+  secondary-dark:$secondary-dark,
+  coffee:$coffee,
+  red:$red,
+  blue:$blue,
+  green:$green,
+  white: $white,
+  gray-100:$gray-100,
+  gray-300:$gray-300,
+  gray-500:$gray-500,
+  gray-700:$gray-700,
+  gray-900:$gray-900,
+  black: $black,
+);
+
+
+
+// font---------------------------------------------------------------
+$font-family-base: 'Roboto', 'Noto Sans TC', sans-serif;;
+$font-size-base: 10px;
+$font_weight: 400;
+$base_color : $gray-900;
+$line-height-base: 1.4;
+
+
+// spacing---------------------------------------------------------------
+$space-unit : 4px;
+
+
+// grid------------------------------------------------------------------
+$gutter: 40px;
+$grid-column : 12;
+
+$gutter-lg: 28px;
+$grid-lg-column : 6;
+
+$gutter-sm: 12px;
+$grid-sm-column : 4;
+
+// container-------------------------------------------------------------
+$container-max-widths: 1400px;
+$container-padding: 40px;
+
+ 
+$container-lg-padding: 20px;
+$container-sm-padding: 16px;
+ 
+
+// breakpoints----------------------------------------------------
+$break-point-xs: 414px;  //mobile-xs
+$break-point-sm: 576px;  //mobile
+$break-point-md: 768px;  //pad
+$break-point-lg: 992px;  //pad-pro
+$break-point-xl: 1200px; //notebook
+
+
+$break-points: (
+  xs: $break-point-xs, 
+  sm: $break-point-sm, 
+  md: $break-point-md, 
+  lg: $break-point-lg, 
+  xl: $break-point-xl, 
+);
