@@ -468,6 +468,22 @@ h6, .h6 {
   line-height: 2;
 }
 
+.w-25 {
+  width: 25%;
+}
+
+.w-33 {
+  width: 33%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
 .pt-0 {
   padding-top: 0px;
 }
