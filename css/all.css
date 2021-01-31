@@ -154,6 +154,10 @@ h6, .h6 {
   font-size: 14px;
 }
 
+.font-lg {
+  font-size: 36px;
+}
+
 .font-s {
   font-size: 12px;
 }
@@ -165,63 +169,63 @@ h6, .h6 {
 }
 
 .bg-primary {
-  color: #FADD61;
+  background-color: #FADD61;
 }
 
 .bg-primary-light {
-  color: #FFF9ED;
+  background-color: #FFF9ED;
 }
 
 .bg-secondary {
-  color: #E59807;
+  background-color: #E59807;
 }
 
 .bg-secondary-dark {
-  color: #B57700;
+  background-color: #B57700;
 }
 
 .bg-coffee {
-  color: #522613;
+  background-color: #522613;
 }
 
 .bg-red {
-  color: #AC0404;
+  background-color: #AC0404;
 }
 
 .bg-blue {
-  color: #3490B5;
+  background-color: #3490B5;
 }
 
 .bg-green {
-  color: #38A707;
+  background-color: #38A707;
 }
 
 .bg-white {
-  color: #ffffff;
+  background-color: #ffffff;
 }
 
 .bg-gray-100 {
-  color: #F8F8F8;
+  background-color: #F8F8F8;
 }
 
 .bg-gray-300 {
-  color: #F2F2F2;
+  background-color: #F2F2F2;
 }
 
 .bg-gray-500 {
-  color: #D8D8D8;
+  background-color: #D8D8D8;
 }
 
 .bg-gray-700 {
-  color: #9D9D9D;
+  background-color: #9D9D9D;
 }
 
 .bg-gray-900 {
-  color: #646464;
+  background-color: #646464;
 }
 
 .bg-black {
-  color: #333333;
+  background-color: #333333;
 }
 
 .d-block {

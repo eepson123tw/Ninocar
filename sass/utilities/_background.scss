@@ -1,5 +1,5 @@
 @each $key,$value in $colors {
     .bg-#{$key} {
-        color: #{$value};
+        background-color: #{$value};
     }
 }
