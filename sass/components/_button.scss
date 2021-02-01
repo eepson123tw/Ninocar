@@ -1,0 +1,51 @@
+.btn{
+  @extend.h3;
+  border-radius: 8px;
+  color: $white;
+  background-color: $secondary;
+  padding: 16px 32px;
+  min-width: 160px;
+  @include rwd-sm{
+    min-width: 128px;
+  }
+
+  cursor: pointer;
+  &:hover{
+    background-color: $secondary-dark;
+  }
+
+
+  &--fluld{
+    width: 100%;
+  }
+
+  &--outline{
+    background: transparent;
+    border: 1px solid $secondary;
+    color: $secondary;
+    &:hover{
+      background-color: $gray-100;
+    }
+  }
+
+  &--ghost{
+    color: $black;
+    background-color: transparent;
+    &:hover{
+      background-color: $gray-300;
+    }
+  }
+
+  &--disabled{
+    background-color: $gray-500;
+    &:hover{
+      background-color: $gray-500;
+    }
+  }
+
+  &--icon{
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+

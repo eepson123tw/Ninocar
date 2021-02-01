@@ -34,6 +34,9 @@ h3,.h3 {
     @include rwd-sm {
         font-size: $font-size-base * 1.6; 
     }
+    @include rwd-xs {
+        font-size: $font-size-base * 1.4; 
+    }
 }
 
 h4,.h4 {
