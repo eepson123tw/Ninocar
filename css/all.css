@@ -346,10 +346,14 @@ h6, .h6 {
   display: none;
 }
 
+.progress__nomal:nth-child(4)::before {
+  width: 180%;
+}
+
 .progress__nomal::before {
   content: "";
-  width: 100%;
-  height: 5px;
+  width: 210%;
+  height: 3px;
   position: absolute;
   background-color: #D8D8D8;
   z-index: -1;
@@ -366,8 +370,8 @@ h6, .h6 {
 
 .progress__active::before {
   content: "";
-  width: 100%;
-  height: 5px;
+  width: 210%;
+  height: 3px;
   position: absolute;
   background-color: #E59807;
   z-index: -1;
