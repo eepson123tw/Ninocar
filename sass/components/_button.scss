@@ -5,6 +5,10 @@
   background-color: $secondary;
   padding: 16px 32px;
   min-width: 160px;
+  @include rwd-md{
+    padding: 12px 24px;
+    min-width: 128px;
+  }
   @include rwd-sm{
     min-width: 128px;
   }
@@ -24,7 +28,7 @@
     border: 1px solid $secondary;
     color: $secondary;
     &:hover{
-      background-color: $gray-100;
+      background-color: $primary-light;
     }
   }
 
@@ -33,6 +37,17 @@
     background-color: transparent;
     &:hover{
       background-color: $gray-300;
+    }
+  }
+
+  &--link{
+    color: $coffee;
+    text-decoration: underline;
+    background-color: transparent;
+    padding: 0;
+    &:hover{
+      color: lighten($coffee,20%);
+      background-color: transparent;
     }
   }
 

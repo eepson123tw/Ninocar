@@ -19,7 +19,7 @@ $justifyList : (
     'end' : flex-end);
 
 
-@each $key,$val in $flexList {
+@each $key,$val in $justifyList {
     .justify-content-#{$key} {
         justify-content: #{$val};
     }
