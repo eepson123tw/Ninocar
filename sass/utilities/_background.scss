@@ -3,3 +3,8 @@
         background-color: #{$value};
     }
 }
+@each $key,$value in $series-colors {
+    .bg-series-#{$key} {
+        background-color: #{$value};
+    }
+}
