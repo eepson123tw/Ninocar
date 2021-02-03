@@ -185,6 +185,43 @@ h6, .h6 {
   }
 }
 
+.block {
+  background-color: #fff;
+}
+
+.block__header {
+  padding: 28px 40px;
+  border-bottom: 1px solid #E59807;
+}
+
+@media (max-width: 992px) {
+  .block__header {
+    padding: 20px 24px;
+  }
+}
+
+.block__header--nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.block__header__title {
+  font-weight: 500;
+}
+
+.block__body {
+  padding: 48px;
+}
+
 .btn {
   border-radius: 8px;
   color: #ffffff;
@@ -266,41 +303,22 @@ h6, .h6 {
   padding: 4px 24px;
 }
 
-.block {
-  background-color: #fff;
+.logo {
+  background: url("https://github.com/hexschool/webLayoutTraining1st/blob/master/perfume-week6/d%E2%80%99Perfume@2x.png?raw=true") no-repeat center center/cover;
+  text-indent: 101%;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 128px;
+  height: 38px;
 }
 
-.block__header {
-  padding: 28px 40px;
-  border-bottom: 1px solid #E59807;
+.logo--white {
+  background: url("https://github.com/hexschool/webLayoutTraining1st/blob/master/perfume-week6/d%E2%80%99Perfumewhite@2x.png?raw=true") no-repeat center center/cover;
 }
 
-@media (max-width: 992px) {
-  .block__header {
-    padding: 20px 24px;
-  }
-}
-
-.block__header--nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.block__header__title {
-  font-weight: 500;
-}
-
-.block__body {
-  padding: 48px;
+.icon-close {
+  width: 52px;
+  height: 52px;
 }
 
 .bg-primary {
