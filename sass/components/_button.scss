@@ -1,66 +1,80 @@
-.btn{
+.btn {
   @extend.h3;
   border-radius: 8px;
   color: $white;
   background-color: $secondary;
-  padding: 16px 32px;
   min-width: 160px;
-  @include rwd-md{
-    padding: 12px 24px;
+  padding: 16px 0px;
+  white-space: nowrap;
+  cursor: pointer;
+  @include rwd-md {
     min-width: 128px;
-  }
-  @include rwd-sm{
-    min-width: 128px;
+    padding: 12px 0px;
   }
 
-  cursor: pointer;
-  &:hover{
+  @include rwd-sm {
+    min-width: 100px;
+  }
+
+  @include rwd-xs {
+    min-width: 72px;
+  }
+
+  &:hover {
     background-color: $secondary-dark;
   }
 
-
-  &--fluld{
-    width: 100%;
-  }
-
-  &--outline{
+  &--outline {
     background: transparent;
     border: 1px solid $secondary;
     color: $secondary;
-    &:hover{
+
+    &:hover {
       background-color: $primary-light;
     }
   }
 
-  &--ghost{
+  &--ghost {
     color: $black;
     background-color: transparent;
-    &:hover{
+
+    &:hover {
       background-color: $gray-300;
     }
   }
 
-  &--link{
+  &--link {
+    @extend .h4;
     color: $coffee;
     text-decoration: underline;
     background-color: transparent;
     padding: 0;
-    &:hover{
-      color: lighten($coffee,20%);
+
+    &:hover {
+      opacity: .8;
       background-color: transparent;
     }
   }
 
-  &--disabled{
+  &--disabled {
     background-color: $gray-500;
-    &:hover{
+
+    &:hover {
       background-color: $gray-500;
     }
   }
 
-  &--icon{
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
 
+
+
+  &--fluld {
+    width: 100%;
+  }
+
+  &--small{
+      min-width: auto;
+      padding: 4px 24px;
+  }
+
+
+}
