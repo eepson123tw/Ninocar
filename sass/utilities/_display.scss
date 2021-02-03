@@ -1,8 +1,8 @@
 $displayList : (
-    'block' : 'block',
-    'flex' : 'flex',
-    'inbl' : 'inline-block',
-    'none' : 'none');
+    'block' : block,
+    'flex' : flex,
+    'inbl' : inline-block,
+    'none' : none);
 
 // ex: .d-block { display: block; }
 @each $key,$val in $displayList {
@@ -13,10 +13,10 @@ $displayList : (
 
 
 $positionList : (
-    're' : 'relative',
-    'ab' : 'absolute',
-    'fixed': 'fixed',
-    'sticky': 'sticky');
+    're' : relative,
+    'ab' : absolute,
+    'fixed': fixed,
+    'sticky': sticky);
 
 
 @each $key,$val in $positionList {

@@ -61,6 +61,8 @@ body {
   font-family: "Roboto", "Noto Sans TC", sans-serif;
   line-height: 1.4;
   color: #333333;
+  background-size: 20px 20px;
+  background-image: linear-gradient(90deg, #F2F2F2 1px, transparent 1px), linear-gradient(180deg, #F2F2F2 1px, transparent 1px);
 }
 
 a {
@@ -84,24 +86,24 @@ button {
 }
 
 /* ----------------------------------------font size */
-h1, .h1 {
+h1, .h1, .block__header__title {
   font-size: 32px;
 }
 
 @media (max-width: 992px) {
-  h1, .h1 {
+  h1, .h1, .block__header__title {
     font-size: 28px;
   }
 }
 
 @media (max-width: 768px) {
-  h1, .h1 {
+  h1, .h1, .block__header__title {
     font-size: 24px;
   }
 }
 
 @media (max-width: 576px) {
-  h1, .h1 {
+  h1, .h1, .block__header__title {
     font-size: 20px;
   }
 }
@@ -243,35 +245,38 @@ h6, .h6 {
 }
 
 .d-block {
-  display: "block";
+  display: block;
 }
 
 .d-flex {
-  display: "flex";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .d-inbl {
-  display: "inline-block";
+  display: inline-block;
 }
 
 .d-none {
-  display: "none";
+  display: none;
 }
 
 .po-re {
-  position: "relative";
+  position: relative;
 }
 
 .po-ab {
-  position: "absolute";
+  position: absolute;
 }
 
 .po-fixed {
-  position: "fixed";
+  position: fixed;
 }
 
 .po-sticky {
-  position: "sticky";
+  position: -webkit-sticky;
+  position: sticky;
 }
 
 @media (max-width: 768px) {
@@ -3384,5 +3389,24 @@ h6, .h6 {
 .btn--icon {
   padding-right: 0;
   padding-left: 0;
+}
+
+.block {
+  background-color: #fff;
+}
+
+.block__header {
+  padding: 28px 40px;
+  border-bottom: 1px solid #E59807;
+}
+
+@media (max-width: 992px) {
+  .block__header {
+    padding: 20px 24px;
+  }
+}
+
+.block__header__title {
+  font-weight: 500;
 }
 /*# sourceMappingURL=all.css.map */
