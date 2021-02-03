@@ -1,8 +1,8 @@
 
 $flexList : (
-    'wrap' : 'wrap',
-    'column' : 'column',
-    'reverse' : 'reverse');
+    'wrap' : wrap,
+    'column' : column,
+    'reverse' : reverse);
 
 
 @each $key,$val in $flexList {
@@ -13,10 +13,10 @@ $flexList : (
 
 
 $justifyList : (
-    'center' : 'center',
-    'between' : 'space-between',
-    'around' : 'space-around',
-    'end' : 'flex-end');
+    'center' : center,
+    'between' : space-between,
+    'around' : space-around,
+    'end' : flex-end);
 
 
 @each $key,$val in $flexList {
@@ -27,10 +27,10 @@ $justifyList : (
 
 
 $alignItemsList : (
-    'center' : 'center',
-    'stretch' : 'stretch',
-    'start' : 'flex-start',
-    'end' : 'flex-end');
+    'center' : center,
+    'stretch' : stretch,
+    'start' : flex-start,
+    'end' : flex-end);
 
 @each $key,$val in $alignItemsList {
     .align-items-#{$key} {
