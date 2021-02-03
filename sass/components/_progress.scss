@@ -1,14 +1,14 @@
 .progress {
     display: flex;
     min-width: 472px;
-    margin: 80px auto; //這是頁面空間配置，不會寫在元件sass裡
+    margin: 80px auto;
     justify-content: space-around;
     text-align: center;
     color: white;
     position: relative;
     font-size: xx-large;
     &__nomal {
-        padding: 0 14px; //14px看起來比較圓誒
+        padding: 0 16px;
         background-color: $gray-500;
         border-radius: 100%;
         position: relative;
@@ -34,7 +34,7 @@
         }
     }
     &__active {
-        padding: 0 14px; //progress__item progress__item--active
+        padding: 0 16px;
         border-radius: 100%;
         background-color: $secondary;
         position: relative;
@@ -44,7 +44,7 @@
             height: 3px;
             position: absolute;
             background-color: $secondary;
-            z-index: -1; //這樣背景圖格線跑到前面惹耶 
+            z-index: -1;
             top: 50%;
             left: 100%;
         }
@@ -53,9 +53,9 @@
         width: 200%;
         position: absolute;
         font-size: small;
-        font-weight: 400;//預設就是400 regular惹
+        font-weight: 400;
         top: 110%;
         left: -50%;
-        color: black;//抱歉，全設計稿的黑色都是333，已經寫在base檔，所以不用另外設 
+        color: black;
     }
 }

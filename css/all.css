@@ -336,7 +336,7 @@ h6, .h6 {
 }
 
 .progress__nomal {
-  padding: 0 14px;
+  padding: 0 16px;
   background-color: #D8D8D8;
   border-radius: 100%;
   position: relative;
@@ -362,7 +362,7 @@ h6, .h6 {
 }
 
 .progress__active {
-  padding: 0 14px;
+  padding: 0 16px;
   border-radius: 100%;
   background-color: #E59807;
   position: relative;
@@ -4882,4 +4882,3 @@ h6, .h6 {
     margin-right: -6px;
   }
 }
-/*# sourceMappingURL=all.css.map */
