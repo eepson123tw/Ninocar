@@ -1,34 +1,34 @@
 .card{
   
-  &-img-top {
-    margin-bottom: 16px;
-  }
+      &-img-top {
+        margin-bottom: 16px;
+      }
 
-  &-title {
-    font-size: 20px;
-    margin-bottom: 8px;
-}
+      &-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
 
-&__details {
-    display: flex;
-    justify-content: space-between;
-}
+    &__details {
+        display: flex;
+        justify-content: space-between;
+    }
 
-&__price {
-    font-size: 20px;
-    font-weight: bold;
-    color: $coffee;
-  } 
+    &__price {
+        font-size: 20px;
+        font-weight: bold;
+        color: $coffee;
+      } 
+  
+  
+  &__details{
+      display: flex;
+      margin-bottom: 10px;
+    }
 
-
-&__details{
-  display: flex;
-  margin-bottom: 10px;
-}
-
-&__link {
-    @extend .btn,
-    .btn--link,
-    .text-secondary;
-}
+    &__link {
+        @extend .btn,
+        .btn--link,
+        .text-secondary;
+    }
 }
