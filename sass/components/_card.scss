@@ -1,11 +1,9 @@
 .card{
-    width: 270px;
   
       &-img-top {
-        width: 16rem;
-        height: 14rem;
-        margin-bottom: 15px;
+        margin-bottom: 16px;
       }
+
       &-title {
         font-size: 20px;
       }
@@ -18,7 +16,7 @@
       } 
   }
   
-  .ol, ul{
+  &__details{
       display: flex;
       margin-bottom: 10px;
     }
