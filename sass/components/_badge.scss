@@ -13,11 +13,11 @@
     @include size(64px,64px); //card
     font-size: 28px;
     font-weight: 700;
-    line-height: 1;
+    line-height: .9;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     color:white;
     border-radius: 8px;
     &--lg{
