@@ -1,17 +1,24 @@
 .progress {
     display: flex;
-    min-width: 472px;
-    margin: 80px auto;
-    justify-content: space-around;
     text-align: center;
-    color: white;
+    color: $white;
     position: relative;
-    font-size: xx-large;
-    &__nomal {
-        padding: 0 16px;
-        background-color: $gray-500;
-        border-radius: 100%;
+    @extend .h3;
+    &__item {
+        @include circle(42px, 42px);
+        margin: 0 50px;
         position: relative;
+        background-color: $gray-500;
+        line-height: 42px;
+        &::before {
+            content: "";
+            width: 250%;
+            height: 3px;
+            position: absolute;
+            background-color: $gray-500;
+            top: 50%;
+            left: 100%;
+        }
         &:last-child {
             &::before {
                 display: none;
@@ -19,43 +26,27 @@
         }
         &:nth-child(4) {
             &::before {
-                width: 180%;
+                width: 250%;
             }
         }
-        &::before {
-            content: "";
-            width: 210%;
-            height: 3px;
-            position: absolute;
-            background-color: $gray-500;
-            z-index: -1;
-            top: 50%;
-            left: 100%;
-        }
-    }
-    &__active {
-        padding: 0 16px;
-        border-radius: 100%;
-        background-color: $secondary;
-        position: relative;
-        &::before {
-            content: "";
-            width: 210%;
-            height: 3px;
-            position: absolute;
+        &__active {
             background-color: $secondary;
-            z-index: -1;
-            top: 50%;
-            left: 100%;
+            &::before {
+                content: "";
+                width: 250%;
+                height: 3px;
+                position: absolute;
+                background-color: $secondary;
+                top: 50%;
+                left: 100%;
+            }
         }
     }
     &__text {
-        width: 200%;
+        width: 500%;
         position: absolute;
-        font-size: small;
-        font-weight: 400;
         top: 110%;
-        left: -50%;
-        color: black;
+        left: -200%;
+        color: $black;
     }
 }
