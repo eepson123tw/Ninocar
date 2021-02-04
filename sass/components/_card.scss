@@ -1,34 +1,35 @@
-.card{
-  
-      &-img-top {
-        margin-bottom: 16px;
-      }
+.card {
+  background-color: #fff;
 
-      &-title {
-        font-size: 20px;
-        margin-bottom: 8px;
-    }
+  &__body {
+    padding: 20px;
+  }
 
-    &__details {
-        display: flex;
-        justify-content: space-between;
-    }
+  &__title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
 
-    &__price {
-        font-size: 20px;
-        font-weight: bold;
-        color: $coffee;
-      } 
-  
-  
-  &__details{
-      display: flex;
-      margin-bottom: 10px;
-    }
+  &__details {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__link {
-        @extend .btn,
-        .btn--link,
-        .text-secondary;
-    }
+  &__price {
+    font-size: 20px;
+    font-weight: bold;
+    color: $coffee;
+  }
+
+
+  &__details {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    @extend .btn,
+    .btn--link,
+    .text-secondary;
+  }
 }
