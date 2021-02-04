@@ -6,30 +6,29 @@
 
       &-title {
         font-size: 20px;
-      }
-    
-      &-price {
-        width: 100px;
+        margin-bottom: 8px;
+    }
+
+    &__details {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__price {
         font-size: 20px;
-        font-weight: bolder;
+        font-weight: bold;
         color: $coffee;
       } 
-  }
+  
   
   &__details{
       display: flex;
       margin-bottom: 10px;
     }
-  
-  .btn--link{
-    font-size: 18px;
-    text-decoration:none;
-    text-align: right;
-  }
-  
-  .btn--fluld{
-    width: 16rem;
-    height: 3rem;
-    font-size: 16px;
-    line-height: 1.5;
-  }
+
+    &__link {
+        @extend .btn,
+        .btn--link,
+        .text-secondary;
+    }
+}

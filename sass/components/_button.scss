@@ -46,6 +46,7 @@
   &--link {
     @extend .h4;
     color: $coffee;
+    min-width: auto;
     text-decoration: underline;
     background-color: transparent;
     padding: 0;
