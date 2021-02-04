@@ -4,12 +4,21 @@
     color: $white;
     position: relative;
     @extend .h3;
-    &__nomal {
+    &__item {
         @include circle(42px, 42px);
-        background-color: $gray-500;
         margin: 0 50px;
         position: relative;
+        background-color: $gray-500;
         line-height: 42px;
+        &::before {
+            content: "";
+            width: 250%;
+            height: 3px;
+            position: absolute;
+            background-color: $gray-500;
+            top: 50%;
+            left: 100%;
+        }
         &:last-child {
             &::before {
                 display: none;
@@ -20,30 +29,17 @@
                 width: 250%;
             }
         }
-        &::before {
-            content: "";
-            width: 250%;
-            height: 3px;
-            position: absolute;
-            background-color: $gray-500;
-            top: 50%;
-            left: 100%;
-        }
-    }
-    &__active {
-        @include circle(42px, 42px);
-        background-color: $secondary;
-        line-height: 42px;
-        position: relative;
-        margin: 0 50px;
-        &::before {
-            content: "";
-            width: 250%;
-            height: 3px;
-            position: absolute;
+        &__active {
             background-color: $secondary;
-            top: 50%;
-            left: 100%;
+            &::before {
+                content: "";
+                width: 250%;
+                height: 3px;
+                position: absolute;
+                background-color: $secondary;
+                top: 50%;
+                left: 100%;
+            }
         }
     }
     &__text {
