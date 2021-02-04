@@ -1,8 +1,23 @@
 .card {
   background-color: #fff;
 
-  &__body {
-    padding: 20px;
+  &__header{
+    position: relative;
+  }
+
+  &__carID{
+    @extend .carID;
+    @include rwd-lg{
+      @include size(80px, 80px);
+      font-size: 36px;
+    }
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  &__body{
+    padding: 16px;
   }
 
   &__title {
@@ -13,18 +28,13 @@
   &__details {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
 
   &__price {
     font-size: 20px;
     font-weight: bold;
     color: $coffee;
-  }
-
-
-  &__details {
-    display: flex;
-    margin-bottom: 10px;
   }
 
   &__link {
