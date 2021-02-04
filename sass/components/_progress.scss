@@ -3,7 +3,7 @@
     text-align: center;
     color: $white;
     position: relative;
-    @extend .h3;
+    font-size: 24px;
     &__item {
         @include circle(42px, 42px);
         margin: 0 50px;
@@ -29,7 +29,7 @@
                 width: 250%;
             }
         }
-        &__active {
+        &--active {
             background-color: $secondary;
             &::before {
                 content: "";
