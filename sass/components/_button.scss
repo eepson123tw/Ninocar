@@ -78,28 +78,4 @@
       min-width: auto;
       padding: 4px 24px;
   }
-
-
-  &--big{
-    @extend.h4;
-    min-width: 334px;
-    padding: 16px 0px;
-    border-radius: 8px;
-  }
-
-  &--circle{
-    @extend.h1;
-    min-width: 80px;
-    min-height: 80px;
-    border-radius: 50%;
-    background-color: $primary;
-    margin: 0 20px;
-
-    color: $coffee;
-    font-weight: 700;
-
-    &:hover{
-      background-color: $primary-light;
-    }
-  }
 }
