@@ -1,37 +1,28 @@
-.card{
-    width: 270px;
-  
-      &-img-top {
-        width: 16rem;
-        height: 14rem;
-        margin-bottom: 15px;
-      }
-      &-title {
-        font-size: 20px;
-      }
-    
-      &-price {
-        width: 100px;
-        font-size: 20px;
-        font-weight: bolder;
-        color: $coffee;
-      } 
-  }
-  
-  .ol, ul{
-      display: flex;
-      margin-bottom: 10px;
+.card {
+    background-color: #fff;
+
+    &__body {
+        padding: 20px;
     }
-  
-  .btn--link{
-    font-size: 18px;
-    text-decoration:none;
-    text-align: right;
-  }
-  
-  .btn--fluld{
-    width: 16rem;
-    height: 3rem;
-    font-size: 16px;
-    line-height: 1.5;
-  }
+    &__title{
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    &__details {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__price {
+        font-size: 20px;
+        font-weight: bold;
+        color: $coffee;
+    }
+
+    &__link {
+        @extend .btn,
+        .btn--link,
+        .text-secondary;
+    }
+}
