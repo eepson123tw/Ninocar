@@ -34,21 +34,66 @@
 }
 
 .pin {
-    @include size(80px, 80px);
-    border-radius: 50%;
-    color: $green;
-    border: 2px solid $green;
-    text-align: center;
-    box-shadow: 
-    inset 0 0 0 -15px $green, 
-    inset 0 0 0 -10px white,
-    inset 0 0 0 -5px $green;
+    stroke: $red;
+    fill: none;
 
-    span {
-        outline: 1px solid black;
-        font-weight: bold;
-        line-height: 80px;
-        padding: 4px;
+
+    &--green {
+        stroke: $green;
+
+        .pin__text {
+            fill: $green;
+        }
+    }
+
+    &--blue {
+        stroke: $series-PA;
+        .pin__text {
+            fill: $series-PA;
+        }
+    }
+
+    &--gray {
+        stroke: $series-PM;
+        .pin__text {
+            fill: $series-PM;
+        }
+    }
+
+    &--yellow {
+        stroke: $series-TA;
+        .pin__text {
+            fill: $series-TA;
+        }
+    }
+
+    &--coffee {
+        stroke: $coffee;
+        .pin__text {
+            fill: $coffee;
+        }
+    }
+
+
+    &__text {
+        font-weight: 500;
+        stroke: none;
+        fill: $red;
+        font-size: 12px;
+    }
+
+    &__text--lg {
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        fill: $red;
+    }
+
+    &--disabled{
+        stroke: $gray-500;
+        .pin__text {
+            fill: $gray-500;
+        }
     }
 
 }
