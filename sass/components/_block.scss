@@ -1,6 +1,6 @@
 .block {
     background-color: #fff;
-
+    
     &__header {
         padding: 28px 40px;
         border-bottom: 1px solid $secondary;
@@ -23,6 +23,6 @@
     }
 
     &__body{
-        padding: 48px;
+        padding-top: 20px;
     }
 }
