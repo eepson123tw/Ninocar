@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "安裝套件": "npm install",
-    "全部任務": "gulp all",
-    "並行任務": "gulp paral"
+    "執行監聽": "gulp w"
   },
   "author": "",
   "license": "ISC",
