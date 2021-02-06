@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
-  <g transform="translate(-6.51 -147.018)">
-      <path d="M30.194,187.949A19.009,19.009,0,1,1,49.2,168.94,19.03,19.03,0,0,1,30.194,187.949Zm0-33.018A14.009,14.009,0,1,0,44.2,168.94,14.026,14.026,0,0,0,30.194,154.931Z" fill="#522613"/>
-      <path d="M51.736,193.931a2.489,2.489,0,0,1-1.767-.733L39.9,183.135A2.5,2.5,0,0,1,43.44,179.6L53.5,189.663a2.5,2.5,0,0,1-1.768,4.268Z" fill="#522613"/>
+  <g>
+    <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hover-stroke-coffee"/>
+    <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
   </g>
 </svg>
