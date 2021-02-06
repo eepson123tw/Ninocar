@@ -21,14 +21,27 @@
     align-items: center;
     color: white;
     border-radius: 8px;
+    z-index: 10;
 
     &--lg {
-        @include size(120px, 120px); //product-details
+        @include size(120px, 120px); //product-details/dictionary-display
         font-size: 48px;
+        @include rwd-lg{
+            @include size(100px, 100px); 
+            font-size: 40px;
+        }
+        @include rwd-md{
+            @include size(80px, 80px); 
+            font-size: 36px;
+        }
+        @include rwd-sm{
+            @include size(64px, 64px); 
+            font-size: 28px;
+        }
     }
 
     &--md {
-        @include size(80px, 80px); //dictionary
+        @include size(80px, 80px); //dictionary-post
         font-size: 36px;
     }
 }

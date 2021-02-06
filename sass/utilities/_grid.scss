@@ -22,29 +22,34 @@
     }
   }
   
-  
   @mixin makeCol($breakpoint: null,$gutter:40px,$grid-column:12) {
-      @for $i from 0 through $grid-column {
-        @if ($i == 0) {
-          .col {
-            padding-left: $gutter / 2;
-            padding-right: $gutter / 2;
-            flex-basis: 0;
-            flex-grow: 1;
-            max-width: 100%;
-            position: relative;
-          }
-        }  @else {
-            .col-#{$breakpoint}#{$i} {
-            position: relative;
-            padding-left: $gutter / 2;
-            padding-right: $gutter / 2;
-            flex: 0 0 ($i / $grid-column) * 100%;
-            max-width: ($i / $grid-column) * 100%;
-          }
+    @for $i from 0 through $grid-column {
+      @if ($i == 0) {
+        .col {
+          padding-left: $gutter / 2;
+          padding-right: $gutter / 2;
+          flex-basis: 0;
+          flex-grow: 1;
+          max-width: 100%;
+          position: relative;
+        }
+        .offset-#{$i}{
+          margin-left: 0;
+        }
+      }  @else {
+          .col-#{$breakpoint}#{$i} {
+          position: relative;
+          padding-left: $gutter / 2;
+          padding-right: $gutter / 2;
+          flex: 0 0 ($i / $grid-column) * 100%;
+          max-width: ($i / $grid-column) * 100%;
+        }
+        .offset-#{$breakpoint}#{$i}{
+          margin-left: calc( #{$i} / #{$grid-column} * 100%);
         }
       }
     }
+  }
   
   @include makeCol(null,$gutter,$grid-column);
   

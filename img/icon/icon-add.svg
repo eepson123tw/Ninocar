@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+  <g id="icon-add" transform="translate(-6.51 -223.548)">
+    <rect id="Area_ICON:feather_search_SIZE:LARGE_STYLE:STYLE1_2" data-name="Area ICON:feather search SIZE:LARGE STYLE:STYLE1 2" width="52" height="52" transform="translate(6.51 223.548)" fill="rgba(0,0,0,0)"/>
+    <g id="icon-add-2" data-name="icon-add">
+      <path id="Path_5282" data-name="Path 5282" d="M47.51,252.048h-30a2.5,2.5,0,0,1,0-5h30a2.5,2.5,0,1,1,0,5Z" fill="#522613"/>
+      <path id="Path_5283" data-name="Path 5283" d="M32.51,267.048a2.5,2.5,0,0,1-2.5-2.5v-30a2.5,2.5,0,1,1,5,0v30A2.5,2.5,0,0,1,32.51,267.048Z" fill="#522613"/>
+    </g>
+  </g>
+</svg>

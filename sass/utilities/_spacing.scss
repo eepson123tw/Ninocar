@@ -140,6 +140,13 @@
         margin-left: auto;
     }
 
+    @include rwd-xs{
+        .mx-xs-auto{
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
     //--------------------------------------custom spacing
     @each $level in 25 {
         .pt-#{$level} {

@@ -60,7 +60,18 @@ $alignItemsList : (
     .flex-sm-column {
         flex-direction: column;
     }
+    .flex-sm-wrap {
+        flex-wrap: wrap;
+    }
     .order-sm-1 {
         order: -1;
     }
+}
+
+@include rwd-xs {
+
+    .flex-xs-wrap {
+        flex-wrap: wrap;
+    }
+
 }
