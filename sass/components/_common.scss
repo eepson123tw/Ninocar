@@ -13,10 +13,7 @@
 }
 
 .icon{
+    cursor: pointer;
     display: inline-block;
-    @include size(16px, 16px);
-    @include rwd-md{
-        @include size(12px, 12px);
-    }
 
 }
