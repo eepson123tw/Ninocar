@@ -2,15 +2,15 @@
 專題火速建造中...
 
 組員
-
-
-*@bensoen     憬鏞
-*@Meitaku0519 銘澤
-*@nodel33031  國博
-*@tempura327  莉婷
-*@Wei Lin     維娟
-*@XING-76     欣儒
-*@eepson123tw 周杰
+|git帳號|名字|
+|---|---|
+|@bensoen    |憬鏞
+|@Meitaku0519 |銘澤
+|@nodel33031  |國博
+|@tempura327  |莉婷
+|@Wei Lin     |維娟
+|@XING-76     |欣儒
+|@eepson123tw |周杰
 
 
 
