@@ -1,0 +1,21 @@
+$sizeList : (
+    '25' : 25%,
+    '30' : 30%,
+    '33': 33%,
+    '50' : 50%,
+    '70' : 70%,
+    '75' : 75%,
+    '100' : 100%,);
+
+    @each $key,$val in $sizeList {
+        .w-#{$key} {
+            width: #{$val};
+        }
+    }
+    @include rwd-md {
+        @each $key,$val in $sizeList {
+            .w-md-#{$key} {
+                width: #{$val};
+            }
+        }
+    }
