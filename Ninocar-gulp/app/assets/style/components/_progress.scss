@@ -1,0 +1,52 @@
+.progress {
+    display: flex;
+    text-align: center;
+    color: $white;
+    position: relative;
+    font-size: 24px;
+    &__item {
+        @include circle(42px, 42px);
+        margin: 0 50px;
+        position: relative;
+        background-color: $gray-500;
+        line-height: 42px;
+        &::before {
+            content: "";
+            width: 250%;
+            height: 3px;
+            position: absolute;
+            background-color: $gray-500;
+            top: 50%;
+            left: 100%;
+        }
+        &:last-child {
+            &::before {
+                display: none;
+            }
+        }
+        &:nth-child(4) {
+            &::before {
+                width: 250%;
+            }
+        }
+        &--active {
+            background-color: $secondary;
+            &::before {
+                content: "";
+                width: 250%;
+                height: 3px;
+                position: absolute;
+                background-color: $secondary;
+                top: 50%;
+                left: 100%;
+            }
+        }
+    }
+    &__text {
+        width: 500%;
+        position: absolute;
+        top: 110%;
+        left: -200%;
+        color: $black;
+    }
+}

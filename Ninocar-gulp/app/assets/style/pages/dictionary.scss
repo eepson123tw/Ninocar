@@ -1,0 +1,135 @@
+@import "../helpers/variables";
+@import "../helpers/mixin";
+@import "../helpers/rwd";
+
+.dictionary {
+
+    .block {
+        background-color: transparent;
+
+        &__header {
+            background-color: #fff;
+        }
+    }
+
+    .display {
+        width: 65%;
+        margin: 0 auto;
+        position: relative;
+
+        @include rwd-xl {
+            width: 75%;
+        }
+
+        @include rwd-md {
+            width: 90%;
+        }
+
+        &__title {
+            font-size: 100px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow:
+                1px 1px 2px $coffee,
+                -1px 1px 2px $coffee,
+                1px -1px 2px $coffee,
+                -1px -1px 2px $coffee;
+            color: white;
+
+            @include rwd-lg {
+                font-size: 80px;
+            }
+
+            @include rwd-md {
+                font-size: 68px;
+            }
+
+            @include rwd-sm {
+                font-size: 48px;
+            }
+
+            @include rwd-xs {
+                font-size: 36px;
+            }
+        }
+
+        &__img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 75%;
+
+            @include rwd-sm {
+                width: 90%;
+            }
+        }
+    }
+
+    .post {
+        background-color: #fff;
+        height: 100%;
+        display: flex;
+        padding: 12px;
+        border: 1px solid $gray-500;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 5px 5px 10px $gray-300;
+        }
+
+        &--active {
+            outline: 2px solid $secondary;
+        }
+
+        &__text {
+            width: 30%;
+            padding-top: 8px;
+            margin-right: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .carID {
+            @include size(56px, 56px);
+            font-size: 24px;
+        }
+
+        &__pic {
+            width: 70%;
+            position: relative;
+
+            >img {
+                position: relative;
+                top: 50%;
+                transform: (translateY(- 50%));
+            }
+
+            .pin {
+                position: absolute;
+                bottom: 4px;
+                right: 4px;
+            }
+        }
+    }
+
+
+
+}
+
+
+//======之後放swiper的css
+.swiper-pagination{
+    position: absolute;
+    top: 50%;
+    
+    &-prev{
+        left: -80px;
+    }
+    
+    &-next{
+        right: -80px;
+    }
+}
