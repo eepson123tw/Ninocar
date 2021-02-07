@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
-<script src="../node_modules/jquery/dist/jquery.js"></script> 
+<script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>Document</title>
@@ -12,7 +12,7 @@
 
 <body>
     <div id="app">
-        <the-header></the-header>
+        <vue-header></vue-header>
         <main class="container dictionary pt-10">
             <!-- display -->
             <section class="block mb-10">
@@ -34,10 +34,10 @@
                                 <span class="d-inbl mb-5">{{targetProduct.eng}} {{targetProduct.year}}</span>
                                 <p class="h4 mb-5">{{targetProduct.description}}</p>
                                 <span :class="badgeClass">{{chBadge}}</span>
-                                <span v-if="targetProduct.series == 2" class="badge badge--primary">本月主打</span>
+                                <span v-if="this.targetProduct.extraLabel== 2 || this.targetProduct.extraLabel== 1" :class="extraLabel.className">{{extraLabel.text}}</span>
                             </div>
                             <div class="text-right mx-xs-auto">
-                                <svg class="pin" width="120" height="120" viewbox="0 0 80 80">
+                                <svg :class="getPinClass" width="120" height="120" viewBox="0 0 80 80">
                                     <circle cx="40" cy="40" r="30" stroke-width="4" />
                                     <circle cx="40" cy="40" r="25" stroke-width="2" />
                                     <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
@@ -45,15 +45,7 @@
                                     <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
                                 </svg>
                                 <!-- pin 收藏大師-->
-                                <svg class="pin pin--gray" width="120" height="120" viewbox="0 0 80 80">
-                                    <circle cx="40" cy="40" r="30" stroke-width="4" />
-
-                                    <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                                    <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                                    <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                                    <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                                    <text x="15" y="45" class="pin__text">收藏大師</text>
-                                </svg>
+                              <pin :disabled="!memberHasPin" :series="targetProduct.series">
                             </div>
                         </div>
                         <img src="./assets/img/icon/icon-left.svg" alt="prev"
@@ -80,42 +72,19 @@
                     <!-- li -->
                     <post v-for="(product,index) in products" v-bind="product"
                         @click.native.prevent="handleClickPost(index)"
-                        :active="product.productId === targetProduct.productId"></post>
+                        :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
                 </ul>
             </section>
         </main>
     </div>
 
-    @@include('./components/Header.html')
-    <script>
-        Vue.component('post', {
-            template: `
-        <li class="col-4 col-lg-3 col-sm-4 mb-5">
-            <div :class="postClass">
-                <div class="post__text">
-                    <h2 class="h6 mb-1">{{name}}</h2>
-                    <h3 class="h6">{{eng}}</h3>
-                <div :class="postCarIDClass">{{series}}<span>{{seriesId}}</span></div>
-                </div>
-                <div class="post__pic">
-                    <img :src="imgURL">
-                </div>
-            </div>
-        </li>
-            `,
-            props: ['name', 'eng', 'series', 'seriesId', 'productId', 'imgURL', 'active'],
-            computed: {
-                postCarIDClass() {
-                    return `carID bg-series-${this.series}`
-                },
-                postClass() {
-                    return {
-                        post: true,
-                        'post--active': this.active,
-                    }
-                },
-            }
-        });
+    @@include('./components/VueHeader.html')
+    @@include('./components/Pin.html')
+    @@include('./pages/DictionaryPage/DictionaryPost.html');
+    @@include('./pages/DictionaryPage/DictionaryPostPin.html');
+
+
+    <script>   
         new Vue({
             el: '#app',
             data: { //變數存放的地方
@@ -129,7 +98,7 @@
                         productId: '123',
                         year: 2007,
                         description: '中置引擎超級跑車，有著跨時空的前衛感',
-                        extraLabel: 2,
+                        extraLabel: 1,
                     },
                     {
                         name: '豐田 PRIUS 香港警車',
@@ -166,9 +135,10 @@
                     productId: '123',
                     year: 2007,
                     description: '中置引擎超級跑車，有著跨時空的前衛感',
-                    extraLabel: 2,
+                    extraLabel: 1, 
                 },
-                loading: true,
+                memberOwnProductIdList:['120','121'],
+                memberHasPin: true,
             },
             computed: {
                 carIDClass() {
@@ -177,6 +147,9 @@
                 badgeClass() {
                     return `badge bg-series-${this.targetProduct.series} mr-2`
                 },
+                getPinClass(){
+                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId)? 'pin':'pin pin--disabled' 
+                },  
                 chBadge() {
                     const seriesNames = {
                         BS: '巴士系',
@@ -190,19 +163,27 @@
                     }
                     return seriesNames[this.targetProduct.series]
                 },
-                // extraBadge() {
-                //     const extraLabels = {
-                //         1: '期間限定',
-                //         2: '點數限定',
-                //     }
-                //     if (this.targetProduct.extraLabel )
-                // }
+                extraLabel() {
+                    if (this.targetProduct.extraLabel === 1) {
+                        return {
+                           text: '期間限定',
+                           className: 'badge badge--primary'};
+                    } else if (this.targetProduct.extraLabel === 2) {
+                        return {
+                           text: '點數限定',
+                           className: 'badge bg-blue'};
+                    }else {
+                        return {}
+                    }
+                },
             },
             methods: {
                 handleClickPost(index) {
                     this.targetProduct = this.products[index];
+                },
+                isPostPin(theProductId){
+                    return this.memberOwnProductIdList.indexOf(theProductId);
                 }
-
             }
         });
     </script>
