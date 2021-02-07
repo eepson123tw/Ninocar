@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/index.css"> 
+<script src="../node_modules/jquery/dist/jquery.js"></script> 
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./assets/js/all.js"></script>
+<title>dictionary</title>
+</head>
+
+<body>
+    <div id="app">
+        @@include('./components/Header.html') 
+        <!-- your code here... -->
+    </div>
+
+</body>
+
+
+<script>
+    new Vue({
+        el: '#app', 
+        data: {     
+            message: 'Hello, VueJS!',
+        },
+    });
+</script>
+</html>
