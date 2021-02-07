@@ -25,6 +25,17 @@
             width: 90%;
         }
 
+        &__cover{
+            position: relative;
+            min-height: 400px;
+            @include rwd-lg {
+                min-height: 360px;
+            }
+            @include rwd-md {
+                min-height: auto;
+            }
+        }
+
         &__title {
             font-size: 100px;
             line-height: 1.2;
