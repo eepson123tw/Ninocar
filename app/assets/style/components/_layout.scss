@@ -1,0 +1,34 @@
+.header{
+    width: 100%;
+    background-color: $primary;
+    position: fixed;
+    z-index: 1000;
+}
+
+.link--login {
+    font-size: 24px;
+    color: $coffee;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 2px solid $coffee;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary-light;
+    }
+}
+
+.link-group {
+    position: fixed;
+    right: calc((100% - 1400px) / 2 - 52px);
+    @include rwd(1348px){
+        right: 8px;
+    }
+    bottom: 8px;
+
+    &__link {
+        border-radius: 50%;
+        background-color: $primary;
+    }
+}

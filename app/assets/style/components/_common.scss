@@ -27,18 +27,3 @@
         stroke: none;
     }
 }
-
-
-.login {
-    font-size: 24px;
-    color: $coffee;
-    background-color: transparent;
-    border-radius: 8px;
-    border: 2px solid $coffee;
-    padding: 8px 16px;
-    cursor: pointer;
-
-    &:hover {
-        background-color: $primary-light;
-    }
-}
