@@ -1,8 +1,14 @@
-.header{
+.header {
     width: 100%;
     background-color: $primary;
     position: fixed;
     z-index: 1000;
+}
+
+.link {
+    &:hover {
+        opacity: .7;
+    }
 }
 
 .link--login {
@@ -22,13 +28,35 @@
 .link-group {
     position: fixed;
     right: calc((100% - 1400px) / 2 - 52px);
-    @include rwd(1348px){
+
+    @include rwd(1348px) {
         right: 8px;
     }
+
     bottom: 8px;
 
     &__link {
         border-radius: 50%;
         background-color: $primary;
     }
+}
+
+.footer {
+    background-color: $primary;
+    color: $coffee;
+
+    &__title {
+        @extend .h3;
+        padding-bottom: 8px;
+        border-bottom: 2px dotted $coffee;
+        margin-bottom: 12px;
+    }
+}
+
+.copyright {
+    @extend  .h3;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px dotted $coffee;
 }

@@ -10,7 +10,9 @@
 .icon {
     cursor: pointer;
     display: inline-block;
-
+    &__link:hover {
+        opacity: .7;
+    }
     &:hover .hover-fill-coffee {
         fill: $coffee;
     }
