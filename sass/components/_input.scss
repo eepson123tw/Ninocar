@@ -1,40 +1,54 @@
-.input {
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    color: $gray-700;
-    outline: none;
-    border: 1px solid $gray-700;
-    margin-bottom: 5px;
-    @extend h4;
-    &:focus {
-        border: 1px solid $gray-700;
-    }
-    &__text {
-        float: left;
+.form {
+    &__input {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        color: $gray-900;
+        outline: none;
+        border: 1px solid #CBCBCB;
+        margin-bottom: 5px;
         @extend h4;
         &:focus {
-            border: 1px solid $gray-700;
+            border: 1px solid $blue;
         }
-        &--waring {
-            color: $red;
-            float: right;
-        }
-    }
-    &--waring {
-        border: 1px solid $red;
-        &:focus {
+        &--warning {
             border: 1px solid $red;
+            &:focus {
+                border: 1px solid $red;
+            }
         }
-    }
-    &--sucess {
-        border: 1px solid $green;
-        &:focus {
+        &--success {
             border: 1px solid $green;
+            &:focus {
+                border: 1px solid $green;
+            }
         }
     }
-    &--membership {
-        border: 1px solid $blue;
+    &__text {
+        margin-bottom: 5px;
+        @extend h4;
+        float: left;
+        &--warning {
+            @extend h5;
+            float: right;
+            color: $red;
+        }
+    }
+    &__section {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__select {
+        width: calc(45%);
+        padding: 5px;
+        border-radius: 5px;
+        color: $gray-900;
+        outline: none;
+        border: 1px solid #CBCBCB;
+        margin-bottom: 5px;
+        margin-bottom: 10px;
+        @extend h4;
         &:focus {
             border: 1px solid $blue;
         }
