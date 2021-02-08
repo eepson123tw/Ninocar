@@ -2,22 +2,19 @@
     &__shadow {
         background-color: #0808084D;
         display: flex;
-        width: 100%;
-        height: 100%;
         justify-content: center;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
     }
     &__group {
         position: absolute;
         display: none;
         padding: 20px 0px 100px;
         background-color: $white;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
+        z-index: 2;
+        top: 10%;
     }
     &__header {
         // background-color: $black;

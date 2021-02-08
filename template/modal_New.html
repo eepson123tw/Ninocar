@@ -4,43 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/all.css">
 <title>Document</title>
+
 </head>
 
 <body>
-    <div class="container">
 
-        <!-- your code here... -->
-        <div class="row">
-            <button class="btn js__modal">點擊開啟</button>
-        </div>
-        <div class="row">
-            <div class="modal__shadow">
-                <div class="modal__group col-6 col-lg-4 col-xs-4">
-                    <div class="modal__header">
-                        <div class="modal__close">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon">
-                                <g transform="translate(0 0.47)">
-                                  <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                  <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                </g>
-                              </svg>
-                        </div>
-                        <h2 class="modal__title">
-                            新增地址
-                        </h2>
-                    </div>
-                    <div class="modal__body">
-                        <img src="../img/pic/0.png" class="modal__img" alt="">
-                        <p class="modal__content">更新完成</p>
-                        <p class="modal__text">本商品為會員點數限定販售，如需購買，請先登入或註冊</p>
-                    </div>
-                    <div class="modal__footer">
-                        <button class="btn btn--fluid btn--outline">查看我的訂單</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+    <!-- <div class="row">
             <div class="modal__group col-6 col-lg-4 col-xs-4">
                 <div class="modal__header">
                     <div class="modal__close">
@@ -69,60 +38,121 @@
                         <button class="btn ml-5 ">完成</button>
                     </div>
                 </div>
+            </div> -->
+
+
+    <div class="modal__shadow">
+        <div class="container">
+
+            <div class="modal__group col-12 col-lg-6 col-xs-4">
+                <div class="modal__header">
+                    <div class="modal__close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon">
+                            <g transform="translate(0 0.47)">
+                              <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                              <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                            </g>
+                          </svg>
+                    </div>
+                    <h2 class="modal__title">
+                        新增地址
+                    </h2>
+                </div>
+                <div class="modal__body">
+                    <img src="../img/pic/0.png" class="modal__img" alt="">
+                    <p class="modal__content">更新完成</p>
+                    <p class="modal__text">本商品為會員點數限定販售，如需購買，請先登入或註冊</p>
+                </div>
+                <div class="modal__footer">
+                    <button class="btn btn--fluid btn--outline">查看我的訂單</button>
+                </div>
             </div>
 
         </div>
+    </div>
+    <div class="container">
 
+        <!-- your code here... -->
+        <div class="row mt-20 ml-20">
+            <button class="btn js__modal">點擊開啟</button>
+        </div>
+    </div>
 
-        <script>
-            ;
-            (function() {
+    <script>
+        ;
+        (function() {
 
-                const modalbtn = document.querySelector('.js__modal');
-                const shadow = document.querySelector('.modal__shadow');
-                const modal = document.querySelectorAll('.modal__group');
-                const closebtn = document.querySelector('.modal__close');
+            const modalbtn = document.querySelector('.js__modal');
+            const shadow = document.querySelector('.modal__shadow');
+            const modal = document.querySelectorAll('.modal__group');
+            const closebtn = document.querySelector('.modal__close');
 
-                let active = false;
+            let active = false;
 
-                modalbtn.addEventListener('click', () => {
+            modalbtn.addEventListener('click', () => {
 
-                    active = true;
+                active = true;
 
-                    if (active) {
-                        let {
-                            width,
-                            height
-                        } = window.screen;
+                if (active) {
+                    let {
+                        width,
+                        height
+                    } = window.screen;
 
-                        shadow.style.width = `${width}px`;
-                        shadow.style.height = `${height}px`;
+                    let {
+                        innerWidth,
+                        innerHeight
+                    } = window;
 
-                        modal.forEach((item) => {
-                            item.style.display = 'block';
-                        })
-                    }
-
-
-
-                })
-
-                closebtn.addEventListener('click', () => {
-
-                    shadow.style.width = `0px`;
-                    shadow.style.height = `0px`;
+                    shadow.style.width = `${innerWidth}px`;
+                    shadow.style.height = `${innerHeight}px`;
 
                     modal.forEach((item) => {
-                        item.style.display = 'none';
+                        item.style.display = 'block';
                     })
+                }
 
+            })
 
+            closebtn.addEventListener('click', () => {
+
+                shadow.style.width = `0px`;
+                shadow.style.height = `0px`;
+
+                modal.forEach((item) => {
+                    item.style.display = 'none';
                 })
 
+            })
+
+            window.addEventListener('resize', () => {
+
+                let {
+                    innerWidth,
+                    innerHeight
+                } = window;
+
+                let {
+                    width,
+                    height
+                } = window.screen;
 
 
-            })();
-        </script>
+                shadow.style.width = `${innerWidth}px`;
+                shadow.style.height = `${innerHeight}px`;
+
+                modal.forEach((item) => {
+
+                    let itemwidth = item.style.width;
+
+                    item.style.top = `${(height-innerHeight)/2}px`;
+                    item.style.left = ` ${(width-innerWidth)/50}px`;
+                    console.log(item.style.left);
+                })
+            })
+
+        })();
+    </script>
 
 
 </body>
