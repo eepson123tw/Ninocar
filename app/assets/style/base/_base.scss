@@ -40,3 +40,7 @@ button {
 .material-icons {
   vertical-align: middle;
 }
+
+input, button:focus{
+  outline: none;
+}
