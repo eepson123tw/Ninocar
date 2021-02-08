@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="./assets/css/pages/index.css"> 
 <script src="../node_modules/jquery/dist/jquery.js"></script> 
 <script src="../node_modules/vue/dist/vue.js"></script>
-<script src="./assets/js/all.js"></script>
+<!-- <script src="./assets/js/all.js"></script> -->
 <title>dictionary</title>
 </head>
 
@@ -15,8 +15,15 @@
         @@include('./components/Header.html') 
         <!-- your code here... -->
     </div>
+    <button class="btn" id="modal_btn">modal</button>
 
 </body>
+
+
+<script type="module">
+    import {sayHi} from './assets/js/data.js';
+    sayHi('index');
+</script>
 
 
 <script>
