@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../dist/assets/css/pages/factory.css">
+    <link rel="stylesheet" href="../../../dist/assets/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<style>
+    .out{
+        display: flex;
+
+        width: 1400px;
+        margin: 80px auto;
+    }
+
+    .work_left{
+        outline: 1px solid red;
+    }
+
+    .work_right{
+        outline: 1px solid green;
+    }
+
+    .frame{
+        width: 100%;
+        height: 625px;
+        overflow: hidden;
+
+        outline: 1px solid blue;
+    }
+
+    .workPic--big{
+       width: 100%;
+        /* overflow: hidden;*/
+        outline: 1px solid; 
+    }
+
+    .price{
+        display: flex;
+    }
+
+    .work_right{
+        display: flex;
+        padding: 52px;
+    }
+
+    .typeReply_right{
+        width: 100%;
+    }
+</style>
+<body>
+    <div class="out">
+        <div class="row">
+            <div class="work_left col-6">
+                <div  class="frame">
+                  <img src="../../assets/img/pic/model02.png" class="workPic--big">
+                </div>
+          
+                <p class="h2">天栗鼠計程車</p>
+                <div class="other">
+                  <div class="price">
+                    <p class="h1">NT$</p>
+                    <p class="h1">200</p>
+                  </div>
+          
+                  <div class="col-6 col-lg-6 col-sm-6">
+                    <button class="btn btn--fluid btn--outline">加入購物車</button>
+                  </div>
+                </div>
+            </div>
+        
+            <div class="work_right col-6">
+                <div class="typeReply_left">
+                  <img src="../../assets/img/pic/userPic.png" class="userPic">
+                </div>
+        
+                <div class="typeReply_right">
+                  <p class="userName">沾醬大師</p>
+                  <p>大骨湯要熬乾了啦</p>
+                  <div class="other">
+                    <p class="time">3小時</p>
+                    <button class="btn btn--link">檢舉</button>
+                  </div>
+
+                  <div class="workInfo">
+                    <div class="workInfo_good">
+                        <img src="../../assets/img/icon/icon-good.svg" class="icon">
+                        <p  class="num h3">20</p>
+                    </div>
+                    <div class="workInfo_reply">
+                        <img src="../../assets/img/icon/icon-comment.svg" class="icon">
+                        <p  class="num h3">20</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
