@@ -12,7 +12,7 @@ const fileInclude = require('gulp-file-include');
 const cleanCSS = require('gulp-clean-css');
 const sass = require('gulp-sass');
 const sourceMap = require('source-map');
-var sourcemaps = require('gulp-sourcemaps');
+const sourcemaps = require('gulp-sourcemaps');
 
 
 
@@ -62,4 +62,17 @@ exports.w = function watchFiles() {
     watch('app/**/*.html', includeHTML);
     watch('app/assets/img/**/*', moveImg);
     watch('app/assets/js/**/*.js', concatJSAndMove);
+}
+
+//----package
+const imagemin = require('gulp-imagemin');
+
+exports.img = function compressImg(){
+   return src('app/assets/img/**/*')
+   .pipe(imagemin())
+   .pipe(rename(function(path){
+    path.basename += "-mini"
+}
+))
+   .pipe(dest('images')) 
 }
