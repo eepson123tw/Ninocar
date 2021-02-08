@@ -11,18 +11,15 @@
     <title>Document</title>
 </head>
 <style>
-    /* .out{
-        display: flex;
-
-        width: 1400px;
-        margin: 80px auto;
-    } */
+    
 
     .work_left{
         outline: 1px solid red;
     }
 
     .work_right{
+        height: 800px;
+        overflow-y: scroll;
         outline: 1px solid green;
     }
 
@@ -52,6 +49,19 @@
     .typeReply_right{
         width: 100%;
     }
+
+    .userPic--big{
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        margin: 0 28px;
+    }
+    /* --------------------------- */
+    /* .mask{
+        position: fixed;
+        background-color: #333;
+        opacity: .5;
+    } */
 </style>
 <body>
     <div class="container">
@@ -76,7 +86,7 @@
         
             <div class="work_right col-6">
                 <div class="work_author">
-                    <img src="../../assets/img/pic/userPic.png"  class="userPic">
+                    <img src="../../assets/img/pic/userPic.png"  class="userPic--big">
                     <div class="userContent">
                         <p class="userName h6">矛盾的小女子</p>
                         <h2 class="workName h4">天栗鼠計程車</h2>
@@ -98,7 +108,65 @@
                         <p  class="num h3">20</p>
                     </div>
                 </div>
+                <div class="work_reply">
+                    <img src="../../assets/img/pic/userPic.png"  class="userPic--big">
+                    <div class="userContext">
+                        <p class="userName h6">天婦羅好好吃</p>
+                        <p class="userContent h5">天婦羅好好吃</p>
+                        <div class="other">
+                            <p class="postTime h6">3小時前</p>
+                            <div>                                
+                                <button class="btn btn--link mr-4">回覆</button>
+                                <button class="btn btn--link">檢舉</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="work_reply">
+                    <img src="../../assets/img/pic/userPic.png"  class="userPic--big">
+                    <div class="userContext">
+                        <p class="userName h6">天婦羅好好吃</p>
+                        <p class="userContent h5">天婦羅好好吃</p>
+                        <div class="other">
+                            <p class="postTime h6">3小時前</p>
+                            <div>                                
+                                <button class="btn btn--link mr-4">回覆</button>
+                                <button class="btn btn--link">檢舉</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work_reply">
+                    <img src="../../assets/img/pic/userPic.png"  class="userPic--big">
+                    <div class="userContext">
+                        <p class="userName h6">天婦羅好好吃</p>
+                        <p class="userContent h5">天婦羅好好吃</p>
+                        <div class="other">
+                            <p class="postTime h6">3小時前</p>
+                            <div>                                
+                                <button class="btn btn--link mr-4">回覆</button>
+                                <button class="btn btn--link">檢舉</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typeReply">
+                    <div class="typeReply_left mr-7">
+                      <img src="../../assets/img/pic/userPic02.png" class="userPic--big">
+                    </div>
+            
+                    <div class="typeReply_right">
+                      <p>沾醬大師</p>
+                      <textarea name="" id="" cols="50" rows="7" placeholder="讚美這個作品，或發表看法。"></textarea>
+                      <div class="other">
+                        <p>餘100字</p>
+                        <button class="btn btn--small">留言</button>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
         
