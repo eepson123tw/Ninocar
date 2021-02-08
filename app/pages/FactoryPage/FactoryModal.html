@@ -11,12 +11,12 @@
     <title>Document</title>
 </head>
 <style>
-    .out{
+    /* .out{
         display: flex;
 
         width: 1400px;
         margin: 80px auto;
-    }
+    } */
 
     .work_left{
         outline: 1px solid red;
@@ -45,7 +45,7 @@
     }
 
     .work_right{
-        display: flex;
+        /* display: flex; */
         padding: 52px;
     }
 
@@ -54,7 +54,7 @@
     }
 </style>
 <body>
-    <div class="out">
+    <div class="container">
         <div class="row">
             <div class="work_left col-6">
                 <div  class="frame">
@@ -75,19 +75,20 @@
             </div>
         
             <div class="work_right col-6">
-                <div class="typeReply_left">
-                  <img src="../../assets/img/pic/userPic.png" class="userPic">
+                <div class="work_author">
+                    <img src="../../assets/img/pic/userPic.png"  class="userPic">
+                    <div class="userContent">
+                        <p class="userName h6">矛盾的小女子</p>
+                        <h2 class="workName h4">天栗鼠計程車</h2>
+                        <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                        <div class="other">
+                            <p class="postTime h6">3小時前</p>
+                            <button class="btn btn--link">檢舉</button>
+                        </div>
+                    </div>
                 </div>
-        
-                <div class="typeReply_right">
-                  <p class="userName">沾醬大師</p>
-                  <p>大骨湯要熬乾了啦</p>
-                  <div class="other">
-                    <p class="time">3小時</p>
-                    <button class="btn btn--link">檢舉</button>
-                  </div>
 
-                  <div class="workInfo">
+                <div class="workInfo">
                     <div class="workInfo_good">
                         <img src="../../assets/img/icon/icon-good.svg" class="icon">
                         <p  class="num h3">20</p>
@@ -97,7 +98,7 @@
                         <p  class="num h3">20</p>
                     </div>
                 </div>
-                </div>
+
             </div>
         </div>
         
