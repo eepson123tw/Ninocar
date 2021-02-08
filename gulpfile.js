@@ -23,6 +23,10 @@ function concatJSAndMove() {
     return src('app/assets/js/**/*.js').pipe(concat('all.js')).pipe(dest('dist/assets/js/'));
 }
 
+function moveJS() {
+    return src('app/assets/js/**/*.js').pipe(dest('dist/assets/js/'));
+}
+
 
 function commonStyle() {
     return src('app/assets/style/all.scss')
@@ -63,14 +67,14 @@ function killDist(){
  }
  
 exports.kill = killDist;
-exports.u = series(killDist,parallel(moveImg, concatJSAndMove, commonStyle, pageStyle, includeHTML));
+exports.u = series(killDist,parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
 
 exports.w = function watchFiles() {
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle);
     watch('app/assets/style/pages/*.scss', pageStyle);
     watch('app/**/*.html', includeHTML);
     watch('app/assets/img/**/*', moveImg);
-    watch('app/assets/js/**/*.js', concatJSAndMove);
+    watch('app/assets/js/**/*.js', moveJS);
 }
 
 //----package
