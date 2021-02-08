@@ -1,0 +1,165 @@
+.container{
+    padding-top: 176px;
+}
+
+.intro{
+    display: flex;
+
+    &_pic{
+        outline: 2px solid red;
+    }
+
+    &_content{
+        float: right;
+        outline: 2px solid pink;
+    
+        &_title{
+            color: white;
+            -webkit-text-stroke: 1px #522613;
+            margin-bottom: 36px;
+        }
+    
+        &_text{
+            margin-bottom: 56px;
+            color: #522613;
+        }
+    }
+}
+
+.model{
+    width: 800px;
+}
+
+.lable{
+    width: 148px;
+    height: 148px;
+    background-color: #FADD61;
+    border-radius: 50%;
+    
+    text-align: center;
+    color: #522613;
+
+    position: relative;
+    top: -9.7vw;
+    left: 35vw;
+}
+
+.emphasis{
+    font-size: 64px;
+    font-weight: bold;
+}
+
+// -----------------------------------
+.workBar{
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px 0;
+
+    outline: 2px solid gold;
+
+    &_left{
+        display: flex;
+    }
+}
+
+.workButton{
+    margin: 0 40px;
+    background-color: transparent;
+    outline: none;
+    color: #522613;
+    cursor: pointer;
+}
+// -----------------------------------
+.othersWorks{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.work{
+    outline: 1px solid blue;
+    
+    &_pic{
+        // width: 440px;
+        // height: 384px;
+        // overflow: hidden;
+        padding: 0 32px;
+
+        outline: 1px solid;
+    }
+
+    &_author, &_reply{
+        // margin: 28px;
+        padding: 28px;
+        
+    }
+
+    &Name{
+        margin-bottom: 16px;
+    }
+}
+
+.work_reply, .workInfo, .moreReply{
+    border-bottom: 1px solid #ccc;
+}
+
+.typeReply{
+    padding: 28px;
+}
+
+.user{
+    &Pic{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin: 0 28px;
+
+        border: 1px solid;  
+    }
+
+    &Context{
+        width: 100%;
+    }
+
+    &Name, &Content{
+        margin-bottom: 16px;
+    }
+}
+
+.num{
+    font-weight: bold;
+}
+
+.work_author, .work_reply, .typeReply{
+    display: flex;
+}
+
+.workInfo, .workInfo_reply, .workInfo_good{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.other{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon{
+    margin-left: 8px;
+    margin-right: 14px;
+}
+
+.readMore, .moreReply{
+    padding: 12.5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// -----------------------------------
+.typeReply{
+    display: flex;
+}

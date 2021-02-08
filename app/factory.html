@@ -2,8 +2,8 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/factory.css"> 
+<link rel="stylesheet" href="./assets/css/all.css">
 <script src="../node_modules/jquery/dist/jquery.js"></script> 
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script src="./assets/js/all.js"></script>
@@ -15,7 +15,200 @@
         @@include('./components/Header.html') 
         <!-- your code here... -->
     </div>
+    <div class="container">
+        <row>
+            <div class="intro">
+                <div class="intro_pic col-7 col-lg-4 col-sm-3">
+                    <img src="../app/assets/img/pic/model.png" class="model">
+                    <div class="lable">
+                        <p class="h4">NT$</p>
+                        <h2 class="emphasis">300</h2>
+                        <p class="h4">起</p>
+                    </div>
+                </div>
+                <div class="intro_content col-5 col-lg-2 col-sm-1">
+                    <h2 class="emphasis intro_content_title">打造自己的車</h2>
+                    <p class="h3 intro_content_text">在車車工廠，<br>
+                        我們提供各種車款、烤漆顏色和不同配備，<br>
+                        您可以盡情揮灑創意，創作屬於自己的超酷客製車。</p>
+                    <button class="btn">開始製作</button>
+                </div>
+            </div>
 
+            <div class="workBar col-12 col-lg-6 col-sm-4">
+                <div class="workBar_left">
+                    <button class="workButton h2">大家的作品</button>
+                    <button class="workButton h2">我的作品</button>
+                </div>
+                <div class="filter"></div>
+            </div>
+
+            <div>
+                <ul class="othersWorks">
+                    <li class="work col-4">
+                        <div class="work_pic">
+                            <img src="../app/assets/img/pic/model02.png" class="">
+                        </div>
+
+                        <div class="work_author">
+                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                            <div class="userContent">
+                                <p class="userName h6">矛盾的小女子</p>
+                                <h2 class="workName h4">天栗鼠計程車</h2>
+                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <button class="btn btn--link">檢舉</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workInfo">
+                            <div class="workInfo_good">
+                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                            <div class="workInfo_reply">
+                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                        </div>
+
+                        <div class="work_reply">
+                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                            <div class="userContext">
+                                <p class="userName h6">天婦羅好好吃</p>
+                                <p class="userContent h5">天婦羅好好吃</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <div>                                
+                                        <button class="btn btn--link mr-4">回覆</button>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="typeReply">
+                            <div class="typeReply_left">
+                              <img src="../app/assets/img/pic/userPic.png" class="userPic">
+                            </div>
+                    
+                            <div class="typeReply_right">
+                              <p>沾醬大師</p>
+                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。"></textarea>
+                              <div class="other">
+                                <p>餘100字</p>
+                                <button class="btn btn--small">留言</button>
+                              </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="work col-4">
+                        <div class="work_pic">
+                            <img src="../app/assets/img/pic/model02.png" class="model">
+                        </div>
+
+                        <div class="work_author">
+                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                            <div class="userContent">
+                                <p class="userName h6">矛盾的小女子</p>
+                                <h2 class="workName h4">天栗鼠計程車</h2>
+                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <button class="btn btn--link">檢舉</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workInfo">
+                            <div class="workInfo_good">
+                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                            <div class="workInfo_reply">
+                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                        </div>
+
+                        <div class="work_reply">
+                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                            <div class="userContext">
+                                <p class="userName h6">天婦羅好好吃</p>
+                                <p class="userContent h5">天婦羅好好吃</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <div>                                
+                                        <button class="btn btn--link mr-4">回覆</button>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moreReply">
+                            <p class="h5">2則回覆</p>
+                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
+                        </div>
+                        <div class="readMore">
+                            <p class="h5">閱讀更多</p>
+                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
+                        </div>
+                    </li>
+
+                    <!-- <li class="work col-4">
+                        <div class="work_pic">
+                            <img src="../app/assets/img/pic/model02.png" class="model">
+                        </div>
+
+                        <div class="work_author">
+                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                            <div class="userContent">
+                                <p class="userName h6">矛盾的小女子</p>
+                                <h2 class="workName h4">天栗鼠計程車</h2>
+                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <button class="btn btn--link">檢舉</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workInfo">
+                            <div class="workInfo_good">
+                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                            <div class="workInfo_reply">
+                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                <p  class="num h3">20</p>
+                            </div>
+                        </div>
+
+                        <div class="work_reply">
+                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                            <div class="userContext">
+                                <p class="userName h6">天婦羅好好吃</p>
+                                <p class="userContent h5">天婦羅好好吃</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <div>                                
+                                        <button class="btn btn--link mr-4">回覆</button>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="readMore">
+                            <p class="h5">閱讀更多</p>
+                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </row>
+    </div>
 </body>
 
 

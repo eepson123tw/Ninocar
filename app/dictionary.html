@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <div id="app">
-        <vue-header></vue-header>
+    <div id="dictionary">
+    <vue-header></vue-header>
         <main class="container dictionary pt-10">
             <!-- display -->
             <section class="block mb-10">
@@ -48,14 +48,14 @@
                               <pin :disabled="!memberHasPin" :series="targetProduct.series">
                             </div>
                         </div>
-                        <img src="./assets/img/icon/icon-left.svg" alt="prev"
+                        <!-- <img src="./assets/img/icon/icon-left.svg" alt="prev"
                             class="swiper-pagination swiper-pagination-prev">
                         <img src="./assets/img/icon/icon-right.svg" alt="next"
-                            class="swiper-pagination swiper-pagination-next">
+                            class="swiper-pagination swiper-pagination-next"> -->
                     </div>
                 </section>
             </section>
-            <!-- post -->
+            <!-- dictionary list -->
             <section class="block">
                 <nav class="block__header block__header--nav">
                     <ul class="d-flex mb-md-4">
@@ -69,7 +69,7 @@
                     </div>
                 </nav>
                 <ul class="row block__body">
-                    <!-- li -->
+                    <!-- post -->
                     <post v-for="(product,index) in products" v-bind="product"
                         @click.native.prevent="handleClickPost(index)"
                         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
@@ -78,6 +78,7 @@
         </main>
     </div>
 
+    
     @@include('./components/VueHeader.html')
     @@include('./components/Pin.html')
     @@include('./pages/DictionaryPage/DictionaryPost.html');
@@ -86,7 +87,7 @@
 
     <script>   
         new Vue({
-            el: '#app',
+            el: '#dictionary',
             data: { //變數存放的地方
                 products: [{
                         name: '藍寶堅尼Countach',
