@@ -15,7 +15,9 @@
     },
     "contributors": [
         "Wei Lin <chiwei991814@gmail.com> （https://github.com/WeiLin18）",
-        "Allen Chou <eepson123@gmail.com>  (https://github.com/eepson123tw)"
+        "Allen Chou <eepson123@gmail.com>  (https://github.com/eepson123tw)",
+        "Richard Hung<rustyperfume@gmail.com>  (https://github.com/Meitaku0519)"
+
     ],
     "license": "MIT",
     "repository": {
