@@ -63,3 +63,13 @@ exports.w = function watchFiles() {
     watch('app/assets/img/**/*', moveImg);
     watch('app/assets/js/**/*.js', concatJSAndMove);
 }
+
+// 壓縮js
+
+const uglify = require('gulp-uglify');
+
+exports.minjs = function uglifyjs(){
+    return src('dev/js/*.js')
+    .pipe(uglify())
+    .pipe(dest('js'))
+}

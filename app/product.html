@@ -6,30 +6,9 @@
 <title>product</title>
 </head>
 <body>
-  <div class="product">
-    <ul class="row">
-        <li class="col-2 col-xl-4 col-lg-3 col-sm-4">
-        <!--product overview-->
-            <div class="product__over">
-                <ul caass="product__body">全部商品
-                    <li><a href="#">轎車系</a></li> 
-                    <li><a href="#">工程系</a></li>
-                    <li><a href="#">RV休旅系</a></li>
-                    <li><a href="#">計程車系</a></li>
-                    <li><a href="#">巴士系</a></li>
-                    <li><a href="#">警車系</a></li>
-                    <li><a href="#">消防系</a></li>
-                    <li><a href="#">救護系</a></li>
-                    <li><a href="#">PREMIUM系</a></li>
-                </ul>
-            </div>  
-            
-              
-            
-            
-         
-        </li>
-    </ul>
-</div>  
+    @@include('./components/Header.html') 
+    <main class="container dictionary pt-10"  id="dictionary">
+        @@include('./pages/ProductPage/ProductNav.html') 
+    </main>
 </body>
 </html>
