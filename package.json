@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "安裝套件": "npm install",
-    "執行監聽": "gulp w"
+    "安裝套件(有更新套件時)": "npm install",
+    "更新dist(每次pull下來時）": "gulp u",
+    "執行監聽（開始開發時）": "gulp w"
   },
   "contributors": [
-      "Wei Lin <chiwei991814@gmail.com> （https://github.com/WeiLin18）",
-      "Allen Chou <eepson123@gmail.com>  (https://github.com/eepson123tw)"
-    ],
+    "Wei Lin <chiwei991814@gmail.com> （https://github.com/WeiLin18）",
+    "Allen Chou <eepson123@gmail.com>  (https://github.com/eepson123tw)"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

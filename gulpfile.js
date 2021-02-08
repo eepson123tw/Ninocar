@@ -9,11 +9,10 @@ const {
 
 const concat = require('gulp-concat');
 const fileInclude = require('gulp-file-include');
-const cleanCSS = require('gulp-clean-css');
 const sass = require('gulp-sass');
 const sourceMap = require('source-map');
 const sourcemaps = require('gulp-sourcemaps');
-
+const clean = require('gulp-clean');
 
 
 function moveImg() {
@@ -56,6 +55,16 @@ function includeHTML() {
 }
 
 
+function killDist(){
+    return src('dist', {read: false , allowEmpty: true})
+    .pipe(clean({
+       force: true 
+    })) 
+ }
+ 
+exports.kill = killDist;
+exports.u = series(killDist,parallel(moveImg, concatJSAndMove, commonStyle, pageStyle, includeHTML));
+
 exports.w = function watchFiles() {
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle);
     watch('app/assets/style/pages/*.scss', pageStyle);
@@ -65,14 +74,14 @@ exports.w = function watchFiles() {
 }
 
 //----package
-const imagemin = require('gulp-imagemin');
+// const cleanCSS = require('gulp-clean-css');
+// const imagemin = require('gulp-imagemin');
 
-exports.img = function compressImg(){
-   return src('app/assets/img/**/*')
-   .pipe(imagemin())
-   .pipe(rename(function(path){
-    path.basename += "-mini"
-}
-))
-   .pipe(dest('images')) 
-}
+// exports.img = function compressImg() {
+//     return src('app/assets/img/**/*')
+//         .pipe(imagemin())
+//         .pipe(rename(function (path) {
+//             path.basename += "-mini"
+//         }))
+//         .pipe(dest('images'))
+// }
