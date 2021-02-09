@@ -7,7 +7,7 @@
 <script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script src="./assets/js/all.js"></script>
-<title>Document</title>
+<title>Dictionary</title>
 </head>
 
 <body>
@@ -59,8 +59,8 @@
             <section class="block">
                 <nav class="block__header block__header--nav">
                     <ul class="d-flex mb-md-4">
-                        <li class="mr-20 mr-md-15 mr-sm-10"><a href="#" :class="block__header__title link isLinkActive">全部圖鑑</a></li>
-                        <li><a href="#" :class="block__header__title link isLinkActive">我的圖鑑</a></li>
+                        <li class="mr-20 mr-md-15 mr-sm-10"><a href="#" class="block__header__title link link--active">全部圖鑑</a></li>
+                        <li><a href="#" class="block__header__title link">我的圖鑑</a></li>
                     </ul>
                     <div class="ml-auto w-md-100 text-right">
                         <button class="btn btn--link text-coffee mr-8 mr-sm-1">關鍵字搜尋</button>
@@ -70,7 +70,7 @@
                 </nav>
                 <ul class="row block__body">
                     <!-- post -->
-                    <post v-for="(product,index) in products" v-bind="product"
+                    <post v-for="(product,index) in products" v-bind="product" key="product.productId"
                         @click.native.prevent="handleClickPost(index)"
                         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
                 </ul>

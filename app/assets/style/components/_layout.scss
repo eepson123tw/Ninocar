@@ -23,17 +23,11 @@
 
 .link-group {
     position: fixed;
-    right: calc((100% - 1400px) / 2 - 52px);
+    right: calc((100% - 1400px) / 2 - 61px);
+    top: 85%;
 
     @include rwd(1348px) {
         right: 8px;
-    }
-
-    bottom: 8px;
-
-    &__link {
-        border-radius: 50%;
-        background-color: $primary;
     }
 }
 
