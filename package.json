@@ -6,18 +6,19 @@
     "script comment": {
         "dev": "安裝套件有更新套件時",
         "renew": "更新dist每次pull下來時",
-        "watch": "執行監聽開始開發時"
+        "watch": "執行監聽開始開發時",
+        "browser": "同步檢視更新"
     },
     "scripts": {
         "dev": "npm install",
         "renew": "gulp u",
-        "watch": "gulp w"
+        "watch": "gulp w",
+        "browser": "gulp browser"
     },
     "contributors": [
         "Wei Lin <chiwei991814@gmail.com> （https://github.com/WeiLin18）",
         "Allen Chou <eepson123@gmail.com>  (https://github.com/eepson123tw)",
         "Richard Hung<rustyperfume@gmail.com>  (https://github.com/Meitaku0519)"
-
     ],
     "license": "MIT",
     "repository": {
@@ -27,6 +28,7 @@
     "devDependencies": {
         "@babel/core": "^7.12.13",
         "@babel/preset-env": "^7.12.13",
+        "browser-sync": "^2.26.14",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
         "gulp-clean": "^0.4.0",

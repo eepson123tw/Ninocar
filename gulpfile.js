@@ -13,6 +13,10 @@ const sass = require('gulp-sass');
 const sourceMap = require('source-map');
 const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
+const browserSync = require('browser-sync').create();
+const reload = browserSync.reload; //browser的方法 更新後~
+
+
 
 
 function moveImg() {
@@ -59,15 +63,34 @@ function includeHTML() {
 }
 
 
-function killDist(){
-    return src('dist', {read: false , allowEmpty: true})
-    .pipe(clean({
-       force: true 
-    })) 
- }
- 
+function killDist() {
+    return src('dist', { read: false, allowEmpty: true })
+        .pipe(clean({
+            force: true
+        }))
+}
+
 exports.kill = killDist;
-exports.u = series(killDist,parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
+exports.u = series(killDist, parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
+
+
+exports.browser = function browsersync() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist", //跟目錄設定
+            index: "cart.html" //需更改成自己頁面的名稱
+
+        }
+    });
+    //與browser同步
+    watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle).on('change', reload);
+    watch('app/assets/style/pages/*.scss', pageStyle).on('change', reload);
+    watch('app/**/*.html', includeHTML).on('change', reload);
+    watch('app/assets/img/**/*', moveImg).on('change', reload);
+    watch('app/assets/js/**/*.js', moveJS).on('change', reload);
+}
+
+
 
 exports.w = function watchFiles() {
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle);
