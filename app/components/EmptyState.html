@@ -1,8 +1,69 @@
-<script>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../../dist/assets/css/all.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
+  <title>Document</title>
+  <style>
+      .emptyState{
+        background-color: #fff;
+        padding: 100px 0;
+        outline: 1px solid;
+      }
+
+      .empty--right{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        outline: 1px solid blue;
+      }
+  </style>
+</head>
+<body> -->
+  <div id="app">
+    <empty-state></empty-state>
+  </div>
+
+  <script>
     Vue.component('empty-state', {
-        template: `
-     your code here
-     `,
-        props: ['imgURL','details', 'btn-text','btnURL']
+      data(){
+        return{
+          description: '目前沒有作品',
+          description2: '快去完成你的作品吧',
+          btnDes: '開始製作',
+          // url: "href='https://www.google.com.tw/'"
+        };
+      },
+      methods: {
+        // go(){
+        //   let a = document.querySelector('.btn');
+        //   a.setAttribute('href', 'https://www.google.com.tw/')
+        // }
+
+      },
+      template: `
+          <div class="container" @ready="go">
+              <div class="emptyState row">
+                  <div class="empty--left col-6 col-lg-3 col-sm-2">
+                      <img src="../assets/img/illust/illust-empty.png" alt="">
+                  </div>
+                  <div class="empty--right col-6 col-lg-3 col-sm-2">
+                      <p class="mb-6 h4" v-bind:details="description">{{description}}</p>
+                      <p class="mb-12 h4"  v-bind:details="description2">{{description2}}</p>
+                      <button class="btn" v-bind:btnText="btnDes">{{btnDes}}</button>
+                  </div>
+              </div>
+          </div>`,
+      props: ['details', 'details2', 'btn-text','btnURL']
     });
-</script>
+    
+    new Vue({
+            el: '#app',
+        });
+  </script>
+<!-- </body>
+</html> -->
