@@ -15,6 +15,61 @@
         @@include('./components/Header.html')
         <!-- your code here... -->
         @@include('./pages/CartPage/CartProgress.html')
+
+
+        <main class="container cart">
+            <header class="row mt-20 mb-10">
+                <ul class="cart__title d-flex w-100">
+                    <li>購物車</li>
+                    <li>單價</li>
+                    <li>數量</li>
+                    <li>總計</li>
+                    <li><a href="#">全部刪除</a></li>
+                </ul>
+            </header>
+            <div class="row card__body">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <div>
+                        <div class="cart_img">
+                            <img src="./assets/img/pic/3.jpg" alt="">
+                            <p>BS 01</p>
+                        </div>
+                        <div class="cart_product">
+                            <h3>Audi R8 奧迪小客車</h3>
+                            <p>Ａudi TT coupe 1980</p>
+                        </div>
+                    </div>
+                    <div class="cart_price">
+                        <p> NT$ <span>195</span></p>
+                    </div>
+                    <div class="cart_num">
+                        <select name="">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                        </select>
+                    </div>
+                    <div class="cart_total">
+                        <p> NT$<span>200</span> </p>
+                        <p> <img src="" alt=""> <span></span> </p>
+                    </div>
+                    <div>
+                        <p>刪除</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="row">
+                <ul class="cart__footer">
+                    <li>總計 <span>5</span> 件商品 </li>
+                    <li>
+                        <p> <img src="" alt=""> <span></span> </p>
+                    </li>
+                    <li> NT$ <span></span> </li>
+                </ul>
+            </footer>
+        </main>
+
+
+
     </div>
 
 </body>

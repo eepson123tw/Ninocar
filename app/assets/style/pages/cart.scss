@@ -1,0 +1,32 @@
+@import "../helpers/variables";
+@import "../helpers/mixin";
+@import "../helpers/rwd";
+@import "../base/font";
+.cart {
+    text-align: center;
+    &__btn {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    &__title {
+        padding: 36px 40px;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid $secondary;
+        li {
+            flex-grow: 1;
+            @extend .h4;
+        }
+        li:first-child {
+            flex-grow: 2;
+            text-align: left;
+            @extend .h2;
+        }
+        a {
+            text-decoration: underline;
+            display: block;
+            color: #AC0404;
+        }
+    }
+}
