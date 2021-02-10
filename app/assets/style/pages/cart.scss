@@ -3,30 +3,248 @@
 @import "../helpers/rwd";
 @import "../base/font";
 .cart {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    padding-top: 100px;
+    @extend .h4;
     &__btn {
         display: flex;
         align-items: center;
         flex-direction: row-reverse;
+        animation: btnlight 3s infinite;
+        @keyframes btnlight {
+            0% {
+                color: $primary;
+            }
+            50% {
+                color: $primary-light;
+            }
+            100% {
+                color: $secondary;
+            }
+        }
+        @include rwd-md {
+            justify-content: center;
+            border: none;
+            width: 100%;
+        }
     }
     &__title {
         padding: 36px 40px;
         justify-content: space-between;
         align-items: center;
         border-bottom: 2px solid $secondary;
+        min-width: 375px;
+        @include rwd-sm() {
+            li {
+                display: none;
+            }
+        }
         li {
             flex-grow: 1;
-            @extend .h4;
         }
         li:first-child {
             flex-grow: 2;
             text-align: left;
             @extend .h2;
+            @include rwd-sm() {
+                display: flex;
+            }
         }
-        a {
-            text-decoration: underline;
-            display: block;
+        li:last-child {
+            display: none;
+            @include rwd-sm() {
+                display: flex;
+                justify-content: flex-end;
+                cursor: pointer;
+            }
+        }
+    }
+    &__link {
+        color: #AC0404;
+        &--small {
+            margin-right: 30px;
             color: #AC0404;
+            @include rwd-md {
+                display: none;
+            }
+        }
+    }
+    &__group {
+        position: relative;
+        padding: 36px 30px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        border-bottom: 1px solid $gray-500;
+        min-width: 375px;
+        @include rwd-md {
+            justify-content: flex-end;
+            div:nth-child(2) {
+                padding-left: 50px;
+            }
+            div:nth-child(3) {
+                padding-left: 100px;
+            }
+        }
+        @include rwd-sm {
+            div:nth-child(2) {
+                padding: 0;
+                margin-right: 30px;
+            }
+            div:nth-child(3) {
+                padding: 0;
+                margin-left: 10px;
+            }
+            div:nth-child(4) {
+                margin-left: 205px;
+            }
+        }
+        @include rwd-xs {
+            div:nth-child(2) {
+                margin: 0;
+            }
+            div:nth-child(3) {
+                margin-left: 110px;
+            }
+            div:nth-child(4) {
+                margin-left: 55px;
+            }
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            margin-bottom: 20px;
+            // align-items: center;
+            @include rwd-xs {
+                margin: 0;
+                margin-bottom: 10px;
+            }
+        }
+        div:first-child {
+            flex-grow: 0.7;
+            display: flex;
+            flex-direction: row;
+            @include rwd-xl {
+                flex-grow: 0.03;
+            }
+            @include rwd-sm {
+                flex-grow: 1;
+            }
+            @include rwd-xs {
+                width: 70%;
+                height: 60%;
+            }
+        }
+    }
+    &__groupImg {
+        width: 50%;
+        position: relative;
+        @include size(149px, 141px);
+        img {
+            display: block;
+            vertical-align: middle;
+        }
+        p {
+            display: inline-block;
+            width: 30px;
+            font-size: 12px;
+            background-color: $secondary;
+            position: absolute;
+            color: $white;
+            font-weight: 600;
+            bottom: 15px;
+            right: 0;
+            @include rwd-xs {
+                bottom: -10px;
+                right: 0;
+            }
+        }
+    }
+    &__product {
+        padding-left: 20px;
+        @extend .h4;
+        p {
+            text-align: center;
+            &:last-child {
+                color: $gray-700;
+                @extend .h5;
+            }
+            @include rwd-xs {
+                width: 150px;
+            }
+        }
+    }
+    &__num {
+        text-align: left;
+        padding: 10px 40px 10px 10px;
+        border: 1px solid $gray-500;
+        color: $gray-900;
+        border-radius: 5px;
+        @extend .h4;
+        @include rwd-xs {
+            padding: 5px 30px 5px 10px;
+        }
+    }
+    &__footer {
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-left: 40%;
+        align-items: center;
+        @extend .h4;
+        li {
+            flex-grow: 1;
+        }
+        span {
+            color: $coffee;
+            &:last-child {
+                font-weight: 500;
+                @extend .h2;
+            }
+        }
+        @include rwd-md {
+            justify-content: center;
+            margin: 10px 0;
+            padding: 0 30px;
+        }
+    }
+    &__member {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include rwd-md {
+            width: 30%;
+        }
+        p {
+            @include circle(30px, 30px);
+            line-height: 30px;
+            background-color: $blue;
+            color: $white;
+            margin-right: 10px;
+        }
+    }
+    &__text {
+        display: none;
+        @include rwd-md {
+            display: flex;
+        }
+        &--hide {
+            @include rwd-md {
+                display: none;
+            }
+        }
+    }
+    &__cancel {
+        display: none;
+        @include rwd-sm {
+            display: flex;
+            width: 20px;
+            position: absolute;
+            top: 10px;
+            right: 40px;
         }
     }
 }
