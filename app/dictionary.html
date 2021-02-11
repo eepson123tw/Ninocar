@@ -63,15 +63,15 @@
                         <li><a href="#" class="block__header__title link">我的圖鑑</a></li>
                     </ul>
                     <div class="ml-auto w-md-100 text-right">
-                        <button class="btn btn--link text-coffee mr-8 mr-sm-1">關鍵字搜尋</button>
-                        <button class="btn btn--outline mr-8 mr-sm-1">重置</button>
-                        <button class="btn">搜尋</button>
+                        <button class="btn btn--link text-coffee mr-8 mr-sm-1" @click="changeSearchType">{{searchType}}</button>
+                        <button v-if="searchType === '關鍵字搜尋' "class="btn btn--outline mr-8 mr-sm-1">重置</button>
+                        <button v-if="searchType === '關鍵字搜尋' " class="btn">搜尋</button>
                     </div>
                 </nav>
                 <ul class="row block__body">
                     <!-- post -->
                     <post v-for="(product,index) in products" v-bind="product" key="product.productId"
-                        @click.native.prevent="handleClickPost(index)"
+                        @click.native.prevent="handleClickPost(index)" v-if="isPostShow(product)"
                         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
                 </ul>
             </section>
@@ -139,8 +139,13 @@
                     description: '中置引擎超級跑車，有著跨時空的前衛感',
                     extraLabel: 1, 
                 },
+                myProducts: [],
                 memberOwnProductIdList:['120','121'],
                 memberHasPin: true,
+                searchType:  '關鍵字搜尋',
+            },
+            mounted() {
+                this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product.productId))
             },
             computed: {
                 carIDClass() {
@@ -178,6 +183,7 @@
                         return {}
                     }
                 },
+                
             },
             methods: {
                 handleClickPost(index) {
@@ -185,6 +191,12 @@
                 },
                 isPostPin(theProductId){
                     return this.memberOwnProductIdList.indexOf(theProductId);
+                },
+                changeSearchType(){
+                    this.searchType === '分類搜尋'? this.searchType = '關鍵字搜尋': this.searchType = '分類搜尋'
+                },
+                isPostShow(product){
+
                 }
             }
         });

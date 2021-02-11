@@ -29,6 +29,9 @@
     @include rwd(1348px) {
         right: 8px;
     }
+    @include rwd-sm {
+        top: 80%;
+    }
 }
 
 .footer {
