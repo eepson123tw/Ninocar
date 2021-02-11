@@ -41,7 +41,7 @@
 
     position: relative;
     top: -9.7vw;
-    left: 35vw;
+    left: 33vw;
 }
 
 .emphasis{
@@ -77,12 +77,12 @@
 }
 
 .work{
+    height: 100%;
+    background-color: #fff;
     outline: 1px solid blue;
     
     &_pic{
-        // width: 440px;
-        // height: 384px;
-        // overflow: hidden;
+        cursor: pointer;
         padding: 0 32px;
 
         outline: 1px solid;
@@ -99,13 +99,24 @@
     }
 }
 
-.work_reply, .workInfo, .moreReply{
+.work_reply, .workInfo, .moreReply, .closeReply, .readMore, .closeMore{
     border-bottom: 1px solid #ccc;
+}
+
+.work_reply{
+    display: flex;
+    flex-direction: column;
+}
+
+.work .hiddenReply, .work .hiddenSubReply,{
+    display: none;
 }
 
 .typeReply{
     padding: 28px;
+    border-bottom: 1px solid #ccc;
 }
+
 
 .user{
     &Pic{
@@ -114,16 +125,45 @@
         border-radius: 50%;
         margin: 0 28px;
 
-        border: 1px solid;  
+        &--big{
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            margin: 0 28px;
+        }
+    
+        &--small{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 28px;
+        }
     }
 
     &Context{
+        display: flex;
+
+        // border-bottom: 1px solid #ccc;
+        // padding-bottom: 28px;
+    }
+
+    &Context_top{
         width: 100%;
     }
 
     &Name, &Content{
         margin-bottom: 16px;
     }
+}
+
+.subUserContext{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: 28px;
+    padding-left: 28px;
+    border-top: 1px solid #ccc;
+    margin-top: 16px;
 }
 
 .num{
@@ -134,10 +174,16 @@
     display: flex;
 }
 
-.workInfo, .workInfo_reply, .workInfo_good{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.work{
+    &Info, &Info_reply, &Info_good{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
+
+.workInfo{
+    padding-bottom: 8px;
 }
 
 .other{
@@ -151,7 +197,7 @@
     margin-right: 14px;
 }
 
-.readMore, .moreReply{
+.readMore, .closeReply, .closeMore, .closeTextarea{
     padding: 12.5px;
 
     display: flex;
@@ -159,7 +205,82 @@
     align-items: center;
 }
 
+.moreReply{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeReply, .closeMore{
+    display: none;
+}
+
 // -----------------------------------
 .typeReply{
     display: flex;
 }
+
+.typeReply_left{
+    margin-right: 28px;
+}
+
+// ----------------彈窗-------------------
+.mask{
+    width: 100vw;
+    background-color: #0808084D;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    position: fixed;
+    display: none;
+}
+
+.work_left{
+    height: 880px;
+    background-color: #fff;
+    outline: 1px solid red;
+}
+
+.work_right{
+    background-color: #fff;
+    height: 880px;
+    overflow-y: scroll;
+    outline: 1px solid green;
+}
+
+.closeIcon{
+    position: absolute;
+    left: 32.9vw;
+    top: 0.64vw;
+    cursor: pointer;
+}
+
+.frame{
+    width: 100%;
+    /* height: 625px; */
+    height: 40vw;
+    overflow: hidden;
+
+    outline: 1px solid blue;
+}
+
+.workPic--big{
+   width: 100%;
+    /* overflow: hidden;*/
+    outline: 1px solid; 
+}
+
+.price{
+    display: flex;
+}
+
+.work_right{
+    padding: 52px;
+}
+
+.typeReply_right{
+    width: 100%;
+}
+

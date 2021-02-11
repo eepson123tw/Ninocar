@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="./assets/css/all.css">
 <script src="../node_modules/jquery/dist/jquery.js"></script> 
 <script src="../node_modules/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>factory</title>
 </head>
@@ -31,7 +32,7 @@
                     <p class="h3 intro_content_text">在車車工廠，<br>
                         我們提供各種車款、烤漆顏色和不同配備，<br>
                         您可以盡情揮灑創意，創作屬於自己的超酷客製車。</p>
-                    <button class="btn">開始製作</button>
+                    <button class="btn make">開始製作</button>
                 </div>
             </div>
 
@@ -75,15 +76,17 @@
                         </div>
 
                         <div class="work_reply">
-                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
                             <div class="userContext">
-                                <p class="userName h6">天婦羅好好吃</p>
-                                <p class="userContent h5">天婦羅好好吃</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <div>                                
-                                        <button class="btn btn--link mr-4">回覆</button>
-                                        <button class="btn btn--link">檢舉</button>
+                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">天婦羅好好吃</p>
+                                    <p class="userContent h5">天婦羅好好吃</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,12 +98,17 @@
                     
                             <div class="typeReply_right">
                               <p>沾醬大師</p>
-                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。"></textarea>
+                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                               <div class="other">
-                                <p>餘100字</p>
-                                <button class="btn btn--small">留言</button>
+                                <p class="textCount"></p>
+                                <button class="btn btn--small comment">留言</button>
                               </div>
                             </div>
+                        </div>
+
+                        <div class="closeTextarea">
+                            <p class="h5 textareaWord">關閉輸入框</p>
+                            <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
                         </div>
                     </li>
 
@@ -134,90 +142,229 @@
                         </div>
 
                         <div class="work_reply">
-                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
                             <div class="userContext">
-                                <p class="userName h6">天婦羅好好吃</p>
-                                <p class="userContent h5">天婦羅好好吃</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <div>                                
-                                        <button class="btn btn--link mr-4">回覆</button>
-                                        <button class="btn btn--link">檢舉</button>
+                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">天婦羅好好吃</p>
+                                    <p class="userContent h5">天婦羅好好吃</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="subUserContext">
+                                <img src="../app/assets/img/pic/userPic03.png"  class="userPic--small">
+                                <div class="userContext_top">
+                                    <p class="userName h6">天婦羅不好吃</p>
+                                    <p class="userContent h5">超油</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subUserContext hiddenSubReply">
+                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic--small">
+                                <div class="userContext_top">
+                                    <p class="userName h6">天婦羅好好吃</p>
+                                    <p class="userContent h5">明明就很好吃</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="moreReply">
-                            <p class="h5">2則回覆</p>
-                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
-                        </div>
-                        <div class="readMore">
-                            <p class="h5">閱讀更多</p>
-                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
-                        </div>
-                    </li>
-
-                    <!-- <li class="work col-4">
-                        <div class="work_pic">
-                            <img src="../app/assets/img/pic/model02.png" class="model">
+                            <p class="h5 moreReplyWord">1則回覆</p>
+                            <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon1">
                         </div>
 
-                        <div class="work_author">
-                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
-                            <div class="userContent">
-                                <p class="userName h6">矛盾的小女子</p>
-                                <h2 class="workName h4">天栗鼠計程車</h2>
-                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <button class="btn btn--link">檢舉</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="workInfo">
-                            <div class="workInfo_good">
-                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                            <div class="workInfo_reply">
-                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                        </div>
-
-                        <div class="work_reply">
-                            <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                        <div class="work_reply hiddenReply">
                             <div class="userContext">
-                                <p class="userName h6">天婦羅好好吃</p>
-                                <p class="userContent h5">天婦羅好好吃</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <div>                                
-                                        <button class="btn btn--link mr-4">回覆</button>
-                                        <button class="btn btn--link">檢舉</button>
+                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">天婦羅好好吃</p>
+                                    <p class="userContent h5">天婦羅好好吃</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+ 
                         <div class="readMore">
-                            <p class="h5">閱讀更多</p>
-                            <img src="../app/assets/img/icon/icon-down.svg" class="icon">
+                            <p class="h5 readMoreWord">閱讀更多</p>
+                            <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </row>
     </div>
+
+    <div id="app2">
+        @@include('./pages/FactoryPage/FactoryModal.html')
+    </div>
+
+
+    <script>    
+        const vm1 = new Vue({
+            el: '#app', 
+            data: {     
+                message: 'Hello, VueJS!',
+            },
+        });
+    
+        const vm2 = new Vue({
+            el: '#app2', 
+            data: {     
+                message: 'Hello, VueJS!',
+            },
+        });
+    
+        // --------------------------------------------
+        //進入彈窗
+        $('.work_pic').click(function(){
+            $('.mask').css({
+                "display": "block",
+            });
+        });
+
+        //關掉彈窗
+        $('.closeIcon').click(function(){
+            $('.mask').css({
+                "display": "none",
+            });
+        })
+
+        //收起、打開更多子回覆
+        let count1 = 0;
+        $('.moreReply').click(function(){
+            $('.work .hiddenSubReply').slideToggle();
+            $('.work .hiddenSubReply').css({
+                "display": "flex",
+            });
+
+            count1 += 1;
+            console.log(count1);
+
+            if(count1 % 2 == 1){
+                $('.moreReplyWord').text('關閉子回覆');
+
+                $('.toggleIcon1').css({
+                    "transform": "rotate(180deg)",
+                })
+            }else{
+                $('.moreReplyWord').text('1則回覆');
+
+                $('.toggleIcon1').css({
+                    "transform": "rotate(0deg)",
+                })
+            }
+        })
+
+        //收起、打開更多回覆
+        let count2 = 0;
+        $('.readMore').click(function(){
+            $('.hiddenReply').slideToggle();
+            $('.hiddenReply').css({
+                "display": "flex"
+            });
+
+            count2 += 1;
+            console.log(count2);
+
+            if(count2 % 2 == 1){
+                $('.readMoreWord').text('關閉更多');
+
+                $('.toggleIcon2').css({
+                    "transform": "rotate(180deg)",
+                })
+            }else{
+                $('.readMoreWord').text('閱讀更多');
+
+                $('.toggleIcon2').css({
+                    "transform": "rotate(0deg)",
+                })
+            }
+        })
+
+        //收起、打開輸入回覆區
+        let count3 = 0;
+
+        $('.closeTextarea').click(function(){
+            $('.typeReply').slideToggle();
+
+            count3 += 1;
+            console.log(count3);
+
+            if(count3 % 2 == 1){
+                $('.textareaWord').text('打開輸入框');
+
+                $('.toggleIcon3').css({
+                    "transform": "rotate(180deg)",
+                })
+            }else{
+                $('.textareaWord').text('關閉輸入框');
+
+                $('.toggleIcon3').css({
+                    "transform": "rotate(0deg)",
+                })
+            }
+        })
+
+        //計算輸入框內的剩餘字數，按進去沒輸入字變紅框
+        let textMax = 100;
+        $('.textCount').text(`餘${textMax}字`);
+
+        $('textarea').keyup(function(){
+            let textLength =  $('.textarea').val().length;
+            // console.log(textLength)
+
+            $('.textCount').text(`餘${textMax - textLength}字`);
+
+            if(textLength > 0){
+                console.log('no text')
+                $('.textarea').css({
+                    "border": "1px solid #000",
+                })
+            }
+        })
+
+        //按留言若未輸入字的話變紅框
+        $('.comment').click(function(){
+            let textLength =  $('.textarea').val().length;
+
+            if(textLength == 0){
+                console.log('no text')
+                $('.textarea').css({
+                    "border": "1px solid red",
+                })
+            }else{
+                console.log('ok')
+                $('.textarea').css({
+                    "border": "1px solid #000",
+                }) 
+            }
+        })
+    </script>
 </body>
-
-
-<script>
-    new Vue({
-        el: '#app', 
-        data: {     
-            message: 'Hello, VueJS!',
-        },
-    });
-</script>
 </html>
