@@ -18,76 +18,88 @@
 
         <cart-area></cart-area>
         <div class="container">
-            <div class="row w-100">
-                <section class="cart_payment col-6">
-                    <h2>收貨和付款方式 （折價卷）</h2>
+            <!-- <cart-payment></cart-payment> -->
+            <div class="row w-100 pt-md-5 pt-20">
+                <section class="cart__payment  col-6 col-lg-6 col-xs-12">
+                    <h2 class="mb-10">收貨和付款方式 （折價卷）</h2>
                     <div class="form__group">
-                        <label for="addressee" class="form__text">收件人姓名</label>
-                        <input type="text" class="form__input" id="addressee" placeholder="收件人" />
+                        <label for="productTake" class="form__text mb-2 h5">選擇運送方式</label>
+                        <div class="form__section mb-5">
+                            <select name="" id="productTake" class="form__select cart__select">
+                                <option value="">門市自取</option>
+                                <option value="">黑貓宅配</option>
+                            </select>
+                        </div>
+                        <label for="paymentChoose" class="form__text mb-2 h5">選擇付款方式</label>
+                        <div class="form__section mb-5">
+                            <select name="" id="paymentChoose" class="form__select cart__select">
+                                <option value="">線上刷卡</option>
+                                <option value="">ATM轉帳</option>
+                                <option value="">門市結帳</option>
+                                <option value="">貨到付款</option>
+                            </select>
+                        </div>
+                        <label for="coupon" class="form__text mb-2 h5">使用優惠卷</label>
+                        <div class="form__section mb-5">
+                            <select name="" id="coupon" class="form__select cart__select">
+                                <option value="">註冊新會員結帳享9折優惠！</option>
+                                <option value="">白金會員太牛了享8折優惠！</option>
+                                <option value="">老闆跳樓拉免運費！</option>
+                                <option value="">本月壽星你最大享5折優惠！</option>
+                            </select>
+                        </div>
                     </div>
                 </section>
-            </div>
 
+                <section class="cart__payment  h5  col-6 col-lg-6 col-xs-12">
+                    <h2 class="cart__payMethods  mb-10">訂單明細</h2>
+                    <header class="d-flex justify-content-center ">
+                        <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
+                            <p>商品花費點數</p>
+                            <main class="cart__member">
+                                <p>Ni</p>
+                                <samp>200</samp>
+                            </main>
+                        </div>
+                        <ul class="cart__moneyCount  w-50">
+                            <li>
+                                <p>商品總金額</p>
+                                <p>NT$<span>780</span></p>
+                            </li>
+                            <li>
+                                <p>運費總計</p>
+                                <p>NT$<span>780</span></p>
+                            </li>
+                            <li>
+                                <p>折價卷折抵</p>
+                                <p>NT$<span>780</span></p>
+                            </li>
+                        </ul>
+
+                    </header>
+                    <div>
+                        <ul class="cart__countTotal d-flex align-items-center mb-5">
+                            <li class="cart__pointCount d-flex flex-sm-wrap">
+                                <p>總花費點數</p>
+                                <main class="cart__member ">
+                                    <p>Ni</p>
+                                    <samp>200</samp>
+                                </main>
+                            </li>
+                            <li>
+                                <p>總金額</p>
+                                <p class="cart__TotalText ">NT$ <span>762</span> </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="btn btn--fluid mb-5">確認結帳</button>
+                    <footer class="cart__pointRespond ">
+                        <p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
+                        <p class="cart__hint ">點數將在訂單完成3天內匯入</p>
+                    </footer>
+                </section>
+            </div>
         </div>
-
-
-
-        <!-- <main class="container cart">
-            <header class="row mt-20 mb-10 order-sm-1">
-                <ul class="cart__title d-flex w-100">
-                    <li>購物車</li>
-                    <li>單價</li>
-                    <li>數量</li>
-                    <li>總計</li>
-                    <li><button class="btn btn--link cart__link">全部刪除</button></li>
-                    <li><img src="./assets/img/icon/icon-up.svg" alt=""></li>
-                </ul>
-            </header>
-            <div class="row">
-                <div class="d-flex cart__group w-100">
-                    <div>
-                        <div class="cart__groupImg">
-                            <img src="./assets/img/pic/3.jpg" alt="">
-                            <p>BS 01</p>
-                        </div>
-                        <div class="cart__product">
-                            <p>Audi R8 奧迪小客車</p>
-                            <p>Audi TT coupe 1980</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p> NT$ <span>195</span></p>
-                    </div>
-                    <div>
-                        <select name="" class="cart__num">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p> NT$<span>195</span> </p>
-                        <p> <img src="" alt=""> <span></span> </p>
-                    </div>
-                    <div>
-                        <button class="btn btn--link cart__link--small">刪除</button>
-                    </div>
-                    <p class="cart__cancel"><img src="./assets/img/icon/icon-close.svg" alt=""></p>
-                </div>
-            </div>
-
-            <footer class="row order-sm-1">
-                <ul class="cart__footer d-flex w-100">
-                    <li class="cart__text--hide">總計 <span>5</span> 件商品 </li>
-                    <li class="cart__text">總花點數</li>
-                    <li class="cart__member">
-                        <p>Ni</p>
-                        <samp>200</samp>
-                    </li>
-                    <li class="cart__text">總金額</li>
-                    <li> NT$ <span>200</span> </li>
-                </ul>
-            </footer>
-        </main> -->
 
 
 
@@ -95,7 +107,7 @@
 
 </body>
 
-@@include('./pages/CartPage/CartArea.html')
+@@include('./pages/CartPage/CartArea.html') @@include('./pages/CartPage/CartPayment.html')
 <script>
     new Vue({
         el: '#app',
