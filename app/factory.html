@@ -17,6 +17,9 @@
         <!-- your code here... -->
     </div>
     <div class="container">
+        <div id="progressBar" class="progressBar">
+            @@include('./pages/FactoryPage/FactoryProgress.html') 
+        </div>
         <row>
             <div class="intro">
                 <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -237,6 +240,13 @@
             el: '#app2', 
             data: {     
                 message: 'Hello, VueJS!',
+            },
+        });
+
+        new Vue({
+            el: '#progressBar', 
+            data: {     
+                message: 'Hello, bar',
             },
         });
     
