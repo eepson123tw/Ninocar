@@ -1,0 +1,35 @@
+<section class="mb-30">
+  <div class="container">
+    <div id="trigger1"></div>
+    <img src="./assets/img/illust/illust-billboard.svg" alt="billboard">
+  </div>
+  <div class="po-re">
+    <img src="./assets/img/illust/illust-road-y.svg" alt="road">
+    <img src="./assets/img/illust/illust-car-y.svg" alt="car" class="car-billboard">
+  </div>
+
+</section>
+
+<script>
+  window.onload = function () {
+    let controller = new ScrollMagic.Controller();
+
+    let screenX = document.body.clientWidth;
+    screenX+= 250;
+    let tl = new TimelineMax();
+
+    tl.to('.car-billboard', 5, {
+      x: screenX,
+    })
+    new ScrollMagic.Scene({
+        triggerElement: '#trigger1', //觸發點
+        offset: 200
+      }).setTween(tl) //動畫
+      .addIndicators({
+        name: 'key01',
+        colorStart: '#f20'
+
+      })
+      .addTo(controller)
+  }
+</script>
