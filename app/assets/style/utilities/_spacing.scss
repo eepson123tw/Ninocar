@@ -153,7 +153,7 @@
             padding-top: $space-unit * $level;
         }
     }
-    @each $level in 30 {
+    @each $level in 25,30 {
         .mb-#{$level} {
             margin-bottom: $space-unit * $level;
         }
