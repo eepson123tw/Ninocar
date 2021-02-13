@@ -203,6 +203,10 @@
                 &:last-child {
                     color: $coffee;
                 }
+                &:nth-child(3) {
+                    width: 20%;
+                    padding-right: 5px;
+                }
             }
             span {
                 &:last-child {
@@ -275,8 +279,12 @@
             @include rwd-lg {
                 text-align: center
             }
+            @include rwd_md {
+                padding: 10px 30px 30px;
+            }
             @include rwd_sm {
                 padding: 0;
+                padding-top: 30px;
             }
             h2 {
                 @extend .h2;
@@ -288,6 +296,9 @@
                     content: "";
                     border-bottom: 2px solid $secondary;
                 }
+            }
+            &--nopt {
+                padding: 10px 30px 40px;
             }
         }
         &__select {
@@ -337,5 +348,64 @@
             @extend.h5;
             margin-top: 5px;
             color: $gray-900;
+        }
+        &__comment {
+            padding: 5px 20px;
+            background-color: $white;
+            text-align: left;
+            button {
+                color: $secondary-dark;
+            }
+        }
+        &__choose {
+            position: absolute;
+            &--left {
+                top: 50%;
+                left: -1%;
+            }
+            &--right {
+                top: 50%;
+                right: -1%;
+            }
+        }
+        &--overhidden {
+            overflow-y: scroll;
+        }
+        &__imgGroup {
+            position: relative;
+            img {
+                vertical-align: middle;
+            }
+            p {
+                position: absolute;
+                @include size(64px, 60px);
+                text-align: center;
+                padding: 10px 20px;
+                font-weight: 900;
+                right: 5%;
+                bottom: 5%;
+                text-align: center;
+                color: $white;
+                background-color: $secondary;
+                @extend .h5;
+            }
+        }
+        &__textGroup {
+            padding: 10px;
+            position: relative;
+            h3,
+            p {
+                @extend .h5;
+            }
+            p {
+                color: $coffee;
+            }
+            button {
+                position: absolute;
+                right: 0;
+                bottom: 10%;
+                @extend .h5;
+                color: $secondary-dark;
+            }
         }
     }

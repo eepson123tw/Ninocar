@@ -10,8 +10,14 @@
         position: relative;
         background-color: $gray-500;
         line-height: 42px;
+        @include rwd-md {
+            margin: 0 90px;
+        }
         @include rwd-sm {
             margin: 0 50px;
+        }
+        @include rwd-xs {
+            margin: 0 30px;
         }
         &::before {
             content: "";
@@ -23,6 +29,9 @@
             left: 100%;
             @include rwd-sm {
                 width: 300%;
+            }
+            @include rwd-xs {
+                width: 150%;
             }
         }
         &:nth-child(3) {
@@ -48,6 +57,9 @@
                 @include rwd-sm {
                     width: 300%;
                 }
+                @include rwd-xs {
+                    width: 150%;
+                }
             }
         }
     }
@@ -57,5 +69,14 @@
         top: 110%;
         left: -200%;
         color: $black;
+        @include rwd-sm {
+            width: 500%;
+            font-size: 24px;
+        }
+        @include rwd-xs {
+            width: 300%;
+            font-size: 18px;
+            left: -80%;
+        }
     }
 }
