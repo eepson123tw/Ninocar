@@ -26,6 +26,12 @@
     }
 }
 
+.makeCar{
+    display: none;
+
+    outline: 1px solid orange;
+}
+
 .model{
     width: 800px;
 }
@@ -38,6 +44,7 @@
     
     text-align: center;
     color: #522613;
+    // padding: 20px;
 
     position: relative;
     top: -9.7vw;
@@ -49,7 +56,7 @@
     font-weight: bold;
 }
 
-// -----------------------------------
+// ------------作品區的按鈕-----------------------
 .workBar{
     display: flex;
     justify-content: space-between;
@@ -68,9 +75,14 @@
     background-color: transparent;
     outline: none;
     color: #522613;
+    font-weight: bold;
     cursor: pointer;
 }
-// -----------------------------------
+
+.works{
+    background-image: linear-gradient(transparent 60%, #FADD61 60%)
+}
+// --------------作品區內容---------------------
 .othersWorks{
     display: flex;
     flex-wrap: wrap;
@@ -287,17 +299,22 @@
 // ----------------進度條-------------------
 .progressBar{
     display: none;
+    margin-bottom: 60px;
+    // width: 80vw;
 }
 
 .bar{
     width: 960px;
+    // width: 50vw;
     height: 4px;
     background-color: #D8D8D8;
     position: absolute;
-    top: 18px;
-    left: 400px;
+    top: 290px;
+    // left: 480px;
+    // top: 15vw;
+    left: 25vw;
     z-index: -1;
-  }
+}
 
   .content{
     display: flex;
@@ -309,6 +326,11 @@
   .explanations{
     display: flex;
     justify-content: center;
+
+    position: absolute;
+    top: 270px;
+    // left: 440px;
+    left: 22.9vw;
   }
 
   .circle{
@@ -330,3 +352,61 @@
     margin-right: 150px; 
     color: #333333;
   }
+
+// ----------------製作車子的主區域-------------------
+
+  .mainAreaPic{
+      margin: 0 auto;
+  }
+
+// ----------------標示步驟、金額的區域-------------------
+    .totalPrice{
+        font-size: 32px;
+        color: #522613;
+        font-weight: bold;
+
+        margin-left: 60px;
+    }
+
+    .tipArea, .tipPrice{
+        display: flex;
+    }
+
+    .tipArea{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #E59807;
+        background-color: #fff;
+    }
+
+    .tipArea_right{
+        display: flex;
+        justify-content: space-between;
+    }
+  // ----------------製作車子的選項區域-------------------
+  .selectArea{
+      display: flex;
+  }
+
+  .shapeCard{
+      background-color: #fff;
+  }
+
+  .shape{
+      width: 330px;
+  }
+
+  .makeCar-price{
+    font-size: 20px;
+    font-weight: bold;
+    color: #522613;
+  }
+
+  .makeCar-price, .makeCar-name{
+      text-align: center;
+  }
+
+  .shape, .makeCar-price{
+      margin-bottom: 20px;
+  }
+
+

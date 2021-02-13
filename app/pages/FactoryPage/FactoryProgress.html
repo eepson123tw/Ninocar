@@ -1,58 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <title>Document</title>
-</head>
-<style>
-  .bar{
-    width: 960px;
-    height: 4px;
-    background-color: #D8D8D8;
-    position: absolute;
-    top: 18px;
-    left: 400px;
-    z-index: -1;
-  }
 
-  .content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-  }
-
-  .explanations{
-    display: flex;
-    justify-content: center;
-  }
-  .circle{
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-
-    margin-right: 150px;
-    text-align: center;
-    line-height: 42px;
-
-    background-color: #D8D8D8;
-    font-size: 24px;
-    color: #fff;
-  }
-
-
-  
-  .explanation{
-    font-size: 24px;
-    margin-right: 150px; 
-    color: #333333;
-  }
-</style>
-<body>
-  <div class="bar"></div>
+  <div class="bar bar-back"></div>
+  <div class="bar bar-front"></div>
   <ul class="explanations">
     <li class="content">
       <div class="circle">1</div>
@@ -75,12 +23,3 @@
       <p class="explanation">完成</p>
     </li>
   </ul>
-  <!-- <ul class="content">
-    <li class="explanation">選擇車型</li>
-    <li class="explanation">顏色烤漆</li>
-    <li class="explanation">配裝輪胎</li>
-    <li class="explanation">配備零件</li>
-    <li class="explanation">完成</li>
-  </ul> -->
-</body>
-</html>
