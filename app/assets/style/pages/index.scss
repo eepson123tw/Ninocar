@@ -58,20 +58,50 @@
     }
 
     .factory {
-        position: relative;
-        z-index: 3;
+        &--house {
+            position: relative;
+            z-index: 30;
+            width: 100%;
+        }
 
         &--inner {
             position: absolute;
-            bottom: -24px;
-            left: 13%;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 5;
         }
 
         &--door {
             position: absolute;
             bottom: 0;
-            left: 8%;
-            z-index: 2;
+            left: 0;
+            width: 100%;
+            z-index: 20;
+        }
+
+        &--car {
+            position: absolute;
+            width: 20%;
+            top: -36%;
+            left: 32%;
+            z-index: 10;
+            transform: translateY(100px);
+            @include rwd(1400px) {
+                left: 24%;
+            }
+        }
+
+        &--road {
+            width: 100%;
+            position: relative;
+            top: -160px;
+            left: -8%;
+
+            @include rwd(1400px) {
+                left: -5%;
+            }
+
         }
     }
 
