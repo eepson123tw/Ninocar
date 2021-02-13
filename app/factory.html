@@ -18,6 +18,7 @@
     </div>
     <div class="container">
         <div id="progressBar" class="progressBar">
+            <button class="btn btn--outline"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">離開</button>
             @@include('./pages/FactoryPage/FactoryProgress.html') 
         </div>
         <row>
@@ -39,10 +40,59 @@
                 </div>
             </div>
 
+            <!-- 製作車子的區域 -->
+            <div class="makeCar col-12 col-lg-6 col-sm-4">
+                <div class="mainArea">
+                    <img src="../app/assets/img/pic/model.png" class="mainAreaPic">
+                </div>
+                <div class="tipArea">
+                    <div class="tipArea_left col-6">
+                        <p class="h1">選擇車型</p>
+                    </div>
+                    <div class="tipArea_right col-6">
+                        <div class="tipPrice">
+                            <p class="h4">總金額</p>
+                            <p class="totalPrice">NT$300</p>
+                        </div>
+                        <button class="btn btn--disabled">下一步</button>
+                    </div>
+                </div>
+
+                <ul class="selectArea">
+                    <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                        <img src="../app/assets/img/pic/model.png" class="shape">
+                        <p class="makeCar-name">Audi R8小客車</p>
+                        <p class="makeCar-price">NT$ 100</p>
+                        <button class="btn btn--fluid btn--outline">選擇此車型</button>
+                    </li>
+
+                    <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                        <img src="../app/assets/img/pic/model.png" class="shape">
+                        <p class="makeCar-name">Audi R8小客車</p>
+                        <p class="makeCar-price">NT$ 100</p>
+                        <button class="btn btn--fluid btn--outline">選擇此車型</button>
+                    </li>
+
+                    <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                        <img src="../app/assets/img/pic/model.png" class="shape">
+                        <p class="makeCar-name">Audi R8小客車</p>
+                        <p class="makeCar-price">NT$ 100</p>
+                        <button class="btn btn--fluid btn--outline">選擇此車型</button>
+                    </li>
+
+                    <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                        <img src="../app/assets/img/pic/model.png" class="shape">
+                        <p class="makeCar-name">Audi R8小客車</p>
+                        <p class="makeCar-price">NT$ 100</p>
+                        <button class="btn btn--fluid btn--outline">選擇此車型</button>
+                    </li>
+                </ul>
+            </div>
+
             <div class="workBar col-12 col-lg-6 col-sm-4">
                 <div class="workBar_left">
-                    <button class="workButton h2">大家的作品</button>
-                    <button class="workButton h2">我的作品</button>
+                    <button class="workButton h2 works">大家的作品</button>
+                    <button class="workButton h2 myworks">我的作品</button>
                 </div>
                 <div class="filter"></div>
             </div>
@@ -375,6 +425,40 @@
                 }) 
             }
         })
+
+        //點我的車車、大家的車車後會標示目前在哪
+        $('.workButton').click(function(){
+            console.log('a')
+            $(this).css({
+                "background": "linear-gradient(transparent 60%, #FADD61 60%)"
+            })
+            
+            $('.workButton').not(this).css({
+                "background": "none"
+            })
+
+        })
+
+        //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
+        $('.make').click(function(){
+            $('.progressBar').css({
+                "display": "block"
+            })
+
+            $('.circle:first').css({
+                "background-color":"#E59807"
+            })
+
+            $('.intro').css({
+                "display": "none"
+            })
+
+            $('.makeCar').css({
+                "display": "block"
+            })
+        })
+
+
     </script>
 </body>
 </html>
