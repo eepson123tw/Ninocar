@@ -1,0 +1,60 @@
+<script>
+    Vue.component('cartArea', {
+        template: `  <main class="container cart">
+            <header class="row mt-20 mb-10 order-sm-1">
+                <ul class="cart__title d-flex w-100">
+                    <li>購物車</li>
+                    <li>單價</li>
+                    <li>數量</li>
+                    <li>總計</li>
+                    <li><button class="btn btn--link cart__link">全部刪除</button></li>
+                    <li><img src="./assets/img/icon/icon-up.svg" alt=""></li>
+                </ul>
+            </header>
+            <div class="row">
+                <div class="d-flex cart__group w-100">
+                    <div>
+                        <div class="cart__groupImg">
+                            <img src="./assets/img/pic/3.jpg" alt="">
+                            <p>BS 01</p>
+                        </div>
+                        <div class="cart__product">
+                            <p>Audi R8 奧迪小客車</p>
+                            <p>Audi TT coupe 1980</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p> NT$ <span>195</span></p>
+                    </div>
+                    <div>
+                        <select name="" class="cart__num">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p> NT$<span>195</span> </p>
+                        <p> <img src="" alt=""> <span></span> </p>
+                    </div>
+                    <div>
+                        <button class="btn btn--link cart__link--small">刪除</button>
+                    </div>
+                    <p class="cart__cancel"><img src="./assets/img/icon/icon-close.svg" alt=""></p>
+                </div>
+            </div>
+
+            <footer class="row order-sm-1">
+                <ul class="cart__footer d-flex w-100">
+                    <li class="cart__text--hide">總計 <span>5</span> 件商品 </li>
+                    <li class="cart__text">總花點數</li>
+                    <li class="cart__member">
+                        <p>Ni</p>
+                        <samp>200</samp>
+                    </li>
+                    <li class="cart__text">總金額</li>
+                    <li> NT$ <span>200</span> </li>
+                </ul>
+            </footer>
+        </main>`,
+    })
+</script>
