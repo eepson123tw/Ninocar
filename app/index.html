@@ -3,35 +3,211 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
-<link rel="stylesheet" href="./assets/css/pages/index.css"> 
-<script src="../node_modules/jquery/dist/jquery.js"></script> 
+<link rel="stylesheet" href="./assets/css/pages/index.css">
+<link rel="stylesheet" href="./assets/css/pages/dictionary.css">
+<script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+
 <!-- <script src="./assets/js/all.js"></script> -->
-<title>dictionary</title>
+<title>index</title>
 </head>
 
 <body>
     <div id="app">
-        @@include('./components/Header.html') 
-        <!-- your code here... -->
+        <vue-header></vue-header>
+        <main class="pt-25 index">
+            <!--hero-->
+            <header class="mb-25">
+                <div id="trigger02"></div>
+                <div class="container po-re">
+                    <div class="car--parking">
+                        <img src="./assets/img/illust/illust-car.svg" alt="car">
+                    </div>
+                    <img src="./assets/img/illust/illust-hero-mask.svg" alt="parking">
+                    <div class="road--hero">
+                        <img src="./assets/img/illust/illust-road-left.svg" alt="road">
+                    </div>
+                </div>
+            </header>
+            <!-- billboard -->
+            <section class="mb-30">
+                <div class="container">
+                    <div id="trigger1"></div>
+                    <img src="./assets/img/illust/illust-billboard.svg" alt="billboard">
+                </div>
+                <div class="po-re">
+                    <img src="./assets/img/illust/illust-road-y.svg" alt="road">
+                    <img src="./assets/img/illust/illust-car-y.svg" alt="car" class="car--billboard">
+                </div>
+            </section>
+            <!-- hightway -->
+            <section class="py-10 mb-20">
+                <div class="container">
+                    <img src="./assets/img/illust/illust-highway.svg" alt="hightway">
+                </div>
+            </section>
+            <!-- mountain -->
+            <section class="mountain mb-20">
+                <!-- <img src="./assets/img/illust/illust-mountain.svg" alt="mountain" class="mountain__img"> -->
+                <div class="container">
+                    @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+                </div>
+
+            </section>
+            <!-- factory -->
+            <section class="container py-10">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="factory">
+                            <div id="triggerFactory"></div>
+                            <img src="./assets/img/illust/illust-factory.svg" alt="factory">
+                        </div>
+                        <img src="./assets/img/illust/illust-factory-inner.svg" alt="factory-inner"
+                            class="factory--inner">
+                        <img src="./assets/img/illust/illust-factory-door.svg" alt="factory-door" class="factory--door">
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
+        </main>
+        @@include('./components/Footer.html')
     </div>
-    <button class="btn" id="modal_btn">modal</button>
-
-</body>
 
 
-<script type="module">
+
+    @@include('./components/VueHeader.html')
+
+
+    <!-- <script type="module">
     import {sayHi} from './assets/js/data.js';
     sayHi('index');
-</script>
+</script> -->
 
 
-<script>
-    new Vue({
-        el: '#app', 
-        data: {     
-            message: 'Hello, VueJS!',
-        },
-    });
-</script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello, VueJS!',
+                targetProduct: {
+                    name: '藍寶堅尼Countach',
+                    eng: 'LAMBORGHINI LP500S',
+                    series: 'PM',
+                    seriesId: '01',
+                    imgURL: './assets/img/pic/3.jpg',
+                    displayImgURL: './assets/img/pic/0.png',
+                    productId: '123',
+                    year: 2007,
+                    description: '中置引擎超級跑車，有著跨時空的前衛感',
+                    extraLabel: 1,
+                },
+                memberHasPin: true,
+                memberOwnProductIdList: ['120', '121'],
+            },
+            computed: {
+                carIDClass() {
+                    return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
+                },
+                badgeClass() {
+                    return `badge bg-series-${this.targetProduct.series} mr-2`
+                },
+                getPinClass() {
+                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
+                        'pin pin--disabled'
+                },
+                chBadge() {
+                    const seriesNames = {
+                        BS: '巴士系',
+                        EN: '工程系',
+                        TA: '計程車系',
+                        EM: '消防救護系',
+                        PM: 'PREMIUM系',
+                        PA: '警車系',
+                        RV: 'RV休旅系',
+                        CA: '轎車系'
+                    }
+                    return seriesNames[this.targetProduct.series]
+                },
+                extraLabel() {
+                    if (this.targetProduct.extraLabel === 1) {
+                        return {
+                            text: '期間限定',
+                            className: 'badge badge--primary'
+                        };
+                    } else if (this.targetProduct.extraLabel === 2) {
+                        return {
+                            text: '點數限定',
+                            className: 'badge bg-blue'
+                        };
+                    } else {
+                        return {}
+                    }
+                },
+            },
+            mounted() {
+                let controller = new ScrollMagic.Controller();
+                let screenX = document.body.clientWidth;
+
+
+                let mvParking = TweenMax.to('.car--parking', 4, {
+                    x: -screenX * .65, //5
+                    y: screenX * .39, //3
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#trigger02', //觸發點
+                        offset: 500
+                    }).setTween(mvParking) //找到bgc 物件 動態塞入blue
+                    .addIndicators({
+                        name: 'key02',
+                        colorStart: '#13fe13'
+                    })
+                    .addTo(controller);
+
+
+                let mvBillboard = TweenMax.to('.car--billboard', 3, {
+                    x: screenX + 250,
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#trigger1', //觸發點
+                        offset: 200
+                    }).setTween(mvBillboard) //動畫
+                    .addIndicators({
+                        name: 'key01',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
+
+                let mvFactory = TweenMax.to('.factory--door', 1, {
+                    y = -100,
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerFactory', //觸發點
+                        offset: 200
+                    }).setTween(mvFactory) //動畫
+                    .addIndicators({
+                        name: 'key03',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller)
+
+            }
+
+        });
+    </script>
+</body>
+
 </html>
