@@ -37,12 +37,13 @@
             width: 18.67%;
             right: calc(100% - 41px);
         }
+
         @include rwd(1280px) {
             width: 18.6%;
         }
     }
 
-    .mountain{
+    .mountain {
         position: relative;
         padding: 280px 0 400px;
         background-image: url('../../img/illust/illust-mountain.svg');
@@ -56,11 +57,29 @@
         // }
     }
 
-    .block{
+    .factory {
+        position: relative;
+        z-index: 3;
+
+        &--inner {
+            position: absolute;
+            bottom: -24px;
+            left: 13%;
+        }
+
+        &--door {
+            position: absolute;
+            bottom: 0;
+            left: 8%;
+            z-index: 2;
+        }
+    }
+
+    .block {
         background-color: #fff;
     }
 
-    .z-index-5{
+    .z-index-5 {
         z-index: 5;
     }
 

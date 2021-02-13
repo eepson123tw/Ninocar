@@ -32,7 +32,7 @@
                     </div>
                     <img src="./assets/img/illust/illust-hero-mask.svg" alt="parking">
                     <div class="road--hero">
-                        <img src="./assets/img/illust/illust-road-left.svg" alt="road" >
+                        <img src="./assets/img/illust/illust-road-left.svg" alt="road">
                     </div>
                 </div>
             </header>
@@ -53,7 +53,7 @@
                     <img src="./assets/img/illust/illust-highway.svg" alt="hightway">
                 </div>
             </section>
-             <!-- mountain -->
+            <!-- mountain -->
             <section class="mountain mb-20">
                 <!-- <img src="./assets/img/illust/illust-mountain.svg" alt="mountain" class="mountain__img"> -->
                 <div class="container">
@@ -61,6 +61,21 @@
                 </div>
 
             </section>
+            <!-- factory -->
+            <section class="container py-10">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="factory">
+                            <div id="triggerFactory"></div>
+                            <img src="./assets/img/illust/illust-factory.svg" alt="factory">
+                        </div>
+                        <img src="./assets/img/illust/illust-factory-inner.svg" alt="factory-inner"
+                            class="factory--inner">
+                        <img src="./assets/img/illust/illust-factory-door.svg" alt="factory-door" class="factory--door">
+                    </div>
+                </div>
+            </section>
+
 
             <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
         </main>
@@ -93,10 +108,10 @@
                     productId: '123',
                     year: 2007,
                     description: '中置引擎超級跑車，有著跨時空的前衛感',
-                    extraLabel: 1, 
+                    extraLabel: 1,
                 },
                 memberHasPin: true,
-                memberOwnProductIdList:['120','121'],
+                memberOwnProductIdList: ['120', '121'],
             },
             computed: {
                 carIDClass() {
@@ -105,9 +120,10 @@
                 badgeClass() {
                     return `badge bg-series-${this.targetProduct.series} mr-2`
                 },
-                getPinClass(){
-                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId)? 'pin':'pin pin--disabled' 
-                }, 
+                getPinClass() {
+                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
+                        'pin pin--disabled'
+                },
                 chBadge() {
                     const seriesNames = {
                         BS: '巴士系',
@@ -124,13 +140,15 @@
                 extraLabel() {
                     if (this.targetProduct.extraLabel === 1) {
                         return {
-                           text: '期間限定',
-                           className: 'badge badge--primary'};
+                            text: '期間限定',
+                            className: 'badge badge--primary'
+                        };
                     } else if (this.targetProduct.extraLabel === 2) {
                         return {
-                           text: '點數限定',
-                           className: 'badge bg-blue'};
-                    }else {
+                            text: '點數限定',
+                            className: 'badge bg-blue'
+                        };
+                    } else {
                         return {}
                     }
                 },
@@ -142,7 +160,7 @@
 
                 let mvParking = TweenMax.to('.car--parking', 4, {
                     x: -screenX * .65, //5
-                    y: screenX * .39,  //3
+                    y: screenX * .39, //3
                 });
 
                 new ScrollMagic.Scene({
@@ -158,7 +176,7 @@
 
                 let mvBillboard = TweenMax.to('.car--billboard', 3, {
                     x: screenX + 250,
-                })
+                });
 
                 new ScrollMagic.Scene({
                         triggerElement: '#trigger1', //觸發點
@@ -169,7 +187,23 @@
                         colorStart: '#f20'
 
                     })
+                    .addTo(controller);
+
+                let mvFactory = TweenMax.to('.factory--door', 1, {
+                    y = -100,
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerFactory', //觸發點
+                        offset: 200
+                    }).setTween(mvFactory) //動畫
+                    .addIndicators({
+                        name: 'key03',
+                        colorStart: '#f20'
+
+                    })
                     .addTo(controller)
+
             }
 
         });
