@@ -1,7 +1,7 @@
 .progress {
     display: flex;
-    text-align: center;
     color: $white;
+    text-align: center;
     position: relative;
     font-size: 24px;
     &__item {
@@ -64,19 +64,11 @@
         }
     }
     &__text {
-        width: 500%;
         position: absolute;
-        top: 110%;
-        left: -200%;
+        width: 150px;
+        top: 100%;
+        left: -120%;
         color: $black;
-        @include rwd-sm {
-            width: 500%;
-            font-size: 24px;
-        }
-        @include rwd-xs {
-            width: 300%;
-            font-size: 18px;
-            left: -80%;
-        }
+        @extend .h3;
     }
 }

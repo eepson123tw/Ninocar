@@ -9,7 +9,7 @@
         padding-top: 100px;
         @extend .h4;
         @include rwd-sm {
-            padding: 0;
+            padding: 0px 16px;
         }
         &__btn {
             display: flex;
@@ -76,7 +76,7 @@
         }
         &__group {
             position: relative;
-            padding: 36px 30px;
+            padding: 18px 10px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
@@ -109,7 +109,7 @@
                     margin: 0;
                 }
                 div:nth-child(3) {
-                    margin-left: 110px;
+                    margin-left: 153px;
                 }
                 div:nth-child(4) {
                     margin-left: 55px;
@@ -234,6 +234,38 @@
             @include rwd-xs {
                 width: 100%;
                 justify-content: flex-start;
+            }
+            &--align {
+                p {
+                    position: relative;
+                    color: $white;
+                    @extend .h5;
+                    z-index: 2;
+                    &:after {
+                        position: absolute;
+                        display: block;
+                        content: "";
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 50%;
+                        background-color: $blue;
+                        top: 3px;
+                        left: -9%;
+                        z-index: -1;
+                        @include rwd-md {
+                            top: 3px;
+                            left: -9%;
+                        }
+                        @include rwd-sm {
+                            top: -3px;
+                        }
+                    }
+                }
+                span {
+                    margin-left: 10px;
+                    color: $blue;
+                    @extend .h4;
+                }
             }
             p {
                 width: 25px;
