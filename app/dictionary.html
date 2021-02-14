@@ -34,7 +34,7 @@
                                 <span class="d-inbl mb-5">{{targetProduct.eng}} {{targetProduct.year}}</span>
                                 <p class="h4 mb-5">{{targetProduct.description}}</p>
                                 <span :class="badgeClass">{{chBadge}}</span>
-                                <span v-if="this.targetProduct.extraLabel== 2 || this.targetProduct.extraLabel== 1" :class="extraLabel.className">{{extraLabel.text}}</span>
+                                <span v-if="targetProduct.extraLabel== 2 || targetProduct.extraLabel== 1" :class="extraLabel.className">{{extraLabel.text}}</span>
                             </div>
                             <div class="text-right mx-xs-auto">
                                 <svg :class="getPinClass" width="120" height="120" viewBox="0 0 80 80">
@@ -59,8 +59,8 @@
             <section class="block">
                 <nav class="block__header block__header--nav">
                     <ul class="d-flex mb-md-4">
-                        <li class="mr-20 mr-md-15 mr-sm-10"><a href="#" class="block__header__title link link--active">全部圖鑑</a></li>
-                        <li><a href="#" class="block__header__title link">我的圖鑑</a></li>
+                        <li class="mr-20 mr-md-15 mr-sm-10"><a href="#" class="block__header__title link'":class="{'link--active': navClassName.all}" @click.prevent="changeShowProducts('all')">全部圖鑑</a></li>
+                        <li><a href="#" class="block__header__title link":class="{'link--active': navClassName.my}"  @click.prevent="changeShowProducts('my')">我的圖鑑</a></li>
                     </ul>
                     <div class="ml-auto w-md-100 text-right">
                         <button class="btn btn--link text-coffee mr-8 mr-sm-1" @click="changeSearchType">{{searchType}}</button>
@@ -70,8 +70,8 @@
                 </nav>
                 <ul class="row block__body">
                     <!-- post -->
-                    <post v-for="(product,index) in products" v-bind="product" key="product.productId"
-                        @click.native.prevent="handleClickPost(index)" v-if="isPostShow(product)"
+                    <post v-for="(product,index) in showProducts" v-bind="product" key="product.productId + Math.random()"
+                        @click.native.prevent="handleClickPost(product.productId)" 
                         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
                 </ul>
             </section>
@@ -97,7 +97,7 @@
                         seriesId: '01',
                         imgURL: './assets/img/pic/3.jpg',
                         displayImgURL: './assets/img/pic/0.png',
-                        productId: '123',
+                        productId: '000',
                         year: 2007,
                         description: '中置引擎超級跑車，有著跨時空的前衛感',
                         extraLabel: 1,
@@ -109,7 +109,7 @@
                         seriesId: '03',
                         imgURL: 'https://fakeimg.pl/992x744/',
                         displayImgURL: './assets/img/pic/0.png',
-                        productId: '120',
+                        productId: '121',
                         year: 2010,
                         description: '香港油電混合警車初登場',
                         extraLabel: null,
@@ -121,31 +121,35 @@
                         seriesId: '08',
                         imgURL: 'https://fakeimg.pl/992x744/',
                         displayImgURL: './assets/img/pic/0.png',
-                        productId: '121',
+                        productId: '300',
                         year: 2015,
                         description: '運行於大阪地區的巴士，阪急巴士以米色和藍色配色而聞名，同時也是一款環保低排放巴士',
                         extraLabel: 3,
                     },
                 ],
                 targetProduct: {
-                    name: '藍寶堅尼Countach',
-                    eng: 'LAMBORGHINI LP500S',
-                    series: 'PM',
-                    seriesId: '01',
-                    imgURL: './assets/img/pic/3.jpg',
-                    displayImgURL: './assets/img/pic/0.png',
-                    productId: '123',
-                    year: 2007,
-                    description: '中置引擎超級跑車，有著跨時空的前衛感',
-                    extraLabel: 1, 
-                },
+                        name: '豐田 PRIUS 香港警車',
+                        eng: 'TOYOTA HONG KONG ',
+                        series: 'PA',
+                        seriesId: '03',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '121',
+                        year: 2010,
+                        description: '香港油電混合警車初登場',
+                        extraLabel: null,
+                    },
                 myProducts: [],
-                memberOwnProductIdList:['120','121'],
+                memberOwnProductIdList:['300','121'],
                 memberHasPin: true,
                 searchType:  '關鍵字搜尋',
+                navClassName:  {'all': true, 'my':false },
+                showProducts: [],
             },
             mounted() {
-                this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product.productId))
+                this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product.productId));
+                this.showProducts = this.products;
+                this.targetProduct = this.showProducts[0];
             },
             computed: {
                 carIDClass() {
@@ -186,7 +190,8 @@
                 
             },
             methods: {
-                handleClickPost(index) {
+                handleClickPost(theProductId) {
+                    let index = this.showProducts.map(showProduct => showProduct.productId).indexOf(theProductId);
                     this.targetProduct = this.products[index];
                 },
                 isPostPin(theProductId){
@@ -195,10 +200,18 @@
                 changeSearchType(){
                     this.searchType === '分類搜尋'? this.searchType = '關鍵字搜尋': this.searchType = '分類搜尋'
                 },
-                isPostShow(product){
-
+                changeShowProducts(filter){
+                if(filter === 'my'){
+                    this.showProducts = this.myProducts;
+                    this.navClassName = {'all': false, 'my':true };
+                }else if(filter === 'all'){
+                    this.showProducts = this.products;
+                    this.navClassName = {'all': true, 'my':false };
                 }
-            }
+                   
+                    
+                }
+            },
         });
     </script>
 </body>
