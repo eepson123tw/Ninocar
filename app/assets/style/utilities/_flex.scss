@@ -1,6 +1,5 @@
 
 $flexList : (
-    'wrap' : wrap,
     'column' : column,
     'reverse' : reverse);
 
@@ -9,6 +8,10 @@ $flexList : (
     .flex-#{$key} {
         flex-direction: flex-#{$val};
     }
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
 }
 
 

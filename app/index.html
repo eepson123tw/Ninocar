@@ -149,12 +149,51 @@
             </section>
             <!-- turn road -->
             <section class="container po-re">
-                <svg  width="1068" height="800" viewBox="0 0 1068 800" class="mx-auto w-100 turn-road">
-                    <path id="turnRoadPath" d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88" transform="translate(-32 88)" fill="none" stroke="#3c3d41" stroke-width="160"/>
-                    <path  d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88" transform="translate(-32 88)" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="60"/>
-                  </svg>
+                <svg width="1068" height="800" viewBox="0 0 1068 800" class="mx-auto w-100 turn-road">
+                    <path id="turnRoadPath"
+                        d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88"
+                        transform="translate(-32 88)" fill="none" stroke="#3c3d41" stroke-width="160" />
+                    <path d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88"
+                        transform="translate(-32 88)" fill="none" stroke="#ffffff" stroke-width="5"
+                        stroke-dasharray="60" />
+                </svg>
             </section>
-
+            <!-- address -->
+            <section class="container address">
+                <div class="d-flex py-10 px-10 flex-wrap align-items-center">
+                    <div class="w-50 w-md-100">
+                        <h2 class="mb-5">聯絡我們</h2>
+                        <ul class="h5">
+                            <li class="mb-5">聯絡電話：<span class=ml-3>02-2222-2222</span></li>
+                            <li class="mb-5">店鋪地址：<span class=ml-3>台北市中山區南京東路三段219號</span></li>
+                            <li class="mb-5 d-flex">營業時間：<span class=ml-3>週二 - 週五 8 : 00 ~ 18 : 00<br>週六 - 週日 8 : 00 ~
+                                    15 : 00</span>
+                            </li>
+                            <li class="mb-5">出爐時間：<span class=ml-3>週一 / 每月第一週的星期五</span></li>
+                            <li>出爐時間：<span class=ml-3>早上 8 點 / 下午 2 點 （週末出爐時間不定）</span></li>
+                        </ul>
+                    </div>
+                    <div class="w-50 w-md-100">
+                        <iframe
+                            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.46768704534!2d121.54106421462323!3d25.0521328437191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abddfb12794f%3A0x71c40951a2fc40fe!2zMTA0OTHlj7DljJfluILkuK3lsbHljYDljZfkuqzmnbHot6_kuInmrrUyMTnomZ8!5e0!3m2!1szh-TW!2stw!4v1605541047089!5m2!1szh-TW!2stw'
+                            height="600" frameborder="0" aria-hidden="false" tabIndex="0" class="w-100"></iframe>
+                    </div>
+                </div>
+            </section>
+            <!-- end -->
+            <section class="container end">
+                <svg width="1400" height="645" viewBox="0 0 1400 645" class="w-100">
+                    <g transform="translate(-200 -5966)">
+                        <path d="M2133,5740 v327 c0,144,96,244,214,244 h1400" transform="translate(-1713 226)"
+                            fill="none" stroke="#3c3d41" stroke-width="160" id="endRoadPath" />
+                    </g>
+                    <g transform="translate(-200 -5966)">
+                        <path d="M2133,5740 v327 c0,144,96,244,214,244 h1400" transform="translate(-1713 226)"
+                            fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="60" />
+                    </g>
+                </svg>
+                <img src="./assets/img/illust/illust-showgirl.svg" alt="showgirl" class="showgirl">
+            </section>
 
             <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
         </main>
@@ -255,6 +294,7 @@
 
                 let mvBillboard = TweenMax.to('.car--billboard', 3, {
                     x: screenX + 250,
+                    ease: Linear.easeNone,
                 });
 
                 new ScrollMagic.Scene({
@@ -280,8 +320,8 @@
                         alignOrigin: [0.5, .5],
                         autoRotate: -90,
                         transformOrigin: "50% 50%",
-
-                    }
+                    },
+                    ease:Linear.easeNone,
                 }).to('.factory--car', 4, {
                     motionPath: {
                         path: "#turnRoadPath",
@@ -289,12 +329,23 @@
                         alignOrigin: [0.5, .5],
                         autoRotate: -90,
                         transformOrigin: "50% 50%",
-                        start:1,
-                        end:0,
+                        start: 1,
+                        end: 0,
                     },
+                    ease:Linear.easeNone,
                     delay: .5,
+                }).to('.factory--car', 4, {
+                    motionPath: {
+                        path: "#endRoadPath",
+                        align: "#endRoadPath",
+                        alignOrigin: [0.5, .5],
+                        autoRotate: -90,
+                        transformOrigin: "50% 50%",
+                    },
+                    ease:Linear.easeNone,
+                    delay: 1,
                 });
-                
+
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerFactory', //觸發點

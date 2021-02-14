@@ -4,7 +4,7 @@
 
 .index {
     overflow-x: hidden;
-
+    margin-bottom: -400px;
     .car {
         &--parking {
             position: absolute;
@@ -107,20 +107,31 @@
     .about{
         position: relative;
         background-color: #fff;
-        border: 1px solid $gray-500;
+        border: 2px dashed $coffee;
         z-index: 50;
     }
 
     .turn-road{
         position: relative;
         top:-160px;
-        &--car{
-            position: absolute;
-            top: -400px;
-            right: 200px;
-            width: 10%;
-        }
+    }
 
+    .address{
+        position: relative;
+        top: -360px;
+        background-color: #fff;
+        border: 2px dashed $coffee;
+        z-index: 50;
+    }
+
+    .end{
+        position: relative;
+        top: -500px;
+        .showgirl{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+        }
     }
 
     
