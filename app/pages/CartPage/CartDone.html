@@ -1,10 +1,66 @@
 <script>
-    Vue.component('cartPayment', {
+    Vue.component('cartDone', {
 
-        template: `<div class="container">
+        template: ` <div class="container cart">
+            <div class="row">
+                <div class="cart__list cart__list--none w-100">
+                    <ul class="d-flex justify-content-between align-items-center w-100">
+                        <li class="h2">訂單明細</li>
+                        <li>
+                            <img src="./assets/img/icon/icon-up.svg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row ">
+                <ul class="d-flex w-100 cart__order">
+                    <li>訂單編號： <span>1231231231</span></li>
+                    <li>訂單金額： <span>762元</span></li>
+                    <li>花費點數： <span>200點</span></li>
+                    <li>訂單狀態： <span>已付款，處理中</span></li>
+                    <li>收貨方式： <span>黑貓宅配</span></li>
+                    <li>付款方式： <span>線上刷卡</span></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="cart__list w-100">
+                    <ul class="d-flex justify-content-between align-items-center w-100">
+                        <li class="h2">購買明細</li>
+                        <li>
+                            <img src="./assets/img/icon/icon-up.svg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-flex cart__group w-100">
+                    <div>
+                        <div class="cart__groupImg">
+                            <img src="./assets/img/pic/3.jpg" alt="">
+                            <p>BS 01</p>
+                        </div>
+                        <div class="cart__product">
+                            <p>Audi R8 奧迪小客車</p>
+                            <p>Audi TT coupe 1980</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p> NT$<span>195</span></p>
+                    </div>
+                    <div>
+                        <select name="" class="cart__num" disabled>
+                            <option value="">1</option>
+                            <option value="">2</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p> NT$<span>195</span> </p>
+                        <p> <img src="" alt=""> <span></span> </p>
+                    </div>
+                </div>
+            </div>
             <div class="row w-100 pt-md-5 pt-20">
                 <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                    <h2 class="mb-10">收貨和付款方式 （折價卷）</h2>
                     <div class="form__group">
                         <label for="productTake" class="form__text mb-2 h5">選擇運送方式</label>
                         <div class="form__section mb-5">
@@ -35,7 +91,6 @@
                 </section>
 
                 <section class="cart__payment  h5  col-6 col-lg-6 col-xs-12">
-                    <h2 class="cart__payMethods  mb-10">訂單明細</h2>
                     <header class="d-flex justify-content-center ">
                         <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
                             <p>商品花費點數</p>
@@ -75,15 +130,9 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="btn btn--fluid mb-5">確認結帳</button>
-                    <footer class="cart__pointRespond ">
-                        <p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
-                        <p class="cart__hint ">點數將在訂單完成3天內匯入</p>
-                    </footer>
                 </section>
             </div>
-        </div>
-`,
+        </div>`,
 
 
     })
