@@ -3,15 +3,24 @@
     @import "../helpers/rwd";
     @import "../base/font";
     .cart {
+        //購物車本體
         display: flex;
         flex-direction: column;
         text-align: center;
-        padding-top: 100px;
+        margin-top: 100px;
+        &--none {
+            display: none;
+        }
+        &--maginHalf {
+            margin-top: 10px;
+        }
         @extend .h4;
         @include rwd-sm {
             padding: 0px 16px;
+            margin-top: 0px;
         }
         &__btn {
+            //購物車按鈕
             display: flex;
             align-items: center;
             flex-direction: row-reverse;
@@ -34,6 +43,7 @@
             }
         }
         &__title {
+            //購物車列表
             padding: 36px 40px;
             justify-content: space-between;
             align-items: center;
@@ -43,6 +53,9 @@
                 li {
                     display: none;
                 }
+            }
+            @include rwd-xs() {
+                padding: 0px 40px;
             }
             li {
                 flex-grow: 1;
@@ -75,8 +88,9 @@
             }
         }
         &__group {
+            //產品列表
             position: relative;
-            padding: 18px 10px;
+            padding: 40px 10px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
@@ -109,7 +123,7 @@
                     margin: 0;
                 }
                 div:nth-child(3) {
-                    margin-left: 153px;
+                    margin-left: 140px;
                 }
                 div:nth-child(4) {
                     margin-left: 55px;
@@ -120,8 +134,6 @@
                 flex-direction: column;
                 align-items: center;
                 flex-grow: 1;
-                margin-bottom: 20px;
-                // align-items: center;
                 @include rwd-xs {
                     margin: 0;
                     margin-bottom: 10px;
@@ -144,6 +156,7 @@
             }
         }
         &__groupImg {
+            //產品圖跟上方文字
             width: 50%;
             position: relative;
             @include size(149px, 141px);
@@ -168,6 +181,7 @@
             }
         }
         &__product {
+            //產品圖右側文字
             padding-left: 20px;
             @extend .h4;
             p {
@@ -182,6 +196,7 @@
             }
         }
         &__num {
+            //數量
             text-align: left;
             padding: 10px 40px 10px 10px;
             border: 1px solid $gray-500;
@@ -193,6 +208,7 @@
             }
         }
         &__footer {
+            //購物車最底金額區
             justify-content: space-between;
             margin-top: 20px;
             margin-left: 40%;
@@ -222,6 +238,7 @@
             }
         }
         &__member {
+            //成員圓圈點數
             display: flex;
             justify-content: center;
             align-items: center;
@@ -241,6 +258,7 @@
                     color: $white;
                     @extend .h5;
                     z-index: 2;
+                    padding-left: 3px;
                     &:after {
                         position: absolute;
                         display: block;
@@ -250,11 +268,11 @@
                         border-radius: 50%;
                         background-color: $blue;
                         top: 3px;
-                        left: -9%;
+                        left: -3%;
                         z-index: -1;
                         @include rwd-md {
                             top: 3px;
-                            left: -9%;
+                            left: -3%;
                         }
                         @include rwd-sm {
                             top: -3px;
@@ -284,6 +302,7 @@
             }
         }
         &__text {
+            //購物車文字消失控制
             display: none;
             @include rwd-md {
                 display: flex;
@@ -295,7 +314,9 @@
             }
         }
         &__cancel {
+            //單筆刪除按鈕
             display: none;
+            cursor: pointer;
             @include rwd-sm {
                 display: flex;
                 width: 20px;
@@ -305,7 +326,7 @@
             }
         }
         &__payment {
-            padding: 10px 30px 80px;
+            //訂購模式區塊
             text-align: left;
             position: relative;
             @include rwd-lg {
@@ -318,25 +339,50 @@
                 padding: 0;
                 padding-top: 30px;
             }
+            @include rwd_xs {
+                padding-top: 10px;
+            }
             h2 {
                 @extend .h2;
+                position: relative;
                 &::after {
-                    margin-top: 20px;
+                    position: absolute;
+                    bottom: -15px;
+                    left: -15px;
+                    width: 103%;
                     display: block;
-                    width: 100%;
-                    height: 2px;
                     content: "";
                     border-bottom: 2px solid $secondary;
+                    @include rwd-md {
+                        left: -10px;
+                        width: 105%;
+                    }
+                    @include rwd-sm {
+                        bottom: -10px;
+                        left: -5px;
+                    }
                 }
             }
             &--nopt {
                 padding: 10px 30px 40px;
+                @include rwd-xs {
+                    padding: 10px 30px 10px;
+                }
             }
         }
         &__select {
+            //選數字區
             width: 100%;
+            &--small {
+                width: 22%;
+            }
+            &--input {
+                color: black;
+                padding-left: 10px;
+            }
         }
         &__pointCount {
+            // 收貨方式 點數區塊
             align-items: center;
             justify-content: space-between;
             height: 20px;
@@ -344,6 +390,7 @@
             @extend .h5;
         }
         &__moneyCount {
+            //收貨方式 金額區塊
             li {
                 display: flex;
                 justify-content: space-between;
@@ -352,6 +399,7 @@
             }
         }
         &__countTotal {
+            //訂單明細 總花費區塊
             border-top: 2px solid $gray-500;
             justify-content: space-between;
             text-align: left;
@@ -366,6 +414,7 @@
             }
         }
         &__pointRespond {
+            //訂單明細 點數回報
             text-align: center;
             padding: 15px 5px;
             background-color: $gray-100;
@@ -375,13 +424,18 @@
                 padding: 0 7px;
                 font-weight: 500;
             }
+            @include rwd-xs {
+                margin-bottom: 20px
+            }
         }
         &__hint {
+            //灰字提示區
             @extend.h5;
             margin-top: 5px;
             color: $gray-900;
         }
         &__comment {
+            //熱門推薦
             padding: 5px 20px;
             background-color: $white;
             text-align: left;
@@ -390,20 +444,29 @@
             }
         }
         &__choose {
+            //側邊左右
             position: absolute;
             &--left {
                 top: 50%;
                 left: -1%;
+                @include rwd-xs {
+                    left: -3%;
+                }
             }
             &--right {
                 top: 50%;
                 right: -1%;
+                @include rwd-xs {
+                    right: -3%;
+                }
             }
         }
         &--overhidden {
+            //捲動Ｙ隱藏
             overflow-y: scroll;
         }
         &__imgGroup {
+            //card img
             position: relative;
             img {
                 vertical-align: middle;
@@ -423,6 +486,7 @@
             }
         }
         &__textGroup {
+            //card text
             padding: 10px;
             position: relative;
             h3,
@@ -438,6 +502,68 @@
                 bottom: 10%;
                 @extend .h5;
                 color: $secondary-dark;
+            }
+        }
+        &__list {
+            //購買明細
+            padding-bottom: 10px;
+            border-bottom: 2px solid $secondary;
+            @include rwd-sm {
+                margin-top: 50px;
+            }
+            li {
+                padding: 0 10px;
+                flex-grow: 1;
+                text-align: left;
+                @include rwd-sm {
+                    justify-content: flex-end;
+                }
+                &:first-child {
+                    flex-grow: 5;
+                    @include rwd-sm {
+                        flex-grow: 1;
+                    }
+                }
+                &:nth-child(3) {
+                    p {
+                        padding-left: 1px;
+                        @include rwd-sm {
+                            padding-left: 2px;
+                            text-align: center;
+                        }
+                        &::after {
+                            @include rwd-sm {
+                                left: 1%;
+                            }
+                            @include rwd(515px) {
+                                left: 32%;
+                            }
+                            @include rwd-xs {
+                                left: 25%;
+                            }
+                        }
+                    }
+                    span {
+                        @include rwd-sm {
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+        &__checkbox {
+            input {
+                margin-top: 8px;
+                margin-right: 10px;
+                @include rwd-sm {
+                    margin-top: 4px;
+                }
+            }
+            label {
+                margin-right: 100px;
+                @include rwd-xl {
+                    margin-right: 30px;
+                }
             }
         }
     }
