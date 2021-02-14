@@ -300,27 +300,32 @@
 .progressBar{
     display: none;
     margin-bottom: 60px;
-    // width: 80vw;
+    // outline: 1px solid green;
 }
 
 .bar{
     width: 960px;
-    // width: 50vw;
+    // width: 50%;
     height: 4px;
     background-color: #D8D8D8;
     position: absolute;
     top: 290px;
-    // left: 480px;
+    left: 480px;
     // top: 15vw;
-    left: 25vw;
+    // left: 25vw;
     z-index: -1;
+}
+
+.bar-front{
+    width: 0;
+    background-color: #E59807;
 }
 
   .content{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    // margin-right: 7.8125vw;
   }
 
   .explanations{
@@ -329,8 +334,10 @@
 
     position: absolute;
     top: 270px;
-    // left: 440px;
-    left: 22.9vw;
+    left: 440px;
+    // left: 22.9vw;
+
+    outline: 1px solid indianred;
   }
 
   .circle{
@@ -352,6 +359,7 @@
     margin-right: 150px; 
     color: #333333;
   }
+
 
 // ----------------製作車子的主區域-------------------
 
@@ -405,8 +413,47 @@
       text-align: center;
   }
 
-  .shape, .makeCar-price{
+  .shape, .makeCar-price, .tire, .accessory{
       margin-bottom: 20px;
   }
 
+  .colorCard, .tireCard, .accessoryCard, .giveName{
+      display: none;
+  }
 
+.color{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.white{
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.red{background-color: red;}
+
+.orange{background-color: orange;}
+
+.yellow{background-color: yellow;}
+
+.nameTip{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.typeWorkName, .typeNickName{
+    width: 320px;
+}
+
+.notice{
+    color: #9D9D9D;
+    font-size: 14px;
+}
+
+.description{
+    margin-bottom: 8px;
+}
