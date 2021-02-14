@@ -5,6 +5,6 @@
     </clipPath>
   </defs>
   <g transform="translate(-244 -5966)" clip-path="url(#clip-path)">
-    <path  d="M2133.337,5740v327.277c0,144.7,95.866,244.723,214.269,244.723h185.731" transform="translate(-1713 226.5)" fill="none" stroke="#3c3d41" stroke-width="160"/>
+    <path  d="M2133.337,5740 v327.277 c0,144.7,95.866,244.723,214.269,244.723 h185.731" transform="translate(-1713 226.5)" fill="none" stroke="#3c3d41" stroke-width="160"/>
   </g>
 </svg>

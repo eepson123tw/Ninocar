@@ -84,7 +84,7 @@
             position: absolute;
             width: 20%;
             top: -36%;
-            left: 32%;
+            left: 22%;
             z-index: 10;
             transform: translateY(100px);
             @include rwd(1400px) {
@@ -96,12 +96,6 @@
             width: 100%;
             position: relative;
             top: -160px;
-            left: -8%;
-
-            @include rwd(1400px) {
-                left: -5%;
-            }
-
         }
     }
 
@@ -109,14 +103,29 @@
         background-color: #fff;
     }
 
-    .z-index-5 {
-        z-index: 5;
+
+    .about{
+        position: relative;
+        background-color: #fff;
+        border: 1px solid $gray-500;
+        z-index: 50;
     }
 
+    .turn-road{
+        position: relative;
+        top:-160px;
+        &--car{
+            position: absolute;
+            top: -400px;
+            right: 200px;
+            width: 10%;
+        }
+
+    }
+
+    
+
 
 
 }
 
-.max-w-100 {
-    max-width: 100%;
-}

@@ -73,8 +73,8 @@
             </section>
             <!-- factory -->
             <section class="container pt-10">
-                <div class="row">
-                    <div class="col-6 col-lg-3 col-sm-4">
+                <div class="row align-items-center">
+                    <div class="col-6 col-lg-6 col-sm-4">
                         <div id="triggerFactory"></div>
                         <div class="po-re">
                             <img src="./assets/img/illust/illust-factory.svg" alt="factory" class="factory--house">
@@ -83,16 +83,28 @@
                             <img src="./assets/img/illust/illust-factory-door.svg" alt="factory-door"
                                 class="factory--door">
                         </div>
+                    </div>
+                    <div class="col-5 offset-1 col-lg-6 order-lg-1 col-sm-4 mb-lg-20">
+                        <h2 class="h1 mb-5">打造自己的車</h2>
+                        <p class="h4 mb-5">在車車工廠，<br />我們提供各種車款，顏色烤漆和不同配備，<br />您可以盡情揮灑創意，創作屬於自己的超酷客製車！</p>
+                        <button class="btn">開始製作</button>
+                    </div>
+                </div>
+            </section>
+            <!-- about -->
+            <section class="container">
+                <div class="row no-gutter">
+                    <div class="col-6 col-lg-6 col-sm-4">
                         <div class="factory--road">
-                            <svg width="562" height="645" viewBox="0 0 562 645" class="w-100">
+                            <svg width="800" height="645" viewBox="0 0 700 645" class="w-100">
                                 <g transform="translate(-200 -5966)">
-                                    <path d="M2133.337,5740 v327.277 c0,144.7,95.866,244.723,214.269,244.723 h185.731"
-                                        transform="translate(-1713 226.5)" fill="none" stroke="#3c3d41"
-                                        stroke-width="160" id="factoryRoadPath" />
+                                    <path d="M2133,5740 v327 c0,144,96,244,214,244 h500"
+                                        transform="translate(-1713 226)" fill="none" stroke="#3c3d41" stroke-width="160"
+                                        id="factoryRoadPath" />
                                 </g>
                                 <g transform="translate(-200 -5966)">
-                                    <path d="M2133.337,5740 v327.277 c0,144.7,95.866,244.723,214.269,244.723 h185.731"
-                                        transform="translate(-1713 226.5)" fill="none" stroke="#ffffff" stroke-width="5"
+                                    <path d="M2133,5740 v327 c0,144,96,244,214,244 h500"
+                                        transform="translate(-1713 226)" fill="none" stroke="#ffffff" stroke-width="5"
                                         stroke-dasharray="60" />
                                 </g>
                             </svg>
@@ -100,7 +112,47 @@
                             <img src="./assets/img/illust/illust-car-down.svg" alt="car" class="factory--car">
                         </div>
                     </div>
+                    <div class="col-6 col-lg-6 col-sm-4">
+                        <div class="about mt-20 px-10 py-10  mt-lg-0">
+                            <h2 class="mb-3">我們的產品</h2>
+                            <p class="h5 mb-20">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
+                                aspernatur ex! A perspiciatis libero numquam.</p>
+                            <ul>
+                                <li class="d-flex align-item-center mb-20">
+                                    <img src="./assets/img/illust/illust-about-1.svg" alt="quality" class="w-30">
+                                    <div class="w-70 ml-5">
+                                        <h3 class="h4 mb-3">3道安全品質驗證</h3>
+                                        <p class="h5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum,
+                                            odio.</p>
+                                    </div>
+                                </li>
+                                <li class="d-flex align-item-center mb-20">
+                                    <img src="./assets/img/illust/illust-about-2.svg" alt="quality" class="w-30">
+                                    <div class="w-70 ml-5">
+                                        <h3 class="h4 mb-3">3道安全品質驗證</h3>
+                                        <p class="h5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum,
+                                            odio.</p>
+                                    </div>
+                                </li>
+                                <li class="d-flex align-item-center mb-10">
+                                    <img src="./assets/img/illust/illust-about-3.svg" alt="quality" class="w-30">
+                                    <div class="w-70 ml-5">
+                                        <h3 class="h4 mb-3">3道安全品質驗證</h3>
+                                        <p class="h5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum,
+                                            odio.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </section>
+            <!-- turn road -->
+            <section class="container po-re">
+                <svg  width="1068" height="800" viewBox="0 0 1068 800" class="mx-auto w-100 turn-road">
+                    <path id="turnRoadPath" d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88" transform="translate(-32 88)" fill="none" stroke="#3c3d41" stroke-width="160"/>
+                    <path  d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88" transform="translate(-32 88)" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="60"/>
+                  </svg>
             </section>
 
 
@@ -229,9 +281,20 @@
                         autoRotate: -90,
                         transformOrigin: "50% 50%",
 
+                    }
+                }).to('.factory--car', 4, {
+                    motionPath: {
+                        path: "#turnRoadPath",
+                        align: "#turnRoadPath",
+                        alignOrigin: [0.5, .5],
+                        autoRotate: -90,
+                        transformOrigin: "50% 50%",
+                        start:1,
+                        end:0,
                     },
-                    yoyo: true,
+                    delay: .5,
                 });
+                
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerFactory', //觸發點

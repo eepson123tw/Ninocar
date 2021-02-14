@@ -38,6 +38,12 @@ $alignItemsList : (
     }
 }
 
+@include rwd-lg{
+    .order-lg-1 {
+        order: -1;
+    }
+}
+
 @include rwd-md {
 
     .flex-md {
