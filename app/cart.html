@@ -14,37 +14,52 @@
     <div id="app">
         @@include('./components/Header.html') @@include('./pages/CartPage/CartProgress.html')
 
-        <!-- <cart-area></cart-area>
-        <cart-payment></cart-payment>
-        <cart-recomment></cart-recomment>
-        <cart-info></cart-info> -->
-        <cart-confirm></cart-confirm>
 
+        <cart-area :list="list" :is-Exist="listIsExist"></cart-area>
 
+        <!-- <cart-info></cart-info>
+
+        <cart-done></cart-done> -->
 
     </div>
 
 
-
-
 </body>
-
 @@include('./pages/CartPage/CartArea.html')
-<!--  -->
-@@include('./pages/CartPage/CartPayment.html')
-<!--  -->
-@@include('./pages/CartPage/CartRecomment.html')
 <!--  -->
 @@include('./pages/CartPage/CartInfo.html')
 <!--  -->
-@@include('./pages/CartPage/CartConfirm.html')
-<!--  -->
+@@include('./pages/CartPage/CartDone.html')
 <script>
     new Vue({
         el: '#app',
         data: {
-            message: 'Hello, VueJS!',
+            list: [{
+                productName: 'Audi R8 奧迪小客車',
+                productBrief: 'Audi TT coupe 1980',
+                price: 195,
+                productNum: 1,
+                totalPrice: 195,
+                img: "./assets/img/pic/3.jpg",
+                seriousNum: 'BS 01',
+                pointProduct: false,
+            }],
+            listIsExist: true,
         },
+        methods: {
+
+
+        },
+        mounted() {
+            // 確認有無購買
+            for (listnum in this.list) {
+                if (!this.list[listnum].productName) {
+                    this.listIsExist = false;
+                }
+            }
+        },
+
+
     });
 </script>
 
