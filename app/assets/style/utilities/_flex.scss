@@ -6,7 +6,7 @@ $flexList : (
 
 @each $key,$val in $flexList {
     .flex-#{$key} {
-        flex-direction: flex-#{$val};
+        flex-direction: #{$val};
     }
 }
 
