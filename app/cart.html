@@ -43,6 +43,16 @@
                 img: "./assets/img/pic/3.jpg",
                 seriousNum: 'BS 01',
                 pointProduct: false,
+            }, {
+                productName: 'Audi R8 奧迪小客車',
+                productBrief: 'Audi TT coupe 1980',
+                price: 200,
+                productNum: 1,
+                totalPrice: 200,
+                img: "./assets/img/pic/3.jpg",
+                seriousNum: 'BS 01',
+                pointProduct: true,
+                // 看資料庫型態改名
             }],
             listIsExist: true,
         },
@@ -55,8 +65,23 @@
             for (listnum in this.list) {
                 if (!this.list[listnum].productName) {
                     this.listIsExist = false;
+                };
+                // 確認是否為點數商品
+                if (this.list[listnum].pointProduct) {
+                    console.log(`${(listnum * 1 + 1)}是點數商品`)
                 }
-            }
+
+            };
+
+
+
+
+
+
+
+
+
+
         },
 
 
