@@ -120,10 +120,17 @@
     }
 
     .factory {
+        &--all{
+            @include rwd-lg{
+                width: 60%;
+                margin: 0 auto;
+            }
+        }
         &--house {
             position: relative;
             z-index: 30;
             width: 100%;
+           
         }
 
         &--inner {
@@ -152,12 +159,31 @@
             @include rwd(1400px) {
                 left: 24%;
             }
+            @include rwd-lg{
+                width:  5%;
+                left: 42%;
+                top: -30%
+            }
         }
 
         &--road {
             width: 100%;
             position: relative;
             top: -160px;
+            @include rwd-lg{
+                width: 240%;
+                left: -66%;
+            }
+        }
+
+        &--text{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            padding: 80px;
+            @include rwd-xl{
+                padding: 60px;
+            }
         }
     }
 
