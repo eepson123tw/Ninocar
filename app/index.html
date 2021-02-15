@@ -58,9 +58,9 @@
                     <img src="./assets/img/illust/illust-billboard.svg" alt="billboard">
                     <div class="swiper-container billboard--screen" id="swiperContainerBillboard">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide bg-primary h1">1</div>
-                            <div class="swiper-slide bg-secondary h1">2</div>
-                            <div class="swiper-slide bg-primary h1">3</div>
+                            <div class="swiper-slide"><img src="./assets/img/pic/banner-1.png" alt=""></div>
+                            <div class="swiper-slide"><img src="./assets/img/pic/banner-1.png" alt=""></div>
+                            <div class="swiper-slide"><img src="./assets/img/pic/banner-1.png" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -88,42 +88,40 @@
                 <!-- <img src="./assets/img/illust/illust-mountain.svg" alt="mountain" class="mountain__img"> -->
                 <div class="container swiper-container" id="swiperContainerMountain">
                     <ul class="swiper-wrapper">
-                        <li v-for="(product,index) in products" class="block swiper-slide mb-10">
-                            <section class="block__body py-10 pt-xs-5 pb-xs-5">
-                                <div class="display ">
-                                    <div class="display__cover">
-                                        <h2 class="display__title mb-2">{{product.eng}}</h2>
-                                        <img :src="product.displayImgURL" class="display__img">
-                                        <div :class="carIDClass(product)">{{product.series}}<span>{{product.seriesId}}</span>
+                        <li v-for="(product,index) in products" class="swiper-slide bg-white py-15 py-xs-5">
+                            <div class="display">
+                                <div class="display__cover">
+                                    <h2 class="display__title mb-2">{{product.eng}}</h2>
+                                    <img :src="product.displayImgURL" class="display__img">
+                                    <div :class="carIDClass(product)">
+                                        {{product.series}}<span>{{product.seriesId}}</span>
                                     </div>
-                                    <div class="d-flex justify-content-between  flex-xs-wrap">
-                                        <div class="mb-xs-2 w-50 w-md-100">
-                                            <h3 class="h1 mb-1">{{product.name}}</h3>
-                                            <span class="d-inbl mb-5">{{product.eng}} {{product.year}}</span>
-                                            <p class="h4 mb-5">{{product.description}}</p>
-                                            <span :class="badgeClass(product)">{{chBadge(product)}}</span>
-                                            <span v-if="product.extraLabel== 2 || product.extraLabel== 1"
-                                                :class="extraLabel(product).className">{{extraLabel(product).text}}</span>
-                                        </div>
-                                        <div class="text-right mx-xs-auto">
-                                            <svg :class="getPinClass(product)" width="120" height="120" viewBox="0 0 80 80">
-                                                <circle cx="40" cy="40" r="30" stroke-width="4" />
-                                                <circle cx="40" cy="40" r="25" stroke-width="2" />
-                                                <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                                                <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                                                <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
-                                            </svg>
-                                            <!-- pin 收藏大師-->
-                                          <pin :disabled="!memberHasPin" :series="product.series">
-                                        </div>
-                                    </div>
-                                   
                                 </div>
-                            </section>
+                                <div class="d-flex justify-content-between  flex-xs-wrap">
+                                    <div class="mb-xs-2 w-50 w-md-100">
+                                        <h3 class="h1 mb-1">{{product.name}}</h3>
+                                        <span class="d-inbl mb-5">{{product.eng}} {{product.year}}</span>
+                                        <p class="h4 mb-5">{{product.description}}</p>
+                                        <span :class="badgeClass(product)">{{chBadge(product)}}</span>
+                                        <span v-if="product.extraLabel== 2 || product.extraLabel== 1"
+                                            :class="extraLabel(product).className">{{extraLabel(product).text}}</span>
+                                    </div>
+                                    <div class="text-right mx-xs-auto">
+                                        <svg :class="getPinClass(product)" width="120" height="120" viewBox="0 0 80 80">
+                                            <circle cx="40" cy="40" r="30" stroke-width="4" />
+                                            <circle cx="40" cy="40" r="25" stroke-width="2" />
+                                            <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
+                                            <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
+                                            <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
+                                        </svg>
+                                        <!-- pin 收藏大師-->
+                                        <pin :disabled="!memberHasPin" :series="product.series">
+                                    </div>
+                                </div>
+
                         </li>
                     </ul>
                 </div>
-
             </section>
             <!-- factory -->
             <section class="container pt-10">
@@ -354,7 +352,7 @@
                     }
                 },
             },
-          
+
             mounted() {
                 let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,
