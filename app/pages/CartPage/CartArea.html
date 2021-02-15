@@ -9,12 +9,12 @@
                     <li>單價</li>
                     <li>數量</li>
                     <li>總計</li>
-                    <li><button class="btn btn--link cart__link">全部刪除</button></li>
+                    <li><button  @click="deleteAllHandler"  class="btn btn--link cart__link">全部刪除</button></li>
                     <li><img src="./assets/img/icon/icon-up.svg" alt=""></li>
                 </ul>
             </header>
             <div class="row" >
-                <div class="d-flex cart__group w-100" v-for="(item,index) of buyerList" >
+                <div class="d-flex cart__group w-100" v-for="(item,listIndex) of buyerList" >
                     <div>
                         <div class="cart__groupImg">
                             <img :src="item.img" alt="">
@@ -25,33 +25,45 @@
                             <p>{{item.productBrief}}</p>
                         </div>
                     </div>
-                    <div>
+                    <div v-if="item.pointProduct" >
+                        <div class="cart__member">
+                            <p>Ni</p>
+                            <samp>{{item.price}}</samp>
+                        </div>
+                    </div>
+                    <div v-else>
                         <p> NT$<span>{{item.price}}</span></p>
                     </div>
                     <div>
-                        <select name="" class="cart__num" >
-                            <option value="" v-for=" (item,index) in 20">{{item}}</option>
+                        <select name="" class="cart__num" @change="changeNum(listIndex,$event)" >
+                            <option :value="index"  v-for=" (num ,index) in 20">{{num}}</option>
                         </select>
                     </div>
-                    <div>
-                        <p> NT$<span>{{item.totalPrice}}</span> </p>
+                    <div v-if="item.pointProduct">
+                        <div class="cart__member">
+                            <p>Ni</p>
+                            <samp>{{item.totalPrice}}</samp>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p> NT$<span>{{item.totalPrice}}</span></p>
                     </div>
                     <div>
-                        <button class="btn btn--link cart__link--small">刪除</button>
+                        <button  @click="deleteHandler(listIndex)" class="btn btn--link cart__link--small">刪除</button>
                     </div>
                     <p class="cart__cancel"><img src="./assets/img/icon/icon-close.svg" alt=""></p>
                 </div>
             </div>
             <footer class="row order-sm-1">
                 <ul class="cart__footer d-flex w-100">
-                    <li class="cart__text--hide">總計 <span>5</span> 件商品 </li>
+                    <li class="cart__text--hide">總計 <span>{{totalProductNum}}</span> 件商品 </li>
                     <li class="cart__text">總花點數</li>
                     <li class="cart__member">
                         <p>Ni</p>
-                        <samp>200</samp>
+                        <samp>{{totalPointCost}}</samp>
                     </li>
                     <li class="cart__text">總金額</li>
-                    <li> NT$ <span>200</span> </li>
+                    <li> NT$ <span>{{totalMoneyCost}}</span> </li>
                 </ul>
             </footer>
         </main>
@@ -95,13 +107,13 @@
                             <p>商品花費點數</p>
                             <main class="cart__member">
                                 <p>Ni</p>
-                                <samp>200</samp>
+                                <samp>{{totalPointCost}}</samp>
                             </main>
                         </div>
                         <ul class="cart__moneyCount  w-50">
                             <li>
                                 <p>商品總金額</p>
-                                <p>NT$<span>780</span></p>
+                                <p>NT$<span>{{totalMoneyCost}}</span></p>
                             </li>
                             <li>
                                 <p>運費總計</p>
@@ -120,12 +132,12 @@
                                 <p>總花費點數</p>
                                 <main class="cart__member ">
                                     <p>Ni</p>
-                                    <samp>200</samp>
+                                    <samp>{{totalPointCost}}</samp>
                                 </main>
                             </li>
                             <li>
                                 <p>總金額</p>
-                                <p class="cart__TotalText ">NT$ <span>762</span> </p>
+                                <p class="cart__TotalText ">NT$ <span>{{totalMoneyCost}}</span> </p>
                             </li>
                         </ul>
                     </div>
@@ -230,20 +242,88 @@
             return {
                 buyerList: this.list,
                 listIsExist: this.IsExist,
+                number: "",
+                totalProductNum: null,
+                totalPointCost: null,
+                totalMoneyCost: null,
             }
         },
         mounted() {
-            // 確認有無購買
-            for (listnum in this.list) {
-                if (!this.list[listnum].productName) {
+            //  資料傳入時先渲染
+            for (listNum in this.list) {
+
+                if (!this.list[listNum].productName) {
                     this.listIsExist = false;
                 }
-            }
+
+                this.totalProductNum += this.buyerList[listNum].productNum;
+
+                if (this.buyerList[listNum].pointProduct) {
+
+                    this.totalPointCost += this.buyerList[listNum].price;
+                }
+
+                if (!this.buyerList[listNum].pointProduct) {
+                    this.totalMoneyCost += this.buyerList[listNum].price;
+                }
+            };
+
+
         },
         methods: {
+            changeNum(listIndex, e) {
+
+                let chooseNum = e.target.value * 1 + 1;
+                let totalPrice = this.buyerList[listIndex].price;
+                let newTotalPrice = totalPrice * chooseNum;
+
+                this.buyerList[listIndex].productNum = chooseNum;
+                this.buyerList[listIndex].totalPrice = newTotalPrice;
+
+                this.renew();
+
+            },
+            deleteHandler(listIndex) {
+                this.buyerList.splice(listIndex, 1);
+
+                this.renew();
+
+            },
+            deleteAllHandler() {
+                this.buyerList = "";
+                this.renew();
+            },
+            renew() {
+                // 重render畫面
+                this.totalProductNum = 0;
+                this.totalPointCost = 0;
+                this.totalMoneyCost = 0;
+
+                for (listNum in this.buyerList) {
+
+                    this.totalProductNum += this.buyerList[listNum].productNum;
+
+                    if (this.buyerList[listNum].pointProduct) {
+
+                        this.totalPointCost += this.buyerList[listNum].totalPrice;
+                    }
+
+                    if (!this.buyerList[listNum].pointProduct) {
+                        this.totalMoneyCost += this.buyerList[listNum].totalPrice;
+                    }
+
+
+                };
+            }
+
 
         },
         computed: {
+
+            // deleteAllHandler() {
+            //     return this.buyerList = "";
+            // },
+
 
         }
 
