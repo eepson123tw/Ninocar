@@ -8,7 +8,7 @@
     .pb-#{$level} {
         padding-bottom: $space-unit * $level;
     }
-    
+}  
 @include rwd-lg{
     @each $level in 25 {
         .px-lg-#{$level} {
@@ -18,7 +18,7 @@
     }
 
 }
-@each $level in 25,30 {
+@each $level in 25,30,50 {
     .mb-#{$level} {
         margin-bottom: $space-unit * $level;
     }

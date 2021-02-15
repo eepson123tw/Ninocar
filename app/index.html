@@ -89,20 +89,21 @@
                 <div class="container swiper-container" id="swiperContainerMountain">
                     <ul class="swiper-wrapper">
                         <li v-for="(product,index) in products" class="block swiper-slide mb-10">
-                            <section class="block__body pt-9 pb-14 pt-xs-5 pb-xs-5">
+                            <section class="block__body py-10 pt-xs-5 pb-xs-5">
                                 <div class="display ">
-                                    <div class="display__cover mb-5">
+                                    <div class="display__cover">
                                         <h2 class="display__title mb-2">{{product.eng}}</h2>
                                         <img :src="product.displayImgURL" class="display__img">
+                                        <div :class="carIDClass(product)">{{product.series}}<span>{{product.seriesId}}</span>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center flex-xs-wrap">
                                         <div class="mb-xs-2 w-50 w-md-100">
                                             <h3 class="h1 mb-1">{{product.name}}</h3>
                                             <span class="d-inbl mb-5">{{product.eng}} {{product.year}}</span>
                                             <p class="h4 mb-5">{{product.description}}</p>
-                                            <!-- <span :class="badgeClass">{{chBadge(product)}}</span> -->
-                                            <!-- <span v-if="product.extraLabel== 2 || product.extraLabel== 1"
-                                                :class="extraLabel.className">{{extraLabel(product).text}}</span> -->
+                                            <span :class="badgeClass(product)">{{chBadge(product)}}</span>
+                                            <span v-if="product.extraLabel== 2 || product.extraLabel== 1"
+                                                :class="extraLabel(product).className">{{extraLabel(product).text}}</span>
                                         </div>
                                     </div>
 
@@ -152,9 +153,9 @@
                                         stroke-dasharray="60" />
                                 </g>
                             </svg>
-
                             <img src="./assets/img/illust/illust-car-down.svg" alt="car" class="factory--car">
                         </div>
+                        <img src="./assets/img/illust/illust-delievery.svg" alt="">
                     </div>
                     <div class="col-6 col-lg-6 col-sm-4 z-index-50">
                         <div class="about mt-20 px-10 py-10  mt-lg-0">
@@ -315,6 +316,16 @@
                     }
                     return seriesNames[product.series]
                 },
+                carIDClass(product) {
+                    return `carID carID--lg bg-series-${product.series} po-re mb-5`
+                },
+                badgeClass(product) {
+                    return `badge bg-series-${product.series} mr-2`
+                },
+                getPinClass(product) {
+                    return this.memberOwnProductIdList.indexOf(product.productId) ? 'pin' :
+                        'pin pin--disabled'
+                },
                 extraLabel(product) {
                     if (product.extraLabel === 1) {
                         return {
@@ -331,20 +342,7 @@
                     }
                 },
             },
-            computed: {
-                carIDClass() {
-                    return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
-                },
-                badgeClass() {
-                    return `badge bg-series-${this.targetProduct.series} mr-2`
-                },
-                getPinClass() {
-                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
-                        'pin pin--disabled'
-                },
-               
-                
-            },
+          
             mounted() {
                 let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,
