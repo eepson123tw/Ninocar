@@ -25,6 +25,39 @@
         }
     }
 
+    .billboard{
+        &--screen{
+            position: absolute;
+            background-color: #fa0;
+            width: 93%;
+            height: 70.6%;
+            top: 5.6%;
+            left: 51.5%;
+            transform: translateX(-50%);
+
+            @include rwd(1400px){
+                width: 87%;
+            }
+            @include rwd-xl{
+                width: 86%;
+            }
+            @include rwd-lg{
+                width: 88%;
+            }
+            @include rwd-md{
+                width: 87%;
+            }
+            @include rwd-sm{
+                width: 86.5%;
+                height: 70.3%;
+            }
+            @include rwd-xs{
+                width: 84%;
+            }
+        }   
+    }
+
+
 
     .road--hero {
         position: absolute;
