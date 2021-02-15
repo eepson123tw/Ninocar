@@ -2,10 +2,10 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/index.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
-<link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
 
 <script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
@@ -31,42 +31,49 @@
     <div id="app">
         <vue-header></vue-header>
         <main class="pt-25 index">
-            <!--hero-->
-            <header class="mb-25">
-                <div id="trigger02"></div>
+            <!--parking-->
+            <header class="mb-50">
+                <div id="triggerParking"></div>
                 <div class="container po-re">
-                    <div class="car--parking">
+                    <div class="parking--car">
                         <img src="./assets/img/illust/illust-car.svg" alt="car">
                     </div>
-                    <img src="./assets/img/illust/illust-hero-mask.svg" alt="parking">
-                    <div class="road--hero">
+                    <div class="parking--road">
                         <img src="./assets/img/illust/illust-road-left.svg" alt="road">
+                    </div>
+                    <img src="./assets/img/illust/illust-hero-mask.svg" alt="parking">
+                    <div class="parking--text">
+                        <h2 class="mb-5">歡迎來到NINO車世界</h2>
+                        <p class="h5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, veniam nemo!
+                            Aliquam iure nostrum vitae laudantium perferendis corrupti in, nobis unde perspiciatis
+                            doloribus blanditiis enim!</p>
                     </div>
                 </div>
             </header>
             <!-- billboard -->
-            <section class="mb-30">
+            <section class="mb-30 mb-sm-10">
+                <!-- screen -->
                 <div class="container po-re">
-                    <div id="trigger1"></div>
+                    <div id="triggerBillboard"></div>
                     <img src="./assets/img/illust/illust-billboard.svg" alt="billboard">
-                    <div class="swiper-container billboard--screen" id="swiper-container-billboard">
+                    <div class="swiper-container billboard--screen" id="swiperContainerBillboard">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide bg-primary h1">1</div>
                             <div class="swiper-slide bg-secondary h1">2</div>
                             <div class="swiper-slide bg-primary h1">3</div>
                         </div>
                     </div>
-
                 </div>
+                <!-- road -->
                 <div class="po-re">
-                    <svg width="1920" height="140" viewbox="0 0 1920 140">
+                    <svg width="1920" height="140" viewbox="0 0 1920 140" class="billboard--road">
                         <line stroke="#3c3d41" x1="0" y1="70" x2="1920" y2="70" stroke-width="140"></line>
                         <line stroke="#ffffff" x1="0" y1="5" x2="1920" y2="5" stroke-width="5"></line>
                         <line stroke="#ffffff" x1="0" y1="130" x2="1920" y2="130" stroke-width="5"></line>
                         <line stroke="#ffffff" x1="0" y1="72.5" x2="1920" y2="72.5" stroke-width="5"
                             stroke-dasharray="60"></line>
                     </svg>
-                    <img src="./assets/img/illust/illust-car-y.svg" alt="car" class="car--billboard">
+                    <img src="./assets/img/illust/illust-car-y.svg" alt="car" class="billboard--car">
                 </div>
             </section>
             <!-- hightway -->
@@ -75,16 +82,16 @@
                     <img src="./assets/img/illust/illust-highway.svg" alt="hightway">
                 </div>
             </section>
-            
+
             <!-- mountain -->
             <section class="mountain mb-30">
                 <!-- <img src="./assets/img/illust/illust-mountain.svg" alt="mountain" class="mountain__img"> -->
-                <div class="container swiper-container" id="swiper-container-mountain">
+                <div class="container swiper-container" id="swiperContainerMountain">
                     <ul class="swiper-wrapper">
                         <li v-for="(product,index) in products" class="block swiper-slide mb-10">
                             <section class="block__body pt-9 pb-14 pt-xs-5 pb-xs-5">
                                 <div class="display ">
-                                    <div class="display__cover mb-10">
+                                    <div class="display__cover mb-5">
                                         <h2 class="display__title mb-2">{{product.eng}}</h2>
                                         <img :src="product.displayImgURL" class="display__img">
                                     </div>
@@ -93,9 +100,12 @@
                                             <h3 class="h1 mb-1">{{product.name}}</h3>
                                             <span class="d-inbl mb-5">{{product.eng}} {{product.year}}</span>
                                             <p class="h4 mb-5">{{product.description}}</p>
+                                            <!-- <span :class="badgeClass">{{chBadge(product)}}</span> -->
+                                            <!-- <span v-if="product.extraLabel== 2 || product.extraLabel== 1"
+                                                :class="extraLabel.className">{{extraLabel(product).text}}</span> -->
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </section>
                         </li>
@@ -144,7 +154,7 @@
                             <img src="./assets/img/illust/illust-car-down.svg" alt="car" class="factory--car">
                         </div>
                     </div>
-                    <div class="col-6 col-lg-6 col-sm-4">
+                    <div class="col-6 col-lg-6 col-sm-4 z-index-50">
                         <div class="about mt-20 px-10 py-10  mt-lg-0">
                             <h2 class="mb-3">我們的產品</h2>
                             <p class="h5 mb-20">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni,
@@ -181,18 +191,18 @@
             </section>
             <!-- turn road -->
             <section class="container po-re">
-                <svg width="1068" height="800" viewBox="0 0 1068 800" class="mx-auto w-100 turn-road">
+                <svg width="1400" height="800" viewBox="0 0 1400 800" class="turn-road">
                     <path id="turnRoadPath"
-                        d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88"
-                        transform="translate(-32 88)" fill="none" stroke="#3c3d41" stroke-width="160" />
-                    <path d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-88"
-                        transform="translate(-32 88)" fill="none" stroke="#ffffff" stroke-width="5"
+                        d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-100"
+                        transform="translate(120 88)" fill="none" stroke="#3c3d41" stroke-width="160" />
+                    <path d="M102,712 V526 c0 -118, 100 -214, 244 -214 l432 0 c144,0,244 -96,244-214 V-100"
+                        transform="translate(120 88)" fill="none" stroke="#ffffff" stroke-width="5"
                         stroke-dasharray="60" />
                 </svg>
             </section>
             <!-- address -->
-            <section class="container address">
-                <div class="d-flex py-10 px-10 flex-wrap align-items-center">
+            <section class="container bg-white z-index-50">
+                <div class="address py-10 px-10">
                     <div class="w-50 w-md-100">
                         <h2 class="mb-5">聯絡我們</h2>
                         <ul class="h5">
@@ -224,7 +234,7 @@
                             fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="60" />
                     </g>
                 </svg>
-                <img src="./assets/img/illust/illust-showgirl.svg" alt="showgirl" class="showgirl">
+                <img src="./assets/img/illust/illust-showgirl.svg" alt="showgirl" class="end--showgirl">
             </section>
 
             <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
@@ -237,7 +247,6 @@
     @@include('./components/VueHeader.html')
     @@include('./pages/HomePage/HomeDisplayItem.html')
 
-    <!-- @@include('./pages/HomePage/HomeSwiper.html') -->
 
 
     <!-- <script type="module">
@@ -290,6 +299,36 @@
                 memberHasPin: true,
                 memberOwnProductIdList: ['120', '121'],
             },
+            methods: {
+                chBadge(product) {
+                    const seriesNames = {
+                        BS: '巴士系',
+                        EN: '工程系',
+                        TA: '計程車系',
+                        EM: '消防救護系',
+                        PM: 'PREMIUM系',
+                        PA: '警車系',
+                        RV: 'RV休旅系',
+                        CA: '轎車系'
+                    }
+                    return seriesNames[product.series]
+                },
+                extraLabel(product) {
+                    if (product.extraLabel === 1) {
+                        return {
+                            text: '期間限定',
+                            className: 'badge badge--primary'
+                        };
+                    } else if (product.extraLabel === 2) {
+                        return {
+                            text: '點數限定',
+                            className: 'badge bg-blue'
+                        };
+                    } else {
+                        return {}
+                    }
+                },
+            },
             computed: {
                 carIDClass() {
                     return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
@@ -301,54 +340,28 @@
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
-                chBadge() {
-                    const seriesNames = {
-                        BS: '巴士系',
-                        EN: '工程系',
-                        TA: '計程車系',
-                        EM: '消防救護系',
-                        PM: 'PREMIUM系',
-                        PA: '警車系',
-                        RV: 'RV休旅系',
-                        CA: '轎車系'
-                    }
-                    return seriesNames[this.targetProduct.series]
-                },
-                extraLabel() {
-                    if (this.targetProduct.extraLabel === 1) {
-                        return {
-                            text: '期間限定',
-                            className: 'badge badge--primary'
-                        };
-                    } else if (this.targetProduct.extraLabel === 2) {
-                        return {
-                            text: '點數限定',
-                            className: 'badge bg-blue'
-                        };
-                    } else {
-                        return {}
-                    }
-                },
+               
+                
             },
             mounted() {
-                let swiperBillboard = new Swiper('#swiper-container-billboard', {
+                let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,
                     autoplay: {
                         delay: 2000,
                         disableOnInteraction: false
                     },
-                    loop:true,
+                    loop: true,
                     // mousewheel: true,
                     speed: 800,
                     // effect: 'fade',
                 });
-                let swiperMountain = new Swiper('#swiper-container-mountain', {
+                let swiperMountain = new Swiper('#swiperContainerMountain', {
                     spaceBetween: 20,
                     autoplay: {
                         delay: 2000,
                         disableOnInteraction: false
                     },
-                    loop:true,
+                    loop: true,
                     // mousewheel: true,
                     speed: 800,
                     effect: 'fade',
@@ -358,13 +371,13 @@
                 let screenX = document.body.clientWidth;
 
 
-                let mvParking = TweenMax.to('.car--parking', 4, {
+                let mvParking = TweenMax.to('.parking--car', 4, {
                     x: -screenX * .65, //5
                     y: screenX * .39, //3
                 });
 
                 new ScrollMagic.Scene({
-                        triggerElement: '#trigger02', //觸發點
+                        triggerElement: '#triggerParking', //觸發點
                         offset: 500
                     }).setTween(mvParking) //找到bgc 物件 動態塞入blue
                     .addIndicators({
@@ -374,13 +387,13 @@
                     .addTo(controller);
 
 
-                let mvBillboard = TweenMax.to('.car--billboard', 3, {
+                let mvBillboard = TweenMax.to('.billboard--car', 3, {
                     x: screenX + 250,
                     ease: Linear.easeNone,
                 });
 
                 new ScrollMagic.Scene({
-                        triggerElement: '#trigger1', //觸發點
+                        triggerElement: '#triggerBillboard', //觸發點
                         offset: 200
                     }).setTween(mvBillboard) //動畫
                     .addIndicators({
