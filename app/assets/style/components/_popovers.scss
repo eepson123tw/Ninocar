@@ -1,0 +1,26 @@
+.popovers {
+    // display: none;
+    width: 200px;
+    height: 100px;
+    background-color: violet;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    top: -50%;
+    transition: opacity 2s;
+    &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        // width: 20px;
+        // height: 20px;
+        // background-color: black;
+        border-top: 20px solid transparent;
+        border-left: 20px solid transparent;
+        border-right: 20px solid violet;
+        border-bottom: 20px solid transparent;
+        top: 30%;
+        left: -20%;
+        z-index: 2;
+    }
+}
