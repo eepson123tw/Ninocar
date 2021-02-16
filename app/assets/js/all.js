@@ -6,12 +6,11 @@ window.onload = function() {
     console.log(document.title);
 
     //popovers 
-    let item = document.querySelector(`[data-js]`);
+    let popoversItem = document.querySelector(`[data-js='js-popovers']`);
     let popoversArea = document.querySelector(`.popovers`);
 
-    if (item) {
-
-        item.addEventListener("mouseenter", (e) => {
+    if (popoversItem) {
+        popoversItem.addEventListener("mouseenter", (e) => {
 
             e.preventDefault();
             const { offsetLeft, offsetTop } = e.target;
@@ -20,10 +19,36 @@ window.onload = function() {
             popoversArea.style.display = "block";
             popoversArea.style.opacity = 1;
         })
-
-        item.addEventListener("mouseleave", (e) => {
+        popoversItem.addEventListener("mouseleave", (e) => {
             popoversArea.style.display = "none";
             popoversArea.style.opacity = 0;
+        })
+    }
+    //progress 進度條
+
+    let progressBtn = document.querySelector(`[data-js='js-progress']`);
+    let progressBar = document.querySelector('.progress');
+
+    let clickNumber = 1;
+
+    if (progressBtn) {
+
+        progressBtn.addEventListener('click', () => {
+
+            let liList = progressBar.querySelectorAll('.progress li');
+
+            if (clickNumber >= liList.length) {
+                console.log(`超過了`);
+                return
+            };
+
+            if (liList[clickNumber].classList.contains("progress__item--active")) {
+                // liList[i].classList.remove("progress__item--active");
+            } else {
+                liList[clickNumber].classList.add("progress__item--active");
+            }
+
+            clickNumber += 1;
 
         })
 
