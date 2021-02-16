@@ -13,8 +13,8 @@
         };
       },
       template: `
-          <div class="container">
-              <div class="emptyState row">
+          <div class="container pt-0">
+              <div class="emptyState row pt-25">
                   <div class="empty--left col-6 col-lg-3 col-sm-2">
                       <img src="../app/assets/img/illust/illust-empty.png" alt="">
                   </div>
@@ -24,6 +24,7 @@
                       <button class="btn" v-bind:btnText="btnDes" :onclick=url>{{btnDes}}</button>
                   </div>
               </div>
+              <ul class="putMywork"></ul>
           </div>`,
       props: ['details', 'details2', 'btn-text']
     });

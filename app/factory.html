@@ -43,7 +43,8 @@
             <!-- 製作車子的區域 -->
             <div class="makeCar col-12 col-lg-6 col-sm-4">
                 <div class="mainArea">
-                    <img src="../app/assets/img/pic/model.png" class="mainAreaPic">
+                    <!-- <img src="../app/assets/img/pic/model.png" class="mainAreaPic"> -->
+                    <canvas id="canvas" class="mainAreaPic canvas" width="400" height="400" style="border: 1px solid #ccc;"></canvas>
                 </div>
                 <div class="tipArea">
                     <div class="tipArea_left col-6">
@@ -102,7 +103,7 @@
                             </div>
                             <p class="makeCar-name">白</p>
                             <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor">選擇烤漆</button>
+                            <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
                         </li>
     
                         <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -111,7 +112,7 @@
                             </div>
                             <p class="makeCar-name">紅</p>
                             <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
+                            <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
                         </li>
     
                         <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -120,7 +121,7 @@
                             </div>
                             <p class="makeCar-name">橙</p>
                             <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
+                            <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
                         </li>
     
                         <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -129,7 +130,7 @@
                             </div>
                             <p class="makeCar-name">黃</p>
                             <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
+                            <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
                         </li>
 
                         <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -146,21 +147,21 @@
                             <img src="../app/assets/img/pic/tire01.png" class="tire">
                             <p class="makeCar-name">經典款輪子</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
+                            <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
                         </li>
     
                         <li class="tireCard col-3 col-lg-3 col-sm-3">
                             <img src="../app/assets/img/pic/tire02.png" class="tire">
                             <p class="makeCar-name">經典款輪子</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
+                            <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
                         </li>
     
                         <li class="tireCard col-3 col-lg-3 col-sm-3">
                             <img src="../app/assets/img/pic/tire03.png" class="tire">
                             <p class="makeCar-name">經典款輪子</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
+                            <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
                         </li>
     
                         <li class="tireCard col-3 col-lg-3 col-sm-3">
@@ -492,7 +493,6 @@
                 </ul>
 
                 <div class="mywork" id="mywork">
-                    <!-- <empty-state></empty-state> -->
                     @@include('./components/EmptyState.html')
                 </div>
             </div>
@@ -678,6 +678,7 @@
         $('.myworks').click(function(){
             $('.othersWorks').css({"display": "none"})
             $('.mywork').css({"display": "block"})
+            console.log('我的車車出現')
         })
 
         //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
@@ -871,8 +872,64 @@
                 console.log(typeNickNameL)
                 console.log(typeInspirationL)
 
-                //PO到我的車車(未寫)
+                let x = `<li class="work col-4">
+                        <div class="work_pic">
+                            <img src="../app/assets/img/pic/model02.png" class="">
+                        </div>
 
+                        <div class="work_author">
+                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                            <div class="userContent">
+                                <p class="userName h6">${typeWorkName}</p>
+                                <h2 class="workName h4">${typeNickName}</h2>
+                                <p class="userContent h5">${typeInspiration}</p>
+                                <div class="other">
+                                    <p class="postTime h6">3小時前</p>
+                                    <button class="btn btn--link">檢舉</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workInfo">
+                            <div class="workInfo_good">
+                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                <p  class="num h3">0</p>
+                            </div>
+                            <div class="workInfo_reply">
+                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                <p  class="num h3">0</p>
+                            </div>
+                        </div>
+
+                        <div class="typeReply">
+                            <div class="typeReply_left">
+                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                            </div>
+                    
+                            <div class="typeReply_right">
+                              <p class="replyerName">沾醬大師</p>
+                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                              <div class="other">
+                                <p class="textCount"></p>
+                                <button class="btn btn--small comment">留言</button>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="closeTextarea">
+                            <p class="h5 textareaWord">關閉輸入框</p>
+                            <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
+                        </div>
+                    </li>`
+
+                //PO到我的車車
+                $('.emptyState').css({"display": "none"})
+                $('.mywork .putMywork').append(x)
+
+                //PO完後清空
+                $('.typeWorkName').val('')
+                $('.typeNickName').val('')
+                $('.typeInspiration').val('')
             }
         })
 
@@ -993,21 +1050,150 @@
                 $(this).parent().children('.textCount').text(`餘${textMax}字`);
             }
         })
-    
-        let totalPriceInit = $('.totalPrice').text()
-        let toPriceInit = totalPriceInit.split(' ')
+    // ---------------------------------計算金額------------------------------------------------
+        let totalPriceInit = $('.totalPrice').text().split(' ')[1]
         
         $('.selectShape').click(function(){
-            console.log(toPriceInit[1])
+            console.log(totalPriceInit)
 
-            let shapePrice = $(this).parent().children('.makeCar-price').text()
-            // console.log(shapePrice)
-            let shPrice = shapePrice.split(' ');
-            console.log(shPrice[1]);
+            let shapePrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+            console.log(shapePrice);
 
-            let totalPrice = $('.totalPrice').text().split(' ')[1]
-            totalPrice = $('.totalPrice').text(`NT$ ${shPrice[1]}`)
+            let finalPrice = $('.totalPrice').text().split(' ')[1]
+            finalPrice = $('.totalPrice').text(`NT$ ${shapePrice}`)
         })
+
+        $('.selectColor').click(function(){
+            let totalPrice1 = $('.totalPrice').text().split(' ')[1]
+            // console.log(totalPrice1)
+
+            let colorPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+            console.log("colorPrice: " + colorPrice);
+
+            let calc1 = parseInt(totalPrice1) + parseInt(colorPrice)
+            console.log("calc1:" + calc1)
+
+            let finalPrice = $('.totalPrice').text(`NT$ ${calc1}`)
+            //有問題在1016~1018之間！！！
+        })
+
+        $('.selectTire').click(function(){
+            let totalPrice2 = $('.totalPrice').text().split(' ')[1]
+            // console.log(totalPrice2)
+
+            let tirePrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+            console.log("tirePrice: " + tirePrice);
+
+            let calc2 = parseInt(totalPrice2) + parseInt(tirePrice)
+            console.log("calc2:" + calc2)
+
+            let finalPrice2 = $('.totalPrice').text(`NT$ ${calc2}`)
+            //有問題！！！
+        })
+
+        $('.selectAccessory').click(function(){
+            let totalPrice3 = $('.totalPrice').text().split(' ')[1]
+            // console.log(totalPrice3)
+
+            let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+            console.log("accessoryPrice: " + accessoryPrice);
+
+            let calc3 = parseInt(totalPrice3) + parseInt(accessoryPrice)
+            console.log("calc3:" + calc3)
+
+            let finalPrice3 = $('.totalPrice').text(`NT$ ${calc3}`)
+            //有問題！！！
+        })
+
+        // -------------------------------------CANVAS--------------------------------------------
+        //建立環境
+        let canvas = document.querySelector('.canvas');
+        let context = canvas.getContext('2d');
+
+        //綁定事件
+        $('.selectArea').click(buildCanvas);
+
+        function buildCanvas(e){
+            let targetShape = $(e.target).parent().children('.shape').attr('src');
+            // let targetClass = $(e.target).parent().children('.shape').attr('class');
+            console.log(targetShape)
+            // console.log(targetClass)
+
+            let pic1 = new Image();
+            pic1.src = `${targetShape}`; //放上車型
+            pic1.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic1, 0, 0);
+            })
+
+            //擦去上一個選項尚未找到解！
+        }
+
+        //疊上顏色
+        $('.selectWhite').click(function(){
+            let pic2 = new Image();
+            pic2.src = './assets/img/pic/color1A.png'; //白
+            pic2.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic2, 0, 0);
+            })
+        })
+
+        $('.selectRed').click(function(){
+            let pic2 = new Image();
+            pic2.src = './assets/img/pic/color2A.png'; //紅
+            pic2.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic2, 0, 0);
+            })
+        })
+
+        $('.selectOrange').click(function(){
+            let pic2 = new Image();
+            pic2.src = './assets/img/pic/color3A.png'; //橙
+            pic2.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic2, 0, 0);
+            })
+        })
+
+        $('.selectYellow').click(function(){
+            let pic2 = new Image();
+            pic2.src = './assets/img/pic/color4A.png'; //黃
+            pic2.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic2, 0, 0);
+            })
+        })
+
+        //疊上輪子
+        $('.selectT1').click(function(){
+            let pic3 = new Image();
+            pic3.src = './assets/img/pic/tire01.png'; //輪子1
+            pic3.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic3, 0, 0);
+            })
+        })
+
+        $('.selectT2').click(function(){
+            let pic3 = new Image();
+            pic3.src = './assets/img/pic/tire02.png'; //輪子2
+            pic3.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic3, 0, 0);
+            })
+        })
+
+        $('.selectT3').click(function(){
+            let pic3 = new Image();
+            pic3.src = './assets/img/pic/tire03.png'; //輪子3
+            pic3.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic3, 0, 0);
+            })
+        })
+
     </script>
 </body>
 </html>
