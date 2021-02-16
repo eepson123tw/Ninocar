@@ -1,26 +1,79 @@
-.popovers {
-    // display: none;
-    width: 200px;
-    height: 100px;
-    background-color: violet;
-    position: absolute;
-    z-index: 2;
-    opacity: 0;
-    top: -50%;
-    transition: opacity 2s;
-    &::before {
-        display: block;
-        content: "";
+    .popovers {
+        // display: none;
+        padding: 30px 30px;
+        background-color: $white;
         position: absolute;
-        // width: 20px;
-        // height: 20px;
-        // background-color: black;
-        border-top: 20px solid transparent;
-        border-left: 20px solid transparent;
-        border-right: 20px solid violet;
-        border-bottom: 20px solid transparent;
-        top: 30%;
-        left: -20%;
-        z-index: 2;
+        z-index: 5;
+        opacity: 0;
+        top: -50%;
+        transition: opacity 2s;
+        border: 1px solid $secondary;
+        color: $coffee;
+        @extend .h4;
+        &__points {
+            display: flex;
+            background-color: wheat;
+        }
+        @include rwd-md {
+            padding: 10px;
+        }
+        &__cartItems {
+            margin: 5px;
+        }
+        &__totalCost {
+            margin: 5px;
+            margin-left: 20px;
+        }
+        &__member {
+            display: flex;
+            p {
+                color: $white;
+                position: relative;
+                z-index: 2;
+                 ::after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    top: 2px;
+                    left: -2px;
+                    background-color: $blue;
+                    z-index: -1;
+                }
+            }
+            span {
+                margin: 5px;
+                margin-left: 20px;
+                color: $blue;
+            }
+        }
+        &::before {
+            display: block;
+            content: "";
+            position: absolute;
+            // width: 20px;
+            // height: 20px;
+            // background-color: black;
+            border-top: 19px solid transparent;
+            border-left: 19px solid $secondary;
+            border-right: 19px solid transparent;
+            border-bottom: 19px solid transparent;
+            top: 40%;
+            right: -16%;
+            z-index: 2;
+        }
+        &::after {
+            display: block;
+            content: "";
+            position: absolute;
+            border-top: 18px solid transparent;
+            border-left: 18px solid $white;
+            border-right: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            top: 41%;
+            right: -15%;
+            z-index: 2;
+        }
     }
-}
