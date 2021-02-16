@@ -65,6 +65,8 @@
             }
             @include rwd-md{
                 width: 87%;
+                height: 400px;
+                bottom: 0;
             }
             @include rwd-sm{
                 width: 86.5%;

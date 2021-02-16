@@ -24,14 +24,12 @@
 .link-group {
     position: fixed;
     right: calc((100% - 1400px) / 2 - 61px);
-    top: 85%;
+    top: 80%;
 
     @include rwd(1550px) {
         right: 8px;
     }
-    @include rwd-sm {
-        top: 80%;
-    }
+
 }
 
 .footer {
