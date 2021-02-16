@@ -16,7 +16,7 @@
         @@include('./components/Header.html') 
         <!-- your code here... -->
     </div>
-    <div class="container">
+    <div class="container containerMain">
         <div id="progressBar" class="progressBar">
             <button class="btn btn--outline exit"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">離開</button>
             @@include('./pages/FactoryPage/FactoryProgress.html') 
@@ -481,6 +481,11 @@
                         </div>
                     </li>
                 </ul>
+
+                <div class="mywork" id="mywork">
+                    <!-- <empty-state></empty-state> -->
+                    @@include('./components/EmptyState.html')
+                </div>
             </div>
         </row>
     </div>
@@ -508,12 +513,20 @@
         new Vue({
             el: '#progressBar', 
         });
+
+        let empty = new Vue({
+            el: '#mywork',
+        })
     
         // --------------------------------------------
-        //進入彈窗
+        //進入彈窗、後面固定不給滾動
         $('.work_pic').click(function(){
             $('.mask').css({
                 "display": "block",
+            });
+
+            $('.containerMain').css({
+                "position": "fixed",
             });
         });
 
@@ -521,6 +534,10 @@
         $('.closeIcon').click(function(){
             $('.mask').css({
                 "display": "none",
+            });
+
+            $('.containerMain').css({
+                "position": "initial",
             });
         })
 
@@ -638,7 +655,6 @@
 
         //點我的車車、大家的車車後會標示目前在哪
         $('.workButton').click(function(){
-            console.log('a')
             $(this).css({
                 "background": "linear-gradient(transparent 60%, #FADD61 60%)"
             })
@@ -647,6 +663,15 @@
                 "background": "none"
             })
 
+            $('.othersWorks').css({"display": "flex"})
+            $('.mywork').css({"display": "none"})
+
+        })
+
+        //點我的車車時，大家的車車消失，我的車車或emptyState出現
+        $('.myworks').click(function(){
+            $('.othersWorks').css({"display": "none"})
+            $('.mywork').css({"display": "block"})
         })
 
         //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
@@ -801,15 +826,16 @@
                     $('.nextStep').addClass('btn--disabled').text('完成')
                     $('.nextStep').addClass('finish')
 
-                    $('.selectArea').css({
-                        "display": "none"
-                    })
+                    $('.selectArea').css({"display": "none"})
 
                     $('.giveName').css({
                         "display": "flex",
                         "justify-content": "space-between",
                         "padding": "20px 80px 20px 80px"
                     })
+
+                    //左右紐消失
+                    $('.selectBtn').css({"display": "none"})
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
@@ -879,15 +905,23 @@
         $('.selectAreaOut-next').click(function(){
             countL += 1;
             // console.log("countL ":+ countL);
-
-            $('.selectArea').animate({
-                left:'-=410'
-            });
+            // console.log(countStep)
 
             let distanceToLeft = $('.selectArea').position().left;
             console.log(distanceToLeft)
 
-            //從這繼續
+            if(distanceToLeft > 15){
+                console.log('ab')
+                $('.selectArea').animate({
+                    left:'-=410'
+                });
+            }
+            // else if(countStep == 1 && distanceToLeft > 15){
+            //     console.log('ab')
+            //     $('.selectArea').animate({
+            //         left:'-=410'
+            //     });
+            // }
         })
 
         $('.selectAreaOut-previous').click(function(){
@@ -909,7 +943,21 @@
                 $('.selectArea').animate({
                     left:'+=410'
                 });
-                console.log('aaa')
+            }else if(countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-390) ){
+                console.log('abc')
+                $('.selectArea').animate({
+                    left:'+=410'
+                });
+            }else if(countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-390) ){
+                console.log('abc')
+                $('.selectArea').animate({
+                    left:'+=410'
+                });
+            }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-390) ){
+                console.log('abc')
+                $('.selectArea').animate({
+                    left:'+=410'
+                });
             }
         })
 
