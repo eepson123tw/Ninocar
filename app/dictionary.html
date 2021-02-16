@@ -13,7 +13,7 @@
 <body>
     <div id="dictionary">
     <vue-header></vue-header>
-        <main class="container dictionary pt-25 py-15">
+        <main class="container dictionary pt-25 pb-15">
             <!-- display -->
             <section class="block mb-10">
                 <header class="block__header block__header--nav">
@@ -33,7 +33,7 @@
                                 <h3 class="h1 mb-1">{{targetProduct.name}}</h3>
                                 <span class="d-inbl mb-5">{{targetProduct.eng}} {{targetProduct.year}}</span>
                                 <p class="h4 mb-5">{{targetProduct.description}}</p>
-                                <span :class="badgeClass">{{chBadge}}</span>
+                                <span :class="badgeClass">{{seriesNames[targetProduct.series]}}</span>
                                 <span v-if="targetProduct.extraLabel== 2 || targetProduct.extraLabel== 1" :class="extraLabel.className">{{extraLabel.text}}</span>
                             </div>
                             <div class="text-right mx-xs-auto">
@@ -68,6 +68,9 @@
                         <button v-if="searchType === '關鍵字搜尋' " class="btn">搜尋</button>
                     </div>
                 </nav>
+                <form class="bg-white px-10 py-10" v-if="searchType === '關鍵字搜尋' ">
+                    @@include('./pages/DictionaryPage/DictionaryFilterList.html')
+                </form>
                 <ul class="row block__body">
                     <!-- post -->
                     <post v-for="(product,index) in showProducts" v-bind="product" key="product.productId + Math.random()"
@@ -145,6 +148,31 @@
                 searchType:  '關鍵字搜尋',
                 navClassName:  {'all': true, 'my':false },
                 showProducts: [],
+                seriesNames: {
+                        BS: '巴士系',
+                        EN: '工程系',
+                        TA: '計程車系',
+                        EM: '消防救護系',
+                        PM: 'PREMIUM系',
+                        PA: '警車系',
+                        RV: 'RV休旅系',
+                        CA: '轎車系'
+                    },
+                pricesRange:{
+                    1: '100~200',
+                    2: '200~300',
+                    3: '300以上'
+                },
+                yearsRange:{
+                    1970: '1970~1989',
+                    1990: '1990~2009',
+                    2010: '2010後'
+                },
+                extraLabelNames:{
+                    0:'無限定',
+                    1: '期間限定',
+                    2: '點數限定',
+                },
             },
             mounted() {
                 this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product.productId));
@@ -161,19 +189,6 @@
                 getPinClass(){
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId)? 'pin':'pin pin--disabled' 
                 },  
-                chBadge() {
-                    const seriesNames = {
-                        BS: '巴士系',
-                        EN: '工程系',
-                        TA: '計程車系',
-                        EM: '消防救護系',
-                        PM: 'PREMIUM系',
-                        PA: '警車系',
-                        RV: 'RV休旅系',
-                        CA: '轎車系'
-                    }
-                    return seriesNames[this.targetProduct.series]
-                },
                 extraLabel() {
                     if (this.targetProduct.extraLabel === 1) {
                         return {
