@@ -1,0 +1,48 @@
+    <form class="bg-white po-re px-10 py-10" v-show="searchType === '關鍵字搜尋' ">
+        <ul>
+            <li class="mb-8">
+                <label class="h4 d-block mb-3">價格</label>
+                <label class="custom-input ml-3 mb-5">全部
+                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+                <label v-for="(priceRange,key) in pricesRange" class="custom-input ml-3 mb-5">{{priceRange}}
+                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+            </li>
+            <li class="mb-8">
+                <label class="h4 d-block mb-3">年代</label>
+                <label class="custom-input ml-3 mb-5">全部
+                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+                <label v-for="(yearRange,key) in yearsRange" class="custom-input ml-3 mb-5">{{yearRange}}
+                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+            </li>
+            <li class="mb-8">
+                <label class="h4 d-block mb-3">系列</label>
+                <label class="custom-input ml-3 mb-5">全部
+                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+                <label v-for="(seriesName,key) in seriesNames" class="custom-input ml-3 mb-5">{{seriesName}}
+                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+            </li>
+            <li>
+                <label class="h4 d-block mb-3">限定</label>
+                <label class="custom-input ml-3 mb-5">全部
+                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+                <label v-for="(extraLabelName,key) in extraLabelNames" class="custom-input ml-3 mb-5">{{extraLabelName}}
+                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <span class="custom-input__checkmark"></span>
+                </label>
+            </li>
+        </ul>
+    </form>
