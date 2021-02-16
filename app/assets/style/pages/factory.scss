@@ -88,6 +88,11 @@
     flex-wrap: wrap;
 }
 
+.mywork{
+    display: none;
+    background: #fff;
+}
+
 .work{
     height: 100%;
     background-color: #fff;
@@ -263,16 +268,19 @@
 }
 
 .closeIcon{
-    position: absolute;
-    left: 32.9vw;
-    top: 0.64vw;
+    // position: absolute;
+    // left: 32.9vw;
+    // top: 0.64vw;
+    position: relative;
+    left: 37.9vw;
+    top: -2.36vw;
     cursor: pointer;
 }
 
 .frame{
     width: 100%;
-    /* height: 625px; */
-    height: 40vw;
+    // height: 40vw;
+    height: 32vw;
     overflow: hidden;
 
     outline: 1px solid blue;
@@ -390,10 +398,63 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .pleaseSelect{
+        display: none;
+        position: absolute;
+        top: -80px;
+        right: 20px;
+
+        padding: 20px 12px;
+        background-color: #fff;
+        border: 1px solid #E59807;
+        
+    }
   // ----------------製作車子的選項區域-------------------
+    .selectAreaOut{
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+    }
+
   .selectArea{
+      position: relative;
       display: flex;
+      left: 0;
   }
+
+  .selectBtn{
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 570px;
+    z-index: 1;
+  }
+
+  .selectAreaOut-previous{
+      background-image: url("../../img/icon/icon-left.svg");
+      display:inline-block;
+      width: 60px;
+      height: 60px;
+    //   position: relative;
+    //   top:220px;
+    //   left:0;
+      z-index: 1;
+      cursor: pointer;
+  }
+
+  .selectAreaOut-next{
+    background-image: url("../../img/icon/icon-right.svg");
+    display:inline-block;
+    width: 60px;
+    height: 60px;
+    // position: relative;
+    // top: 200px;
+    // left: 760px;
+    z-index: 1;
+    cursor: pointer;
+}
 
   .shapeCard{
       background-color: #fff;
@@ -422,22 +483,43 @@
   }
 
 .color{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
     margin: 0 auto 20px;
 }
 
 .white{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     background-color: #fff;
     border: 1px solid #ccc;
 }
 
-.red{background-color: red;}
+.red{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: red;
+}
 
-.orange{background-color: orange;}
+.orange{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: orange;
+}
 
-.yellow{background-color: yellow;}
+.yellow{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: yellow;
+}
 
 .nameTip{
     display: flex;
