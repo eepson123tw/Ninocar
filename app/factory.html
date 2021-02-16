@@ -173,31 +173,45 @@
                         
                         <!-- 配件 -->
                         <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/model.png" class="accessory">
+                            <img src="../app/assets/img/pic/accessory1.png" class="accessory">
                             <p class="makeCar-name">圓形燈飾</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory">選擇此配件</button>
+                            <button class="btn btn--fluid btn--outline selectAccessory  selectA1">選擇此配件</button>
                         </li>
     
                         <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/model.png" class="accessory">
-                            <p class="makeCar-name">圓形燈飾</p>
+                            <img src="../app/assets/img/pic/accessory2.png" class="accessory">
+                            <p class="makeCar-name">方形藍色燈飾</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory">選擇此配件</button>
+                            <button class="btn btn--fluid btn--outline selectAccessory selectA2">選擇此配件</button>
                         </li>
     
                         <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/model.png" class="accessory">
-                            <p class="makeCar-name">圓形燈飾</p>
+                            <img src="../app/assets/img/pic/accessory3.png" class="accessory">
+                            <p class="makeCar-name">紅藍色燈飾</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory">選擇此配件</button>
+                            <button class="btn btn--fluid btn--outline selectAccessory selectA3">選擇此配件</button>
                         </li>
     
                         <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/model.png" class="accessory">
-                            <p class="makeCar-name">圓形燈飾</p>
+                            <img src="../app/assets/img/pic/accessory4.png" class="accessory">
+                            <p class="makeCar-name">可愛動物車貼</p>
                             <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory">選擇此配件</button>
+                            <button class="btn btn--fluid btn--outline selectAccessory selectA4">選擇此配件</button>
+                        </li>
+
+                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                            <img src="../app/assets/img/pic/accessory5.png" class="accessory">
+                            <p class="makeCar-name">雙馬車貼</p>
+                            <p class="makeCar-price">NT$ 100</p>
+                            <button class="btn btn--fluid btn--outline selectAccessory selectA5">選擇此配件</button>
+                        </li>
+
+                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                            <img src="../app/assets/img/pic/accessory6.png" class="accessory">
+                            <p class="makeCar-name">白色尾翼</p>
+                            <p class="makeCar-price">NT$ 100</p>
+                            <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
                         </li>
                     </ul>
                 </div>
@@ -930,6 +944,9 @@
                 $('.typeWorkName').val('')
                 $('.typeNickName').val('')
                 $('.typeInspiration').val('')
+
+
+                //該怎麼抓到canvas做出來的圖片丟到我的車車???
             }
         })
 
@@ -968,13 +985,18 @@
         $('.selectAreaOut-next').click(function(){
             countL += 1;
             // console.log("countL ":+ countL);
-            // console.log(countStep)
+            console.log("countStep: " + countStep)
 
             let distanceToLeft = $('.selectArea').position().left;
             console.log(distanceToLeft)
 
-            if(distanceToLeft > 15){
+            if(countStep < 3 && distanceToLeft > 15){
                 console.log('ab')
+                $('.selectArea').animate({
+                    left:'-=410'
+                });
+            }else if(countStep == 3 && distanceToLeft > -400){
+                console.log('再過去一點')
                 $('.selectArea').animate({
                     left:'-=410'
                 });
@@ -1009,7 +1031,7 @@
                 $('.selectArea').animate({
                     left:'+=410'
                 });
-            }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-390) ){
+            }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-820) ){
                 $('.selectArea').animate({
                     left:'+=410'
                 });
@@ -1194,6 +1216,61 @@
             })
         })
 
+        //疊上配件
+        $('.selectA1').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory1.png'; //圓形燈飾
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 0, -20);
+            })
+        })
+
+        $('.selectA2').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory2.png'; //藍燈飾
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 0, -20);
+            })
+        })
+
+        $('.selectA3').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory3.png'; //紅藍燈飾
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 0, -20);
+            })
+        })
+
+        $('.selectA4').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory4.png'; //動物圖案
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 40, 5);
+            })
+        })
+
+        $('.selectA5').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory5.png'; //馬圖案
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 20, 5);
+            })
+        })
+
+        $('.selectA6').click(function(){
+            let pic4 = new Image();
+            pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
+            pic4.addEventListener('load', function(){
+                context.globalAlpha = 1;        
+                context.drawImage(pic4, 60, 5);
+            })
+            //尾翼應該貼到最下層
+        })
     </script>
 </body>
 </html>
