@@ -1,6 +1,7 @@
 <script>
        Vue.component('post', {
             template: `
+            <transition name="slide-fade">
         <li class="col-4 col-lg-3 col-sm-4 mb-5">
             <div :class="postClass">
                 <div class="post__text">
@@ -14,6 +15,7 @@
                 </div>
             </div>
         </li>
+        </transition>
             `,
             props: ['name', 'eng', 'series', 'seriesId', 'productId', 'imgURL', 'active', 'show-pin'],
             computed: {
