@@ -273,11 +273,11 @@
                         </div>
                         <div class="typeReply">
                             <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic">
+                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                             </div>
                     
                             <div class="typeReply_right">
-                              <p>沾醬大師</p>
+                              <p class="replyerName">沾醬大師</p>
                               <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                               <div class="other">
                                 <p class="textCount"></p>
@@ -339,11 +339,11 @@
                         </div>
                         <div class="typeReply">
                             <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic">
+                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                             </div>
                     
                             <div class="typeReply_right">
-                              <p>沾醬大師</p>
+                              <p class="replyerName">沾醬大師</p>
                               <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                               <div class="other">
                                 <p class="textCount"></p>
@@ -462,11 +462,11 @@
                         </div>
                         <div class="typeReply">
                             <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic">
+                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                             </div>
                     
                             <div class="typeReply_right">
-                              <p>沾醬大師</p>
+                              <p class="replyerName">沾醬大師</p>
                               <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                               <div class="other">
                                 <p class="textCount"></p>
@@ -629,7 +629,6 @@
             $('.textCount').text(`餘${textMax - textLength}字`);
 
             if(textLength > 0){
-                console.log('no text')
                 $('.textarea').css({
                     "border": "1px solid #000",
                 })
@@ -916,12 +915,6 @@
                     left:'-=410'
                 });
             }
-            // else if(countStep == 1 && distanceToLeft > 15){
-            //     console.log('ab')
-            //     $('.selectArea').animate({
-            //         left:'-=410'
-            //     });
-            // }
         })
 
         $('.selectAreaOut-previous').click(function(){
@@ -949,19 +942,49 @@
                     left:'+=410'
                 });
             }else if(countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-390) ){
-                console.log('abc')
                 $('.selectArea').animate({
                     left:'+=410'
                 });
             }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-390) ){
-                console.log('abc')
                 $('.selectArea').animate({
                     left:'+=410'
                 });
             }
         })
 
+        //點留言後PO出留言
+        $('.comment').click(function(){
+            let commentContentL = $(this).parent().parent().children('.textarea').val().length;
+            let commentContent = $(this).parent().parent().children('.textarea').val();
 
+            let replyerPic = $(this).parent().parent().parent().children('.typeReply_left').children('.replyerPic').attr('src');
+            // console.log(replyerPic)
+
+            let replyerName = $(this).parent().parent().children('.replyerName').text();
+            // console.log(replyerName)
+
+
+            if(commentContentL > 0){
+                $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
+                            <div class="userContext">
+                                <img src="${replyerPic}"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">${replyerName}</p>
+                                    <p class="userContent h5">${commentContent}</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link mr-4">回覆</button>
+                                            <button class="btn btn--link">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`)
+            }
+
+            $(this).parent().parent().children('.textarea').val('');
+        })
     
     </script>
 </body>
