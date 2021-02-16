@@ -93,6 +93,10 @@
     background: #fff;
 }
 
+.putMywork{
+    display: flex;
+}
+
 .work{
     height: 100%;
     background-color: #fff;
@@ -207,6 +211,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    width: 16vw;
 }
 
 .icon{
@@ -456,7 +462,7 @@
     cursor: pointer;
 }
 
-  .shapeCard{
+  .shapeCard, .colorCard, .tireCard, .accessoryCard{
       background-color: #fff;
   }
 
