@@ -10,7 +10,9 @@
 .icon {
     cursor: pointer;
     display: inline-block;
-
+    &__link:hover {
+        opacity: .7;
+    }
     &:hover .hover-fill-coffee {
         fill: $coffee;
     }
@@ -28,17 +30,25 @@
     }
 }
 
-
-.login {
-    font-size: 24px;
-    color: $coffee;
-    background-color: transparent;
-    border-radius: 8px;
-    border: 2px solid $coffee;
-    padding: 8px 16px;
-    cursor: pointer;
-
+.link {
     &:hover {
-        background-color: $primary-light;
+        opacity: .7;
+        
+    }
+
+    &--active{
+        position: relative;
+        z-index: 10;
+        &::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+            height: 16px;
+            border-radius: 4px;
+            z-index: -1;
+            background-color: $primary;
+        }
     }
 }

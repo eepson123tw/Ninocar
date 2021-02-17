@@ -1,0 +1,21 @@
+<nav class="block__header block__header--nav">
+    <ul class="d-flex mb-md-4">
+        <li class="mr-20 mr-md-15 mr-sm-10"><a href="#" class="block__header__title link'"
+                :class="{'link--active': navClassName.all}"
+                @click.prevent="changeShowProducts('all')">全部圖鑑</a></li>
+        <li><a href="#" class="block__header__title link" :class="{'link--active': navClassName.my}"
+                @click.prevent="changeShowProducts('my')">我的圖鑑</a></li>
+    </ul>
+    <div class="ml-auto w-md-100 d-flex text-right">
+        <button class="btn btn--link text-coffee mr-8 mr-sm-1"
+            @click="changeSearchType">{{searchType}}</button>
+            <div class="d-inbl" v-show="searchType === '關鍵字搜尋' ">
+                <button class="btn btn--outline mr-8 mr-sm-1">重置</button>
+                <button class="btn">搜尋</button>
+            </div>
+            <div class="search-bar" v-show="searchType === '分類搜尋' ">
+                <input type="text" class="search-bar__input">
+                <button class="btn search-bar__btn">搜尋</button>
+            </div>
+    </div>
+</nav>

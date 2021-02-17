@@ -9,10 +9,13 @@ const {
 
 const concat = require('gulp-concat');
 const fileInclude = require('gulp-file-include');
-const cleanCSS = require('gulp-clean-css');
 const sass = require('gulp-sass');
 const sourceMap = require('source-map');
-var sourcemaps = require('gulp-sourcemaps');
+const sourcemaps = require('gulp-sourcemaps');
+const clean = require('gulp-clean');
+const browserSync = require('browser-sync').create();
+const reload = browserSync.reload; //browser的方法 更新後~
+
 
 
 
@@ -22,6 +25,10 @@ function moveImg() {
 
 function concatJSAndMove() {
     return src('app/assets/js/**/*.js').pipe(concat('all.js')).pipe(dest('dist/assets/js/'));
+}
+
+function moveJS() {
+    return src('app/assets/js/**/*.js').pipe(dest('dist/assets/js/'));
 }
 
 
@@ -56,20 +63,52 @@ function includeHTML() {
 }
 
 
+function killDist() {
+    return src('dist', { read: false, allowEmpty: true })
+        .pipe(clean({
+            force: true
+        }))
+}
+
+exports.kill = killDist;
+exports.u = series(killDist, parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
+
+
+exports.browser = function browsersync() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist", //跟目錄設定
+            index: "cart.html" //需更改成自己頁面的名稱
+
+        }
+    });
+    //與browser同步
+    watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle).on('change', reload);
+    watch('app/assets/style/pages/*.scss', pageStyle).on('change', reload);
+    watch('app/**/*.html', includeHTML).on('change', reload);
+    watch('app/assets/img/**/*', moveImg).on('change', reload);
+    watch('app/assets/js/**/*.js', moveJS).on('change', reload);
+}
+
+
+
 exports.w = function watchFiles() {
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle);
     watch('app/assets/style/pages/*.scss', pageStyle);
     watch('app/**/*.html', includeHTML);
     watch('app/assets/img/**/*', moveImg);
-    watch('app/assets/js/**/*.js', concatJSAndMove);
+    watch('app/assets/js/**/*.js', moveJS);
 }
 
-// 壓縮js
+//----package
+// const cleanCSS = require('gulp-clean-css');
+// const imagemin = require('gulp-imagemin');
 
-const uglify = require('gulp-uglify');
-
-exports.minjs = function uglifyjs(){
-    return src('dev/js/*.js')
-    .pipe(uglify())
-    .pipe(dest('js'))
-}
+// exports.img = function compressImg() {
+//     return src('app/assets/img/**/*')
+//         .pipe(imagemin())
+//         .pipe(rename(function (path) {
+//             path.basename += "-mini"
+//         }))
+//         .pipe(dest('images'))
+// }
