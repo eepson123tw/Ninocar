@@ -261,9 +261,9 @@
     display: flex;
 }
 
-.typeReply_left{
-    margin-right: 28px;
-}
+// .typeReply_left{
+//     margin-right: 28px;
+// }
 
 // ----------------彈窗-------------------
 .mask{
@@ -410,7 +410,7 @@
     }
 
     .tipArea{
-        padding-bottom: 20px;
+        padding: 20px 0;
         border-bottom: 1px solid #E59807;
         background-color: #fff;
     }
@@ -493,6 +493,10 @@
 
   .cardOut{
       height: 150px;
+  }
+
+  .shapeCards, .colorCards, .tireCards, .accessoryCards{
+      display: flex;
   }
 
   .shape, .tire, .accessory{
