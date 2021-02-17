@@ -2,16 +2,30 @@
     padding-top: 176px;
 }
 
+#factory .header .container{
+    padding-top: 8px;
+    padding-bottom: 0;
+}
+
+#factory .header .icon{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+#factory .footer .container{
+    padding-top: 0;
+}
+
 .intro{
     display: flex;
 
-    &_pic{
-        outline: 2px solid red;
-    }
+    // &_pic{
+        // outline: 2px solid red;
+    // }
 
     &_content{
         float: right;
-        outline: 2px solid pink;
+        // outline: 2px solid pink;
     
         &_title{
             color: white;
@@ -29,7 +43,7 @@
 .makeCar{
     display: none;
 
-    outline: 1px solid orange;
+    // outline: 1px solid orange;
 }
 
 .model{
@@ -63,7 +77,7 @@
 
     padding: 20px 0;
 
-    outline: 2px solid gold;
+    // outline: 2px solid gold;
 
     &_left{
         display: flex;
@@ -93,6 +107,10 @@
     background: #fff;
 }
 
+.othersWorks, .mywork{
+    padding-bottom: 60px;
+}
+
 .putMywork{
     display: flex;
 }
@@ -100,13 +118,13 @@
 .work{
     height: 100%;
     background-color: #fff;
-    outline: 1px solid blue;
+    // outline: 1px solid blue;
     
     &_pic{
         cursor: pointer;
         padding: 0 32px;
 
-        outline: 1px solid;
+        // outline: 1px solid;
     }
 
     &_author, &_reply{
@@ -263,20 +281,17 @@
 .work_left{
     height: 880px;
     background-color: #fff;
-    outline: 1px solid red;
+    // outline: 1px solid red;
 }
 
 .work_right{
     background-color: #fff;
     height: 880px;
     overflow-y: scroll;
-    outline: 1px solid green;
+    // outline: 1px solid green;
 }
 
 .closeIcon{
-    // position: absolute;
-    // left: 32.9vw;
-    // top: 0.64vw;
     position: relative;
     left: 37.9vw;
     top: -2.36vw;
@@ -289,13 +304,13 @@
     height: 32vw;
     overflow: hidden;
 
-    outline: 1px solid blue;
+    // outline: 1px solid blue;
 }
 
 .workPic--big{
    width: 100%;
     /* overflow: hidden;*/
-    outline: 1px solid; 
+    // outline: 1px solid; 
 }
 
 .price{
@@ -313,7 +328,7 @@
 // ----------------進度條-------------------
 .progressBar{
     display: none;
-    margin-bottom: 60px;
+    // margin-bottom: 60px;
     // outline: 1px solid green;
 }
 
@@ -322,16 +337,15 @@
     // width: 50%;
     height: 4px;
     background-color: #D8D8D8;
-    position: absolute;
-    top: 290px;
-    left: 480px;
-    // top: 15vw;
-    // left: 25vw;
+    position: relative;
+    top: 30px;
+    left: 100px;
     z-index: -1;
 }
 
 .bar-front{
     width: 0;
+    top: 26px;
     background-color: #E59807;
 }
 
@@ -346,12 +360,11 @@
     display: flex;
     justify-content: center;
 
-    position: absolute;
-    top: 270px;
-    left: 440px;
-    // left: 22.9vw;
+    // position: absolute;
+    // top: 270px;
+    // left: 440px;
 
-    outline: 1px solid indianred;
+    // outline: 1px solid indianred;
   }
 
   .circle{
@@ -374,7 +387,9 @@
     color: #333333;
   }
 
-
+  .content:last-child .circle, .content:last-child .explanation{
+      margin-right: 0
+    }
 // ----------------製作車子的主區域-------------------
 
   .mainAreaPic{
@@ -434,7 +449,9 @@
   .selectArea{
       position: relative;
       display: flex;
-      left: 0;
+    //   left: 0;
+
+      margin-bottom: 20px;
   }
 
   .selectBtn{
@@ -442,7 +459,7 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 570px;
+    top: 360px;
     z-index: 1;
   }
 
@@ -474,8 +491,13 @@
       background-color: #fff;
   }
 
-  .shape{
-      width: 330px;
+  .cardOut{
+      height: 150px;
+  }
+
+  .shape, .tire, .accessory{
+      width: 200px;
+      margin: 0 auto;
   }
 
   .makeCar-price{
@@ -497,8 +519,9 @@
   }
 
 .color{
-    width: 300px;
-    height: 300px;
+    // width: 300px;
+    // height: 300px;
+    padding-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -507,37 +530,37 @@
 }
 
 .white{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: #fff;
     border: 1px solid #ccc;
 }
 
 .red{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: red;
 }
 
 .orange{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: orange;
 }
 
 .yellow{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: yellow;
 }
 
 .purple{
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: rgb(173, 85, 224);
 }

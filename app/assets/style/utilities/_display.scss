@@ -27,6 +27,15 @@ $positionList : (
 
 
 //-----------------------------RWD
+@include rwd-lg {
+    .d-md-none {
+        display: none;
+    }
+
+    .d-md-flex {
+        display: flex;
+    }
+}
 @include rwd-md {
     .d-md-none {
         display: none;

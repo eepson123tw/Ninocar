@@ -1,0 +1,38 @@
+.myillustbook {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    color: #989898;
+    &_all {
+        font-size: 24px;
+        margin: 40px;
+    }
+    &_my {
+        font-size: 24px;
+        margin: 40px;
+    }
+}
+
+.mask {
+    border-width: 0 37px 35px 37px;
+    border-style: none solid solid;
+    margin: 30px auto;
+    border-color: transparent transparent #C8C8C8;
+}
+
+.illustbook {
+    display: flex;
+    margin-bottom: 20px;
+    border: 5px solid orange;
+    &__body {
+        padding: 20px;
+        background-color: papayawhip;
+        border-right: 5px solid orange;
+    }
+    &__title {
+        font-size: 34px;
+        font-weight: bolder;
+        margin-top: 30px;
+        color: orange;
+    }
+}

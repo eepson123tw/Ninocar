@@ -12,515 +12,548 @@
 </head>
 
 <body>
-    <div id="app">
-        @@include('./components/Header.html') 
-        <!-- your code here... -->
-    </div>
-    <div class="container containerMain">
-        <div id="progressBar" class="progressBar">
-            <button class="btn btn--outline exit"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">離開</button>
-            @@include('./pages/FactoryPage/FactoryProgress.html') 
-        </div>
-        <row>
-            <div class="intro">
-                <div class="intro_pic col-7 col-lg-4 col-sm-3">
-                    <img src="../app/assets/img/pic/model.png" class="model">
-                    <div class="lable">
-                        <p class="h4">NT$</p>
-                        <h2 class="emphasis">300</h2>
-                        <p class="h4">起</p>
-                    </div>
-                </div>
-                <div class="intro_content col-5 col-lg-2 col-sm-1">
-                    <h2 class="emphasis intro_content_title">打造自己的車</h2>
-                    <p class="h3 intro_content_text">在車車工廠，<br>
-                        我們提供各種車款、烤漆顏色和不同配備，<br>
-                        您可以盡情揮灑創意，創作屬於自己的超酷客製車。</p>
-                    <button class="btn make">開始製作</button>
-                </div>
-            </div>
-
-            <!-- 製作車子的區域 -->
-            <div class="makeCar col-12 col-lg-6 col-sm-4">
-                <div class="mainArea">
-                    <!-- <img src="../app/assets/img/pic/model.png" class="mainAreaPic"> -->
-                    <canvas id="canvas" class="mainAreaPic canvas" width="400" height="400" style="border: 1px solid #ccc;"></canvas>
-                </div>
-                <div class="tipArea">
-                    <div class="tipArea_left col-6">
-                        <p class="h1">選擇車型</p>
-                    </div>
-                    <div class="tipArea_right col-6">
-                        <div class="tipPrice">
-                            <p class="h4">總金額</p>
-                            <p class="totalPrice">NT$ 0</p>
+    <div id="factory">
+        <vue-header></vue-header>
+        <div class="container containerMain">
+            <row>
+                <div class="intro">
+                    <div class="intro_pic col-7 col-lg-4 col-sm-3">
+                        <img src="../app/assets/img/pic/model.png" class="model">
+                        <div class="lable">
+                            <p class="h4">NT$</p>
+                            <h2 class="emphasis">300</h2>
+                            <p class="h4">起</p>
                         </div>
-                        <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-                        <button class="btn btn--disabled nextStep">下一步</button>
+                    </div>
+                    <div class="intro_content col-5 col-lg-2 col-sm-1">
+                        <h2 class="emphasis intro_content_title">打造自己的車</h2>
+                        <p class="h3 intro_content_text">在車車工廠，<br>
+                            我們提供各種車款、烤漆顏色和不同配備，<br>
+                            您可以盡情揮灑創意，創作屬於自己的超酷客製車。</p>
+                        <button class="btn make">開始製作</button>
                     </div>
                 </div>
-
-                <div class="selectAreaOut">
-                    <div class="selectBtn">
-                        <div class="selectAreaOut-previous"></div>
-                        <div class="selectAreaOut-next"></div>
+    
+                <!-- 製作車子的區域 -->
+                <div class="makeCar col-12 col-lg-6 col-sm-4">
+                    <div class="mainArea">
+                        <!-- <img src="../app/assets/img/pic/model.png" class="mainAreaPic"> -->
+                        <canvas id="canvas" class="mainAreaPic canvas" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
                     </div>
-
-                    <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
-                        <!-- 車型 -->
-                        <li class="shapeCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/shape01.png" class="shape">
-                            <p class="makeCar-name">Audi R8小客車</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-                        </li>
-    
-                        <li class="shapeCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/shape02.png" class="shape">
-                            <p class="makeCar-name">Audi R8小客車</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-                        </li>
-    
-                        <li class="shapeCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/shape03.png" class="shape">
-                            <p class="makeCar-name">Audi R8小客車</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-                        </li>
-    
-                        <li class="shapeCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic//shape03.png" class="shape">
-                            <p class="makeCar-name">Audi R8小客車</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-                        </li>
-    
-                        <!-- 顏色 -->
-                        <li class="colorCard col-3 col-lg-3 col-sm-3">
-                            <div class="color">
-                                <div class="white"></div>
-                            </div>
-                            <p class="makeCar-name">白</p>
-                            <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
-                        </li>
-    
-                        <li class="colorCard col-3 col-lg-3 col-sm-3">
-                            <div class="color">
-                                <div class="red"></div>
-                            </div>
-                            <p class="makeCar-name">紅</p>
-                            <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
-                        </li>
-    
-                        <li class="colorCard col-3 col-lg-3 col-sm-3">
-                            <div class="color ">
-                                <div class="orange"></div>
-                            </div>
-                            <p class="makeCar-name">橙</p>
-                            <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
-                        </li>
-    
-                        <li class="colorCard col-3 col-lg-3 col-sm-3">
-                            <div class="color ">
-                                <div class="yellow"></div>
-                            </div>
-                            <p class="makeCar-name">黃</p>
-                            <p class="makeCar-price">NT$ 50</p>
-                            <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
-                        </li>
-
-                        <li class="colorCard col-3 col-lg-3 col-sm-3">
-                            <div class="color ">
-                                <div class="purple"></div>
-                            </div>
-                            <p class="makeCar-name">紫</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
-                        </li>
-    
-                        <!-- 輪子 -->
-                        <li class="tireCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/tire01.png" class="tire">
-                            <p class="makeCar-name">經典款輪子</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
-                        </li>
-    
-                        <li class="tireCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/tire02.png" class="tire">
-                            <p class="makeCar-name">經典款輪子</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
-                        </li>
-    
-                        <li class="tireCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/tire03.png" class="tire">
-                            <p class="makeCar-name">經典款輪子</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
-                        </li>
-    
-                        <li class="tireCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/tire03.png" class="tire">
-                            <p class="makeCar-name">經典款輪子</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
-                        </li>
+                    <div id="progressBar" class="progressBar">
                         
-                        <!-- 配件 -->
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory1.png" class="accessory">
-                            <p class="makeCar-name">圓形燈飾</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory  selectA1">選擇此配件</button>
+                        @@include('./pages/FactoryPage/FactoryProgress.html') 
+                    </div>
+    
+    
+                    <div class="selectAreaOut">
+                        <div class="selectBtn">
+                            <div class="selectAreaOut-previous"></div>
+                            <div class="selectAreaOut-next"></div>
+                        </div>
+    
+                        <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
+                            <!-- 車型 -->
+                            <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/shape01.png" class="shape">
+                                </div>
+                                
+                                <p class="makeCar-name">Audi R8小客車</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+                            </li>
+        
+                            <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">                                    
+                                    <img src="../app/assets/img/pic/shape02.png" class="shape">
+                                </div>
+                                <p class="makeCar-name">Audi R8小客車</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+                            </li>
+        
+                            <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/shape03.png" class="shape">
+                                </div>
+                                <p class="makeCar-name">Audi R8小客車</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+                            </li>
+        
+                            <li class="shapeCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic//shape03.png" class="shape">
+                                </div>
+                                <p class="makeCar-name">Audi R8小客車</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+                            </li>
+        
+                            <!-- 顏色 -->
+                            <li class="colorCard col-3 col-lg-3 col-sm-3">
+                                <div class="color">
+                                    <div class="white"></div>
+                                </div>
+                                <p class="makeCar-name">白</p>
+                                <p class="makeCar-price">NT$ 50</p>
+                                <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
+                            </li>
+        
+                            <li class="colorCard col-3 col-lg-3 col-sm-3">
+                                <div class="color">
+                                    <div class="red"></div>
+                                </div>
+                                <p class="makeCar-name">紅</p>
+                                <p class="makeCar-price">NT$ 50</p>
+                                <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
+                            </li>
+        
+                            <li class="colorCard col-3 col-lg-3 col-sm-3">
+                                <div class="color ">
+                                    <div class="orange"></div>
+                                </div>
+                                <p class="makeCar-name">橙</p>
+                                <p class="makeCar-price">NT$ 50</p>
+                                <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
+                            </li>
+        
+                            <li class="colorCard col-3 col-lg-3 col-sm-3">
+                                <div class="color ">
+                                    <div class="yellow"></div>
+                                </div>
+                                <p class="makeCar-name">黃</p>
+                                <p class="makeCar-price">NT$ 50</p>
+                                <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
+                            </li>
+    
+                            <li class="colorCard col-3 col-lg-3 col-sm-3">
+                                <div class="color ">
+                                    <div class="purple"></div>
+                                </div>
+                                <p class="makeCar-name">紫</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
+                            </li>
+        
+                            <!-- 輪子 -->
+                            <li class="tireCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/tire01.png" class="tire">
+                                </div>
+                                <p class="makeCar-name">經典款輪子</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
+                            </li>
+        
+                            <li class="tireCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/tire02.png" class="tire">
+                                </div>
+                                <p class="makeCar-name">經典款輪子</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
+                            </li>
+        
+                            <li class="tireCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/tire03.png" class="tire">
+                                </div>
+                                <p class="makeCar-name">經典款輪子</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
+                            </li>
+        
+                            <li class="tireCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/tire03.png" class="tire">
+                                </div>
+                                <p class="makeCar-name">經典款輪子</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
+                            </li>
+                            
+                            <!-- 配件 -->
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory1.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">圓形燈飾</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory  selectA1">選擇此配件</button>
+                            </li>
+        
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory2.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">方形藍色燈飾</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory selectA2">選擇此配件</button>
+                            </li>
+        
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory3.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">紅藍色燈飾</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory selectA3">選擇此配件</button>
+                            </li>
+        
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory4.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">可愛動物車貼</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory selectA4">選擇此配件</button>
+                            </li>
+    
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory5.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">雙馬車貼</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory selectA5">選擇此配件</button>
+                            </li>
+    
+                            <li class="accessoryCard col-3 col-lg-3 col-sm-3">
+                                <div class="cardOut">
+                                    <img src="../app/assets/img/pic/accessory6.png" class="accessory">
+                                </div>
+                                <p class="makeCar-name">白色尾翼</p>
+                                <p class="makeCar-price">NT$ 100</p>
+                                <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div class="tipArea">
+                        <div class="tipArea_left col-6">
+                            <button class="btn btn--outline exit"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
+                        </div>
+                        <div class="tipArea_right col-6">
+                            <div class="tipPrice">
+                                <p class="h4">總金額</p>
+                                <p class="totalPrice">NT$ 0</p>
+                            </div>
+                            <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
+                            <button class="btn btn--disabled nextStep">下一步</button>
+                        </div>
+                    </div>
+                    
+    
+                    <div class="giveName">
+                        <div class="giveName_left">
+                            <p class="description">幫您的作品取個名字</p>
+                            <input type="text" class="typeWorkName">
+                            <div class="nameTip">
+                                <p>餘20字</p>
+                                <button class="btn btn--link randomName h5">隨機取名</button>
+                            </div>
+    
+                            <input type="checkbox" name="" value="">公開此作品
+    
+                            <p class="description">使用者暱稱</p>
+                            <input type="text" class="typeNickName">
+                            <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
+                        </div>
+                        <div class="giveName_right">
+                            <p class="description">描述您的創作靈感</p>
+                            <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration"></textarea>
+                            <p>餘100字</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="workBar col-12 col-lg-6 col-sm-4">
+                    <div class="workBar_left">
+                        <button class="workButton h2 works">大家的作品</button>
+                        <button class="workButton h2 myworks">我的作品</button>
+                    </div>
+                    <div class="filter"></div>
+                </div>
+    
+                <div>
+                    <ul class="othersWorks">
+                        <li class="work col-4">
+                            <div class="work_pic">
+                                <img src="../app/assets/img/pic/model02.png" class="">
+                            </div>
+    
+                            <div class="work_author">
+                                <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                                <div class="userContent">
+                                    <p class="userName h6">矛盾的小女子</p>
+                                    <h2 class="workName h4">天栗鼠計程車</h2>
+                                    <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="workInfo">
+                                <div class="workInfo_good">
+                                    <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                                <div class="workInfo_reply">
+                                    <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                            </div>
+    
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="typeReply">
+                                <div class="typeReply_left">
+                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                </div>
+                        
+                                <div class="typeReply_right">
+                                  <p class="replyerName">沾醬大師</p>
+                                  <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                  <div class="other">
+                                    <p class="textCount"></p>
+                                    <button class="btn btn--small comment">留言</button>
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="closeTextarea">
+                                <p class="h5 textareaWord">關閉輸入框</p>
+                                <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
+                            </div>
                         </li>
     
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory2.png" class="accessory">
-                            <p class="makeCar-name">方形藍色燈飾</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory selectA2">選擇此配件</button>
+                        <li class="work col-4">
+                            <div class="work_pic">
+                                <img src="../app/assets/img/pic/model04.png" class="">
+                            </div>
+    
+                            <div class="work_author">
+                                <img src="../app/assets/img/pic/userPic03.png"  class="userPic">
+                                <div class="userContent">
+                                    <p class="userName h6">天婦羅不好吃</p>
+                                    <h2 class="workName h4">烤地瓜休旅車</h2>
+                                    <p class="userContent h5">烤地瓜好吃，一台四處賣烤地瓜的休旅車</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="workInfo">
+                                <div class="workInfo_good">
+                                    <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                                <div class="workInfo_reply">
+                                    <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                            </div>
+    
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="typeReply">
+                                <div class="typeReply_left">
+                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                </div>
+                        
+                                <div class="typeReply_right">
+                                  <p class="replyerName">沾醬大師</p>
+                                  <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                  <div class="other">
+                                    <p class="textCount"></p>
+                                    <button class="btn btn--small comment">留言</button>
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="closeTextarea">
+                                <p class="h5 textareaWord">關閉輸入框</p>
+                                <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
+                            </div>
                         </li>
     
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory3.png" class="accessory">
-                            <p class="makeCar-name">紅藍色燈飾</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory selectA3">選擇此配件</button>
-                        </li>
+                        <li class="work col-4">
+                            <div class="work_pic">
+                                <img src="../app/assets/img/pic/model03.png" class="model">
+                            </div>
     
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory4.png" class="accessory">
-                            <p class="makeCar-name">可愛動物車貼</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory selectA4">選擇此配件</button>
-                        </li>
-
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory5.png" class="accessory">
-                            <p class="makeCar-name">雙馬車貼</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory selectA5">選擇此配件</button>
-                        </li>
-
-                        <li class="accessoryCard col-3 col-lg-3 col-sm-3">
-                            <img src="../app/assets/img/pic/accessory6.png" class="accessory">
-                            <p class="makeCar-name">白色尾翼</p>
-                            <p class="makeCar-price">NT$ 100</p>
-                            <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
+                            <div class="work_author">
+                                <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                                <div class="userContent">
+                                    <p class="userName h6">矛盾的小女子</p>
+                                    <h2 class="workName h4">天栗鼠計程車</h2>
+                                    <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="workInfo">
+                                <div class="workInfo_good">
+                                    <img src="../app/assets/img/icon/icon-good.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                                <div class="workInfo_reply">
+                                    <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
+                                    <p  class="num h3">20</p>
+                                </div>
+                            </div>
+    
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="subUserContext">
+                                    <img src="../app/assets/img/pic/userPic03.png"  class="userPic--small">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅不好吃</p>
+                                        <p class="userContent h5">超油</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="subUserContext hiddenSubReply">
+                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic--small">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">明明就很好吃</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="moreReply">
+                                <p class="h5 moreReplyWord">1則回覆</p>
+                                <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon1">
+                            </div>
+    
+                            <div class="work_reply hiddenReply">
+                                <div class="userContext">
+                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+     
+                            <div class="readMore">
+                                <p class="h5 readMoreWord">閱讀更多</p>
+                                <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon2">
+                            </div>
+                            <div class="typeReply">
+                                <div class="typeReply_left">
+                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                </div>
+                        
+                                <div class="typeReply_right">
+                                  <p class="replyerName">沾醬大師</p>
+                                  <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                  <div class="other">
+                                    <p class="textCount"></p>
+                                    <button class="btn btn--small comment">留言</button>
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="closeTextarea">
+                                <p class="h5 textareaWord">關閉輸入框</p>
+                                <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
+                            </div>
                         </li>
                     </ul>
-                </div>
-                
-
-                <div class="giveName">
-                    <div class="giveName_left">
-                        <p class="description">幫您的作品取個名字</p>
-                        <input type="text" class="typeWorkName">
-                        <div class="nameTip">
-                            <p>餘20字</p>
-                            <button class="btn btn--link randomName h5">隨機取名</button>
-                        </div>
-
-                        <input type="checkbox" name="" value="">公開此作品
-
-                        <p class="description">使用者暱稱</p>
-                        <input type="text" class="typeNickName">
-                        <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
-                    </div>
-                    <div class="giveName_right">
-                        <p class="description">描述您的創作靈感</p>
-                        <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration"></textarea>
-                        <p>餘100字</p>
+    
+                    <div class="mywork" id="mywork">
+                        @@include('./components/EmptyState.html')
                     </div>
                 </div>
-            </div>
-
-            <div class="workBar col-12 col-lg-6 col-sm-4">
-                <div class="workBar_left">
-                    <button class="workButton h2 works">大家的作品</button>
-                    <button class="workButton h2 myworks">我的作品</button>
-                </div>
-                <div class="filter"></div>
-            </div>
-
-            <div>
-                <ul class="othersWorks">
-                    <li class="work col-4">
-                        <div class="work_pic">
-                            <img src="../app/assets/img/pic/model02.png" class="">
-                        </div>
-
-                        <div class="work_author">
-                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
-                            <div class="userContent">
-                                <p class="userName h6">矛盾的小女子</p>
-                                <h2 class="workName h4">天栗鼠計程車</h2>
-                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <button class="btn btn--link">檢舉</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="workInfo">
-                            <div class="workInfo_good">
-                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                            <div class="workInfo_reply">
-                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                        </div>
-
-                        <div class="work_reply">
-                            <div class="userContext">
-                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅好好吃</p>
-                                    <p class="userContent h5">天婦羅好好吃</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="typeReply">
-                            <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
-                            </div>
-                    
-                            <div class="typeReply_right">
-                              <p class="replyerName">沾醬大師</p>
-                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                              <div class="other">
-                                <p class="textCount"></p>
-                                <button class="btn btn--small comment">留言</button>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="closeTextarea">
-                            <p class="h5 textareaWord">關閉輸入框</p>
-                            <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
-                        </div>
-                    </li>
-
-                    <li class="work col-4">
-                        <div class="work_pic">
-                            <img src="../app/assets/img/pic/model04.png" class="">
-                        </div>
-
-                        <div class="work_author">
-                            <img src="../app/assets/img/pic/userPic03.png"  class="userPic">
-                            <div class="userContent">
-                                <p class="userName h6">天婦羅不好吃</p>
-                                <h2 class="workName h4">烤地瓜休旅車</h2>
-                                <p class="userContent h5">烤地瓜好吃，一台四處賣烤地瓜的休旅車</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <button class="btn btn--link">檢舉</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="workInfo">
-                            <div class="workInfo_good">
-                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                            <div class="workInfo_reply">
-                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                        </div>
-
-                        <div class="work_reply">
-                            <div class="userContext">
-                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅好好吃</p>
-                                    <p class="userContent h5">天婦羅好好吃</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="typeReply">
-                            <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
-                            </div>
-                    
-                            <div class="typeReply_right">
-                              <p class="replyerName">沾醬大師</p>
-                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                              <div class="other">
-                                <p class="textCount"></p>
-                                <button class="btn btn--small comment">留言</button>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="closeTextarea">
-                            <p class="h5 textareaWord">關閉輸入框</p>
-                            <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
-                        </div>
-                    </li>
-
-                    <li class="work col-4">
-                        <div class="work_pic">
-                            <img src="../app/assets/img/pic/model03.png" class="model">
-                        </div>
-
-                        <div class="work_author">
-                            <img src="../app/assets/img/pic/userPic.png"  class="userPic">
-                            <div class="userContent">
-                                <p class="userName h6">矛盾的小女子</p>
-                                <h2 class="workName h4">天栗鼠計程車</h2>
-                                <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
-                                <div class="other">
-                                    <p class="postTime h6">3小時前</p>
-                                    <button class="btn btn--link">檢舉</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="workInfo">
-                            <div class="workInfo_good">
-                                <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                            <div class="workInfo_reply">
-                                <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                <p  class="num h3">20</p>
-                            </div>
-                        </div>
-
-                        <div class="work_reply">
-                            <div class="userContext">
-                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅好好吃</p>
-                                    <p class="userContent h5">天婦羅好好吃</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="subUserContext">
-                                <img src="../app/assets/img/pic/userPic03.png"  class="userPic--small">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅不好吃</p>
-                                    <p class="userContent h5">超油</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="subUserContext hiddenSubReply">
-                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic--small">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅好好吃</p>
-                                    <p class="userContent h5">明明就很好吃</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="moreReply">
-                            <p class="h5 moreReplyWord">1則回覆</p>
-                            <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon1">
-                        </div>
-
-                        <div class="work_reply hiddenReply">
-                            <div class="userContext">
-                                <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">天婦羅好好吃</p>
-                                    <p class="userContent h5">天婦羅好好吃</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-                                            <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
- 
-                        <div class="readMore">
-                            <p class="h5 readMoreWord">閱讀更多</p>
-                            <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon2">
-                        </div>
-                        <div class="typeReply">
-                            <div class="typeReply_left">
-                              <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
-                            </div>
-                    
-                            <div class="typeReply_right">
-                              <p class="replyerName">沾醬大師</p>
-                              <textarea name="" id="" cols="32" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                              <div class="other">
-                                <p class="textCount"></p>
-                                <button class="btn btn--small comment">留言</button>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="closeTextarea">
-                            <p class="h5 textareaWord">關閉輸入框</p>
-                            <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="mywork" id="mywork">
-                    @@include('./components/EmptyState.html')
-                </div>
-            </div>
-        </row>
+            </row>
+        </div>
+        @@include('./components/Footer.html')
     </div>
+
 
     <div id="app2">
         @@include('./pages/FactoryPage/FactoryModal.html')
     </div>
 
+    @@include('./components/VueHeader.html')
 
     <script>    
         const vm1 = new Vue({
-            el: '#app', 
+            el: '#factory', 
             data: {     
                 message: 'Hello, VueJS!',
             },
@@ -1160,10 +1193,10 @@
         let context = canvas.getContext('2d');
 
         //綁定事件
-        $('.selectArea').click(buildCanvas);
+        $('.selectShape').click(buildCanvas);
 
         function buildCanvas(e){
-            let targetShape = $(e.target).parent().children('.shape').attr('src');
+            let targetShape = $(e.target).parent().children('.cardOut').children('.shape').attr('src');
             // let targetClass = $(e.target).parent().children('.shape').attr('class');
             console.log(targetShape)
             // console.log(targetClass)
@@ -1172,19 +1205,27 @@
             pic1.src = `${targetShape}`; //放上車型
             pic1.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic1, 0, 0);
+                context.drawImage(pic1, 0, -100);
             })
 
             //擦去上一個選項尚未找到解！
         }
 
         //疊上顏色
+        $('.selectShape').click(function(){
+            //抓取車型的index(用來判別顏色圖要貼甚麼)
+            
+            let index = $(this).parent().index();
+            console.log(index)
+        })
+
+
         $('.selectWhite').click(function(){
             let pic2 = new Image();
             pic2.src = './assets/img/pic/color1A.png'; //白
             pic2.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic2, 0, 0);
+                context.drawImage(pic2, 0, -100);
             })
         })
 
@@ -1193,7 +1234,7 @@
             pic2.src = './assets/img/pic/color2A.png'; //紅
             pic2.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic2, 0, 0);
+                context.drawImage(pic2, 0, -100);
             })
         })
 
@@ -1202,7 +1243,7 @@
             pic2.src = './assets/img/pic/color3A.png'; //橙
             pic2.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic2, 0, 0);
+                context.drawImage(pic2, 0, -100);
             })
         })
 
@@ -1211,7 +1252,7 @@
             pic2.src = './assets/img/pic/color4A.png'; //黃
             pic2.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic2, 0, 0);
+                context.drawImage(pic2, 0, -100);
             })
         })
 
@@ -1221,7 +1262,7 @@
             pic3.src = './assets/img/pic/tire01.png'; //輪子1
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic3, 0, 0);
+                context.drawImage(pic3, 0, -100);
             })
         })
 
@@ -1230,7 +1271,7 @@
             pic3.src = './assets/img/pic/tire02.png'; //輪子2
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic3, 0, 0);
+                context.drawImage(pic3, 0, -100);
             })
         })
 
@@ -1239,7 +1280,7 @@
             pic3.src = './assets/img/pic/tire03.png'; //輪子3
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic3, 0, 0);
+                context.drawImage(pic3, 0, -100);
             })
         })
 
@@ -1249,7 +1290,7 @@
             pic4.src = './assets/img/pic/accessory1.png'; //圓形燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 0, -20);
+                context.drawImage(pic4, 0, -120);
             })
         })
 
@@ -1258,7 +1299,7 @@
             pic4.src = './assets/img/pic/accessory2.png'; //藍燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 0, -20);
+                context.drawImage(pic4, 0, -120);
             })
         })
 
@@ -1267,7 +1308,7 @@
             pic4.src = './assets/img/pic/accessory3.png'; //紅藍燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 0, -20);
+                context.drawImage(pic4, 0, -120);
             })
         })
 
@@ -1276,7 +1317,7 @@
             pic4.src = './assets/img/pic/accessory4.png'; //動物圖案
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 40, 5);
+                context.drawImage(pic4, 40, -100);
             })
         })
 
@@ -1285,7 +1326,7 @@
             pic4.src = './assets/img/pic/accessory5.png'; //馬圖案
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 20, 5);
+                context.drawImage(pic4, 20, -100);
             })
         })
 
@@ -1294,10 +1335,10 @@
             pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
-                context.drawImage(pic4, 60, 5);
+                context.drawImage(pic4, 0, -100);
             })
-            //尾翼應該貼到最下層
         })
+
     </script>
 </body>
 </html>
