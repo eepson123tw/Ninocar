@@ -274,9 +274,6 @@
 }
 
 .closeIcon{
-    // position: absolute;
-    // left: 32.9vw;
-    // top: 0.64vw;
     position: relative;
     left: 37.9vw;
     top: -2.36vw;
@@ -322,11 +319,9 @@
     // width: 50%;
     height: 4px;
     background-color: #D8D8D8;
-    position: absolute;
-    top: 290px;
-    left: 480px;
-    // top: 15vw;
-    // left: 25vw;
+    position: relative;
+    top: 30px;
+    left: 200px;
     z-index: -1;
 }
 
@@ -346,10 +341,9 @@
     display: flex;
     justify-content: center;
 
-    position: absolute;
-    top: 270px;
-    left: 440px;
-    // left: 22.9vw;
+    // position: absolute;
+    // top: 270px;
+    // left: 440px;
 
     outline: 1px solid indianred;
   }
@@ -374,7 +368,9 @@
     color: #333333;
   }
 
-
+  .content:last-child .circle, .content:last-child .explanation{
+      margin-right: 0
+    }
 // ----------------製作車子的主區域-------------------
 
   .mainAreaPic{
