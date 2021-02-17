@@ -1,7 +1,6 @@
 .product{
 
     &__header{
-        border: 1px solid red;
         padding: 0px 50px;
         box-sizing: border-box;
         margin-right: 20px;
@@ -25,10 +24,42 @@
     }  
 }
 
+.area{
+    width: 150px;
+}
+
+.card_all{
+    border: 2px solid red;
+}
+
 .card{
 
-    margin: 50px 0 50px ;
+    margin: 150px 0 40px;
 }
+
+.page{
+
+    display: flex;
+    margin: 100px auto;
+
+    &_btn_nb span{
+        width:50px;
+        border:1px solid;
+        margin: 3px;
+        padding: 20px;
+        line-height: 50px;
+        text-align: center;
+
+    }
+
+    &_btn_nb span:hover{
+        background: orange;
+        color: #fff;
+    }
+}
+
+
+
 
 
 
