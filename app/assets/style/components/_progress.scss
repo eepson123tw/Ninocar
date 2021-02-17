@@ -1,52 +1,74 @@
 .progress {
     display: flex;
-    text-align: center;
     color: $white;
+    text-align: center;
     position: relative;
     font-size: 24px;
     &__item {
         @include circle(42px, 42px);
-        margin: 0 50px;
+        margin: 0 100px;
         position: relative;
         background-color: $gray-500;
         line-height: 42px;
+        @include rwd-md {
+            margin: 0 90px;
+        }
+        @include rwd-sm {
+            margin: 0 50px;
+        }
+        @include rwd-xs {
+            margin: 0 30px;
+        }
         &::before {
             content: "";
-            width: 250%;
+            width: 500%;
             height: 3px;
             position: absolute;
             background-color: $gray-500;
             top: 50%;
             left: 100%;
+            @include rwd-sm {
+                width: 300%;
+            }
+            @include rwd-xs {
+                width: 150%;
+            }
         }
-        &:last-child {
+        &:nth-child(3) {
             &::before {
                 display: none;
             }
         }
         &:nth-child(4) {
             &::before {
-                width: 250%;
+                width: 500%;
             }
         }
         &--active {
             background-color: $secondary;
             &::before {
                 content: "";
-                width: 250%;
+                width: 500%;
                 height: 3px;
                 position: absolute;
                 background-color: $secondary;
                 top: 50%;
                 left: 100%;
+                @include rwd-sm {
+                    width: 300%;
+                }
+                @include rwd-xs {
+                    width: 150%;
+                }
             }
         }
     }
     &__text {
-        width: 500%;
         position: absolute;
-        top: 110%;
-        left: -200%;
+        width: 150px;
+        top: 100%;
+        left: -120%;
         color: $black;
+        @extend .h3;
     }
 }

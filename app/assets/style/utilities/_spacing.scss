@@ -1,4 +1,30 @@
-    //--------------------------------------spacing
+       //--------------------------------------custom spacing
+@each $level in 25 {
+    .pt-#{$level} {
+        padding-top: $space-unit * $level;
+    }
+}
+@each $level in 25,30,50 {
+    .pb-#{$level} {
+        padding-bottom: $space-unit * $level;
+    }
+}  
+@include rwd-lg{
+    @each $level in 25 {
+        .px-lg-#{$level} {
+            padding-left: $space-unit * $level;
+            padding-right: $space-unit * $level;
+        }
+    }
+
+}
+@each $level in 25,30,50 {
+    .mb-#{$level} {
+        margin-bottom: $space-unit * $level;
+    }
+}
+   
+   //--------------------------------------spacing
     $spacing : ('pt' : 'padding-top',
         'pb' : 'padding-bottom',
         'mt' : 'margin-top',
@@ -147,9 +173,3 @@
         }
     }
 
-    //--------------------------------------custom spacing
-    @each $level in 25 {
-        .pt-#{$level} {
-            padding-top: $space-unit * $level;
-        }
-    }

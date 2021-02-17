@@ -1,14 +1,17 @@
 
 $flexList : (
-    'wrap' : wrap,
     'column' : column,
     'reverse' : reverse);
 
 
 @each $key,$val in $flexList {
     .flex-#{$key} {
-        flex-direction: flex-#{$val};
+        flex-direction: #{$val};
     }
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
 }
 
 
@@ -35,6 +38,12 @@ $alignItemsList : (
 @each $key,$val in $alignItemsList {
     .align-items-#{$key} {
         align-items: #{$val};
+    }
+}
+
+@include rwd-lg{
+    .order-lg-1 {
+        order: -1;
     }
 }
 

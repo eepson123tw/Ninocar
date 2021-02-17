@@ -1,0 +1,41 @@
+<section class="block mb-10">
+    <header class="block__header block__header--nav">
+        <h2 class="block__header__title">車車圖鑑</h2>
+        <button class="btn">查看商品</button>
+    </header>
+    <section class="block__body bg-white pt-9 pb-14 pt-xs-5 pb-xs-5">
+        <div class="display">
+            <div class="display__cover mb-10">
+                <h2 class="display__title mb-2">{{targetProduct.eng}}</h2>
+                <img :src="targetProduct.displayImgURL" class="display__img">
+                <div :class="carIDClass">{{targetProduct.series}}<span>{{targetProduct.seriesId}}</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center flex-xs-wrap">
+                <div class="mb-xs-2 w-50 w-md-100">
+                    <h3 class="h1 mb-1">{{targetProduct.name}}</h3>
+                    <span class="d-inbl mb-5">{{targetProduct.eng}} {{targetProduct.year}}</span>
+                    <p class="h4 mb-5">{{targetProduct.description}}</p>
+                    <span :class="badgeClass">{{seriesNames[targetProduct.series]}}</span>
+                    <span v-if="targetProduct.extraLabel== 2 || targetProduct.extraLabel== 1"
+                        :class="extraLabel.className">{{extraLabel.text}}</span>
+                </div>
+                <div class="text-right mx-xs-auto">
+                    <svg :class="getPinClass" width="120" height="120" viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="30" stroke-width="4" />
+                        <circle cx="40" cy="40" r="25" stroke-width="2" />
+                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
+                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
+                        <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
+                    </svg>
+                    <!-- pin 收藏大師-->
+                    <pin :disabled="!memberHasPin" :series="targetProduct.series">
+                </div>
+            </div>
+            <!-- <img src="./assets/img/icon/icon-left.svg" alt="prev"
+        class="swiper-pagination swiper-pagination-prev">
+    <img src="./assets/img/icon/icon-right.svg" alt="next"
+        class="swiper-pagination swiper-pagination-next"> -->
+        </div>
+    </section>
+</section>

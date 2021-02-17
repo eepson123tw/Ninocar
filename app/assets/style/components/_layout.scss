@@ -1,0 +1,53 @@
+.header {
+    width: 100%;
+    background-color: $primary;
+    position: fixed;
+    z-index: 1000;
+}
+
+
+
+.link--login {
+    font-size: 24px;
+    color: $coffee;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 2px solid $coffee;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary-light;
+    }
+}
+
+.link-group {
+    position: fixed;
+    right: calc((100% - 1400px) / 2 - 61px);
+    top: 80%;
+
+    @include rwd(1550px) {
+        right: 8px;
+    }
+
+}
+
+.footer {
+    background-color: $primary;
+    color: $coffee;
+
+    &__title {
+        @extend .h3;
+        padding-bottom: 8px;
+        border-bottom: 2px dotted $coffee;
+        margin-bottom: 12px;
+    }
+}
+
+.copyright {
+    @extend  .h3;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px dotted $coffee;
+}
