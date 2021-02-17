@@ -620,7 +620,7 @@
         let count3 = 0;
 
         $('.closeTextarea').click(function(){
-            // $('.typeReply').slideToggle();
+            console.log('coloseTextarea')
             $(this).parent().children('.typeReply').slideToggle();
 
             count3 += 1;
@@ -947,6 +947,33 @@
 
 
                 //該怎麼抓到canvas做出來的圖片丟到我的車車???
+                let count6 = 0;
+                $('.closeTextarea').click(function(){
+                    console.log('關掉textarea')
+
+                    $(this).parent().children('.typeReply').slideToggle();
+
+                    count6 += 1;
+                    console.log(count6);
+
+                    if(count6 % 2 == 1){
+                        $(this).children('.textareaWord').text('打開輸入框');
+
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    }else{
+                        $(this).children('.textareaWord').text('關閉輸入框');
+
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+                })//
+
+                $('.comment').click(function(){
+                    console.log('留言')
+                })
             }
         })
 
