@@ -78,7 +78,7 @@ exports.browser = function browsersync() {
     browserSync.init({
         server: {
             baseDir: "./dist", //跟目錄設定
-            index: "cart.html" //需更改成自己頁面的名稱
+            index: "membermain.html" //需更改成自己頁面的名稱
 
         }
     });
