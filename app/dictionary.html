@@ -91,7 +91,7 @@
                 myProducts: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
-                searchType: '關鍵字搜尋',
+                searchType: '分類搜尋',
                 navClassName: {
                     'all': true,
                     'my': false
@@ -122,6 +122,7 @@
                     1: '期間限定',
                     2: '點數限定',
                 },
+                isModalShow: false,
             },
             mounted() {
                 this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
@@ -130,6 +131,13 @@
                 this.targetProduct = this.showProducts[0];
             },
             computed: {
+                modalClass(){
+                    if(this.isModalShow){
+                        return 'modal text-left -active'
+                    }else{
+                        return 'modal text-left '
+                    }
+                },
                 carIDClass() {
                     return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
                 },
@@ -159,15 +167,11 @@
             },
             methods: {
                 handleClickPost(theProductId) {
+                    
                     let index = this.showProducts.map(showProduct => showProduct.productId).indexOf(
                         theProductId);
                     this.targetProduct = this.products[index];
-                    this.intervalId = setInterval(() => {
-                    if (window.pageYOffset === 0) {
-                        clearInterval(this.intervalId)
-                    }
-                    window.scroll(0, window.pageYOffset - 50)
-                }, 20)
+                   this.isModalShow = true;
                 },
                 isPostPin(theProductId) {
                     return this.memberOwnProductIdList.indexOf(theProductId);

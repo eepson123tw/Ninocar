@@ -14,17 +14,19 @@
 }
 
 .display {
-    width: 65%;
+    background-color: #fff;
+    max-width: 920px;
+    width: 80%;
     margin: 0 auto;
     position: relative;
-    height: 100%;
 
-    @include rwd-xl {
-        width: 75%;
+
+    @include rwd-lg {
+        width: 90%;
     }
 
-    @include rwd-md {
-        width: 90%;
+    @include rwd-sm {
+        width: 95%;
     }
 
     &__cover {
