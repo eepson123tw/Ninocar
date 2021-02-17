@@ -309,7 +309,6 @@
 
 .workPic--big{
    width: 100%;
-    /* overflow: hidden;*/
     // outline: 1px solid; 
 }
 
@@ -359,12 +358,6 @@
   .explanations{
     display: flex;
     justify-content: center;
-
-    // position: absolute;
-    // top: 270px;
-    // left: 440px;
-
-    // outline: 1px solid indianred;
   }
 
   .circle{
@@ -586,4 +579,38 @@
 
 .description{
     margin-bottom: 8px;
+}
+
+// ---------------------------------------
+// ---------------------------------------
+@media screen and (max-width:992px){
+    .bar{
+        left: 50px;
+    }
+
+    .bar-back{
+        width: 830px;
+    }
+
+    .work_author, .work_reply, .typeReply{
+        display: block;
+    }
+
+    .userPic{
+        margin: 0 auto;
+    }
+
+    .userName, .workName, .replyerName, .userContent{
+        text-align: center;
+    }
+
+    .other{
+        width: auto;
+    }
+
+    .textarea{
+        margin: 0 auto;
+        display: flex;
+        margin-bottom: 8px;
+    }
 }

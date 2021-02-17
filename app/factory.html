@@ -812,8 +812,10 @@
 
         //點下一步後跳到選色步驟、跳選輪子步驟
         let countStep = 0;
+        let docW = $(document).width();
         $('.nextStep').click(function(){
             console.log(countStep)
+            console.log(docW)
             if($('.nextStep').hasClass('btn--disabled')){
                 
                 $('.pleaseSelect').css({"display": "block"})
@@ -839,7 +841,12 @@
                         "background-color": "#E59807"
                     })
 
-                    $('.bar-front').width(240)
+                    if(docW > 1003){
+                        $('.bar-front').width(240)
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(220)
+                    }
+                    
                 }else if(countStep == 2){
                     $('.nextStep').addClass('btn--disabled')
 
@@ -856,7 +863,12 @@
                         "background-color": "#E59807"
                     })    
 
-                    $('.bar-front').width(480)                
+                    if(docW > 1003){
+                        $('.bar-front').width(480) 
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(440) 
+                    }
+                                   
                 }else if(countStep == 3){
                     $('.nextStep').addClass('btn--disabled')
 
@@ -877,7 +889,11 @@
                         "background-color": "#E59807"
                     })
 
-                    $('.bar-front').width(720)
+                    if(docW > 1003){
+                        $('.bar-front').width(720) 
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(660) 
+                    }
                 }
                 else if(countStep == 4){
                     $('.nextStep').addClass('btn--disabled').text('完成')
@@ -902,7 +918,11 @@
                         "background-color": "#E59807"
                     })
 
-                    $('.bar-front').width(960)
+                    if(docW > 1003){
+                        $('.bar-front').width(960) 
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(840) 
+                    }
                 }
             }
         })
@@ -1007,7 +1027,10 @@
                 $('.typeWorkName').val('')
                 $('.typeNickName').val('')
                 $('.typeInspiration').val('')
-
+                
+                //PO完回到第一頁
+                $('.makeCar').css({"display":"none"})
+                $('.intro').css({"display":"flex"})
 
                 //該怎麼抓到canvas做出來的圖片丟到我的車車???
                 let count6 = 0;
@@ -1075,26 +1098,44 @@
             countL += 1;
             // console.log("countL ":+ countL);
             console.log("countStep: " + countStep)
+            console.log('docW: '+ docW)
 
             let distanceToLeft = $('.selectArea').position().left;
             console.log(distanceToLeft)
 
-            if(countStep < 3 && distanceToLeft > 15){
-                console.log('ab')
-                $('.selectArea').animate({
-                    left:'-=410'
-                });
-            }else if(countStep == 3 && distanceToLeft > -400){
-                console.log('再過去一點')
-                $('.selectArea').animate({
-                    left:'-=410'
-                });
+            if(docW <= 992){
+                if(countStep < 3 && distanceToLeft > -900){
+                    console.log('ab')
+                    $('.selectArea').animate({
+                        left:'-=430'
+                    });
+                }else if(countStep == 3 && distanceToLeft > -2100){
+
+                    $('.selectArea').animate({
+                        left:'-=410'
+                    });
+                }
+            }else{
+                if(countStep < 3 && distanceToLeft > 15){
+                    console.log('ab')
+                    $('.selectArea').animate({
+                        left:'-=410'
+                    });
+                }else if(countStep == 3 && distanceToLeft > -400){
+                    // console.log('再過去一點')
+                    $('.selectArea').animate({
+                        left:'-=410'
+                    });
+                }
             }
+            
         })
 
         $('.selectAreaOut-previous').click(function(){
             countR += 1;
             console.log('countR: '+ countR);
+            console.log('docW: '+ docW)
+
 
             let shapeLength = $('.shapeCard').length
             // console.log(shapeLength)
@@ -1107,24 +1148,46 @@
             let distanceToLeft = $('.selectArea').position().left;
             console.log(distanceToLeft)
 
-            if(countStep == 0 && distanceToLeft < 14){
-                $('.selectArea').animate({
+            if(docW <= 992){
+                if(countStep == 0 && distanceToLeft < 3){
+                    $('.selectArea').animate({
                     left:'+=410'
-                });
-            }else if(countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400) ){
-                console.log('abc')
-                $('.selectArea').animate({
+                    });
+                }else if(countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300) ){
+                    console.log('abc')
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }else if(countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300) ){
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100) ){
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }
+            }else{
+                if(countStep == 0 && distanceToLeft < 14){
+                    $('.selectArea').animate({
                     left:'+=410'
-                });
-            }else if(countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400) ){
-                $('.selectArea').animate({
-                    left:'+=410'
-                });
-            }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920) ){
-                $('.selectArea').animate({
-                    left:'+=410'
-                });
+                    });
+                }else if(countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400) ){
+                    console.log('abc')
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }else if(countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400) ){
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920) ){
+                    $('.selectArea').animate({
+                        left:'+=410'
+                    });
+                }
             }
+
         })
 
         //點留言後PO出留言
