@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/backend.css">
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./assets/js/all.js"></script>
+<title>後台登入</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- your code here... -->
+  </div>
+  <div class="container">
+    <div class="col  mt-6 card-body">
+
+      <form class="col text-center form-box">
+        <h1 class="title text-center mb-6 h1">登入</h1>
+
+        <div class="form-input mb-3">
+          <span><i class="fas fa-envelope"></i></span>
+          <input type="account" name="" placeholder="帳號" tabindex="10" required>
+        </div>
+
+        <div class="form-input mb-6">
+          <span><i class="fas fa-key"></i></span>
+          <input type="password" name="" placeholder="密碼" tabindex="10" required>
+        </div>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn--small">登入</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello, VueJS!',
+    },
+  });
+</script>
+
+</html>
