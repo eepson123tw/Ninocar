@@ -16,11 +16,7 @@
         @@include('./components/Header.html') 
         <!-- your code here... -->
     </div>
-    <div class="container containerMain">
-        <div id="progressBar" class="progressBar">
-            <button class="btn btn--outline exit"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">離開</button>
-            @@include('./pages/FactoryPage/FactoryProgress.html') 
-        </div>
+    <div class="container pt-25 containerMain">
         <row>
             <div class="intro">
                 <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -46,19 +42,11 @@
                     <!-- <img src="../app/assets/img/pic/model.png" class="mainAreaPic"> -->
                     <canvas id="canvas" class="mainAreaPic canvas" width="400" height="400" style="border: 1px solid #ccc;"></canvas>
                 </div>
-                <div class="tipArea">
-                    <div class="tipArea_left col-6">
-                        <p class="h1">選擇車型</p>
-                    </div>
-                    <div class="tipArea_right col-6">
-                        <div class="tipPrice">
-                            <p class="h4">總金額</p>
-                            <p class="totalPrice">NT$ 0</p>
-                        </div>
-                        <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-                        <button class="btn btn--disabled nextStep">下一步</button>
-                    </div>
+                <div id="progressBar" class="progressBar">
+                    
+                    @@include('./pages/FactoryPage/FactoryProgress.html') 
                 </div>
+
 
                 <div class="selectAreaOut">
                     <div class="selectBtn">
@@ -214,6 +202,20 @@
                             <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
                         </li>
                     </ul>
+                </div>
+
+                <div class="tipArea">
+                    <div class="tipArea_left col-6">
+                        <button class="btn btn--outline exit"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
+                    </div>
+                    <div class="tipArea_right col-6">
+                        <div class="tipPrice">
+                            <p class="h4">總金額</p>
+                            <p class="totalPrice">NT$ 0</p>
+                        </div>
+                        <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
+                        <button class="btn btn--disabled nextStep">下一步</button>
+                    </div>
                 </div>
                 
 
