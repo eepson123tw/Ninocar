@@ -76,11 +76,17 @@ exports.u = series(killDist, parallel(moveImg, moveJS, commonStyle, pageStyle, i
 
 exports.browser = function browsersync() {
     browserSync.init({
+
+        // files: "**",
+        // port: 3001,
+        // notify: false, //禁用瀏覽器的通知元素
+        // browser: "chrome",
         server: {
             baseDir: "./dist", //跟目錄設定
-            index: "membermain.html" //需更改成自己頁面的名稱
-
+            index: "membermain.html", //需更改成自己頁面的名稱
+            injectChanges: false,
         }
+
     });
     //與browser同步
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle).on('change', reload);
