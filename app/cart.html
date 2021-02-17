@@ -12,20 +12,23 @@
 
 <body>
     <div id="app">
-        @@include('./components/Header.html') @@include('./pages/CartPage/CartProgress.html')
+        <vue-header></vue-header>
 
 
-        <!-- <cart-area :list="list" :is-Exist="listIsExist"></cart-area>
+        @@include('./pages/CartPage/CartProgress.html')
+
+
+        <cart-area :list="list" :is-Exist="listIsExist"></cart-area>
 
         <cart-info></cart-info>
 
-        <cart-done></cart-done> -->
+        <cart-done></cart-done>
 
 
 
 
 
-
+        <!-- 
         <div class="popovers">
             <p>共<span class="popovers__cartItems"> 3</span>件商品</p>
             <p>總金額：NT$<span class="popovers__totalCost">200</span></p>
@@ -43,64 +46,69 @@
             <div class="row d-flex mt-20 justify-content-center">
                 <button class="btn btn--small  ml-20" data-js="js-progress">Progress</button>
             </div>
-        </div>
+        </div> -->
 
 
 
     </div>
 
+    @@include('./components/VueHeader.html')
+    <!--  -->
+    @@include('./pages/CartPage/CartArea.html')
+    <!--  -->
+    @@include('./pages/CartPage/CartInfo.html')
+    <!--  -->
+    @@include('./pages/CartPage/CartDone.html')
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                list: [{
+                    productName: 'Audi R8 奧迪小客車',
+                    productBrief: 'Audi TT coupe 1980',
+                    price: 195,
+                    productNum: 1,
+                    totalPrice: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: 'BS 01',
+                    pointProduct: false,
+                }, {
+                    productName: 'Audi R8 奧迪小客車',
+                    productBrief: 'Audi TT coupe 1980',
+                    price: 200,
+                    productNum: 1,
+                    totalPrice: 200,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: 'BS 01',
+                    pointProduct: true,
+                    //看資料庫型態改名
+                }],
+                listIsExist: true,
+            },
+            methods: {},
+            mounted() {
+                //確認有無購買
+                for (listnum in
+                    this.list) {
+                    if (!this.list[listnum].productName) {
+                        this.listIsExist = false;
+                    };
+                    //確認是否為點數商品
+                    if (this.list[listnum].pointProduct) {
+                        console.log(`${(listnum
+                            *
+                            1
+                            +
+                            1)}是點數商品`)
+                    }
+                };
+            },
+        });
+    </script>
+
+
 
 </body>
-@@include('./pages/CartPage/CartArea.html')
-<!--  -->
-@@include('./pages/CartPage/CartInfo.html')
-<!--  -->
-@@include('./pages/CartPage/CartDone.html')
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            list: [{
-                productName: 'Audi R8 奧迪小客車',
-                productBrief: 'Audi TT coupe 1980',
-                price: 195,
-                productNum: 1,
-                totalPrice: 195,
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false,
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                productBrief: 'Audi TT coupe 1980',
-                price: 200,
-                productNum: 1,
-                totalPrice: 200,
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: true,
-                //看資料庫型態改名
-            }],
-            listIsExist: true,
-        },
-        methods: {},
-        mounted() {
-            //確認有無購買
-            for (listnum in
-                this.list) {
-                if (!this.list[listnum].productName) {
-                    this.listIsExist = false;
-                };
-                //確認是否為點數商品
-                if (this.list[listnum].pointProduct) {
-                    console.log(`${(listnum
-                        *
-                        1
-                        +
-                        1)}是點數商品`)
-                }
-            };
-        },
-    });
-</script>
+
 
 </html>
