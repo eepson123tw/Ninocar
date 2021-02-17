@@ -11,22 +11,23 @@
 </head>
 
 <body>
-    @@include('./components/Header.html') 
-    <main class="container dictionary pt-10"  id="dictionary">
-        @@include('./pages/DictionaryPage/DictionaryDisplay.html') 
-        @@include('./pages/DictionaryPage/DictionaryPosts.html') 
+    @@include('./components/Header.html')
+    <main class="container dictionary pt-10" id="dictionary">
+        <!-- @@include('./pages/DictionaryPage/DictionaryDisplay.html') 
+        @@include('./pages/DictionaryPage/DictionaryPosts.html')  -->
     </main>
 </body>
 
 
 <script>
     new Vue({
-        el: '#dictionary', 
-        data: {      //變數存放的地方
+        el: '#dictionary',
+        data: { //變數存放的地方
             message: 'Hello, VueJS!',
             score: 0,
             loading: true,
         },
     });
 </script>
+
 </html>
