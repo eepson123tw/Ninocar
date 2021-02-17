@@ -3,7 +3,7 @@
             template: `
             <transition name="slide-fade">
         <li class="col-4 col-lg-3 col-sm-4 mb-5">
-            <div :class="postClass">
+            <div class="post">
                 <div class="post__text">
                     <h2 class="h6 mb-1">{{name}}</h2>
                     <h3 class="h6">{{eng}}</h3>
@@ -22,12 +22,7 @@
                 postCarIDClass() {
                     return `carID bg-series-${this.series}`
                 },
-                postClass() {
-                    return {
-                        post: true,
-                        'post--active': this.active,
-                    }
-                },
+              
             }
         });
 </script>
