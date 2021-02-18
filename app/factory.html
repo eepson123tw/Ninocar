@@ -1263,16 +1263,16 @@
         })
 
         $('.selectAccessory').click(function(){
-            console.log(state3Price)
+            let state4Price0 = $('.totalPrice').text().split(' ')[1]
+            console.log(state4Price0)
 
             let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
             console.log("accessoryPrice: " + accessoryPrice);
 
-            let stage4Price = parseInt(state3Price) + parseInt(accessoryPrice)
+            let stage4Price = parseInt(state4Price0) + parseInt(accessoryPrice)
             console.log("stage4:" + stage4Price)
 
             let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
-            //有問題！！！
         })
 
         // -------------------------------------CANVAS--------------------------------------------
@@ -1430,7 +1430,7 @@
 
         //疊上配件
         $('.selectA1').click(function(){
-            let pic4 = new Image();
+            let pic4 = new Image;
             pic4.src = '../app/assets/img/pic/accessory1.png'; //圓形燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
