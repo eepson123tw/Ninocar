@@ -16,7 +16,7 @@
   font-size: larger;
 }
 
-// index
+// base
 
 header{
   z-index: 1;
@@ -165,13 +165,13 @@ label #sidebar_btn{
   display: none;
 }
 
-.content .card p{
-  background: $white;
-  padding: 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  opacity: 0.8;
-}
+// .content .card p{
+//   background: $white;
+//   padding: 15px;
+//   margin-bottom: 10px;
+//   font-size: 14px;
+//   opacity: 0.8;
+// }
 
 /* Responsive */
 
@@ -312,5 +312,22 @@ td{
     &:hover{
       color: $gray-900;
     }
+  }
+}
+
+// block
+
+.block-responsive{
+  // display: block;
+  // overflow-x: auto;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 10px;
+  background: $secondary;
+  display: flex;
+  flex-direction: column;
+  input{
+    width: 70%;
   }
 }
