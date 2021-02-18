@@ -111,6 +111,9 @@
                 width: 100%;
                 font-size: 12px;
             }
+            @include rwd(655px) {
+                font-size: 12px;
+            }
         }
         &--small {
             @extend .h4;
@@ -136,7 +139,9 @@
         border-radius: 50%;
     }
     &__cupon {
-        background-color: violet;
+        margin-bottom: 100px;
+        background-color: $white;
+        box-shadow: -3px 5px 10px $gray-700;
     }
 }
 

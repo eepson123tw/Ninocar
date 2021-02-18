@@ -141,7 +141,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="btn btn--fluid mb-5">確認結帳</button>
+                    <button @click="pageHandler"  class="btn btn--fluid mb-5">確認結帳</button>
                     <footer class="cart__pointRespond ">
                         <p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
                         <p class="cart__hint ">點數將在訂單完成3天內匯入</p>
@@ -237,7 +237,7 @@
         </main>
     </div>
     `,
-        props: ['list', 'IsExist'],
+        props: ['list', 'IsExist', 'current'],
         data() {
             return {
                 buyerList: this.list,
@@ -246,6 +246,7 @@
                 totalProductNum: null,
                 totalPointCost: null,
                 totalMoneyCost: null,
+                currentdata: this.current,
             }
         },
         mounted() {
@@ -271,6 +272,11 @@
 
         },
         methods: {
+            pageHandler() {
+                this.currentdata += 1;
+
+                this.$emit('data-handler', this.currentdata)
+            },
             changeNum(listIndex, e) {
 
                 let chooseNum = e.target.value * 1 + 1;
