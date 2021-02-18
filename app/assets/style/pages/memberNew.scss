@@ -140,6 +140,7 @@
     }
     &__cupon {
         margin-bottom: 100px;
+        padding: 20px 40px;
         background-color: $white;
         box-shadow: -3px 5px 10px $gray-700;
     }
@@ -168,14 +169,6 @@ nav {
 }
 
 // member bar 區塊
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
 .cool>li {
     position: relative;
     display: flex;
