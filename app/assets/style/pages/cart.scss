@@ -7,13 +7,9 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-top: 100px;
     position: relative;
     &--none {
         display: none;
-    }
-    &--maginHalf {
-        margin-top: 30px;
     }
     @extend .h4;
     @include rwd-sm {

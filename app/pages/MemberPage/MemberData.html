@@ -1,0 +1,77 @@
+<div class="member__info container">
+    <div class="row  mt-xs-1  mt-15">
+        <main class="member__data d-flex w-100">
+            <h2 id="memberData">基本資料</h2>
+            <button class="btn btn-small">儲存</button>
+        </main>
+    </div>
+    <div class="row  py-10">
+        <div class="member__baseData ">
+            <ul>
+                <li>
+                    <p>使用者帳號 : <span class="member__text--small">abc123</span></p>
+                </li>
+                <li>
+                    <label for="account" class="member__text">使用者帳號:</label>
+                    <input type="text" class="member__input " id="account" placeholder="請輸入暱稱" />
+                    <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
+                </li>
+                <li>
+                    <label for="name" class=" member__text member__text--right">姓名 :</label>
+                    <input type="text" class="member__input" id="name" placeholder="請輸入英文暱稱" />
+                </li>
+                <li>
+                    <label for="email" class=" member__text member__text--right">電子郵件 :</label>
+                    <input type="text" class="member__input" id="email" placeholder="請輸入郵件" />
+                </li>
+                <li>
+                    <label for="phone" class=" member__text member__text--right">電話號碼 : </label>
+                    <input type="text" class="member__input" id="phone" placeholder="請輸入電話號碼" />
+                </li>
+                <li>
+                    <label for="sex" class=" member__text member__text--right">性別 :</label>
+                    <select id="sex" class="member__input member__input--small">
+                        <option selected  disabled >請選擇</option>
+                        <option >男</option>
+                        <option >女</option>
+                        <option >其他</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="year" class=" member__text member__text--right">生日 :</label>
+                    <select id="year" class="member__input member__input--small">
+                        <option selected  disabled >年</option>
+                        <option >1990</option>
+                        <option >1991</option>
+                        <option >1992</option>
+                    </select>
+                    <select id="mon" class="member__input member__input--small">
+                        <option selected  disabled >月</option>
+                        <option >1月</option>
+                        <option >2月</option>
+                        <option >3月</option>
+                    </select>
+                    <select id="day" class="member__input member__input--small">
+                        <option selected  disabled >日</option>
+                        <option >1</option>
+                        <option >2</option>
+                        <option >3</option>
+                    </select>
+                </li>
+
+            </ul>
+        </div>
+        <div class="member__baseImg">
+            <main>
+                <ul>
+                    <li class="member__circle"></li>
+                    <li> <label class="member__input--prettier">
+                        <input type="file" />
+                        <span>選擇圖片</span>
+                      </label></li>
+                    <li>限制大小 300X300.jpg</li>
+                </ul>
+            </main>
+        </div>
+    </div>
+</div>

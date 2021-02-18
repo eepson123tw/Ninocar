@@ -64,6 +64,18 @@
                         extraLabel: null,
                     },
                     {
+                        name: '豐田 PRIUS 香港警車',
+                        eng: 'TOYOTA HONG KONG ',
+                        series: 'CA',
+                        seriesId: '05',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '211',
+                        year: 2010,
+                        description: '香港油電混合警車初登場',
+                        extraLabel: null,
+                    },
+                    {
                         name: '三菱夫桑阪急巴士',
                         eng: 'MITSUBISHI AEROSTAR',
                         series: 'BS',
@@ -91,7 +103,7 @@
                 myProducts: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
-                searchType: '關鍵字搜尋',
+                searchType: '分類搜尋',
                 navClassName: {
                     'all': true,
                     'my': false
@@ -122,6 +134,7 @@
                     1: '期間限定',
                     2: '點數限定',
                 },
+                isModalShow: false,
             },
             mounted() {
                 this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
@@ -130,6 +143,13 @@
                 this.targetProduct = this.showProducts[0];
             },
             computed: {
+                modalClass(){
+                    if(this.isModalShow){
+                        return 'modal text-left -active'
+                    }else{
+                        return 'modal text-left '
+                    }
+                },
                 carIDClass() {
                     return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
                 },
@@ -159,15 +179,11 @@
             },
             methods: {
                 handleClickPost(theProductId) {
+                    
                     let index = this.showProducts.map(showProduct => showProduct.productId).indexOf(
                         theProductId);
                     this.targetProduct = this.products[index];
-                    this.intervalId = setInterval(() => {
-                    if (window.pageYOffset === 0) {
-                        clearInterval(this.intervalId)
-                    }
-                    window.scroll(0, window.pageYOffset - 50)
-                }, 20)
+                   this.isModalShow = true;
                 },
                 isPostPin(theProductId) {
                     return this.memberOwnProductIdList.indexOf(theProductId);
@@ -197,4 +213,17 @@
     </script>
 </body>
 
+<<<<<<< HEAD
+<script>
+    new Vue({
+        el: '#dictionary', 
+        data: {      //變數存放的地方
+            message: 'Hello,!',
+            score: 0,
+            loading: true,
+        },
+    });
+</script>
+=======
+>>>>>>> gulp
 </html>
