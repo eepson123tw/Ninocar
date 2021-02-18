@@ -1,0 +1,242 @@
+@import "../helpers/variables";
+@import "../helpers/mixin";
+@import "../helpers/rwd";
+
+.index {
+    overflow-x: hidden;
+    margin-bottom: -400px;
+
+    .parking{
+        &--car{
+            position: absolute;
+            width: 20%;
+            top: 28%;
+            left: 44%;
+            z-index: 30;
+        }
+
+        &--road{
+            position: absolute;
+            width: 19.85%;
+            right: 1400px;
+            top: 0;
+            z-index: 10;
+    
+            @include rwd(1400px) {
+                width: 18.67%;
+                right: calc(100% - 41px);
+            }
+    
+            @include rwd(1280px) {
+                width: 18.5%;
+            }
+        }
+
+        &--text{
+            background-color: $primary;
+            color: $coffee;
+            text-align: center;
+            position: absolute;
+            top:85%;
+            right: 10%;
+            padding: 40px 40px 80px;
+            width: 50%;
+        }
+    }
+ 
+
+    .billboard{
+        &--screen{
+            position: absolute;
+            width: 93%;
+            height: 70.6%;
+            top: 5.6%;
+            left: 51.5%;
+            transform: translateX(-50%);
+
+            @include rwd(1400px){
+                width: 87%;
+            }
+            @include rwd-xl{
+                width: 86%;
+            }
+            @include rwd-lg{
+                width: 88%;
+            }
+            @include rwd-md{
+                width: 87%;
+                height: 400px;
+                bottom: 0;
+            }
+            @include rwd-sm{
+                width: 86.5%;
+                height: 70.3%;
+            }
+            @include rwd-xs{
+                width: 84%;
+            }
+        } 
+        
+        &--car{
+            position: absolute;
+            top: -20px;
+            left: -250px;
+
+            @include rwd(1400px) {
+                width: 280px;
+            }
+        }
+        
+        &--road{
+            // width: 100%;
+            @include rwd-lg{
+                height: 120px;
+                transform: translateX(-160px);
+            }
+            @include rwd-md{
+                height: 80px;
+                transform: translateX(-440px);
+            }
+        }
+    }
+
+
+
+
+    .mountain {
+        position: relative;
+        padding: 280px 0 400px;
+        background-image: url('../../img/illust/illust-mountain.svg');
+        background-size: cover;
+        // &__img{
+        //     position: absolute;
+        //     width: 100%;
+        //     top: 0;
+        //     left: 0;
+        //     z-index: 0;
+        // }
+        @include rwd-xl{
+            margin-top: -160px;
+        }
+    }
+
+    .factory {
+        &--all{
+            @include rwd-lg{
+                width: 60%;
+                margin: 0 auto;
+            }
+        }
+        &--house {
+            position: relative;
+            z-index: 30;
+            width: 100%;
+           
+        }
+
+        &--inner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 5;
+        }
+
+        &--door {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 20;
+        }
+
+        &--car {
+            position: absolute;
+            width: 20%;
+            top: -36%;
+            left: 22%;
+            z-index: 10;
+            transform: translateY(100px);
+            @include rwd(1400px) {
+                left: 24%;
+            }
+            @include rwd-lg{
+                width:  5%;
+                left: 42%;
+                top: -30%
+            }
+        }
+
+        &--road {
+            width: 100%;
+            position: relative;
+            top: -160px;
+            @include rwd-lg{
+                width: 240%;
+                left: -66%;
+            }
+        }
+
+        &--text{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            padding: 80px;
+            @include rwd-xl{
+                padding: 60px;
+            }
+        }
+
+    }
+
+    .block {
+        background-color: #fff;
+    }
+
+
+    .about{
+        position: relative;
+        background-color: #fff;
+        border: 2px dashed $coffee;
+        z-index: 50;
+    }
+
+    .turn-road{
+        position: relative;
+        top:-160px;
+        width: 100%;
+        margin: 0 auto;
+
+    }
+
+    .address{
+        position: relative;
+        top: -360px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border: 2px dashed $coffee;
+        z-index: 50;
+        @include rwd-md{
+            flex-wrap: wrap;
+        }
+    }
+
+    .end{
+        position: relative;
+        top: -500px;
+        .end--showgirl{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+        }
+    }
+
+    .z-index-50{
+        z-index: 50;
+    }
+
+
+
+}
+

@@ -1,0 +1,54 @@
+.logo {
+    background: url('https://github.com/hexschool/webLayoutTraining1st/blob/master/perfume-week6/d%E2%80%99Perfume@2x.png?raw=true')no-repeat center center / cover;
+    @include text-hide;
+    @include size(128px, 38px);
+
+}
+
+
+
+.icon {
+    cursor: pointer;
+    display: inline-block;
+    &__link:hover {
+        opacity: .7;
+    }
+    &:hover .hover-fill-coffee {
+        fill: $coffee;
+    }
+
+    &:hover .hover-stroke-coffee {
+        stroke: $coffee;
+    }
+
+    &:hover .hover-fill-white {
+        fill: $primary-light;
+    }
+
+    &:hover .hover-stroke-none {
+        stroke: none;
+    }
+}
+
+.link {
+    &:hover {
+        opacity: .7;
+        
+    }
+
+    &--active{
+        position: relative;
+        z-index: 10;
+        &::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+            height: 16px;
+            border-radius: 4px;
+            z-index: -1;
+            background-color: $primary;
+        }
+    }
+}

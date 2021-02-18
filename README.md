@@ -20,8 +20,11 @@
 ### 開發前務必先熟悉
 <br>
 
+<<<<<<< HEAD:README.md
 
 
+=======
+>>>>>>> allen:使用說明書.md
 ## 2/16 靜態頁面 與 個人頁面 需完成
 ## breakpoints
 <br>$break-point-xs: 414px;  //mobile-xs
@@ -29,6 +32,10 @@
 <br>$break-point-md: 768px;  //pad
 <br>$break-point-lg: 992px;  //pad-pro
 <br>$break-point-xl: 1200px; //notebook
+<<<<<<< HEAD:README.md
+=======
+
+>>>>>>> allen:使用說明書.md
 
 
 

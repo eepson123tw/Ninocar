@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/dictionary.css">
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./assets/js/all.js"></script>
+<title>Dictionary</title>
+</head>
+
+<body>
+    <div id="dictionary">
+        <vue-header></vue-header>
+        <main class="container dictionary pt-25 pb-15">
+            <!-- display -->
+            @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+            <!-- dictionary list -->
+            <section class="block">
+                @@include('./pages/DictionaryPage/DictionaryPostNav.html')
+                <transition name="collapse">
+                    @@include('./pages/DictionaryPage/DictionaryFilterForm.html')
+                </transition>
+                @@include('./pages/DictionaryPage/DictionaryPostList.html')
+            </section>
+        </main>
+        @@include('./components/Footer.html')
+    </div>
+
+
+    @@include('./components/VueHeader.html')
+    @@include('./components/Pin.html')
+    @@include('./pages/DictionaryPage/DictionaryPostItem.html')
+    @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+
+
+    <script>
+        new Vue({
+            el: '#dictionary',
+            data: { //變數存放的地方
+                products: [{
+                        name: '藍寶堅尼Countach',
+                        eng: 'LAMBORGHINI LP500S',
+                        series: 'PM',
+                        seriesId: '01',
+                        imgURL: './assets/img/pic/3.jpg',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '000',
+                        year: 2007,
+                        description: '中置引擎超級跑車，有著跨時空的前衛感',
+                        extraLabel: 1,
+                    },
+                    {
+                        name: '豐田 PRIUS 香港警車',
+                        eng: 'TOYOTA HONG KONG ',
+                        series: 'PA',
+                        seriesId: '03',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '121',
+                        year: 2010,
+                        description: '香港油電混合警車初登場',
+                        extraLabel: null,
+                    },
+                    {
+                        name: '三菱夫桑阪急巴士',
+                        eng: 'MITSUBISHI AEROSTAR',
+                        series: 'BS',
+                        seriesId: '08',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '300',
+                        year: 2015,
+                        description: '運行於大阪地區的巴士，阪急巴士以米色和藍色配色而聞名，同時也是一款環保低排放巴士',
+                        extraLabel: 3,
+                    },
+                    {
+                        name: '天隸屬車車',
+                        eng: 'PUI PUI CAR',
+                        series: 'CA',
+                        seriesId: '05',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '211',
+                        year: 2010,
+                        description: '香港油電混合警車初登場',
+                        extraLabel: null,
+                    },
+                    {
+                        name: '就糊車車',
+                        eng: 'EMERGENCY CAR',
+                        series: 'EM',
+                        seriesId: '05',
+                        imgURL: 'https://fakeimg.pl/992x744/',
+                        displayImgURL: './assets/img/pic/0.png',
+                        productId: '311',
+                        year: 2010,
+                        description: '香港油電混合警車初登場',
+                        extraLabel: null,
+                    },
+                ],
+                targetProduct: {
+                    name: '豐田 PRIUS 香港警車',
+                    eng: 'TOYOTA HONG KONG ',
+                    series: 'PA',
+                    seriesId: '03',
+                    imgURL: 'https://fakeimg.pl/992x744/',
+                    displayImgURL: './assets/img/pic/0.png',
+                    productId: '121',
+                    year: 2010,
+                    description: '香港油電混合警車初登場',
+                    extraLabel: null,
+                },
+                myProducts: [],
+                memberOwnProductIdList: ['300', '121'],
+                memberHasPin: true,
+                searchType: '分類搜尋',
+                navClassName: {
+                    'all': true,
+                    'my': false
+                },
+                showProducts: [],
+                isNavbarShow: true,
+                seriesNames: {
+                    BS: '巴士系',
+                    EN: '工程系',
+                    TA: '計程車系',
+                    EM: '消防救護系',
+                    PM: 'PREMIUM系',
+                    PA: '警車系',
+                    RV: 'RV休旅系',
+                    CA: '轎車系'
+                },
+                selectedSeriesFilter: ['BS','EN','TA','EM','PM','PA','RV','CA'],
+                pricesRange: {
+                    1: '100~200',
+                    2: '200~300',
+                    3: '300以上'
+                },
+                selectedPriceFilter: [1, 2, 3],
+                yearsRange: {
+                    1970: '1970~1989',
+                    1990: '1990~2009',
+                    2010: '2010後'
+                },
+                selectedYearFilter: [1970, 1990, 2010],
+                extraLabelNames: {
+                    0: '無限定',
+                    1: '期間限定',
+                    2: '點數限定',
+                },
+                selectedLimitFilter: [0, 1, 2],
+                isModalShow: false,
+            },
+            mounted() {
+                this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
+                    .productId));
+                this.showProducts = this.products;
+                this.targetProduct = this.showProducts[0];
+            },
+            computed: {
+                modalClass() {
+                    if (this.isModalShow) {
+                        return 'modal text-left -active'
+                    } else {
+                        return 'modal text-left '
+                    }
+                },
+                carIDClass() {
+                    return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
+                },
+                badgeClass() {
+                    return `badge bg-series-${this.targetProduct.series} mr-2`
+                },
+                getPinClass() {
+                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
+                        'pin pin--disabled'
+                },
+                extraLabel() {
+                    if (this.targetProduct.extraLabel === 1) {
+                        return {
+                            text: '期間限定',
+                            className: 'badge badge--primary'
+                        };
+                    } else if (this.targetProduct.extraLabel === 2) {
+                        return {
+                            text: '點數限定',
+                            className: 'badge bg-blue'
+                        };
+                    } else {
+                        return {}
+                    }
+                },
+
+            },
+            methods: {
+                handleResetFilter() {
+                    this.selectedYearFilter.splice(0);
+                    for (const key in this.yearsRange) {
+                        this.selectedYearFilter.push(key);
+                    }
+                    this.selectedSeriesFilter.splice(0);
+                    for (const key in this.seriesNames) {
+                        this.selectedSeriesFilter.push(key);
+                    }
+                    this.selectedPriceFilter.splice(0);
+                    for (const key in this.pricesRange) {
+                        this.selectedPriceFilter.push(key);
+                    }
+                    this.selectedLimitFilter.splice(0);
+                    for (const key in this.extraLabelNames) {
+                        this.selectedLimitFilter.push(key);
+                    }
+                },
+                handleAllCheckYear() {
+                    if (this.selectedYearFilter.length === 3) {
+                        this.selectedYearFilter.splice(0)
+                    } else {
+                        this.selectedYearFilter.splice(0);
+                        for (const key in this.yearsRange) {
+                            this.selectedYearFilter.push(key);
+                        }
+                    }
+                },
+                handleAllCheckSeries() {
+                    if (this.selectedSeriesFilter.length === 8) {
+                        this.selectedSeriesFilter.splice(0)
+                    } else {
+                        this.selectedSeriesFilter.splice(0);
+                        for (const key in this.seriesNames) {
+                            this.selectedSeriesFilter.push(key);
+                        }
+                    }
+                },
+                handleAllCheckPrice() {
+                    if (this.selectedPriceFilter.length === 3) {
+                        this.selectedPriceFilter.splice(0)
+                    } else {
+                        this.selectedPriceFilter.splice(0);
+                        for (const key in this.pricesRange) {
+                            this.selectedPriceFilter.push(key);
+                        }
+                    }
+                },
+                handleAllCheckLimit() {
+                    if (this.selectedLimitFilter.length === 3) {
+                        this.selectedLimitFilter.splice(0)
+                    } else {
+                        this.selectedLimitFilter.splice(0);
+                        for (const key in this.extraLabelNames) {
+                            this.selectedLimitFilter.push(key);
+                        }
+                    }
+                },
+                handleClickPost(theProductId) {
+
+                    let index = this.showProducts.map(showProduct => showProduct.productId).indexOf(
+                        theProductId);
+                    this.targetProduct = this.products[index];
+                    this.isModalShow = true;
+                },
+                isPostPin(theProductId) {
+                    return this.memberOwnProductIdList.indexOf(theProductId);
+                },
+                changeSearchType() {
+                    this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
+                },
+                changeShowProducts(filter) {
+                    if (filter === 'my') {
+                        this.showProducts = this.myProducts;
+                        this.isNavbarShow = false;
+                        this.navClassName = {
+                            'all': false,
+                            'my': true
+                        };
+                    } else if (filter === 'all') {
+                        this.showProducts = this.products;
+                        this.isNavbarShow = true;
+                        this.navClassName = {
+                            'all': true,
+                            'my': false
+                        };
+                    }
+                },
+                searchShowProduct() {
+                  
+                    // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
+                    const filteredList = this.products.filter(product => this.selectedSeriesFilter.indexOf(product.series)>=0);
+                    console.log(filteredList);
+                    this.showProducts = filteredList;
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>
