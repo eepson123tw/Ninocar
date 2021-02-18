@@ -814,7 +814,7 @@
         let countStep = 0;
         let docW = $(document).width();
         $('.nextStep').click(function(){
-            console.log(countStep)
+            console.log("countStep: "+ countStep)
             console.log(docW)
             if($('.nextStep').hasClass('btn--disabled')){
                 
@@ -831,6 +831,7 @@
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選顏色
+                    $('.colorCards').css({"display": "flex"})
                     $('.colorCard').css({"display": "block"})
 
                     //提醒內容變更
@@ -853,6 +854,7 @@
                     //進入選輪子
                     $('.colorCard').css({"display": "none"})
 
+                    $('.tireCards').css({"display": "flex"})
                     $('.tireCard').css({"display": "block"})
 
                     //提醒內容變更
@@ -873,16 +875,13 @@
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選配件
-                    $('.tireCard').css({
-                        "display": "none"
-                    })
+                    $('.tireCard').css({"display": "none"})
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
 
-                    $('.accessoryCard').css({
-                        "display": "block"
-                    })
+                    $('.accessoryCards').css({"display": "flex"})
+                    $('.accessoryCard').css({"display": "block"})
 
                     //進度條變色
                     $('.content:nth-child(4) .circle').css({
@@ -896,6 +895,11 @@
                     }
                 }
                 else if(countStep == 4){
+                    countStep = -1;
+                    console.log("countStep歸0")
+
+                    // $('.giveName').css({"display": "none"})
+
                     $('.nextStep').addClass('btn--disabled').text('完成')
                     $('.nextStep').addClass('finish')
 
@@ -918,11 +922,11 @@
                         "background-color": "#E59807"
                     })
 
-                    if(docW > 1003){
-                        $('.bar-front').width(960) 
-                    }else if(docW <= 1003){
-                        $('.bar-front').width(840) 
-                    }
+                    // if(docW > 1003){
+                    //     $('.bar-front').width(960) 
+                    // }else if(docW <= 1003){
+                    //     $('.bar-front').width(840) 
+                    // }
                 }
             }
         })
@@ -965,7 +969,8 @@
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
 
-            if(typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0){
+            //如果作品名、作者暱稱、靈感皆不為空則PO文
+            if(typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0){ 
                 console.log(typeWorkNameL)
                 console.log(typeNickNameL)
                 console.log(typeInspirationL)
@@ -1030,7 +1035,19 @@
                 
                 //PO完回到第一頁
                 $('.makeCar').css({"display":"none"})
+                $('.giveName').css({"display":"none"})
+                $('.selectArea').css({"display":"block"})
+                $('.selectBtn').css({"display":"flex"})
+
+                $('.shapeCards').css({"display":"flex"})
+                $('.shapeCard').css({"display":"block"})
+
+                $('.colorCards').css({"display":"none"})
+                $('.tireCards').css({"display":"none"})
+                $('.accessoryCards').css({"display":"none"})
+
                 $('.intro').css({"display":"flex"})
+                // $()
 
                 //該怎麼抓到canvas做出來的圖片丟到我的車車???
                 let count6 = 0;
