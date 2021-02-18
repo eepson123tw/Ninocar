@@ -2,18 +2,22 @@
     width: 100%;
     background-color: $primary;
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+.searchbar__input,.header__btn{
+    color: $coffee;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 2px solid $coffee;
+    
 }
 
 .searchbar {
     &__input {
         font-size: 24px;
-        color: $coffee;
-        background-color: transparent;
-        border-radius: 8px;
-        border: 2px solid $coffee;
         padding: 8px 16px;
     }
 
@@ -28,25 +32,35 @@
 
 .close-icon{
     position: relative;
-    z-index: 1500;
+    z-index: 2500;
 }
 
 .menu{
     top: 0;
     width: 100%;
-    height: 50%;
+    padding-bottom: 40px;
     position: fixed;
     background-color: $primary;
-    z-index: 1001;
+    z-index: 2001;
+
+ 
+
+    &__link{
+        display: block;
+        width: 100%;
+        @extend .h3;
+        color: $coffee;
+        padding: 12px;
+        font-weight: 500;
+        border-bottom: 1px solid $coffee;
+
+    }
+
 }
 
 
-.login-btn {
+.header__btn {
     font-size: 20px;
-    color: $coffee;
-    background-color: transparent;
-    border-radius: 8px;
-    border: 2px solid $coffee;
     padding: 8px;
     cursor: pointer;
 
