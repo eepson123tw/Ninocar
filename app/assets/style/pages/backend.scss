@@ -54,6 +54,10 @@ header{
   }
 }
 
+.btn_active{
+  background: $secondary-dark;
+}
+
 .sidebar{
   z-index: 1;
   top: 0;
@@ -326,8 +330,61 @@ td{
   border-radius: 10px;
   background: $secondary;
   display: flex;
-  flex-direction: column;
-  input{
+  // flex-direction: column;
+  main{
     width: 70%;
+    display: flex;
+    flex-direction: column;
+    color: $white;
+    // align-items: flex-end;
+    .update{
+      display: flex; 
+      max-height: 2rem;
+      p{
+        width: 20%;
+      }
+      input{
+        display: block;
+        width: 70%;
+        border: none;
+        // cursor: pointer;
+      }
+    }
+  }
+  .img-preview{
+    width: 30%;
+  }
+}
+
+
+@include rwd-lg {
+  .block-responsive{
+    display: block;
+    main{
+      width: 100%;
+      margin-bottom: 2rem;
+      .update{
+        p{
+          width: 50%;
+        }
+        input{
+          width: 150%;
+        }
+      }
+    }
+    .img-preview {
+      margin: 0 auto;
+      width: 80%;
+      img{
+        // max-width: none;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include rwd-sm {
+  input{
+    width: 60%!important;
   }
 }
