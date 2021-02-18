@@ -1,46 +1,46 @@
-    <form class="bg-white po-re px-10 py-5" v-show="searchType === '關鍵字搜尋' ">
+    <form class="bg-white po-re px-10 py-5" v-show="searchType === '關鍵字搜尋' && isNavbarShow">
         <ul>
             <li class="mb-5">
                 <label class="h4 d-block mb-3">價格</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <input type="checkbox"  v-model="selectedPriceFilter.length === 3" @click="handleAllCheckPrice" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="(priceRange,key) in pricesRange" class="custom-input ml-3 mb-5">{{priceRange}}
-                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <input type="checkbox" :value="key" v-model="selectedPriceFilter" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
             <li class="mb-5">
                 <label class="h4 d-block mb-3">年代</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <input type="checkbox"  v-model="selectedYearFilter.length === 3" @click="handleAllCheckYear"class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-                <label v-for="(yearRange,key) in yearsRange" class="custom-input ml-3 mb-5">{{yearRange}}
-                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                <label v-for="(yearRange,key) in yearsRange" class="custom-input ml-3 mb-5" >{{yearRange}}
+                    <input type="checkbox" :value="key"  v-model="selectedYearFilter" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
             <li class="mb-5">
                 <label class="h4 d-block mb-3">系列</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <input type="checkbox"  v-model="selectedSeriesFilter.length === 8" @click="handleAllCheckSeries" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="(seriesName,key) in seriesNames" class="custom-input ml-3 mb-5">{{seriesName}}
-                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <input type="checkbox" :value="key" v-model="selectedSeriesFilter"  class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
             <li>
                 <label class="h4 d-block mb-3">限定</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" checked="checked" value="0" name="0" class="custom-input__input">
+                    <input type="checkbox" v-model="selectedLimitFilter.length === 3" @click="handleAllCheckLimit" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="(extraLabelName,key) in extraLabelNames" class="custom-input ml-3 mb-5">{{extraLabelName}}
-                    <input type="checkbox" :value="key" :name="key" class="custom-input__input">
+                    <input type="checkbox" :value="key" v-model="selectedLimitFilter"  class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
