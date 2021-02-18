@@ -13,8 +13,7 @@
         "dev": "npm install",
         "renew": "gulp u",
         "watch": "gulp w",
-        "browser": "gulp browser",
-        "githubPage": "gulp deploy"
+        "browser": "gulp browser"
     },
     "contributors": [
         "Wei Lin <chiwei991814@gmail.com> （https://github.com/WeiLin18）",

@@ -15,7 +15,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload; //browser的方法 更新後~
-const ghPages = require('gulp-gh-pages');
+
 
 
 
@@ -106,10 +106,6 @@ exports.w = function watchFiles() {
     watch('app/assets/js/**/*.js', moveJS);
 }
 
-exports.deploy = function github() {
-    return src('./dist/**/*')
-        .pipe(ghPages());
-}
 
 
 //----package
