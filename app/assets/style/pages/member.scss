@@ -11,3 +11,26 @@
 .cart__comment{
     padding: 30px 20px;
 }
+
+.notice{
+    margin: 200px 50px 20px;
+
+    &_link{
+        width: 100%;
+        margin-top: 20px;
+        border-top: 3px solid orange;
+    }
+}
+
+.not_content{
+    display: flex;
+    margin: 50px 70px;
+
+    &_title{
+        display: block;
+        border-radius: 4px;
+    
+        
+        
+    }
+}

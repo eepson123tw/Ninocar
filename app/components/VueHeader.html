@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                             <li v-if="!isLogin">
-                                <button class="login-btn" @click="isLoginModalShow=true">登入 / 註冊</button>
+                                <button class="header__btn" @click="isLoginModalShow=true">登入 / 註冊</button>
                             </li>
                             <li class="ml-10 ml-sm-5 lh-1">
                                 <svg role="button" aria-label=”menu” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -82,8 +82,7 @@
                                 </svg>
                                 <svg role="button" aria-label=”close” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                     viewBox="0 0 50 50" class="icon close-icon" v-if="isMenuShow" @click="isMenuShow=false">
-                                    <circle cx="25" cy="25" r="23" fill="none" stroke="#522613" stroke-width="4"
-                                        class="hover-fill-white" />
+                                    <circle cx="25" cy="25" r="23" fill="#fff" stroke="#522613" stroke-width="4"/>
                                     <line x1="15" y1="15" x2="35" y2="35" stroke="#522613" stroke-width="4"
                                         stroke-linecap="round" />
                                     <line x1="15" y1="35" x2="35" y2="15" stroke="#522613" stroke-width="4"
@@ -96,8 +95,9 @@
                 <link-group />
                 <modal-login :state="isLoginModalShow" @on-close="isLoginModalShow=false" @on-login="isLogin=true" />
             <transition name="collapse">
-                <nav-menu v-if="isMenuShow"></nav-menu>
+                <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
             </transition>
+            <div class="modal -active" v-if="isMenuShow" @click="isMenuShow=false"></div>
         </header>
         `,
         data() {
@@ -113,18 +113,51 @@
         template: `
             <nav class="menu">
                 <div class="container">
-                    <div class="close_bar">
-                        <div></div>
+                   <div class="row mt-5 mt-md-20 mt-sm-25">
+                       <div class="col-8 col-lg-5 col-sm-4 mx-auto">
+                            <form class="po-re mb-8">
+                                <input type="text" class="searchbar__input w-100" />
+                                <button class="searchbar__btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
+                                        <g>
+                                            <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                            <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                class="hover-stroke-coffee" />
+                                            <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                        </g>
+                                    </svg>
+                                </button>
+                            </form>
+                            <div class="d-flex flex-md-column">
+                                <ul class="w-50  w-md-100 mr-5 mr-md-0">
+                                    <li class="mb-2"><a href="#" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">New Arrival<span class="fl-right mr-5">最新商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Campaign<span class="fl-right mr-5">本月主打</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Popular<span class="fl-right mr-5">熱門商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Points Only<span class="fl-right mr-5">點數限定</span></a></li>                 
+                                </ul>
+                                <ul class="w-50 w-md-100">
+                                <li class="mb-2"><a href="#" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
+                                <li class="mb-2"><a href="#" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
+                                <li class="mb-5"><a href="#" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex ml-2">
+                                        <img src="./assets/img/icon/icon-fb.svg" class="icon">
+                                        <img src="./assets/img/icon/icon-ig.svg" class="icon ml-5">
+                                    </div>
+                                    <button class="header__btn px-5" v-if="login">登出</button>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <ul>
-                        <li class="item"><a href="#">首頁</a></li>
-                        <li class="item"><a href="#">關於我們</a></li>
-                        <li class="item"><a href="#">專案</a></li>
-                        <li class="item"><a href="#">聯絡我們</a></li>
-                    </ul>
-                </div>
+                </div>          
             </nav>
             `,
+            props:['login'],
         data() {
             return {
             
