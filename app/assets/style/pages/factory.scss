@@ -457,7 +457,8 @@
   }
 
   .selectAreaOut-previous{
-      background-image: url("../../img/icon/icon-left.svg");
+    //   background-image: url("../../img/icon/icon-left.svg");
+    //   background-image: url("../app/assets/img/icon/icon-left.svg");
       display:inline-block;
       width: 60px;
       height: 60px;
@@ -469,7 +470,7 @@
   }
 
   .selectAreaOut-next{
-    background-image: url("../../img/icon/icon-right.svg");
+    // background-image: url("../../img/icon/icon-right.svg");
     display:inline-block;
     width: 60px;
     height: 60px;
