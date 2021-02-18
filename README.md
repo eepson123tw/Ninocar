@@ -20,11 +20,6 @@
 ### 開發前務必先熟悉
 <br>
 
-<<<<<<< HEAD:README.md
-
-
-=======
->>>>>>> allen:使用說明書.md
 ## 2/16 靜態頁面 與 個人頁面 需完成
 ## breakpoints
 <br>$break-point-xs: 414px;  //mobile-xs
