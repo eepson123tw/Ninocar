@@ -22,7 +22,7 @@
                             </g>
                         </svg>
                     </li>
-                    <li class="ml-10" v-if="isLogin" @click="isLogin=false">
+                    <li class="ml-10" v-if="isLogin" >
                         <a href="#" aria-label=”member”>
                             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
                                 <g transform="translate(3 6.274)">
@@ -51,8 +51,8 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="ml-10" v-if="!isLogin" @click="isLogin=true">
-                        <button class="link--login">登入 / 註冊</button>
+                    <li class="ml-10" v-if="!isLogin">
+                        <button class="link--login" @click="isLoginModalShow=true">登入 / 註冊</button>
                     </li>
                 </ul>         
             </nav>
@@ -97,18 +97,56 @@
                 </ul>
             </nav>
         </div> 
+    <div :class="modalLoginClass">
+        <div class="po-ab h-100 w-100" @click="isLoginModalShow=false"></div>
+        <div class="modal__group modal__group--sm">
+            <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52"
+                class="icon modal__close" @click="isLoginModalShow=false">
+                <g transform="translate(0 0.47)">
+                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none"
+                        stroke="#522613" stroke-linecap="round" stroke-width="5" />
+                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none"
+                        stroke="#522613" stroke-linecap="round" stroke-width="5" />
+                </g>
+            </svg>
+            <h2 class="modal__title mb-5">
+                登入
+            </h2>
+            <div class="form__group mb-5">
+                <label for="account" class="form__text">帳號</label>
+                <input type="text" class="form__input" id="account" placeholder="abc@gmail.com" />
+            </div>
+            <div class="form__group mb-12">
+                <label for="password" class="form__text">密碼</label>
+                <input type="text" class="form__input" id="password" placeholder="***" />
+            </div>
+
+            <div class="text-right">
+                <button class="btn btn--link mb-6">忘記密碼</button>
+            </div>
+            <button class="btn btn--fluid mb-4" @click="isLogin=true;isLoginModalShow=false">登入</button>
+            <button class="btn btn--fluid btn--outline">註冊</button>
+        </div>
+    </div>
     </header>
         `,
         data() {
             return {
                 username: '',
-                isLogin: true,
+                isLogin: false,
                 isTopBtnVisible: false,
+                isLoginModalShow: false,
             }
         },
-        created() {
-            document.addEventListener = ('scroll', this.changeColor)
-        },
+       computed:{
+        modalLoginClass(){
+            if (this.isLoginModalShow) {
+                        return 'modal -active'
+                    } else {
+                        return 'modal  '
+                    }
+        }
+       },
         methods: {
             scrollTop() {
                 this.intervalId = setInterval(() => {
