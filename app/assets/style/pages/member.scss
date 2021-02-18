@@ -1,47 +1,33 @@
+@import "../helpers/variables";
+@import "../helpers/mixin";
+@import "../helpers/rwd";
+
+
 .myillustbook{
     display: flex;
-    justify-content: center;
-    margin: 20px ;
-    color: #989898;
-    
-    &_all{
-        font-size: 24px;
-        margin: 40px;
-    }
+    justify-content:space-around;
+    margin: 100px 200px 150px 100px;
 
-    &_my{
-        font-size: 24px;
-        margin: 40px;
+    @include rwd-md {
+        margin: 50px 90px;
     }
-}    
+    @include rwd-sm {
+        margin: 50px 90px;
+    }
+   
+}   
 
-.mask{
-    border-width:0 37px 35px 37px;
-    border-style:none solid solid;
-    margin: 30px auto;
-    border-color:transparent transparent #C8C8C8;
+.favorites{
+    margin: 0 40px ;
+    border-bottom: 2px solid orange;
 }
 
-
-.illustbook{
+.d-flex{
     display: flex;
-    margin-bottom: 20px;
-    border: 5px solid orange;
-
-
-    &__body{
-        
-        padding: 20px;
-        background-color: papayawhip;
-        border-right: 5px solid orange;
-
-    }
-
-    &__title{
-        font-size: 34px;
-        font-weight: bolder;
-        margin-top: 30px;
-        color: orange;
-    }
+    flex-wrap: wrap;
+    
 }
 
+.cart__comment{
+    padding: 20px 20px;
+}
