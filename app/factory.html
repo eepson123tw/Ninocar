@@ -962,7 +962,7 @@
 
                 let x = `<li class="work col-4 col-lg-2 col-sm-4">
                         <div class="work_pic">
-                            <img src="../app/assets/img/pic/model02.png" class="">
+                            <img src="data:image/png;${dataURL}" class="">
                         </div>
 
                         <div class="work_author">
@@ -1490,7 +1490,16 @@
                 setTimeout(function(){
                     $('.pleaseSelect').css({"display": "none"})
                  }, 1000);
+            }
+        })
 
+        // -----------------------CANVAS取得base64---------------------------
+        $('.nextStep').click(function(){
+            if(countStep == -1){
+                // console.log('生成base64')
+                
+                dataURL = document.querySelector('.canvas').toDataURL();
+                console.log(dataURL)
             }
         })
 
