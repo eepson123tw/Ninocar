@@ -1228,18 +1228,19 @@
         let totalPriceInit = $('.totalPrice').text().split(' ')[1]
         
         $('.selectShape').click(function(){
-            console.log(totalPriceInit)
+            console.log("totalPriceInit: "+ totalPriceInit)
 
             let shapePrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
             console.log(shapePrice);
 
             let finalPrice = $('.totalPrice').text().split(' ')[1]
             finalPrice = $('.totalPrice').text(`NT$ ${shapePrice}`)
+            console.log('finalPrice: '+ finalPrice)
         })
 
         $('.selectColor').click(function(){
             let totalPrice1 = $('.totalPrice').text().split(' ')[1]
-            // console.log(totalPrice1)
+            console.log("totalPrice1: "+ totalPrice1)
 
             let colorPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
             console.log("colorPrice: " + colorPrice);
