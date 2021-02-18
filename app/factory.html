@@ -1283,7 +1283,10 @@
         //綁定事件
         $('.selectShape').click(buildCanvas);
 
-        function buildCanvas(e){
+        function buildCanvas(e){    
+            //先清空
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
             let targetShape = $(e.target).parent().children('.cardOut').children('.shape').attr('src');
             // console.log(targetShape)
 
@@ -1293,8 +1296,6 @@
                 context.globalAlpha = 1;        
                 context.drawImage(pic1, 0, -100);
             })
-
-            //擦去上一個選項尚未找到解！
         }
 
         //疊上顏色        
