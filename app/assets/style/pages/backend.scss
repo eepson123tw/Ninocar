@@ -2,19 +2,40 @@
 @import "../helpers/mixin";
 @import "../helpers/rwd";
 
+//login
 
-.form-input input{
-  // width: 100%;
-  height: 2.5rem;
-  padding-left: 1rem;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  box-shadow: none;
-  outline: none;
-  border-radius: 1rem;
-  background: transparent;
-  font-size: larger;
+.login-body{
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 2.5rem;
+  background: $primary;
+  border-radius: 10px;
+  color: $secondary-dark;
+  .form-input{
+    input{
+      width: 100%;
+      height: 2.5rem;
+      padding-left: 1rem;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      box-shadow: none;
+      outline: none;
+      border: none;
+      border-radius: 1rem;
+      background: transparent;
+      font-size: larger;
+      background: $white;
+      color: $secondary-dark;
+      &::placeholder{
+        color: $secondary-dark;
+      }
+    }
+  }
+  a{
+    text-align: right;
+  }
 }
+
 
 // base
 
@@ -127,19 +148,19 @@ label #sidebar_btn{
   }
 }
 
-#check:checked ~ .sidebar{
-  left: -185px;
-}
+// #check:checked ~ .sidebar{
+//   left: -185px;
+// }
 
-#check:checked ~ .sidebar a span{
-  display: none;
-}
+// #check:checked ~ .sidebar a span{
+//   display: none;
+// }
 
-#check:checked ~ .sidebar a{
-  font-size: 20px;
-  margin-left: 165px;
-  width: 100%;
-}
+// #check:checked ~ .sidebar a{
+//   font-size: 20px;
+//   margin-left: 165px;
+//   width: 100%;
+// }
 
 .content{
   width: calc(100% - 250px);
@@ -151,31 +172,43 @@ label #sidebar_btn{
   background-size: cover;
   height: 100vh;
   transition: 0.5s;
+  .update_btn{
+    width: 90%;
+    overflow-x: auto;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    button{
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 0.6rem 1rem;
+      background: $secondary;
+      color: $white;
+      i{
+        margin-right: .5rem;
+      }
+      &:hover{
+        background: $secondary-dark;
+      }
+    }
+  }
 }
 
-#check:checked ~ .content{
-  margin-left: 60px;
-}
+// #check:checked ~ .content{
+//   margin-left: 60px;
+// }
 
-#check:checked ~ .sidebar .profile_info{
-  display: none;
-}
+// #check:checked ~ .sidebar .profile_info{
+//   display: none;
+// }
 
-#check{
-  display: none;
-}
+// #check{
+//   display: none;
+// }
 
 .mobile_nav{
   display: none;
 }
 
-// .content .card p{
-//   background: $white;
-//   padding: 15px;
-//   margin-bottom: 10px;
-//   font-size: 14px;
-//   opacity: 0.8;
-// }
 
 /* Responsive */
 
@@ -200,9 +233,9 @@ label #sidebar_btn{
     width: 100%;
   }
 
-  #check:checked ~ .content{
-    margin-left: 0;
-  }
+  // #check:checked ~ .content{
+  //   margin-left: 0;
+  // }
 
   .mobile_nav{
     display: block;
@@ -310,6 +343,7 @@ table{
 
 td{
   padding: 12px 40px;
+  // padding: 1.5rem;
   white-space: nowrap;
   text-align: center;
   a{
@@ -317,7 +351,12 @@ td{
       color: $gray-900;
     }
   }
+  img{
+    width: 10rem;
+    margin: auto;
+  }
 }
+
 
 // block
 
@@ -384,7 +423,13 @@ td{
 }
 
 @include rwd-sm {
-  input{
-    width: 60%!important;
+  .block-responsive{
+    main{
+      .update{
+        input{
+          width: 60%;
+        }
+      }
+    }
   }
 }
