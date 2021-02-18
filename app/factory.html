@@ -48,8 +48,8 @@
     
                     <div class="selectAreaOut">
                         <div class="selectBtn">
-                            <div class="selectAreaOut-previous"></div>
-                            <div class="selectAreaOut-next"></div>
+                            <div class="selectAreaOut-previous"><img src="../app/assets/img/icon/icon-left.svg" alt=""></div>
+                            <div class="selectAreaOut-next"><img src="../app/assets/img/icon/icon-right.svg" alt=""></div>
                         </div>
     
                         <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
@@ -1235,7 +1235,8 @@
 
             let finalPrice = $('.totalPrice').text().split(' ')[1]
             finalPrice = $('.totalPrice').text(`NT$ ${shapePrice}`)
-            console.log('finalPrice: '+ finalPrice)
+            finalPrice2 = finalPrice.text().split(' ')[1]
+            console.log('finalPrice2: '+ finalPrice2)
         })
 
         $('.selectColor').click(function(){
@@ -1248,7 +1249,7 @@
             let calc1 = parseInt(totalPrice1) + parseInt(colorPrice)
             console.log("calc1:" + calc1)
 
-            let finalPrice = $('.totalPrice').text(`NT$ ${calc1}`)
+            let finalPrice = $('.totalPrice1').text(`${calc1}`)
             //有問題在1016~1018之間！！！
         })
 
@@ -1314,20 +1315,20 @@
         $('.selectWhite').click(function(){
             let pic2 = new Image();
             if(shapeIndex == 0){
-                pic2.src = './assets/img/pic/color1A.png'; //白
+                pic2.src = '../app/assets/img/pic/color1A.png'; //白
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 1){
-                pic2.src = './assets/img/pic/color1B.png'; //白
+                pic2.src = '../app/assets/img/pic/color1B.png'; //白
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
 
             }else if(shapeIndex == 2 || shapeIndex == 3){
-                pic2.src = './assets/img/pic/color1C.png'; //白
+                pic2.src = '../app/assets/img/pic/color1C.png'; //白
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, -1, -117);
@@ -1338,19 +1339,19 @@
         $('.selectRed').click(function(){
             let pic2 = new Image();
             if(shapeIndex == 0){
-                pic2.src = './assets/img/pic/color2A.png'; //紅
+                pic2.src = '../app/assets/img/pic/color2A.png'; //紅
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 1){
-                pic2.src = './assets/img/pic/color2B.png'; //紅
+                pic2.src = '../app/assets/img/pic/color2B.png'; //紅
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 2 || shapeIndex == 3){
-                pic2.src = './assets/img/pic/color2C.png'; //紅
+                pic2.src = '../app/assets/img/pic/color2C.png'; //紅
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, -1, -117);
@@ -1361,19 +1362,19 @@
         $('.selectOrange').click(function(){
             let pic2 = new Image();
             if(shapeIndex == 0){
-                pic2.src = './assets/img/pic/color3A.png'; //橙
+                pic2.src = '../app/assets/img/pic/color3A.png'; //橙
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 1){
-                pic2.src = './assets/img/pic/color3B.png'; //橙
+                pic2.src = '../app/assets/img/pic/color3B.png'; //橙
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 2 || shapeIndex == 3){
-                pic2.src = './assets/img/pic/color3C.png'; //橙
+                pic2.src = '../app/assets/img/pic/color3C.png'; //橙
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, -1, -117);
@@ -1385,19 +1386,19 @@
             let pic2 = new Image();
 
             if(shapeIndex == 0){              
-                pic2.src = './assets/img/pic/color4A.png'; //黃
+                pic2.src = '../app/assets/img/pic/color4A.png'; //黃
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 1){
-                pic2.src = './assets/img/pic/color4B.png'; //黃
+                pic2.src = '../app/assets/img/pic/color4B.png'; //黃
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, 0, -100);
                 })
             }else if(shapeIndex == 2 || shapeIndex == 3){
-                pic2.src = './assets/img/pic/color4C.png'; //黃
+                pic2.src = '../app/assets/img/pic/color4C.png'; //黃
                 pic2.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic2, -1, -117);
@@ -1409,7 +1410,7 @@
         //疊上輪子
         $('.selectT1').click(function(){
             let pic3 = new Image();
-            pic3.src = './assets/img/pic/tire01.png'; //輪子1
+            pic3.src = '../app/assets/img/pic/tire01.png'; //輪子1
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic3, 0, -100);
@@ -1418,7 +1419,7 @@
 
         $('.selectT2').click(function(){
             let pic3 = new Image();
-            pic3.src = './assets/img/pic/tire02.png'; //輪子2
+            pic3.src = '../app/assets/img/pic/tire02.png'; //輪子2
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic3, 0, -100);
@@ -1427,7 +1428,7 @@
 
         $('.selectT3').click(function(){
             let pic3 = new Image();
-            pic3.src = './assets/img/pic/tire03.png'; //輪子3
+            pic3.src = '../app/assets/img/pic/tire03.png'; //輪子3
             pic3.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic3, 0, -100);
@@ -1437,7 +1438,7 @@
         //疊上配件
         $('.selectA1').click(function(){
             let pic4 = new Image();
-            pic4.src = './assets/img/pic/accessory1.png'; //圓形燈飾
+            pic4.src = '../app/assets/img/pic/accessory1.png'; //圓形燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic4, 0, -120);
@@ -1446,7 +1447,7 @@
 
         $('.selectA2').click(function(){
             let pic4 = new Image();
-            pic4.src = './assets/img/pic/accessory2.png'; //藍燈飾
+            pic4.src = '../app/assets/img/pic/accessory2.png'; //藍燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic4, 0, -120);
@@ -1455,7 +1456,7 @@
 
         $('.selectA3').click(function(){
             let pic4 = new Image();
-            pic4.src = './assets/img/pic/accessory3.png'; //紅藍燈飾
+            pic4.src = '../app/assets/img/pic/accessory3.png'; //紅藍燈飾
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic4, 0, -120);
@@ -1464,7 +1465,7 @@
 
         $('.selectA4').click(function(){
             let pic4 = new Image();
-            pic4.src = './assets/img/pic/accessory4.png'; //動物圖案
+            pic4.src = '../app/assets/img/pic/accessory4.png'; //動物圖案
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic4, 40, -100);
@@ -1473,7 +1474,7 @@
 
         $('.selectA5').click(function(){
             let pic4 = new Image();
-            pic4.src = './assets/img/pic/accessory5.png'; //馬圖案
+            pic4.src = '../app/assets/img/pic/accessory5.png'; //馬圖案
             pic4.addEventListener('load', function(){
                 context.globalAlpha = 1;        
                 context.drawImage(pic4, 20, -100);
@@ -1483,14 +1484,22 @@
         $('.selectA6').click(function(){
             let pic4 = new Image();
             if(shapeIndex != 1){
-                pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
+                console.log('shapeIndex = 0 or 2')
+                pic4.src = '../app/assets/img/pic/accessory6.png'; //白尾翼
                 pic4.addEventListener('load', function(){
                     context.globalAlpha = 1;        
                     context.drawImage(pic4, 0, -100);
                 })
+            }else{
+                console.log('shapeIndex = 1')
+                $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display":"block"})
+                $(this).addClass('btn--outline')
+                $('.nextStep').addClass('btn--disabled')
+                setTimeout(function(){
+                    $('.pleaseSelect').css({"display": "none"})
+                 }, 1000);
+
             }
-
-
         })
 
     </script>
