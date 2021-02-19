@@ -13,36 +13,15 @@
 <body>
     <div id="app">
         <vue-header></vue-header>
-        @@include('pages/MemberPage/MemberBar.html') @@include('pages/MemberPage/MemberData.html')
-
-        <div class="member__info container">
-            <div class="row">
-                <main class="member__data d-flex w-100">
-                    <h2 id="memberCoupon">我的折價卷</h2>
-                </main>
-            </div>
-            <div class="row">
-                <div class="member__cupon  mt-5 col-6 col-lg-6 col-md-12 ">
-                    <ul>
-                        <li class="member__cuponText">
-                            <p>九</p>
-                        </li>
-                        <li class="member__cuponContent">
-                            <ul>
-                                <li>【註冊新會員】</li>
-                                <li>全品項商品不限金額結帳九折優惠</li>
-                                <li class="member__cuponContent--warning">即將到期:剩下 <span>68:08:22</span></li>
-                            </ul>
-                        </li>
-                        <li class="member__cuponBtn">
-                            <button class="btn btn--link">去逛逛</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
+        @@include('pages/MemberPage/MemberBar.html')
+        <!--  -->
+        @@include('pages/MemberPage/MemberData.html')
+        <!--  -->
+        @@include('pages/MemberPage/MemberCupon.html')
+        <!--  -->
+        @@include('pages/MemberPage/MemberAddress.html')
+        <!--  -->
+        @@include('pages/MemberPage/MemberPassword.html')
 
 
     </div>
