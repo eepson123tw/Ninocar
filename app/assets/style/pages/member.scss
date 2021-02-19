@@ -68,9 +68,19 @@
 .purchase{
     margin: 100px 50px 20px;
 
-    &_link{
+    &_pay{
+        padding: 20px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    &--left {
+        display: flex;
         width: 100%;
-        margin-top: 20px;
-        border-top: 3px solid orange;
+        justify-content: space-around;
+        @include rwd-lg {
+            margin-top: 20px;
+            width: 100%;
+        }
     }
 }
