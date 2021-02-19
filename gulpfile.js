@@ -106,10 +106,6 @@ exports.w = function watchFiles() {
     watch('app/assets/js/**/*.js', moveJS);
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> allen
 
 
 //----package
