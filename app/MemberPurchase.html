@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="./assets/css/pages/member.css"> 
 <link rel="stylesheet" href="./assets/css/pages/memberNew.css">
 <script src="../node_modules/jquery/dist/jquery.js"></script> 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>member</title>
@@ -16,14 +15,13 @@
 <body>
     <div id="app">
         <vue-header></vue-header>
-
-        @@include('./pages/MemberPage/MemberNav.html')
+        
+        @@include('./pages/MemberPage/MemberPurchase.html')
         <!-- your code here... -->
     </div>
 
 </body>
 @@include('./components/VueHeader.html')
-
 
 <script>
     new Vue({

@@ -2,16 +2,38 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="./assets/css/all.css">
-<link rel="stylesheet" href="../dist/assets/css/pages/product.css">
+<link rel="stylesheet" href="./assets/css/pages/product.css">
 <title>product</title>
 </head>
+
+
 <body>
-    @@include('./components/Header.html') 
-    <main class="container  pt-10">
+    <div id="app">
+        <vue-header></vue-header>
+
         @@include('./pages/ProductPage/ProductNav.html')
-      
-    </main>
+        <!-- your code here... -->
+    </div>
+
+    @@include('./components/VueHeader.html')
     <script src="../app/assets/js/new.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app', 
+            data: {     
+                message: 'Hello, VueJS!',
+            },
+        });
+    
+        
+    </script>
+
 </body>
+
+
 </html>
+
+

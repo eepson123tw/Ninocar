@@ -95,6 +95,9 @@ exports.w = function watchFiles() {
     watch('app/assets/js/**/*.js', moveJS);
 };
 
+
+
+
 //----package
 // const cleanCSS = require('gulp-clean-css');
 // const imagemin = require('gulp-imagemin');
