@@ -1,6 +1,11 @@
 .favorites{
-    margin: 200px 50px 20px;
-    border-bottom: 3px solid orange;
+    margin: 100px 50px 20px;
+
+    &_link{
+        width: 100%;
+        margin-top: 20px;
+        border-top: 3px solid orange;
+    }
 }
 
 .d-flex{
@@ -13,7 +18,7 @@
 }
 
 .notice{
-    margin: 200px 50px 20px;
+    margin: 100px 50px 20px;
 
     &_link{
         width: 100%;
@@ -24,13 +29,48 @@
 
 .not_content{
     display: flex;
-    margin: 50px 70px;
+    margin: 70px 70px;
 
-    &_title{
-        display: block;
-        border-radius: 4px;
+    &_circle{
+        width:120px;
+        height:120px;
+        border: 2px solid orange;
+        border-radius: 50%;
+    }
     
-        
-        
+    &_title{
+        margin:35px 25px;
+        color: orange;
+        font-size: 20px;
+        font-weight: bolder;
+        text-align:center;
+    }
+    &_cont{
+        font-size: 24px;
+        margin: 20px 0 50px;
+    }    
+    
+}
+.not_content ul{
+    margin-left: 50px;
+}
+
+.bg-secondary{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.toggleIcon2{
+    margin-top: 25px;
+    margin-right: 70px;
+}
+
+.purchase{
+    margin: 100px 50px 20px;
+
+    &_link{
+        width: 100%;
+        margin-top: 20px;
+        border-top: 3px solid orange;
     }
 }

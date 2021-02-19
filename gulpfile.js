@@ -1,11 +1,4 @@
-const {
-    src,
-    series,
-    dest,
-    parallel,
-    watch,
-} = require('gulp');
-
+const { src, series, dest, parallel, watch } = require('gulp');
 
 const concat = require('gulp-concat');
 const fileInclude = require('gulp-file-include');
@@ -15,9 +8,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload; //browser的方法 更新後~
-
-
-
 
 function moveImg() {
     return src('app/assets/img/**/*').pipe(dest('dist/assets/img/'));
@@ -31,62 +21,63 @@ function moveJS() {
     return src('app/assets/js/**/*.js').pipe(dest('dist/assets/js/'));
 }
 
-
 function commonStyle() {
     return src('app/assets/style/all.scss')
         .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: "expanded" // nested巢狀  // compressed壓縮  //expanded 原本
-        }).on('error', sass.logError))
+        .pipe(
+            sass({
+                outputStyle: 'expanded', // nested巢狀  // compressed壓縮  //expanded 原本
+            }).on('error', sass.logError)
+        )
         .pipe(sourcemaps.write())
-        .pipe(dest('dist/assets/css/'))
+        .pipe(dest('dist/assets/css/'));
 }
 
 function pageStyle() {
     return src('app/assets/style/pages/*.scss')
         .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: "nested"
-        }).on('error', sass.logError))
+        .pipe(
+            sass({
+                outputStyle: 'nested',
+            }).on('error', sass.logError)
+        )
         .pipe(sourcemaps.write())
-        .pipe(dest('dist/assets/css/pages/'))
+        .pipe(dest('dist/assets/css/pages/'));
 }
-
 
 function includeHTML() {
     return src('app/*.html')
-        .pipe(fileInclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
+        .pipe(
+            fileInclude({
+                prefix: '@@',
+                basepath: '@file',
+            })
+        )
         .pipe(dest('dist/'));
 }
 
-
 function killDist() {
-    return src('dist', { read: false, allowEmpty: true })
-        .pipe(clean({
-            force: true
-        }))
+    return src('dist', { read: false, allowEmpty: true }).pipe(
+        clean({
+            force: true,
+        })
+    );
 }
 
 exports.kill = killDist;
 exports.u = series(killDist, parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
 
-
 exports.browser = function browsersync() {
     browserSync.init({
-
         // files: "**",
         // port: 3001,
         // notify: false, //禁用瀏覽器的通知元素
         // browser: "chrome",
         server: {
-            baseDir: "./dist", //跟目錄設定
-            index: "member.html", //需更改成自己頁面的名稱
+            baseDir: './dist', //跟目錄設定
+            index: 'itemdetail.html', //需更改成自己頁面的名稱
             injectChanges: false,
-        }
-
+        },
     });
     //與browser同步
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle).on('change', reload);
@@ -94,9 +85,7 @@ exports.browser = function browsersync() {
     watch('app/**/*.html', includeHTML).on('change', reload);
     watch('app/assets/img/**/*', moveImg).on('change', reload);
     watch('app/assets/js/**/*.js', moveJS).on('change', reload);
-}
-
-
+};
 
 exports.w = function watchFiles() {
     watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle);
@@ -104,7 +93,10 @@ exports.w = function watchFiles() {
     watch('app/**/*.html', includeHTML);
     watch('app/assets/img/**/*', moveImg);
     watch('app/assets/js/**/*.js', moveJS);
-}
+};
+
+
+
 
 //----package
 // const cleanCSS = require('gulp-clean-css');
