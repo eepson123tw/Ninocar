@@ -8,8 +8,14 @@
     flex-direction: column;
     text-align: center;
     position: relative;
+    &__top {
+        padding-top: 100px;
+    }
     &--none {
         display: none;
+    }
+    &--maginHalf {
+        margin-top: 50px
     }
     @extend .h4;
     @include rwd-sm {
@@ -27,7 +33,7 @@
         left: 0;
         bottom: -20%;
         @include rwd-lg {
-            bottom: -110%;
+            bottom: -80%;
             left: 40%;
         }
         @keyframes btnlight {
@@ -42,12 +48,12 @@
             }
         }
         @include rwd-sm {
-            bottom: -90%;
-            left: 40%;
+            bottom: -70%;
+            left: 37%;
         }
         @include rwd-xs {
-            bottom: -90%;
-            left: 35%;
+            bottom: -60%;
+            left: 33%;
         }
         &--none {
             display: none;
@@ -475,7 +481,10 @@
     }
     &--overhidden {
         //捲動Ｙ隱藏
-        overflow-y: scroll;
+        @include rwd-lg {
+            overflow: hidden;
+        }
+        // overflow-y: scroll;
     }
     &__imgGroup {
         //card img
@@ -637,5 +646,26 @@
                 margin-top: 10px;
             }
         }
+    }
+    &__topfix {
+        margin-top: 150px;
+        @include rwd-sm {
+            margin-top: 60px;
+        }
+    }
+}
+
+.fade {
+    &-enter {
+        opacity: 0;
+    }
+    &-leave-to {
+        opacity: 0;
+    }
+    &-enter-active {
+        transition: opacity .5s;
+    }
+    &-leave-active {
+        transition: opacity .5s;
     }
 }

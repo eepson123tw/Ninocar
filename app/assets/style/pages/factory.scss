@@ -457,7 +457,8 @@
   }
 
   .selectAreaOut-previous{
-      background-image: url("../../img/icon/icon-left.svg");
+    //   background-image: url("../../img/icon/icon-left.svg");
+    //   background-image: url("../app/assets/img/icon/icon-left.svg");
       display:inline-block;
       width: 60px;
       height: 60px;
@@ -469,7 +470,7 @@
   }
 
   .selectAreaOut-next{
-    background-image: url("../../img/icon/icon-right.svg");
+    // background-image: url("../../img/icon/icon-right.svg");
     display:inline-block;
     width: 60px;
     height: 60px;
@@ -513,6 +514,10 @@
 
   .colorCard, .tireCard, .accessoryCard, .giveName{
       display: none;
+  }
+
+  .giveName{
+      padding: 20px 80px;
   }
 
 .color{
@@ -582,7 +587,7 @@
 }
 
 // ---------------------------------------
-// ---------------------------------------
+// ----------------992-----------------------
 @media screen and (max-width:992px){
     .bar{
         left: 50px;
@@ -612,5 +617,82 @@
         margin: 0 auto;
         display: flex;
         margin-bottom: 8px;
+    }
+}
+// ---------------------------------------
+// -----------------576----------------------
+
+@media screen and (max-width:576px){
+    .intro{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .emphasis{
+        font-size: 44px;
+    }
+
+    .lable{
+        width: 120px;
+        height: 120px;
+        top: -14.7vw;
+        left: 49vw;
+    }
+
+    .progressBar{
+        margin-top: 20px;
+    }
+
+    .bar{
+        display: none;
+    }
+
+    .circle, .explanation{
+        margin: 0;
+    }
+
+    .explanation{
+        font-size: 16px;
+    }
+
+    .content{
+        margin-right: 8px;
+    }
+
+    .content:last-child{
+        margin-right: 0;
+    }
+
+    .work{
+        margin-bottom: 20px;
+    }
+
+    .tipArea{
+        flex-direction: column;
+
+        &_left{
+            margin-bottom: 8px;
+        }
+    }
+
+    .selectBtn{
+        top: 420px;
+    }
+
+    .makeCar .giveName{
+        // display: flex; //這個flex要動態改CSS
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .typeInspiration{
+        width: 320px;
+    }
+
+    .selectArea{   
+        .colorCard, .accessoryCard{
+           max-width: 50%; 
+        }
     }
 }

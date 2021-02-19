@@ -1,38 +1,66 @@
-.myillustbook {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-    color: #989898;
-    &_all {
-        font-size: 24px;
-        margin: 40px;
-    }
-    &_my {
-        font-size: 24px;
-        margin: 40px;
+.favorites{
+    margin: 100px 50px 20px;
+
+    &_link{
+        width: 100%;
+        margin-top: 20px;
+        border-top: 3px solid orange;
     }
 }
 
-.mask {
-    border-width: 0 37px 35px 37px;
-    border-style: none solid solid;
-    margin: 30px auto;
-    border-color: transparent transparent #C8C8C8;
+.d-flex{
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.illustbook {
-    display: flex;
-    margin-bottom: 20px;
-    border: 5px solid orange;
-    &__body {
-        padding: 20px;
-        background-color: papayawhip;
-        border-right: 5px solid orange;
+.cart__comment{
+    padding: 30px 20px;
+}
+
+.notice{
+    margin: 100px 50px 20px;
+
+    &_link{
+        width: 100%;
+        margin-top: 20px;
+        border-top: 3px solid orange;
     }
-    &__title {
-        font-size: 34px;
-        font-weight: bolder;
-        margin-top: 30px;
+}
+
+.not_content{
+    display: flex;
+    margin: 70px 70px;
+
+    &_circle{
+        width:120px;
+        height:120px;
+        border: 2px solid orange;
+        border-radius: 50%;
+    }
+    
+    &_title{
+        margin:35px 25px;
         color: orange;
+        font-size: 20px;
+        font-weight: bolder;
+        text-align:center;
     }
+    &_cont{
+        font-size: 24px;
+        margin: 20px 0 50px;
+    }    
+    
+}
+.not_content ul{
+    margin-left: 50px;
+}
+
+.bg-secondary{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.toggleIcon2{
+    margin-top: 25px;
+    margin-right: 70px;
 }

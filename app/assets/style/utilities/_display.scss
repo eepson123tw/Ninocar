@@ -28,11 +28,11 @@ $positionList : (
 
 //-----------------------------RWD
 @include rwd-lg {
-    .d-md-none {
+    .d-lg-none {
         display: none;
     }
 
-    .d-md-flex {
+    .d-lg-flex {
         display: flex;
     }
 }
@@ -56,4 +56,8 @@ $positionList : (
 
 .overflow-hidden{
     overflow: hidden;
+}
+
+.fl-right{
+    float: right;
 }

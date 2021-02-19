@@ -111,6 +111,9 @@
                 width: 100%;
                 font-size: 12px;
             }
+            @include rwd(655px) {
+                font-size: 12px;
+            }
         }
         &--small {
             @extend .h4;
@@ -136,11 +139,111 @@
         border-radius: 50%;
     }
     &__cupon {
-        background-color: violet;
+        margin: 20px 0px 0px 80px;
+        padding: 10px 40px;
+        background-color: $white;
+        box-shadow: 1px 1px 5px $gray-500;
+        line-height: 2;
+        display: flex;
+        align-items: center;
+        @include rwd(1116px) {
+            margin: 20px 40px 0px 40px;
+        }
+        @include rwd-lg {
+            margin: 0px;
+            margin-top: 20px;
+        }
+    }
+    &__cuponText {
+        padding: 10px;
+        color: $secondary;
+        align-self: center;
+        position: relative;
+        z-index: 3;
+        &::before {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 1px solid $secondary;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &--big {
+            font-size: 72px;
+        }
+        &--small {
+            font-size: 27px;
+        }
+        &--mid {
+            font-size: 33px;
+        }
+        &--middle {
+            font-size: 28px;
+        }
+        &--wrap {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &__cuponContent {
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;
+        // height: 100%;
+        &--warning {
+            color: $red;
+            font-weight: 700;
+        }
+    }
+    &__cuponBtn {
+        display: flex;
+        align-self: flex-end;
+        &--black {
+            color: $black;
+        }
+        &--red {
+            color: $red;
+        }
+        &--text {
+            margin-left: 20px;
+            padding: 3px 10px;
+        }
+    }
+    &__address {
+        padding: 20px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        &--left {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            @include rwd-lg {
+                margin-top: 20px;
+                width: 100%;
+            }
+        }
+    }
+    &__addressText {
+        padding-left: 50px;
+        @include rwd-lg {
+            padding: 0;
+        }
+    }
+    &__password {
+        margin-right: 20px;
+        @extend .h3;
+        &--pr {
+            margin-right: 25px;
+        }
     }
 }
 
-nav {
+.nav {
     position: relative;
     perspective: 600px;
     z-index: 10;
@@ -163,14 +266,6 @@ nav {
 }
 
 // member bar 區塊
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
 .cool>li {
     position: relative;
     display: flex;
@@ -198,6 +293,8 @@ nav ul {
 
 .trigger-enter-active .dropdown {
     opacity: 1;
+    background-color: $white;
+    border: 1px solid $secondary;
 }
 
 .dropdownBackground {

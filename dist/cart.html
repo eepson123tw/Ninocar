@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-<link
-    rel="stylesheet"
-    href="./assets/css/all.css"
->
-<link
-    rel="stylesheet"
-    href="./assets/css/pages/cart.css"
->
-<script src="../node_modules/jquery/dist/jquery.js"></script>
-<script
-    src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'
-    integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ=='
-    crossorigin='anonymous'
-></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/cart.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <title>cart</title>
 </head>
@@ -29,25 +16,25 @@
 
 
         <div class="container cart ">
-    <div class="row   d-flex justify-content-center align-items-center  mt-20">
-        <button class="btn btn--outline cart__btn px-5 mr-10">繼續購物<img
-                src=" ./assets/img/icon/icon-double-left.svg "
-                alt=" "
-                class="pr-3"
-            ></button>
+    <div class="row   d-flex justify-content-center align-items-center cart__top">
+        <a href="product.html"><button class="btn btn--outline cart__btn px-5 mr-10"> 繼續購物<img
+            src=" ./assets/img/icon/icon-double-left.svg "
+            alt=" "
+            class="pr-3"
+        ></button></a>
         <button class="btn btn--outline cart__btn cart__btn--none px-5 mr-10">返回購物車<img
                 src=" ./assets/img/icon/icon-double-left.svg "
                 alt=" "
                 class="pr-3"
             ></button>
-        <ul class="progress mt-5 row">
-            <li class="progress__item progress__item--active ">1
+        <ul class="progress  row">
+            <li class="progress__item " :class="{'progress__item--active' : current_section >= 0}">1
                 <p class="progress__text ">確認訂單</p>
             </li>
-            <li class="progress__item  ">2
+            <li class="progress__item  " :class="{'progress__item--active' : current_section >= 1}">2
                 <p class="progress__text ">填寫訂購資料</p>
             </li>
-            <li class="progress__item  ">3
+            <li class="progress__item  " :class="{'progress__item--active' : current_section >= 2}">3
                 <p class="progress__text ">完成訂單</p>
             </li>
         </ul>
@@ -55,14 +42,15 @@
 </div>
 
 
-        <cart-area
-            :list="list"
-            :is-Exist="listIsExist"
-        ></cart-area>
+        <transition name="fade" mode="out-in">
+            <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist" v-if="current_section === 0" key="index-1"></cart-area>
 
-        <cart-info></cart-info>
+            <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
 
-        <cart-done></cart-done>
+            <cart-done v-if="current_section === 2" key="index-3"></cart-done>
+        </transition>
+
+
 
 
 
@@ -95,67 +83,180 @@
     <script>
     Vue.component('vue-header', {
         template: `
-    <header class="header">
-        <div class="container d-flex justify-content-between align-items-center po-re py-2">
-            <svg role="button" aria-label=”menu” xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
-                <g transform="translate(-197.2 -223.548)">
-                    <path d="M223.2,271.936a23.222,23.222,0,1,1,23.222-23.222A23.248,23.248,0,0,1,223.2,271.936Zm0-41.444a18.222,18.222,0,1,0,18.222,18.222A18.242,18.242,0,0,0,223.2,230.492Z" fill="#522613"/>
-                    <path d="M233.116,246.609H213a2.5,2.5,0,0,1,0-5h20.113a2.5,2.5,0,0,1,0,5Z" fill="#522613"/>
-                    <path  d="M233.116,257.135H213a2.5,2.5,0,0,1,0-5h20.113a2.5,2.5,0,0,1,0,5Z" fill="#522613"/>
-                </g>
-            </svg>
-             <a href="#"><h1 class="logo">nino car</h1></a>
-            <nav>
-                <ul class="d-flex">
-                    <li>
-                        <svg role="button" aria-label="search" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
-                            <g>
-                                <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                                <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hover-stroke-coffee"/>
-                                <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                            </g>
-                        </svg>
-                    </li>
-                    <li class="ml-10" v-if="isLogin" >
-                        <a href="#" aria-label=”member”>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
-                                <g transform="translate(3 6.274)">
-                                    <g  transform="translate(9 -3)" fill="none" stroke="#522613" stroke-width="5">
-                                        <circle cx="14" cy="14" r="14" stroke="none"/>
-                                        <circle cx="14" cy="14" r="11.5" fill="none"/>
-                                    </g>
-                                    <g transform="translate(4 27)" fill="none" stroke="#522613" stroke-width="5">
-                                        <ellipse cx="18.5" cy="7.5" rx="18.5" ry="7.5" stroke="none"/>
-                                        <ellipse cx="18.5" cy="7.5" rx="16" ry="5" fill="none"/>
-                                    </g>
-                                    <circle cx="2" cy="2" r="2" transform="translate(17 8.725)" class="hover-fill-coffee" fill="none"/>
-                                    <circle cx="2" cy="2" r="2" transform="translate(25 8.725)" class="hover-fill-coffee" fill="none"/>
-                                </g>
-                            </svg>
+        <header class="header">
+                <div class="container d-flex justify-content-between align-items-center po-re py-2">
+                    <div class="d-flex">
+                        <a href="index.html">
+                            <h1 class="h2 color-coffee font-bold">NINO CAR</h1>
                         </a>
-                    </li>
-                    <li class="ml-10"  v-if="isLogin">
-                        <a href="#" aria-label=”message”>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon">
-                                <g transform="translate(6.473 4.772)">
-                                    <path d="M32.3,14.12a11.12,11.12,0,0,0-22.24,0C10.06,27.094,4.5,30.8,4.5,30.8H37.86S32.3,27.094,32.3,14.12" transform="translate(-1.601 -0.584)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                                    <path d="M22.932,31.5a4.351,4.351,0,0,1-7.527,0" transform="translate(0.413 6.835)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                                    <path d="M22.3,8.281S25.877,9.8,25.621,18.86" fill="none" stroke="none" stroke-linecap="round" stroke-width="3" class="hover-stroke-coffee"/>
-                                </g>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="ml-10" v-if="!isLogin">
-                        <button class="link--login" @click="isLoginModalShow=true">登入 / 註冊</button>
-                    </li>
-                </ul>         
+                        <form class="d-md-none ml-5 po-re">
+                            <input type="text" class="searchbar__input" />
+                            <button class="searchbar__btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
+                                    <g>
+                                        <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none"
+                                            stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                        <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none"
+                                            stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            class="hover-stroke-coffee" />
+                                        <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <nav>
+                        <ul class="d-flex align-items-center">
+                            <li class="lg-1" v-if="isLogin">
+                                <a href="membermain.html" aria-label=”member”>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
+                                        class="icon">
+                                        <g transform="translate(3 6.5)">
+                                            <g transform="translate(9 -1)" fill="none" stroke="#522613" stroke-width="5">
+                                                <circle cx="14" cy="14" r="14" stroke="none" />
+                                                <circle cx="14" cy="14" r="11.5" fill="none" />
+                                            </g>
+                                            <g transform="translate(4 29)" fill="none" stroke="#522613" stroke-width="5">
+                                                <ellipse cx="18.5" cy="7.5" rx="18.5" ry="7.5" stroke="none" />
+                                                <ellipse cx="18.5" cy="7.5" rx="16" ry="5" fill="none" />
+                                            </g>
+                                            <circle cx="2" cy="2" r="2" transform="translate(17 8.725)"
+                                                class="hover-fill-coffee" fill="none" />
+                                            <circle cx="2" cy="2" r="2" transform="translate(25 8.725)"
+                                                class="hover-fill-coffee" fill="none" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
+                                <a href="MemberNotice.html" aria-label=”message”>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
+                                        class="icon">
+                                        <g transform="translate(6.473 4.772)">
+                                            <path
+                                                d="M32.3,14.12a11.12,11.12,0,0,0-22.24,0C10.06,27.094,4.5,30.8,4.5,30.8H37.86S32.3,27.094,32.3,14.12"
+                                                transform="translate(-1.601 -0.584)" fill="none" stroke="#522613"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                            <path d="M22.932,31.5a4.351,4.351,0,0,1-7.527,0" transform="translate(0.413 6.835)"
+                                                fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="5" />
+                                            <path d="M22.3,8.281S25.877,9.8,25.621,18.86" fill="none" stroke="none"
+                                                stroke-linecap="round" stroke-width="3" class="hover-stroke-coffee" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li v-if="!isLogin">
+                                <button class="header__btn" @click="isLoginModalShow=true">登入 / 註冊</button>
+                            </li>
+                            <li class="ml-10 ml-sm-5 lh-1">
+                                <svg role="button" aria-label=”menu” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                    viewBox="0 0 50 50" class="icon"  v-if="!isMenuShow" @click="isMenuShow=true">
+                                    <circle cx="25" cy="25" r="23" fill="none" stroke="#522613" stroke-width="4"
+                                        class="hover-fill-white" />
+                                    <line x1="15" y1="17" x2="35" y2="17" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="25" x2="35" y2="25" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="32" x2="35" y2="32" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <svg role="button" aria-label=”close” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                    viewBox="0 0 50 50" class="icon close-icon" v-if="isMenuShow" @click="isMenuShow=false">
+                                    <circle cx="25" cy="25" r="23" fill="#fff" stroke="#522613" stroke-width="4"/>
+                                    <line x1="15" y1="15" x2="35" y2="35" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="35" x2="35" y2="15" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <link-group />
+                <modal-login :state="isLoginModalShow" @on-close="isLoginModalShow=false" @on-login="isLogin=true" />
+            <transition name="collapse">
+                <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
+            </transition>
+            <div class="modal -active" v-if="isMenuShow" @click="isMenuShow=false"></div>
+        </header>
+        `,
+        data() {
+            return {
+                username: '',
+                isLogin: false,
+                isLoginModalShow: false,
+                isMenuShow: false,
+            }
+        },
+    });
+    Vue.component('nav-menu', {
+        template: `
+            <nav class="menu">
+                <div class="container">
+                   <div class="row mt-5 mt-md-20 mt-sm-25">
+                       <div class="col-8 col-lg-5 col-sm-4 mx-auto">
+                            <form class="po-re mb-8">
+                                <input type="text" class="searchbar__input w-100" />
+                                <button class="searchbar__btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
+                                        <g>
+                                            <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                            <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                class="hover-stroke-coffee" />
+                                            <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                        </g>
+                                    </svg>
+                                </button>
+                            </form>
+                            <div class="d-flex flex-md-column">
+                                <ul class="w-50  w-md-100 mr-5 mr-md-0">
+                                    <li class="mb-2"><a href="product.html" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">New Arrival<span class="fl-right mr-5">最新商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Campaign<span class="fl-right mr-5">本月主打</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Popular<span class="fl-right mr-5">熱門商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Points Only<span class="fl-right mr-5">點數限定</span></a></li>                 
+                                </ul>
+                                <ul class="w-50 w-md-100">
+                                <li class="mb-2"><a href="factory.html" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
+                                <li class="mb-2"><a href="dictionary.html" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
+                                <li class="mb-5"><a href="membermain.html" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex ml-2">
+                                        <img src="./assets/img/icon/icon-fb.svg" class="icon">
+                                        <img src="./assets/img/icon/icon-ig.svg" class="icon ml-5">
+                                    </div>
+                                    <button class="header__btn px-5" v-if="login">登出</button>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>          
             </nav>
-        </div> 
-        <div class="container">
+            `,
+        props: ['login'],
+        data() {
+            return {
+
+            };
+        },
+        methods: {
+
+        },
+    });
+
+    Vue.component('link-group', {
+        template: `
+            <div class="container">
             <nav class="link-group">
                 <ul>
                     <li>
-                        <a href="#" aria-label=”cart”>
+                        <a href="cart.html" aria-label=”cart”>
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -190,12 +291,41 @@
                     </li>
                 </ul>
             </nav>
-        </div> 
-    <div :class="modalLoginClass">
-        <div class="po-ab h-100 w-100" @click="isLoginModalShow=false"></div>
+        </div>
+            `,
+        data() {
+            return {
+                isTopBtnVisible: false,
+            }
+        },
+        methods: {
+            scrollTop() {
+                this.intervalId = setInterval(() => {
+                    if (window.pageYOffset === 0) {
+                        clearInterval(this.intervalId)
+                    }
+                    window.scroll(0, window.pageYOffset - 50)
+                }, 20)
+            },
+            scrollListener() {
+                this.isTopBtnVisible = window.scrollY > 100
+            }
+        },
+        mounted() {
+            window.addEventListener('scroll', this.scrollListener)
+        },
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.scrollListener)
+        }
+
+    });
+    Vue.component('modal-login', {
+        template: `
+            <div :class="modalLoginClass">
+        <div class="po-ab h-100 w-100" @click="handleCloseModal"></div>
         <div class="modal__group modal__group--sm">
             <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52"
-                class="icon modal__close" @click="isLoginModalShow=false">
+                class="icon modal__close" @click="handleCloseModal">
                 <g transform="translate(0 0.47)">
                     <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none"
                         stroke="#522613" stroke-linecap="round" stroke-width="5" />
@@ -218,48 +348,30 @@
             <div class="text-right">
                 <button class="btn btn--link mb-6">忘記密碼</button>
             </div>
-            <button class="btn btn--fluid mb-4" @click="isLogin=true;isLoginModalShow=false">登入</button>
+            <button class="btn btn--fluid mb-4" @click="handleLogin">登入</button>
             <button class="btn btn--fluid btn--outline">註冊</button>
         </div>
     </div>
-    </header>
-        `,
-        data() {
-            return {
-                username: '',
-                isLogin: false,
-                isTopBtnVisible: false,
-                isLoginModalShow: false,
-            }
-        },
-       computed:{
-        modalLoginClass(){
-            if (this.isLoginModalShow) {
-                        return 'modal -active'
-                    } else {
-                        return 'modal  '
-                    }
-        }
-       },
+            `,
+        props: ['state'],
         methods: {
-            scrollTop() {
-                this.intervalId = setInterval(() => {
-                    if (window.pageYOffset === 0) {
-                        clearInterval(this.intervalId)
-                    }
-                    window.scroll(0, window.pageYOffset - 50)
-                }, 20)
+            handleCloseModal() {
+                this.$emit('on-close');
             },
-            scrollListener() {
-                this.isTopBtnVisible = window.scrollY > 100
+            handleLogin() {
+                this.$emit('on-login');
+                this.$emit('on-close');
             }
         },
-        mounted() {
-            window.addEventListener('scroll', this.scrollListener)
+        computed: {
+            modalLoginClass() {
+                if (this.state) {
+                    return 'modal -active'
+                } else {
+                    return 'modal '
+                }
+            }
         },
-        beforeDestroy() {
-            window.removeEventListener('scroll', this.scrollListener)
-        }
     });
 </script>
     <!--  -->
@@ -406,7 +518,7 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="btn btn--fluid mb-5">確認結帳</button>
+                    <button @click="pageHandler"  class="btn btn--fluid mb-5">確認結帳</button>
                     <footer class="cart__pointRespond ">
                         <p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
                         <p class="cart__hint ">點數將在訂單完成3天內匯入</p>
@@ -502,7 +614,7 @@
         </main>
     </div>
     `,
-        props: ['list', 'IsExist'],
+        props: ['list', 'IsExist', 'current'],
         data() {
             return {
                 buyerList: this.list,
@@ -511,6 +623,7 @@
                 totalProductNum: null,
                 totalPointCost: null,
                 totalMoneyCost: null,
+                currentdata: this.current,
             }
         },
         mounted() {
@@ -536,6 +649,11 @@
 
         },
         methods: {
+            pageHandler() {
+                this.currentdata += 1;
+
+                this.$emit('data-handler', this.currentdata)
+            },
             changeNum(listIndex, e) {
 
                 let chooseNum = e.target.value * 1 + 1;
@@ -596,173 +714,188 @@
     })
 </script>
     <!--  -->
-    <script>
+    <template id="cart-info">
+
+    <div> <div class="container cart">
+        <div class="row cart__topfix">
+            <div class="cart__list w-100">
+                <ul class="d-flex justify-content-between align-items-center w-100">
+                    <li class="h2">購買明細</li>
+                    <li>總花點數</li>
+                    <li class="cart__member--align">
+                        <p>Ni <span>200</span></p>
+                    </li>
+                    <li>總金額</li>
+                    <li>
+                        <h3>NT$ 762</h3>
+                    </li>
+                    <li>
+                        <img src="./assets/img/icon/icon-down.svg" alt="">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container cart cart--maginHalf ">
+        <div class="row">
+            <div class="d-flex cart__group w-100">
+                <div>
+                    <div class="cart__groupImg">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__product">
+                        <p>Audi R8 奧迪小客車</p>
+                        <p>Audi TT coupe 1980</p>
+                    </div>
+                </div>
+                <div>
+                    <p> NT$<span>195</span></p>
+                </div>
+                <div>
+                    <select name="" class="cart__num" disabled>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                    </select>
+                </div>
+                <div>
+                    <p> NT$<span>195</span> </p>
+                    <p> <img src="" alt=""> <span></span> </p>
+                </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex cart__group w-100">
+                <div>
+                    <div class="cart__groupImg">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__product">
+                        <p>Audi R8 奧迪小客車</p>
+                        <p>Audi TT coupe 1980</p>
+                    </div>
+                </div>
+                <div>
+                    <p> NT$<span>195</span></p>
+                </div>
+                <div>
+                    <select name="" class="cart__num" disabled>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                    </select>
+                </div>
+                <div>
+                    <p> NT$<span>195</span> </p>
+                    <p> <img src="" alt=""> <span></span> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row w-100 pt-md-5 pt-20">
+            <section class="cart__payment  col-6 col-lg-6 col-xs-12">
+                <h2 class="mb-10">購買人資料</h2>
+                <div class="form__group">
+                    <label for="buyerName" class="form__text mb-2 ">姓名</label>
+                    <div class="form__section mb-5">
+                        <input id="buyerName" type="text" class="form__select cart__select cart__select--input" placeholder="王小明"></input>
+                    </div>
+                    <label for="buyerPhone" class="form__text mb-2 ">聯絡電話</label>
+                    <div class="form__section mb-5">
+                        <input id="buyerPhone" type="text" class="form__select cart__select cart__select--input" placeholder="0910-123-456"></input>
+                    </div>
+                    <label for="buyerEmail" class="form__text mb-2 ">電子郵件</label>
+                    <div class="form__section mb-5">
+                        <input id="buyerEmail" type="email" class="form__select cart__select cart__select--input" placeholder="abc@gmail.com"></input>
+                    </div>
+                </div>
+            </section>
+            <section class="cart__payment  col-6 col-lg-6 col-xs-12">
+                <h2 class="mb-10">收貨人資料</h2>
+                <div class="form__group">
+                    <label for="receiverName" class="form__text mb-2 mr-3 ">收件人姓名</label>
+                    <div class="d-flex  cart__checkbox">
+                        <input type="checkbox" id="receiverSame" class="mr-3">
+                        <label for="receiverSame" class="form__text mb-2 mr-3 ">同購買人姓名</label>
+                    </div>
+                    <div class="form__section mb-5">
+                        <input id="receiverName" type="text" class="form__select cart__select cart__select--input" placeholder="王小明"></input>
+                    </div>
+                    <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
+                    <div class="form__section mb-5">
+                        <input id="receiverPhone" type="text" class="form__select cart__select cart__select--input" placeholder="0910-123-456"></input>
+                    </div>
+                    <div class="form__group ">
+                        <label for="address" class="form__text ">地址</label>
+                        <div class="form__section mb-5">
+                            <select name="" id="" class="form__select ">
+                                <option value="">城市</option>
+                            </select>
+                            <select name="" id="" class="form__select ">
+                                <option value="">鄉政區</option>
+                            </select>
+                        </div>
+                        <input type="text" class="form__input  " id="address" placeholder="街/路/巷弄/樓層" />
+                        <div class="d-flex  cart__checkbox mt-10 mb-10">
+                            <input type="checkbox" id="receiverAddress">
+                            <label for="receiverAddress" class="form__text">設為預設地址</label>
+                            <input type="checkbox" id="saveAddress">
+                            <label for="saveAddress" class="form__text">儲存至我的地址</label>
+                        </div>
+                        <button class="btn btn--fluid mb-xs-5" @click="pageHandler">確認付款</button>
+                    </div>
+                </div>
+            </section>
+            <section class="cart__payment  col-6 col-lg-6 col-xs-12">
+                <h2 class="mb-10">付款資料</h2>
+                <div class="form__group">
+                    <div class="form__group">
+                        <label for="cardName" class="form__text mb-2 ">信用卡卡號</label>
+                        <div class="form__section mb-5">
+                            <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
+                            <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
+                            <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
+                            <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
+                        </div>
+                        <label for="cardDate" class="form__text mb-2 ">有效日期</label>
+                        <div class="form__section mb-5">
+                            <input id="cardDate" type="text" class="form__select cart__select cart__select--input" placeholder="MM/YY"></input>
+                        </div>
+                        <label for="cardCode" class="form__text mb-2 ">背面驗證碼</label>
+                        <div class="form__section mb-5">
+                            <input id="cardCode" type="email" class="form__select cart__select cart__select--input" placeholder="123"></input>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+
+    </div></div>
+</template>
+
+<script>
     Vue.component('cart-info', {
-        template: `
-        <div> 
-            <div class="container cart">
-            <div class="row">
-                <div class="cart__list w-100">
-                    <ul class="d-flex justify-content-between align-items-center w-100">
-                        <li class="h2">購買明細</li>
-                        <li>總花點數</li>
-                        <li class="cart__member--align">
-                            <p>Ni <span>200</span></p>
-                        </li>
-                        <li>總金額</li>
-                        <li>
-                            <h3>NT$ 762</h3>
-                        </li>
-                        <li>
-                            <img src="./assets/img/icon/icon-down.svg" alt="">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container cart cart--maginHalf ">
-            <div class="row">
-                <div class="d-flex cart__group w-100">
-                    <div>
-                        <div class="cart__groupImg">
-                            <img src="./assets/img/pic/3.jpg" alt="">
-                            <p>BS 01</p>
-                        </div>
-                        <div class="cart__product">
-                            <p>Audi R8 奧迪小客車</p>
-                            <p>Audi TT coupe 1980</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p> NT$<span>195</span></p>
-                    </div>
-                    <div>
-                        <select name="" class="cart__num" disabled>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p> NT$<span>195</span> </p>
-                        <p> <img src="" alt=""> <span></span> </p>
-                    </div>
-                   
-                </div>
-            </div>
-            <div class="row">
-                <div class="d-flex cart__group w-100">
-                    <div>
-                        <div class="cart__groupImg">
-                            <img src="./assets/img/pic/3.jpg" alt="">
-                            <p>BS 01</p>
-                        </div>
-                        <div class="cart__product">
-                            <p>Audi R8 奧迪小客車</p>
-                            <p>Audi TT coupe 1980</p>
-                        </div>
-                    </div>
-                    <div>
-                        <p> NT$<span>195</span></p>
-                    </div>
-                    <div>
-                        <select name="" class="cart__num" disabled>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p> NT$<span>195</span> </p>
-                        <p> <img src="" alt=""> <span></span> </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row w-100 pt-md-5 pt-20">
-                <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                    <h2 class="mb-10">購買人資料</h2>
-                    <div class="form__group">
-                        <label for="buyerName" class="form__text mb-2 ">姓名</label>
-                        <div class="form__section mb-5">
-                            <input id="buyerName" type="text" class="form__select cart__select cart__select--input" placeholder="王小明"></input>
-                        </div>
-                        <label for="buyerPhone" class="form__text mb-2 ">聯絡電話</label>
-                        <div class="form__section mb-5">
-                            <input id="buyerPhone" type="text" class="form__select cart__select cart__select--input" placeholder="0910-123-456"></input>
-                        </div>
-                        <label for="buyerEmail" class="form__text mb-2 ">電子郵件</label>
-                        <div class="form__section mb-5">
-                            <input id="buyerEmail" type="email" class="form__select cart__select cart__select--input" placeholder="abc@gmail.com"></input>
-                        </div>
-                    </div>
-                </section>
-                <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                    <h2 class="mb-10">收貨人資料</h2>
-                    <div class="form__group">
-                        <label for="receiverName" class="form__text mb-2 mr-3 ">收件人姓名</label>
-                        <div class="d-flex  cart__checkbox">
-                            <input type="checkbox" id="receiverSame" class="mr-3">
-                            <label for="receiverSame" class="form__text mb-2 mr-3 ">同購買人姓名</label>
-                        </div>
-                        <div class="form__section mb-5">
-                            <input id="receiverName" type="text" class="form__select cart__select cart__select--input" placeholder="王小明"></input>
-                        </div>
-                        <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
-                        <div class="form__section mb-5">
-                            <input id="receiverPhone" type="text" class="form__select cart__select cart__select--input" placeholder="0910-123-456"></input>
-                        </div>
-                        <div class="form__group ">
-                            <label for="address" class="form__text ">地址</label>
-                            <div class="form__section mb-5">
-                                <select name="" id="" class="form__select ">
-                                    <option value="">城市</option>
-                                </select>
-                                <select name="" id="" class="form__select ">
-                                    <option value="">鄉政區</option>
-                                </select>
-                            </div>
-                            <input type="text" class="form__input  " id="address" placeholder="街/路/巷弄/樓層" />
-                            <div class="d-flex  cart__checkbox mt-10 mb-10">
-                                <input type="checkbox" id="receiverAddress">
-                                <label for="receiverAddress" class="form__text">設為預設地址</label>
-                                <input type="checkbox" id="saveAddress">
-                                <label for="saveAddress" class="form__text">儲存至我的地址</label>
-                            </div>
-                            <button class="btn btn--fluid mb-xs-5">確認付款</button>
-                        </div>
-                    </div>
-                </section>
-                <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                    <h2 class="mb-10">付款資料</h2>
-                    <div class="form__group">
-                        <div class="form__group">
-                            <label for="cardName" class="form__text mb-2 ">信用卡卡號</label>
-                            <div class="form__section mb-5">
-                                <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
-                                <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
-                                <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
-                                <input id="cardName" type="text" class="form__select cart__select--small cart__select--input " maxlength="4"></input>
-                            </div>
-                            <label for="cardDate" class="form__text mb-2 ">有效日期</label>
-                            <div class="form__section mb-5">
-                                <input id="cardDate" type="text" class="form__select cart__select cart__select--input" placeholder="MM/YY"></input>
-                            </div>
-                            <label for="cardCode" class="form__text mb-2 ">背面驗證碼</label>
-                            <div class="form__section mb-5">
-                                <input id="cardCode" type="email" class="form__select cart__select cart__select--input" placeholder="123"></input>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+        template: '#cart-info',
+        props: ['current'],
+        data() {
+            return {
+                currentdata: this.current,
+            }
+        },
 
-        </div>
-
-
-
-        </div>
-    </div>`,
-
+        methods: {
+            pageHandler() {
+                this.currentdata += 1;
+                console.log(this.currentdata);
+                this.$emit('data-handler', this.currentdata)
+            },
+        }
 
     })
 </script>
@@ -771,7 +904,7 @@
     Vue.component('cartDone', {
 
         template: ` <div class="container cart">
-            <div class="row">
+            <div class="row cart__topfix">
                 <div class="cart__list cart__list--none w-100">
                     <ul class="d-flex justify-content-between align-items-center w-100">
                         <li class="h2">訂單明細</li>
@@ -931,8 +1064,17 @@
                     //看資料庫型態改名
                 }],
                 listIsExist: true,
+                current_section: 0,
             },
-            methods: {},
+            methods: {
+
+                dataChange(val) {
+
+                    this.current_section = val;
+
+                }
+
+            },
             mounted() {
                 //確認有無購買
                 for (listnum in

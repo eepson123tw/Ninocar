@@ -3,419 +3,581 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
-<link rel="stylesheet" href="./assets/css/pages/member.css"> 
-<script src="../node_modules/jquery/dist/jquery.js"></script> 
-<script src="../node_modules/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="./assets/css/pages/cart.css">
+<link rel="stylesheet" href="./assets/css/pages/member.css">
+<link rel="stylesheet" href="./assets/css/pages/memberNew.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <title>member</title>
 </head>
 
 <body>
     <div id="app">
-        <header class="bg-primary">
-    <div class="container d-flex justify-content-between align-items-center py-5">
-        <img src="../app/assets/img/icon/icon-menu.svg" alt="menu">
-        <h1 class="logo">nino car</h1>
-        <nav class="d-flex">
-            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" class="icon mr-10">
-                <g>
-                  <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                  <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none" stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hover-stroke-coffee"/>
-                  <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                </g>
-              </svg>
-              
-            <button class="login">登入 / 註冊</button>
+        <vue-header></vue-header>
+
+        <div class="container ">
+    <div class="row member w-100">
+        <nav class="top w-100">
+            <div class="dropdownBackground">
+                <span class="arrow"></span>
+            </div>
+            <ul class="cool member__bar w-100">
+                <li>
+                    <a href="#">我的帳戶</a>
+                    <ul class="dropdown courses">
+                        <li>
+                            <span class="code"></span>
+                            <a href="#memberData">基本資料</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#memberCoupon">我的折價券</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">我的資料</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">更改密碼</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">會員中心</a>
+                    <ul class="dropdown courses">
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">會員狀態</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">點數兌換紀錄</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">會員機制</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">圖鑒成就</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">通知中心</a>
+                    <ul class="dropdown courses">
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">尚未付款</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">處理中</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">已出貨</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">已完成</a>
+                        </li>
+                        <li>
+                            <span class="code"></span>
+                            <a href="#">已取消</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">購買清單</a>
+                </li>
+                <li>
+                    <a href="#">收藏商品清單</a>
+                </li>
+            </ul>
         </nav>
-</header> 
-        
-<div class="myillustbook">
-    <a class="myillustbook_all" href="#">全部圖鑑</a>
-    <a class="myillustbook_my" href="#">我的圖鑑</a>
+    </div>
+
+
+</div>
 </div>
 
-<ol class="col-12">
-<div class="mask"></div>
-</ol>
+<div class="favorites">
+    <h2>收藏商品清單</h2>
+    <div class="favorites_link"></div>
+</div>
 
+<div class="container">
+    <div class="row w-100">
+        <section class=" cart__payment cart__payment--nopt w-100">
+            <div class="d-flex">
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<ul class="col-12">
-	<div class="row">
-    <li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
 
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
-
-<li class="col-3 col-xl-4 col-lg-3 col-sm-4">
-	<!--illustbook-->
-	<a href="#" class="illustbook">
-		<div class="illustbook__body">
-			<h2 class="illustbook__title">SP<br>01</h2>
-		</div>
-        <div class="illustbook__foot">
-			<img src="./assets/img/3.jpg">
-		</div>
-	</a>
-</li>
-<!----> 
+                <div class="cart__comment col-3 col-lg-6">
+                    <div class="cart__imgGroup">
+                        <img src="./assets/img/pic/3.jpg" alt="">
+                        <p>BS 01</p>
+                    </div>
+                    <div class="cart__textGroup">
+                        <h3>Audi R8 奧迪小客車</h3>
+                        <p>NT$ <span>195</span></p>
+                        <button class="btn btn--ghost btn--small">收藏</button>
+                    </div>
+                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
+                </div>
         <!-- your code here... -->
     </div>
 
 </body>
+<script>
+    Vue.component('vue-header', {
+        template: `
+        <header class="header">
+                <div class="container d-flex justify-content-between align-items-center po-re py-2">
+                    <div class="d-flex">
+                        <a href="index.html">
+                            <h1 class="h2 color-coffee font-bold">NINO CAR</h1>
+                        </a>
+                        <form class="d-md-none ml-5 po-re">
+                            <input type="text" class="searchbar__input" />
+                            <button class="searchbar__btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
+                                    <g>
+                                        <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none"
+                                            stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                        <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none"
+                                            stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            class="hover-stroke-coffee" />
+                                        <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <nav>
+                        <ul class="d-flex align-items-center">
+                            <li class="lg-1" v-if="isLogin">
+                                <a href="membermain.html" aria-label=”member”>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
+                                        class="icon">
+                                        <g transform="translate(3 6.5)">
+                                            <g transform="translate(9 -1)" fill="none" stroke="#522613" stroke-width="5">
+                                                <circle cx="14" cy="14" r="14" stroke="none" />
+                                                <circle cx="14" cy="14" r="11.5" fill="none" />
+                                            </g>
+                                            <g transform="translate(4 29)" fill="none" stroke="#522613" stroke-width="5">
+                                                <ellipse cx="18.5" cy="7.5" rx="18.5" ry="7.5" stroke="none" />
+                                                <ellipse cx="18.5" cy="7.5" rx="16" ry="5" fill="none" />
+                                            </g>
+                                            <circle cx="2" cy="2" r="2" transform="translate(17 8.725)"
+                                                class="hover-fill-coffee" fill="none" />
+                                            <circle cx="2" cy="2" r="2" transform="translate(25 8.725)"
+                                                class="hover-fill-coffee" fill="none" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
+                                <a href="MemberNotice.html" aria-label=”message”>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
+                                        class="icon">
+                                        <g transform="translate(6.473 4.772)">
+                                            <path
+                                                d="M32.3,14.12a11.12,11.12,0,0,0-22.24,0C10.06,27.094,4.5,30.8,4.5,30.8H37.86S32.3,27.094,32.3,14.12"
+                                                transform="translate(-1.601 -0.584)" fill="none" stroke="#522613"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                            <path d="M22.932,31.5a4.351,4.351,0,0,1-7.527,0" transform="translate(0.413 6.835)"
+                                                fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="5" />
+                                            <path d="M22.3,8.281S25.877,9.8,25.621,18.86" fill="none" stroke="none"
+                                                stroke-linecap="round" stroke-width="3" class="hover-stroke-coffee" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li v-if="!isLogin">
+                                <button class="header__btn" @click="isLoginModalShow=true">登入 / 註冊</button>
+                            </li>
+                            <li class="ml-10 ml-sm-5 lh-1">
+                                <svg role="button" aria-label=”menu” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                    viewBox="0 0 50 50" class="icon"  v-if="!isMenuShow" @click="isMenuShow=true">
+                                    <circle cx="25" cy="25" r="23" fill="none" stroke="#522613" stroke-width="4"
+                                        class="hover-fill-white" />
+                                    <line x1="15" y1="17" x2="35" y2="17" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="25" x2="35" y2="25" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="32" x2="35" y2="32" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <svg role="button" aria-label=”close” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                    viewBox="0 0 50 50" class="icon close-icon" v-if="isMenuShow" @click="isMenuShow=false">
+                                    <circle cx="25" cy="25" r="23" fill="#fff" stroke="#522613" stroke-width="4"/>
+                                    <line x1="15" y1="15" x2="35" y2="35" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <line x1="15" y1="35" x2="35" y2="15" stroke="#522613" stroke-width="4"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <link-group />
+                <modal-login :state="isLoginModalShow" @on-close="isLoginModalShow=false" @on-login="isLogin=true" />
+            <transition name="collapse">
+                <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
+            </transition>
+            <div class="modal -active" v-if="isMenuShow" @click="isMenuShow=false"></div>
+        </header>
+        `,
+        data() {
+            return {
+                username: '',
+                isLogin: false,
+                isLoginModalShow: false,
+                isMenuShow: false,
+            }
+        },
+    });
+    Vue.component('nav-menu', {
+        template: `
+            <nav class="menu">
+                <div class="container">
+                   <div class="row mt-5 mt-md-20 mt-sm-25">
+                       <div class="col-8 col-lg-5 col-sm-4 mx-auto">
+                            <form class="po-re mb-8">
+                                <input type="text" class="searchbar__input w-100" />
+                                <button class="searchbar__btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
+                                        <g>
+                                            <circle cx="16.5" cy="16.5" r="16.5" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                            <circle cx="16.5" cy="16.5" r="10" transform="translate(7.175 5.413)" fill="none"
+                                                stroke="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                class="hover-stroke-coffee" />
+                                            <line x1="10" y1="10" transform="translate(35.163 34.349)" fill="none" stroke="#522613"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+                                        </g>
+                                    </svg>
+                                </button>
+                            </form>
+                            <div class="d-flex flex-md-column">
+                                <ul class="w-50  w-md-100 mr-5 mr-md-0">
+                                    <li class="mb-2"><a href="product.html" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">New Arrival<span class="fl-right mr-5">最新商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Campaign<span class="fl-right mr-5">本月主打</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Popular<span class="fl-right mr-5">熱門商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">Points Only<span class="fl-right mr-5">點數限定</span></a></li>                 
+                                </ul>
+                                <ul class="w-50 w-md-100">
+                                <li class="mb-2"><a href="factory.html" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
+                                <li class="mb-2"><a href="dictionary.html" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
+                                <li class="mb-5"><a href="membermain.html" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
+                                <li class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex ml-2">
+                                        <img src="./assets/img/icon/icon-fb.svg" class="icon">
+                                        <img src="./assets/img/icon/icon-ig.svg" class="icon ml-5">
+                                    </div>
+                                    <button class="header__btn px-5" v-if="login">登出</button>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>          
+            </nav>
+            `,
+        props: ['login'],
+        data() {
+            return {
+
+            };
+        },
+        methods: {
+
+        },
+    });
+
+    Vue.component('link-group', {
+        template: `
+            <div class="container">
+            <nav class="link-group">
+                <ul>
+                    <li>
+                        <a href="cart.html" aria-label=”cart”>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
+                                <g transform="translate(-715 -383)">
+                                    <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
+                                    <g transform="translate(734 402.037)">
+                                    <path  d="M16.627,32.313A2.313,2.313,0,1,1,14.313,30,2.313,2.313,0,0,1,16.627,32.313Z" transform="translate(0.072 4.523)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+                                    <path d="M16.627,32.313A2.313,2.313,0,1,1,14.313,30,2.313,2.313,0,0,1,16.627,32.313Z" transform="translate(19.072 4.523)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+                                    <path  d="M1.5,1.5H8.97l5,25.006a3.735,3.735,0,0,0,3.735,3.007H35.862A3.735,3.735,0,0,0,39.6,26.506l2.988-15.668H10.837" transform="translate(-2.5 1.276)" fill="none" stroke="#522613" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+                                    <line  x1="6" transform="translate(-3 23.462)" fill="none" stroke="none" stroke-linecap="round" stroke-width="4" class="hover-stroke-coffee"/>
+                                    <line x1="6" transform="translate(-1 30.462)" fill="none" stroke="none" stroke-linecap="round" stroke-width="4" class="hover-stroke-coffee"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label=”top” v-show="isTopBtnVisible" @click.prevent="scrollTop">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
+                                <g transform="translate(-1660 -805)">
+                                    <g transform="translate(76 -122.041)">
+                                        <circle cx="40" cy="40" r="37" transform="translate(1584 927.041)" fill="#fadd61" stroke="#ffffff" stroke-width="3"/>
+                                    </g>
+                                    <text transform="translate(1700 862)" fill="#522613" font-size="32" font-family="NotoSans-Bold, Noto Sans" font-weight="700"><tspan x="-31.891" y="0">TOP</tspan></text>
+                                    <g transform="translate(1995.252 1047.249) rotate(180)">
+                                    <path d="M301.122,234.488a1.2,1.2,0,0,1-.864-.366l-6.664-6.875a1.2,1.2,0,0,1,1.729-1.676l5.741,5.922,4.986-5.864a1.2,1.2,0,0,1,1.834,1.559l-5.845,6.875a1.2,1.2,0,0,1-.878.423Z" transform="translate(-5.703 -8.294)" fill="#522613"/>
+                                    </g>
+                                    <g transform="translate(1995.252 1037.967) rotate(180)">
+                                    <path d="M301.122,234.488a1.2,1.2,0,0,1-.864-.366l-6.664-6.875a1.2,1.2,0,0,1,1.729-1.676l5.741,5.922,4.986-5.864a1.2,1.2,0,0,1,1.834,1.559l-5.845,6.875a1.2,1.2,0,0,1-.878.423Z" transform="translate(-5.703 -8.294)" fill="none" class="hover-fill-coffee"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+            `,
+        data() {
+            return {
+                isTopBtnVisible: false,
+            }
+        },
+        methods: {
+            scrollTop() {
+                this.intervalId = setInterval(() => {
+                    if (window.pageYOffset === 0) {
+                        clearInterval(this.intervalId)
+                    }
+                    window.scroll(0, window.pageYOffset - 50)
+                }, 20)
+            },
+            scrollListener() {
+                this.isTopBtnVisible = window.scrollY > 100
+            }
+        },
+        mounted() {
+            window.addEventListener('scroll', this.scrollListener)
+        },
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.scrollListener)
+        }
+
+    });
+    Vue.component('modal-login', {
+        template: `
+            <div :class="modalLoginClass">
+        <div class="po-ab h-100 w-100" @click="handleCloseModal"></div>
+        <div class="modal__group modal__group--sm">
+            <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52"
+                class="icon modal__close" @click="handleCloseModal">
+                <g transform="translate(0 0.47)">
+                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none"
+                        stroke="#522613" stroke-linecap="round" stroke-width="5" />
+                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none"
+                        stroke="#522613" stroke-linecap="round" stroke-width="5" />
+                </g>
+            </svg>
+            <h2 class="modal__title mb-5">
+                登入
+            </h2>
+            <div class="form__group mb-5">
+                <label for="account" class="form__text">帳號</label>
+                <input type="text" class="form__input" id="account" placeholder="abc@gmail.com" />
+            </div>
+            <div class="form__group mb-12">
+                <label for="password" class="form__text">密碼</label>
+                <input type="text" class="form__input" id="password" placeholder="***" />
+            </div>
+
+            <div class="text-right">
+                <button class="btn btn--link mb-6">忘記密碼</button>
+            </div>
+            <button class="btn btn--fluid mb-4" @click="handleLogin">登入</button>
+            <button class="btn btn--fluid btn--outline">註冊</button>
+        </div>
+    </div>
+            `,
+        props: ['state'],
+        methods: {
+            handleCloseModal() {
+                this.$emit('on-close');
+            },
+            handleLogin() {
+                this.$emit('on-login');
+                this.$emit('on-close');
+            }
+        },
+        computed: {
+            modalLoginClass() {
+                if (this.state) {
+                    return 'modal -active'
+                } else {
+                    return 'modal '
+                }
+            }
+        },
+    });
+</script>
 
 
 <script>
     new Vue({
-        el: '#app', 
-        data: {     
+        el: '#app',
+        data: {
             message: 'Hello, VueJS!',
         },
     });
 </script>
+
 </html>

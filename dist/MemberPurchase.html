@@ -3,9 +3,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/cart.css"> 
+<link rel="stylesheet" href="./assets/css/pages/member.css"> 
 <link rel="stylesheet" href="./assets/css/pages/memberNew.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src="../node_modules/jquery/dist/jquery.js"></script> 
+<script src="../node_modules/vue/dist/vue.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>member</title>
 </head>
@@ -13,6 +15,7 @@
 <body>
     <div id="app">
         <vue-header></vue-header>
+        
         <div class="container ">
     <div class="row member w-100">
         <nav class="top w-100">
@@ -21,7 +24,7 @@
             </div>
             <ul class="cool member__bar w-100">
                 <li>
-                    <a href="membermain.html">我的帳戶</a>
+                    <a href="#">我的帳戶</a>
                     <ul class="dropdown courses">
                         <li>
                             <span class="code"></span>
@@ -33,11 +36,11 @@
                         </li>
                         <li>
                             <span class="code"></span>
-                            <a href="#memberAddress">我的地址</a>
+                            <a href="#">我的資料</a>
                         </li>
                         <li>
                             <span class="code"></span>
-                            <a href="#memberPassword">更改密碼</a>
+                            <a href="#">更改密碼</a>
                         </li>
 
                     </ul>
@@ -65,7 +68,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="MemberNotice.html">通知中心</a>
+                    <a href="#">通知中心</a>
                     <ul class="dropdown courses">
                         <li>
                             <span class="code"></span>
@@ -94,261 +97,59 @@
                     <a href="#">購買清單</a>
                 </li>
                 <li>
-                    <a href="member.html">收藏商品清單</a>
+                    <a href="#">收藏商品清單</a>
                 </li>
             </ul>
         </nav>
     </div>
 
-
 </div>
 </div>
-        <!--  -->
-        <div class="container">
-    <div class="row  mt-xs-1 member__info mt-15">
-        <main class="member__data d-flex w-100">
-            <h2 id="memberData">基本資料</h2>
-            <button class="btn btn-small">儲存</button>
-        </main>
-    </div>
-    <div class="row  member__info py-10">
-        <div class="member__baseData ">
-            <ul>
-                <li>
-                    <p>使用者帳號 : <span class="member__text--small">abc123</span></p>
-                </li>
-                <li>
-                    <label for="accountName" class=" member__text member__text--right">帳號名稱 :</label>
-                    <input type="text" class="member__input" id="accountName" placeholder="請輸入名稱" />
-                    <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
-                </li>
-                <li>
-                    <label for="name" class=" member__text member__text--right">姓名 :</label>
-                    <input type="text" class="member__input" id="name" placeholder="請輸入英文暱稱" />
-                </li>
-                <li>
-                    <label for="email" class=" member__text member__text--right">電子郵件 :</label>
-                    <input type="text" class="member__input" id="email" placeholder="請輸入郵件" />
-                </li>
-                <li>
-                    <label for="phone" class=" member__text member__text--right">電話號碼 : </label>
-                    <input type="text" class="member__input" id="phone" placeholder="請輸入電話號碼" />
-                </li>
-                <li>
-                    <label for="sex" class=" member__text member__text--right">性別 :</label>
-                    <select id="sex" class="member__input member__input--small">
-                        <option selected  disabled >請選擇</option>
-                        <option >男</option>
-                        <option >女</option>
-                        <option >其他</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="year" class=" member__text member__text--right">生日 :</label>
-                    <select id="year" class="member__input member__input--small">
-                        <option selected  disabled >年</option>
-                        <option >1990</option>
-                        <option >1991</option>
-                        <option >1992</option>
-                    </select>
-                    <select id="mon" class="member__input member__input--small">
-                        <option selected  disabled >月</option>
-                        <option >1月</option>
-                        <option >2月</option>
-                        <option >3月</option>
-                    </select>
-                    <select id="day" class="member__input member__input--small">
-                        <option selected  disabled >日</option>
-                        <option >1</option>
-                        <option >2</option>
-                        <option >3</option>
-                    </select>
-                </li>
 
-            </ul>
-        </div>
-        <div class="member__baseImg">
-            <main>
-                <ul>
-                    <li class="member__circle"></li>
-                    <li> <label class="member__input--prettier">
-                        <input type="file" />
-                        <span>選擇圖片</span>
-                      </label></li>
-                    <li>限制大小 300X300.jpg</li>
-                </ul>
-            </main>
-        </div>
-    </div>
-</div>
-        <!--  -->
-        <div class=" container">
-    <div class="row member__info">
-        <main class="member__data d-flex w-100">
-            <h2 id="memberCoupon">我的折價卷</h2>
-        </main>
-    </div>
-    <div class="row member__info">
-        <div class="member__cupon  mt-5  col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--big">9</span><span class="member__cuponText--small">折</span>
-                </li>
-                <li class=" pt-10 w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【註冊新會員】</li>
-                        <li class="h4">全項商品不限金額結帳九折優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">即將到期:剩下 <span>   68:08:22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black pb-5 ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon   mt-5   col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100 ">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--mid">免運</span>
-                </li>
-                <li class=" w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【黃金會員】</li>
-                        <li class="h4">宅配享一次免運優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon   mt-5   col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100 ">
-                <li class="member__cuponText member__cuponText--wrap">
-                    <span class="member__cuponText--middle">買一</span>
-                    <span class="member__cuponText--middle">送一</span>
-                </li>
-                <li class=" w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【白金會員】</li>
-                        <li class="h4">結帳享買一送一</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon  mt-5  col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--big">8</span><span class="member__cuponText--small">折</span>
-                </li>
-                <li class=" pt-10 w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【生日優惠】</li>
-                        <li class="h4">全項商品不限金額結帳七折優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black pb-5 ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-        <!--  -->
-        <div class="container">
-    <div class="row  mt-xs-1 member__info mt-15">
-        <main class="member__data d-flex w-100">
-            <h2 id="memberAddress">我的地址</h2>
-            <button class="btn btn-small">新增地址</button>
-        </main>
-    </div>
-    <div class="row member__info">
-        <div class="member__address   w-100">
-            <div class="member__address--right col-8 col-lg-6">
-                <ul>
-                    <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
-                    <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
-                    <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235 新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
-                </ul>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-                <ul class="member__address--left ">
-                    <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
-                    <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
-                    <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
-                </ul>
-            </div>
 
-        </div>
-        <div class="member__address  member__info w-100">
-            <div class="member__address--right col-8 col-lg-6">
-                <ul>
-                    <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
-                    <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
-                    <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235 新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
-                </ul>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-                <ul class="member__address--left ">
-                    <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
-                    <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
-                    <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</div>
-        <!--  -->
-        <div class="container">
-    <div class="row  mt-xs-1 member__info mt-15">
-        <main class="member__data d-flex w-100">
-            <h2 id="memberPassword">更改密碼</h2>
-            <button class="btn btn-small">儲存</button>
-        </main>
-    </div>
-    <div class="row  member__info py-10">
-        <div class="member__address   w-100">
-            <div class="member__address--right col-6 col-lg-6">
-                <ul>
-                    <li class="mb-5">
-                        <label for="passWord" class="member__password">目前密碼 :</label>
-                        <input type="text" class="member__input" id="passWord" placeholder="請輸入密碼" />
-                    </li>
-                    <li class="mb-5">
-                        <label for="newPassWord" class="member__password member__password--pr pl-4">新密碼 :</label>
-                        <input type="text" class="member__input" id="newPassWord" placeholder="請輸入密碼" />
-                    </li>
-                    <li class="mb-5">
-                        <label for="confirmPassWord" class="member__password">確認密碼 :</label>
-                        <input type="text" class="member__input" id="confirmPassWord" placeholder="請輸入密碼" />
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
+<div class="container ">
+    <div class="row member w-100">
+        <nav class="top w-100">
+<div class="purchase">
+    <h2>尚未付款</h2>
+    <div class="purchase_link"></div>
+    <p>沒有處理中的訂單</p>
 </div>
 
+<div class="purchase">
+    <h2>處理中</h2>
+    <div class="purchase_link"></div>
+    <p>沒有處理中的訂單</p>
+</div>
 
+<div class="purchase">
+    <h2>已出貨</h2>
+    <div class="purchase_link"></div>
+    <p>沒有處理中的訂單</p>
+</div>
+
+<div class="purchase">
+    <h2>已完成</h2>
+    <div class="purchase_link"></div>
+    <p>沒有處理中的訂單</p>
+</div>
+
+<div class="purchase">
+    <h2>已取消</h2>
+    <div class="purchase_link"></div>
+    <p>沒有處理中的訂單</p>
+</div>
+        <!-- your code here... -->
     </div>
 
-
-
-
-    <script>
+</body>
+<script>
     Vue.component('vue-header', {
         template: `
         <header class="header">
                 <div class="container d-flex justify-content-between align-items-center po-re py-2">
                     <div class="d-flex">
-                        <a href="index.html">
+                        <a href="#">
                             <h1 class="h2 color-coffee font-bold">NINO CAR</h1>
                         </a>
                         <form class="d-md-none ml-5 po-re">
@@ -371,7 +172,7 @@
                     <nav>
                         <ul class="d-flex align-items-center">
                             <li class="lg-1" v-if="isLogin">
-                                <a href="membermain.html" aria-label=”member”>
+                                <a href="#" aria-label=”member”>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(3 6.5)">
@@ -392,7 +193,7 @@
                                 </a>
                             </li>
                             <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
-                                <a href="MemberNotice.html" aria-label=”message”>
+                                <a href="#" aria-label=”message”>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(6.473 4.772)">
@@ -477,16 +278,16 @@
                             </form>
                             <div class="d-flex flex-md-column">
                                 <ul class="w-50  w-md-100 mr-5 mr-md-0">
-                                    <li class="mb-2"><a href="product.html" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
+                                    <li class="mb-2"><a href="#" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">New Arrival<span class="fl-right mr-5">最新商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Campaign<span class="fl-right mr-5">本月主打</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Popular<span class="fl-right mr-5">熱門商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Points Only<span class="fl-right mr-5">點數限定</span></a></li>                 
                                 </ul>
                                 <ul class="w-50 w-md-100">
-                                <li class="mb-2"><a href="factory.html" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
-                                <li class="mb-2"><a href="dictionary.html" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
-                                <li class="mb-5"><a href="membermain.html" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
+                                <li class="mb-2"><a href="#" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
+                                <li class="mb-2"><a href="#" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
+                                <li class="mb-5"><a href="#" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
                                 <li class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex ml-2">
                                         <img src="./assets/img/icon/icon-fb.svg" class="icon">
@@ -501,10 +302,10 @@
                 </div>          
             </nav>
             `,
-        props: ['login'],
+            props:['login'],
         data() {
             return {
-
+            
             };
         },
         methods: {
@@ -518,7 +319,7 @@
             <nav class="link-group">
                 <ul>
                     <li>
-                        <a href="cart.html" aria-label=”cart”>
+                        <a href="#" aria-label=”cart”>
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -639,19 +440,12 @@
 
 
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello, VueJS!',
-            },
-        });
-    </script>
-
-
-</body>
-
-
-
-
+<script>
+    new Vue({
+        el: '#app', 
+        data: {     
+            message: 'Hello, VueJS!',
+        },
+    });
+</script>
 </html>

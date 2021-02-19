@@ -2,35 +2,34 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/cart.css">
+<link rel="stylesheet" href="./assets/css/pages/member.css">
+<link rel="stylesheet" href="./assets/css/pages/memberNew.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
-<link rel="stylesheet" href="./assets/css/all.css">
-<link rel="stylesheet" href="./assets/css/pages/product.css">
-<title>product</title>
+<script src="./assets/js/all.js"></script>
+<title>member</title>
 </head>
-
 
 <body>
     <div id="app">
         <vue-header></vue-header>
 
-        @@include('./pages/ProductPage/ProductNav.html')
+        @@include('./pages/MemberPage/MemberNotice.html')
         <!-- your code here... -->
     </div>
 
-    @@include('./components/VueHeader.html')
-    <script src="../app/assets/js/new.js"></script>
-
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello, VueJS!',
-            },
-        });
-    </script>
-
 </body>
+@@include('./components/VueHeader.html')
 
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello, VueJS!',
+        },
+    });
+</script>
 
 </html>
