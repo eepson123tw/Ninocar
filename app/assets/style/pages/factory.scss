@@ -195,11 +195,21 @@
 
 .num {
     font-weight: bold;
+    color: #E59807;
 }
 
+<<<<<<< HEAD
+.pin--secondary {
+    stroke: #E59807;
+    fill: #E59807;
+}
+  
+.work_author, .work_reply, .typeReply{
+=======
 .work_author,
 .work_reply,
 .typeReply {
+>>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     display: flex;
 }
 
@@ -229,10 +239,19 @@
     margin-right: 14px;
 }
 
+<<<<<<< HEAD
+// .goodIcon, .commentIcon{
+//     width: 30px;
+//     height: 30px;
+// }
+
+.readMore, .closeReply, .closeMore, .closeTextarea{
+=======
 .readMore,
 .closeReply,
 .closeMore,
 .closeTextarea {
+>>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     padding: 12.5px;
     display: flex;
     justify-content: center;
@@ -285,9 +304,11 @@
 
 .closeIcon {
     position: relative;
-    left: 37.9vw;
+    left: 39.9vw;
     top: -2.36vw;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 .frame {
@@ -329,7 +350,7 @@
     background-color: #D8D8D8;
     position: relative;
     top: 30px;
-    left: 100px;
+    left: 200px;
     z-index: -1;
 }
 
