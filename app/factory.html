@@ -15,6 +15,31 @@
     <div id="factory">
         <vue-header></vue-header>
         <div class="container containerMain">
+
+            <div class="modal js-modal" data-modal="1">
+                <div class="modal__group">
+                    <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close">
+                                <g transform="translate(0 0.47)">
+                                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                </g>
+                                </svg>
+                    <h2 class="modal__title">
+                        新增地址
+                    </h2>
+                    <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
+                    <ul class="modal__textGroup">
+                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
+                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
+                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
+                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
+                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
+                    </ul>
+                    <button class="btn btn--ghost">取消</button>
+                    <button class="btn ml-5 ">完成</button>
+                </div>
+            </div>
+
             <row>
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -302,7 +327,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime h6">3小時前</p>
-                                        <button class="btn btn--link">檢舉</button>
+                                        <button class="btn btn--link report">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +353,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -368,7 +393,7 @@
                                     <p class="userContent h5">烤地瓜好吃，一台四處賣烤地瓜的休旅車</p>
                                     <div class="other">
                                         <p class="postTime h6">3小時前</p>
-                                        <button class="btn btn--link">檢舉</button>
+                                        <button class="btn btn--link report">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -394,12 +419,13 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="typeReply">
                                 <!-- <div class="typeReply_left"> -->
                                   <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
@@ -434,7 +460,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime h6">3小時前</p>
-                                        <button class="btn btn--link">檢舉</button>
+                                        <button class="btn btn--link report">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -460,7 +486,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -475,7 +501,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -490,7 +516,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -512,7 +538,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4">回覆</button>
-                                                <button class="btn btn--link">檢舉</button>
+                                                <button class="btn btn--link report">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -584,6 +610,19 @@
             el: '#mywork',
         })
     
+        // new Vue({
+        //     el:'#reportModal',
+        //     template: '<div class="modal js-modal" data-modal="1">'+'<div class="modal__group">'+'<svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close"><g transform="translate(0 0.47)"><line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>'+'<line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/></g>'+'</svg><h2 class="modal__title">新增地址</h2>'+'<p class="modal__content--left">檢舉留言這篇留言的原因?</p>'+'<ul class="modal__textGroup">'+'<li class="modal__textGroupContent">'+' <input type="radio" name="check" id="bad1"> '+'<label for="b中傷、歧視、謾罵等人身攻擊言論</label>'+ '</li>'+'<li class="modal__textGroupContent">'+
+            
+        //     '<input type="radio" name="check" id="bad2"><label for="b包含性騷擾或血腥恐怖等讓人不舒服之內容</label>'+'</li><li class="modal__textGroupContent">'+ '<input type="radio" name="check" id="bad3">'+
+
+        //     '<label for="b文章內容空泛或明顯無意義內容</label> </li>'+ '<li class="modal__textGroupContent">'+ '<input type="radio" name="check" id="bad4">' +'<label for="b涉及宗教、種族歧視或政治對立等言論</label>' +'</li><li class="modal__textGroupContent">'+ '<input type="radio" name="check" id="bad5">'+ '<label for="b留言內容空泛或無關作品內容</label>'+ '</li> </ul><button class="btn btn--ghost">取消</button><button class="btn ml-5 ">完成</button></div></div>'
+        // })
+
+        // Vue.component('to-report', {
+        //     template: '<div class="modal js-modal" data-modal="1"><div class="modal__group"><svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close"><g transform="translate(0 0.47)"><line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/><line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/></g></svg><h2 class="modal__title">新增地址</h2><p class="modal__content--left">檢舉留言這篇留言的原因?</p><ul class="modal__textGroup"><li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="b中傷、歧視、謾罵等人身攻擊言論</label> </li><li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="b包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li><li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="b文章內容空泛或明顯無意義內容</label> </li><li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="b涉及宗教、種族歧視或政治對立等言論</label> </li><li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="b留言內容空泛或無關作品內容</label> </li></ul><button class="btn btn--ghost">取消</button><button class="btn ml-5 ">完成</button></div></div>'
+        // })
+
         // --------------------------------------------
         //進入彈窗、後面固定不給滾動
         $('.work_pic').click(function(){
@@ -973,7 +1012,7 @@
                                 <p class="userContent h5">${typeInspiration}</p>
                                 <div class="other">
                                     <p class="postTime h6">3小時前</p>
-                                    <button class="btn btn--link">檢舉</button>
+                                    <button class="btn btn--link report">檢舉</button>
                                 </div>
                             </div>
                         </div>
@@ -1211,7 +1250,7 @@
                                         <p class="postTime h6">3小時前</p>
                                         <div>                                
                                             <button class="btn btn--link mr-4">回覆</button>
-                                            <button class="btn btn--link">檢舉</button>
+                                            <button class="btn btn--link report">檢舉</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1504,6 +1543,21 @@
             }
         })
 
+
+        //打開檢舉彈窗(之後改寫到new Vue #reportModal裡面)
+        let openModal = document.querySelector('.report');
+
+        openModal.addEventListener('click', () => {
+          console.log('打開')
+          modal = document.querySelector('.modal');
+          modal.classList.add('modal-active')
+        })
+
+        let closeModal = document.querySelector('.modal__close');
+        closeModal.addEventListener('click', () => {
+          console.log('關掉')
+          modal.classList.remove('modal-active')
+        })
     </script>
 </body>
 </html>
