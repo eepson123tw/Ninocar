@@ -1,0 +1,149 @@
+@import '../helpers/variables';
+@import '../helpers/mixin';
+@import '../helpers/rwd';
+.breadcrumb {
+    display: flex;
+    margin-top: 70px;
+}
+
+.box {
+    margin-bottom: 20px;
+}
+
+.box-2 {
+    margin-top: 150px;
+}
+
+.box-2 p {
+    margin: 20px 0px 20px 0px;
+}
+
+.box-pink {
+    height: 100px;
+    border-bottom: 1px solid #e59807;
+    line-height: 150px;
+    margin-bottom: 20px;
+}
+
+.box-green {
+    background-color: #dd8;
+}
+
+.h1 {
+    font-size: 128px;
+    z-index: 0;
+    position: relative;
+    -webkit-text-stroke: 2px #b57700;
+    color: white;
+}
+
+.tag {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.gallery {
+    width: 16%;
+    height: 16%;
+    display: flex;
+    margin-top: 200px;
+    cursor: pointer;
+}
+
+.gallery img {
+    padding-right: 10px;
+}
+
+.icon-down {
+    font-size: 10px;
+}
+
+.info-buy,
+.info-ship {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-blue img {
+    width: 100%;
+}
+
+.pandc {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-blue-1 {
+    position: relative;
+}
+
+.box-blue-4 {
+    position: relative;
+}
+
+.btn {
+    margin-bottom: 30px;
+}
+
+.lorem {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+//--------------------------光箱---------------------------
+a {
+    text-decoration: none;
+    color: #222222;
+    font-size: 18px;
+}
+
+
+/* Lightbox background */
+
+#lightbox {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1000;
+}
+
+
+/* Lightbox panel with some content */
+
+#lightbox-panel {
+    display: none;
+    position: fixed;
+    top: 15vh;
+    left: 25%;
+    width: 50%;
+    background: #ffffff;
+    padding: 10px 15px 10px 15px;
+    // border: 2px solid #cccccc;
+    z-index: 1001;
+    // position: absolute;
+    // top: 200px;
+}
+
+#show-panel img {
+    width: 80%;
+    margin-left: 150px;
+    position: absolute;
+    top: 200px;
+    z-index: 1;
+}
+
+#close-panel {
+    float: right;
+}

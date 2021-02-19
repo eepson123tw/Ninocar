@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/all.css" />
+    <link rel="stylesheet" href="./assets/css/pages/productdetail.css" />
+    <link rel="stylesheet" href="./assets/js/act.js" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+    <title>商品詳細</title>
+</head>
+
+<body>
+    <div id="app">
+        <vue-header></vue-header>
+        <main class="container pt-10">@@include('./pages/ProductPage/ItemDetail.html')</main>
+    </div>
+    @@include('./components/VueHeader.html')
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //變數存放的地方
+                message: 'Hello, VueJS!',
+                score: 0,
+                loading: true,
+            },
+        });
+    </script>
+    <script src="../app/assets/js/new.js"></script>
+</body>
+
+</html>
