@@ -29,7 +29,7 @@
     background-color: #dd8;
 }
 
-.h1 {
+.car-name {
     font-size: 128px;
     z-index: 0;
     position: relative;
@@ -43,10 +43,6 @@
     margin-bottom: 10px;
 }
 
-img {
-    cursor: pointer;
-}
-
 .gallery {
     width: 16%;
     height: 16%;
@@ -57,6 +53,7 @@ img {
 
 .gallery img {
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .icon-down {
@@ -105,7 +102,6 @@ a {
     font-size: 18px;
 }
 
-
 /* Lightbox background */
 
 #lightbox {
@@ -118,7 +114,6 @@ a {
     min-height: 100%;
     z-index: 1000;
 }
-
 
 /* Lightbox panel with some content */
 
@@ -138,9 +133,9 @@ a {
 
 #show-panel img {
     width: 80%;
-    margin-left: 150px;
+    margin-left: 100px;
     position: absolute;
-    top: 200px;
+    top: 250px;
     z-index: 1;
 }
 
