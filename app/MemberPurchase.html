@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/cart.css"> 
+<link rel="stylesheet" href="./assets/css/pages/member.css"> 
+<link rel="stylesheet" href="./assets/css/pages/memberNew.css">
+<script src="../node_modules/jquery/dist/jquery.js"></script> 
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="./assets/js/all.js"></script>
+<title>member</title>
+</head>
+
+<body>
+    <div id="app">
+        <vue-header></vue-header>
+        
+        @@include('./pages/MemberPage/MemberPurchase.html')
+        <!-- your code here... -->
+    </div>
+
+</body>
+@@include('./components/VueHeader.html')
+
+<script>
+    new Vue({
+        el: '#app', 
+        data: {     
+            message: 'Hello, VueJS!',
+        },
+    });
+</script>
+</html>
