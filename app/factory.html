@@ -2,10 +2,9 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="./assets/css/pages/factory.css"> 
+<link rel="stylesheet" href="./assets/css/pages/factory.css">
 <link rel="stylesheet" href="./assets/css/all.css">
-<script src="../node_modules/jquery/dist/jquery.js"></script> 
-<script src="../node_modules/vue/dist/vue.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>factory</title>
@@ -27,13 +26,13 @@
                     </div>
                     <div class="intro_content col-5 col-lg-2 col-sm-4">
                         <h2 class="emphasis intro_content_title">打造自己的車</h2>
-                        <p class="h3 intro_content_text">在車車工廠，<br>
-                            我們提供各種車款、烤漆顏色和不同配備，<br>
-                            您可以盡情揮灑創意，創作屬於自己的超酷客製車。</p>
+                        <p class="h3 intro_content_text">在車車工廠，<br> 我們提供各種車款、烤漆顏色和不同配備，
+                            <br> 您可以盡情揮灑創意，創作屬於自己的超酷客製車。
+                        </p>
                         <button class="btn make">開始製作</button>
                     </div>
                 </div>
-    
+
                 <!-- 製作車子的區域 -->
                 <div class="makeCar col-12 col-lg-6 col-sm-4">
                     <div class="mainArea">
@@ -41,17 +40,17 @@
                         <canvas id="canvas" class="mainAreaPic canvas" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
                     </div>
                     <div id="progressBar" class="progressBar">
-                        
-                        @@include('./pages/FactoryPage/FactoryProgress.html') 
+
+                        @@include('./pages/FactoryPage/FactoryProgress.html')
                     </div>
-    
-    
+
+
                     <div class="selectAreaOut">
                         <div class="selectBtn">
                             <div class="selectAreaOut-previous"><img src="../app/assets/img/icon/icon-left.svg" alt=""></div>
                             <div class="selectAreaOut-next"><img src="../app/assets/img/icon/icon-right.svg" alt=""></div>
                         </div>
-    
+
                         <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
                             <!-- 車型 -->
                             <div class="shapeCards">
@@ -59,21 +58,21 @@
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/shape01.png" class="shape">
                                     </div>
-                                    
+
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
-            
+
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
-                                    <div class="cardOut">                                    
+                                    <div class="cardOut">
                                         <img src="../app/assets/img/pic/shape02.png" class="shape">
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
-            
+
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/shape03.png" class="shape">
@@ -82,7 +81,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
-            
+
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic//shape03.png" class="shape">
@@ -92,7 +91,7 @@
                                     <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
                             </div>
-                                    
+
                             <!-- 顏色 -->
                             <div class="colorCards">
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -103,7 +102,7 @@
                                     <p class="makeCar-price">NT$ 50</p>
                                     <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
                                 </li>
-            
+
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
                                     <div class="color">
                                         <div class="red"></div>
@@ -112,7 +111,7 @@
                                     <p class="makeCar-price">NT$ 50</p>
                                     <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
                                 </li>
-            
+
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
                                     <div class="color ">
                                         <div class="orange"></div>
@@ -121,7 +120,7 @@
                                     <p class="makeCar-price">NT$ 50</p>
                                     <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
                                 </li>
-            
+
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
                                     <div class="color ">
                                         <div class="yellow"></div>
@@ -130,7 +129,7 @@
                                     <p class="makeCar-price">NT$ 70</p>
                                     <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
                                 </li>
-        
+
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
                                     <div class="color ">
                                         <div class="purple"></div>
@@ -140,8 +139,8 @@
                                     <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
                                 </li>
                             </div>
-                            
-        
+
+
                             <!-- 輪子 -->
                             <div class="tireCards">
                                 <li class="tireCard col-3 col-lg-3 col-sm-3">
@@ -152,7 +151,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
                                 </li>
-            
+
                                 <li class="tireCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/tire02.png" class="tire">
@@ -161,7 +160,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
                                 </li>
-            
+
                                 <li class="tireCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/tire03.png" class="tire">
@@ -170,7 +169,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
                                 </li>
-            
+
                                 <li class="tireCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/tire03.png" class="tire">
@@ -180,8 +179,8 @@
                                     <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
                                 </li>
                             </div>
-                            
-                            
+
+
                             <!-- 配件 -->
                             <div class="accessoryCards">
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
@@ -192,7 +191,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectAccessory  selectA1">選擇此配件</button>
                                 </li>
-            
+
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/accessory2.png" class="accessory">
@@ -201,7 +200,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectAccessory selectA2">選擇此配件</button>
                                 </li>
-            
+
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/accessory3.png" class="accessory">
@@ -210,7 +209,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectAccessory selectA3">選擇此配件</button>
                                 </li>
-            
+
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/accessory4.png" class="accessory">
@@ -219,7 +218,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectAccessory selectA4">選擇此配件</button>
                                 </li>
-        
+
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/accessory5.png" class="accessory">
@@ -228,7 +227,7 @@
                                     <p class="makeCar-price">NT$ 100</p>
                                     <button class="btn btn--fluid btn--outline selectAccessory selectA5">選擇此配件</button>
                                 </li>
-        
+
                                 <li class="accessoryCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
                                         <img src="../app/assets/img/pic/accessory6.png" class="accessory">
@@ -240,7 +239,7 @@
                             </div>
                         </ul>
                     </div>
-    
+
                     <div class="tipArea">
                         <div class="tipArea_left col-6 col-sm-4">
                             <button class="btn btn--outline previousStep"><img src="../app/assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
@@ -254,8 +253,8 @@
                             <button class="btn btn--disabled nextStep">下一步</button>
                         </div>
                     </div>
-                    
-    
+
+
                     <div class="giveName">
                         <div class="giveName_left">
                             <p class="description">幫您的作品取個名字</p>
@@ -264,9 +263,9 @@
                                 <p>餘20字</p>
                                 <button class="btn btn--link randomName h5">隨機取名</button>
                             </div>
-    
+
                             <input type="checkbox" name="" value="">公開此作品
-    
+
                             <p class="description">使用者暱稱</p>
                             <input type="text" class="typeNickName">
                             <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
@@ -278,7 +277,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="workBar col-12 col-lg-6 col-sm-4">
                     <div class="workBar_left">
                         <button class="workButton h2 works">大家的作品</button>
@@ -286,16 +285,16 @@
                     </div>
                     <div class="filter"></div>
                 </div>
-    
+
                 <div>
                     <ul class="othersWorks">
                         <li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img src="../app/assets/img/pic/model02.png" class="">
                             </div>
-    
+
                             <div class="work_author">
-                                <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                                <img src="../app/assets/img/pic/userPic.png" class="userPic">
                                 <div class="userContent">
                                     <p class="userName h6">矛盾的小女子</p>
                                     <h2 class="workName h4">天栗鼠計程車</h2>
@@ -306,27 +305,27 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="workInfo">
                                 <div class="workInfo_good">
                                     <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                                 <div class="workInfo_reply">
                                     <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                             </div>
-    
+
                             <div class="work_reply">
                                 <div class="userContext">
-                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <img src="../app/assets/img/pic/userPic02.png" class="userPic">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
@@ -336,32 +335,32 @@
                             </div>
                             <div class="typeReply">
                                 <!-- <div class="typeReply_left"> -->
-                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                                 <!-- </div> -->
-                        
+
                                 <div class="typeReply_right">
-                                  <p class="replyerName">沾醬大師</p>
-                                  <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                                  <div class="other">
-                                    <p class="textCount"></p>
-                                    <button class="btn btn--small comment">留言</button>
-                                  </div>
+                                    <p class="replyerName">沾醬大師</p>
+                                    <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                    <div class="other">
+                                        <p class="textCount"></p>
+                                        <button class="btn btn--small comment">留言</button>
+                                    </div>
                                 </div>
                             </div>
-    
+
                             <div class="closeTextarea">
                                 <p class="h5 textareaWord">關閉輸入框</p>
                                 <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
                             </div>
                         </li>
-    
+
                         <li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img src="../app/assets/img/pic/model04.png" class="">
                             </div>
-    
+
                             <div class="work_author">
-                                <img src="../app/assets/img/pic/userPic03.png"  class="userPic">
+                                <img src="../app/assets/img/pic/userPic03.png" class="userPic">
                                 <div class="userContent">
                                     <p class="userName h6">天婦羅不好吃</p>
                                     <h2 class="workName h4">烤地瓜休旅車</h2>
@@ -372,27 +371,27 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="workInfo">
                                 <div class="workInfo_good">
                                     <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                                 <div class="workInfo_reply">
                                     <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                             </div>
-    
+
                             <div class="work_reply">
                                 <div class="userContext">
-                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <img src="../app/assets/img/pic/userPic02.png" class="userPic">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
@@ -402,32 +401,32 @@
                             </div>
                             <div class="typeReply">
                                 <!-- <div class="typeReply_left"> -->
-                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                                 <!-- </div> -->
-                        
+
                                 <div class="typeReply_right">
-                                  <p class="replyerName">沾醬大師</p>
-                                  <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                                  <div class="other">
-                                    <p class="textCount"></p>
-                                    <button class="btn btn--small comment">留言</button>
-                                  </div>
+                                    <p class="replyerName">沾醬大師</p>
+                                    <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                    <div class="other">
+                                        <p class="textCount"></p>
+                                        <button class="btn btn--small comment">留言</button>
+                                    </div>
                                 </div>
                             </div>
-    
+
                             <div class="closeTextarea">
                                 <p class="h5 textareaWord">關閉輸入框</p>
                                 <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
                             </div>
                         </li>
-    
+
                         <li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img src="../app/assets/img/pic/model03.png" class="model">
                             </div>
-    
+
                             <div class="work_author">
-                                <img src="../app/assets/img/pic/userPic.png"  class="userPic">
+                                <img src="../app/assets/img/pic/userPic.png" class="userPic">
                                 <div class="userContent">
                                     <p class="userName h6">矛盾的小女子</p>
                                     <h2 class="workName h4">天栗鼠計程車</h2>
@@ -438,79 +437,79 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="workInfo">
                                 <div class="workInfo_good">
                                     <img src="../app/assets/img/icon/icon-good.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                                 <div class="workInfo_reply">
                                     <img src="../app/assets/img/icon/icon-comment.svg" class="icon">
-                                    <p  class="num h3">20</p>
+                                    <p class="num h3">20</p>
                                 </div>
                             </div>
-    
+
                             <div class="work_reply">
                                 <div class="userContext">
-                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <img src="../app/assets/img/pic/userPic02.png" class="userPic">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <div class="subUserContext">
-                                    <img src="../app/assets/img/pic/userPic03.png"  class="userPic--small">
+                                    <img src="../app/assets/img/pic/userPic03.png" class="userPic--small">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅不好吃</p>
                                         <p class="userContent h5">超油</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <div class="subUserContext hiddenSubReply">
-                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic--small">
+                                    <img src="../app/assets/img/pic/userPic02.png" class="userPic--small">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">明明就很好吃</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    
+
                             </div>
                             <div class="moreReply">
                                 <p class="h5 moreReplyWord">1則回覆</p>
                                 <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon1">
                             </div>
-    
+
                             <div class="work_reply hiddenReply">
                                 <div class="userContext">
-                                    <img src="../app/assets/img/pic/userPic02.png"  class="userPic">
+                                    <img src="../app/assets/img/pic/userPic02.png" class="userPic">
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>
                                                 <button class="btn btn--link mr-4">回覆</button>
                                                 <button class="btn btn--link">檢舉</button>
                                             </div>
@@ -518,33 +517,33 @@
                                     </div>
                                 </div>
                             </div>
-     
+
                             <div class="readMore">
                                 <p class="h5 readMoreWord">閱讀更多</p>
                                 <img src="../app/assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                             </div>
                             <div class="typeReply">
                                 <!-- <div class="typeReply_left"> -->
-                                  <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
+                                <img src="../app/assets/img/pic/userPic.png" class="userPic replyerPic">
                                 <!-- </div> -->
-                        
+
                                 <div class="typeReply_right">
-                                  <p class="replyerName">沾醬大師</p>
-                                  <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-                                  <div class="other">
-                                    <p class="textCount"></p>
-                                    <button class="btn btn--small comment">留言</button>
-                                  </div>
+                                    <p class="replyerName">沾醬大師</p>
+                                    <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                    <div class="other">
+                                        <p class="textCount"></p>
+                                        <button class="btn btn--small comment">留言</button>
+                                    </div>
                                 </div>
                             </div>
-    
+
                             <div class="closeTextarea">
                                 <p class="h5 textareaWord">關閉輸入框</p>
                                 <img src="../app/assets/img/icon/icon-up.svg" class="icon toggleIcon3">
                             </div>
                         </li>
                     </ul>
-    
+
                     <div class="mywork" id="mywork">
                         @@include('./components/EmptyState.html')
                     </div>
@@ -561,32 +560,32 @@
 
     @@include('./components/VueHeader.html')
 
-    <script>    
+    <script>
         const vm1 = new Vue({
-            el: '#factory', 
-            data: {     
+            el: '#factory',
+            data: {
                 message: 'Hello, VueJS!',
             },
         });
-    
+
         const vm2 = new Vue({
-            el: '#app2', 
-            data: {     
+            el: '#app2',
+            data: {
                 message: 'Hello, VueJS!',
             },
         });
 
         new Vue({
-            el: '#progressBar', 
+            el: '#progressBar',
         });
 
         let empty = new Vue({
             el: '#mywork',
         })
-    
+
         // --------------------------------------------
         //進入彈窗、後面固定不給滾動
-        $('.work_pic').click(function(){
+        $('.work_pic').click(function() {
             $('.mask').css({
                 "display": "block",
             });
@@ -597,7 +596,7 @@
         });
 
         //關掉彈窗
-        $('.closeIcon').click(function(){
+        $('.closeIcon').click(function() {
             $('.mask').css({
                 "display": "none",
             });
@@ -609,7 +608,7 @@
 
         //收起、打開更多子回覆
         let count1 = 0;
-        $('.moreReply').click(function(){
+        $('.moreReply').click(function() {
             $('.work .hiddenSubReply').slideToggle();
             $('.work .hiddenSubReply').css({
                 "display": "flex",
@@ -618,13 +617,13 @@
             count1 += 1;
             // console.log(count1);
 
-            if(count1 % 2 == 1){
+            if (count1 % 2 == 1) {
                 $('.moreReplyWord').text('關閉子回覆');
 
                 $('.toggleIcon1').css({
                     "transform": "rotate(180deg)",
                 })
-            }else{
+            } else {
                 $('.moreReplyWord').text('1則回覆');
 
                 $('.toggleIcon1').css({
@@ -635,7 +634,7 @@
 
         //收起、打開更多回覆
         let count2 = 0;
-        $('.readMore').click(function(){
+        $('.readMore').click(function() {
             $('.hiddenReply').slideToggle();
             $('.hiddenReply').css({
                 "display": "flex"
@@ -644,13 +643,13 @@
             count2 += 1;
             // console.log(count2);
 
-            if(count2 % 2 == 1){
+            if (count2 % 2 == 1) {
                 $('.readMoreWord').text('關閉更多');
 
                 $('.toggleIcon2').css({
                     "transform": "rotate(180deg)",
                 })
-            }else{
+            } else {
                 $('.readMoreWord').text('閱讀更多');
 
                 $('.toggleIcon2').css({
@@ -662,20 +661,20 @@
         //收起、打開輸入回覆區
         let count3 = 0;
 
-        $('.closeTextarea').click(function(){
+        $('.closeTextarea').click(function() {
             // console.log('coloseTextarea')
             $(this).parent().children('.typeReply').slideToggle();
 
             count3 += 1;
             // console.log(count3);
 
-            if(count3 % 2 == 1){
+            if (count3 % 2 == 1) {
                 $(this).children('.textareaWord').text('打開輸入框');
 
                 $(this).children('.toggleIcon3').css({
                     "transform": "rotate(180deg)",
                 })
-            }else{
+            } else {
                 $(this).children('.textareaWord').text('關閉輸入框');
 
                 $(this).children('.toggleIcon3').css({
@@ -688,64 +687,74 @@
         let textMax = 100;
         $('.textCount').text(`餘${textMax}字`);
 
-        $('textarea').keyup(function(){
-            let textLength =  $(this).val().length;
+        $('textarea').keyup(function() {
+            let textLength = $(this).val().length;
             // console.log(textLength)
 
             $(this).parent().children('.other').children('.textCount').text(`餘${textMax - textLength}字`);
 
-            if(textLength > 0){
-                $(this).css({"border": "1px solid #000",})
+            if (textLength > 0) {
+                $(this).css({
+                    "border": "1px solid #000",
+                })
             }
         })
 
         //按留言若未輸入字的話變紅框
-        $('.comment').click(function(){
-            let textLength =  $(this).parent().parent().children('.textarea').val().length;
+        $('.comment').click(function() {
+            let textLength = $(this).parent().parent().children('.textarea').val().length;
 
-            if(textLength < 1){
+            if (textLength < 1) {
                 // console.log('no text')
                 $(this).parent().parent().children('.textarea').css({
                     "border": "1px solid red",
                 })
-            }else{
+            } else {
                 // console.log('ok')
                 $(this).parent().parent().children('.textarea').css({
                     "border": "1px solid #000",
-                }) 
+                })
             }
         })
 
         //點我的車車、大家的車車後會標示目前在哪
-        $('.workButton').click(function(){
+        $('.workButton').click(function() {
             $(this).css({
                 "background": "linear-gradient(transparent 60%, #FADD61 60%)"
             })
-            
+
             $('.workButton').not(this).css({
                 "background": "none"
             })
 
-            $('.othersWorks').css({"display": "flex"})
-            $('.mywork').css({"display": "none"})
+            $('.othersWorks').css({
+                "display": "flex"
+            })
+            $('.mywork').css({
+                "display": "none"
+            })
 
         })
 
         //點我的車車時，大家的車車消失，我的車車或emptyState出現
-        $('.myworks').click(function(){
-            $('.othersWorks').css({"display": "none"})
-            $('.mywork').css({"display": "block"})
-            // console.log('我的車車出現')
+        $('.myworks').click(function() {
+            $('.othersWorks').css({
+                "display": "none"
+            })
+            $('.mywork').css({
+                    "display": "block"
+                })
+                // console.log('我的車車出現')
         })
 
         //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
-        $('.make').click(function(){
+        $('.make').click(function() {
             $('.progressBar').css({
                 "display": "block"
             })
 
             $('.circle:first').css({
-                "background-color":"#E59807"
+                "background-color": "#E59807"
             })
 
             $('.intro').css({
@@ -760,36 +769,44 @@
 
         //選擇後「下一步」變able、提醒先做選則才進入下一步的提示消失
         // 選擇的項目標示顏色、單選的情況其他沒選的不標色
-        $('.selectShape').click(function(){
+        $('.selectShape').click(function() {
             $('.nextStep').removeClass('btn--disabled')
-            $('.pleaseSelect').css({"display": "none"})
+            $('.pleaseSelect').css({
+                "display": "none"
+            })
 
             $(this).removeClass('btn--outline')
 
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectColor').click(function(){
+        $('.selectColor').click(function() {
             $('.nextStep').removeClass('btn--disabled')
-            $('.pleaseSelect').css({"display": "none"})
+            $('.pleaseSelect').css({
+                "display": "none"
+            })
 
             $(this).removeClass('btn--outline')
 
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectTire').click(function(){
+        $('.selectTire').click(function() {
             $('.nextStep').removeClass('btn--disabled')
-            $('.pleaseSelect').css({"display": "none"})
+            $('.pleaseSelect').css({
+                "display": "none"
+            })
 
             $(this).removeClass('btn--outline')
 
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectAccessory').click(function(){
+        $('.selectAccessory').click(function() {
             $('.nextStep').removeClass('btn--disabled')
-            $('.pleaseSelect').css({"display": "none"})
+            $('.pleaseSelect').css({
+                "display": "none"
+            })
 
             $(this).removeClass('btn--outline')
 
@@ -799,26 +816,36 @@
         //點下一步後跳到選色步驟、跳選輪子步驟
         let countStep = 0;
         let docW = $(document).width();
-        $('.nextStep').click(function(){
+        $('.nextStep').click(function() {
             // console.log("countStep: "+ countStep)
             // console.log(docW)
-            if($('.nextStep').hasClass('btn--disabled')){
-                
-                $('.pleaseSelect').css({"display": "block"})
+            if ($('.nextStep').hasClass('btn--disabled')) {
 
-                setTimeout(function(){
-                    $('.pleaseSelect').css({"display": "none"})
-                 }, 1000);
-            }else{
+                $('.pleaseSelect').css({
+                    "display": "block"
+                })
+
+                setTimeout(function() {
+                    $('.pleaseSelect').css({
+                        "display": "none"
+                    })
+                }, 1000);
+            } else {
                 countStep += 1;
-                $('.shapeCard').css({"display": "none"})
+                $('.shapeCard').css({
+                    "display": "none"
+                })
 
-                if(countStep == 1){
+                if (countStep == 1) {
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選顏色
-                    $('.colorCards').css({"display": "flex"})
-                    $('.colorCard').css({"display": "block"})
+                    $('.colorCards').css({
+                        "display": "flex"
+                    })
+                    $('.colorCard').css({
+                        "display": "block"
+                    })
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
@@ -828,20 +855,26 @@
                         "background-color": "#E59807"
                     })
 
-                    if(docW > 1003){
+                    if (docW > 1003) {
                         $('.bar-front').width(240)
-                    }else if(docW <= 1003){
+                    } else if (docW <= 1003) {
                         $('.bar-front').width(220)
                     }
-                    
-                }else if(countStep == 2){
+
+                } else if (countStep == 2) {
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選輪子
-                    $('.colorCard').css({"display": "none"})
+                    $('.colorCard').css({
+                        "display": "none"
+                    })
 
-                    $('.tireCards').css({"display": "flex"})
-                    $('.tireCard').css({"display": "block"})
+                    $('.tireCards').css({
+                        "display": "flex"
+                    })
+                    $('.tireCard').css({
+                        "display": "block"
+                    })
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
@@ -849,38 +882,43 @@
                     //進度條變色
                     $('.content:nth-child(3) .circle').css({
                         "background-color": "#E59807"
-                    })    
+                    })
 
-                    if(docW > 1003){
-                        $('.bar-front').width(480) 
-                    }else if(docW <= 1003){
-                        $('.bar-front').width(440) 
+                    if (docW > 1003) {
+                        $('.bar-front').width(480)
+                    } else if (docW <= 1003) {
+                        $('.bar-front').width(440)
                     }
-                                   
-                }else if(countStep == 3){
+
+                } else if (countStep == 3) {
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選配件
-                    $('.tireCard').css({"display": "none"})
+                    $('.tireCard').css({
+                        "display": "none"
+                    })
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
 
-                    $('.accessoryCards').css({"display": "flex"})
-                    $('.accessoryCard').css({"display": "block"})
+                    $('.accessoryCards').css({
+                        "display": "flex"
+                    })
+                    $('.accessoryCard').css({
+                        "display": "block"
+                    })
 
                     //進度條變色
                     $('.content:nth-child(4) .circle').css({
                         "background-color": "#E59807"
                     })
 
-                    if(docW > 1003){
-                        $('.bar-front').width(720) 
-                    }else if(docW <= 1003){
-                        $('.bar-front').width(660) 
+                    if (docW > 1003) {
+                        $('.bar-front').width(720)
+                    } else if (docW <= 1003) {
+                        $('.bar-front').width(660)
                     }
-                }
-                else if(countStep == 4){
+                } else if (countStep == 4) {
                     countStep = -1;
                     // console.log("countStep重置")
 
@@ -889,7 +927,9 @@
                     $('.nextStep').addClass('btn--disabled').text('完成')
                     $('.nextStep').addClass('finish')
 
-                    $('.selectArea').css({"display": "none"})
+                    $('.selectArea').css({
+                        "display": "none"
+                    })
 
                     $('.giveName').css({
                         "display": "flex",
@@ -897,7 +937,9 @@
                     })
 
                     //左右紐消失
-                    $('.selectBtn').css({"display": "none"})
+                    $('.selectBtn').css({
+                        "display": "none"
+                    })
 
                     //提醒內容變更
                     $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
@@ -917,37 +959,55 @@
         })
 
         //上一步
-        $('.previousStep').click(function(){
+        $('.previousStep').click(function() {
             countStep -= 1
-            // console.log(countStep)
+                // console.log(countStep)
 
-            if(countStep == 0){
-                $('.colorCard').css({"display":"none"})
-                $('.shapeCard').css({"display":"block"})
-
-                $('.nextStep').removeClass('btn--disabled')
-            }else if(countStep == 1){
-                $('.tireCard').css({"display":"none"})
-                $('.colorCard').css({"display":"block"})
-
-                $('.nextStep').removeClass('btn--disabled')
-            }else if(countStep == 2){
-                $('.accessoryCard').css({"display":"none"})
-                $('.tireCard').css({"display":"block"})
+            if (countStep == 0) {
+                $('.colorCard').css({
+                    "display": "none"
+                })
+                $('.shapeCard').css({
+                    "display": "block"
+                })
 
                 $('.nextStep').removeClass('btn--disabled')
-            }else if(countStep == 3){
-                $('.giveName').css({"display":"none"})
-                $('.selectArea').css({"display":"block"})
-                $('.accessoryCard').css({"display":"block"})
+            } else if (countStep == 1) {
+                $('.tireCard').css({
+                    "display": "none"
+                })
+                $('.colorCard').css({
+                    "display": "block"
+                })
+
+                $('.nextStep').removeClass('btn--disabled')
+            } else if (countStep == 2) {
+                $('.accessoryCard').css({
+                    "display": "none"
+                })
+                $('.tireCard').css({
+                    "display": "block"
+                })
+
+                $('.nextStep').removeClass('btn--disabled')
+            } else if (countStep == 3) {
+                $('.giveName').css({
+                    "display": "none"
+                })
+                $('.selectArea').css({
+                    "display": "block"
+                })
+                $('.accessoryCard').css({
+                    "display": "block"
+                })
 
             }
         })
 
         //若沒有輸入所有資料跳出請完成資料輸入
-        $('.nextStep').click(function(){
+        $('.nextStep').click(function() {
             let typeWorkName = $('.typeWorkName').val()
-            let typeNickName = $('.typeNickName').val()         
+            let typeNickName = $('.typeNickName').val()
             let typeInspiration = $('.typeInspiration').val()
 
             let typeWorkNameL = $('.typeWorkName').val().length;
@@ -955,7 +1015,7 @@
             let typeInspirationL = $('.typeInspiration').val().length;
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
-            if(typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0){ 
+            if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
                 // console.log(typeWorkNameL)
                 // console.log(typeNickNameL)
                 // console.log(typeInspirationL)
@@ -1010,54 +1070,76 @@
                     </li>`
 
                 //PO到我的車車
-                $('.emptyState').css({"display": "none"})
+                $('.emptyState').css({
+                    "display": "none"
+                })
                 $('.mywork .putMywork').append(x)
 
                 //PO完後清空
                 $('.typeWorkName').val('')
                 $('.typeNickName').val('')
                 $('.typeInspiration').val('')
-                
+
                 //PO完回到第一頁
-                $('.makeCar').css({"display":"none"})
-                $('.giveName').css({"display":"none"})
-                $('.selectArea').css({"display":"block"})
-                $('.selectBtn').css({"display":"flex"})
+                $('.makeCar').css({
+                    "display": "none"
+                })
+                $('.giveName').css({
+                    "display": "none"
+                })
+                $('.selectArea').css({
+                    "display": "block"
+                })
+                $('.selectBtn').css({
+                    "display": "flex"
+                })
 
-                $('.shapeCards').css({"display":"flex"})
-                $('.shapeCard').css({"display":"block"})
+                $('.shapeCards').css({
+                    "display": "flex"
+                })
+                $('.shapeCard').css({
+                    "display": "block"
+                })
 
-                $('.colorCards').css({"display":"none"})
-                $('.tireCards').css({"display":"none"})
-                $('.accessoryCards').css({"display":"none"})
+                $('.colorCards').css({
+                    "display": "none"
+                })
+                $('.tireCards').css({
+                    "display": "none"
+                })
+                $('.accessoryCards').css({
+                    "display": "none"
+                })
 
-                $('.intro').css({"display":"flex"})
-                // $()
+                $('.intro').css({
+                        "display": "flex"
+                    })
+                    // $()
 
                 //該怎麼抓到canvas做出來的圖片丟到我的車車???
                 let count6 = 0;
-                $('.closeTextarea').click(function(){
-                    // console.log('關掉textarea')
+                $('.closeTextarea').click(function() {
+                        // console.log('關掉textarea')
 
-                    $(this).parent().children('.typeReply').slideToggle();
+                        $(this).parent().children('.typeReply').slideToggle();
 
-                    count6 += 1;
-                    // console.log(count6);
+                        count6 += 1;
+                        // console.log(count6);
 
-                    if(count6 % 2 == 1){
-                        $(this).children('.textareaWord').text('打開輸入框');
+                        if (count6 % 2 == 1) {
+                            $(this).children('.textareaWord').text('打開輸入框');
 
-                        $(this).children('.toggleIcon3').css({
-                            "transform": "rotate(180deg)",
-                        })
-                    }else{
-                        $(this).children('.textareaWord').text('關閉輸入框');
+                            $(this).children('.toggleIcon3').css({
+                                "transform": "rotate(180deg)",
+                            })
+                        } else {
+                            $(this).children('.textareaWord').text('關閉輸入框');
 
-                        $(this).children('.toggleIcon3').css({
-                            "transform": "rotate(0deg)",
-                        })
-                    }
-                })//
+                            $(this).children('.toggleIcon3').css({
+                                "transform": "rotate(0deg)",
+                            })
+                        }
+                    }) //
 
                 // $('.comment').click(function(){
                 //     // console.log('留言')
@@ -1066,25 +1148,27 @@
         })
 
         //完成資料輸入後按鈕自動變able、移除提示
-        $('.giveName').change(function(){
+        $('.giveName').change(function() {
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
 
-            if(typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0){
-                $('.pleaseSelect').css({"display": "none"})
+            if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
+                $('.pleaseSelect').css({
+                    "display": "none"
+                })
                 $('.finish').removeClass('btn--disabled')
             }
         })
 
         //隨機取名
-        $('.randomName').click(function(){
-            let nameArr1 = ['地瓜', '蓮霧', '芋圓',  '天竺鼠', '賓士貓', '長毛貓', '白襪貓', '短腿柯基', '犀牛', '脖子長長頸鹿']
+        $('.randomName').click(function() {
+            let nameArr1 = ['地瓜', '蓮霧', '芋圓', '天竺鼠', '賓士貓', '長毛貓', '白襪貓', '短腿柯基', '犀牛', '脖子長長頸鹿']
             let nameArr2 = ['轎車', '跑車', '小客車', '巴士', '休旅車', '箱型車', '敞篷車', '公車', '警車', '消防車']
 
             let ran1 = Math.floor(Math.random() * 10)
             let ran2 = Math.floor(Math.random() * 10)
-            
+
             // console.log(ran1)
             // console.log(ran2)
 
@@ -1096,7 +1180,7 @@
         let countR = 0;
         let distance = 410;
         //選擇車型、零件的區域按左右會移動
-        $('.selectAreaOut-next').click(function(){
+        $('.selectAreaOut-next').click(function() {
             countL += 1;
             // console.log("countL ":+ countL);
             // console.log("countStep: " + countStep)
@@ -1105,83 +1189,83 @@
             let distanceToLeft = $('.selectArea').position().left;
             // console.log(distanceToLeft)
 
-            if(docW <= 992){
-                if(countStep < 3 && distanceToLeft > -900){
+            if (docW <= 992) {
+                if (countStep < 3 && distanceToLeft > -900) {
                     $('.selectArea').animate({
-                        left:'-=430'
+                        left: '-=430'
                     });
-                }else if(countStep == 3 && distanceToLeft > -2100){
+                } else if (countStep == 3 && distanceToLeft > -2100) {
 
                     $('.selectArea').animate({
-                        left:'-=410'
+                        left: '-=410'
                     });
                 }
-            }else{
-                if(countStep < 3 && distanceToLeft > 15){
+            } else {
+                if (countStep < 3 && distanceToLeft > 15) {
                     $('.selectArea').animate({
-                        left:'-=410'
+                        left: '-=410'
                     });
-                }else if(countStep == 3 && distanceToLeft > -400){
+                } else if (countStep == 3 && distanceToLeft > -400) {
                     // console.log('再過去一點')
                     $('.selectArea').animate({
-                        left:'-=410'
+                        left: '-=410'
                     });
                 }
             }
-            
+
         })
 
-        $('.selectAreaOut-previous').click(function(){
+        $('.selectAreaOut-previous').click(function() {
             countR += 1;
             // console.log('countR: '+ countR);
             // console.log('docW: '+ docW)
 
 
             let shapeLength = $('.shapeCard').length
-            // console.log(shapeLength)
+                // console.log(shapeLength)
 
             let colorLength = $('.selectColor').length
-            // console.log(colorLength)
+                // console.log(colorLength)
 
             // console.log("countStep:  " + countStep)
 
             let distanceToLeft = $('.selectArea').position().left;
             console.log(distanceToLeft)
 
-            if(docW <= 992){
-                if(countStep == 0 && distanceToLeft < 3){
+            if (docW <= 992) {
+                if (countStep == 0 && distanceToLeft < 3) {
                     $('.selectArea').animate({
-                    left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300) ){
+                } else if (countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300) ){
+                } else if (countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100) ){
+                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
                 }
-            }else{
-                if(countStep == 0 && distanceToLeft < 14){
+            } else {
+                if (countStep == 0 && distanceToLeft < 14) {
                     $('.selectArea').animate({
-                    left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400) ){
+                } else if (countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400) ){
+                } else if (countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
-                }else if(countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920) ){
+                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
                     $('.selectArea').animate({
-                        left:'+=410'
+                        left: '+=410'
                     });
                 }
             }
@@ -1189,19 +1273,19 @@
         })
 
         //點留言後PO出留言
-        $('.comment').click(function(){
-            let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-            let commentContent = $(this).parent().parent().children('.textarea').val();
+        $('.comment').click(function() {
+                let commentContentL = $(this).parent().parent().children('.textarea').val().length;
+                let commentContent = $(this).parent().parent().children('.textarea').val();
 
-            let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-            // console.log(replyerPic)
+                let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
+                // console.log(replyerPic)
 
-            let replyerName = $(this).parent().parent().children('.replyerName').text();
-            // console.log(replyerName)
+                let replyerName = $(this).parent().parent().children('.replyerName').text();
+                // console.log(replyerName)
 
 
-            if(commentContentL > 0){
-                $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
+                if (commentContentL > 0) {
+                    $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
                             <div class="userContext">
                                 <img src="${replyerPic}"  class="userPic">
                                 <div class="userContext_top">
@@ -1217,40 +1301,40 @@
                                 </div>
                             </div>
                         </div>`)
-                
-                $(this).parent().parent().children('.textarea').val('');
-                $(this).parent().children('.textCount').text(`餘${textMax}字`);
-            }
-        })
-    // ---------------------------------計算金額------------------------------------------------
-        
-        
-        $('.selectShape').click(function(){
+
+                    $(this).parent().parent().children('.textarea').val('');
+                    $(this).parent().children('.textCount').text(`餘${textMax}字`);
+                }
+            })
+            // ---------------------------------計算金額------------------------------------------------
+
+
+        $('.selectShape').click(function() {
             let totalPriceInit = $('.totalPrice').text().split(' ')[1]
-            console.log("totalPriceInit: "+ totalPriceInit)
+            console.log("totalPriceInit: " + totalPriceInit)
 
             let shapePrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
             console.log(shapePrice);
 
             let finalPrice = $('.totalPrice').text().split(' ')[1]
             stage1Price = $('.totalPrice').text(`NT$ ${shapePrice}`)
-            stage1Price2 = stage1Price.text().split(' ')[1]  //設成全域，下一階段要用這個數
-            console.log('stage1: '+ stage1Price2)
+            stage1Price2 = stage1Price.text().split(' ')[1] //設成全域，下一階段要用這個數
+            console.log('stage1: ' + stage1Price2)
         })
 
-        $('.selectColor').click(function(){
+        $('.selectColor').click(function() {
             console.log(stage1Price2)
 
             let colorPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
             console.log("colorPrice: " + colorPrice);
 
-            stage2Price = parseInt(stage1Price2) + parseInt(colorPrice)//設成全域，下一階段要用這個數
+            stage2Price = parseInt(stage1Price2) + parseInt(colorPrice) //設成全域，下一階段要用這個數
             console.log("stage2:" + stage2Price)
 
-            stage2Price2 = $('.totalPrice').text(`NT$ ${stage2Price}`) 
+            stage2Price2 = $('.totalPrice').text(`NT$ ${stage2Price}`)
         })
 
-        $('.selectTire').click(function(){
+        $('.selectTire').click(function() {
             console.log(stage2Price)
 
             let tirePrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
@@ -1262,7 +1346,7 @@
             state3Price2 = $('.totalPrice').text(`NT$ ${state3Price}`)
         })
 
-        $('.selectAccessory').click(function(){
+        $('.selectAccessory').click(function() {
             let state4Price0 = $('.totalPrice').text().split(' ')[1]
             console.log(state4Price0)
 
@@ -1283,7 +1367,7 @@
         //綁定事件
         $('.selectShape').click(buildCanvas);
 
-        function buildCanvas(e){    
+        function buildCanvas(e) {
             //先清空
             context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1292,108 +1376,108 @@
 
             let pic1 = new Image();
             pic1.src = `${targetShape}`; //放上車型
-            pic1.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic1.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic1, 0, -100);
             })
         }
 
         //疊上顏色        
-        $('.selectShape').click(function(){
+        $('.selectShape').click(function() {
             //抓取車型的index(用來判別顏色圖要貼甚麼)
             shapeIndex = $(this).parent().index();
             // console.log(shapeIndex)
         })
 
-        $('.selectWhite').click(function(){
+        $('.selectWhite').click(function() {
             let pic2 = new Image();
-            if(shapeIndex == 0){
+            if (shapeIndex == 0) {
                 pic2.src = '../app/assets/img/pic/color1A.png'; //白
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 1){
+            } else if (shapeIndex == 1) {
                 pic2.src = '../app/assets/img/pic/color1B.png'; //白
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
 
-            }else if(shapeIndex == 2 || shapeIndex == 3){
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = '../app/assets/img/pic/color1C.png'; //白
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, -1, -117);
                 })
             }
         })
 
-        $('.selectRed').click(function(){
+        $('.selectRed').click(function() {
             let pic2 = new Image();
-            if(shapeIndex == 0){
+            if (shapeIndex == 0) {
                 pic2.src = '../app/assets/img/pic/color2A.png'; //紅
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 1){
+            } else if (shapeIndex == 1) {
                 pic2.src = '../app/assets/img/pic/color2B.png'; //紅
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 2 || shapeIndex == 3){
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = '../app/assets/img/pic/color2C.png'; //紅
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, -1, -117);
                 })
             }
         })
 
-        $('.selectOrange').click(function(){
+        $('.selectOrange').click(function() {
             let pic2 = new Image();
-            if(shapeIndex == 0){
+            if (shapeIndex == 0) {
                 pic2.src = '../app/assets/img/pic/color3A.png'; //橙
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 1){
+            } else if (shapeIndex == 1) {
                 pic2.src = '../app/assets/img/pic/color3B.png'; //橙
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 2 || shapeIndex == 3){
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = '../app/assets/img/pic/color3C.png'; //橙
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, -1, -117);
                 })
             }
         })
 
-        $('.selectYellow').click(function(){
+        $('.selectYellow').click(function() {
             let pic2 = new Image();
 
-            if(shapeIndex == 0){              
+            if (shapeIndex == 0) {
                 pic2.src = '../app/assets/img/pic/color4A.png'; //黃
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 1){
+            } else if (shapeIndex == 1) {
                 pic2.src = '../app/assets/img/pic/color4B.png'; //黃
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-            }else if(shapeIndex == 2 || shapeIndex == 3){
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = '../app/assets/img/pic/color4C.png'; //黃
-                pic2.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic2, -1, -117);
                 })
             }
@@ -1401,109 +1485,113 @@
         })
 
         //疊上輪子
-        $('.selectT1').click(function(){
+        $('.selectT1').click(function() {
             let pic3 = new Image();
             pic3.src = '../app/assets/img/pic/tire01.png'; //輪子1
-            pic3.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic3.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic3, 0, -100);
             })
         })
 
-        $('.selectT2').click(function(){
+        $('.selectT2').click(function() {
             let pic3 = new Image();
             pic3.src = '../app/assets/img/pic/tire02.png'; //輪子2
-            pic3.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic3.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic3, 0, -100);
             })
         })
 
-        $('.selectT3').click(function(){
+        $('.selectT3').click(function() {
             let pic3 = new Image();
             pic3.src = '../app/assets/img/pic/tire03.png'; //輪子3
-            pic3.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic3.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic3, 0, -100);
             })
         })
 
         //疊上配件
-        $('.selectA1').click(function(){
+        $('.selectA1').click(function() {
             let pic4 = new Image;
             pic4.src = '../app/assets/img/pic/accessory1.png'; //圓形燈飾
-            pic4.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic4.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic4, 0, -120);
             })
         })
 
-        $('.selectA2').click(function(){
+        $('.selectA2').click(function() {
             let pic4 = new Image();
             pic4.src = '../app/assets/img/pic/accessory2.png'; //藍燈飾
-            pic4.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic4.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic4, 0, -120);
             })
         })
 
-        $('.selectA3').click(function(){
+        $('.selectA3').click(function() {
             let pic4 = new Image();
             pic4.src = '../app/assets/img/pic/accessory3.png'; //紅藍燈飾
-            pic4.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic4.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic4, 0, -120);
             })
         })
 
-        $('.selectA4').click(function(){
+        $('.selectA4').click(function() {
             let pic4 = new Image();
             pic4.src = '../app/assets/img/pic/accessory4.png'; //動物圖案
-            pic4.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic4.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic4, 40, -100);
             })
         })
 
-        $('.selectA5').click(function(){
+        $('.selectA5').click(function() {
             let pic4 = new Image();
             pic4.src = '../app/assets/img/pic/accessory5.png'; //馬圖案
-            pic4.addEventListener('load', function(){
-                context.globalAlpha = 1;        
+            pic4.addEventListener('load', function() {
+                context.globalAlpha = 1;
                 context.drawImage(pic4, 20, -100);
             })
         })
 
-        $('.selectA6').click(function(){
+        $('.selectA6').click(function() {
             let pic4 = new Image();
-            if(shapeIndex != 1){
+            if (shapeIndex != 1) {
                 // console.log('shapeIndex = 0 or 2')
                 pic4.src = '../app/assets/img/pic/accessory6.png'; //白尾翼
-                pic4.addEventListener('load', function(){
-                    context.globalAlpha = 1;        
+                pic4.addEventListener('load', function() {
+                    context.globalAlpha = 1;
                     context.drawImage(pic4, 0, -100);
                 })
-            }else{
+            } else {
                 // console.log('shapeIndex = 1')
-                $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display":"block"})
+                $('.pleaseSelect').text('此車型不可搭配尾翼').css({
+                    "display": "block"
+                })
                 $(this).addClass('btn--outline')
                 $('.nextStep').addClass('btn--disabled')
-                setTimeout(function(){
-                    $('.pleaseSelect').css({"display": "none"})
-                 }, 1000);
+                setTimeout(function() {
+                    $('.pleaseSelect').css({
+                        "display": "none"
+                    })
+                }, 1000);
             }
         })
 
         // -----------------------CANVAS取得base64---------------------------
-        $('.nextStep').click(function(){
-            if(countStep == -1){
+        $('.nextStep').click(function() {
+            if (countStep == -1) {
                 // console.log('生成base64')
-                
+
                 dataURL = document.querySelector('.canvas').toDataURL();
                 console.log(dataURL)
             }
         })
-
     </script>
 </body>
+
 </html>
