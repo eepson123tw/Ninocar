@@ -207,8 +207,14 @@
 
 .num{
     font-weight: bold;
+    color: #E59807;
 }
 
+.pin--secondary {
+    stroke: #E59807;
+    fill: #E59807;
+}
+  
 .work_author, .work_reply, .typeReply{
     display: flex;
 }
@@ -237,6 +243,11 @@
     margin-left: 8px;
     margin-right: 14px;
 }
+
+// .goodIcon, .commentIcon{
+//     width: 30px;
+//     height: 30px;
+// }
 
 .readMore, .closeReply, .closeMore, .closeTextarea{
     padding: 12.5px;
@@ -293,9 +304,11 @@
 
 .closeIcon{
     position: relative;
-    left: 37.9vw;
+    left: 39.9vw;
     top: -2.36vw;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 .frame{
@@ -338,7 +351,7 @@
     background-color: #D8D8D8;
     position: relative;
     top: 30px;
-    left: 100px;
+    left: 200px;
     z-index: -1;
 }
 
