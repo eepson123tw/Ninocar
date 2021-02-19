@@ -1,90 +1,80 @@
-.container{
+.container {
     padding-top: 176px;
 }
 
-#factory .header .container{
+#factory .header .container {
     padding-top: 8px;
     padding-bottom: 0;
 }
 
-#factory .header .icon{
+#factory .header .icon {
     margin-right: 0;
     margin-left: 0;
 }
 
-#factory .footer .container{
+#factory .footer .container {
     padding-top: 0;
 }
 
-.intro{
+.intro {
     display: flex;
-
     // &_pic{
-        // outline: 2px solid red;
+    // outline: 2px solid red;
     // }
-
-    &_content{
+    &_content {
         float: right;
         // outline: 2px solid pink;
-    
-        &_title{
+        &_title {
             color: white;
             -webkit-text-stroke: 1px #522613;
             margin-bottom: 36px;
         }
-    
-        &_text{
+        &_text {
             margin-bottom: 56px;
             color: #522613;
         }
     }
 }
 
-.makeCar{
+.makeCar {
     display: none;
-
     // outline: 1px solid orange;
 }
 
-.model{
+.model {
     width: 800px;
 }
 
-.lable{
+.lable {
     width: 148px;
     height: 148px;
     background-color: #FADD61;
     border-radius: 50%;
-    
     text-align: center;
     color: #522613;
     // padding: 20px;
-
     position: relative;
     top: -9.7vw;
     left: 33vw;
 }
 
-.emphasis{
+.emphasis {
     font-size: 64px;
     font-weight: bold;
 }
 
 // ------------作品區的按鈕-----------------------
-.workBar{
+.workBar {
     display: flex;
     justify-content: space-between;
-
     padding: 20px 0;
-
     // outline: 2px solid gold;
-
-    &_left{
+    &_left {
         display: flex;
     }
 }
 
-.workButton{
+.workButton {
     margin: 0 40px;
     background-color: transparent;
     outline: none;
@@ -93,109 +83,107 @@
     cursor: pointer;
 }
 
-.works{
+.works {
     background-image: linear-gradient(transparent 60%, #FADD61 60%)
 }
+
 // --------------作品區內容---------------------
-.othersWorks{
+.othersWorks {
     display: flex;
     flex-wrap: wrap;
 }
 
-.mywork{
+.mywork {
     display: none;
     background: #fff;
 }
 
-.othersWorks, .mywork{
+.othersWorks,
+.mywork {
     padding-bottom: 60px;
 }
 
-.putMywork{
+.putMywork {
     display: flex;
 }
 
-.work{
+.work {
     height: 100%;
     background-color: #fff;
     // outline: 1px solid blue;
-    
-    &_pic{
+    &_pic {
         cursor: pointer;
         padding: 0 32px;
-
         // outline: 1px solid;
     }
-
-    &_author, &_reply{
+    &_author,
+    &_reply {
         // margin: 28px;
         padding: 28px;
-        
     }
-
-    &Name{
+    &Name {
         margin-bottom: 16px;
     }
 }
 
-.work_reply, .workInfo, .moreReply, .closeReply, .readMore, .closeMore{
+.work_reply,
+.workInfo,
+.moreReply,
+.closeReply,
+.readMore,
+.closeMore {
     border-bottom: 1px solid #ccc;
 }
 
-.work_reply{
+.work_reply {
     display: flex;
     flex-direction: column;
 }
 
-.work .hiddenReply, .work .hiddenSubReply,{
+.work .hiddenReply,
+.work .hiddenSubReply {
     display: none;
 }
 
-.typeReply{
+.typeReply {
     padding: 28px;
     border-bottom: 1px solid #ccc;
 }
 
-
-.user{
-    &Pic{
+.user {
+    &Pic {
         width: 60px;
         height: 60px;
         border-radius: 50%;
         margin: 0 28px;
-
-        &--big{
+        &--big {
             width: 84px;
             height: 84px;
             border-radius: 50%;
             margin: 0 28px;
         }
-    
-        &--small{
+        &--small {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             margin: 0 28px;
         }
     }
-
-    &Context{
+    &Context {
         display: flex;
-
         // border-bottom: 1px solid #ccc;
         // padding-bottom: 28px;
     }
-
-    &Context_top{
+    &Context_top {
         width: 100%;
     }
-
-    &Name, &Content{
+    &Name,
+    &Content {
         margin-bottom: 16px;
     }
 }
 
-.subUserContext{
+.subUserContext {
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -205,104 +193,116 @@
     margin-top: 16px;
 }
 
-.num{
+.num {
     font-weight: bold;
     color: #E59807;
 }
 
+<<<<<<< HEAD
 .pin--secondary {
     stroke: #E59807;
     fill: #E59807;
 }
   
 .work_author, .work_reply, .typeReply{
+=======
+.work_author,
+.work_reply,
+.typeReply {
+>>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     display: flex;
 }
 
-.work{
-    &Info, &Info_reply, &Info_good{
+.work {
+    &Info,
+    &Info_reply,
+    &Info_good {
         display: flex;
         align-items: center;
         justify-content: space-around;
     }
 }
 
-.workInfo{
+.workInfo {
     padding-bottom: 8px;
 }
 
-.other{
+.other {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 16vw;
 }
 
-.icon{
+.icon {
     margin-left: 8px;
     margin-right: 14px;
 }
 
+<<<<<<< HEAD
 // .goodIcon, .commentIcon{
 //     width: 30px;
 //     height: 30px;
 // }
 
 .readMore, .closeReply, .closeMore, .closeTextarea{
+=======
+.readMore,
+.closeReply,
+.closeMore,
+.closeTextarea {
+>>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     padding: 12.5px;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.moreReply{
+.moreReply {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.closeReply, .closeMore{
+.closeReply,
+.closeMore {
     display: none;
 }
 
 // -----------------------------------
-.typeReply{
+.typeReply {
     display: flex;
 }
 
 // .typeReply_left{
 //     margin-right: 28px;
 // }
-
 // ----------------彈窗-------------------
-.mask{
+.mask {
     width: 100vw;
     background-color: #0808084D;
     z-index: 1;
     position: absolute;
     left: 0;
     top: 0;
-
     position: fixed;
     display: none;
 }
 
-.work_left{
+.work_left {
     height: 880px;
     background-color: #fff;
     // outline: 1px solid red;
 }
 
-.work_right{
+.work_right {
     background-color: #fff;
     height: 880px;
     overflow-y: scroll;
     // outline: 1px solid green;
 }
 
-.closeIcon{
+.closeIcon {
     position: relative;
     left: 39.9vw;
     top: -2.36vw;
@@ -311,40 +311,39 @@
     height: 20px;
 }
 
-.frame{
+.frame {
     width: 100%;
     // height: 40vw;
     height: 32vw;
     overflow: hidden;
-
     // outline: 1px solid blue;
 }
 
-.workPic--big{
-   width: 100%;
+.workPic--big {
+    width: 100%;
     // outline: 1px solid; 
 }
 
-.price{
+.price {
     display: flex;
 }
 
-.work_right{
+.work_right {
     padding: 52px;
 }
 
-.typeReply_right{
+.typeReply_right {
     width: 100%;
 }
 
 // ----------------進度條-------------------
-.progressBar{
+.progressBar {
     display: none;
     // margin-bottom: 60px;
     // outline: 1px solid green;
 }
 
-.bar{
+.bar {
     width: 960px;
     // width: 50%;
     height: 4px;
@@ -355,136 +354,132 @@
     z-index: -1;
 }
 
-.bar-front{
+.bar-front {
     width: 0;
     top: 26px;
     background-color: #E59807;
 }
 
-  .content{
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
     // margin-right: 7.8125vw;
-  }
+}
 
-  .explanations{
+.explanations {
     display: flex;
     justify-content: center;
-  }
+}
 
-  .circle{
+.circle {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-
     margin-right: 150px;
     text-align: center;
     line-height: 42px;
-
     background-color: #D8D8D8;
     font-size: 24px;
     color: #fff;
-  }
+}
 
-  .explanation{
+.explanation {
     font-size: 24px;
-    margin-right: 150px; 
+    margin-right: 150px;
     color: #333333;
-  }
+}
 
-  .content:last-child .circle, .content:last-child .explanation{
-      margin-right: 0
-    }
+.content:last-child .circle,
+.content:last-child .explanation {
+    margin-right: 0
+}
+
 // ----------------製作車子的主區域-------------------
-
-  .mainAreaPic{
-      margin: 0 auto;
-  }
+.mainAreaPic {
+    margin: 0 auto;
+}
 
 // ----------------標示步驟、金額的區域-------------------
-    .totalPrice{
-        font-size: 32px;
-        color: #522613;
-        font-weight: bold;
+.totalPrice {
+    font-size: 32px;
+    color: #522613;
+    font-weight: bold;
+    margin-left: 60px;
+}
 
-        margin-left: 60px;
-    }
+.tipArea,
+.tipPrice {
+    display: flex;
+}
 
-    .tipArea, .tipPrice{
-        display: flex;
-    }
+.tipArea {
+    padding: 20px 0;
+    border-bottom: 1px solid #E59807;
+    background-color: #fff;
+}
 
-    .tipArea{
-        padding: 20px 0;
-        border-bottom: 1px solid #E59807;
-        background-color: #fff;
-    }
+.tipArea_right {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .tipArea_right{
-        display: flex;
-        justify-content: space-between;
-    }
+.pleaseSelect {
+    display: none;
+    position: absolute;
+    top: -80px;
+    right: 20px;
+    padding: 20px 12px;
+    background-color: #fff;
+    border: 1px solid #E59807;
+}
 
-    .pleaseSelect{
-        display: none;
-        position: absolute;
-        top: -80px;
-        right: 20px;
+//放canvas區域
+.mainArea {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+}
 
-        padding: 20px 12px;
-        background-color: #fff;
-        border: 1px solid #E59807;
-        
-    }
+// ----------------製作車子的選項區域-------------------
+.selectAreaOut {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
 
-    //放canvas區域
-    .mainArea{
-        display: flex;
-        justify-content: center;
-        background-color: #fff;
-    }
-
-  // ----------------製作車子的選項區域-------------------
-    .selectAreaOut{
-        overflow: hidden;
-        display: flex;
-        justify-content: space-between;
-    }
-
-  .selectArea{
-      position: relative;
-      display: flex;
+.selectArea {
+    position: relative;
+    display: flex;
     //   left: 0;
+    margin-bottom: 20px;
+}
 
-      margin-bottom: 20px;
-  }
-
-  .selectBtn{
+.selectBtn {
     width: 97%;
     display: flex;
     justify-content: space-between;
     position: absolute;
     top: 360px;
     z-index: 1;
-  }
+}
 
-  .selectAreaOut-previous{
+.selectAreaOut-previous {
     //   background-image: url("../../img/icon/icon-left.svg");
     //   background-image: url("../app/assets/img/icon/icon-left.svg");
-      display:inline-block;
-      width: 60px;
-      height: 60px;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
     //   position: relative;
     //   top:220px;
     //   left:0;
-      z-index: 1;
-      cursor: pointer;
-  }
+    z-index: 1;
+    cursor: pointer;
+}
 
-  .selectAreaOut-next{
+.selectAreaOut-next {
     // background-image: url("../../img/icon/icon-right.svg");
-    display:inline-block;
+    display: inline-block;
     width: 60px;
     height: 60px;
     // position: relative;
@@ -494,46 +489,61 @@
     cursor: pointer;
 }
 
-  .shapeCard, .colorCard, .tireCard, .accessoryCard{
-      background-color: #fff;
-  }
+.shapeCard,
+.colorCard,
+.tireCard,
+.accessoryCard {
+    background-color: #fff;
+}
 
-  .cardOut{
-      height: 150px;
-  }
+.cardOut {
+    height: 150px;
+}
 
-  .shapeCards, .colorCards, .tireCards, .accessoryCards{
-      display: flex;
-  }
+.shapeCards,
+.colorCards,
+.tireCards,
+.accessoryCards {
+    display: flex;
+}
 
-  .shape, .tire, .accessory{
-      width: 200px;
-      margin: 0 auto;
-  }
+.shape,
+.tire,
+.accessory {
+    width: 200px;
+    margin: 0 auto;
+}
 
-  .makeCar-price{
+.makeCar-price {
     font-size: 20px;
     font-weight: bold;
     color: #522613;
-  }
+}
 
-  .makeCar-price, .makeCar-name{
-      text-align: center;
-  }
+.makeCar-price,
+.makeCar-name {
+    text-align: center;
+}
 
-  .shape, .makeCar-price, .tire, .accessory{
-      margin-bottom: 20px;
-  }
+.shape,
+.makeCar-price,
+.tire,
+.accessory {
+    margin-bottom: 20px;
+}
 
-  .colorCard, .tireCard, .accessoryCard, .giveName{
-      display: none;
-  }
+.colorCard,
+.tireCard,
+.accessoryCard,
+.giveName {
+    display: none;
+}
 
-  .giveName{
-      padding: 20px 80px;
-  }
+.giveName {
+    padding: 20px 80px;
+}
 
-.color{
+.color {
     // width: 300px;
     // height: 300px;
     padding-top: 20px;
@@ -544,7 +554,7 @@
     margin: 0 auto 20px;
 }
 
-.white{
+.white {
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -552,165 +562,152 @@
     border: 1px solid #ccc;
 }
 
-.red{
+.red {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: red;
 }
 
-.orange{
+.orange {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: orange;
 }
 
-.yellow{
+.yellow {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: yellow;
 }
 
-.purple{
+.purple {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: rgb(173, 85, 224);
 }
 
-.nameTip{
+.nameTip {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.typeWorkName, .typeNickName{
+.typeWorkName,
+.typeNickName {
     width: 320px;
 }
 
-.notice{
+.notice {
     color: #9D9D9D;
     font-size: 14px;
 }
 
-.description{
+.description {
     margin-bottom: 8px;
 }
 
-
 //應急處置
-#factory .modal__group--sm{
+#factory .modal__group--sm {
     display: none;
 }
+
 // ---------------------------------------
 // ----------------992-----------------------
-@media screen and (max-width:992px){
-    .bar{
+@media screen and (max-width:992px) {
+    .bar {
         left: 50px;
     }
-
-    .bar-back{
+    .bar-back {
         width: 830px;
     }
-
-    .work_author, .work_reply, .typeReply{
+    .work_author,
+    .work_reply,
+    .typeReply {
         display: block;
     }
-
-    .userPic{
+    .userPic {
         margin: 0 auto;
     }
-
-    .userName, .workName, .replyerName, .userContent{
+    .userName,
+    .workName,
+    .replyerName,
+    .userContent {
         text-align: center;
     }
-
-    .other{
+    .other {
         width: auto;
     }
-
-    .textarea{
+    .textarea {
         margin: 0 auto;
         display: flex;
         margin-bottom: 8px;
     }
 }
+
 // ---------------------------------------
 // -----------------576----------------------
-
-@media screen and (max-width:576px){
-    .intro{
+@media screen and (max-width:576px) {
+    .intro {
         display: flex;
         flex-direction: column;
     }
-
-    .emphasis{
+    .emphasis {
         font-size: 44px;
     }
-
-    .lable{
+    .lable {
         width: 120px;
         height: 120px;
         top: -14.7vw;
         left: 49vw;
     }
-
-    .progressBar{
+    .progressBar {
         margin-top: 20px;
     }
-
-    .bar{
+    .bar {
         display: none;
     }
-
-    .circle, .explanation{
+    .circle,
+    .explanation {
         margin: 0;
     }
-
-    .explanation{
+    .explanation {
         font-size: 16px;
     }
-
-    .content{
+    .content {
         margin-right: 8px;
     }
-
-    .content:last-child{
+    .content:last-child {
         margin-right: 0;
     }
-
-    .work{
+    .work {
         margin-bottom: 20px;
     }
-
-    .tipArea{
+    .tipArea {
         flex-direction: column;
-
-        &_left{
+        &_left {
             margin-bottom: 8px;
         }
     }
-
-    .selectBtn{
+    .selectBtn {
         top: 420px;
     }
-
-    .makeCar .giveName{
+    .makeCar .giveName {
         // display: flex; //這個flex要動態改CSS
         display: none;
         flex-direction: column;
         padding: 20px;
     }
-
-    .typeInspiration{
+    .typeInspiration {
         width: 320px;
     }
-
-    .selectArea{   
-        .colorCard, .accessoryCard{
-           max-width: 50%; 
+    .selectArea {
+        .colorCard,
+        .accessoryCard {
+            max-width: 50%;
         }
     }
 }

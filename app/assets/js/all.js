@@ -74,7 +74,7 @@ window.onload = function() {
         const dropdown = this.querySelector(".dropdown");
         if (dropdown) {
             const rect = dropdown.getBoundingClientRect();
-            const navRect = document.querySelector(".top").getBoundingClientRect();
+            const navRect = document.querySelector("nav").getBoundingClientRect();
             dropdownBackground.classList.add("open");
             dropdownBackground.style.width = rect.width + "px";
             dropdownBackground.style.height = (rect.height) + "px";

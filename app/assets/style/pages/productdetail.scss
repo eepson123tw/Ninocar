@@ -1,7 +1,6 @@
 @import '../helpers/variables';
 @import '../helpers/mixin';
 @import '../helpers/rwd';
-
 .breadcrumb {
     display: flex;
     margin-top: 70px;
@@ -30,7 +29,7 @@
     background-color: #dd8;
 }
 
-h1 {
+.h1 {
     font-size: 128px;
     z-index: 0;
     position: relative;
@@ -100,14 +99,15 @@ img {
 }
 
 //--------------------------光箱---------------------------
-
 a {
     text-decoration: none;
     color: #222222;
     font-size: 18px;
 }
 
+
 /* Lightbox background */
+
 #lightbox {
     display: none;
     background: rgba(0, 0, 0, 0.8);
@@ -118,7 +118,10 @@ a {
     min-height: 100%;
     z-index: 1000;
 }
+
+
 /* Lightbox panel with some content */
+
 #lightbox-panel {
     display: none;
     position: fixed;

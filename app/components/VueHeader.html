@@ -4,7 +4,7 @@
         <header class="header">
                 <div class="container d-flex justify-content-between align-items-center po-re py-2">
                     <div class="d-flex">
-                        <a href="#">
+                        <a href="index.html">
                             <h1 class="h2 color-coffee font-bold">NINO CAR</h1>
                         </a>
                         <form class="d-md-none ml-5 po-re">
@@ -27,7 +27,7 @@
                     <nav>
                         <ul class="d-flex align-items-center">
                             <li class="lg-1" v-if="isLogin">
-                                <a href="#" aria-label=”member”>
+                                <a href="membermain.html" aria-label=”member”>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(3 6.5)">
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
-                                <a href="#" aria-label=”message”>
+                                <a href="MemberNotice.html" aria-label=”message”>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(6.473 4.772)">
@@ -133,16 +133,16 @@
                             </form>
                             <div class="d-flex flex-md-column">
                                 <ul class="w-50  w-md-100 mr-5 mr-md-0">
-                                    <li class="mb-2"><a href="#" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
+                                    <li class="mb-2"><a href="product.html" class="menu__link">All Products<span class="fl-right mr-5">全部商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">New Arrival<span class="fl-right mr-5">最新商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Campaign<span class="fl-right mr-5">本月主打</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Popular<span class="fl-right mr-5">熱門商品</span></a></li>
                                     <li class="mb-2"><a href="#" class="menu__link">Points Only<span class="fl-right mr-5">點數限定</span></a></li>                 
                                 </ul>
                                 <ul class="w-50 w-md-100">
-                                <li class="mb-2"><a href="#" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
-                                <li class="mb-2"><a href="#" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
-                                <li class="mb-5"><a href="#" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
+                                <li class="mb-2"><a href="factory.html" class="menu__link">Customization<span class="fl-right mr-5">車車工廠</span></a></li>
+                                <li class="mb-2"><a href="dictionary.html" class="menu__link">Dictionary<span class="fl-right mr-5">車車圖鑑</span></a></li>
+                                <li class="mb-5"><a href="membermain.html" class="menu__link"  v-if="login">Member<span class="fl-right mr-5">會員中心</span></a></li>
                                 <li class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex ml-2">
                                         <img src="./assets/img/icon/icon-fb.svg" class="icon">
@@ -157,10 +157,10 @@
                 </div>          
             </nav>
             `,
-            props:['login'],
+        props: ['login'],
         data() {
             return {
-            
+
             };
         },
         methods: {
@@ -174,7 +174,7 @@
             <nav class="link-group">
                 <ul>
                     <li>
-                        <a href="#" aria-label=”cart”>
+                        <a href="cart.html" aria-label=”cart”>
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -292,4 +292,3 @@
         },
     });
 </script>
-
