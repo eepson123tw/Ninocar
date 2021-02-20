@@ -45,7 +45,7 @@
                 </div>
             </main>
             <div class="img-preview">
-                <img src="../app/assets/img/pic/userPic03.png">
+                <img src="../assets/img/pic/userPic03.png">
             </div>
         </div>
     </div>

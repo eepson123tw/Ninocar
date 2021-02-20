@@ -42,7 +42,7 @@
                                 <div>車</div>
                             </td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
@@ -52,7 +52,7 @@
                         <tr>
                             <td>車</td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
@@ -62,7 +62,7 @@
                         <tr>
                             <td>車</td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
@@ -72,7 +72,7 @@
                         <tr>
                             <td>車</td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
@@ -82,7 +82,7 @@
                         <tr>
                             <td>車</td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
@@ -92,7 +92,7 @@
                         <tr>
                             <td>車</td>
                             <td>
-                                <div class="product_img"><img src="../app/assets/img/pic/model.png" alt=""></div>
+                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
                             </td>
                             <td>一般商品</td>
                             <td>車系</td>
