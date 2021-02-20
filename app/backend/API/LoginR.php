@@ -1,9 +1,9 @@
 <?php
-    include("../Lib/UtilClass.php");
+    include("../../Lib/UtilClass.php");
     $Util = new UtilClass();
 
     //建立SQL
-    $sql = "SELECT * FROM member WHERE member_account = ? and member_pwd = ?";
+    $sql = "SELECT * FROM admin WHERE admin_account = ? and admin_pwd = ?";
 
     //執行
     $statement = $Util->getPDO()->prepare($sql);
@@ -24,9 +24,9 @@
         $Member->setSessionB($_POST["account"]);
 
         //導回後台首頁        
-        header("Location: ../../../commodity.php");
+        header("Location: ../commodity.php");
     }else{
         //跳出提示停留在後台登入頁
-        echo "<script>alert('帳號或密碼錯誤!'); location.href = '../../../Login.php';</script>"; 
+        echo "<script>alert('帳號或密碼錯誤!'); location.href = '../Login.php';</script>"; 
     }
 ?>

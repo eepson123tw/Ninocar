@@ -12,11 +12,14 @@
 </head>
 
 <body>
-    @@include('../pages/BackendPage/base.html')
+    <?php
+        include './API/LoginCheck.php';
+        include '../pages/BackendPage/base.html';
+    ?>
     <div class="content">
         <!-- update-button -->
         <div class="update_btn">
-            <button><a href="./update.html"><i class="fas fa-upload"></i>上架商品</a></button>
+            <button><a href="./update.php"><i class="fas fa-upload"></i>上架商品</a></button>
         </div>
         <!-- table -->
         <div class="col-lg-9">
