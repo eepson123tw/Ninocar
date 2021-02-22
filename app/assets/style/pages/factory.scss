@@ -198,18 +198,12 @@
     color: #E59807;
 }
 
-<<<<<<< HEAD
 .pin--secondary {
     stroke: #E59807;
     fill: #E59807;
 }
   
 .work_author, .work_reply, .typeReply{
-=======
-.work_author,
-.work_reply,
-.typeReply {
->>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     display: flex;
 }
 
@@ -239,19 +233,7 @@
     margin-right: 14px;
 }
 
-<<<<<<< HEAD
-// .goodIcon, .commentIcon{
-//     width: 30px;
-//     height: 30px;
-// }
-
 .readMore, .closeReply, .closeMore, .closeTextarea{
-=======
-.readMore,
-.closeReply,
-.closeMore,
-.closeTextarea {
->>>>>>> d74f7475c4a4cd286d0721ee8ff71f78737b043d
     padding: 12.5px;
     display: flex;
     justify-content: center;
@@ -382,6 +364,7 @@
     background-color: #D8D8D8;
     font-size: 24px;
     color: #fff;
+    cursor: pointer;
 }
 
 .explanation {
@@ -440,6 +423,28 @@
     justify-content: center;
     background-color: #fff;
 }
+
+.canvas, .canvasA1, .canvasA2, .canvasA3{
+    position: relative;
+} 
+
+.canvas{
+    left: 600px;
+    z-index: 1;
+
+    &A1{
+        left: 198px;   
+    }
+
+    &A2{
+        right: 204px;
+    }
+
+    &A3{
+        right: 606px;
+    }
+}
+
 
 // ----------------製作車子的選項區域-------------------
 .selectAreaOut {
