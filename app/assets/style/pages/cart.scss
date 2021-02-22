@@ -9,7 +9,7 @@
     text-align: center;
     position: relative;
     &__top {
-        padding-top: 100px;
+        padding-top: 150px;
     }
     &--none {
         display: none;
@@ -28,14 +28,6 @@
         align-items: center;
         flex-direction: row-reverse;
         animation: btnlight 3s infinite;
-        position: absolute;
-        z-index: 2;
-        left: 0;
-        bottom: -20%;
-        @include rwd-lg {
-            bottom: -80%;
-            left: 40%;
-        }
         @keyframes btnlight {
             0% {
                 color: $secondary;
@@ -47,14 +39,14 @@
                 color: $secondary;
             }
         }
-        @include rwd-sm {
-            bottom: -70%;
-            left: 37%;
-        }
-        @include rwd-xs {
-            bottom: -60%;
-            left: 33%;
-        }
+        // @include rwd-sm {
+        //     bottom: -70%;
+        //     left: 37%;
+        // }
+        // @include rwd-xs {
+        //     bottom: -60%;
+        //     left: 33%;
+        // }
         &--none {
             display: none;
         }
