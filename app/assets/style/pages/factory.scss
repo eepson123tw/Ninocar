@@ -135,9 +135,15 @@
     border-bottom: 1px solid #ccc;
 }
 
-.work_reply {
-    display: flex;
-    flex-direction: column;
+.work_ {
+    &_reply{
+        display: flex;
+        flex-direction: column;  
+    }
+
+    &_pic{
+        height: 182px;
+    }
 }
 
 .work .hiddenReply,
@@ -188,7 +194,7 @@
     justify-content: flex-end;
     width: 100%;
     padding-top: 28px;
-    padding-left: 28px;
+    padding-left: 38px;
     border-top: 1px solid #ccc;
     margin-top: 16px;
 }
@@ -203,7 +209,8 @@
     fill: #E59807;
 }
   
-.work_author, .work_reply, .typeReply{
+// .work_author, .work_reply, .typeReply{
+    .work_author, .typeReply{
     display: flex;
 }
 
@@ -251,6 +258,20 @@
     display: none;
 }
 
+.layer{
+    &2{
+        position: relative;
+        top: -181px;
+    }
+    &3{
+        position: relative;
+        top: -362px;
+    }
+    &4{
+        position: relative;
+        top: -543px;
+    }
+}
 // -----------------------------------
 .typeReply {
     display: flex;
@@ -364,7 +385,10 @@
     background-color: #D8D8D8;
     font-size: 24px;
     color: #fff;
-    cursor: pointer;
+
+    &--able{
+        cursor: pointer;
+    }
 }
 
 .explanation {
@@ -430,8 +454,6 @@
 
 .canvas{
     left: 600px;
-    z-index: 1;
-
     &A1{
         left: 198px;   
     }
@@ -480,6 +502,11 @@
     //   left:0;
     z-index: 1;
     cursor: pointer;
+}
+
+.tipArea_left .invisible{
+    opacity: 0;
+    pointer-events: none;
 }
 
 .selectAreaOut-next {
@@ -616,9 +643,9 @@
 }
 
 //應急處置
-#factory .modal__group--sm {
-    display: none;
-}
+// #factory .modal__group--sm {
+//     display: none;
+// }
 
 // ---------------------------------------
 // ----------------992-----------------------
