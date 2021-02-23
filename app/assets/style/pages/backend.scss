@@ -386,6 +386,16 @@ td {
         border: none;
         // cursor: pointer;
       }
+      select {
+        display: block;
+        width: 70%;
+        border: none;
+      }
+      textarea {
+        display: block;
+        width: 70%;
+        border: none;
+      }
     }
   }
   .img-preview {
@@ -406,6 +416,9 @@ td {
         input {
           width: 150%;
         }
+        select {
+          width: 150%;
+        }
       }
     }
     .img-preview {
@@ -424,6 +437,9 @@ td {
     main {
       .update {
         input {
+          width: 60%;
+        }
+        select {
           width: 60%;
         }
       }
