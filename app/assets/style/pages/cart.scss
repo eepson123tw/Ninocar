@@ -460,6 +460,8 @@
             &__choose {
                 //側邊左右
                 position: absolute;
+                width: 40px;
+                height: 40px;
                 &--left {
                     top: 50%;
                     left: -5%;
