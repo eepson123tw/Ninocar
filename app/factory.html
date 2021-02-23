@@ -1171,7 +1171,9 @@
                 $('.shapeCard').css({"display": "none"})
 
                 if (countStep % 5 == 1) {
+                    console.log(countStep)
                     $('.nextStep').addClass('btn--disabled')
+                    
 
                     //進入選顏色
                     $('.colorCards').css({"display": "flex"})
@@ -1192,6 +1194,8 @@
                     }
 
                 } else if (countStep % 5  == 2) {
+                    console.log(countStep)
+
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選輪子
@@ -1215,6 +1219,8 @@
                     }
 
                 } else if (countStep % 5  == 3) {
+                    console.log(countStep)
+
                     $('.nextStep').addClass('btn--disabled')
 
                     //進入選配件
@@ -1237,9 +1243,9 @@
                     } else if (docW <= 1003) {
                         $('.bar-front').width(660)
                     }
-                } else if (countStep % 5  == 4) {
+                } else if (countStep % 5 == 4) {
                     // countStep = -1;
-                    // console.log("countStep重置")
+                    console.log(countStep)
 
                     // $('.giveName').css({"display": "none"})
 
@@ -1267,15 +1273,23 @@
                     }else if(docW <= 1003){
                         $('.bar-front').width(840) 
                     }
-
-                    $('.finish').click(() => {
-                        console.log('清空畫布')
-                        context.clearRect(0, 0, 400, 200)
-                        contextA1.clearRect(0, 0, 400, 200)
-                        contextA2.clearRect(0, 0, 400, 200)
-                        contextA3.clearRect(0, 0, 400, 200)
-                    })
                 }
+            }
+        })
+
+        $('.make').click(() => {
+            console.log(countStep)
+        })
+
+        //清空畫布
+        $('.finish').click(() => {
+            if(countStep % 5 == 4){
+                console.log('清空')
+                context.clearRect(0, 0, 400, 200)
+                contextA1.clearRect(0, 0, 400, 200)
+                contextA2.clearRect(0, 0, 400, 200)
+                contextA3.clearRect(0, 0, 400, 200)
+                $(this).removeClass('finish')
             }
         })
 
@@ -2043,7 +2057,7 @@
 
         // -----------------------CANVAS取得base64---------------------------
         $('.nextStep').click(function() {
-            if (countStep == 4) {
+            if (countStep % 5 == 4) {
                 dataURL = document.querySelector('.canvas').toDataURL();
                 dataURLA1 = document.querySelector('.canvasA1').toDataURL();
                 dataURLA2 = document.querySelector('.canvasA2').toDataURL();
