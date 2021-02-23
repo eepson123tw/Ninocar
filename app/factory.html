@@ -1279,18 +1279,12 @@
 
         $('.make').click(() => {
             console.log(countStep)
-        })
-
-        //清空畫布
-        $('.finish').click(() => {
-            if(countStep % 5 == 4){
-                console.log('清空')
-                context.clearRect(0, 0, 400, 200)
-                contextA1.clearRect(0, 0, 400, 200)
-                contextA2.clearRect(0, 0, 400, 200)
-                contextA3.clearRect(0, 0, 400, 200)
-                $(this).removeClass('finish')
-            }
+            // console.log('清空')
+            context.clearRect(0, 0, 400, 200)
+            contextA1.clearRect(0, 0, 400, 200)
+            contextA2.clearRect(0, 0, 400, 200)
+            contextA3.clearRect(0, 0, 400, 200)
+            $(this).removeClass('finish')
         })
 
         //上一步
@@ -1591,7 +1585,7 @@
 
         $('.selectAreaOut-previous').click(function() {
             countR += 1;
-            // console.log('countR: '+ countR);
+            console.log('countR: '+ countR);
             // console.log('docW: '+ docW)
 
 
