@@ -115,4 +115,183 @@
 .toggleIcon2{
     margin-top: 25px;
     margin-right: 0px;
-}    
+} 
+
+.only__cuponText{
+    margin-top: 130px;
+    margin-left: 50px;
+
+}
+
+.only{
+
+    &__normal{
+        display: block;
+        margin-top: 5px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+    
+
+    &__cuponContent{
+        display: block;
+        margin: 50px auto 50px;  
+        line-height: 2.5;
+    }
+
+    &__text{
+        
+        width: 120px;
+        margin: 40px;
+    }
+
+    &__btn{
+        color: orange;
+        font-size: 14px;
+       
+    }
+
+    &__data{
+        padding: 10px 20px;
+        align-items: center;
+        background-color: $white;
+        justify-content: space-between;
+        border-bottom: 1px solid $gray-500;
+        font-weight: 300;
+    }
+
+    &__cupon{
+        display: block;
+        float: left;
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        background-color: $gray-900;
+        display: block;
+        overflow: hidden;
+        padding: 5%;
+        margin-top: 36px;
+        border-radius: 50%;
+
+        &--color{
+            display: block;
+            float: left;
+            position: relative;
+            width: 5rem;
+            height: 5rem;
+            background-color: $blue;
+            display: block;
+            overflow: hidden;
+            padding: 5%;
+            margin-top: 36px;
+            border-radius: 50%;
+        }
+    }
+
+    &__nigold{
+        position: absolute;
+        font-size: 32px;
+        font-weight: bolder;
+        color: $white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+    }
+
+    
+    &__title{
+        margin: 30px -200px;
+        line-height: 2.5;
+    }
+    
+    &__readMore{
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    &__more{
+        font-size: 20px;
+        color: $coffee;
+    }
+
+    &__icon{
+        margin-bottom: 0px;
+    }
+
+    &__medal{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__man{
+        margin: 25px 15px;
+    }
+
+
+    &__tds{
+        width: 1000px;
+        height: 250px;
+        margin: 30px 0 ;
+    }
+
+    &__td{
+        width: 150px;
+        text-align: center;
+        line-height: 5.6;
+    }
+
+    &__tt{
+        width: 500px;
+        height: 80px;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    &__dd{
+        width: 500px;
+        height: 120px;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    &__log{
+        text-align: center;
+    }
+
+    &__smallmark{
+        display: inline-block;
+        font-size: 16px;
+        font-weight: normal;
+        // border: 1px solid red;
+        margin-left: 20px;
+    }
+
+    &__front{
+        display: flex;
+        margin-right: 10px;
+        border: 1px solid red;
+    }
+
+    &__medach{
+        display: flex;
+        border: 1px solid red;
+    }
+
+    &__last{
+        display: flex;
+        margin-right: 45px;
+        border: 1px solid red;
+    }
+
+    &__smallall{
+        margin:30px 30px;
+    }
+
+}

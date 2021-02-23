@@ -27,6 +27,6 @@
         header("Location: ../commodity.php");
     }else{
         //跳出提示停留在後台登入頁
-        echo "<script>alert('帳號或密碼錯誤!'); location.href = '../Login.php';</script>"; 
+        echo "<script>alert('帳號或密碼錯誤!'); location.href = '../index.php';</script>"; 
     }
 ?>
