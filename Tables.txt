@@ -124,8 +124,6 @@ CREATE TABLE IF NOT EXISTS `team1`.`comment` (
   `comment_date` DATETIME NOT NULL COMMENT '留言時間',
   `comment_type` TINYINT NOT NULL DEFAULT '0' COMMENT '留言狀態（0：預設 1：封鎖）',
   PRIMARY KEY (`comment_id`),
-  INDEX `member_id2_idx` (`member_id` ASC) VISIBLE,
-  INDEX `board_id_idx` (`board_id` ASC) VISIBLE,
   CONSTRAINT `board_id`
     FOREIGN KEY (`board_id`)
     REFERENCES `team1`.`board` (`board_id`),
@@ -163,10 +161,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`customize` (
   `product_points` INT NULL DEFAULT NULL COMMENT '點數售價',
   `product_des` VARCHAR(200) NOT NULL COMMENT '商品描述',
   `product_type` TINYINT NOT NULL DEFAULT '0' COMMENT '商品狀態（0：預設 1：封鎖 2：刪除）',
-  INDEX `member_id4_idx` (`member_id` ASC) VISIBLE,
-  INDEX `board_id2_idx` (`board_id` ASC) VISIBLE,
   PRIMARY KEY (`customize_id`),
-  INDEX `product_id_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `board_id2`
     FOREIGN KEY (`board_id`)
     REFERENCES `team1`.`board` (`board_id`),
@@ -197,7 +192,6 @@ CREATE TABLE IF NOT EXISTS `team1`.`order` (
   `order_date` DATETIME NOT NULL COMMENT '訂單日期',
   `type_date` DATETIME NULL DEFAULT NULL COMMENT '貨物狀態日期',
   PRIMARY KEY (`order_id`),
-  INDEX `member_id5_idx` (`member_id` ASC) VISIBLE,
   CONSTRAINT `member_id5`
     FOREIGN KEY (`member_id`)
     REFERENCES `team1`.`member` (`member_id`))
@@ -212,7 +206,6 @@ CREATE TABLE IF NOT EXISTS `team1`.`detail` (
   `order_id` INT NOT NULL COMMENT '訂單編號',
   `product_id` INT NOT NULL COMMENT '商品編號',
   PRIMARY KEY (`order_id`, `product_id`),
-  INDEX `product_id2_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `order_id`
     FOREIGN KEY (`order_id`)
     REFERENCES `team1`.`order` (`order_id`),
@@ -234,8 +227,6 @@ CREATE TABLE IF NOT EXISTS `team1`.`member_coupon` (
   `dead_date` DATETIME NOT NULL COMMENT '到期日期',
   `coupon_type` TINYINT NOT NULL DEFAULT '0' COMMENT '折價券狀態（0：預設 1：啟用）',
   PRIMARY KEY (`member_cid`),
-  INDEX `member_id_idx` (`member_id` ASC) VISIBLE,
-  INDEX `coupon_id_idx` (`coupon_id` ASC) VISIBLE,
   CONSTRAINT `coupon_id`
     FOREIGN KEY (`coupon_id`)
     REFERENCES `team1`.`coupon` (`coupon_id`),
@@ -257,8 +248,6 @@ CREATE TABLE IF NOT EXISTS `team1`.`reply` (
   `reply_date` DATE NOT NULL COMMENT '回覆時間',
   `reply_type` TINYINT NOT NULL DEFAULT '0' COMMENT '回覆狀態（0：預設 1：封鎖）',
   PRIMARY KEY (`reply_id`),
-  INDEX `member_id3_idx` (`member_id` ASC) VISIBLE,
-  INDEX `comment_id_idx` (`comment_id` ASC) VISIBLE,
   CONSTRAINT `comment_id`
     FOREIGN KEY (`comment_id`)
     REFERENCES `team1`.`comment` (`comment_id`),
