@@ -1155,8 +1155,6 @@
         $('.nextStep').click(function() {
             // console.log("countStep: "+ countStep)
             // console.log(docW)
-            
-            
 
             if ($('.nextStep').hasClass('btn--disabled')) {
 
@@ -1270,7 +1268,13 @@
                         $('.bar-front').width(840) 
                     }
 
-                    // countStep = -1;
+                    $('.finish').click(() => {
+                        console.log('清空畫布')
+                        context.clearRect(0, 0, 400, 200)
+                        contextA1.clearRect(0, 0, 400, 200)
+                        contextA2.clearRect(0, 0, 400, 200)
+                        contextA3.clearRect(0, 0, 400, 200)
+                    })
                 }
             }
         })
@@ -1338,9 +1342,10 @@
                 $('.selectArea').css({"display": "block"})
                 $('.accessoryCards').css({"display": "block"})
 
-                
+
             }
         })
+
         // console.log(countStep)
         //先抓取進度條圓圈(circle)的index
         $('.circle').click((e) => {
@@ -2034,6 +2039,8 @@
             }        
         })
 
+
+
         // -----------------------CANVAS取得base64---------------------------
         $('.nextStep').click(function() {
             if (countStep == 4) {
@@ -2121,9 +2128,9 @@
                 
                 //PO完後出現「X則回覆」
                 $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
-
-
         })
+
+        // $('.finish').click(() => {})
     </script>
 </body>
 
