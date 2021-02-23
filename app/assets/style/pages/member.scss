@@ -139,16 +139,55 @@
         line-height: 2.5;
     }
 
+    &__textout{
+        display: flex;
+    }
+
+    &__textin{
+        margin-left: 43px;
+    }
+
+    &__btn{
+        color: orange;
+        font-size: 14px;
+        margin: 3px 45px;
+       
+    }
+
     &__text{
         
         width: 120px;
         margin: 40px;
     }
 
-    &__btn{
-        color: orange;
-        font-size: 14px;
-       
+    &__progbarallto{
+        display: flex;
+        
+    }
+
+    &__progbarall{
+        display: flex;
+        margin-left: 40px;
+        margin-top: 12px;
+        border: 1px solid #ccc;
+        transform: translate(1%, -20%);
+        
+    }
+
+    &__progbar{
+        width: 5px;
+        height: 15px;
+        background-color: #ccc;
+        margin-left: 3px;
+        margin-top: 6px;
+        
+    }
+
+    &__nembr{
+        display: inline-block;
+        font-size: 10px;
+        margin: -1px 15px;
+
     }
 
     &__data{
