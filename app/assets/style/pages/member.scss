@@ -315,22 +315,50 @@
     &__front{
         display: flex;
         margin-right: 10px;
-        border: 1px solid red;
+        //border: 1px solid red;
     }
 
-    &__medach{
-        display: flex;
-        border: 1px solid red;
+    &__condition{
+        margin-left: 10px;
     }
 
     &__last{
         display: flex;
         margin-right: 45px;
-        border: 1px solid red;
+        //border: 1px solid red;
     }
 
     &__smallall{
         margin:30px 30px;
+    }
+
+    &__progbarfoot{
+        display: flex;
+        
+    }
+
+    &__progbarfootall{
+        display: flex;
+        margin-left: 20px;
+        margin-top: 7px;
+        border: 1px solid #ccc;
+        transform: translate(1%, -20%);
+        
+    }
+
+    &__progbarfootin{
+        width: 5px;
+        height: 15px;
+        background-color: #ccc;
+        margin-left: 3px;
+        margin-top: 8px;
+        
+    }
+
+    &__progbardigital{
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 10px;
     }
 
 }
