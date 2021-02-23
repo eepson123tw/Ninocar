@@ -23,6 +23,25 @@
     }
 }
 
+.area {
+    float: right;
+}
+
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff url('http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif') no-repeat 90% 50%;
+}
+
+.select-style {
+    width: 100%;
+}
+
 .card_all {
     border: 2px solid red;
 }
