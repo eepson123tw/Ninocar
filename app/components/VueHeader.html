@@ -97,7 +97,7 @@
             <transition name="collapse">
                 <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
             </transition>
-            <div class="modal -active" v-if="isMenuShow" @click="isMenuShow=false"></div>
+            <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
         </header>
         `,
         data() {
@@ -284,7 +284,7 @@
         computed: {
             modalLoginClass() {
                 if (this.state) {
-                    return 'modal -active'
+                    return 'modal-active'
                 } else {
                     return 'modal '
                 }

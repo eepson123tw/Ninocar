@@ -131,7 +131,8 @@
 .moreReply,
 .closeReply,
 .readMore,
-.closeMore {
+.closeMore,
+.closeTextarea {
     border-bottom: 1px solid #ccc;
 }
 
@@ -140,10 +141,10 @@
         display: flex;
         flex-direction: column;  
     }
+}
 
-    &_pic{
-        height: 182px;
-    }
+.putMywork .work_pic{
+    height: 182px;
 }
 
 .work .hiddenReply,
@@ -197,6 +198,7 @@
     padding-left: 38px;
     border-top: 1px solid #ccc;
     margin-top: 16px;
+    display: none;
 }
 
 .num {
@@ -209,9 +211,17 @@
     fill: #E59807;
 }
   
-// .work_author, .work_reply, .typeReply{
-    .work_author, .typeReply{
+.work_author, .typeReply, .typeSubReply{
     display: flex;
+}
+
+.typeSubReply{
+    border-bottom: none;
+    border-top: 1px solid #ccc;
+    padding: 0;
+    padding-top: 28px;
+    margin-top: 28px;
+    display: none;
 }
 
 .work {
@@ -251,6 +261,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hiddenMR{
+    display: none;
 }
 
 .closeReply,
@@ -717,6 +731,7 @@
     }
     .work {
         margin-bottom: 20px;
+        
     }
     .tipArea {
         flex-direction: column;
