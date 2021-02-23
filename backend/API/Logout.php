@@ -5,5 +5,5 @@
     //清空session
     $Member->clearSession();
 
-    echo "<script>alert('登出成功!'); location.href = '../Login.php';</script>";  
+    echo "<script>alert('登出成功!'); location.href = '../index.php';</script>";  
 ?>
