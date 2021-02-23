@@ -47,7 +47,7 @@
     width: 16%;
     height: 16%;
     display: flex;
-    margin-top: 100px;
+    margin-top: 50px;
     cursor: pointer;
 }
 
@@ -58,6 +58,11 @@
 
 .icon-down {
     font-size: 10px;
+}
+
+.select-style select {
+    width: 140px;
+    height: 40px;
 }
 
 .info-buy,
@@ -92,7 +97,7 @@
 }
 
 .item-price {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .lorem {
@@ -143,7 +148,7 @@ a {
     width: 80%;
     margin-left: 100px;
     position: absolute;
-    top: 200px;
+    top: 220px;
     z-index: 1;
 }
 
