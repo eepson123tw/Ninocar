@@ -402,6 +402,11 @@
 
     &--able{
         cursor: pointer;
+        
+    }
+
+    &--active{
+        background-color: rgb(229, 152, 7);
     }
 }
 
@@ -666,24 +671,30 @@
 @media screen and (max-width:992px) {
     .bar {
         left: 50px;
+        
+        &-back{
+            width: 830px;
+        }
     }
-    .bar-back {
-        width: 830px;
-    }
+    //.typeReply 
     .work_author,
     .work_reply,
-    .typeReply {
+    {
         display: block;
     }
     .userPic {
         margin: 0 auto;
+        margin-right: 16px;
     }
-    .userName,
-    .workName,
-    .replyerName,
-    .userContent {
-        text-align: center;
+    // .userName, .userContent,.workName,.replyerName{
+    //     text-align: center;
+    // }
+
+    .work_author .userPic{
+        margin: 0;
+        margin-bottom: 8px;
     }
+
     .other {
         width: auto;
     }
@@ -732,6 +743,14 @@
     .work {
         margin-bottom: 20px;
         
+        &_author{
+            display: flex;
+
+            .userPic{
+                display: inline;
+                margin-right: 16px;
+            }
+        }
     }
     .tipArea {
         flex-direction: column;
@@ -755,6 +774,25 @@
         .colorCard,
         .accessoryCard {
             max-width: 50%;
+        }
+    }
+
+    .textarea{
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    .layer{
+        &2{
+            top: -134px;
+        }
+
+        &3{
+            top: -272px;
+        }
+
+        &4{
+            top: -413px;
         }
     }
 }
