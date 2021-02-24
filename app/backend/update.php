@@ -17,7 +17,7 @@
 
 <body>
     <?php
-        include '../pages/BackendPage/base.html';
+        include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <div class="block-responsive">
