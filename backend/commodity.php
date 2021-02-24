@@ -11,6 +11,7 @@
     //給值
     $statement->execute();
     $data = $statement->fetchAll();
+
 ?>
 <title>商品管理</title>
 </head>
@@ -46,12 +47,13 @@
                         <tr>
                             <td><?=$row["product_name"] ?></td>
                             <td>
-                                <img src="../app/assets/img/pic/model.png" alt="">
+                                <!-- <img src="<?=$row['PictureName'] ?>" alt=""> -->
+                                <img src="../app/assets/img/3.jpg" alt="">
                             </td>
                             <td><?=$row["product_series"] ?></td>
                             <td><?=$row["product_price"] ?></td>
                             <td><?=$row["product_points"] ?></td>
-                            <td><a href="">查看</a></td>
+                            <td><a href="ProductUpdate.php?PID=<?=$row["product_id"] ?>">查看</a></td>
                         </tr>
                     <?php   
                         }
