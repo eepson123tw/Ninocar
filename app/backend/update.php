@@ -17,7 +17,7 @@
 
 <body>
     <?php
-        include '../app/pages/BackendPage/base.html';
+        include '../pages/BackendPage/base.html';
     ?>
     <div class="content">
         <div class="block-responsive">
@@ -121,7 +121,7 @@
                 </form>
             </main>
             <div class="img-preview">
-                <img src="../app/assets/img/pic/userPic03.png">
+                <img src="../assets/img/pic/userPic03.png">
             </div>
         </div>
     </div>

@@ -31,6 +31,10 @@ function movePHP() {
     return src('app/assets/php/**/*.php').pipe(dest('dist/assets/php/'));
 }
 
+function moveBackendFiles() {
+    return src('app/backend/**/*.php').pipe(dest('dist/backend'));
+}
+
 function commonStyle() {
     return src('app/assets/style/all.scss')
         .pipe(sourcemaps.init())
@@ -78,7 +82,7 @@ function killDist() {
 }
 
 exports.kill = killDist;
-exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, commonStyle, pageStyle, includeHTML));
+exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, includeHTML));
 
 exports.browser = function browsersync() {
     browserSync.init({
@@ -88,7 +92,7 @@ exports.browser = function browsersync() {
         // browser: "chrome",
         server: {
             baseDir: './dist', //跟目錄設定
-            index: 'factory.html', //需更改成自己頁面的名稱
+            index: 'index.html', //需更改成自己頁面的名稱
             injectChanges: false,
         },
     });
@@ -98,6 +102,8 @@ exports.browser = function browsersync() {
     watch('app/**/*.html', includeHTML).on('change', reload);
     watch('app/assets/img/**/*', moveImg).on('change', reload);
     watch('app/assets/js/**/*.js', moveJS).on('change', reload);
+    watch('app/assets/php/**/*.php', movePHP).on('change', reload);
+    watch('app/backend/**/*.php', moveBackendFiles).on('change', reload);
 };
 
 exports.w = function watchFiles() {
@@ -107,6 +113,7 @@ exports.w = function watchFiles() {
     watch('app/assets/img/**/*', moveImg);
     watch('app/assets/js/**/*.js', moveJS);
     watch('app/assets/php/**/*.php', movePHP);
+    watch('app/backend/**/*.php', moveBackendFiles);
 };
 
 

@@ -1,5 +1,5 @@
 <?php
-    include("../Lib/UtilClass.php");
+    include("../assets/php/Lib/UtilClass.php");
     $Util = new UtilClass();
 
     //建立SQL
@@ -17,7 +17,7 @@
     //依資料筆數判斷是否為會員
     if(count($products) > 0){
 
-        include("../Lib/MemberClass.php");
+        include("../assets/php/Lib/MemberClass.php");
         $Member = new MemberClass();
 
         //將登入資訊寫入session

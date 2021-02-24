@@ -27,7 +27,7 @@
                         <button type="submit" class="btn">登入</button>
                     </div>
 
-                    <a href="../dist/index.html">回前台首頁</a>
+                    <a href="../index-front.html">回前台首頁</a>
 
                 </form>
             </div>

@@ -1,5 +1,5 @@
 <?php
-    include("../Lib/MemberClass.php");
+    include("../assets/php/Lib/MemberClass.php");
     $Member = new MemberClass();
 
     //清空session
