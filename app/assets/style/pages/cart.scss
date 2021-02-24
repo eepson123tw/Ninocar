@@ -262,6 +262,15 @@
                 //     width: 100%;
                 //     justify-content: flex-start;
                 // }
+                &__text {
+                    color: $blue;
+                    @extend .h4;
+                }
+                &__price {
+                    color: $coffee;
+                    font-weight: 900;
+                    @extend .h2;
+                }
                 &--align {
                     p {
                         position: relative;
@@ -417,8 +426,8 @@
                 //訂單明細 總花費區塊
                 border-top: 2px solid $gray-500;
                 justify-content: space-between;
+                align-items: center;
                 text-align: left;
-                padding: 30px 0px;
                 li {
                     display: flex;
                     width: 50%;
@@ -462,9 +471,10 @@
                 position: absolute;
                 width: 40px;
                 height: 40px;
+                z-index: 10;
                 &--left {
                     top: 50%;
-                    left: -5%;
+                    left: -3%;
                     @include rwd-lg {
                         left: -1%;
                     }
@@ -477,7 +487,7 @@
                 }
                 &--right {
                     top: 50%;
-                    right: -5%;
+                    right: -3%;
                     @include rwd-lg {
                         right: -1%;
                     }
@@ -661,7 +671,7 @@
                 }
             }
             &__topfix {
-                margin-top: 150px;
+                margin-top: 50px;
                 @include rwd-sm {
                     margin-top: 60px;
                 }

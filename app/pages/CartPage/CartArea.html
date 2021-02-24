@@ -1,7 +1,5 @@
-<script>
-    Vue.component('cartArea', {
-        template: `  
-        <div v-if="listIsExist">
+<template id="cartArea">
+    <div v-if="listIsExist">
         <main class="container cart   ">
             <header class="row mt-20 block order-sm-1">
                 <ul class="cart__title  w-100">
@@ -32,7 +30,7 @@
                         </div>
                     </div>
                     <div v-else class="cart__group--dflex ">
-                        <p> NT$<span>{{item.price}}</span></p>
+                        <p class="font-black"> NT$<span>{{item.price}}</span></p>
                     </div>
                     <div class="cart__group--dflex">
                         <select name="" class="cart__num" @change="changeNum(listIndex,$event)" >
@@ -46,7 +44,7 @@
                         </div>
                     </div>
                     <div v-else class="cart__group--dflex">
-                        <p> NT$<span>{{item.totalPrice}}</span></p>
+                        <p class="font-black">  NT$<span>{{item.totalPrice}}</span></p>
                     </div>
                     <div>
                         <button  @click="deleteHandler(listIndex)" class="btn btn--link cart__link--small">刪除</button>
@@ -114,15 +112,15 @@
                             <ul class="cart__moneyCount  w-50">
                                 <li>
                                     <p>商品總金額</p>
-                                    <p>NT$<span>{{totalMoneyCost}}</span></p>
+                                    <p class="font-black">NT$<span>{{totalMoneyCost}}</span></p>
                                 </li>
                                 <li>
                                     <p>運費總計</p>
-                                    <p>NT$<span>780</span></p>
+                                    <p class="font-black">NT$<span>780</span></p>
                                 </li>
                                 <li>
                                     <p>折價卷折抵</p>
-                                    <p>NT$<span>780</span></p>
+                                    <p class="font-black"><span class="font-black pr-3">-</span>NT$<span>780</span></p>
                                 </li>
                             </ul>
 
@@ -138,7 +136,7 @@
                                 </li>
                                 <li>
                                     <p>總金額</p>
-                                    <p class="cart__TotalText ">NT$ <span>{{totalMoneyCost}}</span> </p>
+                                    <p class="cart__TotalText font-black" >NT$ <span>{{totalMoneyCost}}</span> </p>
                                 </li>
                             </ul>
                         </div>
@@ -239,7 +237,16 @@
             </div>  
         </main>
     </div>
-    `,
+</template>
+
+
+
+
+
+
+<script>
+    Vue.component('cartArea', {
+        template: "#cartArea",
         props: ['list', 'IsExist', 'current'],
         data() {
             return {

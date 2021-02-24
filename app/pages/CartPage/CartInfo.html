@@ -3,15 +3,15 @@
     <div>
         <div class="container cart">
             <div class="row cart__topfix">
-                <ul class="d-flex cart__list justify-content-between align-items-center w-100">
-                    <li class="h2">購買明細</li>
+                <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
+                    <li class="block__header__title">購買明細</li>
                     <li>總花點數</li>
                     <li class="cart__member--align">
-                        <p>Ni <span>200</span></p>
+                        <p>Ni <span class="cart__member__text">200</span></p>
                     </li>
                     <li>總金額</li>
                     <li>
-                        <h3>NT$ 762</h3>
+                        <h3 class="cart__member__price" >NT$ 762</h3>
                     </li>
                     <li>
                         <img
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="cart__group--dflex ">
-                        <p> NT$<span>195</span></p>
+                        <p class="font-black"> NT$<span>195</span></p>
                     </div>
                     <div class="cart__group--dflex">
                         <select
@@ -53,7 +53,7 @@
                         </select>
                     </div>
                     <div class="cart__group--dflex">
-                        <p> NT$<span>195</span> </p>
+                        <p class="font-black"> NT$<span>195</span> </p>
                         <p> <img
                                 src=""
                                 alt=""
@@ -69,10 +69,10 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row w-100 pt-md-5 pt-20">
-                    <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                        <h2 class="mb-10">購買人資料</h2>
-                        <div class="form__group">
+                <div class="row  pt-md-5 pt-20 ">
+                    <section class="cart__payment col-6 col-lg-6 col-xs-12 ">
+                        <h2 class=" block block__header__title block__header">購買人資料</h2>
+                        <div class="form__group px-10 block pt-10 pb-20 ">
                             <label
                                 for="buyerName"
                                 class="form__text mb-2 "
@@ -111,9 +111,9 @@
                             </div>
                         </div>
                     </section>
-                    <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                        <h2 class="mb-10">收貨人資料</h2>
-                        <div class="form__group">
+                    <section class="cart__payment  col-6 col-lg-6 col-xs-12 block">
+                        <h2 class="block block__header__title block__header">收貨人資料</h2>
+                        <div class="pt-10 px-10 form__group">
                             <label
                                 for="receiverName"
                                 class="form__text mb-2 mr-3 "
@@ -194,17 +194,12 @@
                                         class="form__text"
                                     >儲存至我的地址</label>
                                 </div>
-                                <button
-                                    class="btn btn--fluid mb-xs-5"
-                                    @click="pageHandler"
-                                >確認付款</button>
                             </div>
                         </div>
                     </section>
                     <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                        <h2 class="mb-10">付款資料</h2>
-                        <div class="form__group">
-                            <div class="form__group">
+                        <h2 class="block block__header__title block__header">付款資料</h2>
+                            <div class="pt-10 px-10 form__group block">
                                 <label
                                     for="cardName"
                                     class="form__text mb-2 "
@@ -260,8 +255,14 @@
                                     ></input>
                                 </div>
                             </div>
-                        </div>
+                        
                     </section>
+                    <div class="col-6 col-lg-6 col-xs-12 block mt-20">
+                        <button
+                        class="btn btn--fluid mb-xs-5 "
+                        @click="pageHandler"
+                    >確認付款</button>
+                    </div>
                 </div>
             </div>
         </div>

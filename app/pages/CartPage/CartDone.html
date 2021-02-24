@@ -1,9 +1,9 @@
 <template id="cartDone">
-    <div class="container cart">
-        <div class="row cart__topfix">
-            <div class="cart__list cart__list--none w-100">
+    <div class="container cart ">
+        <div class="row cart__topfix block">
+            <div class="cart__list cart__list--none w-100 ">
                 <ul class="d-flex justify-content-between align-items-center w-100">
-                    <li class="h2">訂單明細</li>
+                    <li class="block__header__title">訂單明細</li>
                     <li>
                         <img
                             src="./assets/img/icon/icon-up.svg"
@@ -13,7 +13,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row ">
+        <div class="row  block">
             <ul class="d-flex w-100 cart__order">
                 <li>訂單編號： <span>1231231231</span></li>
                 <li>訂單金額： <span>762元</span></li>
@@ -23,10 +23,10 @@
                 <li>付款方式： <span>線上刷卡</span></li>
             </ul>
         </div>
-        <div class="row">
-            <div class="cart__list w-100">
+        <div class="row mt-20">
+            <div class="cart__list w-100 block">
                 <ul class="d-flex justify-content-between align-items-center w-100">
-                    <li class="h2">購買明細</li>
+                    <li class="block__header__title">購買明細</li>
                     <li>
                         <img
                             src="./assets/img/icon/icon-up.svg"
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="cart__group--dflex ">
-                    <p> NT$<span>195</span></p>
+                    <p class="font-black">  NT$<span>195</span></p>
                 </div>
                 <div class="cart__group--dflex">
                     <select
@@ -66,7 +66,7 @@
                     </select>
                 </div>
                 <div class="cart__group--dflex">
-                    <p> NT$<span>195</span> </p>
+                    <p class="font-black"> NT$<span>195</span> </p>
                     <p> <img
                             src=""
                             alt=""
@@ -82,8 +82,8 @@
             </div>
         </div>
         <div class="row w-100 pt-md-5 pt-20">
-            <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                <div class="form__group">
+            <section class="cart__payment  col-6 col-lg-6 col-xs-12 block">
+                <div class="form__group px-10 py-10">
                     <label
                         for="productTake"
                         class="form__text mb-2 h5"
@@ -133,8 +133,8 @@
                 </div>
             </section>
 
-            <section class="cart__payment  h5  col-6 col-lg-6 col-xs-12">
-                <header class="d-flex justify-content-center ">
+            <section class="cart__payment  h5  col-6 col-lg-6 col-xs-12 ">
+                <header class="d-flex justify-content-center px-5 py-10 block ">
                     <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
                         <p>商品花費點數</p>
                         <main class="cart__member">
@@ -145,22 +145,22 @@
                     <ul class="cart__moneyCount  w-50">
                         <li>
                             <p>商品總金額</p>
-                            <p>NT$<span>780</span></p>
+                            <p class="font-black">NT$<span>780</span></p>
                         </li>
                         <li>
                             <p>運費總計</p>
-                            <p>NT$<span>780</span></p>
+                            <p class="font-black">NT$<span>780</span></p>
                         </li>
                         <li>
-                            <p>折價卷折抵</p>
-                            <p>NT$<span>780</span></p>
+                            <p> 折價卷折抵</p>
+                            <p class="font-black"><span class="pr-5">-</span> NT$<span>780</span></p>
                         </li>
                     </ul>
 
                 </header>
                 <div>
-                    <ul class="cart__countTotal d-flex align-items-center mb-5">
-                        <li class="cart__pointCount d-flex flex-sm-wrap">
+                    <ul class="cart__countTotal d-flex align-items-center mb-5  px-5 py-5   block">
+                        <li class="cart__pointCount d-flex flex-sm-wrap ">
                             <p>總花費點數</p>
                             <main class="cart__member ">
                                 <p>Ni</p>
@@ -168,8 +168,8 @@
                             </main>
                         </li>
                         <li>
-                            <p>總金額</p>
-                            <p class="cart__TotalText ">NT$ <span>762</span> </p>
+                            <p class="pt-2">總金額</p>
+                            <p class="cart__member__price ">NT$ <span>762</span> </p>
                         </li>
                     </ul>
                 </div>
