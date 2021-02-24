@@ -4,8 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous"></script>
 <script src="./assets/js/all.js"></script>
 <title>Dictionary</title>
 </head>
@@ -29,7 +32,9 @@
     </div>
 
 
-    @@include('./components/VueHeader.html') @@include('./components/Pin.html') @@include('./pages/DictionaryPage/DictionaryPostItem.html') @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+    @@include('./components/VueHeader.html') @@include('./components/Pin.html')
+    @@include('./pages/DictionaryPage/DictionaryPostItem.html')
+    @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
 
     <script>
@@ -146,15 +151,44 @@
                 isModalShow: false,
             },
             mounted() {
-                this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
-                    .productId));
-                this.showProducts = this.products;
-                this.targetProduct = this.showProducts[0];
+
+                const getProductList = async () => {
+                    const productList = await axios.get(
+                        `./assets/php/frontend/getProductList.php`
+                    );
+                    return productList;
+                }
+                getProductList().then(res => {
+                    console.log(res.data);
+                    const fetchProductList = res.data.map(product => {
+                        return {
+                            name: product[`product_name`],
+                            eng: product['product_ename'],
+                            series: 'PM',
+                            seriesId: '01',
+                            imgURL: product['product_img'],
+                            displayImgURL: product['product_img1'],
+                            productId: product['product_id'],
+                            year: product['product_year'],
+                            description: product['product_des'],
+                            extraLabel: product['product_spec'],
+                        }
+                    })
+                    console.log(fetchProductList);
+                    this.products = fetchProductList;
+                    this.showProducts = this.products;
+                    this.targetProduct = this.showProducts[0];
+                }).catch(error => {
+                    console.log(error)
+                })
+                // this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
+                //     .productId));
+
             },
             computed: {
                 modalClass() {
                     if (this.isModalShow) {
-                        return 'modal text-left -active'
+                        return 'modal text-left modal-active'
                     } else {
                         return 'modal text-left '
                     }
@@ -278,7 +312,8 @@
                 searchShowProduct() {
 
                     // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
-                    const filteredList = this.products.filter(product => this.selectedSeriesFilter.indexOf(product.series) >= 0);
+                    const filteredList = this.products.filter(product => this.selectedSeriesFilter.indexOf(
+                        product.series) >= 0);
                     console.log(filteredList);
                     this.showProducts = filteredList;
                 },
