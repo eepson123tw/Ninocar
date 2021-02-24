@@ -262,6 +262,15 @@
                 //     width: 100%;
                 //     justify-content: flex-start;
                 // }
+                &__text {
+                    color: $blue;
+                    @extend .h4;
+                }
+                &__price {
+                    color: $coffee;
+                    font-weight: 900;
+                    @extend .h2;
+                }
                 &--align {
                     p {
                         position: relative;
@@ -417,8 +426,8 @@
                 //訂單明細 總花費區塊
                 border-top: 2px solid $gray-500;
                 justify-content: space-between;
+                align-items: center;
                 text-align: left;
-                padding: 30px 0px;
                 li {
                     display: flex;
                     width: 50%;
@@ -661,7 +670,7 @@
                 }
             }
             &__topfix {
-                margin-top: 150px;
+                margin-top: 50px;
                 @include rwd-sm {
                     margin-top: 60px;
                 }
