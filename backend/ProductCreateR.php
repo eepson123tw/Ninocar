@@ -1,5 +1,6 @@
 <?php
-    //include("./LoginCheck.php");
+    // include("LoginCheck.php");
+    include 'LoginCheck.php';
 
     //先判斷圖片是否上傳成功?
     if($_FILES["img"]["error"] > 0){
