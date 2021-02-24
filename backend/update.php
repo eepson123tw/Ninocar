@@ -1,16 +1,28 @@
-<?php include("head.php") ?>
+<?php
+    include("head.php");
+    include 'LoginCheck.php';
+
+    //建立SQL
+    $sql = "SELECT * FROM team1.product";
+
+    //執行
+    $statement = $Util->getPDO()->prepare($sql);
+
+    //給值
+    $statement->execute();
+    $data = $statement->fetchAll();
+?>
 <title>上架頁</title>
 </head>
 
 <body>
     <?php
-        include './API/LoginCheck.php';
         include '../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <div class="block-responsive">
             <main>
-                <form method="post" action="API/ProductCreateR.php" enctype="multipart/form-data">
+                <form method="post" action="ProductCreateR.php" enctype="multipart/form-data">
                     <div class="update mb-3">
                         <p>商品名稱：</p>
                         <input type="text" name="name">
