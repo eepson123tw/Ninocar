@@ -18,7 +18,7 @@
 
 <body>
     <?php
-        include '../pages/BackendPage/base.html';
+        include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <!-- update-button -->
@@ -47,8 +47,7 @@
                         <tr>
                             <td><?=$row["product_name"] ?></td>
                             <td>
-                                <!-- <img src="<?=$row['PictureName'] ?>" alt=""> -->
-                                <img src="../assets/img/3.jpg" alt="">
+                                <img src="<?=$row['product_img'] ?>" alt="">
                             </td>
                             <td><?=$row["product_series"] ?></td>
                             <td><?=$row["product_price"] ?></td>

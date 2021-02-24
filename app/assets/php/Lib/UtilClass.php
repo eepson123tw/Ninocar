@@ -5,7 +5,7 @@
         function getFilePath(){
             //Web根目錄真實路徑
             $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
-            return $ServerRoot."/T1/backend";
+            return $ServerRoot."/T1/dist";
         }
 
         //取得PDO物件
@@ -13,7 +13,7 @@
             // $db_host = "127.0.0.1";
             $db_host = "localhost";
             $db_user = "root";
-            $db_pass = "WD01002";
+            $db_pass = "password";
             $db_select = "team1";
        
             //建立資料庫連線物件
