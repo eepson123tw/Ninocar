@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-4 col-lg-4 login-body">
 
-                <form class="text-center form-box" method="post" action="./API/LoginR.php">
+                <form class="text-center form-box" method="post" action="LoginR.php">
                     <h1 class="title text-center mb-6 h1">後台入口</h1>
 
                     <div class="form-input mb-3">
