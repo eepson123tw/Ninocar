@@ -1151,7 +1151,7 @@
         let countStep = 0;
         let docW = $(document).width();
         $('.nextStep').click(() => {
-            // console.log("countStep: "+ countStep)
+            console.log("nextStep is clicked! countStep: "+ countStep)
             // console.log(docW)
 
             if ($('.nextStep').hasClass('btn--disabled')) {
@@ -1181,9 +1181,9 @@
                     $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
 
                     //進度條變色
-                    $('.content:nth-child(2) .circle').css({"background-color": "#E59807"})
+                    // $('.content:nth-child(2) .circle').css({"background-color": "#E59807"})
                     $('.content:nth-child(2) .circle').addClass('circle--able')
-
+                    $('.content:nth-child(2) .circle').addClass('circle--active')
 
                     if (docW > 1003) {
                         $('.bar-front').width(240)
@@ -1207,9 +1207,9 @@
                     $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
 
                     //進度條變色
-                    $('.content:nth-child(3) .circle').css({"background-color": "#E59807"})
+                    // $('.content:nth-child(3) .circle').css({"background-color": "#E59807"})
                     $('.content:nth-child(3) .circle').addClass('circle--able')
-
+                    $('.content:nth-child(3) .circle').addClass('circle--active')
 
                     if (docW > 1003) {
                         $('.bar-front').width(480)
@@ -1240,8 +1240,9 @@
                     })
 
                     //進度條變色
-                    $('.content:nth-child(4) .circle').css({"background-color": "#E59807"})
+                    // $('.content:nth-child(4) .circle').css({"background-color": "#E59807"})
                     $('.content:nth-child(4) .circle').addClass('circle--able')
+                    $('.content:nth-child(4) .circle').addClass('circle--active')
 
 
                     if (docW > 1003) {
@@ -1272,7 +1273,9 @@
                     $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
 
                     //進度條變色
-                    $('.content:nth-child(5) .circle').css({"background-color": "#E59807"})
+                    // $('.content:nth-child(5) .circle').css({"background-color": "#E59807"})
+                    $('.content:nth-child(5) .circle').addClass('circle--able')
+                    $('.content:nth-child(5) .circle').addClass('circle--active')
 
                     if(docW > 1003){
                         $('.bar-front').width(960) 
@@ -1296,7 +1299,7 @@
         //上一步
         $('.previousStep').click(function() {
             countStep -= 1
-                // console.log(countStep)
+            console.log("previousStep is clicked! countStep: " + countStep)
 
             if (countStep % 5 == 0) {
                 $('.colorCards').css({"display": "none"})
@@ -1304,6 +1307,8 @@
                 $('.shapeCard').css({"display": "block"})
 
                 $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+
+                $('.previousStep').addClass('invisible')
 
                 if (docW > 1003) {
                         $('.bar-front').width(0)
@@ -2028,7 +2033,7 @@
             pic3.src = './assets/img/pic/tire04B.png'; //輪子4
             pic3.addEventListener('load', function() {
                 context.globalAlpha = 1;
-                context.drawImage(pic3, 0, -100);
+                context.drawImage(pic3, 5, -105);
             })
         })
 
@@ -2180,8 +2185,6 @@
             }        
         })
 
-
-
         // -----------------------CANVAS取得base64---------------------------
         $('.nextStep').click(function() {
             if (countStep % 5 == 4) {
@@ -2270,6 +2273,85 @@
                 //PO完後出現「X則回覆」
                 $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
         })
+
+        // //按了circle-able，回到上一個步驟(按一次往前一步)
+        $('.circle').click(() => {
+            console.log("countStep: " + countStep)
+
+            if(countStep % 5 == 1){
+              console.log('回去第1步，countStep=0') 
+                countStep--
+
+                $('.colorCards').css({"display":"none"})
+                $('.shapeCards').css({"display":"flex"})
+                $('.shapeCard').css({"display":"block"})
+
+                //去除顏色，變不能點
+                $('.content:nth-child(2) .circle').removeClass('circle--able')
+                $('.content:nth-child(2) .circle').removeClass('circle--active')
+
+                //進度條變短
+                if (docW > 1003) {
+                    $('.bar-front').width(0)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(0)
+                }
+
+            }else if(countStep % 5 == 2){
+              console.log('回去第2步') 
+                countStep--
+
+                $('.tireCards').css({"display":"none"})
+                $('.colorCards').css({"display":"flex"})
+                $('.colorCard').css({"display":"block"})
+
+                $('.content:nth-child(3) .circle').removeClass('circle--able')
+                $('.content:nth-child(3) .circle').removeClass('circle--active')
+
+                //進度條變短
+                if (docW > 1003) {
+                    $('.bar-front').width(240)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(220)
+                }
+
+            }else if(countStep % 5 == 3){
+              console.log('回去第3步') 
+                countStep--
+                
+                $('.accessoryCards').css({"display":"none"})
+                $('.tireCards').css({"display":"flex"})
+                $('.tireCard').css({"display":"block"})
+
+                $('.content:nth-child(4) .circle').removeClass('circle--able')
+                $('.content:nth-child(4) .circle').removeClass('circle--active')
+
+                //進度條變短
+                if (docW > 1003) {
+                    $('.bar-front').width(480)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(440)
+                }
+            }else if(countStep % 5 == 4){
+               console.log('回去第4步') 
+               countStep--
+
+               $('.giveName').css({"display":"none"});
+               $('.accessoryCards').css({"display":"flex"})
+               $('.accessoryCard').css({"display":"block"})
+
+               $('.content:nth-child(5) .circle').removeClass('circle--able')
+               $('.content:nth-child(5) .circle').removeClass('circle--active')
+
+                //進度條變短
+                if (docW > 1003) {
+                    $('.bar-front').width(730)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(660)
+                }
+            }
+        })
+
 
     </script>
 </body>

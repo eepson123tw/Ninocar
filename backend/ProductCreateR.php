@@ -4,7 +4,8 @@
 
     //先判斷圖片是否上傳成功?
     if($_FILES["img"]["error"] > 0){
-        echo "上傳失敗: 錯誤代碼".$_FILES["img"]["error"];
+        // echo "上傳失敗: 錯誤代碼".$_FILES["img"]["error"];
+        echo "<script>alert('上傳失敗'); location.href = 'update.php';</script>";
     }else{
         //Server上的暫存檔路徑含檔名
         $filePath_Temp = $_FILES["img"]["tmp_name"];
@@ -65,9 +66,9 @@
 
             //導頁
             //header("Location: Index.php");
-            echo "<script>alert('新增成功!'); location.href = '../commodity.php';</script>";
+            echo "<script>alert('新增成功!'); location.href = 'update.php';</script>";
         }else{
-            echo "拷貝/移動上傳圖片失敗";
+            echo "<script>alert('拷貝/移動上傳圖片失敗'); location.href = 'update.php';</script>";
         }
     }
 
