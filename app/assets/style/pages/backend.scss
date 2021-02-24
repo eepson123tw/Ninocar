@@ -49,7 +49,7 @@ header {
 }
 
 .left_area h3 {
-  color: $white;
+  color: $black;
   margin: 0;
   text-transform: uppercase;
   font-size: 22px;
@@ -57,20 +57,25 @@ header {
 }
 
 .logout_btn {
-  padding: 5px;
-  background: $secondary;
+  // padding: 5px;
+  text-align: center;
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid $black;
   text-decoration: none;
   float: right;
   margin-top: -30px;
   margin-right: 40px;
-  border-radius: 2px;
   font-size: 15px;
   font-weight: 600;
-  color: $white;
+  color: $black;
   transition: 0.5s;
-  transition-property: background;
+  // transition-property: background;
   &:hover {
-    background: $secondary-dark;
+    background: $gray-300;
   }
 }
 
@@ -81,7 +86,7 @@ header {
 .sidebar {
   z-index: 1;
   top: 0;
-  background: $secondary;
+  background: $gray-300;
   margin-top: 70px;
   padding-top: 30px;
   position: fixed;
@@ -108,13 +113,13 @@ header {
 }
 
 .sidebar .profile_info h4 {
-  color: $white;
+  color: $black;
   margin-top: 0;
   margin-bottom: 20px;
 }
 
 .sidebar a {
-  color: $white;
+  color: $black;
   display: block;
   width: 100%;
   line-height: 60px;
@@ -124,7 +129,7 @@ header {
   transition: 0.5s;
   // transition-property: background;
   &:hover {
-    background: $secondary-dark;
+    background: $primary;
   }
 }
 
@@ -166,7 +171,6 @@ label #sidebar_btn {
   margin-top: 7rem;
   padding: 20px;
   margin-left: 250px;
-  // background: url(background.png) no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -177,7 +181,7 @@ label #sidebar_btn {
     margin: 0 auto;
     margin-bottom: 1rem;
     button {
-      border-radius: 50px;
+      border-radius: 5px;
       cursor: pointer;
       padding: 0.6rem 1rem;
       background: $secondary;
@@ -241,7 +245,7 @@ label #sidebar_btn {
   }
 
   .nav_bar {
-    background: $secondary;
+    background: $gray-300;
     width: 100%;
     margin-top: 70px;
     display: flex;
@@ -257,36 +261,33 @@ label #sidebar_btn {
   }
 
   .nav_bar .nav_btn {
-    color: $white;
+    color: $black;
     font-size: 22px;
     cursor: pointer;
     transition: 0.5s;
     transition-property: color;
-  }
-
-  .nav_bar .nav_btn:hover {
-    color: $secondary-dark;
+    &:hover {
+      color: $primary;
+    }
   }
 
   .mobile_nav_items {
-    background: $secondary;
+    background: $gray-300;
     display: none;
-  }
-
-  .mobile_nav_items a {
-    color: $white;
-    display: block;
-    text-align: center;
-    letter-spacing: 1px;
-    line-height: 60px;
-    text-decoration: none;
-    box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: background;
-  }
-
-  .mobile_nav_items a:hover {
-    background: $secondary-dark;
+    a {
+      color: $black;
+      display: block;
+      text-align: center;
+      letter-spacing: 1px;
+      line-height: 60px;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: 0.5s;
+      // transition-property: background;
+      &:hover {
+        background: $primary;
+      }
+    }
   }
 
   .mobile_nav_items i {
@@ -318,31 +319,31 @@ table {
   border-collapse: collapse;
   thead {
     th {
-      background: $secondary;
+      background: $white;
       font-size: 16px;
-      color: $white;
+      color: $black;
       vertical-align: middle;
       font-weight: 400;
       text-transform: capitalize;
       line-height: 1;
       padding: 22px 40px;
       white-space: nowrap;
+      border-bottom: 3px solid $primary;
     }
   }
   tbody {
     box-sizing: border-box;
     tr:nth-of-type(odd) {
-      background-color: $primary-light;
+      background-color: $white;
     }
     tr:nth-of-type(even) {
-      background-color: $primary;
+      background-color: $gray-300;
     }
   }
 }
 
 td {
   padding: 12px 40px;
-  // padding: 1.5rem;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
@@ -360,21 +361,17 @@ td {
 // block
 
 .block-responsive {
-  // display: block;
-  // overflow-x: auto;
   width: 90%;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 10px;
   background: $secondary;
   display: flex;
-  // flex-direction: column;
   main {
     width: 70%;
     display: flex;
     flex-direction: column;
     color: $white;
-    // align-items: flex-end;
     .update {
       display: flex;
       max-height: 2rem;
@@ -385,7 +382,6 @@ td {
         display: block;
         width: 70%;
         border: none;
-        // cursor: pointer;
       }
       select,
       textarea {
@@ -393,11 +389,6 @@ td {
         width: 70%;
         border: none;
       }
-      // textarea {
-      //   display: block;
-      //   width: 70%;
-      //   border: none;
-      // }
       button {
         text-align: center;
         width: 5rem;
