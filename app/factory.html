@@ -163,7 +163,7 @@
                                     </div>
                                     <p class="makeCar-name">紫</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectColor">選擇此烤漆</button>
+                                    <button class="btn btn--fluid btn--outline selectColor selectPurple">選擇此烤漆</button>
                                 </li>
                             </div>
 
@@ -199,11 +199,11 @@
 
                                 <li class="tireCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
-                                        <img src="./assets/img/pic/tire03.png" class="tire">
+                                        <img src="./assets/img/pic/tire04.png" class="tire">
                                     </div>
-                                    <p class="makeCar-name">經典款輪子</p>
+                                    <p class="makeCar-name">時尚款輪子</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectTire">選擇此車輪</button>
+                                    <button class="btn btn--fluid btn--outline selectTire selectT4">選擇此車輪</button>
                                 </li>
                             </div>
 
@@ -1109,7 +1109,7 @@
 
         //選擇後「下一步」變able、提醒先做選則才進入下一步的提示消失
         // 選擇的項目標示顏色、單選的情況其他沒選的不標色
-        $('.selectShape').click(function() {
+        $('.selectShape').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
 
@@ -1120,7 +1120,7 @@
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectColor').click(function() {
+        $('.selectColor').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({
                 "display": "none"
@@ -1131,7 +1131,7 @@
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectTire').click(function() {
+        $('.selectTire').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
 
@@ -1140,7 +1140,7 @@
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
-        $('.selectAccessory').click(function() {
+        $('.selectAccessory').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
 
@@ -1150,7 +1150,7 @@
         //點下一步後跳到選色步驟、跳選輪子步驟
         let countStep = 0;
         let docW = $(document).width();
-        $('.nextStep').click(function() {
+        $('.nextStep').click(() => {
             // console.log("countStep: "+ countStep)
             // console.log(docW)
 
@@ -1158,7 +1158,7 @@
 
                 $('.pleaseSelect').css({"display": "block"})
 
-                setTimeout(function() {
+                setTimeout(() => {
                     $('.pleaseSelect').css({"display": "none"})
                 }, 1000);
             } else {
@@ -1446,81 +1446,158 @@
                         </div>
                     </li>`
 
-
-                    // <div class="closeTextarea">
-                    //         <p class="h5 textareaWord">關閉輸入框</p>
-                    //         <img src="./assets/img/icon/icon-up.svg" class="icon toggleIcon3">
-                    // </div>
-
                 //PO到我的車車
                 $('.emptyState').css({"display": "none"})
                 $('.mywork .putMywork').append(x)
 
-                //PO完後清空
+                //PO完後清空填寫的資料
                 $('.typeWorkName').val('')
                 $('.typeNickName').val('')
                 $('.typeInspiration').val('')
 
                 //PO完回到第一頁
-                $('.makeCar').css({
-                    "display": "none"
-                })
+                $('.makeCar').css({"display": "none"})
                 $('.giveName').css({
                     "display": "none"
                 })
-                $('.selectArea').css({
-                    "display": "block"
-                })
-                $('.selectBtn').css({
-                    "display": "flex"
-                })
+                $('.selectArea').css({"display": "block"})
+                $('.selectBtn').css({"display": "flex"})
 
-                $('.shapeCards').css({
-                    "display": "flex"
-                })
-                $('.shapeCard').css({
-                    "display": "block"
-                })
+                $('.shapeCards').css({"display": "flex"})
+                $('.shapeCard').css({"display": "block"})
 
-                $('.colorCards').css({
-                    "display": "none"
-                })
-                $('.tireCards').css({
-                    "display": "none"
-                })
-                $('.accessoryCards').css({
-                    "display": "none"
-                })
+                $('.colorCards').css({"display": "none"})
+                $('.tireCards').css({"display": "none"})
+                $('.accessoryCards').css({"display": "none"})
 
-                $('.intro').css({
-                        "display": "flex"
-                    })
+                $('.intro').css({"display": "flex"})
 
                 let count6 = 0;
                 $('.closeTextarea').click(function() {
-                        // console.log('關掉textarea')
+                    // console.log('關掉textarea')
+                    $(this).parent().children('.typeReply').slideToggle();
+                    count6 += 1;
+                    // console.log(count6);
+                    if (count6 % 2 == 1) {
+                        $(this).children('.textareaWord').text('打開輸入框');
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        $(this).children('.textareaWord').text('關閉輸入框');
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+                }) 
+                
+                //PO完後再跑一次這段，讓我的作品的goodIcon mouseover時有反應
+                $('.goodIcon').mouseover((e) => {
+                    // console.log('變色')
+                    $(e.target).children('g').children('path').addClass('pin--secondary')            
+                })
 
-                        $(this).parent().children('.typeReply').slideToggle();
+                $('.goodIcon').mouseout((e) => {
+                    // console.log('變回去')
+                    $(e.target).children('g').children('path').removeClass('pin--secondary')         
+                })
 
-                        count6 += 1;
-                        // console.log(count6);
+                ////PO完後再跑一次這段
+                // $('.comment').click(() => {
+                //     console.log(this)
+                //     let commentContentL = $(this).parent().parent().children('.textarea').val().length;
+                //     let commentContent = $(this).parent().parent().children('.textarea').val();
 
-                        if (count6 % 2 == 1) {
-                            $(this).children('.textareaWord').text('打開輸入框');
+                //     let A = $(this).parent();
+                //     console.log(A)
 
-                            $(this).children('.toggleIcon3').css({
-                                "transform": "rotate(180deg)",
-                            })
-                        } else {
-                            $(this).children('.textareaWord').text('關閉輸入框');
 
-                            $(this).children('.toggleIcon3').css({
-                                "transform": "rotate(0deg)",
-                            })
-                        }
-                    }) //
+                //     let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
+                //     console.log(replyerPic)
+
+                //     let replyerName = $(this).parent().parent().children('.replyerName').text();
+                //     console.log(replyerName)
+
+                //     if (commentContentL < 1) { //沒有打字的時候
+                //         $(this).parent().parent().children('.textarea').css({"border": "1px solid red",}) //紅框
+                //     } else { //有打字的時候
+                //         $(this).parent().parent().children('.textarea').css({"border": "1px solid #000",}) //黑框
+                    
+                //         //PO留言
+                //         $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
+                //           <div class="userContext">
+                //               <img src="${replyerPic}"  class="userPic">
+                //               <div class="userContext_top">
+                //                   <p class="userName h6">${replyerName}</p>
+                //                   <p class="userContent h5">${commentContent}</p>
+                //                   <div class="other">
+                //                       <p class="postTime h6">3小時前</p>
+                //                       <div>                                
+                //                           <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                //                           <button class="btn btn--link report h5">檢舉</button>
+                //                       </div>
+                //                   </div>
+                //               </div>
+                //           </div></div>`)
+                      
+                //         $(this).parent().parent().children('.textarea').val('');
+                //         $(this).parent().children('.textCount').text(`餘${textMax}字`);
+                //     }
+                // })
+
+                $('.comment').click(function() {
+                    let textLength = $(this).parent().parent().children('.textarea').val().length;
+
+                    if (textLength < 1) {
+                        // console.log('no text')
+                        $(this).parent().parent().children('.textarea').css({
+                            "border": "1px solid red",
+                        })
+                    } else {
+                        // console.log('ok')
+                        $(this).parent().parent().children('.textarea').css({
+                            "border": "1px solid #000",
+                        })
+                    }
+                })
+
+                $('.comment').click(function() {
+                    let commentContentL = $(this).parent().parent().children('.textarea').val().length;
+                    let commentContent = $(this).parent().parent().children('.textarea').val();
+                    
+                    let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
+                    // console.log(replyerPic)
+                    
+                    let replyerName = $(this).parent().parent().children('.replyerName').text();
+                    // console.log(replyerName)
+                    
+                    
+                    if (commentContentL > 0) {
+                        $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
+                                <div class="userContext">
+                                    <img src="${replyerPic}"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">${replyerName}</p>
+                                        <p class="userContent h5">${commentContent}</p>
+                                        <div class="other">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`)
+                        
+                        $(this).parent().parent().children('.textarea').val('');
+                        $(this).parent().children('.textCount').text(`餘${textMax}字`);
+                    }
+                })
             }
         })
+
+        // <button class="btn btn--link report h5">檢舉</button>
 
         //完成資料輸入後按鈕自動變able、移除提示
         $('.giveName').change(function() {
@@ -1548,7 +1625,6 @@
             // console.log(ran2)
 
             $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
-
         })
 
         let countL = 0;
@@ -1594,7 +1670,6 @@
             countR += 1;
             console.log('countR: '+ countR);
             // console.log('docW: '+ docW)
-
 
             let shapeLength = $('.shapeCard').length
                 // console.log(shapeLength)
@@ -1644,7 +1719,6 @@
                     });
                 }
             }
-
         })
 
         //點留言後PO出留言
@@ -1895,7 +1969,30 @@
                     context.drawImage(pic2, -1, -117);
                 })
             }
+        })
 
+        $('.selectPurple').click(function() {
+            let pic2 = new Image();
+
+            if (shapeIndex == 0) {
+                pic2.src = './assets/img/pic/color5A.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color5B.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color5C.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         //疊上輪子
@@ -1920,6 +2017,15 @@
         $('.selectT3').click(function() {
             let pic3 = new Image();
             pic3.src = './assets/img/pic/tire03.png'; //輪子3
+            pic3.addEventListener('load', function() {
+                context.globalAlpha = 1;
+                context.drawImage(pic3, 0, -100);
+            })
+        })
+
+        $('.selectT4').click(function() {
+            let pic3 = new Image();
+            pic3.src = './assets/img/pic/tire04B.png'; //輪子4
             pic3.addEventListener('load', function() {
                 context.globalAlpha = 1;
                 context.drawImage(pic3, 0, -100);
@@ -2097,19 +2203,19 @@
         })
 
         $('.modal__close').click(() => {
-            console.log('關掉')
+            // console.log('關掉')
             $('.modal').removeClass('modal-active');
         })
 
 
         //mouseover在Icon時svg變色
         $('.goodIcon').mouseover((e) => {
-            // console.log('變色')
+            console.log('變色')
             $(e.target).children('g').children('path').addClass('pin--secondary')            
         })
 
         $('.goodIcon').mouseout((e) => {
-            // console.log('變回去')
+            console.log('變回去')
             $(e.target).children('g').children('path').removeClass('pin--secondary')         
         })
 
@@ -2165,7 +2271,6 @@
                 $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
         })
 
-        // $('.finish').click(() => {})
     </script>
 </body>
 
