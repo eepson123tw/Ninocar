@@ -1144,9 +1144,7 @@
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
 
-            
-            
-            // $(this).parent().siblings().children('.btn').addClass('btn--outline')
+            // $(this).parent().siblings().children('.btn').addClass('btn--outline') // 單選才需要這個
         })
 
         //點下一步後跳到選色步驟、跳選輪子步驟
@@ -1194,6 +1192,7 @@
                     }
 
                 } else if (countStep % 5  == 2) {
+
                     console.log(countStep)
 
                     $('.nextStep').addClass('btn--disabled')
@@ -1219,6 +1218,13 @@
                     }
 
                 } else if (countStep % 5  == 3) {
+                    if(shapeIndex != 0){
+                        console.log('讓尾翼不能選')
+                        $('.selectA6').addClass('btn--disabled')
+                        $('.selectA6').removeClass('btn--outline')
+                        $('.selectA6').css({"pointer-events":"none"})
+                    }
+
                     console.log(countStep)
 
                     $('.nextStep').addClass('btn--disabled')
@@ -1438,12 +1444,13 @@
                               </div>
                             </div>
                         </div>
-
-                        <div class="closeTextarea">
-                            <p class="h5 textareaWord">關閉輸入框</p>
-                            <img src="./assets/img/icon/icon-up.svg" class="icon toggleIcon3">
-                        </div>
                     </li>`
+
+
+                    // <div class="closeTextarea">
+                    //         <p class="h5 textareaWord">關閉輸入框</p>
+                    //         <img src="./assets/img/icon/icon-up.svg" class="icon toggleIcon3">
+                    // </div>
 
                 //PO到我的車車
                 $('.emptyState').css({"display": "none"})
@@ -1714,17 +1721,37 @@
             state3Price2 = $('.totalPrice').text(`NT$ ${state3Price}`)
         })
 
+
+        //計算零件的金額
+
         $('.selectAccessory').click(function() {
             let state4Price0 = $('.totalPrice').text().split(' ')[1]
             // console.log(state4Price0)
 
-            let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
-            // console.log("accessoryPrice: " + accessoryPrice);
+            if($(this).hasClass('btn--outline')){ //當從沒選零件變成有選零件的時候加錢
+                let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+                // console.log("accessoryPrice: " + accessoryPrice);
+                
+                let stage4Price = parseInt(state4Price0) + parseInt(accessoryPrice)
+                // console.log("stage4:" + stage4Price)
+                
+                let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
+            
+                
+            }else{ //當從有選零件變成沒選零件時，扣掉原本加上去的錢
+                let state4Price1 = $('.totalPrice').text().split(' ')[1]
+                console.log(state4Price1)
 
-            let stage4Price = parseInt(state4Price0) + parseInt(accessoryPrice)
-            // console.log("stage4:" + stage4Price)
+                let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
+                
+                let stage4Price = parseInt(state4Price1) - parseInt(accessoryPrice)
 
-            let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
+                let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
+
+            }
+
+
+
         })
 
         // -------------------------------------CANVAS--------------------------------------------

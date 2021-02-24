@@ -284,7 +284,10 @@
         computed: {
             modalLoginClass() {
                 if (this.state) {
-                    return 'modal-active'
+                    return {
+                        modal:true,
+                        "modal-active":true
+                    }
                 } else {
                     return 'modal '
                 }
