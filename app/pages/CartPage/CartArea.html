@@ -88,11 +88,9 @@
                         </div>
                         <label for="coupon" class="form__text mb-2 h5">使用優惠卷</label>
                         <div class="form__section mb-5">
-                            <select name="" id="coupon" class="form__select cart__select">
-                                <option value="">註冊新會員結帳享9折優惠！</option>
-                                <option value="">白金會員太牛了享8折優惠！</option>
-                                <option value="">老闆跳樓拉免運費！</option>
-                                <option value="">本月壽星你最大享5折優惠！</option>
+                            <select  id="coupon" class="form__select cart__select" v-model="selectCupon" @change='countDiscount' >
+                                <option value="" disabled>請選擇</option>
+                                <option v-for="(value,objvalue) of cuponList">{{value}}</option>
                             </select>
                         </div>
                     </div>
@@ -116,17 +114,17 @@
                                 </li>
                                 <li>
                                     <p>運費總計</p>
-                                    <p class="font-black">NT$<span>780</span></p>
+                                    <p class="font-black">NT$<span>{{sendPrice}}</span></p>
                                 </li>
                                 <li>
                                     <p>折價卷折抵</p>
-                                    <p class="font-black"><span class="font-black pr-3">-</span>NT$<span>780</span></p>
+                                    <p class="font-black"><span class="font-black pr-3">-</span>NT$<span>{{discountPrice}}</span></p>
                                 </li>
                             </ul>
 
                         </header>
                         <div>
-                            <ul class="cart__countTotal d-flex align-items-center    mb-5">
+                            <ul class="cart__countTotal d-flex align-items-center ">
                                 <li class="cart__pointCount d-flex flex-sm-wrap">
                                     <p>總花費點數</p>
                                     <main class="cart__member ">
@@ -136,7 +134,7 @@
                                 </li>
                                 <li>
                                     <p>總金額</p>
-                                    <p class="cart__TotalText font-black" >NT$ <span>{{totalMoneyCost}}</span> </p>
+                                    <p class="cart__TotalText font-black" >NT$ <span>{{totalCount}}</span> </p>
                                 </li>
                             </ul>
                         </div>
@@ -250,13 +248,30 @@
         props: ['list', 'IsExist', 'current'],
         data() {
             return {
+                //購買清單
                 buyerList: this.list,
+                //購買清單是否存在
                 listIsExist: this.IsExist,
+                // 選擇的數量
                 number: "",
+                // 初始全部金額
                 totalProductNum: null,
                 totalPointCost: null,
                 totalMoneyCost: null,
+                // 目前頁面
                 currentdata: this.current,
+
+                // 折價卷種類
+                cuponList: {
+                    discountOne: "註冊新會員結帳享9折優惠！",
+                    discountTwo: "白金會員太牛了享8折優惠！",
+                    discountThree: "老闆跳樓拉免運費！",
+                    discountFour: '本月壽星你最大享5折優惠！',
+                },
+                //選擇cupon
+                selectCupon: "",
+                discountPrice: 0,
+                sendPrice: 0,
             }
         },
         mounted() {
@@ -284,7 +299,7 @@
         methods: {
             pageHandler() {
                 this.currentdata += 1;
-
+                confirm(`確認結帳!!`);
                 this.$emit('data-handler', this.currentdata)
             },
             changeNum(listIndex, e) {
@@ -316,30 +331,45 @@
                 this.totalMoneyCost = 0;
 
                 for (listNum in this.buyerList) {
-
                     this.totalProductNum += this.buyerList[listNum].productNum;
-
                     if (this.buyerList[listNum].pointProduct) {
-
                         this.totalPointCost += this.buyerList[listNum].totalPrice;
                     }
-
                     if (!this.buyerList[listNum].pointProduct) {
                         this.totalMoneyCost += this.buyerList[listNum].totalPrice;
                     }
 
-
                 };
+            },
+            countDiscount() {
+                // 折扣選取器
+                for (let key in this.cuponList) {
+                    if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
+                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
+                    }
+                    if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
+                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
+                    }
+                    if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
+                        this.sendPrice = 0;
+                    }
+                    if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
+                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
+                    }
+
+                }
+
+
+                // this.cuponList['']
             }
-
-
         },
         computed: {
 
-            // deleteAllHandler() {
-            //     return this.buyerList = "";
-            // },
+            totalCount() {
 
+                return this.totalMoneyCost - this.discountPrice;
+
+            }
 
         }
 
