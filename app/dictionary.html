@@ -47,7 +47,7 @@
                 showProductList: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
-                searchType: '分類搜尋',
+                searchType: 'keyword',
                 navClassName: {
                     'all': true,
                     'my': false
@@ -83,7 +83,7 @@
                 labelList: ['無限定', '期間限定', '點數限定'],
                 selectedFilter: {
                     selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                    selectedPriceList: [1, 2, 3],
+                    selectedPriceList: ['100~200', '200~300'],
                     selectedYearList: [1970, 1990, 2010],
                     selectedLimitList: [0, 1, 2],
                 },
@@ -155,7 +155,12 @@
                             className: 'badge bg-blue'
                         };
                     }
-                }
+                },
+                priceAllCheck() {
+                    if (this.selectedFilter.selectedPriceList.length === this.priceList.length) {
+                        return
+                    }
+                },
 
             },
             methods: {
@@ -164,12 +169,14 @@
                         filter.splice(0);
                     }
                 },
-                handlePriceAllCheck() {
-                    if (selectedFilter.selectedPriceList.length === priceList.length) {
-                        this.selectedFilter.selectedPriceList.splice(0)
-                    } else {
-                        this.selectedFilter = this.priceList.map(e => e);
-                    }
+                handleAllCheck(selectedList, standardList) {
+                    console.log(selectedList.length)
+                    console.log(standardList.length)
+                    // if (selectedList.length === standardList.length) {
+                    //     this.selectedFilter.selectedPriceList.splice(0)
+                    // } else {
+                    //     this.selectedFilter = this.priceList.map(e => e);
+                    // }
                 },
                 // handleAllCheckYear() {
                 //     if (this.selectedYearFilter.length === 3) {
@@ -208,9 +215,6 @@
                 },
                 isPostPin(theProductId) {
                     return this.memberOwnProductIdList.indexOf(theProductId);
-                },
-                handleSearchTypeChange() {
-                    this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
                 },
                 handleNavBarChange(filter) {
                     if (filter === 'my') {
