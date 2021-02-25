@@ -1,4 +1,10 @@
-const { src, series, dest, parallel, watch } = require('gulp');
+const {
+    src,
+    series,
+    dest,
+    parallel,
+    watch
+} = require('gulp');
 
 const concat = require('gulp-concat');
 const fileInclude = require('gulp-file-include');
@@ -19,6 +25,14 @@ function concatJSAndMove() {
 
 function moveJS() {
     return src('app/assets/js/**/*.js').pipe(dest('dist/assets/js/'));
+}
+
+function movePHP() {
+    return src('app/assets/php/**/*.php').pipe(dest('dist/assets/php/'));
+}
+
+function moveBackendFiles() {
+    return src('app/backend/**/*.php').pipe(dest('dist/backend'));
 }
 
 function commonStyle() {
@@ -57,7 +71,10 @@ function includeHTML() {
 }
 
 function killDist() {
-    return src('dist', { read: false, allowEmpty: true }).pipe(
+    return src('dist', {
+        read: false,
+        allowEmpty: true
+    }).pipe(
         clean({
             force: true,
         })
@@ -65,7 +82,7 @@ function killDist() {
 }
 
 exports.kill = killDist;
-exports.u = series(killDist, parallel(moveImg, moveJS, commonStyle, pageStyle, includeHTML));
+exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, includeHTML));
 
 exports.browser = function browsersync() {
     browserSync.init({
@@ -85,6 +102,8 @@ exports.browser = function browsersync() {
     watch('app/**/*.html', includeHTML).on('change', reload);
     watch('app/assets/img/**/*', moveImg).on('change', reload);
     watch('app/assets/js/**/*.js', moveJS).on('change', reload);
+    watch('app/assets/php/**/*.php', movePHP).on('change', reload);
+    watch('app/backend/**/*.php', moveBackendFiles).on('change', reload);
 };
 
 exports.w = function watchFiles() {
@@ -93,6 +112,8 @@ exports.w = function watchFiles() {
     watch('app/**/*.html', includeHTML);
     watch('app/assets/img/**/*', moveImg);
     watch('app/assets/js/**/*.js', moveJS);
+    watch('app/assets/php/**/*.php', movePHP);
+    watch('app/backend/**/*.php', moveBackendFiles);
 };
 
 

@@ -27,7 +27,7 @@
                     <nav>
                         <ul class="d-flex align-items-center">
                             <li class="lg-1" v-if="isLogin">
-                                <a href="membermain.html" aria-label=”member”>
+                                <a href="membermain.html" aria-label="member">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(3 6.5)">
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
-                                <a href="MemberNotice.html" aria-label=”message”>
+                                <a href="MemberNotice.html" aria-label="message">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                         class="icon">
                                         <g transform="translate(6.473 4.772)">
@@ -69,7 +69,7 @@
                                 <button class="header__btn" @click="isLoginModalShow=true">登入 / 註冊</button>
                             </li>
                             <li class="ml-10 ml-sm-5 lh-1">
-                                <svg role="button" aria-label=”menu” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                <svg role="button" aria-label="menu" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                     viewBox="0 0 50 50" class="icon"  v-if="!isMenuShow" @click="isMenuShow=true">
                                     <circle cx="25" cy="25" r="23" fill="none" stroke="#522613" stroke-width="4"
                                         class="hover-fill-white" />
@@ -80,7 +80,7 @@
                                     <line x1="15" y1="32" x2="35" y2="32" stroke="#522613" stroke-width="4"
                                         stroke-linecap="round" />
                                 </svg>
-                                <svg role="button" aria-label=”close” xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                <svg role="button" aria-label="close" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                     viewBox="0 0 50 50" class="icon close-icon" v-if="isMenuShow" @click="isMenuShow=false">
                                     <circle cx="25" cy="25" r="23" fill="#fff" stroke="#522613" stroke-width="4"/>
                                     <line x1="15" y1="15" x2="35" y2="35" stroke="#522613" stroke-width="4"
@@ -97,7 +97,7 @@
             <transition name="collapse">
                 <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
             </transition>
-            <div class="modal -active" v-if="isMenuShow" @click="isMenuShow=false"></div>
+            <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
         </header>
         `,
         data() {
@@ -174,7 +174,7 @@
             <nav class="link-group">
                 <ul>
                     <li>
-                        <a href="cart.html" aria-label=”cart”>
+                        <a href="cart.html" aria-label="cart">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -190,7 +190,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" aria-label=”top” v-show="isTopBtnVisible" @click.prevent="scrollTop">
+                        <a href="#" aria-label="top" v-show="isTopBtnVisible" @click.prevent="scrollTop">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-1660 -805)">
                                     <g transform="translate(76 -122.041)">
@@ -284,7 +284,10 @@
         computed: {
             modalLoginClass() {
                 if (this.state) {
-                    return 'modal -active'
+                    return {
+                        modal: true,
+                        "modal-active": true
+                    }
                 } else {
                     return 'modal '
                 }

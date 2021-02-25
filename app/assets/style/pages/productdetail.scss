@@ -29,8 +29,8 @@
     background-color: #dd8;
 }
 
-.h1 {
-    font-size: 128px;
+.car-name {
+    font-size: 8rem;
     z-index: 0;
     position: relative;
     -webkit-text-stroke: 2px #b57700;
@@ -43,24 +43,26 @@
     margin-bottom: 10px;
 }
 
-img {
-    cursor: pointer;
-}
-
 .gallery {
     width: 16%;
     height: 16%;
     display: flex;
-    margin-top: 200px;
+    margin-top: 50px;
     cursor: pointer;
 }
 
 .gallery img {
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .icon-down {
     font-size: 10px;
+}
+
+.select-style select {
+    width: 140px;
+    height: 40px;
 }
 
 .info-buy,
@@ -71,6 +73,10 @@ img {
 
 .box-blue img {
     width: 100%;
+}
+
+.item-card {
+    margin-top: 10px;
 }
 
 .pandc {
@@ -90,6 +96,10 @@ img {
     margin-bottom: 30px;
 }
 
+.item-price {
+    font-size: 2rem;
+}
+
 .lorem {
     display: none;
 }
@@ -105,7 +115,6 @@ a {
     font-size: 18px;
 }
 
-
 /* Lightbox background */
 
 #lightbox {
@@ -118,7 +127,6 @@ a {
     min-height: 100%;
     z-index: 1000;
 }
-
 
 /* Lightbox panel with some content */
 
@@ -138,9 +146,9 @@ a {
 
 #show-panel img {
     width: 80%;
-    margin-left: 150px;
+    margin-left: 100px;
     position: absolute;
-    top: 200px;
+    top: 220px;
     z-index: 1;
 }
 

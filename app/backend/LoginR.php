@@ -1,5 +1,5 @@
 <?php
-    include("../../Lib/UtilClass.php");
+    include("../assets/php/Lib/UtilClass.php");
     $Util = new UtilClass();
 
     //建立SQL
@@ -17,16 +17,16 @@
     //依資料筆數判斷是否為會員
     if(count($products) > 0){
 
-        include("../../Lib/MemberClass.php");
+        include("../assets/php/Lib/MemberClass.php");
         $Member = new MemberClass();
 
         //將登入資訊寫入session
         $Member->setSessionB($_POST["account"]);
 
         //導回後台首頁        
-        header("Location: ../commodity.php");
+        header("Location: commodity.php");
     }else{
         //跳出提示停留在後台登入頁
-        echo "<script>alert('帳號或密碼錯誤!'); location.href = '../Login.php';</script>"; 
+        echo "<script>alert('帳號或密碼錯誤!'); location.href = 'index.php';</script>"; 
     }
 ?>

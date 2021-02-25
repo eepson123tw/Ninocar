@@ -131,13 +131,20 @@
 .moreReply,
 .closeReply,
 .readMore,
-.closeMore {
+.closeMore,
+.closeTextarea {
     border-bottom: 1px solid #ccc;
 }
 
-.work_reply {
-    display: flex;
-    flex-direction: column;
+.work_ {
+    &_reply{
+        display: flex;
+        flex-direction: column;  
+    }
+}
+
+.putMywork .work_pic{
+    height: 182px;
 }
 
 .work .hiddenReply,
@@ -188,9 +195,10 @@
     justify-content: flex-end;
     width: 100%;
     padding-top: 28px;
-    padding-left: 28px;
+    padding-left: 38px;
     border-top: 1px solid #ccc;
     margin-top: 16px;
+    display: none;
 }
 
 .num {
@@ -203,8 +211,17 @@
     fill: #E59807;
 }
   
-.work_author, .work_reply, .typeReply{
+.work_author, .typeReply, .typeSubReply{
     display: flex;
+}
+
+.typeSubReply{
+    border-bottom: none;
+    border-top: 1px solid #ccc;
+    padding: 0;
+    padding-top: 28px;
+    margin-top: 28px;
+    display: none;
 }
 
 .work {
@@ -246,11 +263,29 @@
     align-items: center;
 }
 
+.hiddenMR{
+    display: none;
+}
+
 .closeReply,
 .closeMore {
     display: none;
 }
 
+.layer{
+    &2{
+        position: relative;
+        top: -181px;
+    }
+    &3{
+        position: relative;
+        top: -362px;
+    }
+    &4{
+        position: relative;
+        top: -543px;
+    }
+}
 // -----------------------------------
 .typeReply {
     display: flex;
@@ -364,7 +399,15 @@
     background-color: #D8D8D8;
     font-size: 24px;
     color: #fff;
-    cursor: pointer;
+
+    &--able{
+        cursor: pointer;
+        
+    }
+
+    &--active{
+        background-color: rgb(229, 152, 7);
+    }
 }
 
 .explanation {
@@ -430,8 +473,6 @@
 
 .canvas{
     left: 600px;
-    z-index: 1;
-
     &A1{
         left: 198px;   
     }
@@ -480,6 +521,11 @@
     //   left:0;
     z-index: 1;
     cursor: pointer;
+}
+
+.tipArea_left .invisible{
+    opacity: 0;
+    pointer-events: none;
 }
 
 .selectAreaOut-next {
@@ -616,33 +662,39 @@
 }
 
 //應急處置
-#factory .modal__group--sm {
-    display: none;
-}
+// #factory .modal__group--sm {
+//     display: none;
+// }
 
 // ---------------------------------------
 // ----------------992-----------------------
 @media screen and (max-width:992px) {
     .bar {
         left: 50px;
+        
+        &-back{
+            width: 830px;
+        }
     }
-    .bar-back {
-        width: 830px;
-    }
+    //.typeReply 
     .work_author,
     .work_reply,
-    .typeReply {
+    {
         display: block;
     }
     .userPic {
         margin: 0 auto;
+        margin-right: 16px;
     }
-    .userName,
-    .workName,
-    .replyerName,
-    .userContent {
-        text-align: center;
+    // .userName, .userContent,.workName,.replyerName{
+    //     text-align: center;
+    // }
+
+    .work_author .userPic{
+        margin: 0;
+        margin-bottom: 8px;
     }
+
     .other {
         width: auto;
     }
@@ -690,6 +742,15 @@
     }
     .work {
         margin-bottom: 20px;
+        
+        &_author{
+            display: flex;
+
+            .userPic{
+                display: inline;
+                margin-right: 16px;
+            }
+        }
     }
     .tipArea {
         flex-direction: column;
@@ -713,6 +774,25 @@
         .colorCard,
         .accessoryCard {
             max-width: 50%;
+        }
+    }
+
+    .textarea{
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    .layer{
+        &2{
+            top: -134px;
+        }
+
+        &3{
+            top: -272px;
+        }
+
+        &4{
+            top: -413px;
         }
     }
 }

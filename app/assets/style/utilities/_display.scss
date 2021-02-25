@@ -1,25 +1,25 @@
-$displayList : (
-    'block' : block,
+$displayList : ('block' : block,
     'flex' : flex,
     'inbl' : inline-block,
     'none' : none);
 
 // ex: .d-block { display: block; }
-@each $key,$val in $displayList {
+@each $key,
+$val in $displayList {
     .d-#{$key} {
         display: $val;
     }
 }
 
 
-$positionList : (
-    're' : relative,
+$positionList : ('re' : relative,
     'ab' : absolute,
     'fixed': fixed,
     'sticky': sticky);
 
 
-@each $key,$val in $positionList {
+@each $key,
+$val in $positionList {
     .po-#{$key} {
         position: $val;
     }
@@ -36,6 +36,7 @@ $positionList : (
         display: flex;
     }
 }
+
 @include rwd-md {
     .d-md-none {
         display: none;
@@ -54,10 +55,14 @@ $positionList : (
     }
 }
 
-.overflow-hidden{
+.overflow-hidden {
     overflow: hidden;
 }
 
-.fl-right{
+.fl-right {
     float: right;
+}
+
+.bottom-0 {
+    bottom: 0;
 }

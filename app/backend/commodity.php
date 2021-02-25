@@ -1,25 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../../dist/assets/css/all.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="../../dist/assets/css/pages/backend.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
-<script src="../assets/js/all.js"></script>
+<?php
+    include("head.php");
+    include 'LoginCheck.php';
+
+    //建立SQL
+    $sql = "SELECT * FROM product";
+
+    //執行
+    $statement = $Util->getPDO()->prepare($sql);
+
+    //給值
+    $statement->execute();
+    $data = $statement->fetchAll();
+
+?>
 <title>商品管理</title>
 </head>
 
 <body>
     <?php
-        include './API/LoginCheck.php';
-        include '../pages/BackendPage/base.html';
+        include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <!-- update-button -->
         <div class="update_btn">
-            <button><a href="./update.php"><i class="fas fa-upload"></i>上架商品</a></button>
+            <button><a href="update.php"><i class="fas fa-upload"></i>上架商品</a></button>
         </div>
         <!-- table -->
         <div class="col-lg-9">
@@ -31,74 +35,28 @@
                             <th>商品名稱</th>
                             <th>商品圖示</th>
                             <th>商品分類</th>
-                            <th>商品系列</th>
                             <th>商品金額</th>
+                            <th>商品點數</th>
                             <th>詳細</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        foreach($data as $index => $row){
+                    ?>
                         <tr>
+                            <td><?=$row["product_name"] ?></td>
                             <td>
-                                <div>車</div>
+                                <img src="<?=$row['product_img'] ?>" alt="">
                             </td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
+                            <td><?=$row["product_series"] ?></td>
+                            <td><?=$row["product_price"] ?></td>
+                            <td><?=$row["product_points"] ?></td>
+                            <td><a href="ProductUpdate.php?PID=<?=$row["product_id"] ?>">查看</a></td>
                         </tr>
-                        <tr>
-                            <td>車</td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
-                        </tr>
-                        <tr>
-                            <td>車</td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
-                        </tr>
-                        <tr>
-                            <td>車</td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
-                        </tr>
-                        <tr>
-                            <td>車</td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
-                        </tr>
-                        <tr>
-                            <td>車</td>
-                            <td>
-                                <div class="product_img"><img src="../assets/img/pic/model.png" alt=""></div>
-                            </td>
-                            <td>一般商品</td>
-                            <td>車系</td>
-                            <td>$200</td>
-                            <td><a href="">查看</a></td>
-                        </tr>
+                    <?php   
+                        }
+                    ?>
                     </tbody>
                 </table>
             </div>

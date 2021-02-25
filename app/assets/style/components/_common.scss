@@ -10,9 +10,11 @@
 .icon {
     cursor: pointer;
     display: inline-block;
+
     &__link:hover {
         opacity: .7;
     }
+
     &:hover .hover-fill-coffee {
         fill: $coffee;
     }
@@ -29,19 +31,25 @@
         stroke: none;
     }
 
+    &.disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+
 }
 
 
 .link {
     &:hover {
         opacity: .7;
-        
+
     }
 
-    &--active{
+    &--active {
         position: relative;
         z-index: 10;
-        &::before{
+
+        &::before {
             content: '';
             position: absolute;
             left: 0;
