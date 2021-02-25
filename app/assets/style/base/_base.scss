@@ -18,7 +18,9 @@ body {
     linear-gradient(180deg, $gray-300 1px, transparent 1px);
 }
 
-
+main {
+  min-height: calc(100vh - 400px);
+}
 
 a {
   display: block;
@@ -41,6 +43,7 @@ button {
   vertical-align: middle;
 }
 
-input, button:focus{
+input,
+button:focus {
   outline: none;
 }

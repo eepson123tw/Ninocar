@@ -1,7 +1,7 @@
 <ul class="row block__body">
     <!-- post -->
 
-    <post v-for="(product,index) in showProducts" v-bind="product" key="product.productId"
+    <post v-for="(product,index) in showProductList" v-bind="product" key="product.productId"
         @click.native.prevent="handleClickPost(product.productId)"
         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
 

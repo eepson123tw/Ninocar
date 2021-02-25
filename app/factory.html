@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <row>
+            <!-- <row> -->
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
                         <img src="./assets/img/pic/model.png" class="model">
@@ -870,10 +870,11 @@
                     </ul>
 
                     <div class="mywork" id="mywork">
-                        @@include('./components/EmptyState.html')
+                        <!-- @@include('./components/EmptyState.html') -->
+                        <empty-state></empty-state>
                     </div>
                 </div>
-            </row>
+            <!-- </row> -->
         </div>
         @@include('./components/Footer.html')
     </div>
@@ -886,6 +887,34 @@
     @@include('./components/VueHeader.html')
 
     <script>
+        Vue.component('empty-state', {
+            data(){
+              return{
+                description: '目前沒有作品',
+                description2: '快去完成你的作品吧',
+                btnDes: '開始製作',
+                url: "window.location='../../dist/factory.html'"
+              };
+            },
+            template: `
+                <div class="container pt-0">
+                    <div class="emptyState row pt-25">
+                        <div class="empty--left col-6 col-lg-3 col-sm-2">
+                            <img src="./assets/img/illust/illust-empty.png" alt="">
+                        </div>
+                        <div class="empty--right col-6 col-lg-3 col-sm-2">
+                            <p class="mb-6 h4" v-bind:details="description">{{description}}</p>
+                            <p class="mb-12 h4"  v-bind:details="description2">{{description2}}</p>
+                            <button class="btn" v-bind:btnText="btnDes" :onclick=url>{{btnDes}}</button>
+                        </div>
+                    </div>
+                    <ul class="putMywork"></ul>
+                </div>`,
+            props: ['details', 'details2', 'btn-text']
+        });
+
+
+
         const vm1 = new Vue({
             el: '#factory',
             data: {
@@ -908,6 +937,8 @@
             el: '#mywork',
         })
 
+
+
         // new Vue({
         //     el:'#reportModal',
         //     template: '<div class="modal js-modal" data-modal="1">'+'<div class="modal__group">'+'<svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close"><g transform="translate(0 0.47)"><line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>'+'<line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/></g>'+'</svg><h2 class="modal__title">新增地址</h2>'+'<p class="modal__content--left">檢舉留言這篇留言的原因?</p>'+'<ul class="modal__textGroup">'+'<li class="modal__textGroupContent">'+' <input type="radio" name="check" id="bad1"> '+'<label for="b中傷、歧視、謾罵等人身攻擊言論</label>'+ '</li>'+'<li class="modal__textGroupContent">'+
@@ -924,33 +955,23 @@
         // --------------------------------------------
         //進入彈窗、後面固定不給滾動
         $('.work_pic').click(function() {
-            $('.mask').css({
-                "display": "block",
-            });
+            $('.mask').css({"display": "block",});
 
-            $('.containerMain').css({
-                "position": "fixed",
-            });
+            $('.containerMain').css({"position": "fixed",});
         });
 
         //關掉彈窗
         $('.closeIcon').click(function() {
-            $('.mask').css({
-                "display": "none",
-            });
+            $('.mask').css({"display": "none",});
 
-            $('.containerMain').css({
-                "position": "initial",
-            });
+            $('.containerMain').css({"position": "initial",});
         })
 
         //收起、打開更多子回覆
         let count1 = 0;
         $('.moreReply').click(function() {
             $('.work .hiddenSubReply').slideToggle();
-            $('.work .hiddenSubReply').css({
-                "display": "flex",
-            });
+            $('.work .hiddenSubReply').css({"display": "flex",});
 
             count1 += 1;
             // console.log(count1);
@@ -985,14 +1006,14 @@
                 $(this).children('.toggleIcon2').css({
                     "transform": "rotate(180deg)",
                 })
-                console.log('1')
+                // console.log('1')
             } else {
                 $(this).children('.readMoreWord').text('閱讀更多');
 
                 $(this).children('.toggleIcon2').css({
                     "transform": "rotate(0deg)",
                 })
-                console.log('2')
+                // console.log('2')
             }
         })
 
@@ -1057,31 +1078,19 @@
 
         //點我的車車、大家的車車後會標示目前在哪
         $('.workButton').click(function() {
-            $(this).css({
-                "background": "linear-gradient(transparent 60%, #FADD61 60%)"
-            })
+            $(this).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
 
-            $('.workButton').not(this).css({
-                "background": "none"
-            })
+            $('.workButton').not(this).css({"background": "none"})
 
-            $('.othersWorks').css({
-                "display": "flex"
-            })
-            $('.mywork').css({
-                "display": "none"
-            })
+            $('.othersWorks').css({"display": "flex"})
+            $('.mywork').css({"display": "none"})
 
         })
 
         //點我的車車時，大家的車車消失，我的車車或emptyState出現
         $('.myworks').click(function() {
-            $('.othersWorks').css({
-                "display": "none"
-            })
-            $('.mywork').css({
-                    "display": "block"
-                })
+            $('.othersWorks').css({"display": "none"})
+            $('.mywork').css({"display": "block"})
                 // console.log('我的車車出現')
         })
 
@@ -1089,21 +1098,13 @@
         $('.make').click(function() {
             $('.previousStep').addClass('invisible')
 
-            $('.progressBar').css({
-                "display": "block"
-            })
+            $('.progressBar').css({"display": "block"})
 
-            $('.circle:first').css({
-                "background-color": "#E59807"
-            })
+            $('.circle:first').css({"background-color": "#E59807"})
 
-            $('.intro').css({
-                "display": "none"
-            })
+            $('.intro').css({"display": "none"})
 
-            $('.makeCar').css({
-                "display": "block"
-            })
+            $('.makeCar').css({"display": "block"})
         })
 
 

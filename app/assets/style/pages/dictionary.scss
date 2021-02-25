@@ -4,7 +4,6 @@
 @import "../base/font";
 
 
-
 .block {
     background-color: transparent;
 
@@ -46,8 +45,8 @@
             min-height: 260px;
         }
 
-        @include rwd-sm {
-            min-height: 220px;
+        @include rwd-xs {
+            min-height: 190px;
         }
     }
 
@@ -89,7 +88,17 @@
         width: 75%;
 
         @include rwd-sm {
-            width: 90%;
+            width: 100%;
+        }
+    }
+
+    &__carID {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        @include rwd-sm {
+            left: 80%;
         }
     }
 
