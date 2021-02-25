@@ -1114,17 +1114,13 @@
             $('.pleaseSelect').css({"display": "none"})
 
             $(this).removeClass('btn--outline')
-            
-
 
             $(this).parent().siblings().children('.btn').addClass('btn--outline')
         })
 
         $('.selectColor').click(() => {
             $('.nextStep').removeClass('btn--disabled')
-            $('.pleaseSelect').css({
-                "display": "none"
-            })
+            $('.pleaseSelect').css({"display": "none"})
 
             $(this).removeClass('btn--outline')
 
@@ -1180,8 +1176,7 @@
                     //提醒內容變更
                     $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
 
-                    //進度條變色
-                    // $('.content:nth-child(2) .circle').css({"background-color": "#E59807"})
+                    //進度條、圓圈變色
                     $('.content:nth-child(2) .circle').addClass('circle--able')
                     $('.content:nth-child(2) .circle').addClass('circle--active')
 
@@ -1239,8 +1234,7 @@
                     $('.accessoryCard').css({"display": "block"
                     })
 
-                    //進度條變色
-                    // $('.content:nth-child(4) .circle').css({"background-color": "#E59807"})
+                    //進度條、圓圈變色
                     $('.content:nth-child(4) .circle').addClass('circle--able')
                     $('.content:nth-child(4) .circle').addClass('circle--active')
 
@@ -1251,7 +1245,6 @@
                         $('.bar-front').width(660)
                     }
                 } else if (countStep % 5 == 4) {
-                    // countStep = -1;
                     console.log(countStep)
 
                     // $('.giveName').css({"display": "none"})
@@ -1272,8 +1265,7 @@
                     //提醒內容變更
                     $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
 
-                    //進度條變色
-                    // $('.content:nth-child(5) .circle').css({"background-color": "#E59807"})
+                    //進度條、圓圈變色
                     $('.content:nth-child(5) .circle').addClass('circle--able')
                     $('.content:nth-child(5) .circle').addClass('circle--active')
 
@@ -2274,31 +2266,35 @@
                 $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
         })
 
-        // //按了circle-able，回到上一個步驟(按一次往前一步)
-        $('.circle').click(() => {
-            console.log("countStep: " + countStep)
-
+        //----------------------- 點圓圈進入、退到下一步驟 -----------------------
+        $('.content:nth-child(1) .circle').click(() => {
             if(countStep % 5 == 1){
-              console.log('回去第1步，countStep=0') 
+                console.log('回去countStep=0') 
                 countStep--
 
+                $('.pleaseSelect').text('請先選擇車款才能進入下一步喔')
+                
                 $('.colorCards').css({"display":"none"})
+                $('.accessoryCard').css({"display":"none"})
                 $('.shapeCards').css({"display":"flex"})
                 $('.shapeCard').css({"display":"block"})
-
+                
                 //去除顏色，變不能點
                 $('.content:nth-child(2) .circle').removeClass('circle--able')
                 $('.content:nth-child(2) .circle').removeClass('circle--active')
-
+                
                 //進度條變短
                 if (docW > 1003) {
                     $('.bar-front').width(0)
                 } else if (docW <= 1003) {
                     $('.bar-front').width(0)
                 }
+            }
+        })
 
-            }else if(countStep % 5 == 2){
-              console.log('回去第2步') 
+        $('.content:nth-child(2) .circle').click(() => {
+            if(countStep % 5 == 2){
+                console.log('回到countStep == 1')
                 countStep--
 
                 $('.tireCards').css({"display":"none"})
@@ -2313,14 +2309,43 @@
                     $('.bar-front').width(240)
                 } else if (docW <= 1003) {
                     $('.bar-front').width(220)
-                }
+                }               
+           }else if(countStep % 5 == 0 && $('.nextStep').hasClass('btn--disabled')){
+                $('.pleaseSelect').css({"display": "block"})
 
-            }else if(countStep % 5 == 3){
-              console.log('回去第3步') 
+                setTimeout(() => {
+                    $('.pleaseSelect').css({"display": "none"})
+                }, 1000);
+           }else if(countStep % 5 == 0 && !$('.nextStep').hasClass('btn--disabled')){
+                console.log('前進到countStep == 1')
+                countStep++
+
+                $('.nextStep').addClass('btn--disabled')
+                    
+                $('.shapeCard').css({"display": "none"})
+                //進入選顏色
+                $('.colorCards').css({"display": "flex"})
+                $('.colorCard').css({"display": "block"})
+                //提醒內容變更
+                $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
+                //進度條、圓圈變色
+                $('.content:nth-child(2) .circle').addClass('circle--able')
+                $('.content:nth-child(2) .circle').addClass('circle--active')
+                if (docW > 1003) {
+                    $('.bar-front').width(240)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(220)
+                }
+           }
+        })    
+
+        $('.content:nth-child(3) .circle').click(() => {
+            if(countStep % 5 == 3){
+                console.log('回到countStep == 2')
                 countStep--
                 
                 $('.accessoryCards').css({"display":"none"})
-                $('.tireCards').css({"display":"flex"})
+                $('.tirerCards').css({"display":"flex"})
                 $('.tireCard').css({"display":"block"})
 
                 $('.content:nth-child(4) .circle').removeClass('circle--able')
@@ -2332,18 +2357,91 @@
                 } else if (docW <= 1003) {
                     $('.bar-front').width(440)
                 }
-            }else if(countStep % 5 == 4){
-               console.log('回去第4步') 
-               countStep--
 
-               $('.giveName').css({"display":"none"});
-               $('.accessoryCards').css({"display":"flex"})
-               $('.accessoryCard').css({"display":"block"})
+            }else if(countStep % 5 == 1 && $('.nextStep').hasClass('btn--disabled')){
+                $('.pleaseSelect').css({"display": "block"})
 
-               $('.content:nth-child(5) .circle').removeClass('circle--able')
-               $('.content:nth-child(5) .circle').removeClass('circle--active')
+                setTimeout(() => {
+                    $('.pleaseSelect').css({"display": "none"})
+                }, 1000);
+            }else if(countStep % 5 == 1 && !$('.nextStep').hasClass('btn--disabled')){
+                console.log('前進到countStep == 2')
+                countStep++
 
-                //進度條變短
+                $('.nextStep').addClass('btn--disabled')
+
+                //進入選輪子
+                $('.colorCard').css({"display": "none"})
+
+                $('.tireCards').css({"display": "flex"})
+                $('.tireCard').css({"display": "block"})
+
+                //提醒內容變更
+                $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
+
+                //進度條、圓圈變色
+                $('.content:nth-child(3) .circle').addClass('circle--able')
+                $('.content:nth-child(3) .circle').addClass('circle--active')
+
+                if (docW > 1003) {
+                    $('.bar-front').width(480)
+                } else if (docW <= 1003) {
+                    $('.bar-front').width(440)
+                }
+            }
+        })
+
+        $('.content:nth-child(4) .circle').click(() => {
+            if(countStep % 5 == 4){
+                console.log('回到countStep == 3')
+                countStep--
+
+                $('.giveName').css({"display":"none"});
+                $('.selectArea').css({"display":"flex"});
+                $('.accessoryCards').css({"display":"flex"})
+                $('.accessoryCard').css({"display":"block"})
+
+                $('.content:nth-child(5) .circle').removeClass('circle--able')
+                $('.content:nth-child(5) .circle').removeClass('circle--active')
+
+                 //進度條變短
+                if (docW > 1003) {
+                     $('.bar-front').width(730)
+                } else if (docW <= 1003) {
+                     $('.bar-front').width(660)
+                }
+
+            }else if(countStep % 5 == 2 && $('.nextStep').hasClass('btn--disabled')){
+                $('.pleaseSelect').css({"display": "block"})
+
+                setTimeout(() => {
+                    $('.pleaseSelect').css({"display": "none"})
+                }, 1000);
+            }else if(countStep % 5 == 2 && !$('.nextStep').hasClass('btn--disabled')){
+                console.log('前進到countStep == 3')
+                countStep++
+
+                if(shapeIndex != 0){
+                        console.log('讓尾翼不能選')
+                        $('.selectA6').addClass('btn--disabled')
+                        $('.selectA6').removeClass('btn--outline')
+                        $('.selectA6').css({"pointer-events":"none"})
+                }
+                    
+                $('.nextStep').addClass('btn--disabled')
+
+                //進入選配件
+                $('.tireCard').css({"display": "none"})
+
+                //提醒內容變更
+                $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
+                $('.accessoryCards').css({"display": "flex"})
+                $('.accessoryCard').css({"display": "block"})
+
+                //進度條、圓圈變色
+                $('.content:nth-child(4) .circle').addClass('circle--able')
+                $('.content:nth-child(4) .circle').addClass('circle--active')
+
                 if (docW > 1003) {
                     $('.bar-front').width(730)
                 } else if (docW <= 1003) {
@@ -2352,7 +2450,44 @@
             }
         })
 
+        $('.content:nth-child(5) .circle').click(() => {
+            if(countStep % 5 == 3 && $('.nextStep').hasClass('btn--disabled')){
+                $('.pleaseSelect').css({"display": "block"})
+                            
+                setTimeout(() => {
+                    $('.pleaseSelect').css({"display": "none"})
+                }, 1000);
+            }else if(countStep % 5 == 3 && !$('.nextStep').hasClass('btn--disabled')){
+                console.log('前進到countStep == 4')
+                countStep++
 
+                $('.nextStep').addClass('btn--disabled').text('完成')
+                    $('.nextStep').addClass('finish')
+
+                    $('.selectArea').css({"display": "none"})
+
+                    $('.giveName').css({
+                        "display": "flex",
+                        "justify-content": "space-between"
+                    })
+
+                    //左右紐消失
+                    $('.selectBtn').css({"display": "none"})
+
+                    //提醒內容變更
+                    $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
+
+                    //進度條、圓圈變色
+                    $('.content:nth-child(5) .circle').addClass('circle--able')
+                    $('.content:nth-child(5) .circle').addClass('circle--active')
+
+                    if(docW > 1003){
+                        $('.bar-front').width(960) 
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(840) 
+                    }
+            }
+        })
     </script>
 </body>
 
