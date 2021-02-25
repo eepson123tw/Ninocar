@@ -9,9 +9,9 @@
                 <ul class="cool member__bar block w-100">
                     <li>
                         <a
+                            data-page="memberMain"
                             href="membermain.html"
-                            class="member__page"
-                            :class="{memberpage == nowPage}"
+                            class="member__page member__page--active"
                         >我的帳戶</a>
                         <ul class="dropdown courses">
                             <li>
@@ -35,8 +35,9 @@
                     </li>
                     <li>
                         <a
-                            href="#"
+                            href="MemberOnly.html"
                             class="member__page"
+                            data-page="memberOnly"
                         >會員中心</a>
                         <ul class="dropdown courses">
                             <li>
@@ -62,6 +63,7 @@
                         <a
                             href="MemberNotice.html"
                             class="member__page"
+                            data-page="memberNotice"
                         >通知中心</a>
                         <ul class="dropdown courses">
                             <li>
@@ -89,14 +91,16 @@
                     </li>
                     <li>
                         <a
-                            href="#"
+                            href="MemberPurchase.html"
                             class="member__page"
+                            data-page="memberPurchase"
                         >購買清單</a>
                     </li>
                     <li>
                         <a
                             href="member.html"
                             class="member__page"
+                            data-page="memberCollection"
                         >收藏商品清單</a>
                     </li>
                 </ul>
@@ -112,7 +116,29 @@
 
         template: '#memberBar',
 
+        data() {
+            return {}
+        },
+        methods: {
 
+
+        },
+        mounted() {
+
+
+            let nowPage = document.title;
+            let pageList = document.querySelectorAll('.member__page');
+
+            pageList.forEach((item) => {
+
+                let target = item.dataset.page;
+
+
+            })
+
+
+
+        }
 
 
     })
