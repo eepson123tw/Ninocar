@@ -6,9 +6,7 @@
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>Dictionary</title>
 </head>
@@ -63,24 +61,24 @@
                     RV: 'RV休旅系',
                     CA: '轎車系'
                 },
-                selectedSeriesFilter: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
                 pricesRange: {
                     1: '100~200',
                     2: '200~300',
                     3: '300以上'
                 },
-                selectedPriceFilter: [1, 2, 3],
                 yearsRange: {
                     1970: '1970~1989',
                     1990: '1990~2009',
                     2010: '2010後'
                 },
-                selectedYearFilter: [1970, 1990, 2010],
-                extraLabelNames: {
+                limitLabels: {
                     0: '無限定',
                     1: '期間限定',
                     2: '點數限定',
                 },
+                selectedSeriesFilter: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
+                selectedPriceFilter: [1, 2, 3],
+                selectedYearFilter: [1970, 1990, 2010],
                 selectedLimitFilter: [0, 1, 2],
                 isModalShow: false,
             },
@@ -104,8 +102,9 @@
                             displayImgURL: product['product_img1'],
                             productId: product['product_id'],
                             year: product['product_year'],
+                            size: product['product_size'],
                             description: product['product_des'],
-                            extraLabel: product['product_spec'],
+                            limitLabel: product['product_spec'],
                         }
                     })
                     console.log(fetchProductList);
@@ -128,7 +127,7 @@
                     }
                 },
                 carIDClass() {
-                    return `carID carID--lg bg-series-${this.targetProduct.series} po-re `
+                    return `carID carID--lg bg-series-${this.targetProduct.series} po-ab bottom-0`
                 },
                 badgeClass() {
                     return `badge bg-series-${this.targetProduct.series} mr-2`
@@ -137,13 +136,13 @@
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
-                extraLabel() {
-                    if (this.targetProduct.extraLabel === 1) {
+                limitLabel() {
+                    if (this.targetProduct.limitLabel === 1) {
                         return {
                             text: '期間限定',
                             className: 'badge badge--primary'
                         };
-                    } else if (this.targetProduct.extraLabel === 2) {
+                    } else if (this.targetProduct.limitLabel === 2) {
                         return {
                             text: '點數限定',
                             className: 'badge bg-blue'
@@ -169,7 +168,7 @@
                         this.selectedPriceFilter.push(key);
                     }
                     this.selectedLimitFilter.splice(0);
-                    for (const key in this.extraLabelNames) {
+                    for (const key in this.limitLabels) {
                         this.selectedLimitFilter.push(key);
                     }
                 },
@@ -208,7 +207,7 @@
                         this.selectedLimitFilter.splice(0)
                     } else {
                         this.selectedLimitFilter.splice(0);
-                        for (const key in this.extraLabelNames) {
+                        for (const key in this.limitLabels) {
                             this.selectedLimitFilter.push(key);
                         }
                     }

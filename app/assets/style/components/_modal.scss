@@ -10,6 +10,7 @@
     left: 0;
     z-index: 2000;
     transition: opacity .3s ease;
+
     &__group {
         padding: 48px;
         background-color: $white;
@@ -21,53 +22,68 @@
         max-width: 540px;
         width: 100%;
     }
+
     &__group--sm {
         max-width: 440px;
     }
+
     &__title {
         text-align: center;
         @extend h2;
         @extend .font-medium;
+
         &--left {
             text-align: left;
             @extend h2;
             @extend .font-bold;
         }
     }
+
     &__close {
         position: absolute;
         top: 10px;
         right: 10px;
+
+        &:hover {
+            opacity: .8;
+        }
     }
+
     &__img {
         display: inline-block;
         vertical-align: middle;
         @include size(72px, 72px);
     }
+
     &__content {
         text-align: center;
         margin: 10px 0;
         @extend .h4;
+
         &--left {
             text-align: left;
             margin: 40px 0;
             @extend .h4;
         }
     }
+
     &__text {
         margin: 40px 0px 10px;
         text-align: center;
         @extend .h4;
+
         &--left {
             margin: 40px 0px 10px;
             text-align: left;
             @extend .h4;
         }
     }
+
     &__textGroup {
         text-align: left;
         @extend .h4;
     }
+
     &__textGroupContent {
         margin: 10px 0;
         @extend .h4;
