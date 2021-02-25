@@ -14,9 +14,11 @@
 <body>
     <div id="dictionary">
         <vue-header></vue-header>
-        <main class="container dictionary pt-25 pb-15">
+        <main class="container pt-25 pb-15">
             <!-- display -->
-            @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+            <transition name="fade">
+                @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+            </transition>
             <!-- dictionary list -->
             <section class="block">
                 @@include('./pages/DictionaryPage/DictionaryPostNav.html')
@@ -39,10 +41,10 @@
         new Vue({
             el: '#dictionary',
             data: { //變數存放的地方
-                products: [],
+                productList: [],
                 targetProduct: {},
                 myProducts: [],
-                showProducts: [],
+                showProductList: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
                 searchType: '分類搜尋',
@@ -51,36 +53,42 @@
                     'my': false
                 },
                 isNavbarShow: true,
-                seriesNames: {
-                    BS: '巴士系',
-                    EN: '工程系',
-                    TA: '計程車系',
-                    EM: '消防救護系',
-                    PM: 'PREMIUM系',
-                    PA: '警車系',
-                    RV: 'RV休旅系',
-                    CA: '轎車系'
+                seriesList: [{
+                    name: '工程系',
+                    eName: 'EN',
+                }, {
+                    name: 'RV休旅系',
+                    eName: 'RV',
+                }, {
+                    name: '計程車系',
+                    eName: 'TA',
+                }, {
+                    name: '巴士系',
+                    eName: 'BS',
+                }, {
+                    name: '警車系',
+                    eName: 'PA',
+                }, {
+                    name: '消防救護系',
+                    eName: 'EM',
+                }, {
+                    name: '轎車系',
+                    eName: 'CA',
+                }, {
+                    name: 'PREMIUM系',
+                    eName: 'PM',
+                }],
+                priceList: ['100~200', '200~300', '300以上'],
+                yearList: ['1970~1989', '1990~2009', '2010後'],
+                labelList: ['無限定', '期間限定', '點數限定'],
+                selectedFilter: {
+                    selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
+                    selectedPriceList: [1, 2, 3],
+                    selectedYearList: [1970, 1990, 2010],
+                    selectedLimitList: [0, 1, 2],
                 },
-                pricesRange: {
-                    1: '100~200',
-                    2: '200~300',
-                    3: '300以上'
-                },
-                yearsRange: {
-                    1970: '1970~1989',
-                    1990: '1990~2009',
-                    2010: '2010後'
-                },
-                limitLabels: {
-                    0: '無限定',
-                    1: '期間限定',
-                    2: '點數限定',
-                },
-                selectedSeriesFilter: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                selectedPriceFilter: [1, 2, 3],
-                selectedYearFilter: [1970, 1990, 2010],
-                selectedLimitFilter: [0, 1, 2],
                 isModalShow: false,
+                keywordText: '',
             },
             mounted() {
 
@@ -93,11 +101,20 @@
                 getProductList().then(res => {
                     console.log(res.data);
                     const fetchProductList = res.data.map(product => {
+                        let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
+                        thisSeriesIndex.toString();
+                        let thisSeriesId;
+                        if (product[`product_seriesid`].length === 1) {
+                            thisSeriesId = 0 + product[`product_seriesid`];
+                        } else {
+                            thisSeriesId = product[`product_seriesid`];
+                        }
                         return {
                             name: product[`product_name`],
-                            eng: product['product_ename'],
-                            series: 'PM',
-                            seriesId: '01',
+                            eName: product['product_ename'],
+                            series: this.seriesList[thisSeriesIndex].eName,
+                            seriesIndex: thisSeriesIndex,
+                            seriesId: thisSeriesId,
                             imgURL: product['product_img'],
                             displayImgURL: product['product_img1'],
                             productId: product['product_id'],
@@ -108,24 +125,24 @@
                         }
                     })
                     console.log(fetchProductList);
-                    this.products = fetchProductList;
-                    this.showProducts = this.products;
-                    this.targetProduct = this.showProducts[0];
+                    this.productList = fetchProductList;
+                    this.showProductList = this.productList;
+                    this.targetProduct = this.showProductList[0];
                 }).catch(error => {
                     console.log(error)
                 })
-                // this.myProducts = this.products.filter(product => this.memberOwnProductIdList.indexOf(product
+                // this.myProducts = this.productList.filter(product => this.memberOwnProductIdList.indexOf(product
                 //     .productId));
 
             },
             computed: {
-                modalClass() {
-                    if (this.isModalShow) {
-                        return 'modal text-left modal-active'
-                    } else {
-                        return 'modal text-left '
-                    }
-                },
+                // modalClass() {
+                //     if (this.isModalShow) {
+                //         return 'modal text-left modal-active'
+                //     } else {
+                //         return 'modal text-left '
+                //     }
+                // },
                 carIDClass() {
                     return `carID carID--lg bg-series-${this.targetProduct.series} po-ab bottom-0`
                 },
@@ -137,86 +154,66 @@
                         'pin pin--disabled'
                 },
                 limitLabel() {
-                    if (this.targetProduct.limitLabel === 1) {
+                    if (this.targetProduct.limitLabel === '2') {
                         return {
                             text: '期間限定',
                             className: 'badge badge--primary'
                         };
-                    } else if (this.targetProduct.limitLabel === 2) {
+                    } else if (this.targetProduct.limitLabel === '4') {
                         return {
                             text: '點數限定',
                             className: 'badge bg-blue'
                         };
-                    } else {
-                        return {}
                     }
-                },
+                }
 
             },
             methods: {
-                handleResetFilter() {
-                    this.selectedYearFilter.splice(0);
-                    for (const key in this.yearsRange) {
-                        this.selectedYearFilter.push(key);
-                    }
-                    this.selectedSeriesFilter.splice(0);
-                    for (const key in this.seriesNames) {
-                        this.selectedSeriesFilter.push(key);
-                    }
-                    this.selectedPriceFilter.splice(0);
-                    for (const key in this.pricesRange) {
-                        this.selectedPriceFilter.push(key);
-                    }
-                    this.selectedLimitFilter.splice(0);
-                    for (const key in this.limitLabels) {
-                        this.selectedLimitFilter.push(key);
+                handleFilterReset() {
+                    for (const filter in this.selectedFilter) {
+                        filter.splice(0);
                     }
                 },
-                handleAllCheckYear() {
-                    if (this.selectedYearFilter.length === 3) {
-                        this.selectedYearFilter.splice(0)
+                handlePriceAllCheck() {
+                    if (selectedFilter.selectedPriceList.length === priceList.length) {
+                        this.selectedFilter.selectedPriceList.splice(0)
                     } else {
-                        this.selectedYearFilter.splice(0);
-                        for (const key in this.yearsRange) {
-                            this.selectedYearFilter.push(key);
-                        }
+                        this.selectedFilter = this.priceList.map(e => e);
                     }
                 },
-                handleAllCheckSeries() {
-                    if (this.selectedSeriesFilter.length === 8) {
-                        this.selectedSeriesFilter.splice(0)
-                    } else {
-                        this.selectedSeriesFilter.splice(0);
-                        for (const key in this.seriesNames) {
-                            this.selectedSeriesFilter.push(key);
-                        }
-                    }
-                },
-                handleAllCheckPrice() {
-                    if (this.selectedPriceFilter.length === 3) {
-                        this.selectedPriceFilter.splice(0)
-                    } else {
-                        this.selectedPriceFilter.splice(0);
-                        for (const key in this.pricesRange) {
-                            this.selectedPriceFilter.push(key);
-                        }
-                    }
-                },
-                handleAllCheckLimit() {
-                    if (this.selectedLimitFilter.length === 3) {
-                        this.selectedLimitFilter.splice(0)
-                    } else {
-                        this.selectedLimitFilter.splice(0);
-                        for (const key in this.limitLabels) {
-                            this.selectedLimitFilter.push(key);
-                        }
-                    }
-                },
+                // handleAllCheckYear() {
+                //     if (this.selectedYearFilter.length === 3) {
+                //         this.selectedYearFilter.splice(0)
+                //     } else {
+                //         this.selectedYearFilter.splice(0);
+                //         for (const key in this.yearsRange) {
+                //             this.selectedYearFilter.push(key);
+                //         }
+                //     }
+                // },
+                // handleAllCheckSeries() {
+                //     if (this.selectedSeriesFilter.length === 8) {
+                //         this.selectedSeriesFilter.splice(0)
+                //     } else {
+                //         this.selectedSeriesFilter.splice(0);
+                //         for (const key in this.seriesNames) {
+                //             this.selectedSeriesFilter.push(key);
+                //         }
+                //     }
+                // },
+                // handleAllCheckLimit() {
+                //     if (this.selectedLimitFilter.length === 3) {
+                //         this.selectedLimitFilter.splice(0)
+                //     } else {
+                //         this.selectedLimitFilter.splice(0);
+                //         for (const key in this.limitLabels) {
+                //             this.selectedLimitFilter.push(key);
+                //         }
+                //     }
+                // },
                 handleClickPost(theProductId) {
-
-                    let index = this.showProducts.map(showProduct => showProduct.productId).indexOf(
-                        theProductId);
-                    this.targetProduct = this.products[index];
+                    this.targetProduct = this.showProductList.find(product => product.productId ===
+                        theProductId)
                     this.isModalShow = true;
                 },
                 isPostPin(theProductId) {
@@ -225,16 +222,16 @@
                 changeSearchType() {
                     this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
                 },
-                changeShowProducts(filter) {
+                navBarChange(filter) {
                     if (filter === 'my') {
-                        this.showProducts = this.myProducts;
+                        this.showProductList = this.myProducts;
                         this.isNavbarShow = false;
                         this.navClassName = {
                             'all': false,
                             'my': true
                         };
                     } else if (filter === 'all') {
-                        this.showProducts = this.products;
+                        this.showProductList = this.productList;
                         this.isNavbarShow = true;
                         this.navClassName = {
                             'all': true,
@@ -245,13 +242,29 @@
                 searchShowProduct() {
 
                     // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
-                    const filteredList = this.products.filter(product => this.selectedSeriesFilter.indexOf(
+                    const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
                         product.series) >= 0);
                     console.log(filteredList);
-                    this.showProducts = filteredList;
+                    this.showProductList = filteredList;
                 },
+                keywordSearch() {
+                    const filteredProductList = this.productList.filter(product => {
+                        let isIncludeWord = false;
+                        product.name.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                            isIncludeWord = true : '';
+                        product.eName.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                            isIncludeWord = true : '';
+                        product.series.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                            isIncludeWord = true : '';
+                        product.series.toLowerCase().concat(product.seriesId).includes(this.keywordText
+                                .toLowerCase()) ?
+                            isIncludeWord = true : '';
+                        return isIncludeWord;
+                    })
+                    this.showProductList = filteredProductList;
+                }
             },
-        });
+        })
     </script>
 </body>
 
