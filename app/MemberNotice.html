@@ -15,7 +15,7 @@
 <body>
     <div id="app">
         <vue-header></vue-header>
-        @@include('pages/MemberPage/MemberBar.html')
+        <member-bar></member-bar>
         <!--  -->
 
         @@include('./pages/MemberPage/MemberNotice.html')
@@ -23,7 +23,7 @@
     </div>
 
 </body>
-@@include('./components/VueHeader.html')
+@@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
 
 <script>
     new Vue({

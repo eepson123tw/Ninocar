@@ -15,12 +15,13 @@
 <body>
     <div id="app">
         <vue-header></vue-header>
-        @@include('pages/MemberPage/MemberBar.html') @@include('./pages/MemberPage/MemberPurchase.html')
+        <member-bar></member-bar>
+        @@include('./pages/MemberPage/MemberPurchase.html')
         <!-- your code here... -->
     </div>
 
 </body>
-@@include('./components/VueHeader.html')
+@@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
 
 <script>
     new Vue({

@@ -11,7 +11,7 @@
                         <a
                             data-page="memberMain"
                             href="membermain.html"
-                            class="member__page member__page--active"
+                            class="member__page "
                         >我的帳戶</a>
                         <ul class="dropdown courses">
                             <li>
@@ -124,19 +124,17 @@
 
         },
         mounted() {
-
-
             let nowPage = document.title;
             let pageList = document.querySelectorAll('.member__page');
 
             pageList.forEach((item) => {
-
                 let target = item.dataset.page;
+                if (target == nowPage) {
 
+                    item.classList.add('member__page--active')
+                }
 
             })
-
-
 
         }
 
