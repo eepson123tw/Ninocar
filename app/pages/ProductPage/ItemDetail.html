@@ -7,30 +7,30 @@
                     <a href=""> <p>全部商品</p> </a>><a href=""> <p>PREMIUM系</p> </a>>
                     <a href=""><p>Audi R8</p></a>
                 </div>
-                <div class="car-name">Audi TT Coupe</div>
+                <div class="car-name">{{list.productBrief}}</div>
 
-                <a id="show-panel" href="#"><img src="./assets/img/pic/0.png" alt="" /></a>
+                <a id="show-panel" href="#"><img :src="list.imgURL[0]" /></a>
 
                 <div id="lightbox-panel">
-                    <img src="img/0.png" alt="" />
+                    <img :src="list.imgURL[0]" />
                     <a id="close-panel" href="#"><i class="fa fa-window-close" aria-hidden="true"></i></a>
                 </div>
                 <div class="row d-flex justify-content-end">
                     <div class="carID carID--lg bg-series-PM mr-10" style="margin-top: 30px">PM<span>01</span></div>
                 </div>
                 <div class="gallery">
-                    <img src="./assets/img/pic/1.jpg" alt="" />
-                    <img src="./assets/img/pic/2.jpg" alt="" />
-                    <img src="./assets/img/pic/3.jpg" alt="" />
-                    <img src="./assets/img/pic/4.jpg" alt="" />
-                    <img src="./assets/img/pic/5.jpg" alt="" />
+                    <img :src="list.imgURL[1]" />
+                    <img :src="list.imgURL[2]" />
+                    <img :src="list.imgURL[3]" />
+                    <img :src="list.imgURL[4]" />
+                    <img :src="list.imgURL[5]" />
                 </div>
             </div>
         </div>
         <div class="col-5 col-lg-2 col-sm-3">
             <div class="box-2">
-                <h2>Audi R8 奧迪小客車</h2>
-                <h3>Audi TT Coupe</h3>
+                <h2>{{list.productName}}</h2>
+                <h3>{{list.productBrief}}</h3>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi saepe pariatur laudantium fuga
                     inventore ipsa, dignissimos molestias quasi vel mollitia!
@@ -42,7 +42,7 @@
                         <span class="badge badge--primary">本月主打</span>
                     </div>
                 </div>
-                <div class="item-price">NT$ 195</div>
+                <div class="item-price">NT$ {{list.price}}</div>
                 <div>數量</div>
                 <div class="select-style">
                     <select>
@@ -66,7 +66,7 @@
                         <button class="btn btn--fluid btn--outline">加入收藏</button>
                     </div>
                 </div>
-                <div>商品詳細</div>
+                <div>商品說明</div>
                 <hr />
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?</p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?</p>
@@ -116,11 +116,11 @@
                     <div class="prev">
                         <i class="fa fa-chevron-left"></i>
                     </div>
-                    <img src="./assets/img/pic/3.jpg" alt="" />
+                    <img :src="list.imgURL[3]" />
                     <div class="item-card">
-                        <div>Audi R8 奧迪小客車</div>
+                        <div>{{list.productName}}</div>
                         <div class="pandc">
-                            <div>NT 195</div>
+                            <div>NT {{list.price}}</div>
                             <div>收藏</div>
                         </div>
                         <div class="row mt-10 mb-10">
@@ -135,11 +135,11 @@
         <div class="col-3 col-lg-3 col-sm-2">
             <div class="box-blue-2">
                 <div class="box box-blue">
-                    <img src="./assets/img/pic/3.jpg" alt="" />
+                    <img :src="list.imgURL[3]" />
                     <div class="item-card">
-                        <div>Audi R8 奧迪小客車</div>
+                        <div>{{list.productName}}</div>
                         <div class="pandc">
-                            <div>NT 195</div>
+                            <div>NT {{list.price}}</div>
                             <div>收藏</div>
                         </div>
                         <div class="row mt-10 mb-10">
@@ -154,11 +154,11 @@
         <div class="col-3 col-lg-3 col-sm-4">
             <div class="box-blue-3">
                 <div class="box box-blue">
-                    <img src="./assets/img/pic/3.jpg" alt="" />
+                    <img :src="list.imgURL[3]" />
                     <div class="item-card">
-                        <div>Audi R8 奧迪小客車</div>
+                        <div>{{list.productName}}</div>
                         <div class="pandc">
-                            <div>NT 195</div>
+                            <div>NT {{list.price}}</div>
                             <div>收藏</div>
                         </div>
                         <div class="row mt-10 mb-10">
@@ -173,11 +173,11 @@
         <div class="col-3 col-lg-3 col-sm-4">
             <div class="box-blue-4">
                 <div class="box box-blue">
-                    <img src="./assets/img/pic/3.jpg" alt="" />
+                    <img :src="list.imgURL[3]" />
                     <div class="item-card">
-                        <div>Audi R8 奧迪小客車</div>
+                        <div>{{list.productName}}</div>
                         <div class="pandc">
-                            <div>NT 195</div>
+                            <div>NT {{list.price}}</div>
                             <div>收藏</div>
                         </div>
                         <div class="row mt-10 mb-10">
