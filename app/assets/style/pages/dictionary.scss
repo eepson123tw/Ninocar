@@ -135,10 +135,11 @@
 .search-bar {
     display: flex;
     align-items: stretch;
+
     &__input {
         @extend .h4;
         width: 280px;
-        padding: 16px;
+        padding: 12px;
         border: 1px solid $secondary;
         border-radius: 8px 0 0 8px;
     }
