@@ -139,7 +139,7 @@
                 bgClass() {
                     return `bg-series-${this.targetProduct.series}`
                 },
-                getPinClass() {
+                pinClass() {
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
@@ -209,10 +209,10 @@
                 isPostPin(theProductId) {
                     return this.memberOwnProductIdList.indexOf(theProductId);
                 },
-                changeSearchType() {
+                handleSearchTypeChange() {
                     this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
                 },
-                navBarChange(filter) {
+                handleNavBarChange(filter) {
                     if (filter === 'my') {
                         this.showProductList = this.myProducts;
                         this.isNavbarShow = false;
@@ -229,7 +229,7 @@
                         };
                     }
                 },
-                modalProductChange(order) {
+                handleModalProductChange(order) {
                     const currentIndex = this.showProductList.indexOf(this.targetProduct);
                     if (order === 'prev') {
                         this.targetProduct = this.showProductList[currentIndex - 1];
@@ -245,17 +245,17 @@
                     console.log(filteredList);
                     this.showProductList = filteredList;
                 },
-                keywordSearch() {
+                handleKeywordSearch() {
                     const filteredProductList = this.productList.filter(product => {
+                        const keyword = this.keywordText.toLowerCase().trim();
                         let isIncludeWord = false;
-                        product.name.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.name.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.eName.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.eName.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.series.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().concat(product.seriesId).includes(this.keywordText
-                                .toLowerCase()) ?
+                        product.series.toLowerCase().concat(product.seriesId).includes(keyword) ?
                             isIncludeWord = true : '';
                         return isIncludeWord;
                     })
