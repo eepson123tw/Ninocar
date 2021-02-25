@@ -104,6 +104,10 @@
     display: none;
 }
 
+.lorem2 {
+    display: none;
+}
+
 .show {
     display: block;
 }
@@ -133,9 +137,9 @@ a {
 #lightbox-panel {
     display: none;
     position: fixed;
-    top: 15vh;
-    left: 25%;
-    width: 50%;
+    top: 120px;
+    left: 33%;
+    width: 40%;
     background: #ffffff;
     padding: 10px 15px 10px 15px;
     // border: 2px solid #cccccc;
@@ -151,7 +155,6 @@ a {
     top: 220px;
     z-index: 1;
 }
-
 #close-panel {
     float: right;
 }
