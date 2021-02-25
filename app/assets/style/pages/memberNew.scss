@@ -241,6 +241,15 @@
             margin-right: 25px;
         }
     }
+    &__page {
+        width: 100%;
+        &:hover {
+            background: linear-gradient(transparent 50%, rgb(250, 221, 97) 60%);
+        }
+        &--active {
+            background: linear-gradient(transparent 50%, rgb(250, 221, 97) 60%);
+        }
+    }
 }
 
 .nav {

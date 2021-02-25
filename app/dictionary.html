@@ -136,18 +136,8 @@
 
             },
             computed: {
-                // modalClass() {
-                //     if (this.isModalShow) {
-                //         return 'modal text-left modal-active'
-                //     } else {
-                //         return 'modal text-left '
-                //     }
-                // },
-                carIDClass() {
-                    return `carID carID--lg bg-series-${this.targetProduct.series} po-ab bottom-0`
-                },
-                badgeClass() {
-                    return `badge bg-series-${this.targetProduct.series} mr-2`
+                bgClass() {
+                    return `bg-series-${this.targetProduct.series}`
                 },
                 getPinClass() {
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
@@ -239,6 +229,14 @@
                         };
                     }
                 },
+                modalProductChange(order) {
+                    const currentIndex = this.showProductList.indexOf(this.targetProduct);
+                    if (order === 'prev') {
+                        this.targetProduct = this.showProductList[currentIndex - 1];
+                    } else if (order === 'next') {
+                        this.targetProduct = this.showProductList[currentIndex + 1];
+                    }
+                },
                 searchShowProduct() {
 
                     // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
@@ -262,7 +260,8 @@
                         return isIncludeWord;
                     })
                     this.showProductList = filteredProductList;
-                }
+                },
+
             },
         })
     </script>

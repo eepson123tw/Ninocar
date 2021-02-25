@@ -9,21 +9,21 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
-<title>memberonly</title>
+<title>memberOnly</title>
 </head>
 
 <body>
     <div id="app">
         <vue-header></vue-header>
-        @@include('pages/MemberPage/MemberBar.html')
+        <member-bar></member-bar>
         <!--  -->
-        
+
         @@include('./pages/MemberPage/MemberOnly.html')
         <!-- your code here... -->
     </div>
 
 </body>
-@@include('./components/VueHeader.html')
+@@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
 
 <script>
     new Vue({
