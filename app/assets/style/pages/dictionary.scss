@@ -10,11 +10,63 @@
     &__header {
         background-color: #fff;
     }
+
+    .search-bar {
+        position: relative;
+        display: flex;
+        height: 40px;
+
+        &__input {
+            @extend .h5;
+            width: 280px;
+            height: 100%;
+            padding-left: 40px;
+            padding-right: 15px;
+            border: 1px solid $secondary;
+            border-radius: 8px;
+
+            @include rwd-xl {
+                width: 60%;
+                padding: 8px;
+                border-radius: 8px 0 0 8px;
+            }
+        }
+
+        &__input::placeholder {
+            font-size: 16px;
+        }
+
+        &__icon {
+            position: absolute;
+            width: 28px;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            @include rwd-xl {
+                display: none;
+            }
+        }
+
+        &__btn {
+            width: 40%;
+            height: 100%;
+            display: none;
+            color: #fff;
+            background-color: $secondary;
+            border-radius: 0 8px 8px 0;
+
+            @include rwd-xl {
+                display: block;
+            }
+        }
+    }
 }
 
 .display {
     background-color: #fff;
     max-width: 920px;
+    min-height: 680px;
     width: 80%;
     margin: 0 auto;
     position: relative;
@@ -102,6 +154,8 @@
         }
     }
 
+
+
 }
 
 .post {
@@ -151,39 +205,3 @@
         }
     }
 }
-
-.search-bar {
-    display: flex;
-    align-items: stretch;
-
-    &__input {
-        @extend .h4;
-        width: 280px;
-        padding: 15px;
-        border: 1px solid $secondary;
-        border-radius: 8px 0 0 8px;
-
-        @include rwd-lg {
-            width: 60%;
-            padding: 8px;
-        }
-    }
-
-    &__btn {
-        border-radius: 0 8px 8px 0;
-    }
-}
-
-// //======之後放swiper的css
-// .swiper-pagination{
-//     position: absolute;
-//     top: 50%;
-
-//     &-prev{
-//         left: -80px;
-//     }
-
-//     &-next{
-//         right: -80px;
-//     }
-// }
