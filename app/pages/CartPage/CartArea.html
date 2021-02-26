@@ -1,6 +1,6 @@
 <template id="cartArea">
     <div v-if="listIsExist">
-        <main class="container cart   ">
+        <div class="container cart   ">
             <header class="row mt-20 block order-sm-1">
                 <ul class="cart__title  w-100">
                     <li class="block__header__title">購物車</li>
@@ -101,7 +101,7 @@
                     <li> NT$ <span>{{totalMoneyCost}}</span> </li>
                 </ul>
             </footer>
-        </main>
+        </div>
         <div class="container">
             <div class="row  pt-md-5 mt-20">
                 <section class="cart__payment  col-6 col-lg-6 col-xs-12 ">
@@ -116,9 +116,13 @@
                                 name=""
                                 id="productTake"
                                 class="form__select cart__select"
+                                v-model="selectShipping"
                             >
-                                <option value="">門市自取</option>
-                                <option value="">黑貓宅配</option>
+                                <option
+                                    value=""
+                                    disabled
+                                >請選擇</option>
+                                <option v-for="(methods,index) of shippingList">{{methods}}</option>
                             </select>
                         </div>
                         <label
@@ -127,14 +131,16 @@
                         >選擇付款方式</label>
                         <div class="form__section mb-5">
                             <select
-                                name=""
                                 id="paymentChoose"
                                 class="form__select cart__select"
+                                v-model="selectPayment"
                             >
-                                <option value="">線上刷卡</option>
-                                <option value="">ATM轉帳</option>
-                                <option value="">門市結帳</option>
-                                <option value="">貨到付款</option>
+                                <option
+                                    value=""
+                                    disabled
+                                >請選擇</option>
+                                <option v-for="(payment,index) of paymentList">{{payment}}</option>
+
                             </select>
                         </div>
                         <label
@@ -348,15 +354,12 @@
                 buyerList: this.list,
                 //購買清單是否存在
                 listIsExist: this.IsExist,
-                // 選擇的數量
-                number: "",
                 // 初始全部金額
                 totalProductNum: null,
                 totalPointCost: null,
                 totalMoneyCost: null,
                 // 目前頁面
                 currentdata: this.current,
-
                 // 折價卷種類
                 cuponList: {
                     discountOne: "註冊新會員結帳享9折優惠！",
@@ -364,39 +367,51 @@
                     discountThree: "老闆跳樓拉免運費！",
                     discountFour: '本月壽星你最大享5折優惠！',
                 },
+                //  付款方式種類
+                paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
+                shippingList: ['自取', '宅配'],
                 //選擇cupon
                 selectCupon: "",
+                // 選擇payment
+                selectPayment: "",
+                // shipping methods
+
+                selectShipping: "",
                 discountPrice: 0,
                 sendPrice: 0,
+                finallyPrice: 0,
             }
         },
         mounted() {
             //  資料傳入時先渲染
             for (listNum in this.list) {
-
                 if (!this.list[listNum].productName) {
                     this.listIsExist = false;
                 }
-
                 this.totalProductNum += this.buyerList[listNum].productNum;
-
                 if (this.buyerList[listNum].pointProduct) {
 
                     this.totalPointCost += this.buyerList[listNum].price;
                 }
-
                 if (!this.buyerList[listNum].pointProduct) {
                     this.totalMoneyCost += this.buyerList[listNum].price;
                 }
             };
-
-
         },
         methods: {
             pageHandler() {
                 this.currentdata += 1;
                 confirm(`確認結帳!!`);
-                this.$emit('data-handler', this.currentdata)
+                this.$emit('data-handler', this.currentdata);
+                //傳送更新 store 的值
+                this.$store.commit('selectCupon', this.selectCupon);
+                this.$store.commit('selectShipping', this.selectShipping);
+                this.$store.commit('selectPayment', this.selectPayment);
+                this.$store.commit('addBuyList', this.buyerList);
+                this.$store.commit('addBuyNum', this.totalProductNum);
+                this.$store.commit('addFinalPrice', this.finallyPrice);
+                this.$store.commit('addTotalPointCost', this.totalPointCost);
+
             },
             changeNum(listIndex, e) {
 
@@ -406,13 +421,11 @@
 
                 this.buyerList[listIndex].productNum = chooseNum;
                 this.buyerList[listIndex].totalPrice = newTotalPrice;
-
                 this.renew();
 
             },
             deleteHandler(listIndex) {
                 this.buyerList.splice(listIndex, 1);
-
                 this.renew();
 
             },
@@ -460,9 +473,12 @@
 
             totalCount() {
 
-                return this.totalMoneyCost - this.discountPrice;
+                let final = this.totalMoneyCost - this.discountPrice;
+                this.finallyPrice = final;
+                return final;
 
-            }
+            },
+
 
         }
 
