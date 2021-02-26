@@ -19,7 +19,7 @@
             <transition name="fade">
                 @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
             </transition>
-            <!-- dictionary list -->
+            <!--  list -->
             <section class="block">
                 @@include('./pages/DictionaryPage/DictionaryPostNav.html')
                 <transition name="collapse">
@@ -54,6 +54,7 @@
                     'my': false
                 },
                 isNavbarShow: true,
+                isModalShow: false,
                 seriesList: [{
                     name: '工程系',
                     eName: 'EN',
@@ -79,16 +80,13 @@
                     name: 'PREMIUM系',
                     eName: 'PM',
                 }],
-                priceList: ['100~200', '200~300', '300以上'],
+                priceList: ['100~199', '200~299', '300以上'],
                 yearList: ['1970~1989', '1990~2009', '2010後'],
-                labelList: ['無限定', '期間限定', '點數限定'],
-                selectedFilter: {
-                    selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                    selectedPriceList: ['100~200', '200~300'],
-                    selectedYearList: [1970, 1990, 2010],
-                    selectedLimitList: [0, 1, 2],
-                },
-                isModalShow: false,
+                limitList: ['無限定', '期間限定', '點數限定'],
+                selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
+                selectedPriceList: ['100~199', '200~299', '300以上'],
+                selectedYearList: ['1970~1989', '1990~2009', '2010後'],
+                selectedLimitList: ['無限定', '期間限定', '點數限定'],
                 keywordText: '',
             },
             mounted() {
@@ -102,8 +100,10 @@
                 getProductList().then(res => {
                     console.log(res.data);
                     const fetchProductList = res.data.map(product => {
+                        // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
                         thisSeriesIndex.toString();
+                        // 系列Id若是單位數，前面加0
                         let thisSeriesId;
                         if (product[`product_seriesid`].length === 1) {
                             thisSeriesId = 0 + product[`product_seriesid`];
@@ -116,6 +116,7 @@
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
+                            price: product[`product_price`],
                             imgURL: product['product_img'],
                             displayImgURL: product['product_img1'],
                             productId: product['product_id'],
@@ -157,59 +158,115 @@
                         };
                     }
                 },
-                priceAllCheck() {
-                    if (this.selectedFilter.selectedPriceList.length === this.priceList.length) {
-                        return
+                priceAllCheck: {
+                    get() {
+                        return this.selectedPriceList ? this.selectedPriceList
+                            .length === this.priceList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedPriceList = [...this.priceList] : this
+                            .selectedPriceList = [];
                     }
                 },
-
+                yearAllCheck: {
+                    get() {
+                        return this.selectedYearList ? this.selectedYearList
+                            .length === this.yearList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedYearList = [...this.yearList] : this
+                            .selectedYearList = [];
+                    }
+                },
+                seriesAllCheck: {
+                    get() {
+                        return this.selectedSeriesList ? this.selectedSeriesList.length === this.seriesList
+                            .length : false
+                    },
+                    set(value) {
+                        value ? this.selectedSeriesList = this.seriesList.map(series =>
+                                series.eName) : this
+                            .selectedSeriesList = [];
+                    }
+                },
+                limitAllCheck: {
+                    get() {
+                        return this.selectedLimitList ? this.selectedLimitList
+                            .length === this.limitList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedLimitList = [...this.limitList] : this
+                            .selectedLimitList = [];
+                    }
+                },
+            },
+            watch: {
+                selectedPriceList(changedYearList) {
+                    const changedProductList = this.productList.filter(product => {
+                        let isInclude = false;
+                        changedYearList.includes('100~199') && (product.price <= 199) ? isInclude =
+                            true : '';
+                        changedYearList.includes('300以上') && product.price >= 300 ? isInclude = true :
+                            '';
+                        if (changedYearList.includes('200~299')) {
+                            product.price >= 200 && product.price <= 299 ? isInclude = true : '';
+                        }
+                        // 扣除點數限定商品（點數販售，價錢為0)
+                        product.price == 0 ? isInclude = false : '';
+                        return isInclude;
+                    })
+                    this.showProductList = changedProductList;
+                },
+                selectedYearList(changedYearList) {
+                    const changedProductList = this.productList.filter(product => {
+                        let isInclude = false;
+                        changedYearList.includes('1970~1989') && product.year <= 1989 ? isInclude =
+                            true : '';
+                        changedYearList.includes('2010後') && product.year >= 2010 ? isInclude = true :
+                            '';
+                        if (changedYearList.includes('1990~2009')) {
+                            product.year >= 1990 && product.year <= 2009 ? isInclude = true : '';
+                        }
+                        return isInclude;
+                    })
+                    this.showProductList = changedProductList;
+                },
+                selectedSeriesList(changedSeriesList) {
+                    const changedProductList = this.productList.filter(product => {
+                        return changedSeriesList.includes(product.series);
+                    })
+                    this.showProductList = changedProductList;
+                },
+                selectedLimitList(changedSeriesList) {
+                    const changedProductList = this.productList.filter(product => {
+                        let isInclude = false;
+                        changedSeriesList.includes('期間限定') && product.limitLabel === '2' ? isInclude =
+                            true : '';
+                        changedSeriesList.includes('點數限定') && product.limitLabel === '4' ? isInclude =
+                            true : '';
+                        if (changedSeriesList.includes('無限定')) {
+                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isInclude =
+                                true : '';
+                        }
+                        return isInclude;
+                    })
+                    this.showProductList = changedProductList;
+                },
             },
             methods: {
                 handleFilterReset() {
-                    for (const filter in this.selectedFilter) {
-                        filter.splice(0);
-                    }
+                    this.priceAllCheck = false;
+                    this.yearAllCheck = false;
+                    this.seriesAllCheck = false;
+                    this.limitAllCheck = false;
                 },
-                handleAllCheck(selectedList, standardList) {
-                    console.log(selectedList.length)
-                    console.log(standardList.length)
-                    // if (selectedList.length === standardList.length) {
-                    //     this.selectedFilter.selectedPriceList.splice(0)
-                    // } else {
-                    //     this.selectedFilter = this.priceList.map(e => e);
-                    // }
+                handleFilterAllCheck() {
+                    this.priceAllCheck = true;
+                    this.yearAllCheck = true;
+                    this.seriesAllCheck = true;
+                    this.limitAllCheck = true;
                 },
-                // handleAllCheckYear() {
-                //     if (this.selectedYearFilter.length === 3) {
-                //         this.selectedYearFilter.splice(0)
-                //     } else {
-                //         this.selectedYearFilter.splice(0);
-                //         for (const key in this.yearsRange) {
-                //             this.selectedYearFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckSeries() {
-                //     if (this.selectedSeriesFilter.length === 8) {
-                //         this.selectedSeriesFilter.splice(0)
-                //     } else {
-                //         this.selectedSeriesFilter.splice(0);
-                //         for (const key in this.seriesNames) {
-                //             this.selectedSeriesFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckLimit() {
-                //     if (this.selectedLimitFilter.length === 3) {
-                //         this.selectedLimitFilter.splice(0)
-                //     } else {
-                //         this.selectedLimitFilter.splice(0);
-                //         for (const key in this.limitLabels) {
-                //             this.selectedLimitFilter.push(key);
-                //         }
-                //     }
-                // },
-                handleClickPost(theProductId) {
+                handlePostClick(theProductId) {
                     this.targetProduct = this.showProductList.find(product => product.productId ===
                         theProductId)
                     this.isModalShow = true;
@@ -243,8 +300,6 @@
                     }
                 },
                 searchShowProduct() {
-
-                    // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
                     const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
                         product.series) >= 0);
                     console.log(filteredList);
