@@ -7,8 +7,7 @@
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="(priceRange) in priceList" :key="priceRange" class="custom-input ml-3 mb-5">{{priceRange}}
-                    <input type="checkbox" :value="priceRange" v-model="selectedFilter.selectedPriceList"
-                        class="custom-input__input">
+                    <input type="checkbox" :value="priceRange" v-model="selectedPriceList" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
@@ -19,8 +18,7 @@
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="(yearRange) in yearList" class="custom-input ml-3 mb-5">{{yearRange}}
-                    <input type="checkbox" :value="yearRange" v-model="selectedFilter.selectedYearList"
-                        class="custom-input__input">
+                    <input type="checkbox" :value="yearRange" v-model="selectedYearList" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
@@ -31,7 +29,7 @@
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="seriesName in seriesList" class="custom-input ml-3 mb-5">{{seriesName.name}}
-                    <input type="checkbox" :value="seriesName.eName" v-model="selectedFilter.selectedSeriesList"
+                    <input type="checkbox" :value="seriesName.eName" v-model="selectedSeriesList"
                         class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
@@ -43,8 +41,7 @@
                     <span class="custom-input__checkmark"></span>
                 </label>
                 <label v-for="limit in limitList" class="custom-input ml-3 mb-5">{{limit}}
-                    <input type="checkbox" :value="limit" v-model="selectedFilter.selectedLimitList"
-                        class="custom-input__input">
+                    <input type="checkbox" :value="limit" v-model="selectedLimitList" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
