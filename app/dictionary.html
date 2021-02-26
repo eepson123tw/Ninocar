@@ -19,7 +19,7 @@
             <transition name="fade">
                 @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
             </transition>
-            <!-- dictionary list -->
+            <!--  list -->
             <section class="block">
                 @@include('./pages/DictionaryPage/DictionaryPostNav.html')
                 <transition name="collapse">
@@ -54,6 +54,7 @@
                     'my': false
                 },
                 isNavbarShow: true,
+                isModalShow: false,
                 seriesList: [{
                     name: '工程系',
                     eName: 'EN',
@@ -81,14 +82,13 @@
                 }],
                 priceList: ['100~200', '200~300', '300以上'],
                 yearList: ['1970~1989', '1990~2009', '2010後'],
-                labelList: ['無限定', '期間限定', '點數限定'],
+                limitList: ['無限定', '期間限定', '點數限定'],
                 selectedFilter: {
                     selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
                     selectedPriceList: ['100~200', '200~300'],
-                    selectedYearList: [1970, 1990, 2010],
-                    selectedLimitList: [0, 1, 2],
+                    selectedYearList: ['1970~1989'],
+                    selectedLimitList: ['無限定', '期間限定', '點數限定'],
                 },
-                isModalShow: false,
                 keywordText: '',
             },
             mounted() {
@@ -102,8 +102,10 @@
                 getProductList().then(res => {
                     console.log(res.data);
                     const fetchProductList = res.data.map(product => {
+                        // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
                         thisSeriesIndex.toString();
+                        // 系列Id若是單位數，前面加0
                         let thisSeriesId;
                         if (product[`product_seriesid`].length === 1) {
                             thisSeriesId = 0 + product[`product_seriesid`];
@@ -157,9 +159,46 @@
                         };
                     }
                 },
-                priceAllCheck() {
-                    if (this.selectedFilter.selectedPriceList.length === this.priceList.length) {
-                        return
+                priceAllCheck: {
+                    get() {
+                        return this.selectedFilter.selectedPriceList ? this.selectedFilter.selectedPriceList
+                            .length === this.priceList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedFilter.selectedPriceList = [...this.priceList] : this
+                            .selectedFilter.selectedPriceList = [];
+                    }
+                },
+                yearAllCheck: {
+                    get() {
+                        return this.selectedFilter.selectedYearList ? this.selectedFilter.selectedYearList
+                            .length === this.yearList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedFilter.selectedYearList = [...this.yearList] : this
+                            .selectedFilter.selectedYearList = [];
+                    }
+                },
+                seriesAllCheck: {
+                    get() {
+                        return this.selectedFilter.selectedSeriesList ? this.selectedFilter
+                            .selectedSeriesList
+                            .length === this.seriesList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedFilter.selectedSeriesList = this.seriesList.map(series =>
+                                series.eName) : this
+                            .selectedFilter.selectedSeriesList = [];
+                    }
+                },
+                limitAllCheck: {
+                    get() {
+                        return this.selectedFilter.selectedLimitList ? this.selectedFilter.selectedLimitList
+                            .length === this.limitList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedFilter.selectedLimitList = [...this.limitList] : this
+                            .selectedFilter.selectedLimitList = [];
                     }
                 },
 
@@ -167,49 +206,16 @@
             methods: {
                 handleFilterReset() {
                     for (const filter in this.selectedFilter) {
-                        filter.splice(0);
+                        this.selectedFilter[filter].splice(0);
                     }
                 },
-                handleAllCheck(selectedList, standardList) {
-                    console.log(selectedList.length)
-                    console.log(standardList.length)
-                    // if (selectedList.length === standardList.length) {
-                    //     this.selectedFilter.selectedPriceList.splice(0)
-                    // } else {
-                    //     this.selectedFilter = this.priceList.map(e => e);
-                    // }
+                handleFilterAllCheck() {
+                    this.priceAllCheck = true;
+                    this.yearAllCheck = true;
+                    this.seriesAllCheck = true;
+                    this.limitAllCheck = true;
                 },
-                // handleAllCheckYear() {
-                //     if (this.selectedYearFilter.length === 3) {
-                //         this.selectedYearFilter.splice(0)
-                //     } else {
-                //         this.selectedYearFilter.splice(0);
-                //         for (const key in this.yearsRange) {
-                //             this.selectedYearFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckSeries() {
-                //     if (this.selectedSeriesFilter.length === 8) {
-                //         this.selectedSeriesFilter.splice(0)
-                //     } else {
-                //         this.selectedSeriesFilter.splice(0);
-                //         for (const key in this.seriesNames) {
-                //             this.selectedSeriesFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckLimit() {
-                //     if (this.selectedLimitFilter.length === 3) {
-                //         this.selectedLimitFilter.splice(0)
-                //     } else {
-                //         this.selectedLimitFilter.splice(0);
-                //         for (const key in this.limitLabels) {
-                //             this.selectedLimitFilter.push(key);
-                //         }
-                //     }
-                // },
-                handleClickPost(theProductId) {
+                handlePostClick(theProductId) {
                     this.targetProduct = this.showProductList.find(product => product.productId ===
                         theProductId)
                     this.isModalShow = true;
@@ -243,8 +249,6 @@
                     }
                 },
                 searchShowProduct() {
-
-                    // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
                     const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
                         product.series) >= 0);
                     console.log(filteredList);

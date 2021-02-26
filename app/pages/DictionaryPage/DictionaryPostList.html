@@ -2,7 +2,7 @@
     <!-- post -->
 
     <post v-for="(product,index) in showProductList" v-bind="product" :key="product.productId"
-        @click.native.prevent="handleClickPost(product.productId)"
+        @click.native.prevent="handlePostClick(product.productId)"
         :active="product.productId === targetProduct.productId" :show-pin="isPostPin(product.productId)"></post>
 
 </ul>
