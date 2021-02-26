@@ -243,7 +243,15 @@
     align-items: center;
     justify-content: space-between;
     width: 16vw;
+
+    &InModal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    }
 }
+
 
 .icon {
     margin-left: 8px;
@@ -526,6 +534,18 @@
 .tipArea_left .invisible{
     opacity: 0;
     pointer-events: none;
+}
+
+.canNotSee{
+    display: none;
+}
+
+.canSeeFlex{
+    display: flex;
+}
+
+.catSeeBlock{
+    display: block;
 }
 
 .selectAreaOut-next {
