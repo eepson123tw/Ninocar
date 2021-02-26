@@ -27,8 +27,6 @@ const store = new Vuex.Store({ //global store
         }],
     },
     mutations: { //類似 new Vue() 裡面的methods
-        addCount(state) {
-            state.count += 1;
-        },
+
     }
 });

@@ -2,16 +2,14 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css'
-    integrity='sha512-uA1+kHA/0O68FTSM4jeTzJNnRvNWxdCCSnE3gv8LaySXYxQT3nc5uPX9buMPtI1gxUBcxm0+5Lcw59jjl0nMDQ=='
-    crossorigin='anonymous' />
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css' />
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/index.css">
-<link rel="stylesheet" href="./assets/css/pages/dictionary.css">
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.js'></script>
 
 
@@ -57,57 +55,81 @@
     sayHi('index');
 </script> -->
 
+    <script src="./assets/js/utils.js"></script>
 
     <script>
         new Vue({
             el: '#app',
+            store,
             data: {
                 productList: [],
-                targetProduct: {},
+                targetProduct: null,
                 memberHasPin: true,
+                memberOwnProductIdList: ['300', '121'],
             },
-            methods: {
-                chBadge(product) {
-                    const seriesNames = {
-                        BS: '巴士系',
-                        EN: '工程系',
-                        TA: '計程車系',
-                        EM: '消防救護系',
-                        PM: 'PREMIUM系',
-                        PA: '警車系',
-                        RV: 'RV休旅系',
-                        CA: '轎車系'
-                    }
-                    return seriesNames[product.series]
+            computed: {
+                seriesList() {
+                    return this.$store.state.seriesList
                 },
-                carIDClass(product) {
-                    return `carID carID--lg bg-series-${product.series} po-re mb-5`
+                bgClass() {
+                    return `bg-series-${this.targetProduct.series}`
                 },
-                badgeClass(product) {
-                    return `badge bg-series-${product.series} mr-2`
-                },
-                getPinClass(product) {
-                    return this.memberOwnProductIdList.indexOf(product.productId) ? 'pin' :
+                pinClass() {
+                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
-                extraLabel(product) {
-                    if (product.extraLabel === 1) {
-                        return {
-                            text: '期間限定',
-                            className: 'badge badge--primary'
-                        };
-                    } else if (product.extraLabel === 2) {
-                        return {
-                            text: '點數限定',
-                            className: 'badge bg-blue'
-                        };
-                    } else {
-                        return {}
+            },
+            methods: {
+                handleModalProductChange(order) {
+                    const currentIndex = this.productList.indexOf(this.targetProduct);
+                    if (order === 'prev') {
+                        this.targetProduct = this.productList[currentIndex - 1];
+                    } else if (order === 'next') {
+                        this.targetProduct = this.productList[currentIndex + 1];
                     }
                 },
             },
 
             mounted() {
+                //getProductList getIndexProductList.php
+                const getIndexProductList = async () => {
+                    const productList = await axios.get(
+                        `./assets/php/getIndexProductList.php`
+                    );
+                    return productList;
+                }
+                getIndexProductList().then(res => {
+                    console.log(res.data);
+                    const fetchProductList = res.data.map(product => {
+                        // 系列數字轉名稱
+                        let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
+                        thisSeriesIndex.toString();
+                        // 系列Id若是單位數，前面加0
+                        let thisSeriesId;
+                        if (product[`product_seriesid`].length === 1) {
+                            thisSeriesId = 0 + product[`product_seriesid`];
+                        } else {
+                            thisSeriesId = product[`product_seriesid`];
+                        }
+                        return {
+                            name: product[`product_name`].trim(),
+                            eName: product['product_ename'].trim(),
+                            series: this.seriesList[thisSeriesIndex].eName,
+                            seriesIndex: thisSeriesIndex,
+                            seriesId: thisSeriesId,
+                            displayImgURL: product['product_img1'],
+                            productId: product['product_id'],
+                            year: product['product_year'],
+                            size: product['product_size'],
+                            description: product['product_des'],
+                        }
+                    })
+                    console.log(fetchProductList);
+                    this.productList = fetchProductList;
+                    this.targetProduct = this.productList[0];
+                }).catch(error => {
+                    console.log(error)
+                })
                 // swiper
                 let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,

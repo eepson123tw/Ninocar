@@ -33,13 +33,12 @@
         @@include('./components/Footer.html')
     </div>
 
-
     @@include('./components/VueHeader.html')
     @@include('./components/common/Pin.html')
     @@include('./pages/DictionaryPage/DictionaryPostItem.html')
     @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
-    <script src="./components/utils.js"></script>
+    <script src="./assets/js/utils.js"></script>
     <script>
         new Vue({
             el: '#dictionary',
@@ -89,8 +88,8 @@
                             thisSeriesId = product[`product_seriesid`];
                         }
                         return {
-                            name: product[`product_name`],
-                            eName: product['product_ename'],
+                            name: product[`product_name`].trim(),
+                            eName: product['product_ename'].trim(),
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
