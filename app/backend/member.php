@@ -21,10 +21,6 @@
         include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
-        <!-- update-button -->
-        <div class="update_btn">
-            <button><a href="update.php"><i class="fas fa-upload"></i>上架商品</a></button>
-        </div>
         <!-- table -->
         <div class="col-lg-9">
             <div class="table-responsive">
