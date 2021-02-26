@@ -345,143 +345,143 @@
 
 
 <script>
-    Vue.component('cartArea', {
-        template: "#cartArea",
-        props: ['list', 'IsExist', 'current'],
-        data() {
-            return {
-                //購買清單
-                buyerList: this.list,
-                //購買清單是否存在
-                listIsExist: this.IsExist,
-                // 初始全部金額
-                totalProductNum: null,
-                totalPointCost: null,
-                totalMoneyCost: null,
-                // 目前頁面
-                currentdata: this.current,
-                // 折價卷種類
-                cuponList: {
-                    discountOne: "註冊新會員結帳享9折優惠！",
-                    discountTwo: "白金會員太牛了享8折優惠！",
-                    discountThree: "老闆跳樓拉免運費！",
-                    discountFour: '本月壽星你最大享5折優惠！',
-                },
-                //  付款方式種類
-                paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
-                shippingList: ['自取', '宅配'],
-                //選擇cupon
-                selectCupon: "",
-                // 選擇payment
-                selectPayment: "",
-                // shipping methods
-
-                selectShipping: "",
-                discountPrice: 0,
-                sendPrice: 0,
-                finallyPrice: 0,
-            }
+  Vue.component('cartArea', {
+    template: "#cartArea",
+    props: ['list', 'IsExist', 'current'],
+    data() {
+      return {
+        //購買清單
+        buyerList: this.list,
+        //購買清單是否存在
+        listIsExist: this.IsExist,
+        // 初始全部金額
+        totalProductNum: null,
+        totalPointCost: null,
+        totalMoneyCost: null,
+        // 目前頁面
+        currentdata: this.current,
+        // 折價卷種類
+        cuponList: {
+          discountOne: "註冊新會員結帳享9折優惠！",
+          discountTwo: "白金會員太牛了享8折優惠！",
+          discountThree: "老闆跳樓拉免運費！",
+          discountFour: '本月壽星你最大享5折優惠！',
         },
-        mounted() {
-            //  資料傳入時先渲染
-            for (listNum in this.list) {
-                if (!this.list[listNum].productName) {
-                    this.listIsExist = false;
-                }
-                this.totalProductNum += this.buyerList[listNum].productNum;
-                if (this.buyerList[listNum].pointProduct) {
+        //  付款方式種類
+        paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
+        shippingList: ['自取', '宅配'],
+        //選擇cupon
+        selectCupon: "",
+        // 選擇payment
+        selectPayment: "",
+        // shipping methods
 
-                    this.totalPointCost += this.buyerList[listNum].price;
-                }
-                if (!this.buyerList[listNum].pointProduct) {
-                    this.totalMoneyCost += this.buyerList[listNum].price;
-                }
-            };
-        },
-        methods: {
-            pageHandler() {
-                this.currentdata += 1;
-                confirm(`確認結帳!!`);
-                this.$emit('data-handler', this.currentdata);
-                //傳送更新 store 的值
-                this.$store.commit('selectCupon', this.selectCupon);
-                this.$store.commit('selectShipping', this.selectShipping);
-                this.$store.commit('selectPayment', this.selectPayment);
-                this.$store.commit('addBuyList', this.buyerList);
-                this.$store.commit('addBuyNum', this.totalProductNum);
-                this.$store.commit('addFinalPrice', this.finallyPrice);
-                this.$store.commit('addTotalPointCost', this.totalPointCost);
+        selectShipping: "",
+        discountPrice: 0,
+        sendPrice: 0,
+        finallyPrice: 0,
+      }
+    },
+    mounted() {
+      //  資料傳入時先渲染
+      for (listNum in this.list) {
+        if (!this.list[listNum].productName) {
+          this.listIsExist = false;
+        }
+        this.totalProductNum += this.buyerList[listNum].productNum;
+        if (this.buyerList[listNum].pointProduct) {
 
-            },
-            changeNum(listIndex, e) {
+          this.totalPointCost += this.buyerList[listNum].price;
+        }
+        if (!this.buyerList[listNum].pointProduct) {
+          this.totalMoneyCost += this.buyerList[listNum].price;
+        }
+      };
+    },
+    methods: {
+      pageHandler() {
+        this.currentdata += 1;
+        confirm(`確認結帳!!`);
+        this.$emit('data-handler', this.currentdata);
+        //傳送更新 store 的值
+        this.$store.commit('selectCupon', this.selectCupon);
+        this.$store.commit('selectShipping', this.selectShipping);
+        this.$store.commit('selectPayment', this.selectPayment);
+        this.$store.commit('addBuyList', this.buyerList);
+        this.$store.commit('addBuyNum', this.totalProductNum);
+        this.$store.commit('addFinalPrice', this.finallyPrice);
+        this.$store.commit('addTotalPointCost', this.totalPointCost);
 
-                let chooseNum = e.target.value * 1 + 1;
-                let totalPrice = this.buyerList[listIndex].price;
-                let newTotalPrice = totalPrice * chooseNum;
+      },
+      changeNum(listIndex, e) {
 
-                this.buyerList[listIndex].productNum = chooseNum;
-                this.buyerList[listIndex].totalPrice = newTotalPrice;
-                this.renew();
+        let chooseNum = e.target.value * 1 + 1;
+        let totalPrice = this.buyerList[listIndex].price;
+        let newTotalPrice = totalPrice * chooseNum;
 
-            },
-            deleteHandler(listIndex) {
-                this.buyerList.splice(listIndex, 1);
-                this.renew();
+        this.buyerList[listIndex].productNum = chooseNum;
+        this.buyerList[listIndex].totalPrice = newTotalPrice;
+        this.renew();
 
-            },
-            deleteAllHandler() {
-                this.buyerList = "";
-                this.renew();
-            },
-            renew() {
-                // 重render畫面
-                this.totalProductNum = 0;
-                this.totalPointCost = 0;
-                this.totalMoneyCost = 0;
+      },
+      deleteHandler(listIndex) {
+        this.buyerList.splice(listIndex, 1);
+        this.renew();
 
-                for (listNum in this.buyerList) {
-                    this.totalProductNum += this.buyerList[listNum].productNum;
-                    if (this.buyerList[listNum].pointProduct) {
-                        this.totalPointCost += this.buyerList[listNum].totalPrice;
-                    }
-                    if (!this.buyerList[listNum].pointProduct) {
-                        this.totalMoneyCost += this.buyerList[listNum].totalPrice;
-                    }
+      },
+      deleteAllHandler() {
+        this.buyerList = "";
+        this.renew();
+      },
+      renew() {
+        // 重render畫面
+        this.totalProductNum = 0;
+        this.totalPointCost = 0;
+        this.totalMoneyCost = 0;
 
-                };
-            },
-            countDiscount() {
-                // 折扣選取器
-                for (let key in this.cuponList) {
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
-                        this.sendPrice = 0;
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
-                    }
+        for (listNum in this.buyerList) {
+          this.totalProductNum += this.buyerList[listNum].productNum;
+          if (this.buyerList[listNum].pointProduct) {
+            this.totalPointCost += this.buyerList[listNum].totalPrice;
+          }
+          if (!this.buyerList[listNum].pointProduct) {
+            this.totalMoneyCost += this.buyerList[listNum].totalPrice;
+          }
 
-                }
-            }
-        },
-        computed: {
-
-            totalCount() {
-
-                let final = this.totalMoneyCost - this.discountPrice;
-                this.finallyPrice = final;
-                return final;
-
-            },
-
+        };
+      },
+      countDiscount() {
+        // 折扣選取器
+        for (let key in this.cuponList) {
+          if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
+            this.sendPrice = 0;
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
+          }
 
         }
+      }
+    },
+    computed: {
+
+      totalCount() {
+
+        let final = this.totalMoneyCost - this.discountPrice;
+        this.finallyPrice = final;
+        return final;
+
+      },
 
 
-    })
+    }
+
+
+  })
 </script>
