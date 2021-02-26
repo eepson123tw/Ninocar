@@ -1,14 +1,14 @@
-    <form class="bg-white po-re px-10 py-5" v-show="searchType === '關鍵字搜尋' && isNavbarShow">
+    <form class="bg-white po-re px-10 py-5" v-show="searchType === 'sort' && isNavbarShow">
         <ul>
             <li>
                 <label class="h4 d-block mb-3">價格</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" v-model="selectedFilter.selectedPriceList.length === priceList.length"
-                        @click="handlePriceAllCheck" class="custom-input__input">
+                    <input type="checkbox" v-model="selectedFilter.selectedPriceList"
+                        @click="handleAllCheck(selectedFilter.selectedPriceList,priceList)" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-                <label v-for="(priceRange,key) in priceList" class="custom-input ml-3 mb-5">{{priceRange}}
-                    <input type="checkbox" :value="key" v-model="selectedFilter.selectedPriceList"
+                <label v-for="(priceRange) in priceList" :key="priceRange" class="custom-input ml-3 mb-5">{{priceRange}}
+                    <input type="checkbox" :value="priceRange" v-model="selectedFilter.selectedPriceList"
                         class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>

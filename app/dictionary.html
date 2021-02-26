@@ -32,7 +32,8 @@
     </div>
 
 
-    @@include('./components/VueHeader.html') @@include('./components/Pin.html')
+    @@include('./components/VueHeader.html')
+    @@include('./components/common/Pin.html')
     @@include('./pages/DictionaryPage/DictionaryPostItem.html')
     @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
@@ -47,7 +48,7 @@
                 showProductList: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
-                searchType: '分類搜尋',
+                searchType: 'keyword',
                 navClassName: {
                     'all': true,
                     'my': false
@@ -83,7 +84,7 @@
                 labelList: ['無限定', '期間限定', '點數限定'],
                 selectedFilter: {
                     selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                    selectedPriceList: [1, 2, 3],
+                    selectedPriceList: ['100~200', '200~300'],
                     selectedYearList: [1970, 1990, 2010],
                     selectedLimitList: [0, 1, 2],
                 },
@@ -139,7 +140,7 @@
                 bgClass() {
                     return `bg-series-${this.targetProduct.series}`
                 },
-                getPinClass() {
+                pinClass() {
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
@@ -155,7 +156,12 @@
                             className: 'badge bg-blue'
                         };
                     }
-                }
+                },
+                priceAllCheck() {
+                    if (this.selectedFilter.selectedPriceList.length === this.priceList.length) {
+                        return
+                    }
+                },
 
             },
             methods: {
@@ -164,12 +170,14 @@
                         filter.splice(0);
                     }
                 },
-                handlePriceAllCheck() {
-                    if (selectedFilter.selectedPriceList.length === priceList.length) {
-                        this.selectedFilter.selectedPriceList.splice(0)
-                    } else {
-                        this.selectedFilter = this.priceList.map(e => e);
-                    }
+                handleAllCheck(selectedList, standardList) {
+                    console.log(selectedList.length)
+                    console.log(standardList.length)
+                    // if (selectedList.length === standardList.length) {
+                    //     this.selectedFilter.selectedPriceList.splice(0)
+                    // } else {
+                    //     this.selectedFilter = this.priceList.map(e => e);
+                    // }
                 },
                 // handleAllCheckYear() {
                 //     if (this.selectedYearFilter.length === 3) {
@@ -209,10 +217,7 @@
                 isPostPin(theProductId) {
                     return this.memberOwnProductIdList.indexOf(theProductId);
                 },
-                changeSearchType() {
-                    this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
-                },
-                navBarChange(filter) {
+                handleNavBarChange(filter) {
                     if (filter === 'my') {
                         this.showProductList = this.myProducts;
                         this.isNavbarShow = false;
@@ -229,7 +234,7 @@
                         };
                     }
                 },
-                modalProductChange(order) {
+                handleModalProductChange(order) {
                     const currentIndex = this.showProductList.indexOf(this.targetProduct);
                     if (order === 'prev') {
                         this.targetProduct = this.showProductList[currentIndex - 1];
@@ -245,17 +250,17 @@
                     console.log(filteredList);
                     this.showProductList = filteredList;
                 },
-                keywordSearch() {
+                handleKeywordSearch() {
                     const filteredProductList = this.productList.filter(product => {
+                        const keyword = this.keywordText.toLowerCase().trim();
                         let isIncludeWord = false;
-                        product.name.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.name.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.eName.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.eName.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.series.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().concat(product.seriesId).includes(this.keywordText
-                                .toLowerCase()) ?
+                        product.series.toLowerCase().concat(product.seriesId).includes(keyword) ?
                             isIncludeWord = true : '';
                         return isIncludeWord;
                     })
