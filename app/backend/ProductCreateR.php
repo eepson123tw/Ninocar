@@ -5,7 +5,7 @@
     //先判斷圖片是否上傳成功?
     if($_FILES["img"]["error"] > 0){
         // echo "上傳失敗: 錯誤代碼".$_FILES["img"]["error"];
-        echo "<script>alert('上傳失敗'); location.href = 'update.php';</script>";
+        echo "<script>alert('上架失敗'); location.href = 'update.php';</script>";
     }else{
         //Server上的暫存檔路徑含檔名
         $filePath_Temp = $_FILES["img"]["tmp_name"];
@@ -26,11 +26,6 @@
             $category = $_POST["category"];   //商品分類（0：轎車系 1：工程系 2：RV休旅系 3：計程車系 4:巴士系 5:警車系 6：消防系 7：救護系 8：PREMIUM系
             $cateId = $_POST["cateId"];   //分類編號
             $category2 = $_POST["category2"];   //特殊分類（0：一般商品 1：熱門商品  2：本月主打 3：最新商品 4:點數限定 5:客製化商品 ）
-            $imgBg = $_POST["imgBg"];   //商品圖（去背）
-            $imgCover = $_POST["imgCover"];   //商品圖（cover）
-            $imgBack = $_POST["imgBack"];   //商品圖（back）
-            $imgFront = $_POST["imgFront"];   //商品圖（front）
-            $imgBox = $_POST["imgBox"];   //商品圖（box）
             $size = $_POST["size"];   //商品尺寸
             $year = $_POST["year"];   //商品年分
             $des = $_POST["des"];   //商品描述
@@ -38,8 +33,7 @@
             $sql = "INSERT INTO `team1`.`product`(`product_name`, `product_ename`,
             `product_img`, `product_type`, `product_price`, `product_points`,
             `product_series`, `product_seriesid`, `product_spec`,
-            `product_img1`,`product_img2`, `product_img3`, `product_img4`,
-            `product_img5`, `product_size`, `product_year`, `product_des`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            `product_size`, `product_year`, `product_des`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             //執行
             $statement = $Util->getPDO()->prepare($sql);
@@ -54,21 +48,16 @@
             $statement->bindValue(7 , $category);
             $statement->bindValue(8 , $cateId);
             $statement->bindValue(9 , $category2);
-            $statement->bindValue(10 , $_FILES["imgBg"]["name"]);
-            $statement->bindValue(11 , $_FILES["imgCover"]["name"]);
-            $statement->bindValue(12 , $_FILES["imgBack"]["name"]);
-            $statement->bindValue(13 , $_FILES["imgFront"]["name"]);
-            $statement->bindValue(14 , $_FILES["imgBox"]["name"]);
-            $statement->bindValue(15 , $size);
-            $statement->bindValue(16 , $year);
-            $statement->bindValue(17 , $des);
+            $statement->bindValue(10 , $size);
+            $statement->bindValue(11 , $year);
+            $statement->bindValue(12 , $des);
             $statement->execute();
 
             //導頁
             //header("Location: Index.php");
-            echo "<script>alert('新增成功!'); location.href = 'update.php';</script>";
+            echo "<script>alert('新增成功!'); location.href = 'commodity.php';</script>";
         }else{
-            echo "<script>alert('拷貝/移動上傳圖片失敗'); location.href = 'update.php';</script>";
+            echo "<script>alert('上架失敗'); location.href = 'commodity.php';</script>";
         }
     }
 
