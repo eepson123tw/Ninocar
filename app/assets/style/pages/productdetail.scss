@@ -56,8 +56,11 @@
     cursor: pointer;
 }
 
-.icon-down {
+.icon-down,
+.icon-down2 {
     font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
 }
 
 .select-style select {
