@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="./assets/css/all.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>factory</title>
 </head>
@@ -313,7 +314,7 @@
                 </div>
 
                 <div>
-                    <ul class="othersWorks">
+                    <ul class="othersWorks grid">
                         <work-card :img="'./assets/img/pic/model01.png'" :goodNum="24"></work-card>
                         <work-card2></work-card2>                        
                         <work-card :img="'./assets/img/pic/model02.png'"></work-card >
@@ -330,12 +331,13 @@
                 </div>
         </div>
         @@include('./components/Footer.html')
-        @@include('./pages/FactoryPage/FactoryModal.html')
+        
     </div>
 
-<!-- 
-    <div id="app2">
-    </div> -->
+
+    <div id="factoryModal">
+        @@include('./pages/FactoryPage/FactoryModal.html')
+    </div>
 
     @@include('./components/VueHeader.html')
 
@@ -398,7 +400,8 @@
                     commentNum_plus: this.commentNum
                 }
             },
-            template: `<li class="work col-4 col-lg-2 col-sm-4">
+            template: `<li class="work grid-item grid-item--height1 col
+            -4 col-lg-2 col-sm-4">
                             <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="">
                             </div>
@@ -513,7 +516,8 @@
                                         <p class="userContent h5">${commentContent}</p>
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
-                                            <div>                                
+                                            <div>               
+                                                <button class="btn btn--link mr-4 h5 replyComment replyComment">回覆</button>
                                                 <button class="btn btn--link mr-4 h5 replyComment report" @click="openReportModal">檢舉</button>
 
                                             </div>
@@ -540,9 +544,9 @@
                     // $(e.target).children('g').children('path').removeClass('pin--secondary')  
                 },
                 openSubTextarea(e){
-                    
-                    $(this.$el).children('.typeSubReply').slideToggle();
-                    $(this.$el).children('.typeSubReply').css({"display":"flex"});
+                    console.log(this.$el)
+                    $(this.$el).children('.work_reply').children('.typeSubReply').slideToggle();
+                    $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
                 },
                 openReportModal(){
                     $('.containerMain .modal').addClass('modal-active');
@@ -556,7 +560,9 @@
                 openWorkModal(){ //進入彈窗、後面固定不給滾動
                     // $('.work_pic').click(function() {
                         $('.mask').css({"display": "block"});
-                        $('.containerMain').css({"position": "fixed"});
+                        $('#factoryModal').css({"position": "fixed"});
+                        $('#factoryModal').css({"z-index": "2010"});
+                        // $('.container').css({"position": "fixed"});
                     // });
 
                 },
@@ -586,7 +592,7 @@
                     commentNum_plus: this.commentNum,
                 }
             },
-            template: `<li class="work col-4 col-lg-2 col-sm-4">
+            template: `<li class="work grid-item grid-item--height2 col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img src="./assets/img/pic/model03.png" class="model">
                             </div>
@@ -598,7 +604,7 @@
                                     <h2 class="workName h4">天栗鼠計程車</h2>
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
-                                        <p class="postTime h6">3小時前</p>
+                                        <p class="postTime h6">1小時前</p>
                                         <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
@@ -687,7 +693,7 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
-                                        <div class="other">
+                                        <div class="other--type2">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
@@ -782,11 +788,58 @@
             data:{
 
             },
+            props:{
+
+            },
+            methods: {
+
+
+            },
+        });
+
+        new Vue({ //主體
+            el: '#factoryModal',
+            props:{
+                img:{
+                    default:"./assets/img/pic/model04.png",
+                    type:String
+                },
+                goodNum:{
+                    default:0,
+                    type:Number
+                },
+                commentNum:{
+                    default:0,
+                    type:Number
+                },
+            },
+            data:{
+                is_icon_color:false,
+                goodNum_plus: this.goodNum,
+                commentNum_plus: this.commentNum
+            },
+
             methods: {
                 closeWorkModal(){ //關掉彈窗
                         $('.mask').css({"display": "none",});
                     
-                        $('.containerMain').css({"position": "initial",});
+                        $('#factoryModal').css({"margin": "0 auto",});
+                },
+                coloredIcon(e){
+                    this.is_icon_color = true
+
+                    // console.log('變色囉')
+                    // $(e.target).children('g').children('path').addClass('pin--secondary')            
+                },
+                noColorIcon(e){
+                    this.is_icon_color = false
+                    // console.log('變回去囉')
+                    // $(e.target).children('g').children('path').removeClass('pin--secondary')  
+                },
+                addGoodNum(e){
+                    this.goodNum_plus += 1;
+
+                    // ajax
                 },
 
             },
@@ -2340,6 +2393,43 @@
                     }else if(docW <= 1003){
                         $('.bar-front').width(840) 
                     }
+            }
+        })
+
+        // 瀑布流
+        $('.grid').masonry({
+          // options
+          horizontalOrder: true,
+        //   gutter: 10,
+          itemSelector: '.grid-item',
+        //   itemSelector: '.grid-item2',
+          columnWidth: 466
+        });
+
+        $('.work:nth-child(2) .readMore').click(() =>{  //如何改成只有在該貼文有被隱藏的回覆時，打開隱藏回覆會把下面的.work推開?
+            // $('.work:nth-child(5)').css({"top": += 300})
+            if(count2 % 2 == 1){
+                $('.work:nth-child(5)').animate({
+                        top: '+=155'
+                });
+
+            }else{
+                $('.work:nth-child(5)').animate({
+                        top: '-=155'
+                });
+            }
+
+        })
+
+        $('.readMore').click(() =>{
+            if(count2 % 2 == 1){
+
+                let gridH = $('.grid').height()
+                $('.grid').height(gridH += 155)
+            }else{
+
+                let gridH = $('.grid').height()
+                $('.grid').height(gridH -= 155)
             }
         })
     </script>
