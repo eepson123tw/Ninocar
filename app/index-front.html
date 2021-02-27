@@ -62,32 +62,26 @@
             el: '#app',
             store,
             data: {
-                productList: [],
-                targetProduct: null,
+                productList: null,
                 memberHasPin: true,
                 memberOwnProductIdList: ['300', '121'],
+                isDisplayPlay: false,
             },
             computed: {
                 seriesList() {
                     return this.$store.state.seriesList
                 },
-                bgClass() {
-                    return `bg-series-${this.targetProduct.series}`
-                },
-                pinClass() {
-                    return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
-                        'pin pin--disabled'
-                },
+
             },
             methods: {
-                handleModalProductChange(order) {
-                    const currentIndex = this.productList.indexOf(this.targetProduct);
-                    if (order === 'prev') {
-                        this.targetProduct = this.productList[currentIndex - 1];
-                    } else if (order === 'next') {
-                        this.targetProduct = this.productList[currentIndex + 1];
-                    }
+                bgClass(productSeries) {
+                    return `bg-series-${productSeries}`
                 },
+                pinClass(productId) {
+                    return this.memberOwnProductIdList.indexOf(productId) ? 'pin' :
+                        'pin pin--disabled'
+                },
+
             },
 
             mounted() {
@@ -99,7 +93,6 @@
                     return productList;
                 }
                 getIndexProductList().then(res => {
-                    console.log(res.data);
                     const fetchProductList = res.data.map(product => {
                         // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
@@ -124,9 +117,28 @@
                             description: product['product_des'],
                         }
                     })
-                    console.log(fetchProductList);
                     this.productList = fetchProductList;
-                    this.targetProduct = this.productList[0];
+
+                    let swiperMountain = new Swiper('#swiperContainerMountain', {
+                        spaceBetween: 20,
+                        autoplay: {
+                            delay: 2000,
+                            disableOnInteraction: false
+                        },
+                        loop: true,
+                        // mousewheel: true,
+                        speed: 800,
+                        effect: 'fade',
+                        // navigation: {
+                        //     nextEl: '.swiper-button-next',
+                        //     prevEl: '.swiper-button-prev',
+                        // },
+                        // pagination: {
+                        //     el: '.swiper-pagination',
+                        //     clickable: true,
+                        // },
+                    });
+
                 }).catch(error => {
                     console.log(error)
                 })
@@ -142,17 +154,7 @@
                     speed: 800,
                     // effect: 'fade',
                 });
-                let swiperMountain = new Swiper('#swiperContainerMountain', {
-                    spaceBetween: 20,
-                    autoplay: {
-                        delay: 2000,
-                        disableOnInteraction: false
-                    },
-                    loop: true,
-                    // mousewheel: true,
-                    speed: 800,
-                    effect: 'fade',
-                });
+
 
                 // gsap
                 let controller = new ScrollMagic.Controller();

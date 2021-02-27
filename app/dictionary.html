@@ -57,11 +57,9 @@
                 },
                 isNavbarShow: true,
                 isModalShow: false,
-                priceList: ['100~199', '200~299', '300以上'],
                 yearList: ['1970~1989', '1990~2009', '2010後'],
                 limitList: ['無限定', '期間限定', '點數限定'],
                 selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                selectedPriceList: ['100~199', '200~299', '300以上'],
                 selectedYearList: ['1970~1989', '1990~2009', '2010後'],
                 selectedLimitList: ['無限定', '期間限定', '點數限定'],
                 keywordText: '',
@@ -93,7 +91,6 @@
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
-                            price: product[`product_price`],
                             imgURL: product['product_img'],
                             displayImgURL: product['product_img1'],
                             productId: product['product_id'],
@@ -138,16 +135,6 @@
                         };
                     }
                 },
-                priceAllCheck: {
-                    get() {
-                        return this.selectedPriceList ? this.selectedPriceList
-                            .length === this.priceList.length : false
-                    },
-                    set(value) {
-                        value ? this.selectedPriceList = [...this.priceList] : this
-                            .selectedPriceList = [];
-                    }
-                },
                 yearAllCheck: {
                     get() {
                         return this.selectedYearList ? this.selectedYearList
@@ -181,67 +168,60 @@
                 },
             },
             watch: {
-                selectedPriceList(changedYearList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedYearList.includes('100~199') && (product.price <= 199) ? isInclude =
-                            true : '';
-                        changedYearList.includes('300以上') && product.price >= 300 ? isInclude = true :
-                            '';
-                        if (changedYearList.includes('200~299')) {
-                            product.price >= 200 && product.price <= 299 ? isInclude = true : '';
-                        }
-                        // 扣除點數限定商品（點數販售，價錢為0)
-                        product.price == 0 ? isInclude = false : '';
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedYearList() {
+
+                    this.getChangedProductList();
                 },
-                selectedYearList(changedYearList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedYearList.includes('1970~1989') && product.year <= 1989 ? isInclude =
-                            true : '';
-                        changedYearList.includes('2010後') && product.year >= 2010 ? isInclude = true :
-                            '';
-                        if (changedYearList.includes('1990~2009')) {
-                            product.year >= 1990 && product.year <= 2009 ? isInclude = true : '';
-                        }
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedSeriesList() {
+
+                    this.getChangedProductList();
                 },
-                selectedSeriesList(changedSeriesList) {
-                    const changedProductList = this.productList.filter(product => {
-                        return changedSeriesList.includes(product.series);
-                    })
-                    this.showProductList = changedProductList;
-                },
-                selectedLimitList(changedSeriesList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedSeriesList.includes('期間限定') && product.limitLabel === '2' ? isInclude =
-                            true : '';
-                        changedSeriesList.includes('點數限定') && product.limitLabel === '4' ? isInclude =
-                            true : '';
-                        if (changedSeriesList.includes('無限定')) {
-                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isInclude =
-                                true : '';
-                        }
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedLimitList() {
+
+                    this.getChangedProductList();
                 },
             },
             methods: {
+                getChangedProductList() {
+                    const filterYearProductList = this.productList.filter(product => {
+                        let isYearInclude = false;
+                        this.selectedYearList.includes('1970~1989') && product.year <= 1989 ?
+                            isYearInclude =
+                            true : '';
+                        this.selectedYearList.includes('2010後') && product.year >= 2010 ?
+                            isYearInclude =
+                            true :
+                            '';
+                        if (this.selectedYearList.includes('1990~2009')) {
+                            product.year >= 1990 && product.year <= 2009 ? isYearInclude = true : '';
+                        }
+                        return isYearInclude;
+                    })
+                    const filterSeriesProductList = filterYearProductList.filter(product => {
+                        return this.selectedSeriesList.includes(product.series);
+                    })
+                    const filterLimitProductList = filterSeriesProductList.filter(product => {
+                        let isLimitInclude = false;
+                        this.selectedLimitList.includes('期間限定') && product.limitLabel === '2' ?
+                            isLimitInclude =
+                            true : '';
+                        this.selectedLimitList.includes('點數限定') && product.limitLabel === '4' ?
+                            isLimitInclude =
+                            true : '';
+                        if (this.selectedLimitList.includes('無限定')) {
+                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isLimitInclude =
+                                true : '';
+                        }
+                        return isLimitInclude;
+                    })
+                    this.showProductList = filterLimitProductList;
+                },
                 handleFilterReset() {
-                    this.priceAllCheck = false;
                     this.yearAllCheck = false;
                     this.seriesAllCheck = false;
                     this.limitAllCheck = false;
                 },
                 handleFilterAllCheck() {
-                    this.priceAllCheck = true;
                     this.yearAllCheck = true;
                     this.seriesAllCheck = true;
                     this.limitAllCheck = true;
