@@ -142,7 +142,7 @@
                 }).catch(error => {
                     console.log(error)
                 })
-                // swiper
+                // --------------------------------------------swiper
                 let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,
                     autoplay: {
@@ -156,12 +156,12 @@
                 });
 
 
-                // gsap
+                // --------------------------------------------gsap
                 let controller = new ScrollMagic.Controller();
                 let screenX = document.body.clientWidth;
 
-
-                let mvParking = gsap.to('.parking--car', 4, {
+                // ----------------------parking
+                let mvParking = gsap.to('.parking__car', 4, {
                     x: -screenX * .65, //5
                     y: screenX * .39, //3
                 });
@@ -171,13 +171,13 @@
                         offset: 500
                     }).setTween(mvParking) //動畫
                     .addIndicators({
-                        name: 'key02',
+                        name: 'keyParking',
                         colorStart: '#13fe13'
                     })
                     .addTo(controller);
 
-
-                let mvBillboard = gsap.to('.billboard--car', 3, {
+                // ----------------------billboard
+                let mvBillboard = gsap.to('.billboard__car', 3, {
                     x: screenX + 250,
                     ease: Linear.easeNone,
                 });
@@ -187,18 +187,38 @@
                         offset: 200
                     }).setTween(mvBillboard)
                     .addIndicators({
-                        name: 'key01',
+                        name: 'keyBillboard',
                         colorStart: '#f20'
 
                     })
                     .addTo(controller);
 
+                // ----------------------mountain
+                let mvMountain = gsap.to('.mountain__car', 3, {
+                    x: screenX + 250,
+                    ease: Linear.easeNone,
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerMountain',
+                        offset: -200
+                    }).setTween(mvMountain)
+                    .addIndicators({
+                        name: 'keyMountain',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
+
+
+
+                // ----------------------factory
                 gsap.registerPlugin(MotionPathPlugin);
 
                 let mvFactory = gsap.timeline();
-                mvFactory.to('.factory--door', 2, {
+                mvFactory.to('.factory__door', 2, {
                     y: -screenX * .1,
-                }).to('.factory--car', 2, {
+                }).to('.factory__car', 2, {
                     motionPath: {
                         path: "#factoryRoadPath",
                         align: "#factoryRoadPath",
@@ -207,7 +227,7 @@
                         transformOrigin: "50% 50%",
                     },
                     ease: Linear.easeNone,
-                }).to('.factory--car', 4, {
+                }).to('.factory__car', 4, {
                     motionPath: {
                         path: "#turnRoadPath",
                         align: "#turnRoadPath",
@@ -219,7 +239,7 @@
                     },
                     ease: Linear.easeNone,
                     delay: .5,
-                }).to('.factory--car', 4, {
+                }).to('.factory__car', 4, {
                     motionPath: {
                         path: "#endRoadPath",
                         align: "#endRoadPath",

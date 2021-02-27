@@ -65,7 +65,6 @@
                 keywordText: '',
             },
             mounted() {
-
                 const getProductList = async () => {
                     const productList = await axios.get(
                         `./assets/php/getProductList.php`
@@ -73,7 +72,7 @@
                     return productList;
                 }
                 getProductList().then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     const fetchProductList = res.data.map(product => {
                         // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
@@ -100,7 +99,7 @@
                             limitLabel: product['product_spec'],
                         }
                     })
-                    console.log(fetchProductList);
+                    // console.log(fetchProductList);
                     this.productList = fetchProductList;
                     this.showProductList = this.productList;
                     this.targetProduct = this.showProductList[0];
@@ -169,15 +168,12 @@
             },
             watch: {
                 selectedYearList() {
-
                     this.getChangedProductList();
                 },
                 selectedSeriesList() {
-
                     this.getChangedProductList();
                 },
                 selectedLimitList() {
-
                     this.getChangedProductList();
                 },
             },
@@ -231,9 +227,6 @@
                         theProductId)
                     this.isModalShow = true;
                 },
-                isPostPin(theProductId) {
-                    return this.memberOwnProductIdList.indexOf(theProductId);
-                },
                 handleNavBarChange(filter) {
                     if (filter === 'my') {
                         this.showProductList = this.myProducts;
@@ -259,12 +252,6 @@
                         this.targetProduct = this.showProductList[currentIndex + 1];
                     }
                 },
-                searchShowProduct() {
-                    const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
-                        product.series) >= 0);
-                    console.log(filteredList);
-                    this.showProductList = filteredList;
-                },
                 handleKeywordSearch() {
                     const filteredProductList = this.productList.filter(product => {
                         const keyword = this.keywordText.toLowerCase().trim();
@@ -281,7 +268,9 @@
                     })
                     this.showProductList = filteredProductList;
                 },
-
+                isPostPin(theProductId) {
+                    return this.memberOwnProductIdList.indexOf(theProductId);
+                },
             },
         })
     </script>

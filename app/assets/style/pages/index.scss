@@ -7,7 +7,7 @@
     margin-bottom: -400px;
 
     .parking {
-        &--car {
+        &__car {
             position: absolute;
             width: 20%;
             top: 28%;
@@ -15,7 +15,7 @@
             z-index: 30;
         }
 
-        &--road {
+        &__road {
             position: absolute;
             width: 19.85%;
             right: 1400px;
@@ -32,7 +32,7 @@
             }
         }
 
-        &--text {
+        &__text {
             background-color: $primary;
             color: $coffee;
             text-align: center;
@@ -46,7 +46,7 @@
 
 
     .billboard {
-        &--screen {
+        &__screen {
             position: absolute;
             width: 93%;
             height: 70.6%;
@@ -82,7 +82,7 @@
             }
         }
 
-        &--car {
+        &__car {
             position: absolute;
             top: -20px;
             left: -250px;
@@ -92,7 +92,7 @@
             }
         }
 
-        &--road {
+        &__road {
 
             // width: 100%;
             @include rwd-lg {
@@ -112,7 +112,7 @@
 
     .mountain {
         position: relative;
-        padding: 280px 0 400px;
+        padding: 400px 0;
         background-image: url('../../img/illust/illust-mountain.svg');
         background-size: cover;
 
@@ -120,31 +120,47 @@
             margin-top: -160px;
         }
 
+        &__road {
+            position: absolute;
+            bottom: -20px;
+        }
+
         &__cars {
             position: absolute;
-            bottom: 15%;
+            bottom: 250px;
             display: flex;
             justify-content: space-around;
             width: 100%;
+            z-index: 50;
+        }
+
+        &__car {
+            position: absolute;
+            bottom: 60px;
+            left: -250px;
+
+            @include rwd(1400px) {
+                width: 280px;
+            }
         }
     }
 
     .factory {
-        &--all {
+        &__all {
             @include rwd-lg {
                 width: 60%;
                 margin: 0 auto;
             }
         }
 
-        &--house {
+        &__house {
             position: relative;
             z-index: 30;
             width: 100%;
 
         }
 
-        &--inner {
+        &__inner {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -152,7 +168,7 @@
             z-index: 5;
         }
 
-        &--door {
+        &__door {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -160,7 +176,7 @@
             z-index: 20;
         }
 
-        &--car {
+        &__car {
             position: absolute;
             width: 20%;
             top: -36%;
@@ -179,7 +195,7 @@
             }
         }
 
-        &--road {
+        &__road {
             width: 100%;
             position: relative;
             top: -160px;
@@ -190,7 +206,7 @@
             }
         }
 
-        &--text {
+        &__text {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -241,16 +257,39 @@
         position: relative;
         top: -500px;
 
-        .end--showgirl {
+        .end__showgirl {
             position: absolute;
             top: 40%;
             left: 50%;
         }
     }
 
-    .z-index-50 {
-        z-index: 50;
+    .car-shake {
+        animation: carShake .3s ease-in-out infinite;
     }
+
+    .car-shake--team1 {
+        animation: carShake .3s .1s ease-in-out infinite;
+    }
+
+    .car-shake--team2 {
+        animation: carShake .3s .2s ease-in-out infinite;
+    }
+
+    @keyframes carShake {
+        0% {
+            transform: translate(.3px, .3px);
+        }
+
+        50% {
+            transform: translate(0px, -.2px);
+        }
+
+        100% {
+            transform: translate(-.3px, 0);
+        }
+    }
+
 
 
 
