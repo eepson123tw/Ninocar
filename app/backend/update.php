@@ -83,26 +83,6 @@
                         </select>
                     </div>
                     <div class="update mb-3">
-                        <p>商品去背：</p>
-                        <input type="file" name="imgBg" multiple>
-                    </div>
-                    <div class="update mb-3">
-                        <p>商品封面：</p>
-                        <input type="file" name="imgCover" multiple>
-                    </div>
-                    <div class="update mb-3">
-                        <p>商品（後）：</p>
-                        <input type="file" name="imgBack" multiple>
-                    </div>
-                    <div class="update mb-3">
-                        <p>商品（前）：</p>
-                        <input type="file" name="imgFront" multiple>
-                    </div>
-                    <div class="update mb-3">
-                        <p>商品（盒）：</p>
-                        <input type="file" name="imgBox" multiple>
-                    </div>
-                    <div class="update mb-3">
                         <p>商品尺寸：</p>
                         <input type="text" name="size">
                     </div>

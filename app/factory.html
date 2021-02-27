@@ -16,7 +16,7 @@
         <vue-header></vue-header>
         <div class="container containerMain">
 
-            <div class="modal js-modal" data-modal="1">
+            <div class="modal js-modal reportModal" data-modal="1">
                 <div class="modal__group">
                     <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close">
                                 <g transform="translate(0 0.47)">
@@ -36,7 +36,7 @@
                         <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
                     </ul>
                     <button class="btn btn--ghost">取消</button>
-                    <button class="btn ml-5 ">完成</button>
+                    <button class="btn ml-5 finishReport" @click="openReportSuccessModal">完成</button>
                 </div>
             </div>
 
@@ -337,6 +337,8 @@
 
     <div id="factoryModal">
         @@include('./pages/FactoryPage/FactoryModal.html')
+        @@include('./pages/FactoryPage/reportSuccessModal.html')
+
     </div>
 
     @@include('./components/VueHeader.html')
@@ -389,12 +391,8 @@
             },
             data(){
                 return{
-                    // srcList:{
-                    //  src1:"./assets/img/pic/model02.png",
-                    //  src2:"./assets/img/pic/model03.png",
-                    //  src3:"./assets/img/pic/model04.png",
-                    //  src4:"./assets/img/pic/model04.png",
-                    // },
+                    count1: 0,
+                    count2: 0,
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum
@@ -470,11 +468,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="moreReply hiddenMR">
+                            <div class="moreReply hiddenMR" @click="openMoreReply">
                                 <p class="h5 moreReplyWord text-coffee">1則回覆</p>
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon1">
                             </div>
-                            <div class="readMore">
+                            <div class="readMore" @click="openReadMore">
                                 <p class="h5 readMoreWord text-coffee">閱讀更多</p>
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                             </div>
@@ -514,7 +512,7 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">${replyerName}</p>
                                         <p class="userContent h5">${commentContent}</p>
-                                        <div class="other">
+                                        <div class="other--type2">
                                             <p class="postTime h6">3小時前</p>
                                             <div>               
                                                 <button class="btn btn--link mr-4 h5 replyComment replyComment">回覆</button>
@@ -549,7 +547,7 @@
                     $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
                 },
                 openReportModal(){
-                    $('.containerMain .modal').addClass('modal-active');
+                    $('.container .modal').addClass('modal-active');
                     // console.log('report!')
                 },
                 addGoodNum(e){
@@ -558,14 +556,53 @@
                     // ajax
                 },
                 openWorkModal(){ //進入彈窗、後面固定不給滾動
-                    // $('.work_pic').click(function() {
                         $('.mask').css({"display": "block"});
                         $('#factoryModal').css({"position": "fixed"});
                         $('#factoryModal').css({"z-index": "2010"});
-                        // $('.container').css({"position": "fixed"});
-                    // });
 
-                },
+               },
+               openMoreReply(e){
+                    $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
+                    $(this.$el).children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
+                    this.count1 += 1;
+                    // console.log(count1);
+                
+                    if (this.count1 % 2 == 1) {
+                        console.log(this.count1)
+                        $(this.$el).children('.moreReply').children('.moreReplyWord').text('關閉子回覆');
+                    
+                        $(this.$el).children('.moreReply').children('.toggleIcon1').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        console.log(this.count1)
+
+                        $(this.$el).children('.moreReply').children('.moreReplyWord').text('1則回覆');
+                    
+                        $(this.$el).children('.moreReply').children('.toggleIcon1').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+               },
+               openReadMore(){
+                    $(this.$el).children('.hiddenReply').slideToggle();
+                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+
+                    this.count2 += 1;
+                    // console.log(count2);
+
+                    if (this.count2 % 2 == 1) {
+                        $(this.$el).children('.readMore').children('.readMoreWord').text('關閉更多');
+                        $(this.$el).children('.readMore').children('.toggleIcon2').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        $(this.$el).children('.readMore').children('.readMoreWord').text('閱讀更多');
+                        $(this.$el).children('.readMore').children('.toggleIcon2').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+               }
 
             },
         })
@@ -587,6 +624,8 @@
             },
             data(){
                 return{
+                    count1: 0,
+                    count2: 0,
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
@@ -642,7 +681,7 @@
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
                                         <div class="other">
-                                            <p class="postTime h6">3小時前</p>
+                                            <p class="postTime h6">30分鐘前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
@@ -682,7 +721,7 @@
                                 </div>
 
                             </div>
-                            <div class="moreReply">
+                            <div class="moreReply" @click="openMoreReply">
                                 <p class="h5 moreReplyWord text-coffee">1則回覆</p>
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon1">
                             </div>
@@ -704,7 +743,7 @@
                                 </div>
                             </div>
 
-                            <div class="readMore">
+                            <div class="readMore" @click="openReadMore">
                                 <p class="h5 readMoreWord text-coffee">閱讀更多</p>
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                             </div>
@@ -779,6 +818,48 @@
 
                     // ajax//這裡開始
                 },
+                openMoreReply(){
+                    $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
+                    $(this.$el).children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
+                    this.count1 += 1;
+                    // console.log(count1);
+                
+                    if (this.count1 % 2 == 1) {
+                        console.log(this.count1)
+                        $(this.$el).children('.moreReply').children('.moreReplyWord').text('關閉子回覆');
+                    
+                        $(this.$el).children('.moreReply').children('.toggleIcon1').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        console.log(this.count1)
+
+                        $(this.$el).children('.moreReply').children('.moreReplyWord').text('1則回覆');
+                    
+                        $(this.$el).children('.moreReply').children('.toggleIcon1').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+               }
+               ,openReadMore(){
+                    $(this.$el).children('.hiddenReply').slideToggle();
+                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+
+                    this.count2 += 1;
+                    // console.log(count2);
+
+                    if (this.count2 % 2 == 1) {
+                        $(this.$el).children('.readMore').children('.readMoreWord').text('關閉更多');
+                        $(this.$el).children('.readMore').children('.toggleIcon2').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        $(this.$el).children('.readMore').children('.readMoreWord').text('閱讀更多');
+                        $(this.$el).children('.readMore').children('.toggleIcon2').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+               }
                 
             },
         })
@@ -792,7 +873,9 @@
 
             },
             methods: {
-
+                openReportSuccessModal(){
+                    $('.reportSuccessModal').addClass('modal-active')
+                }
 
             },
         });
@@ -879,55 +962,55 @@
         //     $('.containerMain').css({"position": "initial",});
         // })
 
-        //收起、打開更多子回覆
-        let count1 = 0;
-        $('.moreReply').click(function() {
-            $(this).parent().children('.work_reply').children('.hiddenSubReply').slideToggle();
-            $(this).parent().children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
+        //收起、打開更多子回覆  //移到Vue
+        // let count1 = 0;
+        // $('.moreReply').click(function() {
+        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').slideToggle();
+        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
 
-            count1 += 1;
-            // console.log(count1);
+        //     count1 += 1;
+        //     // console.log(count1);
 
-            if (count1 % 2 == 1) {
-                $(this).children('.moreReplyWord').text('關閉子回覆');
+        //     if (count1 % 2 == 1) {
+        //         $(this).children('.moreReplyWord').text('關閉子回覆');
 
-                $(this).children('.toggleIcon1').css({
-                    "transform": "rotate(180deg)",
-                })
-            } else {
-                $(this).children('.moreReplyWord').text('1則回覆');
+        //         $(this).children('.toggleIcon1').css({
+        //             "transform": "rotate(180deg)",
+        //         })
+        //     } else {
+        //         $(this).children('.moreReplyWord').text('1則回覆');
 
-                $(this).children('.toggleIcon1').css({
-                    "transform": "rotate(0deg)",
-                })
-            }
-        })
+        //         $(this).children('.toggleIcon1').css({
+        //             "transform": "rotate(0deg)",
+        //         })
+        //     }
+        // })
 
-        //收起、打開更多回覆
-        let count2 = 0;
-        $('.readMore').click(function() {
-            $(this).parent().children('.hiddenReply').slideToggle();
-            $(this).parent().children('.hiddenReply').css({"display": "flex"});
+        //收起、打開更多回覆 //移到Vuw
+        // let count2 = 0;
+        // $('.readMore').click(function() {
+        //     $(this).parent().children('.hiddenReply').slideToggle();
+        //     $(this).parent().children('.hiddenReply').css({"display": "flex"});
 
-            count2 += 1;
-            // console.log(count2);
+        //     count2 += 1;
+        //     // console.log(count2);
 
-            if (count2 % 2 == 1) {
-                $(this).children('.readMoreWord').text('關閉更多');
+        //     if (count2 % 2 == 1) {
+        //         $(this).children('.readMoreWord').text('關閉更多');
 
-                $(this).children('.toggleIcon2').css({
-                    "transform": "rotate(180deg)",
-                })
-                // console.log('1')
-            } else {
-                $(this).children('.readMoreWord').text('閱讀更多');
+        //         $(this).children('.toggleIcon2').css({
+        //             "transform": "rotate(180deg)",
+        //         })
+        //         // console.log('1')
+        //     } else {
+        //         $(this).children('.readMoreWord').text('閱讀更多');
 
-                $(this).children('.toggleIcon2').css({
-                    "transform": "rotate(0deg)",
-                })
-                // console.log('2')
-            }
-        })
+        //         $(this).children('.toggleIcon2').css({
+        //             "transform": "rotate(0deg)",
+        //         })
+        //         // console.log('2')
+        //     }
+        // })
 
         //收起、打開輸入回覆區
         let count3 = 0;
@@ -2406,32 +2489,55 @@
           columnWidth: 466
         });
 
-        $('.work:nth-child(2) .readMore').click(() =>{  //如何改成只有在該貼文有被隱藏的回覆時，打開隱藏回覆會把下面的.work推開?
-            // $('.work:nth-child(5)').css({"top": += 300})
-            if(count2 % 2 == 1){
-                $('.work:nth-child(5)').animate({
-                        top: '+=155'
-                });
+        // $('.work:nth-child(2) .readMore').click(() =>{  //如何改成只有在該貼文有被隱藏的回覆時，打開隱藏回覆會把下面的.work推開?  //還沒改好，之後移到Vue
+        //     if(count2 % 2 == 1){
+        //         $('.work:nth-child(5)').animate({
+        //                 top: '+=155'
+        //         });
+        //     }else{
+        //         $('.work:nth-child(5)').animate({
+        //                 top: '-=155'
+        //         });
+        //     }
+        // })
 
-            }else{
-                $('.work:nth-child(5)').animate({
-                        top: '-=155'
-                });
-            }
+        // $('.readMore').click(() =>{  //還沒改好，之後移到Vue
+        //     if(count2 % 2 == 1){
 
-        })
+        //         let gridH = $('.grid').height()
+        //         $('.grid').height(gridH += 155)
+        //     }else{
 
-        $('.readMore').click(() =>{
-            if(count2 % 2 == 1){
+        //         let gridH = $('.grid').height()
+        //         $('.grid').height(gridH -= 155)
+        //     }
+        // })
 
-                let gridH = $('.grid').height()
-                $('.grid').height(gridH += 155)
-            }else{
+        // $('.work:nth-child(2) .moreReply').click(() =>{  //??還沒改好，之後移到Vue
+        //     // $('.work:nth-child(5)').css({"top": += 300})
+        //     if(count1 % 2 == 1){
+        //         $('.work:nth-child(5)').animate({
+        //                 top: '+=127'
+        //         });
+        //     }else{
+        //         $('.work:nth-child(5)').animate({
+        //                 top: '-=127'
+        //         });
+        //     }
+        // })
 
-                let gridH = $('.grid').height()
-                $('.grid').height(gridH -= 155)
-            }
-        })
+
+
+        // $('.moreReply').click(() =>{ //還沒改好，之後移到Vue
+        //     if(count1 % 2 == 1){
+        //         let gridH = $('.grid').height()
+        //         $('.grid').height(gridH += 127)
+        //     }else{
+
+        //         let gridH = $('.grid').height()
+        //         $('.grid').height(gridH -= 127)
+        //     }
+        // })
     </script>
 </body>
 
