@@ -330,12 +330,12 @@
                 </div>
         </div>
         @@include('./components/Footer.html')
-    </div>
-
-
-    <div id="app2">
         @@include('./pages/FactoryPage/FactoryModal.html')
     </div>
+
+<!-- 
+    <div id="app2">
+    </div> -->
 
     @@include('./components/VueHeader.html')
 
@@ -399,7 +399,7 @@
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
-                            <div class="work_pic">
+                            <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="">
                             </div>
 
@@ -546,14 +546,21 @@
                 },
                 openReportModal(){
                     $('.containerMain .modal').addClass('modal-active');
-                    console.log('report!')
+                    // console.log('report!')
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
 
                     // ajax
-                    
-                }
+                },
+                openWorkModal(){ //進入彈窗、後面固定不給滾動
+                    // $('.work_pic').click(function() {
+                        $('.mask').css({"display": "block"});
+                        $('.containerMain').css({"position": "fixed"});
+                    // });
+
+                },
+
             },
         })
 
@@ -566,12 +573,17 @@
                 goodNum:{
                     default:3,
                     type:Number
+                },
+                commentNum:{
+                    default:2,
+                    type:Number
                 }
             },
             data(){
                 return{
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
+                    commentNum_plus: this.commentNum,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -613,7 +625,7 @@
                                           <circle cx="2.4" cy="2.4" r="2.4" transform="translate(427 386)" fill="#E59807"/>
                                         </g>
                                     </svg>
-                                    <p  class="num h3">2</p>
+                                    <p  class="num h3">{{commentNum_plus}}</p>
                                 </div>
                             </div>
 
@@ -704,7 +716,7 @@
                             </div>
                         </li>`,
                         methods: {
-                addBorder(e){ //按留言若未輸入字的話變紅框
+                addBorder(e){ //按留言若未輸入字的話變紅框  //第736有問題
                     let textLength = $(e.target).parent().parent().children('.textarea').val().length;
                     let commentContent = $(e.target).parent().parent().children('.textarea').val();
                     let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
@@ -738,6 +750,8 @@
                         
                         $(e.target).parent().parent().children('.textarea').val('');
                         $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
+
+                        this.commentNum_plus += 1;
                     }   
                 },
                 coloredIcon(e){
@@ -757,8 +771,8 @@
                 addGoodNum(e){
                     this.goodNum_plus += 1;
 
-                    // ajax
-                },//這裡開始
+                    // ajax//這裡開始
+                },
                 
             },
         })
@@ -766,30 +780,28 @@
         const vm1 = new Vue({ //主體
             el: '#factory',
             data:{
-                imgArray:[
-                    {imgURL: './assets/img/pic/model02.png'},
-                    {imgURL: './assets/img/pic/model03.png'},
-                    {imgURL: './assets/img/pic/model04.png'},
-                ],
+
             },
-            // methods: {
-            //     addBorder(e){
-            //             let textLength = $(e.target).parent().parent().children('.textarea').val().length;
+            methods: {
+                closeWorkModal(){ //關掉彈窗
+                        $('.mask').css({"display": "none",});
+                    
+                        $('.containerMain').css({"position": "initial",});
+                },
 
-            //             if (textLength < 1) {
-            //                 // console.log('no text')
-            //                 $(this).parent().parent().children('.textarea').css({"border": "1px solid red"})
-            //             } else {
-            //                 // console.log('ok')
-            //                 $(this).parent().parent().children('.textarea').css({"border": "1px solid #000"})
-            //             }   
-            //     }
-            // },
+            },
         });
 
-        const vm2 = new Vue({ //設定彈窗的作用域
-            el: '#app2',
-        });
+        // const vm2 = new Vue({ //設定彈窗的作用域
+        //     el: '#app2',
+        //     methods: {
+        //         closeWorkModal(){ //關掉彈窗
+        //                 $('.mask').css({"display": "none",});
+                    
+        //                 $('.containerMain').css({"position": "initial",});
+        //         },
+        //     },
+        // });
 
         new Vue({ //設定進度條的作用域
             el: '#progressBar',
@@ -800,19 +812,19 @@
         })
 
         // --------------------------------------------
-        //進入彈窗、後面固定不給滾動
-        $('.work_pic').click(function() {
-            $('.mask').css({"display": "block"});
+        //進入彈窗、後面固定不給滾動 //移到Vue
+        // $('.work_pic').click(function() {
+        //     $('.mask').css({"display": "block"});
 
-            $('.containerMain').css({"position": "fixed"});
-        });
+        //     $('.containerMain').css({"position": "fixed"});
+        // });
 
-        //關掉彈窗
-        $('.closeIcon').click(function() {
-            $('.mask').css({"display": "none",});
+        //關掉彈窗 //移到Vue
+        // $('.closeIcon').click(function() {
+        //     $('.mask').css({"display": "none",});
 
-            $('.containerMain').css({"position": "initial",});
-        })
+        //     $('.containerMain').css({"position": "initial",});
+        // })
 
         //收起、打開更多子回覆
         let count1 = 0;

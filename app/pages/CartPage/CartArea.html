@@ -1,6 +1,6 @@
 <template id="cartArea">
     <div v-if="listIsExist">
-        <main class="container cart   ">
+        <div class="container cart   ">
             <header class="row mt-20 block order-sm-1">
                 <ul class="cart__title  w-100">
                     <li class="block__header__title">購物車</li>
@@ -101,7 +101,7 @@
                     <li> NT$ <span>{{totalMoneyCost}}</span> </li>
                 </ul>
             </footer>
-        </main>
+        </div>
         <div class="container">
             <div class="row  pt-md-5 mt-20">
                 <section class="cart__payment  col-6 col-lg-6 col-xs-12 ">
@@ -116,9 +116,13 @@
                                 name=""
                                 id="productTake"
                                 class="form__select cart__select"
+                                v-model="selectShipping"
                             >
-                                <option value="">門市自取</option>
-                                <option value="">黑貓宅配</option>
+                                <option
+                                    value=""
+                                    disabled
+                                >請選擇</option>
+                                <option v-for="(methods,index) of shippingList">{{methods}}</option>
                             </select>
                         </div>
                         <label
@@ -127,14 +131,16 @@
                         >選擇付款方式</label>
                         <div class="form__section mb-5">
                             <select
-                                name=""
                                 id="paymentChoose"
                                 class="form__select cart__select"
+                                v-model="selectPayment"
                             >
-                                <option value="">線上刷卡</option>
-                                <option value="">ATM轉帳</option>
-                                <option value="">門市結帳</option>
-                                <option value="">貨到付款</option>
+                                <option
+                                    value=""
+                                    disabled
+                                >請選擇</option>
+                                <option v-for="(payment,index) of paymentList">{{payment}}</option>
+
                             </select>
                         </div>
                         <label
@@ -164,10 +170,10 @@
                         <header class="d-flex justify-content-center mt-5   ">
                             <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
                                 <p>商品花費點數</p>
-                                <main class="cart__member">
+                                <div class="cart__member">
                                     <p>Ni</p>
                                     <span>{{totalPointCost}}</span>
-                                </main>
+                                </div>
                             </div>
                             <ul class="cart__moneyCount  w-50">
                                 <li>
@@ -187,13 +193,13 @@
 
                         </header>
                         <div>
-                            <ul class="cart__countTotal d-flex align-items-center ">
+                            <ul class="cart__countTotal d-flex align-items-center mb-10 ">
                                 <li class="cart__pointCount d-flex flex-sm-wrap">
                                     <p>總花費點數</p>
-                                    <main class="cart__member ">
+                                    <div class="cart__member ">
                                         <p>Ni</p>
                                         <span>{{totalPointCost}}</span>
-                                    </main>
+                                    </div>
                                 </li>
                                 <li>
                                     <p>總金額</p>
@@ -339,133 +345,143 @@
 
 
 <script>
-    Vue.component('cartArea', {
-        template: "#cartArea",
-        props: ['list', 'IsExist', 'current'],
-        data() {
-            return {
-                //購買清單
-                buyerList: this.list,
-                //購買清單是否存在
-                listIsExist: this.IsExist,
-                // 選擇的數量
-                number: "",
-                // 初始全部金額
-                totalProductNum: null,
-                totalPointCost: null,
-                totalMoneyCost: null,
-                // 目前頁面
-                currentdata: this.current,
-
-                // 折價卷種類
-                cuponList: {
-                    discountOne: "註冊新會員結帳享9折優惠！",
-                    discountTwo: "白金會員太牛了享8折優惠！",
-                    discountThree: "老闆跳樓拉免運費！",
-                    discountFour: '本月壽星你最大享5折優惠！',
-                },
-                //選擇cupon
-                selectCupon: "",
-                discountPrice: 0,
-                sendPrice: 0,
-            }
+  Vue.component('cartArea', {
+    template: "#cartArea",
+    props: ['list', 'IsExist', 'current'],
+    data() {
+      return {
+        //購買清單
+        buyerList: this.list,
+        //購買清單是否存在
+        listIsExist: this.IsExist,
+        // 初始全部金額
+        totalProductNum: null,
+        totalPointCost: null,
+        totalMoneyCost: null,
+        // 目前頁面
+        currentdata: this.current,
+        // 折價卷種類
+        cuponList: {
+          discountOne: "註冊新會員結帳享9折優惠！",
+          discountTwo: "白金會員太牛了享8折優惠！",
+          discountThree: "老闆跳樓拉免運費！",
+          discountFour: '本月壽星你最大享5折優惠！',
         },
-        mounted() {
-            //  資料傳入時先渲染
-            for (listNum in this.list) {
+        //  付款方式種類
+        paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
+        shippingList: ['自取', '宅配'],
+        //選擇cupon
+        selectCupon: "",
+        // 選擇payment
+        selectPayment: "",
+        // shipping methods
 
-                if (!this.list[listNum].productName) {
-                    this.listIsExist = false;
-                }
+        selectShipping: "",
+        discountPrice: 0,
+        sendPrice: 0,
+        finallyPrice: 0,
+      }
+    },
+    mounted() {
+      //  資料傳入時先渲染
+      for (listNum in this.list) {
+        if (!this.list[listNum].productName) {
+          this.listIsExist = false;
+        }
+        this.totalProductNum += this.buyerList[listNum].productNum;
+        if (this.buyerList[listNum].pointProduct) {
 
-                this.totalProductNum += this.buyerList[listNum].productNum;
+          this.totalPointCost += this.buyerList[listNum].price;
+        }
+        if (!this.buyerList[listNum].pointProduct) {
+          this.totalMoneyCost += this.buyerList[listNum].price;
+        }
+      };
+    },
+    methods: {
+      pageHandler() {
+        this.currentdata += 1;
+        confirm(`確認結帳!!`);
+        this.$emit('data-handler', this.currentdata);
+        //傳送更新 store 的值
+        this.$store.commit('selectCupon', this.selectCupon);
+        this.$store.commit('selectShipping', this.selectShipping);
+        this.$store.commit('selectPayment', this.selectPayment);
+        this.$store.commit('addBuyList', this.buyerList);
+        this.$store.commit('addBuyNum', this.totalProductNum);
+        this.$store.commit('addFinalPrice', this.finallyPrice);
+        this.$store.commit('addTotalPointCost', this.totalPointCost);
 
-                if (this.buyerList[listNum].pointProduct) {
+      },
+      changeNum(listIndex, e) {
 
-                    this.totalPointCost += this.buyerList[listNum].price;
-                }
+        let chooseNum = e.target.value * 1 + 1;
+        let totalPrice = this.buyerList[listIndex].price;
+        let newTotalPrice = totalPrice * chooseNum;
 
-                if (!this.buyerList[listNum].pointProduct) {
-                    this.totalMoneyCost += this.buyerList[listNum].price;
-                }
-            };
+        this.buyerList[listIndex].productNum = chooseNum;
+        this.buyerList[listIndex].totalPrice = newTotalPrice;
+        this.renew();
 
+      },
+      deleteHandler(listIndex) {
+        this.buyerList.splice(listIndex, 1);
+        this.renew();
 
-        },
-        methods: {
-            pageHandler() {
-                this.currentdata += 1;
-                confirm(`確認結帳!!`);
-                this.$emit('data-handler', this.currentdata)
-            },
-            changeNum(listIndex, e) {
+      },
+      deleteAllHandler() {
+        this.buyerList = "";
+        this.renew();
+      },
+      renew() {
+        // 重render畫面
+        this.totalProductNum = 0;
+        this.totalPointCost = 0;
+        this.totalMoneyCost = 0;
 
-                let chooseNum = e.target.value * 1 + 1;
-                let totalPrice = this.buyerList[listIndex].price;
-                let newTotalPrice = totalPrice * chooseNum;
+        for (listNum in this.buyerList) {
+          this.totalProductNum += this.buyerList[listNum].productNum;
+          if (this.buyerList[listNum].pointProduct) {
+            this.totalPointCost += this.buyerList[listNum].totalPrice;
+          }
+          if (!this.buyerList[listNum].pointProduct) {
+            this.totalMoneyCost += this.buyerList[listNum].totalPrice;
+          }
 
-                this.buyerList[listIndex].productNum = chooseNum;
-                this.buyerList[listIndex].totalPrice = newTotalPrice;
-
-                this.renew();
-
-            },
-            deleteHandler(listIndex) {
-                this.buyerList.splice(listIndex, 1);
-
-                this.renew();
-
-            },
-            deleteAllHandler() {
-                this.buyerList = "";
-                this.renew();
-            },
-            renew() {
-                // 重render畫面
-                this.totalProductNum = 0;
-                this.totalPointCost = 0;
-                this.totalMoneyCost = 0;
-
-                for (listNum in this.buyerList) {
-                    this.totalProductNum += this.buyerList[listNum].productNum;
-                    if (this.buyerList[listNum].pointProduct) {
-                        this.totalPointCost += this.buyerList[listNum].totalPrice;
-                    }
-                    if (!this.buyerList[listNum].pointProduct) {
-                        this.totalMoneyCost += this.buyerList[listNum].totalPrice;
-                    }
-
-                };
-            },
-            countDiscount() {
-                // 折扣選取器
-                for (let key in this.cuponList) {
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
-                        this.sendPrice = 0;
-                    }
-                    if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
-                        this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
-                    }
-
-                }
-            }
-        },
-        computed: {
-
-            totalCount() {
-
-                return this.totalMoneyCost - this.discountPrice;
-
-            }
+        };
+      },
+      countDiscount() {
+        // 折扣選取器
+        for (let key in this.cuponList) {
+          if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
+            this.sendPrice = 0;
+          }
+          if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
+          }
 
         }
+      }
+    },
+    computed: {
+
+      totalCount() {
+
+        let final = this.totalMoneyCost - this.discountPrice;
+        this.finallyPrice = final;
+        return final;
+
+      },
 
 
-    })
+    }
+
+
+  })
 </script>

@@ -6,8 +6,10 @@
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="./assets/js/all.js"></script>
+
 <title>Dictionary</title>
 </head>
 
@@ -17,7 +19,7 @@
         <main class="container pt-25 pb-15">
             <!-- display -->
             <transition name="fade">
-                @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+                @@include('./pages/DictionaryPage/DictionaryModalDiv.html')
             </transition>
             <!--  list -->
             <section class="block">
@@ -31,16 +33,16 @@
         @@include('./components/Footer.html')
     </div>
 
-
     @@include('./components/VueHeader.html')
     @@include('./components/common/Pin.html')
     @@include('./pages/DictionaryPage/DictionaryPostItem.html')
     @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
-
+    <script src="./assets/js/utils.js"></script>
     <script>
         new Vue({
             el: '#dictionary',
+            store,
             data: { //變數存放的地方
                 productList: [],
                 targetProduct: {},
@@ -55,42 +57,14 @@
                 },
                 isNavbarShow: true,
                 isModalShow: false,
-                seriesList: [{
-                    name: '工程系',
-                    eName: 'EN',
-                }, {
-                    name: 'RV休旅系',
-                    eName: 'RV',
-                }, {
-                    name: '計程車系',
-                    eName: 'TA',
-                }, {
-                    name: '巴士系',
-                    eName: 'BS',
-                }, {
-                    name: '警車系',
-                    eName: 'PA',
-                }, {
-                    name: '消防救護系',
-                    eName: 'EM',
-                }, {
-                    name: '轎車系',
-                    eName: 'CA',
-                }, {
-                    name: 'PREMIUM系',
-                    eName: 'PM',
-                }],
-                priceList: ['100~199', '200~299', '300以上'],
                 yearList: ['1970~1989', '1990~2009', '2010後'],
                 limitList: ['無限定', '期間限定', '點數限定'],
                 selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                selectedPriceList: ['100~199', '200~299', '300以上'],
                 selectedYearList: ['1970~1989', '1990~2009', '2010後'],
                 selectedLimitList: ['無限定', '期間限定', '點數限定'],
                 keywordText: '',
             },
             mounted() {
-
                 const getProductList = async () => {
                     const productList = await axios.get(
                         `./assets/php/getProductList.php`
@@ -98,7 +72,7 @@
                     return productList;
                 }
                 getProductList().then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     const fetchProductList = res.data.map(product => {
                         // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
@@ -111,12 +85,11 @@
                             thisSeriesId = product[`product_seriesid`];
                         }
                         return {
-                            name: product[`product_name`],
-                            eName: product['product_ename'],
+                            name: product[`product_name`].trim(),
+                            eName: product['product_ename'].trim(),
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
-                            price: product[`product_price`],
                             imgURL: product['product_img'],
                             displayImgURL: product['product_img1'],
                             productId: product['product_id'],
@@ -126,7 +99,7 @@
                             limitLabel: product['product_spec'],
                         }
                     })
-                    console.log(fetchProductList);
+                    // console.log(fetchProductList);
                     this.productList = fetchProductList;
                     this.showProductList = this.productList;
                     this.targetProduct = this.showProductList[0];
@@ -138,6 +111,9 @@
 
             },
             computed: {
+                seriesList() {
+                    return this.$store.state.seriesList
+                },
                 bgClass() {
                     return `bg-series-${this.targetProduct.series}`
                 },
@@ -156,16 +132,6 @@
                             text: '點數限定',
                             className: 'badge bg-blue'
                         };
-                    }
-                },
-                priceAllCheck: {
-                    get() {
-                        return this.selectedPriceList ? this.selectedPriceList
-                            .length === this.priceList.length : false
-                    },
-                    set(value) {
-                        value ? this.selectedPriceList = [...this.priceList] : this
-                            .selectedPriceList = [];
                     }
                 },
                 yearAllCheck: {
@@ -201,67 +167,57 @@
                 },
             },
             watch: {
-                selectedPriceList(changedYearList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedYearList.includes('100~199') && (product.price <= 199) ? isInclude =
-                            true : '';
-                        changedYearList.includes('300以上') && product.price >= 300 ? isInclude = true :
-                            '';
-                        if (changedYearList.includes('200~299')) {
-                            product.price >= 200 && product.price <= 299 ? isInclude = true : '';
-                        }
-                        // 扣除點數限定商品（點數販售，價錢為0)
-                        product.price == 0 ? isInclude = false : '';
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedYearList() {
+                    this.getChangedProductList();
                 },
-                selectedYearList(changedYearList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedYearList.includes('1970~1989') && product.year <= 1989 ? isInclude =
-                            true : '';
-                        changedYearList.includes('2010後') && product.year >= 2010 ? isInclude = true :
-                            '';
-                        if (changedYearList.includes('1990~2009')) {
-                            product.year >= 1990 && product.year <= 2009 ? isInclude = true : '';
-                        }
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedSeriesList() {
+                    this.getChangedProductList();
                 },
-                selectedSeriesList(changedSeriesList) {
-                    const changedProductList = this.productList.filter(product => {
-                        return changedSeriesList.includes(product.series);
-                    })
-                    this.showProductList = changedProductList;
-                },
-                selectedLimitList(changedSeriesList) {
-                    const changedProductList = this.productList.filter(product => {
-                        let isInclude = false;
-                        changedSeriesList.includes('期間限定') && product.limitLabel === '2' ? isInclude =
-                            true : '';
-                        changedSeriesList.includes('點數限定') && product.limitLabel === '4' ? isInclude =
-                            true : '';
-                        if (changedSeriesList.includes('無限定')) {
-                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isInclude =
-                                true : '';
-                        }
-                        return isInclude;
-                    })
-                    this.showProductList = changedProductList;
+                selectedLimitList() {
+                    this.getChangedProductList();
                 },
             },
             methods: {
+                getChangedProductList() {
+                    const filterYearProductList = this.productList.filter(product => {
+                        let isYearInclude = false;
+                        this.selectedYearList.includes('1970~1989') && product.year <= 1989 ?
+                            isYearInclude =
+                            true : '';
+                        this.selectedYearList.includes('2010後') && product.year >= 2010 ?
+                            isYearInclude =
+                            true :
+                            '';
+                        if (this.selectedYearList.includes('1990~2009')) {
+                            product.year >= 1990 && product.year <= 2009 ? isYearInclude = true : '';
+                        }
+                        return isYearInclude;
+                    })
+                    const filterSeriesProductList = filterYearProductList.filter(product => {
+                        return this.selectedSeriesList.includes(product.series);
+                    })
+                    const filterLimitProductList = filterSeriesProductList.filter(product => {
+                        let isLimitInclude = false;
+                        this.selectedLimitList.includes('期間限定') && product.limitLabel === '2' ?
+                            isLimitInclude =
+                            true : '';
+                        this.selectedLimitList.includes('點數限定') && product.limitLabel === '4' ?
+                            isLimitInclude =
+                            true : '';
+                        if (this.selectedLimitList.includes('無限定')) {
+                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isLimitInclude =
+                                true : '';
+                        }
+                        return isLimitInclude;
+                    })
+                    this.showProductList = filterLimitProductList;
+                },
                 handleFilterReset() {
-                    this.priceAllCheck = false;
                     this.yearAllCheck = false;
                     this.seriesAllCheck = false;
                     this.limitAllCheck = false;
                 },
                 handleFilterAllCheck() {
-                    this.priceAllCheck = true;
                     this.yearAllCheck = true;
                     this.seriesAllCheck = true;
                     this.limitAllCheck = true;
@@ -270,9 +226,6 @@
                     this.targetProduct = this.showProductList.find(product => product.productId ===
                         theProductId)
                     this.isModalShow = true;
-                },
-                isPostPin(theProductId) {
-                    return this.memberOwnProductIdList.indexOf(theProductId);
                 },
                 handleNavBarChange(filter) {
                     if (filter === 'my') {
@@ -299,12 +252,6 @@
                         this.targetProduct = this.showProductList[currentIndex + 1];
                     }
                 },
-                searchShowProduct() {
-                    const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
-                        product.series) >= 0);
-                    console.log(filteredList);
-                    this.showProductList = filteredList;
-                },
                 handleKeywordSearch() {
                     const filteredProductList = this.productList.filter(product => {
                         const keyword = this.keywordText.toLowerCase().trim();
@@ -321,7 +268,9 @@
                     })
                     this.showProductList = filteredProductList;
                 },
-
+                isPostPin(theProductId) {
+                    return this.memberOwnProductIdList.indexOf(theProductId);
+                },
             },
         })
     </script>
