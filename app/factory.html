@@ -2406,22 +2406,31 @@
           columnWidth: 466
         });
 
-        $('.work:nth-child(2) .readMore').click(() =>{
+        $('.work:nth-child(2) .readMore').click(() =>{  //如何改成只有在該貼文有被隱藏的回覆時，打開隱藏回覆會把下面的.work推開?
             // $('.work:nth-child(5)').css({"top": += 300})
             if(count2 % 2 == 1){
                 $('.work:nth-child(5)').animate({
                         top: '+=155'
                 });
-                let gridH = $('.grid').height()
-                $('.grid').height(gridH += 155)
+
             }else{
                 $('.work:nth-child(5)').animate({
                         top: '-=155'
                 });
+            }
+
+        })
+
+        $('.readMore').click(() =>{
+            if(count2 % 2 == 1){
+
+                let gridH = $('.grid').height()
+                $('.grid').height(gridH += 155)
+            }else{
+
                 let gridH = $('.grid').height()
                 $('.grid').height(gridH -= 155)
             }
-
         })
     </script>
 </body>
