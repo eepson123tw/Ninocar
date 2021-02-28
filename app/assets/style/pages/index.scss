@@ -212,7 +212,7 @@
         &__road {
             width: 100%;
             position: relative;
-            top: -120px;
+            top: -150px;
 
             @include rwd-lg {
                 width: 240%;
@@ -245,15 +245,36 @@
         }
 
         &__text__thumb {
-            animation: thumbShake 1s ease-in infinite;
+            animation: frameShake 1s ease-in infinite;
         }
 
 
     }
 
-    .block {
-        background-color: #fff;
+    .delivery {
+        position: relative;
+
+        &__text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 5px;
+            left: 8px;
+        }
+
+        &__text__num {
+            font-size: 60px;
+            font-weight: 700;
+
+            &:before {
+                height: 30px;
+
+            }
+        }
     }
+
+
+
 
 
     .about {
@@ -345,7 +366,7 @@
         }
     }
 
-    @keyframes thumbShake {
+    @keyframes frameShake {
         0% {
             transform: translateX(0px);
         }

@@ -209,23 +209,24 @@
 
                     })
                     .addTo(controller);
-
+                // ----------------------factory service
                 let mvCustom = new TimelineMax();
                 mvCustom.staggerFrom(".gsap-custom", 4, {
-                    scale: 0,
+                    scale: .5,
                     cycle: {
                         y: [-50, 50]
                     },
-                    ease: Elastic.easeOut,
+                    ease: Back.easeInOut,
                     stagger: {
                         from: "inner",
-                        amount: 0.75
+                        amount: 0.25
                     }
                 });
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerCustom',
-                        offset: 50
+                        offset: -100,
+                        duration: "30%",
                     }).setTween(mvCustom)
                     .addIndicators({
                         name: 'keyCustom',
@@ -236,20 +237,12 @@
 
 
 
-                // ----------------------factory
+                // ----------------------factory car
                 gsap.registerPlugin(MotionPathPlugin);
 
                 let mvFactory = gsap.timeline();
                 mvFactory.to('.factory__door', 2, {
                     y: -screenX * .1,
-                }).from('.factory__car__light', 0, {
-                    scale: 0,
-                }).to('.factory__car__light', .8, {
-                    scale: 30,
-                    ease: Elastic.easeOut,
-                }).to('.factory__car__light', 1, {
-                    scale: 0,
-                    ease: Elastic.easeOut,
                 }).to('.factory__car', 2, {
                     motionPath: {
                         path: "#factoryRoadPath",
@@ -284,7 +277,38 @@
 
                     })
                     .addTo(controller)
+
+                // ----------------------delivery
+                let mvDelivery = new TimelineMax();
+                mvDelivery.staggerFrom(".gsap-delivery", 4, {
+
+                    scale: .5,
+                    cycle: {
+                        y: [-50, 50]
+                    },
+                    ease: Back.easeInOut,
+                    stagger: {
+                        from: "inner",
+                        amount: 0.25
+                    }
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerDelivery',
+                        offset: 400,
+                        duration: "30%",
+                    }).setTween(mvDelivery)
+                    .addIndicators({
+                        name: 'keyDelivery',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
+
+
             }
+
+
             // .to('.factory__car', 4, {
             //         motionPath: {
             //             path: "#endRoadPath",
