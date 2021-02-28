@@ -111,14 +111,22 @@
 						<div class="form__group px-10 block pt-10 pb-20 ">
 							<label
 								for="buyerName"
-								class="form__text mb-2 "
-							>姓名</label>
+								class="form__text mb-2 w-100"
+							>姓名 <span
+									v-show="isTextShow"
+									class="h5"
+									:class="textClass"
+								>三個皆為必填</span></label>
 							<div class="form__section mb-5">
 								<input
 									id="buyerName"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class=" cart__select form__input"
+									:class="inputClass"
 									placeholder="王小明"
+									v-model.trim="buyerName"
+									@input="watchInput"
+									@focus="checkInput"
 								></input>
 							</div>
 							<label
@@ -129,7 +137,11 @@
 								<input
 									id="buyerPhone"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									v-model.trim="buyerPhone"
+									:class="inputClass"
+									@input="watchInput"
+									@focus="checkInput"
+									class="cart__select form__input"
 									placeholder="0910-123-456"
 								></input>
 							</div>
@@ -314,6 +326,15 @@
         currentdata: this.current,
         notShow: true,
         animationDisplay: 'cart__displayNone',
+        buyerName: "",
+        buyerPhone: "",
+        isTextShow: false,
+        inputClass: {
+          "form__input--warning": false,
+        },
+        textClass: {
+          "form__text--warning": true,
+        },
       }
     },
     methods: {
@@ -323,17 +344,49 @@
         this.$emit('data-handler', this.currentdata);
       },
       collapseArea() {
+        //收合選單
         if (this.notShow) {
           this.notShow = false;
           this.animationDisplay = "cart__displayShow";
-
         } else {
           this.notShow = true;
           this.animationDisplay = "cart__displayNone";
         }
 
+      },
+      watchInput(val) {
+        //檢查 有無輸入
+        if (this.buyerName || this.buyerPhone) {
+          this.inputClass = {
+            "form__input--warning": false,
+          }
+          this.isTextShow = false;
+        } else if (this.buyerName == "") {
+          this.inputClass = {
+            "form__input--warning": true,
+          };
+          this.isTextShow = true;
+        } else if (this.buyerPhone == "") {
+          this.inputClass = {
+            "form__input--warning": true,
+          }
+          this.isTextShow = true;
+        }
+      },
+      checkInput() {
+        //檢查 有無輸入
+        if (this.buyerName == "") {
+          this.inputClass = {
+            "form__input--warning": true,
+          }
+          this.isTextShow = true;
+        } else if (this.buyerPhone == "") {
+          this.inputClass = {
+            "form__input--warning": true,
+          }
+          this.isTextShow = true;
+        }
       }
-
     },
     computed: {
       // store 區塊
