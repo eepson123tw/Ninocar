@@ -54,7 +54,7 @@
                         <p class="h3 intro_content_text">在車車工廠，<br> 我們提供各種車款、烤漆顏色和不同配備，
                             <br> 您可以盡情揮灑創意，創作屬於自己的超酷客製車。
                         </p>
-                        <button class="btn make">開始製作</button>
+                        <button class="btn make" @click="make">開始製作</button>
                     </div>
                 </div>
 
@@ -307,8 +307,8 @@
 
                 <div class="workBar col-12 col-lg-6 col-sm-4">
                     <div class="workBar_left">
-                        <button class="workButton h2 works">大家的作品</button>
-                        <button class="workButton h2 myworks">我的作品</button>
+                        <button class="workButton h2 works" @click="showWorks">大家的作品</button>
+                        <button class="workButton h2 myworks" @click="showMywork">我的作品</button>
                     </div>
                     <div class="filter"></div>
                 </div>
@@ -873,10 +873,36 @@
 
             },
             methods: {
-                openReportSuccessModal(){
+                openReportSuccessModal(){ //出現檢舉成功的彈窗
                     $('.reportSuccessModal').addClass('modal-active')
-                }
+                },
+                showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
 
+                    $('.workButton').not(e.target).css({"background": "none"})
+
+                    $('.othersWorks').css({"display": "flex"})
+                    $('.mywork').css({"display": "none"})
+                },
+                showMywork(e){ //點選我的作品時會標示在哪裡，我的作品會出現、大家作品會隱藏
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+
+                    $('.workButton').not(e.target).css({"background": "none"})
+
+                    $('.othersWorks').css({"display": "none"})
+                    $('.mywork').css({"display": "block"})
+                },
+                make(){
+                    $('.previousStep').addClass('invisible')
+
+                    $('.progressBar').css({"display": "block"})
+
+                    $('.circle:first').css({"background-color": "#E59807"})
+
+                    $('.intro').css({"display": "none"})
+
+                    $('.makeCar').css({"display": "block"})
+                }
             },
         });
 
@@ -1012,30 +1038,30 @@
         //     }
         // })
 
-        //收起、打開輸入回覆區
-        let count3 = 0;
+        //收起、打開輸入回覆區  //不需要這個了
+        // let count3 = 0;
 
-        $('.closeTextarea').click(function() {
-            // console.log('coloseTextarea')
-            $(this).parent().children('.typeReply').slideToggle();
+        // $('.closeTextarea').click(function() {
+        //     // console.log('coloseTextarea')
+        //     $(this).parent().children('.typeReply').slideToggle();
 
-            count3 += 1;
-            // console.log(count3);
+        //     count3 += 1;
+        //     // console.log(count3);
 
-            if (count3 % 2 == 1) {
-                $(this).children('.textareaWord').text('打開輸入框');
+        //     if (count3 % 2 == 1) {
+        //         $(this).children('.textareaWord').text('打開輸入框');
 
-                $(this).children('.toggleIcon3').css({
-                    "transform": "rotate(180deg)",
-                })
-            } else {
-                $(this).children('.textareaWord').text('關閉輸入框');
+        //         $(this).children('.toggleIcon3').css({
+        //             "transform": "rotate(180deg)",
+        //         })
+        //     } else {
+        //         $(this).children('.textareaWord').text('關閉輸入框');
 
-                $(this).children('.toggleIcon3').css({
-                    "transform": "rotate(0deg)",
-                })
-            }
-        })
+        //         $(this).children('.toggleIcon3').css({
+        //             "transform": "rotate(0deg)",
+        //         })
+        //     }
+        // })
 
         //計算輸入框內的剩餘字數，按進去沒輸入字變紅框
         let textMax = 100;
@@ -1067,36 +1093,36 @@
         //     }
         // })
 
-        //點我的車車、大家的車車後會標示目前在哪
-        $('.workButton').click(function() {
-            $(this).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+        //點我的車車、大家的車車後會標示目前在哪  //移到Vue
+        // $('.workButton').click(function() {
+        //     $(this).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
 
-            $('.workButton').not(this).css({"background": "none"})
+        //     $('.workButton').not(this).css({"background": "none"})
 
-            $('.othersWorks').css({"display": "flex"})
-            $('.mywork').css({"display": "none"})
+        //     $('.othersWorks').css({"display": "flex"})
+        //     $('.mywork').css({"display": "none"})
 
-        })
+        // })
 
-        //點我的車車時，大家的車車消失，我的車車或emptyState出現
-        $('.myworks').click(function() {
-            $('.othersWorks').css({"display": "none"})
-            $('.mywork').css({"display": "block"})
-                // console.log('我的車車出現')
-        })
+        //點我的車車時，大家的車車消失，我的車車或emptyState出現  //移到Vue
+        // $('.myworks').click(function() {
+        //     $('.othersWorks').css({"display": "none"})
+        //     $('.mywork').css({"display": "block"})
+        //         // console.log('我的車車出現')
+        // })
 
-        //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
-        $('.make').click(function() {
-            $('.previousStep').addClass('invisible')
+        //點開始製作時進度條出現、介紹的圖文消失、製作區域出現  //移到Vue
+        // $('.make').click(function() {
+        //     $('.previousStep').addClass('invisible')
 
-            $('.progressBar').css({"display": "block"})
+        //     $('.progressBar').css({"display": "block"})
 
-            $('.circle:first').css({"background-color": "#E59807"})
+        //     $('.circle:first').css({"background-color": "#E59807"})
 
-            $('.intro').css({"display": "none"})
+        //     $('.intro').css({"display": "none"})
 
-            $('.makeCar').css({"display": "block"})
-        })
+        //     $('.makeCar').css({"display": "block"})
+        // })
 
 
         //選擇後「下一步」變able、提醒先做選則才進入下一步的提示消失
@@ -1812,9 +1838,6 @@
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
 
             }
-
-
-
         })
 
         // -------------------------------------CANVAS--------------------------------------------
