@@ -32,7 +32,8 @@
     <ul class="col-9" style="margin-top: 200px">
         <div class="row">
             <div class="col-9">
-                <select class="area">
+                <select class="area" v-model="filterText">
+                    <option value="" disabled>-- 請選擇 --</option>
                     <option value="依上架時間">最新上架</option>
                     <option value="依價格">依價格(由高至低)</option>
                     <option value="依價格">依價格(由低至高)</option>
@@ -52,7 +53,7 @@
                                 <span class="card__label">本月主打</span>
                             </div>
                             <div class="card__body">
-                                <h2 class="card__title">凱迪拉克·埃爾多拉多</h2>
+                                <h2 class="card__title">鈴木居米</h2>
                                 <div class="card__details">
                                     <p class="card__price">NT$ 195</p>
                                     <button class="card__link">收藏</button>
@@ -92,7 +93,7 @@
                                 <span class="card__label">本月主打</span>
                             </div>
                             <div class="card__body">
-                                <h2 class="card__title">凱迪拉克·埃爾多拉多</h2>
+                                <h2 class="card__title">馬自達cx-5</h2>
                                 <div class="card__details">
                                     <p class="card__price">NT$ 195</p>
                                     <button class="card__link">收藏</button>
@@ -132,7 +133,7 @@
                                 <span class="card__label">本月主打</span>
                             </div>
                             <div class="card__body">
-                                <h2 class="card__title">凱迪拉克·埃爾多拉多</h2>
+                                <h2 class="card__title">三菱帕加洛</h2>
                                 <div class="card__details">
                                     <p class="card__price">NT$ 195</p>
                                     <button class="card__link">收藏</button>
@@ -295,3 +296,47 @@
         </div>
     </ul>
 </div>
+
+
+<script>
+    var app = new Vue({
+            el: '#app',
+            data: {
+                arrayData:[{
+                    productName: 'Audi R8 奧迪小客車',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: 'BS 01',
+                    pointProduct: false
+                },{
+                    productName: '馬自達cx-5',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: 'BS 01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: 'BS 01',
+                    pointProduct: false
+                }],
+                filterArray:[],
+                fillterText:''
+            },
+            methods:
+
+            reverseArray: function () {
+                this.arrayData.reverse()
+                console.log(this.arrayData)
+            },
+            filterData: function () {
+                var vm = this;
+                vm.filterArray = vm.arrayData.filter(function (item) {
+                    console.log(vm.filterText, item.productName, item.productName.match(vm.filterText))
+                    return item.productName.match(vm.filterText);
+                });
+            },   
+            
+    });
+</script>
