@@ -60,5 +60,23 @@
             z-index: -1;
             background-color: $primary;
         }
+
+    }
+}
+
+.highlight {
+    position: relative;
+    z-index: 10;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 5px;
+        height: 16px;
+        border-radius: 4px;
+        z-index: -1;
+        background-color: $primary;
     }
 }
