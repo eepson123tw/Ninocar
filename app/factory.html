@@ -74,8 +74,8 @@
 
                     <div class="selectAreaOut">
                         <div class="selectBtn">
-                            <div class="selectAreaOut-previous"><img src="./assets/img/icon/icon-left.svg" alt=""></div>
-                            <div class="selectAreaOut-next"><img src="./assets/img/icon/icon-right.svg" alt=""></div>
+                            <div class="selectAreaOut-previous" @click="moveLeft"><img src="./assets/img/icon/icon-left.svg" alt=""></div>
+                            <div class="selectAreaOut-next" @click="moveRight"><img src="./assets/img/icon/icon-right.svg" alt=""></div>
                         </div>
 
                         <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
@@ -111,7 +111,7 @@
 
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
-                                        <img src="./assets/img/pic//shape03.png" class="shape">
+                                        <img src="./assets/img/pic/shape03.png" class="shape">
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
@@ -906,6 +906,8 @@
             el: '#factory',
             data:{
                 countStep: 0,
+                countR: 0,
+                countL: 0,
                 docW: $(document).width(),
                 shapeIndex:-1,
                 circleIndex: -1,
@@ -1158,7 +1160,66 @@
                 getCircleIndex(e){
                     circleIndex = $(e.target).parent().index();
                     console.log("circleIndex: " + circleIndex)
-                }
+                },
+                moveRight(){
+                    this.countL += 1;
+
+                    let distanceToLeft = $('.selectArea').position().left;
+                    // console.log(distanceToLeft)
+
+                    if (this.docW <= 992) {
+                        if (this.countStep < 3 && distanceToLeft > -900) {
+                            $('.selectArea').animate({left: '-=430'});
+                        } else if (this.countStep == 3 && distanceToLeft > -2100) {
+                        
+                            $('.selectArea').animate({left: '-=410'});
+                        }
+                    } else {
+                        if (this.countStep < 3 && distanceToLeft > 15) {
+                            $('.selectArea').animate({left: '-=410'});
+                        } else if (this.countStep == 3 && distanceToLeft > -400) {
+                            // console.log('再過去一點')
+                            $('.selectArea').animate({left: '-=410'});
+                        }
+                    }
+                },
+                moveLeft(){
+                    this.countR += 1;
+                    console.log('countR: '+ this.countR);
+                    // console.log('docW: '+ docW)
+
+                    let shapeLength = $('.shapeCard').length
+                    // console.log(shapeLength)
+
+                    let colorLength = $('.selectColor').length
+                    // console.log(colorLength)
+                    // console.log("countStep:  " + countStep)
+
+                    let distanceToLeft = $('.selectArea').position().left;
+                    // console.log(distanceToLeft)
+
+                    if (this.docW <= 992) {
+                        if (this.countStep == 0 && distanceToLeft < 3) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        }
+                    } else {
+                        if (this.countStep == 0 && distanceToLeft < 14) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        }
+                    }
+                },
             },
         });
 
@@ -1233,7 +1294,7 @@
             el: '#mywork',
         })
 
-        // --------------------------------------------
+        // ----------------------JQ區----------------------
         //計算輸入框內的剩餘字數，按進去沒輸入字變紅框
         let textMax = 100;
         $('.textCount').text(`餘${textMax}字`);
@@ -1656,104 +1717,101 @@
             let ran1 = Math.floor(Math.random() * 10)
             let ran2 = Math.floor(Math.random() * 10)
 
-            // console.log(ran1)
-            // console.log(ran2)
-
             $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
         })
 
-        let countL = 0;
-        let countR = 0;
-        let distance = 410;
+        // let countL = 0;
+        // let countR = 0;
+        // let distance = 410;
         //選擇車型、零件的區域按左右會移動
-        $('.selectAreaOut-next').click(function() {
-            countL += 1;
-            // console.log("countL ":+ countL);
-            // console.log("countStep: " + countStep)
-            // console.log('docW: '+ docW)
+        // $('.selectAreaOut-next').click(function() { //移到Vue
+            // countL += 1;
+            // // console.log("countL ":+ countL);
+            // // console.log("countStep: " + countStep)
+            // // console.log('docW: '+ docW)
 
-            let distanceToLeft = $('.selectArea').position().left;
-            // console.log(distanceToLeft)
+            // let distanceToLeft = $('.selectArea').position().left;
+            // // console.log(distanceToLeft)
 
-            if (docW <= 992) {
-                if (countStep < 3 && distanceToLeft > -900) {
-                    $('.selectArea').animate({
-                        left: '-=430'
-                    });
-                } else if (countStep == 3 && distanceToLeft > -2100) {
+            // if (docW <= 992) {
+            //     if (countStep < 3 && distanceToLeft > -900) {
+            //         $('.selectArea').animate({
+            //             left: '-=430'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft > -2100) {
 
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                }
-            } else {
-                if (countStep < 3 && distanceToLeft > 15) {
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft > -400) {
-                    // console.log('再過去一點')
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                }
-            }
-        })
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     }
+            // } else {
+            //     if (countStep < 3 && distanceToLeft > 15) {
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft > -400) {
+            //         // console.log('再過去一點')
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     }
+            // }
+        // })
 
-        $('.selectAreaOut-previous').click(function() {
-            countR += 1;
-            console.log('countR: '+ countR);
-            // console.log('docW: '+ docW)
+        // $('.selectAreaOut-previous').click(function() { //移到Vue
+            // countR += 1;
+            // console.log('countR: '+ countR);
+            // // console.log('docW: '+ docW)
 
-            let shapeLength = $('.shapeCard').length
-                // console.log(shapeLength)
+            // let shapeLength = $('.shapeCard').length
+            //     // console.log(shapeLength)
 
-            let colorLength = $('.selectColor').length
-                // console.log(colorLength)
+            // let colorLength = $('.selectColor').length
+            //     // console.log(colorLength)
 
-            // console.log("countStep:  " + countStep)
+            // // console.log("countStep:  " + countStep)
 
-            let distanceToLeft = $('.selectArea').position().left;
-            // console.log(distanceToLeft)
+            // let distanceToLeft = $('.selectArea').position().left;
+            // // console.log(distanceToLeft)
 
-            if (docW <= 992) {
-                if (countStep == 0 && distanceToLeft < 3) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                }
-            } else {
-                if (countStep == 0 && distanceToLeft < 14) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                }
-            }
-        })
+            // if (docW <= 992) {
+            //     if (countStep == 0 && distanceToLeft < 3) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     }
+            // } else {
+            //     if (countStep == 0 && distanceToLeft < 14) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     }
+            // }
+        // })
 
         // ---------------------------------計算金額------------------------------------------------
 
@@ -1875,7 +1933,7 @@
 
         $('.selectWhite').click(function() {
             let pic2 = new Image();
-            // if (shapeIndex == 0) {
+            // if (shapeIndex == 0) { //暫時關掉
             //     pic2.src = './assets/img/pic/color1A.png'; //白
             //     pic2.addEventListener('load', function() {
             //         context.globalAlpha = 1;
@@ -1899,7 +1957,7 @@
 
         $('.selectRed').click(function() {
             let pic2 = new Image();
-            // if (shapeIndex == 0) {
+            // if (shapeIndex == 0) { //暫時關掉
             //     pic2.src = './assets/img/pic/color2A.png'; //紅
             //     pic2.addEventListener('load', function() {
             //         context.globalAlpha = 1;
@@ -1922,7 +1980,7 @@
 
         $('.selectOrange').click(function() {
             let pic2 = new Image();
-            // if (shapeIndex == 0) {
+            // if (shapeIndex == 0) { //暫時關掉
             //     pic2.src = './assets/img/pic/color3A.png'; //橙
             //     pic2.addEventListener('load', function() {
             //         context.globalAlpha = 1;
@@ -1946,7 +2004,7 @@
         $('.selectYellow').click(function() {
             let pic2 = new Image();
 
-            // if (shapeIndex == 0) {
+            // if (shapeIndex == 0) { //暫時關掉
             //     pic2.src = './assets/img/pic/color4A.png'; //黃
             //     pic2.addEventListener('load', function() {
             //         context.globalAlpha = 1;
@@ -1970,7 +2028,7 @@
         $('.selectPurple').click(function() {
             let pic2 = new Image();
 
-            // if (shapeIndex == 0) {
+            // if (shapeIndex == 0) { //暫時關掉
             //     pic2.src = './assets/img/pic/color5A.png'; //紫
             //     pic2.addEventListener('load', function() {
             //         context.globalAlpha = 1;
