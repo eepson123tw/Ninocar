@@ -24,7 +24,7 @@ function concatJSAndMove() {
 }
 
 function moveJS() {
-  return src('app/assets/js/**/*.js').pipe(dest('dist/assets/js/'));
+  return src('app/assets/js/**/*.*').pipe(dest('dist/assets/js/'));
 }
 
 function movePHP() {
@@ -101,7 +101,7 @@ exports.browser = function browsersync() {
   watch('app/assets/style/pages/*.scss', pageStyle).on('change', reload);
   watch('app/**/*.html', includeHTML).on('change', reload);
   watch('app/assets/img/**/*', moveImg).on('change', reload);
-  watch('app/assets/js/**/*.js', moveJS).on('change', reload);
+  watch('app/assets/js/**/*.*', moveJS).on('change', reload);
   watch('app/assets/php/**/*.php', movePHP).on('change', reload);
   watch('app/backend/**/*.php', moveBackendFiles).on('change', reload);
 };

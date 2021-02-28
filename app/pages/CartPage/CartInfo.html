@@ -102,8 +102,6 @@
 						></p>
 				</div>
 			</div>
-
-
 			<div class="container">
 				<div class="row  pt-md-5 pt-20 ">
 					<section class="cart__payment col-6 col-lg-6 col-xs-12 ">
@@ -122,11 +120,11 @@
 									id="buyerName"
 									type="text"
 									class=" cart__select form__input"
-									:class="inputClass"
 									placeholder="王小明"
 									v-model.trim="buyerName"
-									@input="watchInput"
+									@change="checkInput"
 									@focus="checkInput"
+									data-input="0"
 								></input>
 							</div>
 							<label
@@ -138,9 +136,9 @@
 									id="buyerPhone"
 									type="text"
 									v-model.trim="buyerPhone"
-									:class="inputClass"
-									@input="watchInput"
+									@change="checkInput"
 									@focus="checkInput"
+									data-input="1"
 									class="cart__select form__input"
 									placeholder="0910-123-456"
 								></input>
@@ -153,8 +151,12 @@
 								<input
 									id="buyerEmail"
 									type="email"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="abc@gmail.com"
+									v-model.trim="buyerEmail"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="2"
 								></input>
 							</div>
 						</div>
@@ -171,6 +173,7 @@
 									type="checkbox"
 									id="receiverSame"
 									class="mr-3"
+									@click="sameBuyer"
 								>
 								<label
 									for="receiverSame"
@@ -181,8 +184,9 @@
 								<input
 									id="receiverName"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="王小明"
+									v-model="receiverName"
 								></input>
 							</div>
 							<label
@@ -193,8 +197,9 @@
 								<input
 									id="receiverPhone"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="0910-123-456"
+									v-model="receiverPhone"
 								></input>
 							</div>
 							<div class="form__group ">
@@ -207,21 +212,35 @@
 										name=""
 										id=""
 										class="form__select "
+										v-model="receiverCity"
 									>
-										<option value="">城市</option>
+										<option
+											value=""
+											disabled
+										>城市</option>
+										<option v-for="(num,index) of selectCity">{{num}}</option>
 									</select>
 									<select
 										name=""
 										id=""
 										class="form__select "
+										v-model="receiverTown"
 									>
-										<option value="">鄉政區</option>
+										<option
+											value=""
+											disabled
+										>鄉政區</option>
+										<option
+											value=""
+											v-for="(num,index) of selectTown"
+										>{{num}}</option>
 									</select>
 								</div>
 								<input
 									type="text"
 									class="form__input  "
 									id="address"
+									v-model="receiverRoad"
 									placeholder="街/路/巷弄/樓層"
 								/>
 								<div class="d-flex  cart__checkbox mt-10 mb-10">
@@ -256,7 +275,7 @@
 								<input
 									id="cardName"
 									type="text"
-									class="form__select cart__select--small cart__select--input "
+									class="form__select cart__select--small cart__select--input"
 									maxlength="4"
 								></input>
 								<input
@@ -328,6 +347,12 @@
         animationDisplay: 'cart__displayNone',
         buyerName: "",
         buyerPhone: "",
+        buyerEmail: "",
+        receiverName: "",
+        receiverPhone: "",
+        receiverCity: "",
+        receiverTown: "",
+        receiverRoad: "",
         isTextShow: false,
         inputClass: {
           "form__input--warning": false,
@@ -335,6 +360,7 @@
         textClass: {
           "form__text--warning": true,
         },
+        cityList: [],
       }
     },
     methods: {
@@ -354,39 +380,35 @@
         }
 
       },
-      watchInput(val) {
-        //檢查 有無輸入
-        if (this.buyerName || this.buyerPhone) {
-          this.inputClass = {
-            "form__input--warning": false,
-          }
-          this.isTextShow = false;
-        } else if (this.buyerName == "") {
-          this.inputClass = {
-            "form__input--warning": true,
+
+
+      checkInput(e) {
+
+        const inputList = document.querySelectorAll('[data-input]');
+        let inputNum = e.target.dataset.input;
+
+        inputList.forEach((item, index) => {
+          // 檢查表單
+          if (inputList[inputNum].value == "") {
+            inputList[inputNum].classList.add('form__input--warning')
+            this.isTextShow = true;
+          } else if (inputList[inputNum].value !== "") {
+            inputList[inputNum].classList.remove('form__input--warning')
           };
-          this.isTextShow = true;
-        } else if (this.buyerPhone == "") {
-          this.inputClass = {
-            "form__input--warning": true,
-          }
-          this.isTextShow = true;
+
+        })
+        if (this.buyerName !== "" && this.buyerPhone !== "" && this.buyerEmail !== "") {
+          this.isTextShow = false;
         }
+
       },
-      checkInput() {
-        //檢查 有無輸入
-        if (this.buyerName == "") {
-          this.inputClass = {
-            "form__input--warning": true,
-          }
-          this.isTextShow = true;
-        } else if (this.buyerPhone == "") {
-          this.inputClass = {
-            "form__input--warning": true,
-          }
-          this.isTextShow = true;
-        }
-      }
+      sameBuyer() {
+
+        this.receiverName = this.buyerName;
+        this.receiverPhone = this.buyerPhone;
+
+      },
+
     },
     computed: {
       // store 區塊
@@ -398,10 +420,42 @@
         selectPayment: state => state.selectPayment,
         totalPointCost: state => state.totalPointCost,
         selectShipping: state => state.selectShipping,
-      })
+      }),
+      selectCity() {
+        let newCityList = [];
+
+        for (let cityNum in this.cityList) {
+
+          newCityList.push(this.cityList[cityNum]['name']);
+
+        }
+
+        return newCityList;
+
+      },
+      selectTown() {
+        let newTownList = [];
+
+        for (let cityNum in this.cityList) {
+          if (this.cityList[cityNum]['name'] == this.receiverCity) {
+            newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
+          }
+
+        }
+        return newTownList;
+      },
 
     },
+    mounted() {
 
+      fetch('./assets/js/taiwan_districts.json', {
+        method: "get"
+      }).then((res) => {
 
+        return res.json();
+      }).then((res) => {
+        this.cityList = res;
+      })
+    }
   })
 </script>
