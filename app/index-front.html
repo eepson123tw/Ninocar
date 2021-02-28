@@ -210,6 +210,30 @@
                     })
                     .addTo(controller);
 
+                let mvCustom = new TimelineMax();
+                mvCustom.staggerFrom(".gsap-custom", 4, {
+                    scale: 0,
+                    cycle: {
+                        y: [-50, 50]
+                    },
+                    ease: Elastic.easeOut,
+                    stagger: {
+                        from: "inner",
+                        amount: 0.75
+                    }
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerCustom',
+                        offset: 50
+                    }).setTween(mvCustom)
+                    .addIndicators({
+                        name: 'keyCustom',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
+
 
 
                 // ----------------------factory
@@ -218,6 +242,14 @@
                 let mvFactory = gsap.timeline();
                 mvFactory.to('.factory__door', 2, {
                     y: -screenX * .1,
+                }).from('.factory__car__light', 0, {
+                    scale: 0,
+                }).to('.factory__car__light', .8, {
+                    scale: 30,
+                    ease: Elastic.easeOut,
+                }).to('.factory__car__light', 1, {
+                    scale: 0,
+                    ease: Elastic.easeOut,
                 }).to('.factory__car', 2, {
                     motionPath: {
                         path: "#factoryRoadPath",
@@ -239,31 +271,31 @@
                     },
                     ease: Linear.easeNone,
                     delay: .5,
-                }).to('.factory__car', 4, {
-                    motionPath: {
-                        path: "#endRoadPath",
-                        align: "#endRoadPath",
-                        alignOrigin: [0.5, .5],
-                        autoRotate: -90,
-                        transformOrigin: "50% 50%",
-                    },
-                    ease: Linear.easeNone,
-                    delay: 1,
-                });
+                })
 
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerFactory',
-                        offset: 300
+                        offset: 400
                     }).setTween(mvFactory)
                     .addIndicators({
-                        name: 'key03',
+                        name: 'keyFactory',
                         colorStart: '#f20'
 
                     })
                     .addTo(controller)
-
             }
+            // .to('.factory__car', 4, {
+            //         motionPath: {
+            //             path: "#endRoadPath",
+            //             align: "#endRoadPath",
+            //             alignOrigin: [0.5, .5],
+            //             autoRotate: -90,
+            //             transformOrigin: "50% 50%",
+            //         },
+            //         ease: Linear.easeNone,
+            //         delay: 1,
+            //     });
 
         });
     </script>

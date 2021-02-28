@@ -193,12 +193,26 @@
                 left: 42%;
                 top: -30%
             }
+
+        }
+
+        &__car__light {
+            position: absolute;
+            width: 1px;
+            bottom: 10px;
+            left: 5px;
+        }
+
+        &__car__light2 {
+            position: absolute;
+            left: 100px;
+            bottom: 60px;
         }
 
         &__road {
             width: 100%;
             position: relative;
-            top: -160px;
+            top: -120px;
 
             @include rwd-lg {
                 width: 240%;
@@ -210,12 +224,30 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
             padding: 80px;
 
             @include rwd-xl {
                 padding: 60px;
             }
         }
+
+        &__text__title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 300;
+            display: inline-block;
+
+            &:before {
+                height: 30px;
+
+            }
+        }
+
+        &__text__thumb {
+            animation: thumbShake 1s ease-in infinite;
+        }
+
 
     }
 
@@ -311,6 +343,22 @@
         100% {
             transform: translate(-.3px, 0);
         }
+    }
+
+    @keyframes thumbShake {
+        0% {
+            transform: translateX(0px);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+
+
     }
 
 
