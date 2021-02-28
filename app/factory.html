@@ -310,17 +310,25 @@
                         <button class="workButton h2 works" @click="showWorks">大家的作品</button>
                         <button class="workButton h2 myworks" @click="showMywork">我的作品</button>
                     </div>
-                    <div class="filter"></div>
+                    <div class="workBar_right">
+                        <p class="h4 mr-4">排序</p>
+                        <select name="" id="" class="filter h4" @click="sort">
+                            <option class="goodFirst">按讚數多到少</option>
+                            <option class="newFirst">按作品新到舊</option>
+                            <option class="OldFirst">按作品舊到新</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card :img="'./assets/img/pic/model01.png'" :goodNum="24"></work-card>
+                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :post-time="15"></work-card>
                         <work-card2></work-card2>                        
-                        <work-card :img="'./assets/img/pic/model02.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model03.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model04.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model05.png'"></work-card>
+                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15"></work-card >
+                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :post-time="7"></work-card >
+                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5"></work-card >
+                        <work-card :img="'./assets/img/pic/model05.png'" :post-time="26"></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -385,7 +393,11 @@
                     type:Number
                 },
                 commentNum:{
-                    default:0,
+                    default:1,
+                    type:Number
+                },
+                postTime:{
+                    default:4,
                     type:Number
                 },
             },
@@ -395,7 +407,8 @@
                     count2: 0,
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
-                    commentNum_plus: this.commentNum
+                    commentNum_plus: this.commentNum,
+                    
                 }
             },
             template: `<li class="work grid-item grid-item--height1 col
@@ -411,7 +424,7 @@
                                     <h2 class="workName h4">天栗鼠計程車</h2>
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
-                                        <p class="postTime h6">3小時前</p>
+                                        <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
                                         <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
@@ -425,7 +438,7 @@
                                           <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807" :class="{'pin--secondary':is_icon_color === true}"/>
                                         </g>
                                     </svg>
-                                    <p  class="num h3">{{goodNum_plus}}</p>
+                                    <p  class="num h3" :v-text="goodNum">{{goodNum_plus}}</p>
                                 </div>
                                 <div class="workInfo_reply">                                   
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
@@ -652,11 +665,15 @@
                     type:String
                 },
                 goodNum:{
-                    default:3,
+                    default:18,
                     type:Number
                 },
                 commentNum:{
                     default:2,
+                    type:Number
+                },
+                postTime:{
+                    default:1,
                     type:Number
                 }
             },
@@ -681,7 +698,7 @@
                                     <h2 class="workName h4">天栗鼠計程車</h2>
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
-                                        <p class="postTime h6">1小時前</p>
+                                        <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
                                         <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
@@ -1220,6 +1237,29 @@
                         }
                     }
                 },
+                sort(){
+                   let postTimes = $('.mainTime').text().split('小時前');
+                   console.log(postTimes)
+                //    console.log(postTimes.length)
+
+                   for(i = 0; i < postTimes.length - 1; i++){
+                    console.log(postTimes[i])
+                   }
+
+                //    $('.work:nth-child(1)').css({"position":"initial","order":"5"})
+                //    $('.work:nth-child(2)').css({"position":"initial","order":"1"})
+                //    $('.work:nth-child(3)').css({"position":"initial","order":"4"})
+                //    $('.work:nth-child(4)').css({"position":"initial","order":"2"})
+                //    $('.work:nth-child(5)').css({"position":"initial","order":"6"})
+                //    $('.work:nth-child(6)').css({"position":"initial","order":"3"})
+
+                //    $('.grid').masonry({
+                //       // options
+                //       horizontalOrder: true,
+                //       itemSelector: '.grid-item',
+                //       columnWidth: 466
+                //    });
+                }
             },
         });
 
