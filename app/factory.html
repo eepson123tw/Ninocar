@@ -463,7 +463,7 @@
                                         <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                                         <div class="other">
                                             <p class="textCount"></p>
-                                            <button class="btn btn--small h5 subComment">回覆</button>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -602,8 +602,46 @@
                             "transform": "rotate(0deg)",
                         })
                     }
-               }
+               },
+               postSubComment(e){ //PO回覆的回覆
+                   console.log('subComment is clicked')
+                   let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+                   let commentContent = $(e.target).parent().parent().children('.textarea').val();
+                   console.log(commentContentL)
+                   
+                   let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
+                   console.log(replyerPic)
+                  
+                   let replyerName = $(e.target).parent().parent().children('.replyerName').text();
+                   console.log(replyerName)
+                   
+                   if (commentContentL > 0) {
+                    $(e.target).parent().parent().parent().parent().children('.userContext').after(`
+                            <div class="subUserContext hiddenSubReply">
+                                <img src="${replyerPic}"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">${replyerName}</p>
+                                    <p class="userContent h5">${commentContent}</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                        
+                    $(e.target).parent().parent().children('.textarea').val('');
+                    $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
+                   }
 
+                   //PO完後關掉回覆的回覆
+                   $('.typeSubReply').css({"display":"none"})
+                   
+                   //PO完後出現「X則回覆」
+                   $(e.target).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
+               },
             },
         })
 
@@ -974,95 +1012,6 @@
         })
 
         // --------------------------------------------
-        //進入彈窗、後面固定不給滾動 //移到Vue
-        // $('.work_pic').click(function() {
-        //     $('.mask').css({"display": "block"});
-
-        //     $('.containerMain').css({"position": "fixed"});
-        // });
-
-        //關掉彈窗 //移到Vue
-        // $('.closeIcon').click(function() {
-        //     $('.mask').css({"display": "none",});
-
-        //     $('.containerMain').css({"position": "initial",});
-        // })
-
-        //收起、打開更多子回覆  //移到Vue
-        // let count1 = 0;
-        // $('.moreReply').click(function() {
-        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').slideToggle();
-        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
-
-        //     count1 += 1;
-        //     // console.log(count1);
-
-        //     if (count1 % 2 == 1) {
-        //         $(this).children('.moreReplyWord').text('關閉子回覆');
-
-        //         $(this).children('.toggleIcon1').css({
-        //             "transform": "rotate(180deg)",
-        //         })
-        //     } else {
-        //         $(this).children('.moreReplyWord').text('1則回覆');
-
-        //         $(this).children('.toggleIcon1').css({
-        //             "transform": "rotate(0deg)",
-        //         })
-        //     }
-        // })
-
-        //收起、打開更多回覆 //移到Vuw
-        // let count2 = 0;
-        // $('.readMore').click(function() {
-        //     $(this).parent().children('.hiddenReply').slideToggle();
-        //     $(this).parent().children('.hiddenReply').css({"display": "flex"});
-
-        //     count2 += 1;
-        //     // console.log(count2);
-
-        //     if (count2 % 2 == 1) {
-        //         $(this).children('.readMoreWord').text('關閉更多');
-
-        //         $(this).children('.toggleIcon2').css({
-        //             "transform": "rotate(180deg)",
-        //         })
-        //         // console.log('1')
-        //     } else {
-        //         $(this).children('.readMoreWord').text('閱讀更多');
-
-        //         $(this).children('.toggleIcon2').css({
-        //             "transform": "rotate(0deg)",
-        //         })
-        //         // console.log('2')
-        //     }
-        // })
-
-        //收起、打開輸入回覆區  //不需要這個了
-        // let count3 = 0;
-
-        // $('.closeTextarea').click(function() {
-        //     // console.log('coloseTextarea')
-        //     $(this).parent().children('.typeReply').slideToggle();
-
-        //     count3 += 1;
-        //     // console.log(count3);
-
-        //     if (count3 % 2 == 1) {
-        //         $(this).children('.textareaWord').text('打開輸入框');
-
-        //         $(this).children('.toggleIcon3').css({
-        //             "transform": "rotate(180deg)",
-        //         })
-        //     } else {
-        //         $(this).children('.textareaWord').text('關閉輸入框');
-
-        //         $(this).children('.toggleIcon3').css({
-        //             "transform": "rotate(0deg)",
-        //         })
-        //     }
-        // })
-
         //計算輸入框內的剩餘字數，按進去沒輸入字變紅框
         let textMax = 100;
         $('.textCount').text(`餘${textMax}字`);
@@ -1079,51 +1028,6 @@
                 })
             }
         })
-
-        //按留言若未輸入字的話變紅框 //移到Vue
-        // $('.comment').click(function() {
-        //     let textLength = $(this).parent().parent().children('.textarea').val().length;
-
-        //     if (textLength < 1) {
-        //         // console.log('no text')
-        //         $(this).parent().parent().children('.textarea').css({"border": "1px solid red"})
-        //     } else {
-        //         // console.log('ok')
-        //         $(this).parent().parent().children('.textarea').css({"border": "1px solid #000"})
-        //     }
-        // })
-
-        //點我的車車、大家的車車後會標示目前在哪  //移到Vue
-        // $('.workButton').click(function() {
-        //     $(this).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
-
-        //     $('.workButton').not(this).css({"background": "none"})
-
-        //     $('.othersWorks').css({"display": "flex"})
-        //     $('.mywork').css({"display": "none"})
-
-        // })
-
-        //點我的車車時，大家的車車消失，我的車車或emptyState出現  //移到Vue
-        // $('.myworks').click(function() {
-        //     $('.othersWorks').css({"display": "none"})
-        //     $('.mywork').css({"display": "block"})
-        //         // console.log('我的車車出現')
-        // })
-
-        //點開始製作時進度條出現、介紹的圖文消失、製作區域出現  //移到Vue
-        // $('.make').click(function() {
-        //     $('.previousStep').addClass('invisible')
-
-        //     $('.progressBar').css({"display": "block"})
-
-        //     $('.circle:first').css({"background-color": "#E59807"})
-
-        //     $('.intro').css({"display": "none"})
-
-        //     $('.makeCar').css({"display": "block"})
-        // })
-
 
         //選擇後「下一步」變able、提醒先做選則才進入下一步的提示消失
         // 選擇的項目標示顏色、單選的情況其他沒選的不標色
@@ -1157,8 +1061,6 @@
         $('.selectAccessory').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
-
-            // $(this).parent().siblings().children('.btn').addClass('btn--outline') // 單選才需要這個
         })
 
         //點下一步後跳到選色步驟、跳選輪子步驟
@@ -1177,7 +1079,6 @@
                 }, 1000);
             } else {
                 $('.previousStep').removeClass('invisible')
-
 
                 countStep += 1;
                 $('.shapeCard').css({"display": "none"})
@@ -1205,7 +1106,6 @@
                     }
 
                 } else if (countStep % 5  == 2) {
-
                     console.log(countStep)
 
                     $('.nextStep').addClass('btn--disabled')
@@ -1220,7 +1120,6 @@
                     $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
 
                     //進度條變色
-                    // $('.content:nth-child(3) .circle').css({"background-color": "#E59807"})
                     $('.content:nth-child(3) .circle').addClass('circle--able')
                     $('.content:nth-child(3) .circle').addClass('circle--active')
 
@@ -1264,8 +1163,6 @@
                     }
                 } else if (countStep % 5 == 4) {
                     console.log(countStep)
-
-                    // $('.giveName').css({"display": "none"})
 
                     $('.nextStep').addClass('btn--disabled').text('完成')
                     $('.nextStep').addClass('finish')
@@ -1560,59 +1457,24 @@
                 //     }
                 // })
 
-                $('.comment').click(function() {
-                    let textLength = $(this).parent().parent().children('.textarea').val().length;
+                // $('.comment').click(function() { //已經移到Vue了
+                //     let textLength = $(this).parent().parent().children('.textarea').val().length;
 
-                    if (textLength < 1) {
-                        // console.log('no text')
-                        $(this).parent().parent().children('.textarea').css({
-                            "border": "1px solid red",
-                        })
-                    } else {
-                        // console.log('ok')
-                        $(this).parent().parent().children('.textarea').css({
-                            "border": "1px solid #000",
-                        })
-                    }
-                })
-
-                // $('.comment').click(function() {  //移到Vue
-                //     let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-                //     let commentContent = $(this).parent().parent().children('.textarea').val();
-                    
-                //     let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-                //     // console.log(replyerPic)
-                    
-                //     let replyerName = $(this).parent().parent().children('.replyerName').text();
-                //     // console.log(replyerName)
-                    
-                    
-                //     if (commentContentL > 0) {
-                //         $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
-                //                 <div class="userContext">
-                //                     <img src="${replyerPic}"  class="userPic">
-                //                     <div class="userContext_top">
-                //                         <p class="userName h6">${replyerName}</p>
-                //                         <p class="userContent h5">${commentContent}</p>
-                //                         <div class="other">
-                //                             <p class="postTime h6">3小時前</p>
-                //                             <div>                                
-                //                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-
-                //                             </div>
-                //                         </div>
-                //                     </div>
-                //                 </div>
-                //             </div>`)
-                        
-                //         $(this).parent().parent().children('.textarea').val('');
-                //         $(this).parent().children('.textCount').text(`餘${textMax}字`);
+                //     if (textLength < 1) {
+                //         // console.log('no text')
+                //         $(this).parent().parent().children('.textarea').css({
+                //             "border": "1px solid red",
+                //         })
+                //     } else {
+                //         // console.log('ok')
+                //         $(this).parent().parent().children('.textarea').css({
+                //             "border": "1px solid #000",
+                //         })
                 //     }
                 // })
             }
         })
 
-        // <button class="btn btn--link report h5">檢舉</button>
 
         //完成資料輸入後按鈕自動變able、移除提示
         $('.giveName').change(function() {
@@ -1678,7 +1540,6 @@
                     });
                 }
             }
-
         })
 
         $('.selectAreaOut-previous').click(function() {
@@ -1736,42 +1597,7 @@
             }
         })
 
-        //點留言後PO出留言
-        // $('.comment').click(function() {
-        //         let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-        //         let commentContent = $(this).parent().parent().children('.textarea').val();
-
-        //         let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-        //         // console.log(replyerPic)
-
-        //         let replyerName = $(this).parent().parent().children('.replyerName').text();
-        //         // console.log(replyerName)
-
-
-        //         if (commentContentL > 0) {
-        //             $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
-        //                     <div class="userContext">
-        //                         <img src="${replyerPic}"  class="userPic">
-        //                         <div class="userContext_top">
-        //                             <p class="userName h6">${replyerName}</p>
-        //                             <p class="userContent h5">${commentContent}</p>
-        //                             <div class="other">
-        //                                 <p class="postTime h6">3小時前</p>
-        //                                 <div>                                
-        //                                     <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-        //                                     <button class="btn btn--link report h5">檢舉</button>
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>`)
-
-        //             $(this).parent().parent().children('.textarea').val('');
-        //             $(this).parent().children('.textCount').text(`餘${textMax}字`);
-        //         }
-        //     })
-            // ---------------------------------計算金額------------------------------------------------
-
+        // ---------------------------------計算金額------------------------------------------------
 
         $('.selectShape').click(function() {
             let totalPriceInit = $('.totalPrice').text().split(' ')[1]
@@ -2203,81 +2029,57 @@
             }
         })
 
-        //打開檢舉彈窗 //移到Vue
-        // $('.report').click(() => {
-        //     console.log('打開')
-        //     $('.containerMain .modal').addClass('modal-active');
-        // })
-
         $('.modal__close').click(() => {
             // console.log('關掉')
             $('.modal').removeClass('modal-active');
         })
 
 
-        //mouseover在Icon時svg變色 //移到Vue
-        // $('.goodIcon').mouseover((e) => {
-        //     console.log('變色')
-        //     $(e.target).children('g').children('path').addClass('pin--secondary')            
-        // })
+        //PO回覆的回覆  //移到Vue
+        // $('.subComment').click(function() {
+        //     console.log('subComment is clicked')
+        //         let commentContentL = $(this).parent().parent().children('.textarea').val().length;
+        //         let commentContent = $(this).parent().parent().children('.textarea').val();
+        //         console.log(commentContent)
 
-        //移到Vue
-        // $('.goodIcon').mouseout((e) => {
-        //     console.log('變回去')
-        //     $(e.target).children('g').children('path').removeClass('pin--secondary')         
-        // })
+        //         let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
+        //         // console.log(replyerPic)
 
-        //打開回覆的回覆textarea //移到Vue
-        // $('.replyComment').click((e)=>{
-        //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
-        //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
-        // })
-
-        //PO回覆的回覆
-        $('.subComment').click(function() {
-            console.log('subComment is clicked')
-                let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-                let commentContent = $(this).parent().parent().children('.textarea').val();
-                console.log(commentContent)
-
-                let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-                // console.log(replyerPic)
-
-                let replyerName = $(this).parent().parent().children('.replyerName').text();
-                // console.log(replyerName)
+        //         let replyerName = $(this).parent().parent().children('.replyerName').text();
+        //         // console.log(replyerName)
 
 
-                if (commentContentL > 0) {
-                    let b = $(this).parent().parent().parent().parent().parent().children('.work_reply').children(`.typeSubReply`);
-                    console.log(b)
+        //         if (commentContentL > 0) {
+        //             let b = $(this).parent().parent().parent().parent().parent().children('.work_reply').children(`.typeSubReply`);
+        //             console.log(b)
 
-                    $(this).parent().parent().parent().parent().children('.userContext').after(`
-                            <div class="subUserContext hiddenSubReply">
-                                <img src="${replyerPic}"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">${replyerName}</p>
-                                    <p class="userContent h5">${commentContent}</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
+        //             $(this).parent().parent().parent().parent().children('.userContext').after(`
+        //                     <div class="subUserContext hiddenSubReply">
+        //                         <img src="${replyerPic}"  class="userPic">
+        //                         <div class="userContext_top">
+        //                             <p class="userName h6">${replyerName}</p>
+        //                             <p class="userContent h5">${commentContent}</p>
+        //                             <div class="other">
+        //                                 <p class="postTime h6">3小時前</p>
+        //                                 <div>                                
 
-                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `)
+        //                                     <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+        //                                 </div>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 `)
 
-                    $(this).parent().parent().children('.textarea').val('');
-                    $(this).parent().children('.textCount').text(`餘${textMax}字`);
-                }
+        //             $(this).parent().parent().children('.textarea').val('');
+        //             $(this).parent().children('.textCount').text(`餘${textMax}字`);
+        //         }
 
-                //PO完後關掉回覆的回覆
-                $('.typeSubReply').css({"display":"none"})
+        //         //PO完後關掉回覆的回覆
+        //         $('.typeSubReply').css({"display":"none"})
                 
-                //PO完後出現「X則回覆」
-                $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
-        })
+        //         //PO完後出現「X則回覆」
+        //         $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
+        // })
 
         //----------------------- 點圓圈進入、退到下一步驟 -----------------------
         $('.content:nth-child(1) .circle').click(() => {
@@ -2502,13 +2304,11 @@
             }
         })
 
-        // 瀑布流
+        // 瀑布流樣式控制
         $('.grid').masonry({
           // options
           horizontalOrder: true,
-        //   gutter: 10,
           itemSelector: '.grid-item',
-        //   itemSelector: '.grid-item2',
           columnWidth: 466
         });
 
