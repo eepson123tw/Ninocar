@@ -227,8 +227,20 @@
     .about {
         position: relative;
         background-color: #fff;
-        border: 2px dashed $coffee;
+        border: 3px solid $coffee;
+
         z-index: 50;
+
+        &:before {
+            content: " ";
+            position: absolute;
+            z-index: -1;
+            top: 7px;
+            left: 7px;
+            right: 7px;
+            bottom: 7px;
+            border: 2px dashed $coffee;
+        }
     }
 
     .turn-road {
@@ -245,11 +257,22 @@
         display: flex;
         align-items: center;
         background-color: #fff;
-        border: 2px dashed $coffee;
+        border: 3px solid $coffee;
         z-index: 50;
 
         @include rwd-md {
             flex-wrap: wrap;
+        }
+
+        &:before {
+            content: " ";
+            position: absolute;
+            z-index: -1;
+            top: 7px;
+            left: 7px;
+            right: 7px;
+            bottom: 7px;
+            border: 2px dashed $coffee;
         }
     }
 

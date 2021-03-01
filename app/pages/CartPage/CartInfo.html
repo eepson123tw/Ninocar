@@ -102,8 +102,6 @@
 						></p>
 				</div>
 			</div>
-
-
 			<div class="container">
 				<div class="row  pt-md-5 pt-20 ">
 					<section class="cart__payment col-6 col-lg-6 col-xs-12 ">
@@ -111,14 +109,22 @@
 						<div class="form__group px-10 block pt-10 pb-20 ">
 							<label
 								for="buyerName"
-								class="form__text mb-2 "
-							>姓名</label>
+								class="form__text mb-2 w-100"
+							>姓名 <span
+									v-show="isTextShow"
+									class="h5"
+									:class="textClass"
+								>三個皆為必填</span></label>
 							<div class="form__section mb-5">
 								<input
 									id="buyerName"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class=" cart__select form__input"
 									placeholder="王小明"
+									v-model.trim="buyerName"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="0"
 								></input>
 							</div>
 							<label
@@ -129,7 +135,11 @@
 								<input
 									id="buyerPhone"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									v-model.trim="buyerPhone"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="1"
+									class="cart__select form__input"
 									placeholder="0910-123-456"
 								></input>
 							</div>
@@ -141,8 +151,12 @@
 								<input
 									id="buyerEmail"
 									type="email"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="abc@gmail.com"
+									v-model.trim="buyerEmail"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="2"
 								></input>
 							</div>
 						</div>
@@ -159,6 +173,7 @@
 									type="checkbox"
 									id="receiverSame"
 									class="mr-3"
+									@click="sameBuyer"
 								>
 								<label
 									for="receiverSame"
@@ -169,8 +184,9 @@
 								<input
 									id="receiverName"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="王小明"
+									v-model="receiverName"
 								></input>
 							</div>
 							<label
@@ -181,8 +197,9 @@
 								<input
 									id="receiverPhone"
 									type="text"
-									class="form__select cart__select cart__select--input"
+									class="cart__select form__input"
 									placeholder="0910-123-456"
+									v-model="receiverPhone"
 								></input>
 							</div>
 							<div class="form__group ">
@@ -195,27 +212,39 @@
 										name=""
 										id=""
 										class="form__select "
+										v-model="receiverCity"
 									>
-										<option value="">城市</option>
+										<option
+											value=""
+											disabled
+										>城市</option>
+										<option v-for="(num,index) of selectCity">{{num}}</option>
 									</select>
 									<select
 										name=""
 										id=""
 										class="form__select "
+										v-model="receiverTown"
 									>
-										<option value="">鄉政區</option>
+										<option
+											value=""
+											disabled
+										>鄉政區</option>
+										<option v-for="(num,index) of selectTown">{{num}}</option>
 									</select>
 								</div>
 								<input
 									type="text"
 									class="form__input  "
 									id="address"
+									v-model="receiverRoad"
 									placeholder="街/路/巷弄/樓層"
 								/>
 								<div class="d-flex  cart__checkbox mt-10 mb-10">
 									<input
 										type="checkbox"
 										id="receiverAddress"
+										@click="saveDefaultAddress"
 									>
 									<label
 										for="receiverAddress"
@@ -224,6 +253,7 @@
 									<input
 										type="checkbox"
 										id="saveAddress"
+										@click="saveAddress"
 									>
 									<label
 										for="saveAddress"
@@ -233,7 +263,10 @@
 							</div>
 						</div>
 					</section>
-					<section class="cart__payment  col-6 col-lg-6 col-xs-12">
+					<section
+						v-show="cardAreaIsShow"
+						class="cart__payment  col-6 col-lg-6 col-xs-12"
+					>
 						<h2 class="block block__header__title block__header">付款資料</h2>
 						<div class="pt-10 px-10 form__group block">
 							<label
@@ -244,26 +277,38 @@
 								<input
 									id="cardName"
 									type="text"
-									class="form__select cart__select--small cart__select--input "
+									class="form__select cart__select--small cart__select--input"
 									maxlength="4"
+									data-card="0"
+									@input="nextArea"
+									v-model="cardOneArea"
 								></input>
 								<input
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
 									maxlength="4"
+									data-card="1"
+									@input="nextArea"
+									v-model="cardTwoArea"
 								></input>
 								<input
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
 									maxlength="4"
+									data-card="2"
+									@input="nextArea"
+									v-model="cardThreeArea"
 								></input>
 								<input
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
 									maxlength="4"
+									data-card="3"
+									@input="nextArea"
+									v-model="cardFourArea"
 								></input>
 							</div>
 							<label
@@ -276,6 +321,7 @@
 									type="text"
 									class="form__select cart__select cart__select--input"
 									placeholder="MM/YY"
+									v-model="cardDate"
 								></input>
 							</div>
 							<label
@@ -288,12 +334,13 @@
 									type="email"
 									class="form__select cart__select cart__select--input"
 									placeholder="123"
+									v-model="cardCode"
 								></input>
 							</div>
 						</div>
 
 					</section>
-					<div class="col-6 col-lg-6 col-xs-12 block mt-20">
+					<div class="col-6 col-lg-6 col-xs-12 block mt-5">
 						<button
 							class="btn btn--fluid mb-xs-5 "
 							@click="pageHandler"
@@ -314,6 +361,35 @@
         currentdata: this.current,
         notShow: true,
         animationDisplay: 'cart__displayNone',
+        // 購買人跟收貨人區
+        buyerName: "",
+        buyerPhone: "",
+        buyerEmail: "",
+        receiverName: "",
+        receiverPhone: "",
+        receiverCity: "",
+        receiverTown: "",
+        receiverRoad: "",
+        isTextShow: false,
+        inputClass: {
+          "form__input--warning": false,
+        },
+        textClass: {
+          "form__text--warning": true,
+        },
+        receiverAddress: "",
+        //fetch 到的東東
+        cityList: [],
+
+        // 信用卡區塊
+        cardOneArea: "",
+        cardTwoArea: "",
+        cardThreeArea: "",
+        cardFourArea: "",
+        cardsValue: "",
+        cardCode: "",
+        cardDate: "",
+        cardAreaIsShow: false,
       }
     },
     methods: {
@@ -323,15 +399,76 @@
         this.$emit('data-handler', this.currentdata);
       },
       collapseArea() {
+        //收合選單
         if (this.notShow) {
           this.notShow = false;
           this.animationDisplay = "cart__displayShow";
-
         } else {
           this.notShow = true;
           this.animationDisplay = "cart__displayNone";
         }
 
+      },
+      nextArea(e) {
+        // 信用卡區塊 前後
+        const cardInputList = document.querySelectorAll('[data-card]');
+
+        const array = [];
+
+        let cardValue = parseInt(e.target.value.length);
+
+        if (cardValue >= 4) {
+          if (e.target.nextElementSibling !== null) {
+            e.target.nextElementSibling.focus();
+          } else {
+            return
+          }
+
+        } else if (cardValue == 0) {
+          if (e.target.previousElementSibling !== null) {
+            e.target.previousElementSibling.focus();
+          } else {
+            return
+          }
+        }
+      },
+      checkInput(e) {
+
+        const inputList = document.querySelectorAll('[data-input]');
+        let inputNum = e.target.dataset.input;
+
+        inputList.forEach((item, index) => {
+          // 檢查表單
+          if (inputList[inputNum].value == "") {
+            inputList[inputNum].classList.add('form__input--warning')
+            this.isTextShow = true;
+          } else if (inputList[inputNum].value !== "") {
+            inputList[inputNum].classList.remove('form__input--warning')
+          };
+
+        })
+        if (this.buyerName !== "" && this.buyerPhone !== "" && this.buyerEmail !== "") {
+          this.isTextShow = false;
+        }
+      },
+      sameBuyer() {
+        this.receiverName = this.buyerName;
+        this.receiverPhone = this.buyerPhone;
+      },
+      saveAddress() {
+        let dataAddress;
+        dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad;
+        this.receiverAddress = dataAddress;
+        let dataAddressJson = JSON.stringify(dataAddress);
+        localStorage.setItem('receiverAddress', dataAddressJson);
+      },
+      saveDefaultAddress() {
+        let defaultAddress;
+        defaultAddress = true;
+        if (defaultAddress) {
+          let dataAddressDefault = JSON.stringify(defaultAddress);
+          localStorage.setItem('receiverAddressDefault', dataAddressDefault);
+        }
       }
 
     },
@@ -345,10 +482,48 @@
         selectPayment: state => state.selectPayment,
         totalPointCost: state => state.totalPointCost,
         selectShipping: state => state.selectShipping,
-      })
+      }),
+      selectCity() {
+        let newCityList = [];
+
+        for (let cityNum in this.cityList) {
+
+          newCityList.push(this.cityList[cityNum]['name']);
+
+        }
+
+        return newCityList;
+
+      },
+      selectTown() {
+        let newTownList = [];
+
+        for (let cityNum in this.cityList) {
+          if (this.cityList[cityNum]['name'] == this.receiverCity) {
+            newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
+          }
+
+        }
+        return newTownList;
+      },
+      cardsTotal() {
+        this.cardsValue = this.cardOneArea + this.cardTwoArea + this.cardThreeArea + this.cardFourArea;
+        return this.cardsValue;
+      },
 
     },
-
-
+    mounted() {
+      fetch('./assets/js/taiwan_districts.json', {
+        method: "get"
+      }).then((res) => {
+        return res.json();
+      }).then((res) => {
+        this.cityList = res;
+      });
+      // 檢查是否選擇刷卡
+      if (this.selectPayment == "線上刷卡") {
+        this.cardAreaIsShow = true;
+      }
+    }
   })
 </script>

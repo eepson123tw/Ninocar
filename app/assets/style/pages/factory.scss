@@ -69,9 +69,17 @@
     justify-content: space-between;
     padding: 20px 0;
     // outline: 2px solid gold;
-    &_left {
+    &_left, &_right{
         display: flex;
     }
+
+    &_right{
+        align-items: center;
+    }
+}
+
+.filter{
+    padding: 8px;
 }
 
 .workButton {

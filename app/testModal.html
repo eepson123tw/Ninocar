@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/dictionary.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src="./assets/js/all.js"></script>
+<title>test</title>
+</head>
+
+<body>
+  <div id="dictionary">
+    <vue-header></vue-header>
+    <main class="container dictionary pt-25 pb-15">
+      <h2>modalTest</h2>
+      <div class="container">
+        <div class="row mt-20 ml-20">
+          <button class="js-btn btn" @click="openModal">點擊開啟 modal</button>
+        </div>
+      </div>
+    </main>
+
+
+    <modal-custom-made v-show="isModalShow" @closemodal="closeHandler">
+      <template #header>
+        <!-- 傳入文字 -->
+        預設標題
+      </template>
+      <template #content>
+        <!-- 自行決定要傳入什麼 -->
+        <div>
+          <img
+            class="mx-auto"
+            src="./assets/img/illust/illust-showgirl.svg"
+            alt=""
+          >
+        </div>
+      </template>
+      <template #maintext>
+        <!-- 若有文字可以使用 ，也可以關掉-->
+        <div>
+          <p class="modal__text--left">DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊</p>
+        </div>
+      </template>
+      <template #footer>
+        <button class="btn btn--fluid mt-3">DEMO</button>
+      </template>
+
+    </modal-custom-made>
+    @@include('./components/Footer.html')
+  </div>
+
+
+  @@include('./components/VueHeader.html') @@include('./components/ModalNormal.html')
+
+
+  <script>
+    new Vue({
+      el: '#dictionary',
+      data() {
+        return {
+          isModalShow: false,
+
+        }
+      },
+      methods: {
+        // 若有要使用記得加上這個方法控制開關
+        openModal() {
+          if (this.isModalShow) {
+            this.isModalShow = false;
+          } else {
+            this.isModalShow = true;
+          }
+        },
+        closeHandler() {
+          this.isModalShow = false;
+
+        }
+
+      },
+
+    });
+  </script>
+</body>
+
+</html>

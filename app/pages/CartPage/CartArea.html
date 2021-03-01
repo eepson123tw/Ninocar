@@ -1,342 +1,343 @@
 <template id="cartArea">
-    <div v-if="listIsExist">
-        <div class="container cart   ">
-            <header class="row mt-20 block order-sm-1">
-                <ul class="cart__title  w-100">
-                    <li class="block__header__title">購物車</li>
-                    <li>單價</li>
-                    <li class="cart__title--left">數量</li>
-                    <li class="cart__title--left">總計</li>
-                    <li><button
-                            @click="deleteAllHandler"
-                            class="btn btn--link cart__link"
-                        >全部刪除</button></li>
-                    <li><img
-                            src="./assets/img/icon/icon-up.svg"
-                            alt=""
-                        ></li>
-                </ul>
-            </header>
-            <div class="row  block">
-                <div
-                    class="d-flex cart__group w-100"
-                    v-for="(item,listIndex) of buyerList"
-                >
-                    <div class="cart__group--dflex  cart__group__firstArea">
-                        <div class="cart__groupImg">
-                            <img
-                                :src="item.img"
-                                alt=""
-                            >
-                            <p>{{item.seriousNum}}</p>
-                        </div>
-                        <div class="cart__product">
-                            <p>{{item.productName}}</p>
-                            <p>{{item.productBrief}}</p>
-                        </div>
-                    </div>
-                    <div
-                        v-if="item.pointProduct"
-                        class="cart__group--dflex "
-                    >
-                        <div class="cart__member">
-                            <p>Ni</p>
-                            <span>{{item.price}}</span>
-                        </div>
-                    </div>
-                    <div
-                        v-else
-                        class="cart__group--dflex "
-                    >
-                        <p class="font-black"> NT$<span>{{item.price}}</span></p>
-                    </div>
-                    <div class="cart__group--dflex">
-                        <select
-                            name=""
-                            class="cart__num"
-                            @change="changeNum(listIndex,$event)"
-                        >
-                            <option
-                                :value="index"
-                                v-for=" (num ,index) in 20"
-                            >{{num}}</option>
-                        </select>
-                    </div>
-                    <div
-                        v-if="item.pointProduct"
-                        class="cart__group--dflex"
-                    >
-                        <div class="cart__member">
-                            <p>Ni</p>
-                            <span>{{item.totalPrice}}</span>
-                        </div>
-                    </div>
-                    <div
-                        v-else
-                        class="cart__group--dflex"
-                    >
-                        <p class="font-black"> NT$<span>{{item.totalPrice}}</span></p>
-                    </div>
-                    <div>
-                        <button
-                            @click="deleteHandler(listIndex)"
-                            class="btn btn--link cart__link--small"
-                        >刪除</button>
-                    </div>
-                    <p class="cart__cancel"><img
-                            src="./assets/img/icon/icon-close.svg"
-                            alt=""
-                        ></p>
-                </div>
-            </div>
-            <footer class="row order-sm-1 block">
-                <ul class="cart__footer d-flex w-100">
-                    <li class="cart__text--hide">總計 <span>{{totalProductNum}}</span> 件商品 </li>
-                    <li class="cart__text">總花點數</li>
-                    <li class="cart__member">
-                        <p>Ni</p>
-                        <span>{{totalPointCost}}</span>
-                    </li>
-                    <li class="cart__text">總金額</li>
-                    <li> NT$ <span>{{totalMoneyCost}}</span> </li>
-                </ul>
-            </footer>
-        </div>
-        <div class="container">
-            <div class="row  pt-md-5 mt-20">
-                <section class="cart__payment  col-6 col-lg-6 col-xs-12 ">
-                    <h2 class="block  block__header block__header__title">收貨和付款方式 （折價卷）</h2>
-                    <div class="pt-5 pb-20 px-5 form__group block ">
-                        <label
-                            for="productTake"
-                            class="form__text mb-2 h5"
-                        >選擇運送方式</label>
-                        <div class="form__section mb-5">
-                            <select
-                                name=""
-                                id="productTake"
-                                class="form__select cart__select"
-                                v-model="selectShipping"
-                            >
-                                <option
-                                    value=""
-                                    disabled
-                                >請選擇</option>
-                                <option v-for="(methods,index) of shippingList">{{methods}}</option>
-                            </select>
-                        </div>
-                        <label
-                            for="paymentChoose"
-                            class="form__text mb-2 h5"
-                        >選擇付款方式</label>
-                        <div class="form__section mb-5">
-                            <select
-                                id="paymentChoose"
-                                class="form__select cart__select"
-                                v-model="selectPayment"
-                            >
-                                <option
-                                    value=""
-                                    disabled
-                                >請選擇</option>
-                                <option v-for="(payment,index) of paymentList">{{payment}}</option>
+	<div v-if="listIsExist">
+		<div class="container cart   ">
+			<header class="row mt-20 block order-sm-1">
+				<ul class="cart__title  w-100">
+					<li class="block__header__title">購物車</li>
+					<li>單價</li>
+					<li class="cart__title--left">數量</li>
+					<li class="cart__title--left">總計</li>
+					<li><button
+							@click="deleteAllHandler"
+							class="btn btn--link cart__link"
+						>全部刪除</button></li>
+					<li><img
+							src="./assets/img/icon/icon-up.svg"
+							alt=""
+						></li>
+				</ul>
+			</header>
+			<div class="row  block">
+				<div
+					class="d-flex cart__group w-100"
+					v-for="(item,listIndex) of buyerList"
+				>
+					<div class="cart__group--dflex  cart__group__firstArea">
+						<div class="cart__groupImg">
+							<img
+								:src="item.img"
+								alt=""
+							>
+							<p>{{item.seriousNum}}</p>
+						</div>
+						<div class="cart__product">
+							<p>{{item.productName}}</p>
+							<p>{{item.productBrief}}</p>
+						</div>
+					</div>
+					<div
+						v-if="item.pointProduct"
+						class="cart__group--dflex "
+					>
+						<div class="cart__member">
+							<p>Ni</p>
+							<span>{{item.price}}</span>
+						</div>
+					</div>
+					<div
+						v-else
+						class="cart__group--dflex "
+					>
+						<p class="font-black"> NT$<span>{{item.price}}</span></p>
+					</div>
+					<div class="cart__group--dflex">
+						<select
+							name=""
+							class="cart__num"
+							@change="changeNum(listIndex,$event)"
+						>
+							<option
+								:value="index"
+								v-for=" (num ,index) in 20"
+							>{{num}}</option>
+						</select>
+					</div>
+					<div
+						v-if="item.pointProduct"
+						class="cart__group--dflex"
+					>
+						<div class="cart__member">
+							<p>Ni</p>
+							<span>{{item.totalPrice}}</span>
+						</div>
+					</div>
+					<div
+						v-else
+						class="cart__group--dflex"
+					>
+						<p class="font-black"> NT$<span>{{item.totalPrice}}</span></p>
+					</div>
+					<div>
+						<button
+							@click="deleteHandler(listIndex)"
+							class="btn btn--link cart__link--small"
+						>刪除</button>
+					</div>
+					<p class="cart__cancel"><img
+							src="./assets/img/icon/icon-close.svg"
+							alt=""
+						></p>
+				</div>
+			</div>
+			<footer class="row order-sm-1 block">
+				<ul class="cart__footer d-flex w-100">
+					<li class="cart__text--hide">總計 <span>{{totalProductNum}}</span> 件商品 </li>
+					<li class="cart__text">總花點數</li>
+					<li class="cart__member">
+						<p>Ni</p>
+						<span>{{totalPointCost}}</span>
+					</li>
+					<li class="cart__text">總金額</li>
+					<li> NT$ <span>{{totalMoneyCost}}</span> </li>
+				</ul>
+			</footer>
+		</div>
+		<div class="container">
+			<div class="row  pt-md-5 mt-20">
+				<section class="cart__payment  col-6 col-lg-6 col-xs-12 ">
+					<h2 class="block  block__header block__header__title">收貨和付款方式 （折價卷）</h2>
+					<div class="pt-5 pb-20 px-5 form__group block ">
+						<label
+							for="productTake"
+							class="form__text mb-2 h5"
+						>選擇運送方式</label>
+						<div class="form__section mb-5">
+							<select
+								name=""
+								id="productTake"
+								class="form__select cart__select"
+								v-model="selectShipping"
+								@change='countSendPrice'
+							>
+								<option
+									value=""
+									disabled
+								>請選擇</option>
+								<option v-for="(methods,index) of shippingList">{{methods}}</option>
+							</select>
+						</div>
+						<label
+							for="paymentChoose"
+							class="form__text mb-2 h5"
+						>選擇付款方式</label>
+						<div class="form__section mb-5">
+							<select
+								id="paymentChoose"
+								class="form__select cart__select"
+								v-model="selectPayment"
+							>
+								<option
+									value=""
+									disabled
+								>請選擇</option>
+								<option v-for="(payment,index) of paymentList">{{payment}}</option>
 
-                            </select>
-                        </div>
-                        <label
-                            for="coupon"
-                            class="form__text mb-2 h5"
-                        >使用優惠卷</label>
-                        <div class="form__section mb-5">
-                            <select
-                                id="coupon"
-                                class="form__select cart__select"
-                                v-model="selectCupon"
-                                @change='countDiscount'
-                            >
-                                <option
-                                    value=""
-                                    disabled
-                                >請選擇</option>
-                                <option v-for="(value,objvalue) of cuponList">{{value}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
+							</select>
+						</div>
+						<label
+							for="coupon"
+							class="form__text mb-2 h5"
+						>使用優惠卷</label>
+						<div class="form__section mb-5">
+							<select
+								id="coupon"
+								class="form__select cart__select"
+								v-model="selectCupon"
+								@change='countDiscount'
+							>
+								<option
+									value=""
+									disabled
+								>請選擇</option>
+								<option v-for="(value,objvalue) of cuponList">{{value}}</option>
+							</select>
+						</div>
+					</div>
+				</section>
 
-                <section class="cart__payment  col-6 col-lg-6 col-xs-12 block ">
-                    <h2 class="  block__header block__header__title">訂單明細</h2>
-                    <div class='px-5'>
-                        <header class="d-flex justify-content-center mt-5   ">
-                            <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
-                                <p>商品花費點數</p>
-                                <div class="cart__member">
-                                    <p>Ni</p>
-                                    <span>{{totalPointCost}}</span>
-                                </div>
-                            </div>
-                            <ul class="cart__moneyCount  w-50">
-                                <li>
-                                    <p>商品總金額</p>
-                                    <p class="font-black">NT$<span>{{totalMoneyCost}}</span></p>
-                                </li>
-                                <li>
-                                    <p>運費總計</p>
-                                    <p class="font-black">NT$<span>{{sendPrice}}</span></p>
-                                </li>
-                                <li>
-                                    <p>折價卷折抵</p>
-                                    <p class="font-black"><span
-                                            class="font-black pr-3">-</span>NT$<span>{{discountPrice}}</span></p>
-                                </li>
-                            </ul>
+				<section class="cart__payment  col-6 col-lg-6 col-xs-12 block ">
+					<h2 class="  block__header block__header__title">訂單明細</h2>
+					<div class='px-5'>
+						<header class="d-flex justify-content-center mt-5   ">
+							<div class="cart__pointCount d-flex w-50  flex-sm-wrap">
+								<p>商品花費點數</p>
+								<div class="cart__member">
+									<p>Ni</p>
+									<span>{{totalPointCost}}</span>
+								</div>
+							</div>
+							<ul class="cart__moneyCount  w-50">
+								<li>
+									<p>商品總金額</p>
+									<p class="font-black">NT$<span>{{totalMoneyCost}}</span></p>
+								</li>
+								<li>
+									<p>運費總計</p>
+									<p class="font-black">NT$<span>{{sendPrice}}</span></p>
+								</li>
+								<li>
+									<p>折價卷折抵</p>
+									<p class="font-black"><span class="font-black pr-3">-</span>NT$<span>{{discountPrice}}</span></p>
+								</li>
+							</ul>
 
-                        </header>
-                        <div>
-                            <ul class="cart__countTotal d-flex align-items-center mb-10 ">
-                                <li class="cart__pointCount d-flex flex-sm-wrap">
-                                    <p>總花費點數</p>
-                                    <div class="cart__member ">
-                                        <p>Ni</p>
-                                        <span>{{totalPointCost}}</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>總金額</p>
-                                    <p class="cart__TotalText font-black">NT$ <span>{{totalCount}}</span> </p>
-                                </li>
-                            </ul>
-                        </div>
-                        <button
-                            @click="pageHandler"
-                            class="btn  btn--fluid mb-5"
-                        >確認結帳</button>
-                        <footer class="cart__pointRespond ">
-                            <p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
-                            <p class="cart__hint ">點數將在訂單完成3天內匯入</p>
-                        </footer>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row mt-10">
-                <section class=" cart__payment  w-100">
-                    <h2 class="block__header block__header__title  block  mb-5">熱門推薦商品</h2>
-                    <a
-                        href="#"
-                        class="cart__choose cart__choose--left"
-                    ><img
-                            src="./assets/img/icon/icon-left.svg"
-                            alt=""
-                        ></a>
-                    <div class="d-flex  px-5 cart--overhidden">
-                        <div class="cart__comment block  col-3 col-lg-6">
-                            <div class="cart__imgGroup ">
-                                <img
-                                    src="./assets/img/pic/3.jpg"
-                                    alt=""
-                                >
-                                <p>BS 01</p>
-                            </div>
-                            <div class="cart__textGroup ">
-                                <h3>Audi R8 奧迪小客車</h3>
-                                <p>NT$ <span>195</span></p>
-                                <button class="btn btn--ghost btn--small">收藏</button>
+						</header>
+						<div>
+							<ul class="cart__countTotal d-flex align-items-center mb-10 ">
+								<li class="cart__pointCount d-flex flex-sm-wrap">
+									<p>總花費點數</p>
+									<div class="cart__member ">
+										<p>Ni</p>
+										<span>{{totalPointCost}}</span>
+									</div>
+								</li>
+								<li>
+									<p>總金額</p>
+									<p class="cart__TotalText font-black">NT$ <span>{{totalCount}}</span> </p>
+								</li>
+							</ul>
+						</div>
+						<button
+							@click="pageHandler"
+							class="btn  btn--fluid mb-5"
+						>確認結帳</button>
+						<footer class="cart__pointRespond ">
+							<p>結帳後剩餘點數為<span>100</span>,此筆訂單將另外獲得<span>7</span>點</p>
+							<p class="cart__hint ">點數將在訂單完成3天內匯入</p>
+						</footer>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row mt-10">
+				<section class=" cart__payment  w-100">
+					<h2 class="block__header block__header__title  block  mb-5">熱門推薦商品</h2>
+					<a
+						href="#"
+						class="cart__choose cart__choose--left"
+					><img
+							src="./assets/img/icon/icon-left.svg"
+							alt=""
+						></a>
+					<div class="d-flex  px-5 cart--overhidden  swiper-container">
+						<div class="swiper-wrapper">
+							<div class="cart__comment block  col-3 col-lg-6  swiper-slide">
+								<div class="cart__imgGroup ">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 01</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
+							</div>
+							<div class="cart__comment block col-3 col-lg-6  swiper-slide">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 02</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
+							</div>
+							<div class="cart__comment  block col-3 col-lg-6 swiper-slide ">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 03</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
+							</div>
+							<div class="cart__comment block col-3 col-lg-6 swiper-slide ">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 04</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
+							</div>
+						</div>
+					</div>
+					<a
+						href="#"
+						class="cart__choose cart__choose--right"
+					><img
+							src="./assets/img/icon/icon-right.svg"
+							alt=""
+						></a>
+				</section>
+			</div>
+		</div>
 
-                            </div>
-                            <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                        </div>
-                        <div class="cart__comment block col-3 col-lg-6">
-                            <div class="cart__imgGroup">
-                                <img
-                                    src="./assets/img/pic/3.jpg"
-                                    alt=""
-                                >
-                                <p>BS 01</p>
-                            </div>
-                            <div class="cart__textGroup">
-                                <h3>Audi R8 奧迪小客車</h3>
-                                <p>NT$ <span>195</span></p>
-                                <button class="btn btn--ghost btn--small">收藏</button>
-                            </div>
-                            <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                        </div>
-                        <div class="cart__comment  block col-3 col-lg-6">
-                            <div class="cart__imgGroup">
-                                <img
-                                    src="./assets/img/pic/3.jpg"
-                                    alt=""
-                                >
-                                <p>BS 01</p>
-                            </div>
-                            <div class="cart__textGroup">
-                                <h3>Audi R8 奧迪小客車</h3>
-                                <p>NT$ <span>195</span></p>
-                                <button class="btn btn--ghost btn--small">收藏</button>
-                            </div>
-                            <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                        </div>
-                        <div class="cart__comment block col-3 col-lg-6">
-                            <div class="cart__imgGroup">
-                                <img
-                                    src="./assets/img/pic/3.jpg"
-                                    alt=""
-                                >
-                                <p>BS 01</p>
-                            </div>
-                            <div class="cart__textGroup">
-                                <h3>Audi R8 奧迪小客車</h3>
-                                <p>NT$ <span>195</span></p>
-                                <button class="btn btn--ghost btn--small">收藏</button>
-                            </div>
-                            <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                        </div>
-                    </div>
-                    <a
-                        href="#"
-                        class="cart__choose cart__choose--right"
-                    ><img
-                            src="./assets/img/icon/icon-right.svg"
-                            alt=""
-                        ></a>
-                </section>
-            </div>
-        </div>
-
-    </div>
-    <div v-else>
-        <main class="container cart cart--maginHalf">
-            <header class="row mt-20 mb-10 order-sm-1">
-                <ul class="cart__title d-flex w-100">
-                    <li>購物車</li>
-                    <li>單價</li>
-                    <li>數量</li>
-                    <li>總計</li>
-                    <li><button class="btn btn--link cart__link">全部刪除</button></li>
-                    <li><img
-                            src="./assets/img/icon/icon-up.svg"
-                            alt=""
-                        ></li>
-                </ul>
-            </header>
-            <div class="row">
-                <div class="cart__empty w-100 d-flex flex-wrap">
-                    <div class="cart__empty--left">
-                        <img
-                            src="./assets/img/illust/illust-empty.png"
-                            alt=""
-                        />
-                    </div>
-                    <div class="cart__empty--right">
-                        <p>您的購物車是空的</p>
-                        <p>推薦您可透過商品分類找到喜歡的車子,或查看熱門商品</p>
-                        <p><button class='btn btn--small'>熱門商品</button></p>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+	</div>
+	<div v-else>
+		<main class="container cart cart--maginHalf">
+			<header class="row mt-20 mb-10 order-sm-1">
+				<ul class="cart__title d-flex w-100">
+					<li>購物車</li>
+					<li>單價</li>
+					<li>數量</li>
+					<li>總計</li>
+					<li><button class="btn btn--link cart__link">全部刪除</button></li>
+					<li><img
+							src="./assets/img/icon/icon-up.svg"
+							alt=""
+						></li>
+				</ul>
+			</header>
+			<div class="row">
+				<div class="cart__empty w-100 d-flex flex-wrap">
+					<div class="cart__empty--left">
+						<img
+							src="./assets/img/illust/illust-empty.png"
+							alt=""
+						/>
+					</div>
+					<div class="cart__empty--right">
+						<p>您的購物車是空的</p>
+						<p>推薦您可透過商品分類找到喜歡的車子,或查看熱門商品</p>
+						<p><button class='btn btn--small'>熱門商品</button></p>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
 </template>
 
 
@@ -397,6 +398,21 @@
           this.totalMoneyCost += this.buyerList[listNum].price;
         }
       };
+      const swiper = new Swiper('.swiper-container', {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+          nextEl: '.cart__choose--left',
+          prevEl: '.cart__choose--right',
+        },
+      });
+
+
+
+
     },
     methods: {
       pageHandler() {
@@ -411,7 +427,8 @@
         this.$store.commit('addBuyNum', this.totalProductNum);
         this.$store.commit('addFinalPrice', this.finallyPrice);
         this.$store.commit('addTotalPointCost', this.totalPointCost);
-
+        this.$store.commit('addDiscountPrice', this.discountPrice);
+        this.$store.commit('addSendPrice', this.sendPrice);
       },
       changeNum(listIndex, e) {
 
@@ -455,6 +472,7 @@
         for (let key in this.cuponList) {
           if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
+
           }
           if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
@@ -467,13 +485,36 @@
           }
 
         }
-      }
+      },
+      countSendPrice() {
+        // 運費選取
+        for (let sendMethods in this.shippingList) {
+
+          if (this.shippingList[sendMethods] == this.selectShipping && this.selectShipping == "宅配") {
+
+            this.sendPrice = 80;
+
+          } else {
+
+            this.sendPrice = 0;
+
+          }
+
+        }
+
+
+      },
+
+
     },
+
+
+
     computed: {
 
       totalCount() {
 
-        let final = this.totalMoneyCost - this.discountPrice;
+        let final = this.totalMoneyCost - this.discountPrice + this.sendPrice;
         this.finallyPrice = final;
         return final;
 
