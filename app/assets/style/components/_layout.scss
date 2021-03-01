@@ -87,8 +87,10 @@
 }
 
 .footer {
+    position: relative;
     background-color: $primary;
     color: $coffee;
+    z-index: 55;
 
     &__title {
         @extend .h3;

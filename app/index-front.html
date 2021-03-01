@@ -32,7 +32,7 @@
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
             @@include('./pages/HomePage/HomeBillBoardSection.html')
-            @@include('./pages/HomePage/HomeHighWaySection.html')
+            <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
             @@include('./pages/HomePage/HomeMountainSection.html')
             @@include('./pages/HomePage/HomeFactorySection.html')
             @@include('./pages/HomePage/HomeAboutSection.html')
@@ -66,6 +66,8 @@
                 memberHasPin: true,
                 memberOwnProductIdList: ['300', '121'],
                 isDisplayPlay: false,
+                isCarNearGirl: false,
+                isCTAShow: false,
             },
             computed: {
                 seriesList() {
@@ -81,6 +83,19 @@
                     return this.memberOwnProductIdList.indexOf(productId) ? 'pin' :
                         'pin pin--disabled'
                 },
+                handleGirlClick() {
+                    if (this.isCarNearGirl) {
+                        this.isCTAShow = true;
+                        let endCar = new TimelineMax();
+                        endCar.to('.factory__car', 4, {
+                            x: 1920,
+                            ease: Linear.easeNone,
+                            delay: 3,
+                            reverse: false
+
+                        })
+                    }
+                }
 
             },
 
@@ -168,7 +183,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerParking', //觸發點
-                        offset: 500
+                        offset: 500,
+                        reverse: false
                     }).setTween(mvParking) //動畫
                     .addIndicators({
                         name: 'keyParking',
@@ -184,7 +200,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerBillboard',
-                        offset: 200
+                        offset: 200,
+                        reverse: false
                     }).setTween(mvBillboard)
                     .addIndicators({
                         name: 'keyBillboard',
@@ -201,7 +218,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerMountain',
-                        offset: -200
+                        offset: -200,
+                        reverse: false
                     }).setTween(mvMountain)
                     .addIndicators({
                         name: 'keyMountain',
@@ -209,10 +227,31 @@
 
                     })
                     .addTo(controller);
+                // ----------------------factory service
+                let mvCustom = gsap.from(".gsap-custom", 4, {
+                    scale: 0,
+                    ease: Elastic.easeInOut,
+                    stagger: {
+                        from: "inner",
+                        amount: 0.25
+                    }
+                });
+
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerCustom',
+                        offset: -100,
+                        duration: "30%",
+                        reverse: false
+                    }).setTween(mvCustom)
+                    .addIndicators({
+                        name: 'keyCustom',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
 
 
-
-                // ----------------------factory
+                // ----------------------factory car
                 gsap.registerPlugin(MotionPathPlugin);
 
                 let mvFactory = gsap.timeline();
@@ -249,21 +288,86 @@
                     },
                     ease: Linear.easeNone,
                     delay: 1,
-                });
+                }).to('.factory__car', 2, {
+                    xPercent: -55,
+                    ease: Linear.easeNone,
+                    delay: 1,
+                }).then(() => {
+                    this.isCarNearGirl = true;
+                })
 
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerFactory',
-                        offset: 300
+                        offset: 200,
+                        // reverse: false
                     }).setTween(mvFactory)
                     .addIndicators({
-                        name: 'key03',
+                        name: 'keyFactory',
                         colorStart: '#f20'
 
                     })
                     .addTo(controller)
 
+                // ----------------------delivery
+                let mvDelivery = gsap.from(".gsap-delivery", 4, {
+                    scale: .5,
+                    cycle: {
+                        y: [-50, 50]
+                    },
+                    ease: Elastic.easeInOut,
+                    stagger: {
+                        from: "inner",
+                        amount: 0.25
+                    }
+                });
+                let triggerDeliveryOffset;
+                screenX > 768 ? triggerDeliveryOffset = 400 : triggerDeliveryOffset = -100;
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerDelivery',
+                        offset: triggerDeliveryOffset,
+                        duration: "30%",
+                        reverse: false,
+                    }).setTween(mvDelivery)
+                    .addIndicators({
+                        name: 'keyDelivery',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller);
+
+
+                // ----------------------delivery
+                // let mvAddress = new TimelineMax();
+                // mvAddress.staggerFrom(".address__img", 4, {
+
+                //     rotate: 10,
+                //     cycle: {
+                //         y: [-50, 50]
+                //     },
+                //     ease: Elastic.easeInOut,
+                //     stagger: {
+                //         from: "inner",
+                //         amount: 0.25
+                //     }
+                // });
+
+                // new ScrollMagic.Scene({
+                //         triggerElement: '#triggerAddress',
+                //         offset: -100,
+                //         duration: "40%",
+                //     }).setTween(mvAddress)
+                //     .addIndicators({
+                //         name: 'keyAddress',
+                //         colorStart: '#f20'
+
+                //     })
+                //     .addTo(controller);
+
             }
+
+
+
 
         });
     </script>
