@@ -3,8 +3,8 @@
 @import "../helpers/rwd";
 
 .index {
-    overflow-x: hidden;
-    margin-bottom: -400px;
+    overflow: hidden;
+    margin-bottom: -400px; //end top
 
     &__title {
         font-size: 48px;
@@ -288,15 +288,10 @@
         }
     }
 
-
-
-
-
-    .about {
-        position: relative;
+    .frame {
         background-color: #fff;
         border: 3px solid $coffee;
-
+        position: relative;
         z-index: 50;
 
         &:before {
@@ -310,6 +305,10 @@
             border: 2px dashed $coffee;
         }
     }
+
+
+
+
 
     .turn-road {
         position: relative;
@@ -320,26 +319,11 @@
     }
 
     .address {
-        position: relative;
         top: -360px;
         display: flex;
-        background-color: #fff;
-        border: 3px solid $coffee;
-        z-index: 50;
 
         @include rwd-md {
             flex-wrap: wrap;
-        }
-
-        &:before {
-            content: " ";
-            position: absolute;
-            z-index: -1;
-            top: 7px;
-            left: 7px;
-            right: 7px;
-            bottom: 7px;
-            border: 2px dashed $coffee;
         }
 
 
@@ -366,19 +350,58 @@
 
     .end {
         position: relative;
-        top: -500px;
+        top: -400px;
+        padding-bottom: 200px;
 
-        &__showgirl {
+        &__girl {
+            animation: girlShake 3s 1.5s infinite both;
             position: absolute;
-            top: 40%;
-            left: 50%;
+            top: 30%;
+            left: 55%;
+            width: 80px;
         }
 
         &__road--extend {
+            width: 100%;
             position: absolute;
-            bottom: -7px;
-            left: 50%;
+            bottom: 0px;
+
+            @include rwd(1400px) {
+                width: 93%;
+            }
         }
+
+        &__frame {
+            position: relative;
+            padding: 40px 60px;
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto;
+
+        }
+
+        &__frame__sign {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-weight: 500;
+            color: $secondary
+        }
+
+
+        &__girl--lg {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-48%);
+            width: 400px;
+            bottom: -720px;
+        }
+
+
+
+
+
+
 
     }
 
@@ -452,6 +475,27 @@
 
         30% {
             transform: rotate(0deg);
+        }
+
+    }
+
+    @keyframes girlShake {
+        0% {
+            transform: translateY(0px);
+        }
+
+        10% {
+            transform: translateY(10px);
+
+        }
+
+        20% {
+            transform: translateY(-2px);
+        }
+
+        30% {
+            transform: translateY(0);
+
         }
 
     }

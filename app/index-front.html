@@ -66,6 +66,8 @@
                 memberHasPin: true,
                 memberOwnProductIdList: ['300', '121'],
                 isDisplayPlay: false,
+                isCarNearGirl: false,
+                isCTAShow: false,
             },
             computed: {
                 seriesList() {
@@ -81,6 +83,18 @@
                     return this.memberOwnProductIdList.indexOf(productId) ? 'pin' :
                         'pin pin--disabled'
                 },
+                handleGirlClick() {
+                    if (this.isCarNearGirl) {
+                        this.isCTAShow = true;
+                        let endCar = new TimelineMax();
+                        endCar.to('.factory__car', 4, {
+                            x: 1920,
+                            ease: Linear.easeNone,
+                            delay: 3,
+
+                        })
+                    }
+                }
 
             },
 
@@ -213,9 +227,6 @@
                 let mvCustom = new TimelineMax();
                 mvCustom.staggerFrom(".gsap-custom", 4, {
                     scale: 0,
-                    cycle: {
-                        y: [-50, 50]
-                    },
                     ease: Back.easeInOut,
                     stagger: {
                         from: "inner",
@@ -234,7 +245,6 @@
 
                     })
                     .addTo(controller);
-
 
 
                 // ----------------------factory car
@@ -274,7 +284,13 @@
                     },
                     ease: Linear.easeNone,
                     delay: 1,
-                });
+                }).to('.factory__car', 2, {
+                    xPercent: -55,
+                    ease: Linear.easeNone,
+                    delay: 1,
+                }).then(() => {
+                    this.isCarNearGirl = true;
+                })
 
 
                 new ScrollMagic.Scene({
