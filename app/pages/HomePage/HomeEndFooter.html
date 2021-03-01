@@ -1,7 +1,7 @@
           <!-- end -->
-          <footer class="end">
-              <div class="container po-re mb-30">
-                  <svg width="1400" height="560" viewBox="0 0 1400 560" class="w-100">
+          <footer class="end d-sm-none">
+              <div class="container po-re mb-30 mb-xl-0">
+                  <svg width="1400" height="560" viewBox="0 0 1400 560" class="end__road">
                       <path d="M1933,-226 v227 c0,144,96,244,214,244 h450" transform="translate(-1713 226)" fill="none"
                           stroke="none" stroke-width="1" id="endRoadPath" />
                       <path d="M1933,-226 v227 c0,144,96,244,214,244 h1400" transform="translate(-1713 226)" fill="none"
@@ -64,7 +64,6 @@
                       </g>
                   </svg>
                   <transition name="fade">
-
                       <img src="./assets/img/illust/illust-showgirl.svg" alt="girl" class="end__girl"
                           v-show="!isCTAShow" :style="isCarNearGirl?'cursor:pointer':''" @click="handleGirlClick">
                   </transition>
@@ -76,13 +75,15 @@
                       </g>
                   </svg>
               </div>
-              <div class="container po-re" v-show="isCTAShow">
-                  <div class="end__frame frame">
-                      <h2 class="index__title highlight mb-2">註冊會員9折折價券</h2>
-                      <p class="h4 mb-5">新註冊會員，不限金額，消費結帳即享9折優惠</p>
-                      <p class="h6 end__frame__sign">唯你專屬</p>
-                      <button class="btn">註冊新會員</button>
+              <transition name="down">
+                  <div class="container po-re" v-show="isCTAShow">
+                      <div class="end__frame frame">
+                          <h2 class="index__title highlight mb-2">註冊會員9折折價券</h2>
+                          <p class="h4 mb-5">新註冊會員，不限金額，消費結帳即享9折優惠</p>
+                          <p class="h6 end__frame__sign">唯你專屬</p>
+                          <button class="btn">註冊新會員</button>
+                      </div>
+                      <img src="./assets/img/illust/illust-showgirl-lg.svg" alt="girl" class="end__girl--lg">
                   </div>
-                  <img src="./assets/img/illust/illust-showgirl-lg.svg" alt="girl" class="end__girl--lg">
-              </div>
+              </transition>
           </footer>

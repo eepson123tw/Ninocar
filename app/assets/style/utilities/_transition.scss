@@ -31,3 +31,15 @@
 .fade-leave-to {
     opacity: 0;
 }
+
+.down-enter-active,
+.down-leave-active {
+    transition: all 1s ease;
+    transform: translateY(-150px);
+}
+
+.down-enter,
+.down-leave-to {
+    opacity: 0;
+    transform: translateY(0);
+}

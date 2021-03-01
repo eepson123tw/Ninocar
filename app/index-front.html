@@ -32,7 +32,7 @@
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
             @@include('./pages/HomePage/HomeBillBoardSection.html')
-            @@include('./pages/HomePage/HomeHighWaySection.html')
+            <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
             @@include('./pages/HomePage/HomeMountainSection.html')
             @@include('./pages/HomePage/HomeFactorySection.html')
             @@include('./pages/HomePage/HomeAboutSection.html')
@@ -91,6 +91,7 @@
                             x: 1920,
                             ease: Linear.easeNone,
                             delay: 3,
+                            reverse: false
 
                         })
                     }
@@ -182,7 +183,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerParking', //觸發點
-                        offset: 500
+                        offset: 500,
+                        reverse: false
                     }).setTween(mvParking) //動畫
                     .addIndicators({
                         name: 'keyParking',
@@ -198,7 +200,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerBillboard',
-                        offset: 200
+                        offset: 200,
+                        reverse: false
                     }).setTween(mvBillboard)
                     .addIndicators({
                         name: 'keyBillboard',
@@ -215,7 +218,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerMountain',
-                        offset: -200
+                        offset: -200,
+                        reverse: false
                     }).setTween(mvMountain)
                     .addIndicators({
                         name: 'keyMountain',
@@ -224,10 +228,9 @@
                     })
                     .addTo(controller);
                 // ----------------------factory service
-                let mvCustom = new TimelineMax();
-                mvCustom.staggerFrom(".gsap-custom", 4, {
+                let mvCustom = gsap.from(".gsap-custom", 4, {
                     scale: 0,
-                    ease: Back.easeInOut,
+                    ease: Elastic.easeInOut,
                     stagger: {
                         from: "inner",
                         amount: 0.25
@@ -238,6 +241,7 @@
                         triggerElement: '#triggerCustom',
                         offset: -100,
                         duration: "30%",
+                        reverse: false
                     }).setTween(mvCustom)
                     .addIndicators({
                         name: 'keyCustom',
@@ -295,7 +299,8 @@
 
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerFactory',
-                        offset: 400
+                        offset: 200,
+                        // reverse: false
                     }).setTween(mvFactory)
                     .addIndicators({
                         name: 'keyFactory',
@@ -305,24 +310,24 @@
                     .addTo(controller)
 
                 // ----------------------delivery
-                let mvDelivery = new TimelineMax();
-                mvDelivery.staggerFrom(".gsap-delivery", 4, {
-
+                let mvDelivery = gsap.from(".gsap-delivery", 4, {
                     scale: .5,
                     cycle: {
                         y: [-50, 50]
                     },
-                    ease: Back.easeInOut,
+                    ease: Elastic.easeInOut,
                     stagger: {
                         from: "inner",
                         amount: 0.25
                     }
                 });
-
+                let triggerDeliveryOffset;
+                screenX > 768 ? triggerDeliveryOffset = 400 : triggerDeliveryOffset = -100;
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerDelivery',
-                        offset: 400,
+                        offset: triggerDeliveryOffset,
                         duration: "30%",
+                        reverse: false,
                     }).setTween(mvDelivery)
                     .addIndicators({
                         name: 'keyDelivery',
