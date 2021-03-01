@@ -1,8 +1,9 @@
 <template id="cartDone">
-    <div class="container cart ">
-        <div class="row cart__topfix block">
-            <div class="cart__list cart__list--none w-100 ">
-                <ul class="d-flex justify-content-between align-items-center w-100">
+    <div>
+        <div class="container cart ">
+            <div class="row cart__topfix block">
+
+                <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
                     <li class="block__header__title">訂單明細</li>
                     <li>
                         <img
@@ -11,169 +12,185 @@
                         >
                     </li>
                 </ul>
+
             </div>
-        </div>
-        <div class="row  block">
-            <ul class="d-flex w-100 cart__order">
-                <li>訂單編號： <span>1231231231</span></li>
-                <li>訂單金額： <span>762元</span></li>
-                <li>花費點數： <span>200點</span></li>
-                <li>訂單狀態： <span>已付款，處理中</span></li>
-                <li>收貨方式： <span>黑貓宅配</span></li>
-                <li>付款方式： <span>線上刷卡</span></li>
-            </ul>
-        </div>
-        <div class="row mt-20">
-            <div class="cart__list w-100 block">
-                <ul class="d-flex justify-content-between align-items-center w-100">
+            <div class="row  block">
+                <ul class="d-flex w-100 cart__order">
+                    <li>訂單編號： <span>1231231231</span></li>
+                    <li>訂單金額： <span>{{finallyPrice}}</span></li>
+                    <li>花費點數： <span>{{totalPointCost}}點</span></li>
+                    <li>訂單狀態： <span>未付款，處理中</span></li>
+                    <li>收貨方式： <span>{{selectShipping}}</span></li>
+                    <li>付款方式： <span>{{selectPayment}}</span></li>
+                </ul>
+            </div>
+            <div class="row cart__topfix">
+                <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
                     <li class="block__header__title">購買明細</li>
-                    <li>
+                    <li
+                        class="cart__collapse"
+                        @click="collapseArea"
+                    >
                         <img
+                            v-show="notShow"
+                            src="./assets/img/icon/icon-down.svg"
+                            alt=""
+                        >
+                        <img
+                            v-show="!notShow"
                             src="./assets/img/icon/icon-up.svg"
                             alt=""
                         >
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="row  block">
-            <div class="d-flex cart__group w-100">
-                <div class="cart__group--dflex  cart__group__firstArea">
-                    <div class="cart__groupImg">
-                        <img
-                            src="./assets/img/pic/3.jpg"
-                            alt=""
-                        >
-                        <p>BS 01</p>
+            <div
+                class="row  block"
+                :class="animationDisplay"
+            >
+                <div
+                    class="d-flex cart__group w-100"
+                    v-for="(item,listIndex) of buyList"
+                >
+                    <div class="cart__group--dflex  cart__group__firstArea">
+                        <div class="cart__groupImg">
+                            <img
+                                :src="item.img"
+                                alt=""
+                            >
+                            <p>{{item.seriousNum}}</p>
+                        </div>
+                        <div class="cart__product">
+                            <p>{{item.productName}}</p>
+                            <p>{{item.productBrief}}</p>
+                        </div>
                     </div>
-                    <div class="cart__product">
-                        <p>Audi R8 奧迪小客車</p>
-                        <p>Audi TT coupe 1980</p>
-                    </div>
-                </div>
-
-                <div class="cart__group--dflex ">
-                    <p class="font-black">  NT$<span>195</span></p>
-                </div>
-                <div class="cart__group--dflex">
-                    <select
-                        name=""
-                        class="cart__num"
-                        disabled
+                    <div
+                        v-if="item.pointProduct"
+                        class="cart__group--dflex "
                     >
-                        <option value="">1</option>
-                        <option value="">2</option>
-                    </select>
-                </div>
-                <div class="cart__group--dflex">
-                    <p class="font-black"> NT$<span>195</span> </p>
-                    <p> <img
-                            src=""
-                            alt=""
-                        > <span></span> </p>
-                </div>
-                <div>
-                    <button class="btn btn--link cart__link--small">刪除</button>
-                </div>
-                <p class="cart__cancel"><img
-                        src="./assets/img/icon/icon-close.svg"
-                        alt=""
-                    ></p>
-            </div>
-        </div>
-        <div class="row w-100 pt-md-5 pt-20">
-            <section class="cart__payment  col-6 col-lg-6 col-xs-12 block">
-                <div class="form__group px-10 py-10">
-                    <label
-                        for="productTake"
-                        class="form__text mb-2 h5"
-                    >選擇運送方式</label>
-                    <div class="form__section mb-5">
-                        <select
-                            name=""
-                            id="productTake"
-                            class="form__select cart__select"
-                        >
-                            <option value="">門市自取</option>
-                            <option value="">黑貓宅配</option>
-                        </select>
-                    </div>
-                    <label
-                        for="paymentChoose"
-                        class="form__text mb-2 h5"
-                    >選擇付款方式</label>
-                    <div class="form__section mb-5">
-                        <select
-                            name=""
-                            id="paymentChoose"
-                            class="form__select cart__select"
-                        >
-                            <option value="">線上刷卡</option>
-                            <option value="">ATM轉帳</option>
-                            <option value="">門市結帳</option>
-                            <option value="">貨到付款</option>
-                        </select>
-                    </div>
-                    <label
-                        for="coupon"
-                        class="form__text mb-2 h5"
-                    >使用優惠卷</label>
-                    <div class="form__section mb-5">
-                        <select
-                            name=""
-                            id="coupon"
-                            class="form__select cart__select"
-                        >
-                            <option value="">註冊新會員結帳享9折優惠！</option>
-                            <option value="">白金會員太牛了享8折優惠！</option>
-                            <option value="">老闆跳樓拉免運費！</option>
-                            <option value="">本月壽星你最大享5折優惠！</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cart__payment  h5  col-6 col-lg-6 col-xs-12 ">
-                <header class="d-flex justify-content-center px-5 py-10 block ">
-                    <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
-                        <p>商品花費點數</p>
-                        <main class="cart__member">
+                        <div class="cart__member">
                             <p>Ni</p>
-                            <span>200</span>
-                        </main>
+                            <span>{{item.price}}</span>
+                        </div>
                     </div>
-                    <ul class="cart__moneyCount  w-50">
-                        <li>
-                            <p>商品總金額</p>
-                            <p class="font-black">NT$<span>780</span></p>
-                        </li>
-                        <li>
-                            <p>運費總計</p>
-                            <p class="font-black">NT$<span>780</span></p>
-                        </li>
-                        <li>
-                            <p> 折價卷折抵</p>
-                            <p class="font-black"><span class="pr-5">-</span> NT$<span>780</span></p>
-                        </li>
-                    </ul>
+                    <div
+                        v-else
+                        class="cart__group--dflex "
+                    >
+                        <p class="font-black"> NT$<span>{{item.price}}</span></p>
+                    </div>
+                    <div class="cart__group--dflex">
+                        <select class="cart__num">
+                            <option selected>{{item.productNum}}</option>
+                        </select>
+                    </div>
+                    <div
+                        v-if="item.pointProduct"
+                        class="cart__group--dflex"
+                    >
+                        <div class="cart__member">
+                            <p>Ni</p>
+                            <span>{{item.totalPrice}}</span>
+                        </div>
+                    </div>
+                    <div
+                        v-else
+                        class="cart__group--dflex"
+                    >
+                        <p class="font-black"> NT$<span>{{item.totalPrice}}</span></p>
+                    </div>
 
-                </header>
-                <div>
-                    <ul class="cart__countTotal d-flex align-items-center mb-5  px-5 py-5   block">
-                        <li class="cart__pointCount d-flex flex-sm-wrap ">
-                            <p>總花費點數</p>
-                            <main class="cart__member ">
-                                <p>Ni</p>
-                                <span>200</span>
-                            </main>
-                        </li>
-                        <li>
-                            <p class="pt-2">總金額</p>
-                            <p class="cart__member__price ">NT$ <span>762</span> </p>
-                        </li>
-                    </ul>
                 </div>
-            </section>
+            </div>
+            <div class="row w-100 pt-md-5 pt-20">
+                <section class="cart__payment  col-6 col-lg-6 col-xs-12 ">
+                    <div class="pt-5 pb-20 px-5 form__group block ">
+                        <label
+                            for="productTake"
+                            class="form__text mb-2 h5"
+                        >選擇運送方式</label>
+                        <div class="form__section mb-5">
+                            <select
+                                name=""
+                                id="productTake"
+                                class="form__select cart__select"
+                            >
+                                <option>{{selectShipping}}</option>
+                            </select>
+                        </div>
+                        <label
+                            for="paymentChoose"
+                            class="form__text mb-2 h5"
+                        >選擇付款方式</label>
+                        <div class="form__section mb-5">
+                            <select
+                                id="paymentChoose"
+                                class="form__select cart__select"
+                            >
+                                <option>{{selectPayment}}</option>
+
+                            </select>
+                        </div>
+                        <label
+                            for="coupon"
+                            class="form__text mb-2 h5"
+                        >使用優惠卷</label>
+                        <div class="form__section mb-5">
+                            <select
+                                id="coupon"
+                                class="form__select cart__select"
+                            >
+                                <option>{{selectCupon}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+                <section class="cart__payment col-6 col-lg-6 col-xs-12  ">
+                    <div class='pt-5 pb-20 px-5 form__group block'>
+                        <header class="d-flex justify-content-center mt-5   ">
+                            <div class="cart__pointCount d-flex w-50  flex-sm-wrap">
+                                <p>商品花費點數</p>
+                                <div class="cart__member">
+                                    <p>Ni</p>
+                                    <span>{{totalPointCost}}</span>
+                                </div>
+                            </div>
+                            <ul class="cart__moneyCount  w-50">
+                                <li>
+                                    <p>商品總金額</p>
+                                    <p class="font-black">NT$<span>{{finallyPrice}}</span></p>
+                                </li>
+                                <li>
+                                    <p>運費總計</p>
+                                    <p class="font-black">NT$<span>{{sendPrice}}</span></p>
+                                </li>
+                                <li>
+                                    <p>折價卷折抵</p>
+                                    <p class="font-black"><span
+                                            class="font-black pr-3">-</span>NT$<span>{{discountPrice}}</span></p>
+                                </li>
+                            </ul>
+                        </header>
+                        <div>
+                            <ul class="cart__countTotal d-flex align-items-center mb-10 ">
+                                <li class="cart__pointCount d-flex flex-sm-wrap">
+                                    <p>總花費點數</p>
+                                    <div class="cart__member ">
+                                        <p>Ni</p>
+                                        <span>{{totalPointCost}}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>總金額</p>
+                                    <p class="cart__TotalText font-black">NT$ <span>{{finallyPrice}}</span> </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
         </div>
     </div>
 </template>
@@ -186,10 +203,47 @@
 
 
 <script>
-    Vue.component('cartDone', {
+  Vue.component('cartDone', {
 
-        template: "#cartDone",
+    template: "#cartDone",
+    data() {
+
+      return {
+        notShow: true,
+        animationDisplay: 'cart__displayNone',
+      }
 
 
-    })
+    },
+    methods: {
+
+      collapseArea() {
+        //收合選單
+        if (this.notShow) {
+          this.notShow = false;
+          this.animationDisplay = "cart__displayShow";
+        } else {
+          this.notShow = true;
+          this.animationDisplay = "cart__displayNone";
+        }
+
+      },
+
+    },
+    computed: {
+      // store 區塊
+      ...Vuex.mapState({
+        selectCupon: state => state.selectCupon,
+        buyList: state => state.buyList,
+        finallyPrice: state => state.finallyPrice,
+        totalProductNum: state => state.totalProductNum,
+        selectPayment: state => state.selectPayment,
+        totalPointCost: state => state.totalPointCost,
+        selectShipping: state => state.selectShipping,
+        discountPrice: state => state.discountPrice,
+        sendPrice: state => state.sendPrice,
+      }),
+    }
+
+  })
 </script>

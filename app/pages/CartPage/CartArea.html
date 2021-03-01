@@ -117,6 +117,7 @@
 								id="productTake"
 								class="form__select cart__select"
 								v-model="selectShipping"
+								@change='countSendPrice'
 							>
 								<option
 									value=""
@@ -410,7 +411,8 @@
         this.$store.commit('addBuyNum', this.totalProductNum);
         this.$store.commit('addFinalPrice', this.finallyPrice);
         this.$store.commit('addTotalPointCost', this.totalPointCost);
-
+        this.$store.commit('addDiscountPrice', this.discountPrice);
+        this.$store.commit('addSendPrice', this.sendPrice);
       },
       changeNum(listIndex, e) {
 
@@ -467,13 +469,31 @@
           }
 
         }
+      },
+      countSendPrice() {
+        // 運費選取
+        for (let sendMethods in this.shippingList) {
+
+          if (this.shippingList[sendMethods] == this.selectShipping && this.selectShipping == "宅配") {
+
+            this.sendPrice = 80;
+
+          } else {
+
+            this.sendPrice = 0;
+
+          }
+
+        }
+
+
       }
     },
     computed: {
 
       totalCount() {
 
-        let final = this.totalMoneyCost - this.discountPrice;
+        let final = this.totalMoneyCost - this.discountPrice + this.sendPrice;
         this.finallyPrice = final;
         return final;
 

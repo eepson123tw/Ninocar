@@ -77,7 +77,9 @@
         selectCupon: "",
         selectPayment: "",
         selectShipping: "",
-        finallyPrice: 0
+        finallyPrice: 0,
+        discountPrice: 0,
+        sendPrice: 0,
       },
       mutations: {
         //訂單比數跟詳細資料
@@ -106,6 +108,14 @@
         // 最後的價格
         addFinalPrice(state, val) {
           state.finallyPrice = val;
+        },
+        // 折扣金額
+        addDiscountPrice(state, val) {
+          state.discountPrice = val;
+        },
+        // 運費
+        addSendPrice(state, val) {
+          state.sendPrice = val;
         }
       },
     });
@@ -134,7 +144,7 @@
           //看資料庫型態改名
         }],
         listIsExist: true,
-        current_section: 1,
+        current_section: 0,
       },
       store,
       methods: {
@@ -152,7 +162,6 @@
           totalPointCost: state => state.totalPointCost,
           selectShipping: state => state.selectShipping,
         })
-
       },
       mounted() {
         //確認有無購買
