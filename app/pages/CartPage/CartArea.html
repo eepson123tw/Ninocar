@@ -230,67 +230,68 @@
 							src="./assets/img/icon/icon-left.svg"
 							alt=""
 						></a>
-					<div class="d-flex  px-5 cart--overhidden">
-						<div class="cart__comment block  col-3 col-lg-6">
-							<div class="cart__imgGroup ">
-								<img
-									src="./assets/img/pic/3.jpg"
-									alt=""
-								>
-								<p>BS 01</p>
+					<div class="d-flex  px-5 cart--overhidden  swiper-container">
+						<div class="swiper-wrapper">
+							<div class="cart__comment block  col-3 col-lg-6  swiper-slide">
+								<div class="cart__imgGroup ">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 01</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
 							</div>
-							<div class="cart__textGroup ">
-								<h3>Audi R8 奧迪小客車</h3>
-								<p>NT$ <span>195</span></p>
-								<button class="btn btn--ghost btn--small">收藏</button>
-
+							<div class="cart__comment block col-3 col-lg-6  swiper-slide">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 02</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
 							</div>
-							<button class="btn btn--outline btn--fluid ">加進購物車</button>
-						</div>
-						<div class="cart__comment block col-3 col-lg-6">
-							<div class="cart__imgGroup">
-								<img
-									src="./assets/img/pic/3.jpg"
-									alt=""
-								>
-								<p>BS 01</p>
+							<div class="cart__comment  block col-3 col-lg-6 swiper-slide ">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 03</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
 							</div>
-							<div class="cart__textGroup">
-								<h3>Audi R8 奧迪小客車</h3>
-								<p>NT$ <span>195</span></p>
-								<button class="btn btn--ghost btn--small">收藏</button>
+							<div class="cart__comment block col-3 col-lg-6 swiper-slide ">
+								<div class="cart__imgGroup">
+									<img
+										src="./assets/img/pic/3.jpg"
+										alt=""
+									>
+									<p>BS 04</p>
+								</div>
+								<div class="cart__textGroup ">
+									<h3>Audi R8 奧迪小客車</h3>
+									<p>NT$ <span>195</span></p>
+									<button class="btn btn--ghost btn--small">收藏</button>
+								</div>
+								<button class="btn btn--outline btn--fluid ">加進購物車</button>
 							</div>
-							<button class="btn btn--outline btn--fluid ">加進購物車</button>
-						</div>
-						<div class="cart__comment  block col-3 col-lg-6">
-							<div class="cart__imgGroup">
-								<img
-									src="./assets/img/pic/3.jpg"
-									alt=""
-								>
-								<p>BS 01</p>
-							</div>
-							<div class="cart__textGroup">
-								<h3>Audi R8 奧迪小客車</h3>
-								<p>NT$ <span>195</span></p>
-								<button class="btn btn--ghost btn--small">收藏</button>
-							</div>
-							<button class="btn btn--outline btn--fluid ">加進購物車</button>
-						</div>
-						<div class="cart__comment block col-3 col-lg-6">
-							<div class="cart__imgGroup">
-								<img
-									src="./assets/img/pic/3.jpg"
-									alt=""
-								>
-								<p>BS 01</p>
-							</div>
-							<div class="cart__textGroup">
-								<h3>Audi R8 奧迪小客車</h3>
-								<p>NT$ <span>195</span></p>
-								<button class="btn btn--ghost btn--small">收藏</button>
-							</div>
-							<button class="btn btn--outline btn--fluid ">加進購物車</button>
 						</div>
 					</div>
 					<a
@@ -397,6 +398,21 @@
           this.totalMoneyCost += this.buyerList[listNum].price;
         }
       };
+      const swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+          nextEl: '.cart__choose--left',
+          prevEl: '.cart__choose--right',
+        },
+      });
+
+
+
+
     },
     methods: {
       pageHandler() {
@@ -487,8 +503,13 @@
         }
 
 
-      }
+      },
+
+
     },
+
+
+
     computed: {
 
       totalCount() {

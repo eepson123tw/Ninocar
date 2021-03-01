@@ -461,8 +461,11 @@
           }
           &__comment {
             //熱門推薦
-            margin: 0 10px;
+            margin: 0 -21px;
             text-align: left;
+            @include rwd-lg {
+              margin: 0 5px;
+            }
             button {
               color: $secondary-dark;
             }
