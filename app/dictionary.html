@@ -6,8 +6,10 @@
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="./assets/js/all.js"></script>
+
 <title>Dictionary</title>
 </head>
 
@@ -17,9 +19,9 @@
         <main class="container pt-25 pb-15">
             <!-- display -->
             <transition name="fade">
-                @@include('./pages/DictionaryPage/DictionaryDisplaySection.html')
+                @@include('./pages/DictionaryPage/DictionaryModalDiv.html')
             </transition>
-            <!-- dictionary list -->
+            <!--  list -->
             <section class="block">
                 @@include('./pages/DictionaryPage/DictionaryPostNav.html')
                 <transition name="collapse">
@@ -31,15 +33,16 @@
         @@include('./components/Footer.html')
     </div>
 
-
-    @@include('./components/VueHeader.html') @@include('./components/Pin.html')
+    @@include('./components/VueHeader.html')
+    @@include('./components/common/Pin.html')
     @@include('./pages/DictionaryPage/DictionaryPostItem.html')
     @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
-
+    <script src="./assets/js/utils.js"></script>
     <script>
         new Vue({
             el: '#dictionary',
+            store,
             data: { //變數存放的地方
                 productList: [],
                 targetProduct: {},
@@ -47,51 +50,21 @@
                 showProductList: [],
                 memberOwnProductIdList: ['300', '121'],
                 memberHasPin: true,
-                searchType: '分類搜尋',
+                searchType: 'keyword',
                 navClassName: {
                     'all': true,
                     'my': false
                 },
                 isNavbarShow: true,
-                seriesList: [{
-                    name: '工程系',
-                    eName: 'EN',
-                }, {
-                    name: 'RV休旅系',
-                    eName: 'RV',
-                }, {
-                    name: '計程車系',
-                    eName: 'TA',
-                }, {
-                    name: '巴士系',
-                    eName: 'BS',
-                }, {
-                    name: '警車系',
-                    eName: 'PA',
-                }, {
-                    name: '消防救護系',
-                    eName: 'EM',
-                }, {
-                    name: '轎車系',
-                    eName: 'CA',
-                }, {
-                    name: 'PREMIUM系',
-                    eName: 'PM',
-                }],
-                priceList: ['100~200', '200~300', '300以上'],
-                yearList: ['1970~1989', '1990~2009', '2010後'],
-                labelList: ['無限定', '期間限定', '點數限定'],
-                selectedFilter: {
-                    selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-                    selectedPriceList: [1, 2, 3],
-                    selectedYearList: [1970, 1990, 2010],
-                    selectedLimitList: [0, 1, 2],
-                },
                 isModalShow: false,
+                yearList: ['1970~1989', '1990~2009', '2010後'],
+                limitList: ['無限定', '期間限定', '點數限定'],
+                selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
+                selectedYearList: ['1970~1989', '1990~2009', '2010後'],
+                selectedLimitList: ['無限定', '期間限定', '點數限定'],
                 keywordText: '',
             },
             mounted() {
-
                 const getProductList = async () => {
                     const productList = await axios.get(
                         `./assets/php/getProductList.php`
@@ -99,10 +72,12 @@
                     return productList;
                 }
                 getProductList().then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     const fetchProductList = res.data.map(product => {
+                        // 系列數字轉名稱
                         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
                         thisSeriesIndex.toString();
+                        // 系列Id若是單位數，前面加0
                         let thisSeriesId;
                         if (product[`product_seriesid`].length === 1) {
                             thisSeriesId = 0 + product[`product_seriesid`];
@@ -110,8 +85,8 @@
                             thisSeriesId = product[`product_seriesid`];
                         }
                         return {
-                            name: product[`product_name`],
-                            eName: product['product_ename'],
+                            name: product[`product_name`].trim(),
+                            eName: product['product_ename'].trim(),
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
@@ -124,7 +99,7 @@
                             limitLabel: product['product_spec'],
                         }
                     })
-                    console.log(fetchProductList);
+                    // console.log(fetchProductList);
                     this.productList = fetchProductList;
                     this.showProductList = this.productList;
                     this.targetProduct = this.showProductList[0];
@@ -136,10 +111,13 @@
 
             },
             computed: {
+                seriesList() {
+                    return this.$store.state.seriesList
+                },
                 bgClass() {
                     return `bg-series-${this.targetProduct.series}`
                 },
-                getPinClass() {
+                pinClass() {
                     return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
                         'pin pin--disabled'
                 },
@@ -155,64 +133,101 @@
                             className: 'badge bg-blue'
                         };
                     }
-                }
-
+                },
+                yearAllCheck: {
+                    get() {
+                        return this.selectedYearList ? this.selectedYearList
+                            .length === this.yearList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedYearList = [...this.yearList] : this
+                            .selectedYearList = [];
+                    }
+                },
+                seriesAllCheck: {
+                    get() {
+                        return this.selectedSeriesList ? this.selectedSeriesList.length === this.seriesList
+                            .length : false
+                    },
+                    set(value) {
+                        value ? this.selectedSeriesList = this.seriesList.map(series =>
+                                series.eName) : this
+                            .selectedSeriesList = [];
+                    }
+                },
+                limitAllCheck: {
+                    get() {
+                        return this.selectedLimitList ? this.selectedLimitList
+                            .length === this.limitList.length : false
+                    },
+                    set(value) {
+                        value ? this.selectedLimitList = [...this.limitList] : this
+                            .selectedLimitList = [];
+                    }
+                },
+            },
+            watch: {
+                selectedYearList() {
+                    this.getChangedProductList();
+                },
+                selectedSeriesList() {
+                    this.getChangedProductList();
+                },
+                selectedLimitList() {
+                    this.getChangedProductList();
+                },
             },
             methods: {
+                getChangedProductList() {
+                    const filterYearProductList = this.productList.filter(product => {
+                        let isYearInclude = false;
+                        this.selectedYearList.includes('1970~1989') && product.year <= 1989 ?
+                            isYearInclude =
+                            true : '';
+                        this.selectedYearList.includes('2010後') && product.year >= 2010 ?
+                            isYearInclude =
+                            true :
+                            '';
+                        if (this.selectedYearList.includes('1990~2009')) {
+                            product.year >= 1990 && product.year <= 2009 ? isYearInclude = true : '';
+                        }
+                        return isYearInclude;
+                    })
+                    const filterSeriesProductList = filterYearProductList.filter(product => {
+                        return this.selectedSeriesList.includes(product.series);
+                    })
+                    const filterLimitProductList = filterSeriesProductList.filter(product => {
+                        let isLimitInclude = false;
+                        this.selectedLimitList.includes('期間限定') && product.limitLabel === '2' ?
+                            isLimitInclude =
+                            true : '';
+                        this.selectedLimitList.includes('點數限定') && product.limitLabel === '4' ?
+                            isLimitInclude =
+                            true : '';
+                        if (this.selectedLimitList.includes('無限定')) {
+                            product.limitLabel !== '2' && product.limitLabel !== '4' ? isLimitInclude =
+                                true : '';
+                        }
+                        return isLimitInclude;
+                    })
+                    this.showProductList = filterLimitProductList;
+                },
                 handleFilterReset() {
-                    for (const filter in this.selectedFilter) {
-                        filter.splice(0);
-                    }
+                    this.yearAllCheck = false;
+                    this.seriesAllCheck = false;
+                    this.limitAllCheck = false;
                 },
-                handlePriceAllCheck() {
-                    if (selectedFilter.selectedPriceList.length === priceList.length) {
-                        this.selectedFilter.selectedPriceList.splice(0)
-                    } else {
-                        this.selectedFilter = this.priceList.map(e => e);
-                    }
+                handleFilterAllCheck() {
+                    this.yearAllCheck = true;
+                    this.seriesAllCheck = true;
+                    this.limitAllCheck = true;
                 },
-                // handleAllCheckYear() {
-                //     if (this.selectedYearFilter.length === 3) {
-                //         this.selectedYearFilter.splice(0)
-                //     } else {
-                //         this.selectedYearFilter.splice(0);
-                //         for (const key in this.yearsRange) {
-                //             this.selectedYearFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckSeries() {
-                //     if (this.selectedSeriesFilter.length === 8) {
-                //         this.selectedSeriesFilter.splice(0)
-                //     } else {
-                //         this.selectedSeriesFilter.splice(0);
-                //         for (const key in this.seriesNames) {
-                //             this.selectedSeriesFilter.push(key);
-                //         }
-                //     }
-                // },
-                // handleAllCheckLimit() {
-                //     if (this.selectedLimitFilter.length === 3) {
-                //         this.selectedLimitFilter.splice(0)
-                //     } else {
-                //         this.selectedLimitFilter.splice(0);
-                //         for (const key in this.limitLabels) {
-                //             this.selectedLimitFilter.push(key);
-                //         }
-                //     }
-                // },
-                handleClickPost(theProductId) {
+                handlePostClick(theProductId) {
                     this.targetProduct = this.showProductList.find(product => product.productId ===
                         theProductId)
                     this.isModalShow = true;
                 },
-                isPostPin(theProductId) {
-                    return this.memberOwnProductIdList.indexOf(theProductId);
-                },
-                changeSearchType() {
-                    this.searchType === '分類搜尋' ? this.searchType = '關鍵字搜尋' : this.searchType = '分類搜尋'
-                },
-                navBarChange(filter) {
+                handleNavBarChange(filter) {
                     if (filter === 'my') {
                         this.showProductList = this.myProducts;
                         this.isNavbarShow = false;
@@ -229,7 +244,7 @@
                         };
                     }
                 },
-                modalProductChange(order) {
+                handleModalProductChange(order) {
                     const currentIndex = this.showProductList.indexOf(this.targetProduct);
                     if (order === 'prev') {
                         this.targetProduct = this.showProductList[currentIndex - 1];
@@ -237,31 +252,25 @@
                         this.targetProduct = this.showProductList[currentIndex + 1];
                     }
                 },
-                searchShowProduct() {
-
-                    // const AllFilter = [this.selectedYearFilter,this.selectedSeriesFilter,this.selectedPriceFilter,this.selectedLimitFilter];
-                    const filteredList = this.productList.filter(product => this.selectedSeriesFilter.indexOf(
-                        product.series) >= 0);
-                    console.log(filteredList);
-                    this.showProductList = filteredList;
-                },
-                keywordSearch() {
+                handleKeywordSearch() {
                     const filteredProductList = this.productList.filter(product => {
+                        const keyword = this.keywordText.toLowerCase().trim();
                         let isIncludeWord = false;
-                        product.name.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.name.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.eName.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.eName.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().includes(this.keywordText.toLowerCase()) ?
+                        product.series.toLowerCase().includes(keyword) ?
                             isIncludeWord = true : '';
-                        product.series.toLowerCase().concat(product.seriesId).includes(this.keywordText
-                                .toLowerCase()) ?
+                        product.series.toLowerCase().concat(product.seriesId).includes(keyword) ?
                             isIncludeWord = true : '';
                         return isIncludeWord;
                     })
                     this.showProductList = filteredProductList;
                 },
-
+                isPostPin(theProductId) {
+                    return this.memberOwnProductIdList.indexOf(theProductId);
+                },
             },
         })
     </script>

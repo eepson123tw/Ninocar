@@ -4,35 +4,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/cart.css">
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.5.1/vuex.js' integrity='sha512-LRJP5e30Cahm/OH4lAao+BwWtz7gcz8GDWKQh4aVzHZnTG6RKpVthb17/nBEcBMK5aSgGkI6XjCNRPY221esvQ==' crossorigin='anonymous'></script>
+
 <script src="./assets/js/all.js"></script>
 <title>cart</title>
 </head>
 
 <body>
-    <div id="app">
-        <vue-header></vue-header>
+  <div id="app">
+    <vue-header></vue-header>
 
 
-        @@include('./pages/CartPage/CartProgress.html')
+    @@include('./pages/CartPage/CartProgress.html')
 
 
-        <transition name="fade" mode="out-in">
-            <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist" v-if="current_section === 0" key="index-1"></cart-area>
+    <transition name="fade" mode="out-in">
+      <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist" v-if="current_section === 0" key="index-1"></cart-area>
 
-            <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
+      <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
 
-            <cart-done v-if="current_section === 2" key="index-3"></cart-done>
-        </transition>
-
-
-
+      <cart-done v-if="current_section === 2" key="index-3"></cart-done>
+    </transition>
 
 
 
 
-        <!-- 
+
+
+
+    <!-- 
         <div class="popovers">
             <p>共<span class="popovers__cartItems"> 3</span>件商品</p>
             <p>總金額：NT$<span class="popovers__totalCost">200</span></p>
@@ -54,66 +57,122 @@
 
 
 
-    </div>
+  </div>
 
-    @@include('./components/VueHeader.html')
-    <!--  -->
-    @@include('./pages/CartPage/CartArea.html')
-    <!--  -->
-    @@include('./pages/CartPage/CartInfo.html')
-    <!--  -->
-    @@include('./pages/CartPage/CartDone.html')
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                list: [{
-                    productName: 'Audi R8 奧迪小客車',
-                    productBrief: 'Audi TT coupe 1980',
-                    price: 195,
-                    productNum: 1,
-                    totalPrice: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: 'BS 01',
-                    pointProduct: false,
-                }, {
-                    productName: 'Audi R8 奧迪小客車',
-                    productBrief: 'Audi TT coupe 1980',
-                    price: 200,
-                    productNum: 1,
-                    totalPrice: 200,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: 'BS 01',
-                    pointProduct: true,
-                    //看資料庫型態改名
-                }],
-                listIsExist: true,
-                current_section: 0,
-            },
-            methods: {
-                dataChange(val) {
-                    this.current_section = val;
-                }
-            },
-            mounted() {
-                //確認有無購買
-                for (listnum in
-                    this.list) {
-                    if (!this.list[listnum].productName) {
-                        this.listIsExist = false;
-                    };
-                    //確認是否為點數商品
-                    if (this.list[listnum].pointProduct) {
-                        console.log(`${(listnum
-                            *
-                            1
-                            +
-                            1)}是點數商品`)
-                    }
-                };
-            },
-        });
-    </script>
+  @@include('./components/VueHeader.html')
+  <!--  -->
+  @@include('./pages/CartPage/CartArea.html')
+  <!--  -->
+  @@include('./pages/CartPage/CartInfo.html')
+  <!--  -->
+  @@include('./pages/CartPage/CartDone.html')
+
+  <script>
+    const store = new Vuex.Store({
+
+      state: {
+        buyList: [],
+        totalProductNum: null,
+        totalPointCost: null,
+        selectCupon: "",
+        selectPayment: "",
+        selectShipping: "",
+        finallyPrice: 0
+      },
+      mutations: {
+        //訂單比數跟詳細資料
+        addBuyList(state, val) {
+          state.buyList = val;
+        },
+        addTotalPointCost(state, val) {
+          state.totalPointCost = val;
+        },
+        // 購買商品比數
+        addBuyNum(state, val) {
+          state.totalProductNum = val;
+        },
+        // 選擇的折價卷
+        selectCupon(state, val) {
+          state.selectCupon = val;
+        },
+        //選擇的付費方法
+        selectPayment(state, val) {
+          state.selectPayment = val;
+        },
+        //選擇的運送方式
+        selectShipping(state, val) {
+          state.selectShipping = val;
+        },
+        // 最後的價格
+        addFinalPrice(state, val) {
+          state.finallyPrice = val;
+        }
+      },
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        list: [{
+          productName: 'Audi R8 奧迪小客車',
+          productBrief: 'Audi TT coupe 1980',
+          price: 195,
+          productNum: 1,
+          totalPrice: 195,
+          img: " ./assets/img/pic/3.jpg ",
+          seriousNum: 'BS 01',
+          pointProduct: false,
+        }, {
+          productName: 'Audi R8 奧迪小客車',
+          productBrief: 'Audi TT coupe 1980',
+          price: 200,
+          productNum: 1,
+          totalPrice: 200,
+          img: " ./assets/img/pic/3.jpg ",
+          seriousNum: 'BS 01',
+          pointProduct: true,
+          //看資料庫型態改名
+        }],
+        listIsExist: true,
+        current_section: 1,
+      },
+      store,
+      methods: {
+        dataChange(val) {
+          this.current_section = val;
+        }
+      },
+      computed: {
+        ...Vuex.mapState({
+          selectCupon: state => state.selectCupon,
+          buyList: state => state.buyList,
+          finallyPrice: state => state.finallyPrice,
+          totalProductNum: state => state.totalProductNum,
+          selectPayment: state => state.selectPayment,
+          totalPointCost: state => state.totalPointCost,
+          selectShipping: state => state.selectShipping,
+        })
+
+      },
+      mounted() {
+        //確認有無購買
+        for (listnum in
+          this.list) {
+          if (!this.list[listnum].productName) {
+            this.listIsExist = false;
+          };
+          //確認是否為點數商品
+          if (this.list[listnum].pointProduct) {
+            console.log(`${(listnum
+              *
+              1
+              +
+              1)}是點數商品`)
+          }
+        };
+      },
+    });
+  </script>
 
 
 

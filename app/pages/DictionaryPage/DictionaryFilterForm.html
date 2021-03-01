@@ -1,53 +1,38 @@
-    <form class="bg-white po-re px-10 py-5" v-show="searchType === '關鍵字搜尋' && isNavbarShow">
+    <form class="bg-white po-re px-10 py-5" v-show="searchType === 'sort' && isNavbarShow">
         <ul>
             <li>
-                <label class="h4 d-block mb-3">價格</label>
+                <label class="h4 d-block mb-3">年代</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" v-model="selectedFilter.selectedPriceList.length === priceList.length"
-                        @click="handlePriceAllCheck" class="custom-input__input">
+                    <input type="checkbox" v-model="yearAllCheck" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-                <label v-for="(priceRange,key) in priceList" class="custom-input ml-3 mb-5">{{priceRange}}
-                    <input type="checkbox" :value="key" v-model="selectedFilter.selectedPriceList"
-                        class="custom-input__input">
+                <label v-for="(yearRange) in yearList" class="custom-input ml-3 mb-5">{{yearRange}}
+                    <input type="checkbox" :value="yearRange" v-model="selectedYearList" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
-            <!-- <li>
-                <label class="h4 d-block mb-3">年代</label>
-                <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" v-model="selectedYearFilter.length === 3" @click="handleAllCheckYear"
-                        class="custom-input__input">
-                    <span class="custom-input__checkmark"></span>
-                </label>
-                <label v-for="(yearRange,key) in yearList" class="custom-input ml-3 mb-5">{{yearRange}}
-                    <input type="checkbox" :value="key" v-model="selectedFilter.selectedYearList" class="custom-input__input">
-                    <span class="custom-input__checkmark"></span>
-                </label>
-            </li> -->
-            <!-- <li>
+            <li>
                 <label class="h4 d-block mb-3">系列</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" v-model="selectedSeriesFilter.length === 8" @click="handleAllCheckSeries"
-                        class="custom-input__input">
+                    <input type="checkbox" v-model="seriesAllCheck" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-                <label v-for="(seriesName,key) in seriesNames" class="custom-input ml-3 mb-5">{{seriesName}}
-                    <input type="checkbox" :value="key" v-model="selectedSeriesFilter" class="custom-input__input">
+                <label v-for="seriesName in seriesList" class="custom-input ml-3 mb-5">{{seriesName.name}}
+                    <input type="checkbox" :value="seriesName.eName" v-model="selectedSeriesList"
+                        class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
             </li>
             <li>
                 <label class="h4 d-block mb-3">限定</label>
                 <label class="custom-input ml-3 mb-5">全部
-                    <input type="checkbox" v-model="selectedLimitFilter.length === 3" @click="handleAllCheckLimit"
-                        class="custom-input__input">
+                    <input type="checkbox" v-model="limitAllCheck" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-                <label v-for="(limitLabel,key) in limitLabels" class="custom-input ml-3 mb-5">{{limitLabel}}
-                    <input type="checkbox" :value="key" v-model="selectedLimitFilter" class="custom-input__input">
+                <label v-for="limit in limitList" class="custom-input ml-3 mb-5">{{limit}}
+                    <input type="checkbox" :value="limit" v-model="selectedLimitList" class="custom-input__input">
                     <span class="custom-input__checkmark"></span>
                 </label>
-            </li> -->
+            </li>
         </ul>
     </form>

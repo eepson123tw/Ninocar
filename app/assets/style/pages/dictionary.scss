@@ -7,102 +7,66 @@
 .block {
     background-color: transparent;
 
+
     &__header {
         background-color: #fff;
-    }
-}
-
-.display {
-    background-color: #fff;
-    max-width: 920px;
-    width: 80%;
-    margin: 0 auto;
-    position: relative;
-
-
-    @include rwd-lg {
-        width: 90%;
+        min-height: 88px;
     }
 
-    @include rwd-sm {
-        width: 95%;
-    }
-
-    &__cover {
+    .search-bar {
         position: relative;
-        min-height: 420px;
-        margin-bottom: 12px;
+        display: flex;
+        height: 55px;
+        width: 400px;
 
-        @include rwd-xl {
-            min-height: 390px;
-        }
-
-        @include rwd-lg {
-            min-height: 360px;
-        }
-
-        @include rwd-md {
-            min-height: 260px;
-        }
-
-        @include rwd-xs {
-            min-height: 190px;
-        }
-    }
-
-    &__title {
-        width: 90%;
-        font-size: 100px;
-        line-height: 1.2;
-        font-weight: 900;
-        letter-spacing: 2px;
-        text-shadow:
-            1px 1px 2px $coffee,
-            -1px 1px 2px $coffee,
-            1px -1px 2px $coffee,
-            -1px -1px 2px $coffee;
-        color: white;
-
-        @include rwd-lg {
-            font-size: 80px;
-        }
-
-        @include rwd-md {
-            font-size: 68px;
-        }
-
-        @include rwd-sm {
-            font-size: 48px;
-        }
-
-        @include rwd-xs {
-            font-size: 40px;
-        }
-    }
-
-    &__img {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 75%;
-
-        @include rwd-sm {
+        &__input {
+            @extend .h5;
             width: 100%;
+            height: 100%;
+            padding-left: 40px;
+            padding-right: 15px;
+            border: 1px solid $secondary;
+            border-radius: 8px;
+
+            @include rwd-xl {
+                width: 60%;
+                padding: 8px;
+                border-radius: 8px 0 0 8px;
+            }
+        }
+
+        &__input::placeholder {
+            font-size: 16px;
+        }
+
+        &__icon {
+            position: absolute;
+            width: 28px;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            @include rwd-xl {
+                display: none;
+            }
+        }
+
+        &__btn {
+            @extend .h4;
+            width: 40%;
+            height: 100%;
+            display: none;
+            color: #fff;
+            background-color: $secondary;
+            border-radius: 0 8px 8px 0;
+
+            @include rwd-xl {
+                display: block;
+            }
         }
     }
-
-    &__carID {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-
-        @include rwd-sm {
-            left: 80%;
-        }
-    }
-
 }
+
 
 .post {
     background-color: #fff;
@@ -151,39 +115,3 @@
         }
     }
 }
-
-.search-bar {
-    display: flex;
-    align-items: stretch;
-
-    &__input {
-        @extend .h4;
-        width: 280px;
-        padding: 15px;
-        border: 1px solid $secondary;
-        border-radius: 8px 0 0 8px;
-
-        @include rwd-lg {
-            width: 60%;
-            padding: 8px;
-        }
-    }
-
-    &__btn {
-        border-radius: 0 8px 8px 0;
-    }
-}
-
-// //======之後放swiper的css
-// .swiper-pagination{
-//     position: absolute;
-//     top: 50%;
-
-//     &-prev{
-//         left: -80px;
-//     }
-
-//     &-next{
-//         right: -80px;
-//     }
-// }

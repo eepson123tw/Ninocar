@@ -1,291 +1,461 @@
 <template id="cart-info">
 
-    <div>
-        <div class="container cart">
-            <div class="row cart__topfix">
-                <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
-                    <li class="block__header__title">購買明細</li>
-                    <li>總花點數</li>
-                    <li class="cart__member--align">
-                        <p>Ni <span class="cart__member__text">200</span></p>
-                    </li>
-                    <li>總金額</li>
-                    <li>
-                        <h3 class="cart__member__price" >NT$ 762</h3>
-                    </li>
-                    <li>
-                        <img
-                            src="./assets/img/icon/icon-down.svg"
-                            alt=""
-                        >
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="container cart cart--maginHalf ">
-            <div class="row  block">
-                <div class="d-flex cart__group w-100">
-                    <div class="cart__group--dflex  cart__group__firstArea">
-                        <div class="cart__groupImg">
-                            <img
-                                src="./assets/img/pic/3.jpg"
-                                alt=""
-                            >
-                            <p>BS 01</p>
-                        </div>
-                        <div class="cart__product">
-                            <p>Audi R8 奧迪小客車</p>
-                            <p>Audi TT coupe 1980</p>
-                        </div>
-                    </div>
+	<div>
+		<div class="container cart">
+			<div class="row cart__topfix">
+				<ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
+					<li class="block__header__title">購買明細</li>
+					<li>總花點數</li>
+					<li class="cart__member--align">
+						<p>Ni <span class="cart__member__text">{{totalPointCost}}</span></p>
+					</li>
+					<li>總金額</li>
+					<li>
+						<h3 class="cart__member__price">NT$ {{finallyPrice}}</h3>
+					</li>
+					<li
+						class="cart__collapse"
+						@click="collapseArea"
+					>
+						<img
+							v-show="notShow"
+							src="./assets/img/icon/icon-down.svg"
+							alt=""
+						>
+						<img
+							v-show="!notShow"
+							src="./assets/img/icon/icon-up.svg"
+							alt=""
+						>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container cart cart--maginHalf ">
 
-                    <div class="cart__group--dflex ">
-                        <p class="font-black"> NT$<span>195</span></p>
-                    </div>
-                    <div class="cart__group--dflex">
-                        <select
-                            name=""
-                            class="cart__num"
-                            disabled
-                        >
-                            <option value="">1</option>
-                            <option value="">2</option>
-                        </select>
-                    </div>
-                    <div class="cart__group--dflex">
-                        <p class="font-black"> NT$<span>195</span> </p>
-                        <p> <img
-                                src=""
-                                alt=""
-                            > <span></span> </p>
-                    </div>
-                    <div>
-                        <button class="btn btn--link cart__link--small">刪除</button>
-                    </div>
-                    <p class="cart__cancel"><img
-                            src="./assets/img/icon/icon-close.svg"
-                            alt=""
-                        ></p>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row  pt-md-5 pt-20 ">
-                    <section class="cart__payment col-6 col-lg-6 col-xs-12 ">
-                        <h2 class=" block block__header__title block__header">購買人資料</h2>
-                        <div class="form__group px-10 block pt-10 pb-20 ">
-                            <label
-                                for="buyerName"
-                                class="form__text mb-2 "
-                            >姓名</label>
-                            <div class="form__section mb-5">
-                                <input
-                                    id="buyerName"
-                                    type="text"
-                                    class="form__select cart__select cart__select--input"
-                                    placeholder="王小明"
-                                ></input>
-                            </div>
-                            <label
-                                for="buyerPhone"
-                                class="form__text mb-2 "
-                            >聯絡電話</label>
-                            <div class="form__section mb-5">
-                                <input
-                                    id="buyerPhone"
-                                    type="text"
-                                    class="form__select cart__select cart__select--input"
-                                    placeholder="0910-123-456"
-                                ></input>
-                            </div>
-                            <label
-                                for="buyerEmail"
-                                class="form__text mb-2 "
-                            >電子郵件</label>
-                            <div class="form__section mb-5">
-                                <input
-                                    id="buyerEmail"
-                                    type="email"
-                                    class="form__select cart__select cart__select--input"
-                                    placeholder="abc@gmail.com"
-                                ></input>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="cart__payment  col-6 col-lg-6 col-xs-12 block">
-                        <h2 class="block block__header__title block__header">收貨人資料</h2>
-                        <div class="pt-10 px-10 form__group">
-                            <label
-                                for="receiverName"
-                                class="form__text mb-2 mr-3 "
-                            >收件人姓名</label>
-                            <div class="d-flex  cart__checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="receiverSame"
-                                    class="mr-3"
-                                >
-                                <label
-                                    for="receiverSame"
-                                    class="form__text mb-2 mr-3 "
-                                >同購買人姓名</label>
-                            </div>
-                            <div class="form__section mb-5">
-                                <input
-                                    id="receiverName"
-                                    type="text"
-                                    class="form__select cart__select cart__select--input"
-                                    placeholder="王小明"
-                                ></input>
-                            </div>
-                            <label
-                                for="receiverPhone"
-                                class="form__text mb-2 "
-                            >聯絡電話</label>
-                            <div class="form__section mb-5">
-                                <input
-                                    id="receiverPhone"
-                                    type="text"
-                                    class="form__select cart__select cart__select--input"
-                                    placeholder="0910-123-456"
-                                ></input>
-                            </div>
-                            <div class="form__group ">
-                                <label
-                                    for="address"
-                                    class="form__text "
-                                >地址</label>
-                                <div class="form__section mb-5">
-                                    <select
-                                        name=""
-                                        id=""
-                                        class="form__select "
-                                    >
-                                        <option value="">城市</option>
-                                    </select>
-                                    <select
-                                        name=""
-                                        id=""
-                                        class="form__select "
-                                    >
-                                        <option value="">鄉政區</option>
-                                    </select>
-                                </div>
-                                <input
-                                    type="text"
-                                    class="form__input  "
-                                    id="address"
-                                    placeholder="街/路/巷弄/樓層"
-                                />
-                                <div class="d-flex  cart__checkbox mt-10 mb-10">
-                                    <input
-                                        type="checkbox"
-                                        id="receiverAddress"
-                                    >
-                                    <label
-                                        for="receiverAddress"
-                                        class="form__text"
-                                    >設為預設地址</label>
-                                    <input
-                                        type="checkbox"
-                                        id="saveAddress"
-                                    >
-                                    <label
-                                        for="saveAddress"
-                                        class="form__text"
-                                    >儲存至我的地址</label>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="cart__payment  col-6 col-lg-6 col-xs-12">
-                        <h2 class="block block__header__title block__header">付款資料</h2>
-                            <div class="pt-10 px-10 form__group block">
-                                <label
-                                    for="cardName"
-                                    class="form__text mb-2 "
-                                >信用卡卡號</label>
-                                <div class="form__section mb-5">
-                                    <input
-                                        id="cardName"
-                                        type="text"
-                                        class="form__select cart__select--small cart__select--input "
-                                        maxlength="4"
-                                    ></input>
-                                    <input
-                                        id="cardName"
-                                        type="text"
-                                        class="form__select cart__select--small cart__select--input "
-                                        maxlength="4"
-                                    ></input>
-                                    <input
-                                        id="cardName"
-                                        type="text"
-                                        class="form__select cart__select--small cart__select--input "
-                                        maxlength="4"
-                                    ></input>
-                                    <input
-                                        id="cardName"
-                                        type="text"
-                                        class="form__select cart__select--small cart__select--input "
-                                        maxlength="4"
-                                    ></input>
-                                </div>
-                                <label
-                                    for="cardDate"
-                                    class="form__text mb-2 "
-                                >有效日期</label>
-                                <div class="form__section mb-5">
-                                    <input
-                                        id="cardDate"
-                                        type="text"
-                                        class="form__select cart__select cart__select--input"
-                                        placeholder="MM/YY"
-                                    ></input>
-                                </div>
-                                <label
-                                    for="cardCode"
-                                    class="form__text mb-2 "
-                                >背面驗證碼</label>
-                                <div class="form__section mb-5">
-                                    <input
-                                        id="cardCode"
-                                        type="email"
-                                        class="form__select cart__select cart__select--input"
-                                        placeholder="123"
-                                    ></input>
-                                </div>
-                            </div>
-                        
-                    </section>
-                    <div class="col-6 col-lg-6 col-xs-12 block mt-20">
-                        <button
-                        class="btn btn--fluid mb-xs-5 "
-                        @click="pageHandler"
-                    >確認付款</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div
+				class="row  block"
+				:class="animationDisplay"
+			>
+				<div
+					class="d-flex cart__group w-100"
+					v-for="(item,listIndex) of buyList"
+				>
+					<div class="cart__group--dflex  cart__group__firstArea">
+						<div class="cart__groupImg">
+							<img
+								:src="item.img"
+								alt=""
+							>
+							<p>{{item.seriousNum}}</p>
+						</div>
+						<div class="cart__product">
+							<p>{{item.productName}}</p>
+							<p>{{item.productBrief}}</p>
+						</div>
+					</div>
+					<div
+						v-if="item.pointProduct"
+						class="cart__group--dflex "
+					>
+						<div class="cart__member">
+							<p>Ni</p>
+							<span>{{item.price}}</span>
+						</div>
+					</div>
+					<div
+						v-else
+						class="cart__group--dflex "
+					>
+						<p class="font-black"> NT$<span>{{item.price}}</span></p>
+					</div>
+					<div class="cart__group--dflex">
+						<select class="cart__num">
+							<option selected>{{item.productNum}}</option>
+						</select>
+					</div>
+					<div
+						v-if="item.pointProduct"
+						class="cart__group--dflex"
+					>
+						<div class="cart__member">
+							<p>Ni</p>
+							<span>{{item.totalPrice}}</span>
+						</div>
+					</div>
+					<div
+						v-else
+						class="cart__group--dflex"
+					>
+						<p class="font-black"> NT$<span>{{item.totalPrice}}</span></p>
+					</div>
+					<div>
+						<button
+							style="display: none;"
+							@click="deleteHandler(listIndex)"
+							class="btn btn--link cart__link--small"
+						>刪除</button>
+					</div>
+					<p class="cart__cancel"><img
+							src="./assets/img/icon/icon-close.svg"
+							alt=""
+						></p>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row  pt-md-5 pt-20 ">
+					<section class="cart__payment col-6 col-lg-6 col-xs-12 ">
+						<h2 class=" block block__header__title block__header">購買人資料</h2>
+						<div class="form__group px-10 block pt-10 pb-20 ">
+							<label
+								for="buyerName"
+								class="form__text mb-2 w-100"
+							>姓名 <span
+									v-show="isTextShow"
+									class="h5"
+									:class="textClass"
+								>三個皆為必填</span></label>
+							<div class="form__section mb-5">
+								<input
+									id="buyerName"
+									type="text"
+									class=" cart__select form__input"
+									placeholder="王小明"
+									v-model.trim="buyerName"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="0"
+								></input>
+							</div>
+							<label
+								for="buyerPhone"
+								class="form__text mb-2 "
+							>聯絡電話</label>
+							<div class="form__section mb-5">
+								<input
+									id="buyerPhone"
+									type="text"
+									v-model.trim="buyerPhone"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="1"
+									class="cart__select form__input"
+									placeholder="0910-123-456"
+								></input>
+							</div>
+							<label
+								for="buyerEmail"
+								class="form__text mb-2 "
+							>電子郵件</label>
+							<div class="form__section mb-5">
+								<input
+									id="buyerEmail"
+									type="email"
+									class="cart__select form__input"
+									placeholder="abc@gmail.com"
+									v-model.trim="buyerEmail"
+									@change="checkInput"
+									@focus="checkInput"
+									data-input="2"
+								></input>
+							</div>
+						</div>
+					</section>
+					<section class="cart__payment  col-6 col-lg-6 col-xs-12 block">
+						<h2 class="block block__header__title block__header">收貨人資料</h2>
+						<div class="pt-10 px-10 form__group">
+							<label
+								for="receiverName"
+								class="form__text mb-2 mr-3 "
+							>收件人姓名</label>
+							<div class="d-flex  cart__checkbox">
+								<input
+									type="checkbox"
+									id="receiverSame"
+									class="mr-3"
+									@click="sameBuyer"
+								>
+								<label
+									for="receiverSame"
+									class="form__text mb-2 mr-3 "
+								>同購買人姓名</label>
+							</div>
+							<div class="form__section mb-5">
+								<input
+									id="receiverName"
+									type="text"
+									class="cart__select form__input"
+									placeholder="王小明"
+									v-model="receiverName"
+								></input>
+							</div>
+							<label
+								for="receiverPhone"
+								class="form__text mb-2 "
+							>聯絡電話</label>
+							<div class="form__section mb-5">
+								<input
+									id="receiverPhone"
+									type="text"
+									class="cart__select form__input"
+									placeholder="0910-123-456"
+									v-model="receiverPhone"
+								></input>
+							</div>
+							<div class="form__group ">
+								<label
+									for="address"
+									class="form__text "
+								>地址</label>
+								<div class="form__section mb-5">
+									<select
+										name=""
+										id=""
+										class="form__select "
+										v-model="receiverCity"
+									>
+										<option
+											value=""
+											disabled
+										>城市</option>
+										<option v-for="(num,index) of selectCity">{{num}}</option>
+									</select>
+									<select
+										name=""
+										id=""
+										class="form__select "
+										v-model="receiverTown"
+									>
+										<option
+											value=""
+											disabled
+										>鄉政區</option>
+										<option
+											value=""
+											v-for="(num,index) of selectTown"
+										>{{num}}</option>
+									</select>
+								</div>
+								<input
+									type="text"
+									class="form__input  "
+									id="address"
+									v-model="receiverRoad"
+									placeholder="街/路/巷弄/樓層"
+								/>
+								<div class="d-flex  cart__checkbox mt-10 mb-10">
+									<input
+										type="checkbox"
+										id="receiverAddress"
+									>
+									<label
+										for="receiverAddress"
+										class="form__text"
+									>設為預設地址</label>
+									<input
+										type="checkbox"
+										id="saveAddress"
+									>
+									<label
+										for="saveAddress"
+										class="form__text"
+									>儲存至我的地址</label>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="cart__payment  col-6 col-lg-6 col-xs-12">
+						<h2 class="block block__header__title block__header">付款資料</h2>
+						<div class="pt-10 px-10 form__group block">
+							<label
+								for="cardName"
+								class="form__text mb-2 "
+							>信用卡卡號</label>
+							<div class="form__section mb-5">
+								<input
+									id="cardName"
+									type="text"
+									class="form__select cart__select--small cart__select--input"
+									maxlength="4"
+								></input>
+								<input
+									id="cardName"
+									type="text"
+									class="form__select cart__select--small cart__select--input "
+									maxlength="4"
+								></input>
+								<input
+									id="cardName"
+									type="text"
+									class="form__select cart__select--small cart__select--input "
+									maxlength="4"
+								></input>
+								<input
+									id="cardName"
+									type="text"
+									class="form__select cart__select--small cart__select--input "
+									maxlength="4"
+								></input>
+							</div>
+							<label
+								for="cardDate"
+								class="form__text mb-2 "
+							>有效日期</label>
+							<div class="form__section mb-5">
+								<input
+									id="cardDate"
+									type="text"
+									class="form__select cart__select cart__select--input"
+									placeholder="MM/YY"
+								></input>
+							</div>
+							<label
+								for="cardCode"
+								class="form__text mb-2 "
+							>背面驗證碼</label>
+							<div class="form__section mb-5">
+								<input
+									id="cardCode"
+									type="email"
+									class="form__select cart__select cart__select--input"
+									placeholder="123"
+								></input>
+							</div>
+						</div>
+
+					</section>
+					<div class="col-6 col-lg-6 col-xs-12 block mt-20">
+						<button
+							class="btn btn--fluid mb-xs-5 "
+							@click="pageHandler"
+						>確認付款</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-    Vue.component('cart-info', {
-        template: '#cart-info',
-        props: ['current'],
-        data() {
-            return {
-                currentdata: this.current,
-            }
+  Vue.component('cart-info', {
+    template: '#cart-info',
+    props: ['current'],
+    data() {
+      return {
+        currentdata: this.current,
+        notShow: true,
+        animationDisplay: 'cart__displayNone',
+        buyerName: "",
+        buyerPhone: "",
+        buyerEmail: "",
+        receiverName: "",
+        receiverPhone: "",
+        receiverCity: "",
+        receiverTown: "",
+        receiverRoad: "",
+        isTextShow: false,
+        inputClass: {
+          "form__input--warning": false,
         },
-
-        methods: {
-            pageHandler() {
-                this.currentdata += 1;
-                console.log(this.currentdata);
-                this.$emit('data-handler', this.currentdata)
-            },
+        textClass: {
+          "form__text--warning": true,
+        },
+        cityList: [],
+      }
+    },
+    methods: {
+      pageHandler() {
+        this.currentdata += 1;
+        console.log(this.currentdata);
+        this.$emit('data-handler', this.currentdata);
+      },
+      collapseArea() {
+        //收合選單
+        if (this.notShow) {
+          this.notShow = false;
+          this.animationDisplay = "cart__displayShow";
+        } else {
+          this.notShow = true;
+          this.animationDisplay = "cart__displayNone";
         }
 
-    })
+      },
+
+
+      checkInput(e) {
+
+        const inputList = document.querySelectorAll('[data-input]');
+        let inputNum = e.target.dataset.input;
+
+        inputList.forEach((item, index) => {
+          // 檢查表單
+          if (inputList[inputNum].value == "") {
+            inputList[inputNum].classList.add('form__input--warning')
+            this.isTextShow = true;
+          } else if (inputList[inputNum].value !== "") {
+            inputList[inputNum].classList.remove('form__input--warning')
+          };
+
+        })
+        if (this.buyerName !== "" && this.buyerPhone !== "" && this.buyerEmail !== "") {
+          this.isTextShow = false;
+        }
+
+      },
+      sameBuyer() {
+
+        this.receiverName = this.buyerName;
+        this.receiverPhone = this.buyerPhone;
+
+      },
+
+    },
+    computed: {
+      // store 區塊
+      ...Vuex.mapState({
+        selectCupon: state => state.selectCupon,
+        buyList: state => state.buyList,
+        finallyPrice: state => state.finallyPrice,
+        totalProductNum: state => state.totalProductNum,
+        selectPayment: state => state.selectPayment,
+        totalPointCost: state => state.totalPointCost,
+        selectShipping: state => state.selectShipping,
+      }),
+      selectCity() {
+        let newCityList = [];
+
+        for (let cityNum in this.cityList) {
+
+          newCityList.push(this.cityList[cityNum]['name']);
+
+        }
+
+        return newCityList;
+
+      },
+      selectTown() {
+        let newTownList = [];
+
+        for (let cityNum in this.cityList) {
+          if (this.cityList[cityNum]['name'] == this.receiverCity) {
+            newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
+          }
+
+        }
+        return newTownList;
+      },
+
+    },
+    mounted() {
+
+      fetch('./assets/js/taiwan_districts.json', {
+        method: "get"
+      }).then((res) => {
+
+        return res.json();
+      }).then((res) => {
+        this.cityList = res;
+      })
+    }
+  })
 </script>

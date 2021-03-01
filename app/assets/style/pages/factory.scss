@@ -69,9 +69,17 @@
     justify-content: space-between;
     padding: 20px 0;
     // outline: 2px solid gold;
-    &_left {
+    &_left, &_right{
         display: flex;
     }
+
+    &_right{
+        align-items: center;
+    }
+}
+
+.filter{
+    padding: 8px;
 }
 
 .workButton {
@@ -88,14 +96,33 @@
 }
 
 // --------------作品區內容---------------------
+
+
 .othersWorks {
-    display: flex;
-    flex-wrap: wrap;
+    // outline: 3px solid firebrick;
+    overflow: hidden;
+}
+
+.grid-item{
+    float: left;
+    width: 466px;
+    // min-height: 835px;
+    margin-bottom: 10px;
+}
+
+.grid-item--height1{
+    min-height: 830px;
+}
+
+.grid-item--height2{
+
+    min-height: 887px;
 }
 
 .mywork {
     display: none;
     background: #fff;
+    
 }
 
 .othersWorks,
@@ -110,22 +137,22 @@
 .work {
     height: 100%;
     background-color: #fff;
+    
     // outline: 1px solid blue;
     &_pic {
         cursor: pointer;
         padding: 0 32px;
         // outline: 1px solid;
     }
-    &_author,
+    // 
     &_reply {
-        // margin: 28px;
         padding: 28px;
     }
     &Name {
         margin-bottom: 16px;
     }
 }
-
+// &_author,
 .work_reply,
 .workInfo,
 .moreReply,
@@ -242,8 +269,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 16vw;
+
+
+    &--type2{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 13vw;
+    }
+
+    &InModal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    }
 }
+
 
 .icon {
     margin-left: 8px;
@@ -295,10 +337,12 @@
 //     margin-right: 28px;
 // }
 // ----------------彈窗-------------------
+
 .mask {
     width: 100vw;
     background-color: #0808084D;
-    z-index: 1;
+    // z-index: 2010;
+    // z-index: 1;
     position: absolute;
     left: 0;
     top: 0;
@@ -321,7 +365,7 @@
 
 .closeIcon {
     position: relative;
-    left: 39.9vw;
+    left: 33vw;
     top: -2.36vw;
     cursor: pointer;
     width: 20px;
@@ -526,6 +570,18 @@
 .tipArea_left .invisible{
     opacity: 0;
     pointer-events: none;
+}
+
+.canNotSee{
+    display: none;
+}
+
+.canSeeFlex{
+    display: flex;
+}
+
+.catSeeBlock{
+    display: block;
 }
 
 .selectAreaOut-next {
