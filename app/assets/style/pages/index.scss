@@ -6,6 +6,18 @@
     overflow-x: hidden;
     margin-bottom: -400px;
 
+    &__title {
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 300;
+        display: inline-block;
+
+        &:before {
+            height: 30px;
+
+        }
+    }
+
     .parking {
         &__car {
             position: absolute;
@@ -196,19 +208,6 @@
 
         }
 
-        &__car__light {
-            position: absolute;
-            width: 1px;
-            bottom: 10px;
-            left: 5px;
-        }
-
-        &__car__light2 {
-            position: absolute;
-            left: 100px;
-            bottom: 60px;
-        }
-
         &__road {
             width: 100%;
             position: relative;
@@ -232,24 +231,40 @@
             }
         }
 
-        &__text__title {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: 300;
-            display: inline-block;
 
-            &:before {
-                height: 30px;
 
-            }
-        }
-
-        &__text__thumb {
-            animation: frameShake 1s ease-in infinite;
-        }
 
 
     }
+
+    .thumb {
+        position: relative;
+        animation: frameXShake 1s ease-in infinite;
+
+        &--address {
+            animation: frameYShake 1s ease-in infinite;
+        }
+
+        &__text {
+            font-size: 28px;
+            font-weight: 700;
+            color: $coffee;
+            position: absolute;
+            left: 30px;
+            top: 12px;
+        }
+
+        &__text--address {
+            left: 27px;
+            top: 7px;
+        }
+
+        &__svg--address {
+            transform: rotate(-90deg);
+        }
+
+    }
+
 
     .delivery {
         position: relative;
@@ -308,7 +323,6 @@
         position: relative;
         top: -360px;
         display: flex;
-        align-items: center;
         background-color: #fff;
         border: 3px solid $coffee;
         z-index: 50;
@@ -327,17 +341,45 @@
             bottom: 7px;
             border: 2px dashed $coffee;
         }
+
+
+        &__pic--up {
+            animation: picShake 3s infinite both;
+            top: 0;
+            right: 5%;
+            width: 40%;
+        }
+
+        &__pic--down {
+            animation: picShake 3s 1.5s infinite both;
+            bottom: 0;
+            left: 2%;
+            width: 55%;
+        }
+
+
+        &__illust {
+            bottom: 10%;
+            right: 10%
+        }
     }
 
     .end {
         position: relative;
         top: -500px;
 
-        .end__showgirl {
+        &__showgirl {
             position: absolute;
             top: 40%;
             left: 50%;
         }
+
+        &__road--extend {
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+        }
+
     }
 
     .car-shake {
@@ -366,7 +408,7 @@
         }
     }
 
-    @keyframes frameShake {
+    @keyframes frameXShake {
         0% {
             transform: translateX(0px);
         }
@@ -379,6 +421,38 @@
             transform: translateX(0px);
         }
 
+    }
+
+    @keyframes frameYShake {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(5px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    @keyframes picShake {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        10% {
+            transform: rotate(5deg);
+        }
+
+        20% {
+            transform: rotate(-5deg);
+        }
+
+        30% {
+            transform: rotate(0deg);
+        }
 
     }
 
