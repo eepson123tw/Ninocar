@@ -88,7 +88,7 @@
 
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectShape" @click="getShapeIndex">選擇此車型</button>
+                                    <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
 
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
@@ -97,7 +97,7 @@
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectShape" @click="getShapeIndex">選擇此車型</button>
+                                    <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
 
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
@@ -106,7 +106,7 @@
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectShape" @click="getShapeIndex">選擇此車型</button>
+                                    <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
 
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
@@ -115,7 +115,7 @@
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectShape" @click="getShapeIndex">選擇此車型</button>
+                                    <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
                                 </li>
                             </div>
 
@@ -127,7 +127,7 @@
                                     </div>
                                     <p class="makeCar-name">白</p>
                                     <p class="makeCar-price">NT$ 50</p>
-                                    <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
+                                    <button class="btn btn--fluid btn--outline selectColor selectWhite" @click="selectWhite">選擇烤漆</button>
                                 </li>
 
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -353,7 +353,6 @@
 
     <script>
         //全域component
-
         //emptyState
         Vue.component('empty-state', {
             data(){
@@ -928,6 +927,9 @@
                 docW: $(document).width(),
                 shapeIndex:-1,
                 circleIndex: -1,
+
+                
+
             },
             props:{
 
@@ -1169,11 +1171,11 @@
                         $('.accessoryCards').css({"display": "block"})
                     }
                 },
-                getShapeIndex(e){
+                // getShapeIndex(e){
                     //抓取車型的index(用來判別顏色圖要貼甚麼)
-                    this.shapeIndex = $(e.target).parent().index();
-                    console.log(this.shapeIndex)
-                },
+                    // this.shapeIndex = $(e.target).parent().index();
+                    // console.log(this.shapeIndex)
+                // },
                 getCircleIndex(e){
                     circleIndex = $(e.target).parent().index();
                     console.log("circleIndex: " + circleIndex)
@@ -1259,7 +1261,34 @@
                 //       itemSelector: '.grid-item',
                 //       columnWidth: 466
                 //    });
-                }
+                },
+                selectWhite(){
+                    // let canvas = document.querySelector('.canvas');
+                    // let context = canvas.getContext('2d');
+                    // let pic2 = new Image();
+
+                    // if (this.shapeIndex == 0) {
+                    //         pic2.src = './assets/img/pic/color1A.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, 0, -100);
+                    //     })
+                    // } else if (this.shapeIndex == 1) {
+                    //         pic2.src = './assets/img/pic/color1B.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, 0, -100);
+                    //     })
+                    
+                    // } else if (this.shapeIndex == 2 || this.shapeIndex == 3) {
+                    //         pic2.src = './assets/img/pic/color1C.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, -1, -117);
+                    //     })
+                    // }
+                },
+
             },
         });
 
@@ -1603,136 +1632,137 @@
 
 
         //若沒有輸入所有資料跳出請完成資料輸入
-        // $('.nextStep').click(function() {
-            // let typeWorkName = $('.typeWorkName').val()
-            // let typeNickName = $('.typeNickName').val()
-            // let typeInspiration = $('.typeInspiration').val()
+        $('.nextStep').click(function() {
+            let typeWorkName = $('.typeWorkName').val()
+            let typeNickName = $('.typeNickName').val()
+            let typeInspiration = $('.typeInspiration').val()
 
-            // let typeWorkNameL = $('.typeWorkName').val().length;
-            // let typeNickNameL = $('.typeNickName').val().length;
-            // let typeInspirationL = $('.typeInspiration').val().length;
+            let typeWorkNameL = $('.typeWorkName').val().length;
+            let typeNickNameL = $('.typeNickName').val().length;
+            let typeInspirationL = $('.typeInspiration').val().length;
+            let timeCalc = new Date() - Now();
 
-            // //如果作品名、作者暱稱、靈感皆不為空則PO文
-            // if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
-            //     let x = `<li class="work col-4 col-lg-2 col-sm-4">
-            //             <div class="work_pic">
-            //                 <img src="data:image/png;${dataURL}" class="layer1">
-            //                 <img src="data:image/png;${dataURLA1}" class="layer2">
-            //                 <img src="data:image/png;${dataURLA2}" class="layer3">
-            //                 <img src="data:image/png;${dataURLA3}" class="layer4">
-            //             </div>
+            //如果作品名、作者暱稱、靈感皆不為空則PO文
+            if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
+                let x = `<li class="work col-4 col-lg-2 col-sm-4">
+                        <div class="work_pic">
+                            <img src="data:image/png;${dataURL}" class="layer1">
+                            <img src="data:image/png;${dataURLA1}" class="layer2">
+                            <img src="data:image/png;${dataURLA2}" class="layer3">
+                            <img src="data:image/png;${dataURLA3}" class="layer4">
+                        </div>
 
-            //             <div class="work_author">
-            //                 <img src="./assets/img/pic/userPic.png"  class="userPic">
-            //                 <div class="userContent">
-            //                     <p class="userName h6">${typeWorkName}</p>
-            //                     <h2 class="workName h4">${typeNickName}</h2>
-            //                     <p class="userContent h5">${typeInspiration}</p>
-            //                     <div class="other">
-            //                         <p class="postTime h6">3小時前</p>
-            //                         <div class="other_right">
-            //                             <button class="btn btn--link h5 mr-4">編輯</button>
-            //                             <button class="btn btn--link h5">刪除</button>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //             </div>
+                        <div class="work_author">
+                            <img src="./assets/img/pic/userPic.png"  class="userPic">
+                            <div class="userContent">
+                                <p class="userName h6">${typeWorkName}</p>
+                                <h2 class="workName h4">${typeNickName}</h2>
+                                <p class="userContent h5">${typeInspiration}</p>
+                                <div class="other--type2">
+                                    <p class="postTime h6">${timeCalc}</p>
+                                    <div class="other_right">
+                                        <button class="btn btn--link h5 mr-4">編輯</button>
+                                        <button class="btn btn--link h5">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            //             <div class="workInfo">
-            //                 <div class="workInfo_good">
-            //                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon goodIcon">
-            //                         <g transform="translate(-729 -275)">
-            //                             <path d="M14.513,37.47l10.1.209c4.043,0,8.616-5.286,9.752-7.915,0,0,3.514-7.2,2.541-12.055-1.78-3.084-4.026-2.219-13.046-2.219l1.545-7,.052-.515a2.489,2.489,0,0,0-.713-1.743L23.013,4.5,12.194,15.43a3.3,3.3,0,0,0-.944,2.327V34.241A3.237,3.237,0,0,0,14.513,37.47Z" transform="translate(735.366 280.5)" fill="none" stroke="#E59807" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-            //                             <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807"/>
-            //                         </g>
-            //                     </svg>
-            //                     <p  class="num h3">0</p>
-            //                 </div>
-            //                 <div class="workInfo_reply">
-            //                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
-            //                         <g transform="translate(-396.868 -362.313)">
-            //                             <path  d="M413.686,374.254c-8.888,0-16.12,6.165-16.12,13.743a12.384,12.384,0,0,0,3.545,8.634l0,0,0,0a5.214,5.214,0,0,1,1.473,3.662,6.52,6.52,0,0,1,2-.328,5.51,5.51,0,0,1,2.032.38h.006a18.861,18.861,0,0,0,7.058,1.389c8.888,0,16.12-6.165,16.12-13.745s-7.232-13.743-16.12-13.743m0-4.666c11.479,0,20.786,8.242,20.786,18.41s-9.307,18.411-20.786,18.411a23.417,23.417,0,0,1-8.774-1.716.893.893,0,0,0-.322-.055c-1.569,0-4.921,3.126-6.8,3.126a1.16,1.16,0,0,1-.7-.209c-1.973-1.66,1.569-6.761.7-7.646A17.091,17.091,0,0,1,392.9,388C392.9,377.83,402.206,369.588,413.686,369.588Z" transform="translate(8.967 -0.274)" fill="#E59807"/>
-            //                             <circle cx="2.4" cy="2.4" r="2.4" transform="translate(413 386)" fill="#E59807"/>
-            //                             <circle cx="2.4" cy="2.4" r="2.4" transform="translate(420 386)" fill="#E59807"/>
-            //                             <circle cx="2.4" cy="2.4" r="2.4" transform="translate(427 386)" fill="#E59807"/>
-            //                         </g>
-            //                     </svg>
-            //                     <p  class="num h3">0</p>
-            //                 </div>
-            //             </div>
+                        <div class="workInfo">
+                            <div class="workInfo_good">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon goodIcon">
+                                    <g transform="translate(-729 -275)">
+                                        <path d="M14.513,37.47l10.1.209c4.043,0,8.616-5.286,9.752-7.915,0,0,3.514-7.2,2.541-12.055-1.78-3.084-4.026-2.219-13.046-2.219l1.545-7,.052-.515a2.489,2.489,0,0,0-.713-1.743L23.013,4.5,12.194,15.43a3.3,3.3,0,0,0-.944,2.327V34.241A3.237,3.237,0,0,0,14.513,37.47Z" transform="translate(735.366 280.5)" fill="none" stroke="#E59807" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+                                        <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807"/>
+                                    </g>
+                                </svg>
+                                <p  class="num h3">0</p>
+                            </div>
+                            <div class="workInfo_reply">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
+                                    <g transform="translate(-396.868 -362.313)">
+                                        <path  d="M413.686,374.254c-8.888,0-16.12,6.165-16.12,13.743a12.384,12.384,0,0,0,3.545,8.634l0,0,0,0a5.214,5.214,0,0,1,1.473,3.662,6.52,6.52,0,0,1,2-.328,5.51,5.51,0,0,1,2.032.38h.006a18.861,18.861,0,0,0,7.058,1.389c8.888,0,16.12-6.165,16.12-13.745s-7.232-13.743-16.12-13.743m0-4.666c11.479,0,20.786,8.242,20.786,18.41s-9.307,18.411-20.786,18.411a23.417,23.417,0,0,1-8.774-1.716.893.893,0,0,0-.322-.055c-1.569,0-4.921,3.126-6.8,3.126a1.16,1.16,0,0,1-.7-.209c-1.973-1.66,1.569-6.761.7-7.646A17.091,17.091,0,0,1,392.9,388C392.9,377.83,402.206,369.588,413.686,369.588Z" transform="translate(8.967 -0.274)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(413 386)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(420 386)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(427 386)" fill="#E59807"/>
+                                    </g>
+                                </svg>
+                                <p  class="num h3">0</p>
+                            </div>
+                        </div>
 
-            //             <div class="typeReply">
+                        <div class="typeReply">
                             
-            //                 <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+                            <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
         
-            //                 <div class="typeReply_right">
-            //                   <p class="replyerName">沾醬大師</p>
-            //                   <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-            //                   <div class="other">
-            //                     <p class="textCount"></p>
-            //                     <button class="btn btn--small h5 comment">留言</button>
-            //                   </div>
-            //                 </div>
-            //             </div>
-            //         </li>`
+                            <div class="typeReply_right">
+                              <p class="replyerName">沾醬大師</p>
+                              <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                              <div class="other">
+                                <p class="textCount"></p>
+                                <button class="btn btn--small h5 comment">留言</button>
+                              </div>
+                            </div>
+                        </div>
+                    </li>`
 
-            //     //PO到我的車車
-            //     $('.emptyState').css({"display": "none"})
-            //     $('.mywork .putMywork').append(x)
+                //PO到我的車車
+                $('.emptyState').css({"display": "none"})
+                $('.mywork .putMywork').append(x)
 
-            //     //PO完後清空填寫的資料
-            //     $('.typeWorkName').val('')
-            //     $('.typeNickName').val('')
-            //     $('.typeInspiration').val('')
+                //PO完後清空填寫的資料
+                $('.typeWorkName').val('')
+                $('.typeNickName').val('')
+                $('.typeInspiration').val('')
 
-            //     //PO完回到第一頁
-            //     $('.makeCar').css({"display": "none"})
-            //     $('.giveName').css({
-            //         "display": "none"
-            //     })
-            //     $('.selectArea').css({"display": "block"})
-            //     $('.selectBtn').css({"display": "flex"})
+                //PO完回到第一頁
+                $('.makeCar').css({"display": "none"})
+                $('.giveName').css({
+                    "display": "none"
+                })
+                $('.selectArea').css({"display": "block"})
+                $('.selectBtn').css({"display": "flex"})
 
-            //     $('.shapeCards').css({"display": "flex"})
-            //     $('.shapeCard').css({"display": "block"})
+                $('.shapeCards').css({"display": "flex"})
+                $('.shapeCard').css({"display": "block"})
 
-            //     $('.colorCards').css({"display": "none"})
-            //     $('.tireCards').css({"display": "none"})
-            //     $('.accessoryCards').css({"display": "none"})
+                $('.colorCards').css({"display": "none"})
+                $('.tireCards').css({"display": "none"})
+                $('.accessoryCards').css({"display": "none"})
 
-            //     $('.intro').css({"display": "flex"})
+                $('.intro').css({"display": "flex"})
 
-            //     let count6 = 0;
-            //     $('.closeTextarea').click(function() {
-            //         // console.log('關掉textarea')
-            //         $(this).parent().children('.typeReply').slideToggle();
-            //         count6 += 1;
-            //         // console.log(count6);
-            //         if (count6 % 2 == 1) {
-            //             $(this).children('.textareaWord').text('打開輸入框');
-            //             $(this).children('.toggleIcon3').css({
-            //                 "transform": "rotate(180deg)",
-            //             })
-            //         } else {
-            //             $(this).children('.textareaWord').text('關閉輸入框');
-            //             $(this).children('.toggleIcon3').css({
-            //                 "transform": "rotate(0deg)",
-            //             })
-            //         }
-            //     }) 
+                let count6 = 0;
+                $('.closeTextarea').click(function() {
+                    // console.log('關掉textarea')
+                    $(this).parent().children('.typeReply').slideToggle();
+                    count6 += 1;
+                    // console.log(count6);
+                    if (count6 % 2 == 1) {
+                        $(this).children('.textareaWord').text('打開輸入框');
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(180deg)",
+                        })
+                    } else {
+                        $(this).children('.textareaWord').text('關閉輸入框');
+                        $(this).children('.toggleIcon3').css({
+                            "transform": "rotate(0deg)",
+                        })
+                    }
+                }) 
                 
-            //     //PO完後再跑一次這段，讓我的作品的goodIcon mouseover時有反應
-            //     $('.goodIcon').mouseover((e) => {
-            //         // console.log('變色')
-            //         $(e.target).children('g').children('path').addClass('pin--secondary')            
-            //     })
+                //PO完後再跑一次這段，讓我的作品的goodIcon mouseover時有反應
+                $('.goodIcon').mouseover((e) => {
+                    // console.log('變色')
+                    $(e.target).children('g').children('path').addClass('pin--secondary')            
+                })
 
-            //     $('.goodIcon').mouseout((e) => {
-            //         // console.log('變回去')
-            //         $(e.target).children('g').children('path').removeClass('pin--secondary')         
-            //     })
-            // }
-        // })
+                $('.goodIcon').mouseout((e) => {
+                    // console.log('變回去')
+                    $(e.target).children('g').children('path').removeClass('pin--secondary')         
+                })
+            }
+        })
 
 
         //完成資料輸入後按鈕自動變able、移除提示
@@ -1971,122 +2001,127 @@
         //     // console.log(shapeIndex)
         // })
 
-        $('.selectWhite').click(function() {
-            let pic2 = new Image();
-            // if (shapeIndex == 0) { //暫時關掉
-            //     pic2.src = './assets/img/pic/color1A.png'; //白
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 1) {
-            //     pic2.src = './assets/img/pic/color1B.png'; //白
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
+        $('.selectShape').click((e)=>{
+            shapeIndex = $(e.target).parent().index();
+            console.log(shapeIndex)
+        })
 
-            // } else if (shapeIndex == 2 || shapeIndex == 3) {
-            //     pic2.src = './assets/img/pic/color1C.png'; //白
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, -1, -117);
-            //     })
-            // }
+        $('.selectWhite').click(function() { 
+            let pic2 = new Image();
+            if (shapeIndex == 0) { 
+                pic2.src = './assets/img/pic/color1A.png'; //白
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color1B.png'; //白
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color1C.png'; //白
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         $('.selectRed').click(function() {
             let pic2 = new Image();
-            // if (shapeIndex == 0) { //暫時關掉
-            //     pic2.src = './assets/img/pic/color2A.png'; //紅
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 1) {
-            //     pic2.src = './assets/img/pic/color2B.png'; //紅
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 2 || shapeIndex == 3) {
-            //     pic2.src = './assets/img/pic/color2C.png'; //紅
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, -1, -117);
-            //     })
-            // }
+            if (shapeIndex == 0) { 
+                pic2.src = './assets/img/pic/color2A.png'; //紅
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color2B.png'; //紅
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color2C.png'; //紅
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         $('.selectOrange').click(function() {
             let pic2 = new Image();
-            // if (shapeIndex == 0) { //暫時關掉
-            //     pic2.src = './assets/img/pic/color3A.png'; //橙
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 1) {
-            //     pic2.src = './assets/img/pic/color3B.png'; //橙
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 2 || shapeIndex == 3) {
-            //     pic2.src = './assets/img/pic/color3C.png'; //橙
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, -1, -117);
-            //     })
-            // }
+            if (shapeIndex == 0) { 
+                pic2.src = './assets/img/pic/color3A.png'; //橙
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color3B.png'; //橙
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color3C.png'; //橙
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         $('.selectYellow').click(function() {
             let pic2 = new Image();
 
-            // if (shapeIndex == 0) { //暫時關掉
-            //     pic2.src = './assets/img/pic/color4A.png'; //黃
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 1) {
-            //     pic2.src = './assets/img/pic/color4B.png'; //黃
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 2 || shapeIndex == 3) {
-            //     pic2.src = './assets/img/pic/color4C.png'; //黃
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, -1, -117);
-            //     })
-            // }
+            if (shapeIndex == 0) { 
+                pic2.src = './assets/img/pic/color4A.png'; //黃
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color4B.png'; //黃
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color4C.png'; //黃
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         $('.selectPurple').click(function() {
             let pic2 = new Image();
 
-            // if (shapeIndex == 0) { //暫時關掉
-            //     pic2.src = './assets/img/pic/color5A.png'; //紫
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 1) {
-            //     pic2.src = './assets/img/pic/color5B.png'; //紫
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, 0, -100);
-            //     })
-            // } else if (shapeIndex == 2 || shapeIndex == 3) {
-            //     pic2.src = './assets/img/pic/color5C.png'; //紫
-            //     pic2.addEventListener('load', function() {
-            //         context.globalAlpha = 1;
-            //         context.drawImage(pic2, -1, -117);
-            //     })
-            // }
+            if (shapeIndex == 0) {
+                pic2.src = './assets/img/pic/color5A.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 1) {
+                pic2.src = './assets/img/pic/color5B.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, 0, -100);
+                })
+            } else if (shapeIndex == 2 || shapeIndex == 3) {
+                pic2.src = './assets/img/pic/color5C.png'; //紫
+                pic2.addEventListener('load', function() {
+                    context.globalAlpha = 1;
+                    context.drawImage(pic2, -1, -117);
+                })
+            }
         })
 
         //疊上輪子
