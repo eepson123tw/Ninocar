@@ -1,11 +1,11 @@
 $(document).ready(function () {
     //光箱
-    $('a#show-panel').click(function () {
-        $('#lightbox, #lightbox-panel').fadeIn(300);
-    });
-    $('a#close-panel').click(function () {
-        $('#lightbox, #lightbox-panel').fadeOut(300);
-    });
+    // $('a#show-panel').click(function () {
+    //     $('#lightbox, #lightbox-panel').fadeIn(300);
+    // });
+    // $('a#close-panel').click(function () {
+    //     $('#lightbox, #lightbox-panel').fadeOut(300);
+    // });
 
     // let angle = document.getElementsByClassName('icon-down')[0];
     // console.log(angle);

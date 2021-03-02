@@ -1,5 +1,4 @@
 <div class="container">
-    <div id="lightbox"></div>
     <div class="row">
         <div class="col-7 col-lg-6 col-sm-6">
             <div class="box">
@@ -8,19 +7,34 @@
                     <p>Audi R8</p>
                 </div>
                 <div class="car-name">{{list.productBrief}}</div>
-                <div id="lightbox-panel">
-                    <img :src="list.imgURL[0]" />
-                    <a id="close-panel" href="#">
-                        <div class="icon-close">
-                            <img src="./assets/img/icon/icon-close.svg" alt="" />
+                <div class="lightBox">
+                    <figure>
+                        <img @click="lightBox('imgURL')" class="demo" src="./assets/img/pic/0.png" alt="" />
+                    </figure>
+                    <div :class="{'mask':mask}" v-if="mask">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="(item,index2) in showList">
+                                    <div class="swiper-zoom-container">
+                                        <img :src="list.imgURL[1]" alt="" class="lazyload" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 燈箱照片下方swiper的點點 -->
+                            <div class="swiper-pagination swiper-pagination-white"></div>
+                            <!-- swiper套件的左右按鈕 -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            <button class="closeBtn" @click="lightBox('',true)">
+                                <i class="fa fa-times"></i>
+                            </button>
                         </div>
-                    </a>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
+                    </div>
                 </div>
 
-                <a id="show-panel" href="#"><img :src="list.imgURL[0]" /></a>
-                <div class="row d-flex justify-content-end">
-                    <div class="carID carID--lg bg-series-PM mr-10" style="margin-top: 30px">PM<span>01</span></div>
-                </div>
                 <div class="gallery">
                     <img :src="list.imgURL[1]" />
                     <img :src="list.imgURL[2]" />
@@ -118,9 +132,6 @@
         <div class="col-3 col-lg-3 col-sm-4">
             <div class="box-blue-1">
                 <div class="box box-blue">
-                    <div class="prev">
-                        <i class="fa fa-chevron-left"></i>
-                    </div>
                     <img :src="list.imgURL[3]" />
                     <div class="item-card">
                         <div>{{list.productName}}</div>
