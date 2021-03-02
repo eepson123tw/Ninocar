@@ -11,35 +11,53 @@
 </head>
 
 <body>
-    <div id="app">
-        <vue-header></vue-header>
-        <member-bar></member-bar>
-        <!--  -->
-        @@include('pages/MemberPage/MemberData.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberCupon.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberAddress.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberPassword.html')
+  <div id="app">
+    <vue-header></vue-header>
+    <member-bar></member-bar>
+    <!--  -->
+    @@include('pages/MemberPage/MemberData.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberCupon.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberAddress.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberPassword.html')
 
 
-    </div>
+  </div>
 
 
 
 
-    @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
 
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello, VueJS!',
-            },
-        });
-    </script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+
+        cuponList: [{
+            disCount: 9,
+            disCountText: '折',
+            cuponTitle: '【註冊新會員】',
+            cuponText: '全項商品不限金額結帳九折優惠',
+            cuponTime: '68:08:22',
+          },
+
+
+        ],
+        userName: '',
+        userphone: '',
+        usersex: '',
+        sexList: ['男', '女'],
+        userYear: '',
+        userMonth: '',
+        userDate: '',
+
+      },
+    });
+  </script>
 
 
 </body>
