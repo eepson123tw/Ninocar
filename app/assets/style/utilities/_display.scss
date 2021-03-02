@@ -55,6 +55,12 @@ $val in $positionList {
     }
 }
 
+@include rwd-xs {
+    .d-xs-none {
+        display: none;
+    }
+}
+
 .overflow-hidden {
     overflow: hidden;
 }

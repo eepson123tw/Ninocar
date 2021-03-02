@@ -8,7 +8,8 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.5.1/vuex.js' integrity='sha512-LRJP5e30Cahm/OH4lAao+BwWtz7gcz8GDWKQh4aVzHZnTG6RKpVthb17/nBEcBMK5aSgGkI6XjCNRPY221esvQ==' crossorigin='anonymous'></script>
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.js' integrity='sha512-TrDLNQyY4CpGTLPhaubDUMBqE0OExDKveL5wlIQYHCt0V1cxAJNQfDmW0w2kY/z/ed1UtfOF3ykis9uFkmcplQ==' crossorigin='anonymous'></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css' integrity='sha512-uA1+kHA/0O68FTSM4jeTzJNnRvNWxdCCSnE3gv8LaySXYxQT3nc5uPX9buMPtI1gxUBcxm0+5Lcw59jjl0nMDQ==' crossorigin='anonymous' />
 <script src="./assets/js/all.js"></script>
 <title>cart</title>
 </head>
@@ -77,7 +78,9 @@
         selectCupon: "",
         selectPayment: "",
         selectShipping: "",
-        finallyPrice: 0
+        finallyPrice: 0,
+        discountPrice: 0,
+        sendPrice: 0,
       },
       mutations: {
         //訂單比數跟詳細資料
@@ -106,6 +109,14 @@
         // 最後的價格
         addFinalPrice(state, val) {
           state.finallyPrice = val;
+        },
+        // 折扣金額
+        addDiscountPrice(state, val) {
+          state.discountPrice = val;
+        },
+        // 運費
+        addSendPrice(state, val) {
+          state.sendPrice = val;
         }
       },
     });
@@ -152,7 +163,6 @@
           totalPointCost: state => state.totalPointCost,
           selectShipping: state => state.selectShipping,
         })
-
       },
       mounted() {
         //確認有無購買

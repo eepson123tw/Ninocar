@@ -55,14 +55,13 @@
                         <p>商品分類：</p>
                         <select name="category" id="">
                             <option value="">請選擇</option>
-                            <option value="0">轎車系</option>
                             <option value="1">工程系</option>
                             <option value="2">RV休旅系</option>
                             <option value="3">計程車系</option>
                             <option value="4">巴士系</option>
                             <option value="5">警車系</option>
-                            <option value="6">消防系</option>
-                            <option value="7">救護系</option>
+                            <option value="6">消防救護系</option>
+                            <option value="7">轎車系</option>
                             <option value="8">PREMIUM系</option>
                         </select>
                     </div>

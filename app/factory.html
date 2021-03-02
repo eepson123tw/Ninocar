@@ -18,7 +18,7 @@
 
             <div class="modal js-modal reportModal" data-modal="1">
                 <div class="modal__group">
-                    <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close">
+                    <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close" @click="closeModal">
                                 <g transform="translate(0 0.47)">
                                     <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
                                     <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
@@ -54,7 +54,7 @@
                         <p class="h3 intro_content_text">在車車工廠，<br> 我們提供各種車款、烤漆顏色和不同配備，
                             <br> 您可以盡情揮灑創意，創作屬於自己的超酷客製車。
                         </p>
-                        <button class="btn make">開始製作</button>
+                        <button class="btn make" @click="make">開始製作</button>
                     </div>
                 </div>
 
@@ -74,8 +74,8 @@
 
                     <div class="selectAreaOut">
                         <div class="selectBtn">
-                            <div class="selectAreaOut-previous"><img src="./assets/img/icon/icon-left.svg" alt=""></div>
-                            <div class="selectAreaOut-next"><img src="./assets/img/icon/icon-right.svg" alt=""></div>
+                            <div class="selectAreaOut-previous" @click="moveLeft"><img src="./assets/img/icon/icon-left.svg" alt=""></div>
+                            <div class="selectAreaOut-next" @click="moveRight"><img src="./assets/img/icon/icon-right.svg" alt=""></div>
                         </div>
 
                         <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
@@ -111,7 +111,7 @@
 
                                 <li class="shapeCard col-3 col-lg-3 col-sm-3">
                                     <div class="cardOut">
-                                        <img src="./assets/img/pic//shape03.png" class="shape">
+                                        <img src="./assets/img/pic/shape03.png" class="shape">
                                     </div>
                                     <p class="makeCar-name">Audi R8小客車</p>
                                     <p class="makeCar-price">NT$ 100</p>
@@ -127,7 +127,7 @@
                                     </div>
                                     <p class="makeCar-name">白</p>
                                     <p class="makeCar-price">NT$ 50</p>
-                                    <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
+                                    <button class="btn btn--fluid btn--outline selectColor selectWhite" @click="selectWhite">選擇烤漆</button>
                                 </li>
 
                                 <li class="colorCard col-3 col-lg-3 col-sm-3">
@@ -269,7 +269,7 @@
 
                     <div class="tipArea">
                         <div class="tipArea_left col-6 col-sm-4">
-                            <button class="btn btn--outline previousStep invisible"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
+                            <button class="btn btn--outline previousStep invisible" @click="toPreviousStep"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
                         </div>
                         <div class="tipArea_right col-6 col-sm-4">
                             <div class="tipPrice">
@@ -277,7 +277,7 @@
                                 <p class="totalPrice">NT$ 0</p>
                             </div>
                             <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-                            <button class="btn btn--disabled nextStep">下一步</button>
+                            <button class="btn btn--disabled nextStep" @click="toNextStep">下一步</button>
                         </div>
                     </div>
 
@@ -307,20 +307,28 @@
 
                 <div class="workBar col-12 col-lg-6 col-sm-4">
                     <div class="workBar_left">
-                        <button class="workButton h2 works">大家的作品</button>
-                        <button class="workButton h2 myworks">我的作品</button>
+                        <button class="workButton h2 works" @click="showWorks">大家的作品</button>
+                        <button class="workButton h2 myworks" @click="showMywork">我的作品</button>
                     </div>
-                    <div class="filter"></div>
+                    <div class="workBar_right">
+                        <p class="h4 mr-4">排序</p>
+                        <select name="" id="" class="filter h4" @click="sort">
+                            <option class="goodFirst">按讚數多到少</option>
+                            <option class="newFirst">按作品新到舊</option>
+                            <option class="OldFirst">按作品舊到新</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card :img="'./assets/img/pic/model01.png'" :goodNum="24"></work-card>
+                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :post-time="15"></work-card>
                         <work-card2></work-card2>                        
-                        <work-card :img="'./assets/img/pic/model02.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model03.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model04.png'"></work-card >
-                        <work-card :img="'./assets/img/pic/model05.png'"></work-card>
+                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15"></work-card >
+                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :post-time="7"></work-card >
+                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5"></work-card >
+                        <work-card :img="'./assets/img/pic/model05.png'" :post-time="26"></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -345,7 +353,6 @@
 
     <script>
         //全域component
-
         //emptyState
         Vue.component('empty-state', {
             data(){
@@ -385,7 +392,11 @@
                     type:Number
                 },
                 commentNum:{
-                    default:0,
+                    default:1,
+                    type:Number
+                },
+                postTime:{
+                    default:4,
                     type:Number
                 },
             },
@@ -395,7 +406,8 @@
                     count2: 0,
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
-                    commentNum_plus: this.commentNum
+                    commentNum_plus: this.commentNum,
+                    
                 }
             },
             template: `<li class="work grid-item grid-item--height1 col
@@ -411,7 +423,7 @@
                                     <h2 class="workName h4">天栗鼠計程車</h2>
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
-                                        <p class="postTime h6">3小時前</p>
+                                        <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
                                         <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
@@ -425,7 +437,7 @@
                                           <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807" :class="{'pin--secondary':is_icon_color === true}"/>
                                         </g>
                                     </svg>
-                                    <p  class="num h3">{{goodNum_plus}}</p>
+                                    <p  class="num h3" :v-text="goodNum">{{goodNum_plus}}</p>
                                 </div>
                                 <div class="workInfo_reply">                                   
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
@@ -463,7 +475,7 @@
                                         <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                                         <div class="other">
                                             <p class="textCount"></p>
-                                            <button class="btn btn--small h5 subComment">回覆</button>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -495,15 +507,15 @@
                     let textLength = $(e.target).parent().parent().children('.textarea').val().length;
                     let commentContent = $(e.target).parent().parent().children('.textarea').val();
                     let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
-                    console.log(replyerPic)
+                    // console.log(replyerPic)
                     let replyerName = $(e.target).parent().parent().children('.replyerName').text();
-                    console.log(replyerName)
                     // console.log(replyerName)
+
                     if (textLength < 1) {
                         // console.log('no text')
                         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid red"})
                     } else {
-                        // console.log('ok')
+                        console.log('ok')
                         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid #000"})
 
                         $(e.target).parent().parent().parent().parent().children(`.readMore`).before(`<div class="work_reply hiddenReply">
@@ -512,13 +524,26 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">${replyerName}</p>
                                         <p class="userContent h5">${commentContent}</p>
-                                        <div class="other--type2">
+                                        <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>               
-                                                <button class="btn btn--link mr-4 h5 replyComment replyComment">回覆</button>
-                                                <button class="btn btn--link mr-4 h5 replyComment report" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
+                                                <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -528,6 +553,12 @@
                         $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
 
                         this.commentNum_plus += 1;
+
+                        $('.replyComment').click((e)=>{
+                            console.log('0000000')
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                        })
                     }   
                 },
                 coloredIcon(e){
@@ -542,9 +573,12 @@
                     // $(e.target).children('g').children('path').removeClass('pin--secondary')  
                 },
                 openSubTextarea(e){
-                    console.log(this.$el)
-                    $(this.$el).children('.work_reply').children('.typeSubReply').slideToggle();
-                    $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
+                    console.log('aaaa')
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                    // console.log(this.$el)
+                    // $(this.$el).children('.work_reply').children('.typeSubReply').slideToggle();
+                    // $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
                 },
                 openReportModal(){
                     $('.container .modal').addClass('modal-active');
@@ -586,7 +620,7 @@
                },
                openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
-                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+                    $(this.$el).children('.hiddenReply').css({"display": "block"});
 
                     this.count2 += 1;
                     // console.log(count2);
@@ -602,8 +636,46 @@
                             "transform": "rotate(0deg)",
                         })
                     }
-               }
+               },
+               postSubComment(e){ //PO回覆的回覆
+                   console.log('subComment is clicked')
+                   let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+                   let commentContent = $(e.target).parent().parent().children('.textarea').val();
+                   console.log(commentContentL)
+                   
+                   let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
+                   console.log(replyerPic)
+                  
+                   let replyerName = $(e.target).parent().parent().children('.replyerName').text();
+                   console.log(replyerName)
+                   
+                   if (commentContentL > 0) {
+                    $(e.target).parent().parent().parent().parent().children('.userContext').after(`
+                            <div class="subUserContext hiddenSubReply">
+                                <img src="${replyerPic}"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">${replyerName}</p>
+                                    <p class="userContent h5">${commentContent}</p>
+                                    <div class="other">
+                                        <p class="postTime h6">3小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                        
+                    $(e.target).parent().parent().children('.textarea').val('');
+                    $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
+                   }
 
+                   //PO完後關掉回覆的回覆
+                   $('.typeSubReply').css({"display":"none"})
+                   
+                   //PO完後出現「X則回覆」
+                   $(e.target).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
+               },
             },
         })
 
@@ -614,11 +686,15 @@
                     type:String
                 },
                 goodNum:{
-                    default:3,
+                    default:18,
                     type:Number
                 },
                 commentNum:{
                     default:2,
+                    type:Number
+                },
+                postTime:{
+                    default:1,
                     type:Number
                 }
             },
@@ -643,7 +719,7 @@
                                     <h2 class="workName h4">天栗鼠計程車</h2>
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
-                                        <p class="postTime h6">1小時前</p>
+                                        <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
                                         <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
@@ -683,13 +759,26 @@
                                         <div class="other">
                                             <p class="postTime h6">30分鐘前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment">回覆</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="subUserContext">
                                     <img src="./assets/img/pic/userPic03.png" class="userPic--small">
                                     <div class="userContext_top">
@@ -698,7 +787,7 @@
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
@@ -732,12 +821,25 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
-                                        <div class="other--type2">
+                                        <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -785,9 +887,23 @@
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -797,6 +913,12 @@
                         $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
 
                         this.commentNum_plus += 1;
+
+                        $('.replyComment').click((e)=>{
+                            console.log('123123123')
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                        })
                     }   
                 },
                 coloredIcon(e){
@@ -806,9 +928,10 @@
                     this.is_icon_color = false
                 },
                 openSubTextarea(e){
-                    
-                    $(this.$el).children('.typeSubReply').slideToggle();
-                    $(this.$el).children('.typeSubReply').css({"display":"flex"});
+                    console.log('kokokoko')
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+
                 },
                 openReportModal(){
                     $('.containerMain .modal').addClass('modal-active');
@@ -843,7 +966,7 @@
                }
                ,openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
-                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+                    $(this.$el).children('.hiddenReply').css({"display": "block"});
 
                     this.count2 += 1;
                     // console.log(count2);
@@ -867,15 +990,373 @@
         const vm1 = new Vue({ //主體
             el: '#factory',
             data:{
+                countStep: 0,
+                countR: 0,
+                countL: 0,
+                docW: $(document).width(),
+                shapeIndex:-1,
+                circleIndex: -1,
+
+                
 
             },
             props:{
 
             },
             methods: {
-                openReportSuccessModal(){
+                openReportSuccessModal(){ //出現檢舉成功的彈窗
                     $('.reportSuccessModal').addClass('modal-active')
-                }
+                },
+                showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+
+                    $('.workButton').not(e.target).css({"background": "none"})
+
+                    $('.othersWorks').css({"display": "flex"})
+                    $('.mywork').css({"display": "none"})
+                },
+                showMywork(e){ //點選我的作品時會標示在哪裡，我的作品會出現、大家作品會隱藏
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+
+                    $('.workButton').not(e.target).css({"background": "none"})
+
+                    $('.othersWorks').css({"display": "none"})
+                    $('.mywork').css({"display": "block"})
+                },
+                make(e){ //點開始製作後出現製作區域、順便清空整個canvas
+                    $('.previousStep').addClass('invisible')
+
+                    $('.progressBar').css({"display": "block"})
+
+                    $('.circle:first').css({"background-color": "#E59807"})
+
+                    $('.intro').css({"display": "none"})
+
+                    $('.makeCar').css({"display": "block"})
+
+                    console.log('清空空')
+                    context.clearRect(0, 0, 400, 200)
+                    contextA1.clearRect(0, 0, 400, 200)
+                    contextA2.clearRect(0, 0, 400, 200)
+                    contextA3.clearRect(0, 0, 400, 200)
+                    $(e.target).removeClass('finish')
+                },
+                closeModal(){ //關掉彈窗
+                    // console.log('關掉')
+                    $('.modal').removeClass('modal-active');
+                },
+                toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
+                    console.log("nextStep is clicked! countStep: "+ this.countStep)
+                    console.log(this.docW)
+                
+                    if ($('.nextStep').hasClass('btn--disabled')) {
+                    
+                        $('.pleaseSelect').css({"display": "block"})
+                    
+                        setTimeout(() => {
+                            $('.pleaseSelect').css({"display": "none"})
+                        }, 1000);
+                    } else {
+                        $('.previousStep').removeClass('invisible')
+                    
+                        this.countStep += 1;
+                        $('.shapeCard').css({"display": "none"})
+                    
+                        if (this.countStep % 5 == 1) {
+                            console.log(this.countStep)
+                            $('.nextStep').addClass('btn--disabled')
+                        
+                            //進入選顏色
+                            $('.colorCards').css({"display": "flex"})
+                            $('.colorCard').css({"display": "block"})
+                        
+                            //提醒內容變更
+                            $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
+                        
+                            //進度條、圓圈變色
+                            $('.content:nth-child(2) .circle').addClass('circle--able')
+                            $('.content:nth-child(2) .circle').addClass('circle--active')
+                        
+                            if (this.docW > 1003) {
+                                $('.bar-front').width(240)
+                            } else if (this.docW <= 1003) {
+                                $('.bar-front').width(220)
+                            }
+                        
+                        } else if (this.countStep % 5  == 2) {
+                            console.log(this.countStep)
+                        
+                            $('.nextStep').addClass('btn--disabled')
+                        
+                            //進入選輪子
+                            $('.colorCard').css({"display": "none"})
+                        
+                            $('.tireCards').css({"display": "flex"})
+                            $('.tireCard').css({"display": "block"})
+                        
+                            //提醒內容變更
+                            $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
+                        
+                            //進度條變色
+                            $('.content:nth-child(3) .circle').addClass('circle--able')
+                            $('.content:nth-child(3) .circle').addClass('circle--active')
+                        
+                            if (this.docW > 1003) {
+                                $('.bar-front').width(480)
+                            } else if (this.docW <= 1003) {
+                                $('.bar-front').width(440)
+                            }
+                        
+                        } else if (this.countStep % 5  == 3) {
+                            if(this.shapeIndex != 0){
+                                console.log('讓尾翼不能選')
+                                $('.selectA6').addClass('btn--disabled')
+                                $('.selectA6').removeClass('btn--outline')
+                                $('.selectA6').css({"pointer-events":"none"})
+                            }
+                        
+                            console.log(this.countStep)
+                        
+                            $('.nextStep').addClass('btn--disabled')
+                        
+                            //進入選配件
+                            $('.tireCard').css({"display": "none"})
+                        
+                            //提醒內容變更
+                            $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
+                        
+                            $('.accessoryCards').css({"display": "flex"})
+                            $('.accessoryCard').css({"display": "block"
+                            })
+                        
+                            //進度條、圓圈變色
+                            $('.content:nth-child(4) .circle').addClass('circle--able')
+                            $('.content:nth-child(4) .circle').addClass('circle--active')
+                        
+                        
+                            if (this.docW > 1003) {
+                                $('.bar-front').width(730)
+                            } else if (this.docW <= 1003) {
+                                $('.bar-front').width(660)
+                            }
+                        } else if (this.countStep % 5 == 4) {
+                            console.log(this.countStep)
+                        
+                            $('.nextStep').addClass('btn--disabled').text('完成')
+                            $('.nextStep').addClass('finish')
+                        
+                            $('.selectArea').css({"display": "none"})
+                        
+                            $('.giveName').css({
+                                "display": "flex",
+                                "justify-content": "space-between"
+                            })
+                        
+                            //左右紐消失
+                            $('.selectBtn').css({"display": "none"})
+                        
+                            //提醒內容變更
+                            $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
+                        
+                            //進度條、圓圈變色
+                            $('.content:nth-child(5) .circle').addClass('circle--able')
+                            $('.content:nth-child(5) .circle').addClass('circle--active')
+                        
+                            if(this.docW > 1003){
+                                $('.bar-front').width(960) 
+                            }else if(this.docW <= 1003){
+                                $('.bar-front').width(840) 
+                            }
+                            //base64
+                            dataURL = document.querySelector('.canvas').toDataURL();
+                            dataURLA1 = document.querySelector('.canvasA1').toDataURL();
+                            dataURLA2 = document.querySelector('.canvasA2').toDataURL();
+                            dataURLA3 = document.querySelector('.canvasA3').toDataURL();
+                            console.log(dataURL)
+                        }
+                    }
+                },
+                toPreviousStep(){ //點上一步回上一步
+                    this.countStep -= 1
+                    console.log("previousStep is clicked! countStep: " + this.countStep)
+
+                    if (this.countStep % 5 == 0) {
+                        $('.colorCards').css({"display": "none"})
+                        $('.shapeCards').css({"display": "flex"})
+                        $('.shapeCard').css({"display": "block"})
+                    
+                        $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+                    
+                        $('.previousStep').addClass('invisible')
+                    
+                        if (this.docW > 1003) {
+                                $('.bar-front').width(0)
+                        } else if (this.docW <= 1003) {
+                                $('.bar-front').width(0)
+                        }
+                    } else if (this.countStep % 5 == 1) {
+                        $('.tireCards').css({"display": "none"})
+                        $('.colorCards').css({"display": "flex"})
+                        $('.colorCard').css({"display": "block"})
+
+                        $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
+                        $(this).removeClass('invisible')
+                    
+                        $('.nextStep').removeClass('btn--disabled')
+                    
+                        if (this.docW > 1003) {
+                                $('.bar-front').width(240)
+                        } else if (this.docW <= 1003) {
+                                $('.bar-front').width(220)
+                        }
+                    } else if (this.countStep % 5 == 2) {
+                        $('.accessoryCards').css({"display": "none"})
+                        $('.tireCards').css({"display": "flex"})
+                        $('.tireCard').css({"display": "block"})
+                    
+                        $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
+                        $('.nextStep').removeClass('btn--disabled')
+                    
+                        if (this.docW > 1003) {
+                                $('.bar-front').width(480)
+                        } else if (this.docW <= 1003) {
+                                $('.bar-front').width(440)
+                        }
+                    } else if (this.countStep % 5 == 3) {
+                        $('.giveName').css({"display": "none"})
+                        $('.selectArea').css({"display": "block"})
+                        $('.accessoryCards').css({"display": "flex"})
+                        $('.accessoryCard').css({"display": "block"})
+                    
+                        $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
+                        if (this.docW > 1003) {
+                                $('.bar-front').width(730)
+                        } else if (this.docW <= 1003) {
+                                $('.bar-front').width(660)
+                        }
+                    }else{//countStep % 5 == 4
+                        $('.giveName').css({"display": "none"})
+                        $('.selectArea').css({"display": "block"})
+                        $('.accessoryCards').css({"display": "block"})
+                    }
+                },
+                // getShapeIndex(e){
+                    //抓取車型的index(用來判別顏色圖要貼甚麼)
+                    // this.shapeIndex = $(e.target).parent().index();
+                    // console.log(this.shapeIndex)
+                // },
+                getCircleIndex(e){
+                    circleIndex = $(e.target).parent().index();
+                    console.log("circleIndex: " + circleIndex)
+                },
+                moveRight(){
+                    this.countL += 1;
+
+                    let distanceToLeft = $('.selectArea').position().left;
+                    // console.log(distanceToLeft)
+
+                    if (this.docW <= 992) {
+                        if (this.countStep < 3 && distanceToLeft > -900) {
+                            $('.selectArea').animate({left: '-=430'});
+                        } else if (this.countStep == 3 && distanceToLeft > -2100) {
+                        
+                            $('.selectArea').animate({left: '-=410'});
+                        }
+                    } else {
+                        if (this.countStep < 3 && distanceToLeft > 15) {
+                            $('.selectArea').animate({left: '-=410'});
+                        } else if (this.countStep == 3 && distanceToLeft > -400) {
+                            // console.log('再過去一點')
+                            $('.selectArea').animate({left: '-=410'});
+                        }
+                    }
+                },
+                moveLeft(){
+                    this.countR += 1;
+                    console.log('countR: '+ this.countR);
+                    // console.log('docW: '+ docW)
+
+                    let shapeLength = $('.shapeCard').length
+                    // console.log(shapeLength)
+
+                    let colorLength = $('.selectColor').length
+                    // console.log(colorLength)
+                    // console.log("countStep:  " + countStep)
+
+                    let distanceToLeft = $('.selectArea').position().left;
+                    // console.log(distanceToLeft)
+
+                    if (this.docW <= 992) {
+                        if (this.countStep == 0 && distanceToLeft < 3) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        }
+                    } else {
+                        if (this.countStep == 0 && distanceToLeft < 14) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
+                            $('.selectArea').animate({left: '+=410'});
+                        }
+                    }
+                },
+                sort(){
+                   let postTimes = $('.mainTime').text().split('小時前');
+                   console.log(postTimes)
+                //    console.log(postTimes.length)
+
+                   for(i = 0; i < postTimes.length - 1; i++){
+                    console.log(postTimes[i])
+                   }
+
+                //    $('.work:nth-child(1)').css({"position":"initial","order":"5"})
+                //    $('.work:nth-child(2)').css({"position":"initial","order":"1"})
+                //    $('.work:nth-child(3)').css({"position":"initial","order":"4"})
+                //    $('.work:nth-child(4)').css({"position":"initial","order":"2"})
+                //    $('.work:nth-child(5)').css({"position":"initial","order":"6"})
+                //    $('.work:nth-child(6)').css({"position":"initial","order":"3"})
+
+                //    $('.grid').masonry({
+                //       // options
+                //       horizontalOrder: true,
+                //       itemSelector: '.grid-item',
+                //       columnWidth: 466
+                //    });
+                },
+                selectWhite(){
+                    // let canvas = document.querySelector('.canvas');
+                    // let context = canvas.getContext('2d');
+                    // let pic2 = new Image();
+
+                    // if (this.shapeIndex == 0) {
+                    //         pic2.src = './assets/img/pic/color1A.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, 0, -100);
+                    //     })
+                    // } else if (this.shapeIndex == 1) {
+                    //         pic2.src = './assets/img/pic/color1B.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, 0, -100);
+                    //     })
+                    
+                    // } else if (this.shapeIndex == 2 || this.shapeIndex == 3) {
+                    //         pic2.src = './assets/img/pic/color1C.png'; //白
+                    //         pic2.addEventListener('load', function() {
+                    //         context.globalAlpha = 1;
+                    //         context.drawImage(pic2, -1, -117);
+                    //     })
+                    // }
+                },
 
             },
         });
@@ -924,6 +1405,10 @@
 
                     // ajax
                 },
+                closeModal(){
+                    console.log('關掉喔')
+                    $('.modal').removeClass('modal-active');
+                }
 
             },
         });
@@ -947,96 +1432,7 @@
             el: '#mywork',
         })
 
-        // --------------------------------------------
-        //進入彈窗、後面固定不給滾動 //移到Vue
-        // $('.work_pic').click(function() {
-        //     $('.mask').css({"display": "block"});
-
-        //     $('.containerMain').css({"position": "fixed"});
-        // });
-
-        //關掉彈窗 //移到Vue
-        // $('.closeIcon').click(function() {
-        //     $('.mask').css({"display": "none",});
-
-        //     $('.containerMain').css({"position": "initial",});
-        // })
-
-        //收起、打開更多子回覆  //移到Vue
-        // let count1 = 0;
-        // $('.moreReply').click(function() {
-        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').slideToggle();
-        //     $(this).parent().children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
-
-        //     count1 += 1;
-        //     // console.log(count1);
-
-        //     if (count1 % 2 == 1) {
-        //         $(this).children('.moreReplyWord').text('關閉子回覆');
-
-        //         $(this).children('.toggleIcon1').css({
-        //             "transform": "rotate(180deg)",
-        //         })
-        //     } else {
-        //         $(this).children('.moreReplyWord').text('1則回覆');
-
-        //         $(this).children('.toggleIcon1').css({
-        //             "transform": "rotate(0deg)",
-        //         })
-        //     }
-        // })
-
-        //收起、打開更多回覆 //移到Vuw
-        // let count2 = 0;
-        // $('.readMore').click(function() {
-        //     $(this).parent().children('.hiddenReply').slideToggle();
-        //     $(this).parent().children('.hiddenReply').css({"display": "flex"});
-
-        //     count2 += 1;
-        //     // console.log(count2);
-
-        //     if (count2 % 2 == 1) {
-        //         $(this).children('.readMoreWord').text('關閉更多');
-
-        //         $(this).children('.toggleIcon2').css({
-        //             "transform": "rotate(180deg)",
-        //         })
-        //         // console.log('1')
-        //     } else {
-        //         $(this).children('.readMoreWord').text('閱讀更多');
-
-        //         $(this).children('.toggleIcon2').css({
-        //             "transform": "rotate(0deg)",
-        //         })
-        //         // console.log('2')
-        //     }
-        // })
-
-        //收起、打開輸入回覆區
-        let count3 = 0;
-
-        $('.closeTextarea').click(function() {
-            // console.log('coloseTextarea')
-            $(this).parent().children('.typeReply').slideToggle();
-
-            count3 += 1;
-            // console.log(count3);
-
-            if (count3 % 2 == 1) {
-                $(this).children('.textareaWord').text('打開輸入框');
-
-                $(this).children('.toggleIcon3').css({
-                    "transform": "rotate(180deg)",
-                })
-            } else {
-                $(this).children('.textareaWord').text('關閉輸入框');
-
-                $(this).children('.toggleIcon3').css({
-                    "transform": "rotate(0deg)",
-                })
-            }
-        })
-
+        // ----------------------JQ區----------------------
         //計算輸入框內的剩餘字數，按進去沒輸入字變紅框
         let textMax = 100;
         $('.textCount').text(`餘${textMax}字`);
@@ -1053,51 +1449,6 @@
                 })
             }
         })
-
-        //按留言若未輸入字的話變紅框 //移到Vue
-        // $('.comment').click(function() {
-        //     let textLength = $(this).parent().parent().children('.textarea').val().length;
-
-        //     if (textLength < 1) {
-        //         // console.log('no text')
-        //         $(this).parent().parent().children('.textarea').css({"border": "1px solid red"})
-        //     } else {
-        //         // console.log('ok')
-        //         $(this).parent().parent().children('.textarea').css({"border": "1px solid #000"})
-        //     }
-        // })
-
-        //點我的車車、大家的車車後會標示目前在哪
-        $('.workButton').click(function() {
-            $(this).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
-
-            $('.workButton').not(this).css({"background": "none"})
-
-            $('.othersWorks').css({"display": "flex"})
-            $('.mywork').css({"display": "none"})
-
-        })
-
-        //點我的車車時，大家的車車消失，我的車車或emptyState出現
-        $('.myworks').click(function() {
-            $('.othersWorks').css({"display": "none"})
-            $('.mywork').css({"display": "block"})
-                // console.log('我的車車出現')
-        })
-
-        //點開始製作時進度條出現、介紹的圖文消失、製作區域出現
-        $('.make').click(function() {
-            $('.previousStep').addClass('invisible')
-
-            $('.progressBar').css({"display": "block"})
-
-            $('.circle:first').css({"background-color": "#E59807"})
-
-            $('.intro').css({"display": "none"})
-
-            $('.makeCar').css({"display": "block"})
-        })
-
 
         //選擇後「下一步」變able、提醒先做選則才進入下一步的提示消失
         // 選擇的項目標示顏色、單選的情況其他沒選的不標色
@@ -1131,230 +1482,222 @@
         $('.selectAccessory').click(() => {
             $('.nextStep').removeClass('btn--disabled')
             $('.pleaseSelect').css({"display": "none"})
-
-            // $(this).parent().siblings().children('.btn').addClass('btn--outline') // 單選才需要這個
         })
 
-        //點下一步後跳到選色步驟、跳選輪子步驟
-        let countStep = 0;
-        let docW = $(document).width();
-        $('.nextStep').click(() => {
-            console.log("nextStep is clicked! countStep: "+ countStep)
-            // console.log(docW)
+        //點下一步後跳到選色步驟、跳選輪子步驟 //移到Vue
+        // let countStep = 0;
+        // let docW = $(document).width();
+        // $('.nextStep').click(() => {
+        //     console.log("nextStep is clicked! countStep: "+ countStep)
+        //     // console.log(docW)
 
-            if ($('.nextStep').hasClass('btn--disabled')) {
+        //     if ($('.nextStep').hasClass('btn--disabled')) {
 
-                $('.pleaseSelect').css({"display": "block"})
+        //         $('.pleaseSelect').css({"display": "block"})
 
-                setTimeout(() => {
-                    $('.pleaseSelect').css({"display": "none"})
-                }, 1000);
-            } else {
-                $('.previousStep').removeClass('invisible')
+        //         setTimeout(() => {
+        //             $('.pleaseSelect').css({"display": "none"})
+        //         }, 1000);
+        //     } else {
+        //         $('.previousStep').removeClass('invisible')
 
+        //         countStep += 1;
+        //         $('.shapeCard').css({"display": "none"})
 
-                countStep += 1;
-                $('.shapeCard').css({"display": "none"})
-
-                if (countStep % 5 == 1) {
-                    console.log(countStep)
-                    $('.nextStep').addClass('btn--disabled')
+        //         if (countStep % 5 == 1) {
+        //             console.log(countStep)
+        //             $('.nextStep').addClass('btn--disabled')
                     
 
-                    //進入選顏色
-                    $('.colorCards').css({"display": "flex"})
-                    $('.colorCard').css({"display": "block"})
+        //             //進入選顏色
+        //             $('.colorCards').css({"display": "flex"})
+        //             $('.colorCard').css({"display": "block"})
 
-                    //提醒內容變更
-                    $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
+        //             //提醒內容變更
+        //             $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
 
-                    //進度條、圓圈變色
-                    $('.content:nth-child(2) .circle').addClass('circle--able')
-                    $('.content:nth-child(2) .circle').addClass('circle--active')
+        //             //進度條、圓圈變色
+        //             $('.content:nth-child(2) .circle').addClass('circle--able')
+        //             $('.content:nth-child(2) .circle').addClass('circle--active')
 
-                    if (docW > 1003) {
-                        $('.bar-front').width(240)
-                    } else if (docW <= 1003) {
-                        $('.bar-front').width(220)
-                    }
+        //             if (docW > 1003) {
+        //                 $('.bar-front').width(240)
+        //             } else if (docW <= 1003) {
+        //                 $('.bar-front').width(220)
+        //             }
 
-                } else if (countStep % 5  == 2) {
+        //         } else if (countStep % 5  == 2) {
+        //             console.log(countStep)
 
-                    console.log(countStep)
+        //             $('.nextStep').addClass('btn--disabled')
 
-                    $('.nextStep').addClass('btn--disabled')
+        //             //進入選輪子
+        //             $('.colorCard').css({"display": "none"})
 
-                    //進入選輪子
-                    $('.colorCard').css({"display": "none"})
+        //             $('.tireCards').css({"display": "flex"})
+        //             $('.tireCard').css({"display": "block"})
 
-                    $('.tireCards').css({"display": "flex"})
-                    $('.tireCard').css({"display": "block"})
+        //             //提醒內容變更
+        //             $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
 
-                    //提醒內容變更
-                    $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
+        //             //進度條變色
+        //             $('.content:nth-child(3) .circle').addClass('circle--able')
+        //             $('.content:nth-child(3) .circle').addClass('circle--active')
 
-                    //進度條變色
-                    // $('.content:nth-child(3) .circle').css({"background-color": "#E59807"})
-                    $('.content:nth-child(3) .circle').addClass('circle--able')
-                    $('.content:nth-child(3) .circle').addClass('circle--active')
+        //             if (docW > 1003) {
+        //                 $('.bar-front').width(480)
+        //             } else if (docW <= 1003) {
+        //                 $('.bar-front').width(440)
+        //             }
 
-                    if (docW > 1003) {
-                        $('.bar-front').width(480)
-                    } else if (docW <= 1003) {
-                        $('.bar-front').width(440)
-                    }
+        //         } else if (countStep % 5  == 3) {
+        //             if(shapeIndex != 0){
+        //                 console.log('讓尾翼不能選')
+        //                 $('.selectA6').addClass('btn--disabled')
+        //                 $('.selectA6').removeClass('btn--outline')
+        //                 $('.selectA6').css({"pointer-events":"none"})
+        //             }
 
-                } else if (countStep % 5  == 3) {
-                    if(shapeIndex != 0){
-                        console.log('讓尾翼不能選')
-                        $('.selectA6').addClass('btn--disabled')
-                        $('.selectA6').removeClass('btn--outline')
-                        $('.selectA6').css({"pointer-events":"none"})
-                    }
+        //             console.log(countStep)
 
-                    console.log(countStep)
+        //             $('.nextStep').addClass('btn--disabled')
 
-                    $('.nextStep').addClass('btn--disabled')
+        //             //進入選配件
+        //             $('.tireCard').css({"display": "none"})
 
-                    //進入選配件
-                    $('.tireCard').css({"display": "none"})
+        //             //提醒內容變更
+        //             $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
 
-                    //提醒內容變更
-                    $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
+        //             $('.accessoryCards').css({"display": "flex"})
+        //             $('.accessoryCard').css({"display": "block"
+        //             })
 
-                    $('.accessoryCards').css({"display": "flex"})
-                    $('.accessoryCard').css({"display": "block"
-                    })
-
-                    //進度條、圓圈變色
-                    $('.content:nth-child(4) .circle').addClass('circle--able')
-                    $('.content:nth-child(4) .circle').addClass('circle--active')
+        //             //進度條、圓圈變色
+        //             $('.content:nth-child(4) .circle').addClass('circle--able')
+        //             $('.content:nth-child(4) .circle').addClass('circle--active')
 
 
-                    if (docW > 1003) {
-                        $('.bar-front').width(730)
-                    } else if (docW <= 1003) {
-                        $('.bar-front').width(660)
-                    }
-                } else if (countStep % 5 == 4) {
-                    console.log(countStep)
+        //             if (docW > 1003) {
+        //                 $('.bar-front').width(730)
+        //             } else if (docW <= 1003) {
+        //                 $('.bar-front').width(660)
+        //             }
+        //         } else if (countStep % 5 == 4) {
+        //             console.log(countStep)
 
-                    // $('.giveName').css({"display": "none"})
+        //             $('.nextStep').addClass('btn--disabled').text('完成')
+        //             $('.nextStep').addClass('finish')
 
-                    $('.nextStep').addClass('btn--disabled').text('完成')
-                    $('.nextStep').addClass('finish')
+        //             $('.selectArea').css({"display": "none"})
 
-                    $('.selectArea').css({"display": "none"})
+        //             $('.giveName').css({
+        //                 "display": "flex",
+        //                 "justify-content": "space-between"
+        //             })
 
-                    $('.giveName').css({
-                        "display": "flex",
-                        "justify-content": "space-between"
-                    })
+        //             //左右紐消失
+        //             $('.selectBtn').css({"display": "none"})
 
-                    //左右紐消失
-                    $('.selectBtn').css({"display": "none"})
+        //             //提醒內容變更
+        //             $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
 
-                    //提醒內容變更
-                    $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
+        //             //進度條、圓圈變色
+        //             $('.content:nth-child(5) .circle').addClass('circle--able')
+        //             $('.content:nth-child(5) .circle').addClass('circle--active')
 
-                    //進度條、圓圈變色
-                    $('.content:nth-child(5) .circle').addClass('circle--able')
-                    $('.content:nth-child(5) .circle').addClass('circle--active')
+        //             if(docW > 1003){
+        //                 $('.bar-front').width(960) 
+        //             }else if(docW <= 1003){
+        //                 $('.bar-front').width(840) 
+        //             }
+        //         }
+        //     }
+        // })
 
-                    if(docW > 1003){
-                        $('.bar-front').width(960) 
-                    }else if(docW <= 1003){
-                        $('.bar-front').width(840) 
-                    }
-                }
-            }
-        })
-
-        $('.make').click(() => {
-            console.log(countStep)
+        // $('.make').click(() => { //移到Vue
             // console.log('清空')
-            context.clearRect(0, 0, 400, 200)
-            contextA1.clearRect(0, 0, 400, 200)
-            contextA2.clearRect(0, 0, 400, 200)
-            contextA3.clearRect(0, 0, 400, 200)
-            $(this).removeClass('finish')
-        })
+        //     context.clearRect(0, 0, 400, 200)
+        //     contextA1.clearRect(0, 0, 400, 200)
+        //     contextA2.clearRect(0, 0, 400, 200)
+        //     contextA3.clearRect(0, 0, 400, 200)
+        //     $(this).removeClass('finish')
+        // })
 
-        //上一步
-        $('.previousStep').click(function() {
-            countStep -= 1
-            console.log("previousStep is clicked! countStep: " + countStep)
+        //上一步 //移到Vue
+        // $('.previousStep').click(function() {
+        //     countStep -= 1
+        //     console.log("previousStep is clicked! countStep: " + countStep)
 
-            if (countStep % 5 == 0) {
-                $('.colorCards').css({"display": "none"})
-                $('.shapeCards').css({"display": "flex"})
-                $('.shapeCard').css({"display": "block"})
+        //     if (countStep % 5 == 0) {
+        //         $('.colorCards').css({"display": "none"})
+        //         $('.shapeCards').css({"display": "flex"})
+        //         $('.shapeCard').css({"display": "block"})
 
-                $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+        //         $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
 
-                $('.previousStep').addClass('invisible')
+        //         $('.previousStep').addClass('invisible')
 
-                if (docW > 1003) {
-                        $('.bar-front').width(0)
-                } else if (docW <= 1003) {
-                        $('.bar-front').width(0)
-                }
+        //         if (docW > 1003) {
+        //                 $('.bar-front').width(0)
+        //         } else if (docW <= 1003) {
+        //                 $('.bar-front').width(0)
+        //         }
 
-            } else if (countStep % 5 == 1) {
-                $('.tireCards').css({"display": "none"})
-                $('.colorCards').css({"display": "flex"})
-                $('.colorCard').css({"display": "block"})
+        //     } else if (countStep % 5 == 1) {
+        //         $('.tireCards').css({"display": "none"})
+        //         $('.colorCards').css({"display": "flex"})
+        //         $('.colorCard').css({"display": "block"})
                 
-                $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
-                $(this).removeClass('invisible')
+        //         $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
+        //         $(this).removeClass('invisible')
 
-                $('.nextStep').removeClass('btn--disabled')
+        //         $('.nextStep').removeClass('btn--disabled')
 
-                if (docW > 1003) {
-                        $('.bar-front').width(240)
-                } else if (docW <= 1003) {
-                        $('.bar-front').width(220)
-                }
-            } else if (countStep % 5 == 2) {
-                $('.accessoryCards').css({"display": "none"})
-                $('.tireCards').css({"display": "flex"})
-                $('.tireCard').css({"display": "block"})
+        //         if (docW > 1003) {
+        //                 $('.bar-front').width(240)
+        //         } else if (docW <= 1003) {
+        //                 $('.bar-front').width(220)
+        //         }
+        //     } else if (countStep % 5 == 2) {
+        //         $('.accessoryCards').css({"display": "none"})
+        //         $('.tireCards').css({"display": "flex"})
+        //         $('.tireCard').css({"display": "block"})
 
-                $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
-                $('.nextStep').removeClass('btn--disabled')
+        //         $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
+        //         $('.nextStep').removeClass('btn--disabled')
 
-                if (docW > 1003) {
-                        $('.bar-front').width(480)
-                } else if (docW <= 1003) {
-                        $('.bar-front').width(440)
-                }
-            } else if (countStep % 5 == 3) {
-                $('.giveName').css({"display": "none"})
-                $('.selectArea').css({"display": "block"})
-                $('.accessoryCards').css({"display": "flex"})
-                $('.accessoryCard').css({"display": "block"})
+        //         if (docW > 1003) {
+        //                 $('.bar-front').width(480)
+        //         } else if (docW <= 1003) {
+        //                 $('.bar-front').width(440)
+        //         }
+        //     } else if (countStep % 5 == 3) {
+        //         $('.giveName').css({"display": "none"})
+        //         $('.selectArea').css({"display": "block"})
+        //         $('.accessoryCards').css({"display": "flex"})
+        //         $('.accessoryCard').css({"display": "block"})
 
-                $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
-                if (docW > 1003) {
-                        $('.bar-front').width(730)
-                } else if (docW <= 1003) {
-                        $('.bar-front').width(660)
-                }
-            }else{//countStep % 5 == 4
-                $('.giveName').css({"display": "none"})
-                $('.selectArea').css({"display": "block"})
-                $('.accessoryCards').css({"display": "block"})
+        //         $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
+        //         if (docW > 1003) {
+        //                 $('.bar-front').width(730)
+        //         } else if (docW <= 1003) {
+        //                 $('.bar-front').width(660)
+        //         }
+        //     }else{//countStep % 5 == 4
+        //         $('.giveName').css({"display": "none"})
+        //         $('.selectArea').css({"display": "block"})
+        //         $('.accessoryCards').css({"display": "block"})
 
 
-            }
-        })
+        //     }
+        // })
 
         // console.log(countStep)
-        //先抓取進度條圓圈(circle)的index
-        $('.circle').click((e) => {
-            circleIndex = $(e.target).parent().index();
-            console.log("circleIndex: " + circleIndex)
-        })
+        //先抓取進度條圓圈(circle)的index //移到Vue
+        // $('.circle').click((e) => {
+        //     circleIndex = $(e.target).parent().index();
+        //     console.log("circleIndex: " + circleIndex)
+        // })
 
 
         //若沒有輸入所有資料跳出請完成資料輸入
@@ -1366,13 +1709,10 @@
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
+            let timeCalc = new Date() - Now();
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
-                // console.log(typeWorkNameL)
-                // console.log(typeNickNameL)
-                // console.log(typeInspirationL)
-
                 let x = `<li class="work col-4 col-lg-2 col-sm-4">
                         <div class="work_pic">
                             <img src="data:image/png;${dataURL}" class="layer1">
@@ -1388,7 +1728,7 @@
                                 <h2 class="workName h4">${typeNickName}</h2>
                                 <p class="userContent h5">${typeInspiration}</p>
                                 <div class="other">
-                                    <p class="postTime h6">3小時前</p>
+                                    <p class="postTime h6">${timeCalc}</p>
                                     <div class="other_right">
                                         <button class="btn btn--link h5 mr-4">編輯</button>
                                         <button class="btn btn--link h5">刪除</button>
@@ -1490,103 +1830,9 @@
                     // console.log('變回去')
                     $(e.target).children('g').children('path').removeClass('pin--secondary')         
                 })
-
-                ////PO完後再跑一次這段
-                // $('.comment').click(() => {
-                //     console.log(this)
-                //     let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-                //     let commentContent = $(this).parent().parent().children('.textarea').val();
-
-                //     let A = $(this).parent();
-                //     console.log(A)
-
-
-                //     let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-                //     console.log(replyerPic)
-
-                //     let replyerName = $(this).parent().parent().children('.replyerName').text();
-                //     console.log(replyerName)
-
-                //     if (commentContentL < 1) { //沒有打字的時候
-                //         $(this).parent().parent().children('.textarea').css({"border": "1px solid red",}) //紅框
-                //     } else { //有打字的時候
-                //         $(this).parent().parent().children('.textarea').css({"border": "1px solid #000",}) //黑框
-                    
-                //         //PO留言
-                //         $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
-                //           <div class="userContext">
-                //               <img src="${replyerPic}"  class="userPic">
-                //               <div class="userContext_top">
-                //                   <p class="userName h6">${replyerName}</p>
-                //                   <p class="userContent h5">${commentContent}</p>
-                //                   <div class="other">
-                //                       <p class="postTime h6">3小時前</p>
-                //                       <div>                                
-                //                           <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                //                           <button class="btn btn--link report h5">檢舉</button>
-                //                       </div>
-                //                   </div>
-                //               </div>
-                //           </div></div>`)
-                      
-                //         $(this).parent().parent().children('.textarea').val('');
-                //         $(this).parent().children('.textCount').text(`餘${textMax}字`);
-                //     }
-                // })
-
-                $('.comment').click(function() {
-                    let textLength = $(this).parent().parent().children('.textarea').val().length;
-
-                    if (textLength < 1) {
-                        // console.log('no text')
-                        $(this).parent().parent().children('.textarea').css({
-                            "border": "1px solid red",
-                        })
-                    } else {
-                        // console.log('ok')
-                        $(this).parent().parent().children('.textarea').css({
-                            "border": "1px solid #000",
-                        })
-                    }
-                })
-
-                // $('.comment').click(function() {  //移到Vue
-                //     let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-                //     let commentContent = $(this).parent().parent().children('.textarea').val();
-                    
-                //     let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-                //     // console.log(replyerPic)
-                    
-                //     let replyerName = $(this).parent().parent().children('.replyerName').text();
-                //     // console.log(replyerName)
-                    
-                    
-                //     if (commentContentL > 0) {
-                //         $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
-                //                 <div class="userContext">
-                //                     <img src="${replyerPic}"  class="userPic">
-                //                     <div class="userContext_top">
-                //                         <p class="userName h6">${replyerName}</p>
-                //                         <p class="userContent h5">${commentContent}</p>
-                //                         <div class="other">
-                //                             <p class="postTime h6">3小時前</p>
-                //                             <div>                                
-                //                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-
-                //                             </div>
-                //                         </div>
-                //                     </div>
-                //                 </div>
-                //             </div>`)
-                        
-                //         $(this).parent().parent().children('.textarea').val('');
-                //         $(this).parent().children('.textCount').text(`餘${textMax}字`);
-                //     }
-                // })
             }
         })
 
-        // <button class="btn btn--link report h5">檢舉</button>
 
         //完成資料輸入後按鈕自動變able、移除提示
         $('.giveName').change(function() {
@@ -1610,142 +1856,103 @@
             let ran1 = Math.floor(Math.random() * 10)
             let ran2 = Math.floor(Math.random() * 10)
 
-            // console.log(ran1)
-            // console.log(ran2)
-
             $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
         })
 
-        let countL = 0;
-        let countR = 0;
-        let distance = 410;
+        // let countL = 0;
+        // let countR = 0;
+        // let distance = 410;
         //選擇車型、零件的區域按左右會移動
-        $('.selectAreaOut-next').click(function() {
-            countL += 1;
-            // console.log("countL ":+ countL);
-            // console.log("countStep: " + countStep)
-            // console.log('docW: '+ docW)
+        // $('.selectAreaOut-next').click(function() { //移到Vue
+            // countL += 1;
+            // // console.log("countL ":+ countL);
+            // // console.log("countStep: " + countStep)
+            // // console.log('docW: '+ docW)
 
-            let distanceToLeft = $('.selectArea').position().left;
-            // console.log(distanceToLeft)
+            // let distanceToLeft = $('.selectArea').position().left;
+            // // console.log(distanceToLeft)
 
-            if (docW <= 992) {
-                if (countStep < 3 && distanceToLeft > -900) {
-                    $('.selectArea').animate({
-                        left: '-=430'
-                    });
-                } else if (countStep == 3 && distanceToLeft > -2100) {
+            // if (docW <= 992) {
+            //     if (countStep < 3 && distanceToLeft > -900) {
+            //         $('.selectArea').animate({
+            //             left: '-=430'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft > -2100) {
 
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                }
-            } else {
-                if (countStep < 3 && distanceToLeft > 15) {
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft > -400) {
-                    // console.log('再過去一點')
-                    $('.selectArea').animate({
-                        left: '-=410'
-                    });
-                }
-            }
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     }
+            // } else {
+            //     if (countStep < 3 && distanceToLeft > 15) {
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft > -400) {
+            //         // console.log('再過去一點')
+            //         $('.selectArea').animate({
+            //             left: '-=410'
+            //         });
+            //     }
+            // }
+        // })
 
-        })
+        // $('.selectAreaOut-previous').click(function() { //移到Vue
+            // countR += 1;
+            // console.log('countR: '+ countR);
+            // // console.log('docW: '+ docW)
 
-        $('.selectAreaOut-previous').click(function() {
-            countR += 1;
-            console.log('countR: '+ countR);
-            // console.log('docW: '+ docW)
+            // let shapeLength = $('.shapeCard').length
+            //     // console.log(shapeLength)
 
-            let shapeLength = $('.shapeCard').length
-                // console.log(shapeLength)
+            // let colorLength = $('.selectColor').length
+            //     // console.log(colorLength)
 
-            let colorLength = $('.selectColor').length
-                // console.log(colorLength)
+            // // console.log("countStep:  " + countStep)
 
-            // console.log("countStep:  " + countStep)
+            // let distanceToLeft = $('.selectArea').position().left;
+            // // console.log(distanceToLeft)
 
-            let distanceToLeft = $('.selectArea').position().left;
-            // console.log(distanceToLeft)
+            // if (docW <= 992) {
+            //     if (countStep == 0 && distanceToLeft < 3) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     }
+            // } else {
+            //     if (countStep == 0 && distanceToLeft < 14) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
+            //         $('.selectArea').animate({
+            //             left: '+=410'
+            //         });
+            //     }
+            // }
+        // })
 
-            if (docW <= 992) {
-                if (countStep == 0 && distanceToLeft < 3) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                }
-            } else {
-                if (countStep == 0 && distanceToLeft < 14) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                } else if (countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
-                    $('.selectArea').animate({
-                        left: '+=410'
-                    });
-                }
-            }
-        })
-
-        //點留言後PO出留言
-        // $('.comment').click(function() {
-        //         let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-        //         let commentContent = $(this).parent().parent().children('.textarea').val();
-
-        //         let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-        //         // console.log(replyerPic)
-
-        //         let replyerName = $(this).parent().parent().children('.replyerName').text();
-        //         // console.log(replyerName)
-
-
-        //         if (commentContentL > 0) {
-        //             $(this).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
-        //                     <div class="userContext">
-        //                         <img src="${replyerPic}"  class="userPic">
-        //                         <div class="userContext_top">
-        //                             <p class="userName h6">${replyerName}</p>
-        //                             <p class="userContent h5">${commentContent}</p>
-        //                             <div class="other">
-        //                                 <p class="postTime h6">3小時前</p>
-        //                                 <div>                                
-        //                                     <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-        //                                     <button class="btn btn--link report h5">檢舉</button>
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>`)
-
-        //             $(this).parent().parent().children('.textarea').val('');
-        //             $(this).parent().children('.textCount').text(`餘${textMax}字`);
-        //         }
-        //     })
-            // ---------------------------------計算金額------------------------------------------------
-
+        // ---------------------------------計算金額------------------------------------------------
 
         $('.selectShape').click(function() {
             let totalPriceInit = $('.totalPrice').text().split(' ')[1]
@@ -1812,9 +2019,6 @@
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
 
             }
-
-
-
         })
 
         // -------------------------------------CANVAS--------------------------------------------
@@ -1859,16 +2063,21 @@
             })
         }
 
-        //疊上顏色        
-        $('.selectShape').click(function() {
-            //抓取車型的index(用來判別顏色圖要貼甚麼)
-            shapeIndex = $(this).parent().index();
-            // console.log(shapeIndex)
+        //疊上顏色        //移到Vue
+        // $('.selectShape').click(function() {
+        //     //抓取車型的index(用來判別顏色圖要貼甚麼)
+        //     shapeIndex = $(this).parent().index();
+        //     // console.log(shapeIndex)
+        // })
+
+        $('.selectShape').click((e)=>{
+            shapeIndex = $(e.target).parent().index();
+            console.log(shapeIndex)
         })
 
-        $('.selectWhite').click(function() {
+        $('.selectWhite').click(function() { 
             let pic2 = new Image();
-            if (shapeIndex == 0) {
+            if (shapeIndex == 0) { 
                 pic2.src = './assets/img/pic/color1A.png'; //白
                 pic2.addEventListener('load', function() {
                     context.globalAlpha = 1;
@@ -1892,7 +2101,7 @@
 
         $('.selectRed').click(function() {
             let pic2 = new Image();
-            if (shapeIndex == 0) {
+            if (shapeIndex == 0) { 
                 pic2.src = './assets/img/pic/color2A.png'; //紅
                 pic2.addEventListener('load', function() {
                     context.globalAlpha = 1;
@@ -1915,7 +2124,7 @@
 
         $('.selectOrange').click(function() {
             let pic2 = new Image();
-            if (shapeIndex == 0) {
+            if (shapeIndex == 0) { 
                 pic2.src = './assets/img/pic/color3A.png'; //橙
                 pic2.addEventListener('load', function() {
                     context.globalAlpha = 1;
@@ -1939,7 +2148,7 @@
         $('.selectYellow').click(function() {
             let pic2 = new Image();
 
-            if (shapeIndex == 0) {
+            if (shapeIndex == 0) { 
                 pic2.src = './assets/img/pic/color4A.png'; //黃
                 pic2.addEventListener('load', function() {
                     context.globalAlpha = 1;
@@ -2140,27 +2349,27 @@
 
             if(click6 % 2 == 1){
                 let pic4 = new Image();
-                if (shapeIndex == 0) {
-                    // console.log('shapeIndex = 0')
-                    pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
-                    pic4.addEventListener('load', function() {
-                        contextA3.globalAlpha = 1;
-                        contextA3.drawImage(pic4, 0, -100);
-                    })
+                // if (shapeIndex == 0) {
+                //     // console.log('shapeIndex = 0')
+                //     pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
+                //     pic4.addEventListener('load', function() {
+                //         contextA3.globalAlpha = 1;
+                //         contextA3.drawImage(pic4, 0, -100);
+                //     })
                                      
-                    $(this).removeClass('btn--outline')
-                    $(this).text('取消此配件')//按了配件之後要變可以取消，字樣變取消配件
-                }else{
-                    // console.log('shapeIndex = 1 or 2')
-                    $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display": "block"})
+                //     $(this).removeClass('btn--outline')
+                //     $(this).text('取消此配件')//按了配件之後要變可以取消，字樣變取消配件
+                // }else{
+                //     // console.log('shapeIndex = 1 or 2')
+                //     $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display": "block"})
 
-                    $(this).addClass('btn--outline')
-                    $('.nextStep').addClass('btn--disabled')
+                //     $(this).addClass('btn--outline')
+                //     $('.nextStep').addClass('btn--disabled')
 
-                    setTimeout(function() {
-                        $('.pleaseSelect').css({"display": "none"})
-                    }, 1000);
-                }
+                //     setTimeout(function() {
+                //         $('.pleaseSelect').css({"display": "none"})
+                //     }, 1000);
+                // }
             }else{
                 contextA3.clearRect(0, 50, 400, 150);
 
@@ -2170,91 +2379,21 @@
         })
 
         // -----------------------CANVAS取得base64---------------------------
-        $('.nextStep').click(function() {
-            if (countStep % 5 == 4) {
-                dataURL = document.querySelector('.canvas').toDataURL();
-                dataURLA1 = document.querySelector('.canvasA1').toDataURL();
-                dataURLA2 = document.querySelector('.canvasA2').toDataURL();
-                dataURLA3 = document.querySelector('.canvasA3').toDataURL();
-                // console.log(dataURL)
-            }
-        })
-
-        //打開檢舉彈窗 //移到Vue
-        // $('.report').click(() => {
-        //     console.log('打開')
-        //     $('.containerMain .modal').addClass('modal-active');
-        // })
-
-        $('.modal__close').click(() => {
-            // console.log('關掉')
-            $('.modal').removeClass('modal-active');
-        })
-
-
-        //mouseover在Icon時svg變色 //移到Vue
-        // $('.goodIcon').mouseover((e) => {
-        //     console.log('變色')
-        //     $(e.target).children('g').children('path').addClass('pin--secondary')            
+        // $('.nextStep').click(function() {  //移到Vue
+        //     if (countStep % 5 == 4) {
+        //         dataURL = document.querySelector('.canvas').toDataURL();
+        //         dataURLA1 = document.querySelector('.canvasA1').toDataURL();
+        //         dataURLA2 = document.querySelector('.canvasA2').toDataURL();
+        //         dataURLA3 = document.querySelector('.canvasA3').toDataURL();
+        //         // console.log(dataURL)
+        //     }
         // })
 
         //移到Vue
-        // $('.goodIcon').mouseout((e) => {
-        //     console.log('變回去')
-        //     $(e.target).children('g').children('path').removeClass('pin--secondary')         
+        // $('.modal__close').click(() => {
+        //     console.log('關掉')
+        //     $('.modal').removeClass('modal-active');
         // })
-
-        //打開回覆的回覆textarea //移到Vue
-        // $('.replyComment').click((e)=>{
-        //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
-        //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
-        // })
-
-        //PO回覆的回覆
-        $('.subComment').click(function() {
-            console.log('subComment is clicked')
-                let commentContentL = $(this).parent().parent().children('.textarea').val().length;
-                let commentContent = $(this).parent().parent().children('.textarea').val();
-                console.log(commentContent)
-
-                let replyerPic = $(this).parent().parent().parent().children('.replyerPic').attr('src');
-                // console.log(replyerPic)
-
-                let replyerName = $(this).parent().parent().children('.replyerName').text();
-                // console.log(replyerName)
-
-
-                if (commentContentL > 0) {
-                    let b = $(this).parent().parent().parent().parent().parent().children('.work_reply').children(`.typeSubReply`);
-                    console.log(b)
-
-                    $(this).parent().parent().parent().parent().children('.userContext').after(`
-                            <div class="subUserContext hiddenSubReply">
-                                <img src="${replyerPic}"  class="userPic">
-                                <div class="userContext_top">
-                                    <p class="userName h6">${replyerName}</p>
-                                    <p class="userContent h5">${commentContent}</p>
-                                    <div class="other">
-                                        <p class="postTime h6">3小時前</p>
-                                        <div>                                
-
-                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `)
-
-                    $(this).parent().parent().children('.textarea').val('');
-                    $(this).parent().children('.textCount').text(`餘${textMax}字`);
-                }
-
-                //PO完後關掉回覆的回覆
-                $('.typeSubReply').css({"display":"none"})
-                
-                //PO完後出現「X則回覆」
-                $(this).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
-        })
 
         //----------------------- 點圓圈進入、退到下一步驟 -----------------------
         $('.content:nth-child(1) .circle').click(() => {
@@ -2479,13 +2618,11 @@
             }
         })
 
-        // 瀑布流
+        // 瀑布流樣式控制
         $('.grid').masonry({
           // options
           horizontalOrder: true,
-        //   gutter: 10,
           itemSelector: '.grid-item',
-        //   itemSelector: '.grid-item2',
           columnWidth: 466
         });
 
