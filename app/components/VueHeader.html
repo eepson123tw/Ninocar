@@ -66,7 +66,7 @@
                                 </a>
                             </li>
                             <li v-if="!isLogin">
-                                <button class="header__btn" @click="isLoginModalShow=true">登入 / 註冊</button>
+                                <button class="header__btn" @click="isModalShow=true">登入 / 註冊</button>
                             </li>
                             <li class="ml-10 ml-sm-5 lh-1">
                                 <svg role="button" aria-label="menu" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -93,7 +93,9 @@
                     </nav>
                 </div>
                 <link-group />
-                <modal-login :state="isLoginModalShow" @on-close="isLoginModalShow=false" @on-login="isLogin=true" />
+                <transition name="fade">
+                <modal-member v-if="isModalShow" @on-close="handleModalClose" @on-login="handleLogin" />
+            </transition>
             <transition name="collapse">
                 <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
             </transition>
@@ -104,13 +106,26 @@
             return {
                 username: '',
                 isLogin: false,
-                isLoginModalShow: false,
+                isModalShow: false,
                 isMenuShow: false,
             }
         },
+        methods: {
+            handleLogin() {
+                this.isLogin = true;
+                this.isModalShow = false
+            },
+            handleModalClose() {
+
+                this.isModalShow = false;
+            },
+
+        }
     });
 </script>
 
+
+
 @@include('./layout/HeaderLinkGroup.html')
 @@include('./layout/HeaderNavMenu.html')
-@@include('./member/ModalLogin.html')
+@@include('./ModalMember.html')

@@ -1,0 +1,34 @@
+   <script>
+       Vue.component('sign-up-content', {
+           template: '#signUp',
+           methods: {
+               handleSignUp() {
+                   this.$emit('sign-up');
+               },
+               handleLoginShow() {
+                   this.$emit('change', 'login-content');
+               }
+           }
+       });
+   </script>
+   <template id="signUp">
+       <div>
+           <h2 class="modal__title mb-5">
+               註冊新帳號
+           </h2>
+           <div class="form__group mb-5">
+               <label for="account" class="form__text">帳號</label>
+               <input type="text" class="form__input" id="account" placeholder="abc@gmail.com" />
+           </div>
+           <div class="form__group mb-5">
+               <label for="password" class="form__text">密碼</label>
+               <input type="text" class="form__input" id="password" placeholder="***" />
+           </div>
+           <div class="form__group mb-12">
+               <label for="password" class="form__text">確認密碼</label>
+               <input type="text" class="form__input" id="password" placeholder="***" />
+           </div>
+           <button class="btn btn--fluid mb-4" @click="handleSignUp">註冊</button>
+           <button class="btn btn--link" @click="handleLoginShow">回上一頁</button>
+       </div>
+   </template>
