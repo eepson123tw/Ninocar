@@ -17,6 +17,7 @@
                                 <div class="swiper-slide" v-for="(item,index2) in showList">
                                     <div class="swiper-zoom-container">
                                         <img :src="list.imgURL[1]" alt="" class="lazyload" />
+                                        <!-- <img :src="'./assets/img/pic/'+item" alt="" class="lazyload" /> -->
                                     </div>
                                 </div>
                             </div>
@@ -33,14 +34,13 @@
                     <div class="row d-flex justify-content-end">
                         <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
                     </div>
-                </div>
-
-                <div class="gallery">
-                    <img :src="list.imgURL[1]" />
-                    <img :src="list.imgURL[2]" />
-                    <img :src="list.imgURL[3]" />
-                    <img :src="list.imgURL[4]" />
-                    <img :src="list.imgURL[5]" />
+                    <div class="gallery">
+                        <img :src="list.imgURL[1]" />
+                        <img :src="list.imgURL[2]" />
+                        <img :src="list.imgURL[3]" />
+                        <img :src="list.imgURL[4]" />
+                        <img :src="list.imgURL[5]" />
+                    </div>
                 </div>
             </div>
         </div>
