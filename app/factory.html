@@ -507,15 +507,15 @@
                     let textLength = $(e.target).parent().parent().children('.textarea').val().length;
                     let commentContent = $(e.target).parent().parent().children('.textarea').val();
                     let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
-                    console.log(replyerPic)
+                    // console.log(replyerPic)
                     let replyerName = $(e.target).parent().parent().children('.replyerName').text();
-                    console.log(replyerName)
                     // console.log(replyerName)
+
                     if (textLength < 1) {
                         // console.log('no text')
                         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid red"})
                     } else {
-                        // console.log('ok')
+                        console.log('ok')
                         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid #000"})
 
                         $(e.target).parent().parent().parent().parent().children(`.readMore`).before(`<div class="work_reply hiddenReply">
@@ -524,13 +524,26 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">${replyerName}</p>
                                         <p class="userContent h5">${commentContent}</p>
-                                        <div class="other--type2">
+                                        <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>               
-                                                <button class="btn btn--link mr-4 h5 replyComment replyComment">回覆</button>
-                                                <button class="btn btn--link mr-4 h5 replyComment report" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
+                                                <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -540,6 +553,12 @@
                         $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
 
                         this.commentNum_plus += 1;
+
+                        $('.replyComment').click((e)=>{
+                            console.log('0000000')
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                        })
                     }   
                 },
                 coloredIcon(e){
@@ -554,9 +573,12 @@
                     // $(e.target).children('g').children('path').removeClass('pin--secondary')  
                 },
                 openSubTextarea(e){
-                    console.log(this.$el)
-                    $(this.$el).children('.work_reply').children('.typeSubReply').slideToggle();
-                    $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
+                    console.log('aaaa')
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                    // console.log(this.$el)
+                    // $(this.$el).children('.work_reply').children('.typeSubReply').slideToggle();
+                    // $(this.$el).children('.work_reply').children('.typeSubReply').css({"display":"flex"});
                 },
                 openReportModal(){
                     $('.container .modal').addClass('modal-active');
@@ -598,7 +620,7 @@
                },
                openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
-                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+                    $(this.$el).children('.hiddenReply').css({"display": "block"});
 
                     this.count2 += 1;
                     // console.log(count2);
@@ -737,13 +759,26 @@
                                         <div class="other">
                                             <p class="postTime h6">30分鐘前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment">回覆</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="subUserContext">
                                     <img src="./assets/img/pic/userPic03.png" class="userPic--small">
                                     <div class="userContext_top">
@@ -752,7 +787,7 @@
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
@@ -786,12 +821,25 @@
                                     <div class="userContext_top">
                                         <p class="userName h6">天婦羅好好吃</p>
                                         <p class="userContent h5">天婦羅好好吃</p>
-                                        <div class="other--type2">
+                                        <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
                                                 <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -839,9 +887,23 @@
                                         <div class="other">
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
-                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link mr-4 h5 replyComment" @click="openSubTextarea">回覆</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="typeSubReply">
+                                    <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
+    
+                                    <div class="typeReply_right">
+                                        <p class="replyerName">沾醬大師</p>
+                                        <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
+                                        <div class="other">
+                                            <p class="textCount"></p>
+                                            <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -851,6 +913,12 @@
                         $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
 
                         this.commentNum_plus += 1;
+
+                        $('.replyComment').click((e)=>{
+                            console.log('123123123')
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                        })
                     }   
                 },
                 coloredIcon(e){
@@ -860,9 +928,10 @@
                     this.is_icon_color = false
                 },
                 openSubTextarea(e){
-                    
-                    $(this.$el).children('.typeSubReply').slideToggle();
-                    $(this.$el).children('.typeSubReply').css({"display":"flex"});
+                    console.log('kokokoko')
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+
                 },
                 openReportModal(){
                     $('.containerMain .modal').addClass('modal-active');
@@ -897,7 +966,7 @@
                }
                ,openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
-                    $(this.$el).children('.hiddenReply').css({"display": "flex"});
+                    $(this.$el).children('.hiddenReply').css({"display": "block"});
 
                     this.count2 += 1;
                     // console.log(count2);
@@ -1658,7 +1727,7 @@
                                 <p class="userName h6">${typeWorkName}</p>
                                 <h2 class="workName h4">${typeNickName}</h2>
                                 <p class="userContent h5">${typeInspiration}</p>
-                                <div class="other--type2">
+                                <div class="other">
                                     <p class="postTime h6">${timeCalc}</p>
                                     <div class="other_right">
                                         <button class="btn btn--link h5 mr-4">編輯</button>
