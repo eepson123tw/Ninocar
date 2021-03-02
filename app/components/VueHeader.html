@@ -1,30 +1,7 @@
 <script>
     Vue.component('vue-header', {
-        template: '#header',
-        data() {
-            return {
-                username: '',
-                isLogin: false,
-                isModalShow: false,
-                isMenuShow: false,
-            }
-        },
-        methods: {
-            handleLogin() {
-                this.isLogin = true;
-                this.isModalShow = false
-            },
-            handleModalClose() {
-
-                this.isModalShow = false;
-            },
-
-        }
-    });
-</script>
-
-<template id="header">
-    <header class="header">
+        template: `
+        <header class="header">
         <div class="container d-flex justify-content-between align-items-center po-re py-2">
             <div class="d-flex">
                 <a href="index.html">
@@ -123,8 +100,29 @@
             <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
         </transition>
         <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
-    </header>
-</template>
+    </header>`,
+        data() {
+            return {
+                username: '',
+                isLogin: false,
+                isModalShow: false,
+                isMenuShow: false,
+            }
+        },
+        methods: {
+            handleLogin() {
+                this.isLogin = true;
+                this.isModalShow = false
+            },
+            handleModalClose() {
+
+                this.isModalShow = false;
+            },
+
+        }
+    });
+</script>
+
 
 @@include('./layout/HeaderLinkGroup.html')
 @@include('./layout/HeaderNavMenu.html')
