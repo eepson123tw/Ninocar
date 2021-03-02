@@ -49,15 +49,35 @@
                             './assets/img/pic/4.jpg',
                             './assets/img/pic/5.jpg',
                         ],
-                        // car: ['./assets/img/pic/0.png', '2.jpg', '3.jpg', '4.jpg', '5.jpg'],
+                        car: [
+                            './assets/img/pic/1.jpg',
+                            './assets/img/pic/2.jpg',
+                            './assets/img/pic/3.jpg',
+                            './assets/img/pic/4.jpg',
+                            './assets/img/pic/5.jpg',
+                        ],
                         seriousNum: 'PM 01',
                         pointProduct: false,
                         quantity: '0',
                     },
                     mask: false,
                     showList: [],
+                    nowImg: 0,
                 },
                 methods: {
+                    nextImg() {
+                        this.nowImg += 1;
+                        if (this.nowImg >= 4) {
+                            return;
+                        }
+                    },
+                    prevImg() {
+                        this.nowImg -= 1;
+                        if (this.nowImg >= 4) {
+                            return;
+                        }
+                    },
+
                     lightBox(showCar, close = false) {
                         if (close) {
                             this.mask = false;
@@ -66,8 +86,6 @@
                             this.showList = this.list[showCar];
 
                             this.$nextTick(() => {
-                                // DOM更新了
-                                // swiper重新初始化
                                 let swiper = new Swiper('.swiper-container', {
                                     zoom: true,
                                     pagination: {

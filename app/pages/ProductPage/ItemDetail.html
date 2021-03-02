@@ -9,23 +9,26 @@
                 <div class="car-name">{{list.productBrief}}</div>
                 <div class="lightBox">
                     <figure>
-                        <img @click="lightBox('imgURL')" class="demo" src="./assets/img/pic/0.png" alt="" />
+                        <img @click="lightBox('car')" class="demo" src="./assets/img/pic/0.png" alt="" />
                     </figure>
                     <div :class="{'mask':mask}" v-if="mask">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" v-for="(item,index2) in showList">
                                     <div class="swiper-zoom-container">
-                                        <img :src="list.imgURL[1]" alt="" class="lazyload" />
-                                        <!-- <img :src="'./assets/img/pic/'+item" alt="" class="lazyload" /> -->
+                                        <img v-show="nowImg === 0" :src="list.car[0]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 1" :src="list.car[1]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 2" :src="list.car[2]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 3" :src="list.car[3]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 4" :src="list.car[4]" alt="" class="lazyload" />
                                     </div>
                                 </div>
                             </div>
                             <!-- 燈箱照片下方swiper的點點 -->
                             <div class="swiper-pagination swiper-pagination-white"></div>
                             <!-- swiper套件的左右按鈕 -->
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
+                            <div @click="prevImg" class="swiper-button-prev"></div>
+                            <div @click="nextImg" class="swiper-button-next"></div>
                             <button class="closeBtn" @click="lightBox('',true)">
                                 <i class="fa fa-times"></i>
                             </button>
