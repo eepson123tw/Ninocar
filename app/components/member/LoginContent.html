@@ -52,7 +52,7 @@
           <div class="form__group mb-12">
               <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
                   class="form__text form__text--warning">{{password.remind}}</span>
-              <input type="text" ref="loginPassword" :class="password.inputClass" v-model.lazy="password.text"
+              <input type="password" ref="loginPassword" :class="password.inputClass" v-model.lazy="password.text"
                   @keyup.enter="$refs.loginBtn.click()" @change="handlePasswordCheck(password)" class="form__input"
                   placeholder="***" />
           </div>

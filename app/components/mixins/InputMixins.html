@@ -55,14 +55,19 @@
                 }
             },
             handleRequiredCheck() {
+                let isAllCheck = true;
                 this.inputList.forEach(input => {
                     if (input.text.trim() === '') {
-                        console.log('chick')
                         this.handleErrorShow(input, `${input.name}不能空白`);
+                        isAllCheck = false;
+                    } else if (input.remind !== '') {
+                        isAllCheck = false;
                     } else {
-                        input.remind === '' && this.handleSuccessShow(input);
+                        this.handleSuccessShow(input);
                     }
                 });
+                return isAllCheck;
+
             }
 
         }

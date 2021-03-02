@@ -38,7 +38,10 @@
                },
                handleSignUpCheck() {
                    this.handlePasswordMatchCheck(this.password, this.confirmPassword);
-                   this.handleRequiredCheck()
+                   const isAllCheck = this.handleRequiredCheck();
+                   if (isAllCheck) {
+                       console.log('yes')
+                   }
                }
            }
        });
@@ -58,14 +61,14 @@
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
                    class="form__text form__text--warning">{{password.remind}}</span>
-               <input type="text" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
+               <input type="password" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
                    @keyup.enter="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
                    class="form__input" placeholder="***" />
            </div>
            <div class="form__group mb-12">
                <label for="password" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
                    class="form__text form__text--warning">{{confirmPassword.remind}}</span>
-               <input type="text" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
+               <input type="password" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
                    v-model.lazy="confirmPassword.text" @keyup.enter="$refs.signUpBtn.click()"
                    @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" />
            </div>
