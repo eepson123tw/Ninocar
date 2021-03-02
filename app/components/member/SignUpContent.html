@@ -1,12 +1,44 @@
    <script>
        Vue.component('sign-up-content', {
            template: '#signUp',
+           mixins: [inputMixins],
+           data() {
+               return {
+                   account: {
+                       name: '帳號',
+                       text: '',
+                       remind: '',
+                       inputClass: '',
+                   },
+                   password: {
+                       name: '密碼',
+                       text: '',
+                       remind: '',
+                       inputClass: '',
+                   },
+                   confirmPassword: {
+                       name: '確認密碼',
+                       text: '',
+                       remind: '',
+                       inputClass: '',
+                   },
+               }
+           },
+           computed: {
+               inputList() {
+                   return [this.account, this.password, this.confirmPassword]
+               }
+           },
            methods: {
                handleSignUp() {
                    this.$emit('sign-up');
                },
                handleLoginShow() {
                    this.$emit('change', 'login-content');
+               },
+               handleSignUpCheck() {
+                   this.handlePasswordMatchCheck(this.password, this.confirmPassword);
+                   this.handleRequiredCheck()
                }
            }
        });
@@ -17,18 +49,27 @@
                註冊新帳號
            </h2>
            <div class="form__group mb-5">
-               <label for="account" class="form__text">帳號</label>
-               <input type="text" class="form__input" id="account" placeholder="abc@gmail.com" />
+               <label for="account" class="form__text">帳號</label><span v-if="account.remind!==''"
+                   class="form__text form__text--warning">{{account.remind}}</span>
+               <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
+                   @keyup.enter="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
+                   @change="handleEmailCheck(account)" />
            </div>
            <div class="form__group mb-5">
-               <label for="password" class="form__text">密碼</label>
-               <input type="text" class="form__input" id="password" placeholder="***" />
+               <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
+                   class="form__text form__text--warning">{{password.remind}}</span>
+               <input type="text" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
+                   @keyup.enter="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
+                   class="form__input" placeholder="***" />
            </div>
            <div class="form__group mb-12">
-               <label for="password" class="form__text">確認密碼</label>
-               <input type="text" class="form__input" id="password" placeholder="***" />
+               <label for="password" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
+                   class="form__text form__text--warning">{{confirmPassword.remind}}</span>
+               <input type="text" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
+                   v-model.lazy="confirmPassword.text" @keyup.enter="$refs.signUpBtn.click()"
+                   @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" />
            </div>
-           <button class="btn btn--fluid mb-4" @click="handleSignUp">註冊</button>
+           <button class="btn btn--fluid mb-4" ref="signUpBtn" @click.prevent="handleSignUpCheck">註冊</button>
            <button class="btn btn--link" @click="handleLoginShow">回上一頁</button>
        </div>
    </template>

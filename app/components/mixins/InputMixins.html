@@ -44,12 +44,23 @@
                     this.handleSuccessShow(input);
                 }
             },
+            handlePasswordMatchCheck(input1, input2) {
+                if (input1.text !== input2.text) {
+                    this.handleErrorShow(input2, '密碼不一致')
+                } else {
+                    this.handlePasswordCheck(input2);
+                    if (input2.remind === '') {
+                        this.handleSuccessShow(input2);
+                    }
+                }
+            },
             handleRequiredCheck() {
                 this.inputList.forEach(input => {
                     if (input.text.trim() === '') {
+                        console.log('chick')
                         this.handleErrorShow(input, `${input.name}不能空白`);
                     } else {
-                        this.input.remind !== '' && this.handleSuccessShow(input);
+                        input.remind === '' && this.handleSuccessShow(input);
                     }
                 });
             }
