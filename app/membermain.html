@@ -244,10 +244,6 @@
         handlePasswordInput() {
           this.handlePasswordMatchCheck(this.newPassword, this.confirmPassword);
           this.handlePasswordCheck(this.password);
-          const isAllCheck = this.handleRequiredCheck();
-          if (isAllCheck) {
-            console.log('yes')
-          };
         },
 
         sameAddressCode() {
@@ -271,7 +267,7 @@
       },
       computed: {
         inputList() {
-          return [this.user, this.phone, this.password, this.newPassword]
+          return [this.user, this.phone]
         },
         selectCity() {
           let newCityList = [];
@@ -309,10 +305,6 @@
         }).then((res) => {
           this.cityList = res;
         });
-
-
-
-
 
       }
     });

@@ -109,54 +109,58 @@
 						<div class="form__group px-10 block pt-10 pb-20 ">
 							<label
 								for="buyerName"
-								class="form__text mb-2 w-100"
-							>姓名 <span
-									v-show="isTextShow"
-									class="h5"
-									:class="textClass"
-								>三個皆為必填</span></label>
+								class="form__text mb-2"
+							>姓名</label>
+							<span
+								v-if="buyer.remind!==''"
+								class="form__text form__text--warning"
+							>{{buyer.remind}}</span>
 							<div class="form__section mb-5">
 								<input
 									id="buyerName"
 									type="text"
 									class=" cart__select form__input"
 									placeholder="王小明"
-									v-model.trim="buyerName"
-									@change="checkInput"
-									@focus="checkInput"
-									data-input="0"
+									:class="buyer.inputClass"
+									v-model.trim="buyer.text"
 								></input>
 							</div>
 							<label
 								for="buyerPhone"
 								class="form__text mb-2 "
 							>聯絡電話</label>
+							<span
+								v-if="phone.remind!==''"
+								class="form__text form__text--warning"
+							>{{phone.remind}}</span>
 							<div class="form__section mb-5">
 								<input
 									id="buyerPhone"
 									type="text"
-									v-model.trim="buyerPhone"
-									@change="checkInput"
-									@focus="checkInput"
-									data-input="1"
-									class="cart__select form__input"
-									placeholder="0910-123-456"
+									class=" cart__select form__input"
+									placeholder="0912-222-456"
+									:class="phone.inputClass"
+									v-model.trim="phone.text"
 								></input>
 							</div>
 							<label
 								for="buyerEmail"
 								class="form__text mb-2 "
 							>電子郵件</label>
+							<span
+								v-if="email.remind!==''"
+								class="form__text form__text--warning"
+							>{{email.remind}}</span>
 							<div class="form__section mb-5">
 								<input
 									id="buyerEmail"
 									type="email"
+									:class="email.inputClass"
 									class="cart__select form__input"
 									placeholder="abc@gmail.com"
-									v-model.trim="buyerEmail"
-									@change="checkInput"
-									@focus="checkInput"
-									data-input="2"
+									v-model.trim="email.text"
+									@blur="handleInput"
+									@change="emailCheck"
 								></input>
 							</div>
 						</div>
@@ -178,7 +182,7 @@
 								<label
 									for="receiverSame"
 									class="form__text mb-2 mr-3 "
-								>同購買人姓名</label>
+								>同購買人</label>
 							</div>
 							<div class="form__section mb-5">
 								<input
@@ -346,16 +350,10 @@
 					>
 						<h2 class="block block__header__title block__header">付款資料</h2>
 						<div class="pt-10 px-10 py-10 form__group block">
-
 							<p class="mb-5">選擇：{{selectPayment}}</p>
-							<p>請收到到貨通知後,至門市櫃檯結帳</p>
-
+							<p>{{paymentContent}}</p>
 						</div>
-
 					</section>
-
-
-
 					<div class="col-6 col-lg-6 col-xs-12 block mt-5">
 						<button
 							class="btn btn--fluid mb-xs-5 "
@@ -372,27 +370,36 @@
   Vue.component('cart-info', {
     template: '#cart-info',
     props: ['current'],
+    mixins: [inputMixins],
     data() {
       return {
         currentdata: this.current,
         notShow: true,
         animationDisplay: 'cart__displayNone',
         // 購買人跟收貨人區
-        buyerName: "",
-        buyerPhone: "",
-        buyerEmail: "",
+        buyer: {
+          name: '姓名',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        phone: {
+          name: '電話',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        email: {
+          name: '信箱',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
         receiverName: "",
         receiverPhone: "",
         receiverCity: "",
         receiverTown: "",
         receiverRoad: "",
-        isTextShow: false,
-        inputClass: {
-          "form__input--warning": false,
-        },
-        textClass: {
-          "form__text--warning": true,
-        },
         receiverAddress: "",
         //fetch 到的東東
         cityList: [],
@@ -406,6 +413,7 @@
         cardCode: "",
         cardDate: "",
         cardAreaIsShow: false,
+        paymentContent: "",
       }
     },
     methods: {
@@ -428,11 +436,8 @@
       nextArea(e) {
         // 信用卡區塊 前後
         const cardInputList = document.querySelectorAll('[data-card]');
-
         const array = [];
-
         let cardValue = parseInt(e.target.value.length);
-
         if (cardValue >= 4) {
           if (e.target.nextElementSibling !== null) {
             e.target.nextElementSibling.focus();
@@ -448,28 +453,10 @@
           }
         }
       },
-      checkInput(e) {
 
-        const inputList = document.querySelectorAll('[data-input]');
-        let inputNum = e.target.dataset.input;
-
-        inputList.forEach((item, index) => {
-          // 檢查表單
-          if (inputList[inputNum].value == "") {
-            inputList[inputNum].classList.add('form__input--warning')
-            this.isTextShow = true;
-          } else if (inputList[inputNum].value !== "") {
-            inputList[inputNum].classList.remove('form__input--warning')
-          };
-
-        })
-        if (this.buyerName !== "" && this.buyerPhone !== "" && this.buyerEmail !== "") {
-          this.isTextShow = false;
-        }
-      },
       sameBuyer() {
-        this.receiverName = this.buyerName;
-        this.receiverPhone = this.buyerPhone;
+        this.receiverName = this.buyer.text;
+        this.receiverPhone = this.phone.text;
       },
       saveAddress() {
         let dataAddress;
@@ -485,8 +472,19 @@
           let dataAddressDefault = JSON.stringify(defaultAddress);
           localStorage.setItem('receiverAddressDefault', dataAddressDefault);
         }
-      }
+      },
+      handleInput() {
+        const isAllCheck = this.handleRequiredCheck();
+        if (isAllCheck) {
+          console.log('yes')
+        };
+      },
+      emailCheck() {
+        this.handleEmailCheck(this.email);
 
+
+
+      },
     },
     computed: {
       // store 區塊
@@ -526,6 +524,9 @@
         this.cardsValue = this.cardOneArea + this.cardTwoArea + this.cardThreeArea + this.cardFourArea;
         return this.cardsValue;
       },
+      inputList() {
+        return [this.buyer, this.phone, this.email]
+      }
 
     },
     mounted() {
@@ -539,6 +540,11 @@
       // 檢查是否選擇刷卡
       if (this.selectPayment == "線上刷卡") {
         this.cardAreaIsShow = true;
+      }
+      if (this.selectShipping == "自取") {
+        this.paymentContent = '請收到到貨通知後,至門市櫃檯結帳';
+      } else {
+        this.paymentContent = '收到通知信後,請稍做等待2~3日運送時程';
       }
     }
   })
