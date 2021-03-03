@@ -45,7 +45,7 @@
        });
    </script>
    <template id="signUp">
-       <form>
+       <form method="POST" action="assets/php/register.php">
            <h2 class="modal__title mb-5">
                註冊新帳號
            </h2>
@@ -54,23 +54,23 @@
                    class="form__text form__text--warning">{{account.remind}}</span>
                <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
                    @keyup.enter="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
-                   @change="handleEmailCheck(account)" />
+                   @change="handleEmailCheck(account)" name="account"/>
            </div>
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
                    class="form__text form__text--warning">{{password.remind}}</span>
                <input type="password" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
                    @keyup.enter="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
-                   class="form__input" placeholder="***" />
+                   class="form__input" placeholder="***" name="password"/>
            </div>
            <div class="form__group mb-12">
                <label for="password" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
                    class="form__text form__text--warning">{{confirmPassword.remind}}</span>
                <input type="password" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
                    v-model.lazy="confirmPassword.text" @keyup.enter="$refs.signUpBtn.click()"
-                   @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" />
+                   @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" name="repassword"/>
            </div>
-           <button class="btn btn--fluid mb-4" ref="signUpBtn" @click.prevent="handleSignUp">註冊</button>
+           <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit" name="register">註冊</button>
            <button class="btn btn--link" @click="handleLoginShow">回上一頁</button>
        </form>
    </template>
