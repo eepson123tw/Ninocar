@@ -1,6 +1,7 @@
   <script>
       Vue.component('login-content', {
           template: '#login',
+          props: ['loginError'],
           mixins: [inputMixins],
           data() {
               return {
@@ -22,6 +23,12 @@
               inputList() {
                   return [this.account, this.password]
               }
+          },
+          watch: {
+              loginError(message) {
+                  this.handleErrorShow(this.account, message)
+                  this.handleErrorShow(this.password, message)
+              },
           },
           methods: {
               handleLogin() {

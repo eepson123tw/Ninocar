@@ -58,7 +58,7 @@
                     if (input.text.trim() === '') {
                         this.handleErrorShow(input, `${input.name}不能空白`);
                         isAllCheck = false;
-                    } else if (input.remind !== '') {
+                    } else if (input.remind !== '' && input.remind !== '帳號或密碼錯誤') {
                         isAllCheck = false;
                     } else {
                         this.handleSuccessShow(input);
