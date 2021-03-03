@@ -30,24 +30,22 @@
                }
            },
            methods: {
-               handleSignUp() {
-                   this.$emit('sign-up');
-               },
                handleLoginShow() {
                    this.$emit('change', 'login-content');
                },
-               handleSignUpCheck() {
+               handleSignUp() {
                    this.handlePasswordMatchCheck(this.password, this.confirmPassword);
                    const isAllCheck = this.handleRequiredCheck();
                    if (isAllCheck) {
                        console.log('yes')
+                       this.$emit('sign-up');
                    }
                }
            }
        });
    </script>
    <template id="signUp">
-       <div>
+       <form>
            <h2 class="modal__title mb-5">
                註冊新帳號
            </h2>
@@ -72,7 +70,7 @@
                    v-model.lazy="confirmPassword.text" @keyup.enter="$refs.signUpBtn.click()"
                    @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" />
            </div>
-           <button class="btn btn--fluid mb-4" ref="signUpBtn" @click.prevent="handleSignUpCheck">註冊</button>
+           <button class="btn btn--fluid mb-4" ref="signUpBtn" @click.prevent="handleSignUp">註冊</button>
            <button class="btn btn--link" @click="handleLoginShow">回上一頁</button>
-       </div>
+       </form>
    </template>

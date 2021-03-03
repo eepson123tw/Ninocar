@@ -23,17 +23,15 @@
                     this.handleErrorShow(input, '格式不正確');
                 }
             },
+
             handlePasswordCheck(input) {
-                let numbers = /[0-9]/g;
-                let upperCaseLetters = /[A-Z]/g;
-                let lowerCaseLetters = /[a-z]/g;
-                if (!input.text.match(upperCaseLetters) || !input.text.match(lowerCaseLetters)) {
-                    this.handleErrorShow(input, `${input.name}需包含大小寫`)
-                } else if (!input.text.match(numbers)) {
-                    this.handleErrorShow(input, `${input.name}需包含數字`)
-                } else {
+                let regExp = /^[\d|a-zA-Z]+$/;
+                if (regExp.test(input.text)) {
                     this.handleLengthCheck(input, 6, 12);
+                } else {
+                    this.handleErrorShow(input, `${input.name}只能為字母和數字`)
                 }
+
             },
             handleLengthCheck(input, min, max) {
                 if (input.text.length <= min) {

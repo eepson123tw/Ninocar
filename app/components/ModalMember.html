@@ -1,18 +1,17 @@
 <script>
     Vue.component('modal-member', {
         template: '#modal-member',
-        props: ['isShow'],
-        data() {
-            return {
-                content: 'login-content',
-            }
-        },
+        props: ['is-loading', 'content'],
         methods: {
             handleModalClose() {
                 this.$emit('on-close');
             },
             handleContentChange(targetContent) {
-                this.content = targetContent;
+                // this.content = targetContent;
+                this.$emit('update:content', targetContent);
+            },
+            handleLoginInform(text, password) {
+                this.$emit('login', text, password)
             }
         },
     });
@@ -31,12 +30,13 @@
                         stroke-linecap="round" stroke-width="5" />
                 </g>
             </svg>
-            <login-content v-if="content === 'login-content'" @login="$emit('login')" @change="handleContentChange">
+            <login-content v-if="content === 'login-content'" @login="handleLoginInform" @change="handleContentChange">
             </login-content>
-            <sign-up-content v-if="content === 'sign-up-content'" @sign-up="$emit('sign-up')"
+            <success-login-content v-else-if="content === 'success-login-content'"></success-login-content>
+            <sign-up-content v-else-if="content === 'sign-up-content'" @sign-up="$emit('sign-up')"
                 @change="handleContentChange">
             </sign-up-content>
-            <reset-password-content v-if="content === 'reset-password-content'" @reset="$emit('reset')"
+            <reset-password-content v-else-if="content === 'reset-password-content'" @reset="$emit('reset')"
                 @change="handleContentChange">
             </reset-password-content>
         </div>
@@ -47,4 +47,5 @@
 @@include('./mixins/InputMixins.html')
 @@include('./member/LoginContent.html')
 @@include('./member/SignUpContent.html')
+@@include('./member/SuccessLoginContent.html')
 @@include('./member/ResetPasswordContent.html')

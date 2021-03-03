@@ -1,3 +1,4 @@
+<!-- <script src="https://cdn.bootcss.com/qs/6.9.6/qs.min.js"></script> -->
 <script>
     Vue.component('vue-header', {
         template: `
@@ -94,7 +95,7 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" @on-close="handleModalClose" @on-login="handleLogin" />
+            <modal-member v-if="isModalShow" :is-loading.sync="modalState['isLoading']" :content.sync="modalState['content']" @on-close="handleModalClose" @login="handleLogin" />
         </transition>
         <transition name="collapse">
             <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
@@ -105,21 +106,69 @@
             return {
                 username: '',
                 isLogin: false,
+                modalState: {
+                    isLoading: false,
+                    content: 'login-content',
+                },
                 isModalShow: false,
                 isMenuShow: false,
             }
         },
         methods: {
-            handleLogin() {
-                this.isLogin = true;
-                this.isModalShow = false
+            // handleLogin(theAccount, thePassword) {
+            //     console.log(theAccount, thePassword)
+            //     const qs = QS;
+            //     const json = {
+            //         "account": theAccount,
+            //         "password": thePassword
+            //     }
+            //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
+            //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
+            //             transformRequest: [function (data) {
+            //                 return qs.stringify(data); //把資料轉化為QueryString
+            //             }]
+            //         }).then(res => {
+            //             console.log(res)
+            //         })
+            //         .catch(error => {
+            //             console.log(error)
+            //         });
+            //     console.log('parents')
+
+
+            //     // this.isLogin = true;
+            //     // this.isModalShow = false
+            // },
+            handleLogin(theAccount, thePassword) {
+                axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
+                        "account": theAccount,
+                        "password": thePassword
+                    }, ).then(res => {
+                        console.log(res)
+                        if (Array.isArray(res.data)) {
+                            this.modalState.content = 'success-login-content';
+                            this.isLogin = true;
+                            setTimeout(() => {
+                                console.log('close')
+                                this.isModalShow = false
+                            }, 4000)
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+
+
+
+                // this.isModalShow = false
             },
             handleModalClose() {
 
                 this.isModalShow = false;
             },
+        },
 
-        }
     });
 </script>
 
