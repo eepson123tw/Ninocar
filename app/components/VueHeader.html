@@ -97,7 +97,8 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp"/>
+            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']"
+             :ui-state="modalState['uiState']" :sign-up-token="signUpInfo['token']" :sign-up-account="signUpInfo.account" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" @token-submit="handleCompleteSignUp" />
         </transition>
         <transition name="collapse">
             <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
@@ -111,6 +112,12 @@
                 modalState: {
                     isError: '',
                     content: 'login-content',
+                    uiState: '',
+                },
+                signUpInfo: {
+                    account: '',
+                    password: '',
+                    token: '',
                 },
                 isModalShow: false,
                 isMenuShow: false,
@@ -122,17 +129,19 @@
             },
             handleLogin(theAccount, thePassword) {
                 this.modalState.isError = '';
+                this.modalState.uiState = 'loading';
                 axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
                         "account": theAccount,
                         "password": thePassword
                     }, ).then(res => {
                         console.log(res)
+                        this.modalState.uiState = '';
+
                         if (Array.isArray(res.data)) {
                             this.modalState.content = 'success-login-content';
                             this.isLogin = true;
                             setTimeout(() => {
                                 this.isModalShow = false;
-
                             }, 4000)
                         } else {
                             this.modalState.isError = res.data;
@@ -156,13 +165,15 @@
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
             },
             handleSignUp(theAccount, thePassword) {
-                console.log(theAccount, thePassword)
-            },
+                console.log(theAccount, thePassword);
 
-            sendMail() {
+                this.modalState.isError = '';
+                this.signUpInfo.account = theAccount;
+                this.signUpInfo.password = thePassword;
+                this.modalState.uiState = '傳送認證信中';
                 let templateParams = {
-                    token: "123",
-                    userMail: "chiwei991814@gmail.com",
+                    token: Math.floor(Math.random() * 1000),
+                    userMail: theAccount,
                 }
 
                 let service_id = "service_p77rlm2";
@@ -171,11 +182,18 @@
                 emailjs.send(service_id, template_id, templateParams, userID)
                     .then((response) => {
                         console.log('SUCCESS!', response.status, response.text);
+                        this.modalState.uiState = '';
+                        this.signUpInfo.token = templateParams.token;
+                        this.modalState.content = 'confirm-token-content'
                     })
                     .catch((error) => {
                         console.log('FAILED...', error);
                     })
+            },
+            handleCompleteSignUp() {
+                console.log('要insert囉')
             }
+
             // handleLogin(theAccount, thePassword) {
             //     console.log(theAccount, thePassword)
             //     const qs = QS;

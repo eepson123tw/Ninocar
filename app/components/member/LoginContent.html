@@ -1,7 +1,7 @@
   <script>
       Vue.component('login-content', {
           template: '#login',
-          props: ['loginError'],
+          props: ['loginError', 'btn-ui'],
           mixins: [inputMixins],
           data() {
               return {
@@ -69,7 +69,7 @@
           <div class="text-right">
               <a href="#" class="btn btn--link d-inbl mb-6 " @click.prevent="handlePasswordResetShow">忘記密碼</a>
           </div>
-          <button class="btn btn--fluid mb-4" ref="loginBtn" @click.prevent="handleLogin">登入</button>
+          <button class="btn btn--fluid mb-4" ref="loginBtn" @click.prevent="handleLogin">{{btnUi || '登入'}}</button>
           <a href="#" class="btn btn--fluid btn--outline" @click.prevent="handleSignUpShow">註冊</a>
       </form>
   </template>
