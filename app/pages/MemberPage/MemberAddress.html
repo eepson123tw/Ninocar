@@ -12,7 +12,7 @@
           <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
           <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
           <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
-                            新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
+              新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
         </ul>
       </div>
       <div class="col-4 d-flex align-items-center">
@@ -30,7 +30,7 @@
           <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
           <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
           <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
-                            新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
+              新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
         </ul>
       </div>
       <div class="col-4 d-flex align-items-center">
@@ -46,10 +46,10 @@
     <div class="member__address  member__info w-100" v-for="(receiver,index) of receiverList">
       <div class=" member__address--right col-8 col-lg-6 ">
         <ul>
-          <li class="h3 member__addressText mt-5 ">姓名: <span class="h4 ml-5 ">{{receiver.name}}</span> <span v-show="defaultAddress" class="btn h5 member__cuponBtn--text ">預設</span></li>
-          <li class="h3 mt-5 ">聯絡電話: <span class="h4 ml-5 ">{{receiver.phone}}</span></li>
-          <li class="h3 member__addressText mt-5 ">地址: <span class="h4 ml-5 ">{{receiver.code}}
-                            {{receiver.city}}{{receiver.town}}{{receiver.road}}</span></li>
+          <li class="h3 member__addressText mt-5 ">姓名: <span class="h4 ml-5 ">{{receiver.receiverName}}</span> <span v-show="defaultAddress" class="btn h5 member__cuponBtn--text ">預設</span></li>
+          <li class="h3 mt-5 ">聯絡電話: <span class="h4 ml-5 ">{{receiver.receiverPhone}}</span></li>
+          <li class="h3 member__addressText mt-5 ">地址: <span class="h4 ml-5 ">{{receiver.receiverAddresssCode}}
+              {{receiver.receiverCity}}{{receiver.receiverTown}}{{receiver.receiverRoad}}</span></li>
         </ul>
       </div>
       <div class="col-4 d-flex align-items-center ">

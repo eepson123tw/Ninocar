@@ -42,7 +42,7 @@
                 type="text"
                 class=" cart__select form__input"
                 placeholder="王小明"
-                v-model="receiverName"
+                v-model="receiver.receiverName"
               ></input>
             </div>
             <label
@@ -55,7 +55,7 @@
                 type="text"
                 class="cart__select form__input"
                 placeholder="0910-123-456"
-                v-model="receiverPhone"
+                v-model="receiver.receiverPhone"
               ></input>
             </div>
             <label
@@ -68,7 +68,7 @@
                 type="email"
                 class="cart__select form__input"
                 placeholder="300"
-                v-model="receiverAddresssCode"
+                v-model="receiver.receiverAddresssCode"
               ></input>
             </div>
           </div>
@@ -85,7 +85,7 @@
                 name=""
                 id=""
                 class="form__select "
-                v-model="receiverCity"
+                v-model="receiver.receiverCity"
               >
                 <option
                   value=""
@@ -97,7 +97,7 @@
                 name=""
                 id=""
                 class="form__select "
-                v-model="receiverTown"
+                v-model="receiver.receiverTown"
                 @change="sameAddressCode"
               >
                 <option
@@ -111,7 +111,7 @@
               type="text"
               class="form__input  "
               id="address"
-              v-model="receiverRoad"
+              v-model="receiver.receiverRoad"
               placeholder="街/路/巷弄/樓層"
             />
           </div>
@@ -143,6 +143,7 @@
   <script>
     new Vue({
       el: '#app',
+      mixins: [inputMixins],
       data: {
         isModalShow: false,
         cuponList: [{
@@ -170,20 +171,55 @@
           cuponText: '全項商品不限金額結帳七折優惠',
           cuponTime: '2021/03/22',
         }],
-        userName: '',
-        userphone: '',
-        usersex: '',
+        user: {
+          name: '帳號',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        phone: {
+          name: '電話',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        userDetail: {
+          name: '生日、性別',
+          remind: '',
+          usersex: '',
+          userYear: '',
+          userMonth: '',
+          userDate: '',
+        },
         sexList: ['男', '女'],
-        userYear: '',
-        userMonth: '',
-        userDate: '',
         cityList: [],
-        receiverPhone: '',
-        receiverName: '',
-        receiverCity: "",
-        receiverTown: "",
-        receiverRoad: "",
-        receiverAddresssCode: "",
+        receiver: {
+          name: '',
+          receiverPhone: '',
+          receiverName: '',
+          receiverCity: '',
+          receiverTown: '',
+          receiverRoad: '',
+          receiverAddresssCode: '',
+        },
+        password: {
+          name: '密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        newPassword: {
+          name: '新密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        confirmPassword: {
+          name: '確認密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
         receiverList: [],
         defaultAddress: false,
       },
@@ -199,19 +235,26 @@
         closeHandler() {
           this.isModalShow = false;
         },
+        handleInput() {
+          const isAllCheck = this.handleRequiredCheck();
+          if (isAllCheck) {
+            console.log('yes')
+          };
+        },
+        handlePasswordInput() {
+          this.handlePasswordMatchCheck(this.newPassword, this.confirmPassword);
+          this.handlePasswordCheck(this.password);
+          const isAllCheck = this.handleRequiredCheck();
+          if (isAllCheck) {
+            console.log('yes')
+          };
+        },
+
         sameAddressCode() {
-          this.receiverAddresssCode = this.selectCode;
+          this.receiver.receiverAddresssCode = this.selectCode;
         },
         saveAddress() {
-          const datalist = {
-            name: this.receiverName,
-            phone: this.receiverPhone,
-            city: this.receiverCity,
-            town: this.receiverTown,
-            road: this.receiverRoad,
-            code: this.receiverAddresssCode,
-          }
-          this.receiverList.push(datalist);
+          this.receiverList.push(this.receiver);
           this.isModalShow = false;
         },
         defaultHandler() {
@@ -223,13 +266,13 @@
           }
         },
         deleteAddress(val) {
-
           this.receiverList.splice(val, 1)
-
-
         }
       },
       computed: {
+        inputList() {
+          return [this.user, this.phone, this.password, this.newPassword]
+        },
         selectCity() {
           let newCityList = [];
           for (let cityNum in this.cityList) {
@@ -240,7 +283,7 @@
         selectTown() {
           let newTownList = [];
           for (let cityNum in this.cityList) {
-            if (this.cityList[cityNum]['name'] == this.receiverCity) {
+            if (this.cityList[cityNum]['name'] == this.receiver.receiverCity) {
               newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
             }
           }
@@ -249,12 +292,11 @@
         selectCode() {
           let newCode = "";
           for (let cityNum in this.cityList) {
-            if (this.cityList[cityNum]['name'] == this.receiverCity) {
-              newCode = this.cityList[cityNum]['districts'].filter((item) => item.name == this.receiverTown)
+            if (this.cityList[cityNum]['name'] == this.receiver.receiverCity) {
+              newCode = this.cityList[cityNum]['districts'].filter((item) => item.name == this.receiver.receiverTown)
             }
           }
           return newCode[0].zip;
-
         }
 
       },
