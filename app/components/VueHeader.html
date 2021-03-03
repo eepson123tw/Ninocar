@@ -97,7 +97,7 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut"/>
+            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp"/>
         </transition>
         <transition name="collapse">
             <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
@@ -117,6 +117,9 @@
             }
         },
         methods: {
+            handleModalClose() {
+                this.isModalShow = false;
+            },
             handleLogin(theAccount, thePassword) {
                 this.modalState.isError = '';
                 axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
@@ -152,8 +155,8 @@
                 //會員頁寫判斷式回首頁
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
             },
-            handleModalClose() {
-                this.isModalShow = false;
+            handleSignUp(theAccount, thePassword) {
+                console.log(theAccount, thePassword)
             },
 
             sendMail() {
