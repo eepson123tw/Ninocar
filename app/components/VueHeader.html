@@ -1,4 +1,6 @@
 <!-- <script src="https://cdn.bootcss.com/qs/6.9.6/qs.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+</script>
 <script>
     Vue.component('vue-header', {
         template: `
@@ -49,7 +51,7 @@
                         </a>
                     </li>
                     <li class="lh-1 ml-10 ml-sm-5" v-if="isLogin">
-                        <a href="MemberNotice.html" aria-label="message">
+                        <a href="MemberNotice.html" aria-label="message" @click.prevent="sendMail">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 52 52"
                                 class="icon">
                                 <g transform="translate(6.473 4.772)">
@@ -95,10 +97,10 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-loading.sync="modalState['isLoading']" :content.sync="modalState['content']" @on-close="handleModalClose" @login="handleLogin" />
+            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut"/>
         </transition>
         <transition name="collapse">
-            <nav-menu v-if="isMenuShow" :login="isLogin"></nav-menu>
+            <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
         </transition>
         <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
     </header>`,
@@ -107,7 +109,7 @@
                 username: '',
                 isLogin: false,
                 modalState: {
-                    isLoading: false,
+                    isError: '',
                     content: 'login-content',
                 },
                 isModalShow: false,
@@ -115,6 +117,62 @@
             }
         },
         methods: {
+            handleLogin(theAccount, thePassword) {
+                this.modalState.isError = '';
+                axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
+                        "account": theAccount,
+                        "password": thePassword
+                    }, ).then(res => {
+                        console.log(res)
+                        if (Array.isArray(res.data)) {
+                            this.modalState.content = 'success-login-content';
+                            this.isLogin = true;
+                            setTimeout(() => {
+                                this.isModalShow = false;
+
+                            }, 4000)
+                        } else {
+                            this.modalState.isError = res.data;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            },
+            // handleLogOutModalShow() {
+            //     this.isMenuShow = false;
+            //     this.modalState.content = 'log-out-content';
+            //     this.isModalShow = true;
+            // },
+            handleLogOut() {
+                this.isMenuShow = false;
+                this.isLogin = false;
+                this.modalState.content = 'login-content';
+                //會員頁寫判斷式回首頁
+                //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
+            },
+            handleModalClose() {
+                this.isModalShow = false;
+            },
+
+            sendMail() {
+                let templateParams = {
+                    token: "123",
+                    userMail: "chiwei991814@gmail.com",
+                }
+
+                let service_id = "service_p77rlm2";
+                let template_id = "template_8r123bp";
+                let userID = "user_DeGKwX1jMT522C5BEPsyo"
+                emailjs.send(service_id, template_id, templateParams, userID)
+                    .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                    })
+                    .catch((error) => {
+                        console.log('FAILED...', error);
+                    })
+            }
             // handleLogin(theAccount, thePassword) {
             //     console.log(theAccount, thePassword)
             //     const qs = QS;
@@ -139,34 +197,6 @@
             //     // this.isLogin = true;
             //     // this.isModalShow = false
             // },
-            handleLogin(theAccount, thePassword) {
-                axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
-                        "account": theAccount,
-                        "password": thePassword
-                    }, ).then(res => {
-                        console.log(res)
-                        if (Array.isArray(res.data)) {
-                            this.modalState.content = 'success-login-content';
-                            this.isLogin = true;
-                            setTimeout(() => {
-                                console.log('close')
-                                this.isModalShow = false
-                            }, 4000)
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-
-
-
-
-                // this.isModalShow = false
-            },
-            handleModalClose() {
-
-                this.isModalShow = false;
-            },
         },
 
     });

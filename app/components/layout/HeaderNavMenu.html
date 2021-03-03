@@ -38,7 +38,7 @@
                                         <img src="./assets/img/icon/icon-fb.svg" class="link icon">
                                         <img src="./assets/img/icon/icon-ig.svg" class="link icon ml-5">
                                     </div>
-                                    <button class="header__btn px-5" v-if="login">登出</button>
+                                    <button class="header__btn px-5" v-if="login" @click="$emit('log-out')">登出</button>
                                 </li>
                                 </ul>
                             </div>
