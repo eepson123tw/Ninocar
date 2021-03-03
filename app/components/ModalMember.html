@@ -10,8 +10,11 @@
                 // this.content = targetContent;
                 this.$emit('update:content', targetContent);
             },
-            handleLoginInform(text, password) {
-                this.$emit('login', text, password)
+            handleLoginInform(account, password) {
+                this.$emit('login', account, password)
+            },
+            handleSignUpInform(account, password) {
+                this.$emit('sign-up', account, password)
             }
         },
     });
@@ -36,7 +39,7 @@
             <success-login-content v-else-if="content === 'success-login-content'"></success-login-content>
             <log-out-content v-else-if="content === 'log-out-content'" @log-out="$emit('log-out')"
                 @close="handleModalClose"></log-out-content>
-            <sign-up-content v-else-if="content === 'sign-up-content'" @sign-up="$emit('sign-up')"
+            <sign-up-content v-else-if="content === 'sign-up-content'" @sign-up="handleSignUpInform"
                 @change="handleContentChange">
             </sign-up-content>
             <reset-password-content v-else-if="content === 'reset-password-content'" @reset="$emit('reset')"
