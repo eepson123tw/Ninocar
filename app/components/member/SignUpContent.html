@@ -2,6 +2,7 @@
        Vue.component('sign-up-content', {
            template: '#signUp',
            mixins: [inputMixins],
+           props: ['btn-ui'],
            data() {
                return {
                    account: {
@@ -74,7 +75,7 @@
                    class="form__input" placeholder="請輸入6至12位大小寫字母和數字" name="password" />
            </div>
            <div class="form__group mb-4">
-               <label for="password" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
+               <label for="repassword" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
                    class="form__text form__text--warning">{{confirmPassword.remind}}</span>
                <input type="password" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
                    v-model.lazy="confirmPassword.text" @change="handlePasswordMatchCheck(password,confirmPassword)"
@@ -89,7 +90,7 @@
                </label>
            </div>
            <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit" name="register"
-               @click.prevent="handleSignUp">註冊</button>
+               @click.prevent="handleSignUp">{{btnUi || '註冊'}}</button>
            <a href="#" class="btn btn--link" @click.prevent="handleLoginShow">回上一頁</a>
        </form>
    </template>
