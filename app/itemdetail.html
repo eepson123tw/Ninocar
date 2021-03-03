@@ -65,19 +65,6 @@
                     nowImg: 0,
                 },
                 methods: {
-                    nextImg() {
-                        this.nowImg += 1;
-                        if (this.nowImg >= 4) {
-                            return;
-                        }
-                    },
-                    prevImg() {
-                        this.nowImg -= 1;
-                        if (this.nowImg >= 4) {
-                            return;
-                        }
-                    },
-
                     lightBox(showCar, close = false) {
                         if (close) {
                             this.mask = false;
@@ -97,6 +84,18 @@
                                     },
                                 });
                             });
+                        }
+                    },
+                    nextImg() {
+                        this.nowImg += 1;
+                        if (this.nowImg >= 4) {
+                            return;
+                        }
+                    },
+                    prevImg() {
+                        this.nowImg -= 1;
+                        if (this.nowImg >= 4) {
+                            return;
                         }
                     },
                 },
