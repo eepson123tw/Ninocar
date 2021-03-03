@@ -1,10 +1,10 @@
 <?php
  include("./Lib/Conn.php");
-    
+ $Util = new UtilClass();
 
     $sql = "SELECT * FROM product";
 
-    $statement = $pdo->prepare($sql);
+    $statement = $Util->getPDO()->prepare($sql);
     $statement->execute();
 
     //抓出全部且依照順序封裝成一個二維陣列

@@ -1,0 +1,51 @@
+<script>
+    Vue.component('modal-member', {
+        template: '#modal-member',
+        props: ['is-loading', 'content'],
+        methods: {
+            handleModalClose() {
+                this.$emit('on-close');
+            },
+            handleContentChange(targetContent) {
+                // this.content = targetContent;
+                this.$emit('update:content', targetContent);
+            },
+            handleLoginInform(text, password) {
+                this.$emit('login', text, password)
+            }
+        },
+    });
+</script>
+
+<template id="modal-member">
+    <div class="modal">
+        <div class="po-ab h-100 w-100" @click="handleModalClose"></div>
+        <div class="modal__group modal__group--sm">
+            <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52"
+                class="icon modal__btn modal__btn--close" @click="handleModalClose">
+                <g transform="translate(0 0.47)">
+                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613"
+                        stroke-linecap="round" stroke-width="5" />
+                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613"
+                        stroke-linecap="round" stroke-width="5" />
+                </g>
+            </svg>
+            <login-content v-if="content === 'login-content'" @login="handleLoginInform" @change="handleContentChange">
+            </login-content>
+            <success-login-content v-else-if="content === 'success-login-content'"></success-login-content>
+            <sign-up-content v-else-if="content === 'sign-up-content'" @sign-up="$emit('sign-up')"
+                @change="handleContentChange">
+            </sign-up-content>
+            <reset-password-content v-else-if="content === 'reset-password-content'" @reset="$emit('reset')"
+                @change="handleContentChange">
+            </reset-password-content>
+        </div>
+    </div>
+</template>
+
+
+@@include('./mixins/InputMixins.html')
+@@include('./member/LoginContent.html')
+@@include('./member/SignUpContent.html')
+@@include('./member/SuccessLoginContent.html')
+@@include('./member/ResetPasswordContent.html')
