@@ -1,46 +1,68 @@
 <div class="container">
-    <div class="row  mt-xs-1 member__info mt-15">
-        <section class="member__data d-flex w-100">
-            <h2 id="memberAddress">我的地址</h2>
-            <button class="btn btn-small">新增地址</button>
-        </section>
-    </div>
-    <div class="row member__info">
-        <div class="member__address   w-100">
-            <div class="member__address--right col-8 col-lg-6">
-                <ul>
-                    <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
-                    <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
-                    <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
+  <div class="row  mt-xs-1 member__info mt-15">
+    <section class="member__data d-flex w-100">
+      <h2 id="memberAddress">我的地址</h2>
+      <button class="btn btn-small" @click="openModal">新增地址</button>
+    </section>
+  </div>
+  <div class="row member__info">
+    <div class="member__address   w-100">
+      <div class="member__address--right col-8 col-lg-6">
+        <ul>
+          <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
+          <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
+          <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
                             新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
-                </ul>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-                <ul class="member__address--left ">
-                    <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
-                    <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
-                    <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
-                </ul>
-            </div>
+        </ul>
+      </div>
+      <div class="col-4 d-flex align-items-center">
+        <ul class="member__address--left ">
+          <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
+          <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
+          <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
+        </ul>
+      </div>
 
-        </div>
-        <div class="member__address  member__info w-100">
-            <div class="member__address--right col-8 col-lg-6">
-                <ul>
-                    <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
-                    <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
-                    <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
-                            新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
-                </ul>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-                <ul class="member__address--left ">
-                    <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
-                    <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
-                    <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
-                </ul>
-            </div>
-
-        </div>
     </div>
+    <div class="member__address  member__info w-100">
+      <div class="member__address--right col-8 col-lg-6">
+        <ul>
+          <li class="h3 member__addressText mt-5">姓名: <span class="h4 ml-5">林小薇</span> <span class="btn h5 member__cuponBtn--text">預設</span></li>
+          <li class="h3 mt-5">聯絡電話: <span class="h4 ml-5">0912345678</span></li>
+          <li class="h3 member__addressText mt-5">地址: <span class="h4 ml-5">235
+                            新北市中和區中山路一段莒光路110巷2弄10號2樓</span></li>
+        </ul>
+      </div>
+      <div class="col-4 d-flex align-items-center">
+        <ul class="member__address--left ">
+          <li class="ml-15 mr-5"><button class="btn btn--link member__cuponBtn--black">設為預設</button> </li>
+          <li class="mr-5"><button class="btn btn--link member__cuponBtn--black">編輯</button></li>
+          <li class="mr-5"><button class="btn btn--link  member__cuponBtn--red">刪除</button></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="member__address  member__info w-100" v-for="(receiver,index) of receiverList">
+      <div class=" member__address--right col-8 col-lg-6 ">
+        <ul>
+          <li class="h3 member__addressText mt-5 ">姓名: <span class="h4 ml-5 ">{{receiver.name}}</span> <span v-show="defaultAddress" class="btn h5 member__cuponBtn--text ">預設</span></li>
+          <li class="h3 mt-5 ">聯絡電話: <span class="h4 ml-5 ">{{receiver.phone}}</span></li>
+          <li class="h3 member__addressText mt-5 ">地址: <span class="h4 ml-5 ">{{receiver.code}}
+                            {{receiver.city}}{{receiver.town}}{{receiver.road}}</span></li>
+        </ul>
+      </div>
+      <div class="col-4 d-flex align-items-center ">
+        <ul class="member__address--left ">
+          <li class="ml-15 mr-5 "><button class="btn btn--link member__cuponBtn--black " @click="defaultHandler">設為預設</button> </li>
+          <li class="mr-5 "><button class="btn btn--link member__cuponBtn--black ">編輯</button></li>
+          <li class="mr-5 "><button class="btn btn--link member__cuponBtn--red " @click="deleteAddress(index)">刪除</button></li>
+        </ul>
+      </div>
+
+    </div>
+
+
+
+  </div>
 </div>
