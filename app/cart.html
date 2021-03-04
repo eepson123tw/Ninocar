@@ -22,8 +22,8 @@
     @@include('./pages/CartPage/CartProgress.html')
 
 
-    <transition name="fade" mode="out-in">
-      <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist" v-if="current_section === 0" key="index-1"></cart-area>
+    <transition name="fade" mode="out-in" v-if="carts_list">
+      <cart-area @data-handler="dataChange" :list="carts_list" :current="current_section" :is-exist="listIsExist" v-if="current_section === 0" :key=" 'index-1' + listIsExist"></cart-area>
 
       <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
 
@@ -92,6 +92,7 @@
         finallyPrice: 0,
         discountPrice: 0,
         sendPrice: 0,
+        totalMoney: 0,
       },
       mutations: {
         //訂單比數跟詳細資料
@@ -128,6 +129,9 @@
         // 運費
         addSendPrice(state, val) {
           state.sendPrice = val;
+        }, //totalprice
+        addTotalMoney(state, val) {
+          state.totalMoney = val;
         }
       },
     });
@@ -135,30 +139,10 @@
     new Vue({
       el: '#app',
       data: {
-
-        list: [{
-          productName: 'Audi R8 奧迪小客車',
-          productBrief: 'Audi TT coupe 1980',
-          price: 195,
-          productNum: 1,
-          totalPrice: 195,
-          img: " ./assets/img/pic/3.jpg ",
-          seriousNum: 'BS 01',
-          pointProduct: false,
-        }, {
-          productName: 'Audi R8 奧迪小客車',
-          productBrief: 'Audi TT coupe 1980',
-          price: 200,
-          productNum: 1,
-          totalPrice: 200,
-          img: " ./assets/img/pic/3.jpg ",
-          seriousNum: 'BS 01',
-          pointProduct: true,
-          //看資料庫型態改名
-        }],
-        listIsExist: true,
+        listIsExist: false,
         current_section: 0,
         isModalShow: false,
+        carts_list: [],
       },
       store,
       methods: {
@@ -175,9 +159,7 @@
         },
         closeHandler() {
           this.isModalShow = false;
-
         }
-
       },
       computed: {
         ...Vuex.mapState({
@@ -192,22 +174,23 @@
       },
       mounted() {
         //確認有無購買
-        for (listnum in
-          this.list) {
-          if (!this.list[listnum].productName) {
-            this.listIsExist = false;
+
+        this.carts_list = JSON.parse(localStorage.getItem('cartsList')) || [];
+
+        for (let listNum in this.carts_list) {
+
+          if (listNum) {
+            this.listIsExist = true;
           };
-          //確認是否為點數商品
-          if (this.list[listnum].pointProduct) {
-            console.log(`${(listnum
+          // //確認是否為點數商品
+          if (this.carts_list[listNum].product_points !== "0") {
+            console.log(`${(listNum
               *
               1
               +
               1)}是點數商品`)
           }
         };
-
-
       },
     });
   </script>
