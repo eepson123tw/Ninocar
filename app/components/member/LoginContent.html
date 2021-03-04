@@ -26,8 +26,10 @@
           },
           watch: {
               loginError(message) {
-                  this.handleErrorShow(this.account, message)
-                  this.handleErrorShow(this.password, message)
+                  if (message) {
+                      this.handleErrorShow(this.account, message)
+                      this.handleErrorShow(this.password, message)
+                  }
               },
           },
           methods: {

@@ -2,7 +2,7 @@
        Vue.component('sign-up-content', {
            template: '#signUp',
            mixins: [inputMixins],
-           props: ['btn-ui'],
+           props: ['accountError', 'btn-ui'],
            data() {
                return {
                    account: {
@@ -34,6 +34,13 @@
                    return [this.account, this.password, this.confirmPassword]
                }
            },
+           watch: {
+               accountError(message) {
+                   if (message) {
+                       this.handleErrorShow(this.account, message)
+                   }
+               },
+           },
            methods: {
                handleLoginShow() {
                    this.$emit('change', 'login-content');
@@ -45,8 +52,13 @@
                        this.policy.spanClass = "warning"
                    }
                    if (isAllCheck && this.policy.isAgree) {
-                       console.log('yes')
                        this.$emit('sign-up', this.account.text, this.password.text);
+                   }
+               },
+               handleAccountDoubleCheck() {
+                   this.handleEmailCheck(this.account)
+                   if (this.account.remind === '') {
+                       this.$emit('done-account', this.account.text);
                    }
                },
                handlePolicyAgreeCheck() {
@@ -65,7 +77,7 @@
                    class="form__text form__text--warning">{{account.remind}}</span>
                <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
                    @keydown.enter.prevent="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
-                   @change="handleEmailCheck(account)" name="account" />
+                   @change="handleAccountDoubleCheck" name="account" />
            </div>
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"

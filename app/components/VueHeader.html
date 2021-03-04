@@ -97,8 +97,10 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']"
-             :ui-state="modalState['uiState']" :sign-up-token="signUpInfo['token']" :sign-up-account="signUpInfo.account" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" @token-submit="handleCompleteSignUp" />
+            <modal-member v-if="isModalShow" :is-error.sync="modalState['isError']" :content.sync="modalState['content']"
+             :ui-state="modalState['uiState']" :sign-up-token="signUpInfo['token']" :sign-up-account="signUpInfo.account" 
+             @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" 
+             @submit-token="handleCompleteSignUp" @done-account="handleAccountIsValidCheck"/>
         </transition>
         <transition name="collapse">
             <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
@@ -126,11 +128,30 @@
         methods: {
             handleModalClose() {
                 this.isModalShow = false;
+                this.modalState.isError = '';
             },
+            handleAccountIsValidCheck(theAccount) {
+                this.modalState.isError = '';
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/getMemberInfo.php', {
+                        "account": theAccount,
+                    }, ).then(res => {
+                        console.log(res)
+                        if (Array.isArray(res.data)) {
+                            this.modalState.isError = '此帳號已被註冊';
+                        } else {
+                            this.modalState.isError = '';
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            },
+
             handleLogin(theAccount, thePassword) {
                 this.modalState.isError = '';
                 this.modalState.uiState = 'loading';
-                axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/login.php', {
                         "account": theAccount,
                         "password": thePassword
                     }, ).then(res => {
@@ -166,7 +187,7 @@
             },
             handleSignUp(theAccount, thePassword) {
                 console.log(theAccount, thePassword);
-
+                //    寄驗證碼
                 this.modalState.isError = '';
                 this.signUpInfo.account = theAccount;
                 this.signUpInfo.password = thePassword;
@@ -192,33 +213,56 @@
             },
             handleCompleteSignUp() {
                 console.log('要insert囉')
-            }
+                this.modalState.isError = '';
+                this.modalState.uiState = 'loading';
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/signUp.php', {
+                        "account": this.signUpInfo.account,
+                        "password": this.signUpInfo.password
+                    }, ).then(res => {
+                        console.log(res)
+                        this.modalState.uiState = '';
+                        if (res.data === "Connected Successfully") {
+                            this.modalState.content = 'success-sign-up-content';
+                            this.isLogin = true;
+                            setTimeout(() => {
+                                this.isModalShow = false;
+                            }, 4000)
+                        } else {
+                            this.modalState.isError = res.data;
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
 
-            // handleLogin(theAccount, thePassword) {
-            //     console.log(theAccount, thePassword)
-            //     const qs = QS;
-            //     const json = {
-            //         "account": theAccount,
-            //         "password": thePassword
-            //     }
-            //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
-            //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
-            //             transformRequest: [function (data) {
-            //                 return qs.stringify(data); //把資料轉化為QueryString
-            //             }]
-            //         }).then(res => {
-            //             console.log(res)
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //         });
-            //     console.log('parents')
+            },
+        }
+
+        // handleLogin(theAccount, thePassword) {
+        //     console.log(theAccount, thePassword)
+        //     const qs = QS;
+        //     const json = {
+        //         "account": theAccount,
+        //         "password": thePassword
+        //     }
+        //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
+        //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
+        //             transformRequest: [function (data) {
+        //                 return qs.stringify(data); //把資料轉化為QueryString
+        //             }]
+        //         }).then(res => {
+        //             console.log(res)
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //         });
+        //     console.log('parents')
 
 
-            //     // this.isLogin = true;
-            //     // this.isModalShow = false
-            // },
-        },
+        //     // this.isLogin = true;
+        //     // this.isModalShow = false
+        // },
+
 
     });
 </script>

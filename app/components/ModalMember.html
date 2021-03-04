@@ -9,6 +9,7 @@
             handleContentChange(targetContent) {
                 // this.content = targetContent;
                 this.$emit('update:content', targetContent);
+                this.$emit('update:isError', '');
             },
             handleLoginInform(account, password) {
                 this.$emit('login', account, password)
@@ -17,7 +18,10 @@
                 this.$emit('sign-up', account, password)
             },
             handleSubmitTokenInform(token) {
-                this.$emit('token-submit', token)
+                this.$emit('submit-token', token)
+            },
+            handleDoneAccountInform(account) {
+                this.$emit('done-account', account)
             }
         },
     });
@@ -40,10 +44,11 @@
                 @login="handleLoginInform" @change="handleContentChange">
             </login-content>
             <success-login-content v-else-if="content === 'success-login-content'"></success-login-content>
+            <success-sign-up-content v-else-if="content === 'success-sign-up-content'"></success-sign-up-content>
             <log-out-content v-else-if="content === 'log-out-content'" @log-out="$emit('log-out')"
                 @close="handleModalClose" :btn-ui="uiState"></log-out-content>
-            <sign-up-content v-else-if="content === 'sign-up-content'" :btn-ui="uiState" @sign-up="handleSignUpInform"
-                @change="handleContentChange">
+            <sign-up-content v-else-if="content === 'sign-up-content'" :account-error="isError" :btn-ui="uiState"
+                @sign-up="handleSignUpInform" @done-account="handleDoneAccountInform" @change="handleContentChange">
             </sign-up-content>
             <confirm-token-content v-else-if="content === 'confirm-token-content'" :btn-ui="uiState"
                 :email="signUpAccount" :correct-token="signUpToken" @submit="handleSubmitTokenInform">
@@ -61,5 +66,6 @@
 @@include('./member/LogOutContent.html')
 @@include('./member/SignUpContent.html')
 @@include('./member/SuccessLoginContent.html')
+@@include('./member/SuccessSignUpContent.html')
 @@include('./member/ConfirmTokenContent.html')
 @@include('./member/ResetPasswordContent.html')

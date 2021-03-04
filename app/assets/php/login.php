@@ -1,4 +1,6 @@
 <?php
+ try
+ {
     include("./Lib/Conn.php");
     $Util = new UtilClass();
 
@@ -31,6 +33,11 @@
     }else{
         echo '帳號或密碼錯誤';
     }
+ }
+catch(PDOException $e)
+{
+    echo "Connection failed: ".$e->getMessage();
+}
     // }else if($data == [] && $data2 != []){
     //     echo '帳號或密碼錯誤';
     // }else if($data2 == []){
