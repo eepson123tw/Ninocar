@@ -50,8 +50,7 @@
                    const isAllCheck = this.handleRequiredCheck();
                    if (!this.policy.isAgree) {
                        this.policy.spanClass = "warning"
-                   }
-                   if (isAllCheck && this.policy.isAgree) {
+                   } else if (isAllCheck && this.policy.isAgree) {
                        this.$emit('sign-up', this.account.text, this.password.text);
                    }
                },

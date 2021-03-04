@@ -186,34 +186,33 @@
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
             },
             handleSignUp(theAccount, thePassword) {
-                console.log(theAccount, thePassword);
-                //    寄驗證碼
-                this.modalState.isError = '';
-                this.signUpInfo.account = theAccount;
-                this.signUpInfo.password = thePassword;
-                this.modalState.uiState = '傳送認證信中';
-                let templateParams = {
-                    token: Math.floor(Math.random() * 1000),
-                    userMail: theAccount,
+                if (this.modalState.isError === '') {
+                    this.signUpInfo.account = theAccount;
+                    this.signUpInfo.password = thePassword;
+                    this.modalState.uiState = '傳送認證信中';
+                    let templateParams = {
+                        token: Math.floor(Math.random() * 1000),
+                        userMail: theAccount,
+                    }
+
+                    let service_id = "service_p77rlm2";
+                    let template_id = "template_8r123bp";
+                    let userID = "user_DeGKwX1jMT522C5BEPsyo"
+                    emailjs.send(service_id, template_id, templateParams, userID)
+                        .then((response) => {
+                            console.log('SUCCESS!', response.status, response.text);
+                            this.modalState.uiState = '';
+                            this.signUpInfo.token = templateParams.token;
+                            this.modalState.content = 'confirm-token-content'
+                        })
+                        .catch((error) => {
+                            console.log('FAILED...', error);
+                            this.modalState.isError = error;
+                        })
                 }
 
-                let service_id = "service_p77rlm2";
-                let template_id = "template_8r123bp";
-                let userID = "user_DeGKwX1jMT522C5BEPsyo"
-                emailjs.send(service_id, template_id, templateParams, userID)
-                    .then((response) => {
-                        console.log('SUCCESS!', response.status, response.text);
-                        this.modalState.uiState = '';
-                        this.signUpInfo.token = templateParams.token;
-                        this.modalState.content = 'confirm-token-content'
-                    })
-                    .catch((error) => {
-                        console.log('FAILED...', error);
-                    })
             },
             handleCompleteSignUp() {
-                console.log('要insert囉')
-                this.modalState.isError = '';
                 this.modalState.uiState = 'loading';
                 axios.post('http://localhost:8080/nino-scss/dist/assets/php/signUp.php', {
                         "account": this.signUpInfo.account,
