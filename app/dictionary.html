@@ -116,7 +116,7 @@
           return `bg-series-${this.targetProduct.series}`
         },
         pinClass() {
-          return this.memberOwnProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
+          return this.myProductIdList.indexOf(this.targetProduct.productId) ? 'pin' :
             'pin pin--disabled'
         },
         limitLabel() {
@@ -234,7 +234,9 @@
         },
         handleNavBarChange(filter) {
           if (filter === 'my') {
-            this.showProductList = this.myProducts;
+            this.showProductList = this.productList.filter(product => this.myProductIdList.indexOf(product
+              .productId));
+            console.log(this.showProductList)
             this.isNavbarShow = false;
             this.navClassName = {
               'all': false,
@@ -282,9 +284,9 @@
           }).then(res => {
             console.log(res);
             if (res.data != []) {
-              console.log('尚未有商品')
+              this.myProductIdList = res.data.map(obj => obj['product_id'])
             } else {
-              this.myProductIdList = res.data
+              console.log('尚未有商品')
             }
           }).catch(error => {
             console.log(error)
