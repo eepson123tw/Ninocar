@@ -75,22 +75,22 @@
                <label for="account" class="form__text">帳號</label><span v-if="account.remind!==''"
                    class="form__text form__text--warning">{{account.remind}}</span>
                <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
-                   @keydown.enter.prevent="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
-                   @change="handleAccountDoubleCheck" name="account" />
+                   @keydown.enter.prevent="$refs.signUpPassword.focus()" autocomplete="username"
+                   placeholder="abc@gmail.com" @change="handleAccountDoubleCheck" id="account" />
            </div>
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
                    class="form__text form__text--warning">{{password.remind}}</span>
                <input type="password" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
                    @keydown.enter.prevent="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
-                   class="form__input" placeholder="請輸入6至12位大小寫字母和數字" name="password" />
+                   class="form__input" placeholder="請輸入6至12位大小寫字母和數字" autocomplete="new-password" id="password" />
            </div>
            <div class="form__group mb-4">
-               <label for="repassword" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
+               <label for="confirmPpassword" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
                    class="form__text form__text--warning">{{confirmPassword.remind}}</span>
                <input type="password" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
                    v-model.lazy="confirmPassword.text" @change="handlePasswordMatchCheck(password,confirmPassword)"
-                   class="form__input" placeholder="請確認密碼" name="repassword" />
+                   class="form__input" placeholder="請確認密碼" autocomplete="new-password" id="confirmPpassword" />
            </div>
            <div class="text-left">
                <label class="custom-input mb-4 h5">同意<a href="./policy.html" target="blank"

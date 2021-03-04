@@ -59,7 +59,7 @@
                   class="form__text form__text--warning">{{account.remind}}</span>
               <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
                   @keydown.enter.prevent="$refs.loginPassword.focus()" placeholder="abc@gmail.com"
-                  autocomplete="new-password" @change="handleEmailCheck(account)" />
+                  autocomplete="username" @change="handleEmailCheck(account)" />
           </div>
           <div class="form__group mb-12">
               <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
