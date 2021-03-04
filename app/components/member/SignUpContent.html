@@ -67,7 +67,7 @@
        });
    </script>
    <template id="signUp">
-       <form method="POST" action="assets/php/register.php" @submit.prevent="handleSignUp">
+       <form method="POST" @submit.prevent="handleSignUp">
            <h2 class="modal__title mb-5">
                註冊新帳號
            </h2>
@@ -100,7 +100,7 @@
                    <span class="custom-input__checkmark" :class="policy.spanClass" ref="policyCheckbox"></span>
                </label>
            </div>
-           <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit" name="register"
+           <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit"
                @click.prevent="handleSignUp">{{btnUi || '註冊'}}</button>
            <a href="#" class="btn btn--link" @click.prevent="handleLoginShow">回上一頁</a>
        </form>
