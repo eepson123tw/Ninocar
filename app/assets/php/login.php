@@ -11,7 +11,7 @@
     $mem_password = $data -> password;
   
 
-    $sql = "SELECT * FROM member WHERE  member_account = ? and member_pwd = ?";
+    $sql = "SELECT member_id FROM member WHERE  member_account = ? and member_pwd = ?";
     $statement = $Util->getPDO()->prepare($sql);
 
    
