@@ -1,6 +1,6 @@
-<!-- <script src="https://cdn.bootcss.com/qs/6.9.6/qs.min.js"></script> -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
-</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
 <script>
     Vue.component('vue-header', {
         template: `
@@ -109,8 +109,11 @@
     </header>`,
         data() {
             return {
-                username: '',
+                memberId: '',
+                secretKey: 'nino',
                 isLogin: false,
+                isModalShow: false,
+                isMenuShow: false,
                 modalState: {
                     isError: '',
                     content: 'login-content',
@@ -121,8 +124,16 @@
                     password: '',
                     token: '',
                 },
-                isModalShow: false,
-                isMenuShow: false,
+            }
+        },
+        mounted() {
+            const storageMemberId = localStorage.getItem('memberId');
+            if (storageMemberId) {
+                const rawMemberId = CryptoJS.AES.decrypt(storageMemberId, this.secretKey).toString(CryptoJS.enc
+                    .Utf8);
+                this.isLogin = true;
+                console.log(rawMemberId)
+
             }
         },
         methods: {
@@ -132,7 +143,7 @@
             },
             handleAccountIsValidCheck(theAccount) {
                 this.modalState.isError = '';
-                axios.post('http://localhost:8080/nino-scss/dist/assets/php/getMemberInfo.php', {
+                axios.post('./assets/php/getMemberInfo.php', {
                         "account": theAccount,
                     }, ).then(res => {
                         console.log(res)
@@ -151,7 +162,7 @@
             handleLogin(theAccount, thePassword) {
                 this.modalState.isError = '';
                 this.modalState.uiState = 'loading';
-                axios.post('http://localhost:8080/nino-scss/dist/assets/php/login.php', {
+                axios.post('./assets/php/login.php', {
                         "account": theAccount,
                         "password": thePassword
                     }, ).then(res => {
@@ -160,7 +171,7 @@
 
                         if (Array.isArray(res.data)) {
                             this.modalState.content = 'success-login-content';
-                            this.isLogin = true;
+                            this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
                                 this.isModalShow = false;
                             }, 4000)
@@ -173,15 +184,17 @@
                     });
 
             },
-            // handleLogOutModalShow() {
-            //     this.isMenuShow = false;
-            //     this.modalState.content = 'log-out-content';
-            //     this.isModalShow = true;
-            // },
+            handleLoginKeep(rawMemberId) {
+                this.isLogin = true;
+                // crypto加密
+                this.memberId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
+                localStorage.setItem('memberId', this.memberId);
+            },
             handleLogOut() {
                 this.isMenuShow = false;
                 this.isLogin = false;
                 this.modalState.content = 'login-content';
+                localStorage.removeItem('memberId');
                 //會員頁寫判斷式回首頁
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
             },
@@ -200,7 +213,7 @@
                     let userID = "user_DeGKwX1jMT522C5BEPsyo"
                     emailjs.send(service_id, template_id, templateParams, userID)
                         .then((response) => {
-                            console.log('SUCCESS!', response.status, response.text);
+                            console.log('SUCCESS! 寄出驗證信');
                             this.modalState.uiState = '';
                             this.signUpInfo.token = templateParams.token;
                             this.modalState.content = 'confirm-token-content'
@@ -214,20 +227,21 @@
             },
             handleCompleteSignUp() {
                 this.modalState.uiState = 'loading';
-                axios.post('http://localhost:8080/nino-scss/dist/assets/php/signUp.php', {
+                axios.post('./assets/php/signUp.php', {
                         "account": this.signUpInfo.account,
                         "password": this.signUpInfo.password
                     }, ).then(res => {
                         console.log(res)
                         this.modalState.uiState = '';
-                        if (res.data === "Connected Successfully") {
+                        if (Array.isArray(res.data)) {
                             this.modalState.content = 'success-sign-up-content';
-                            this.isLogin = true;
+                            this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
                                 this.isModalShow = false;
                             }, 4000)
                         } else {
                             this.modalState.isError = res.data;
+                            console.log(res.data)
                         }
                     })
                     .catch(error => {
@@ -236,7 +250,11 @@
 
             },
         }
-
+        // handleLogOutModalShow() {
+        //     this.isMenuShow = false;
+        //     this.modalState.content = 'log-out-content';
+        //     this.isModalShow = true;
+        // },
         // handleLogin(theAccount, thePassword) {
         //     console.log(theAccount, thePassword)
         //     const qs = QS;

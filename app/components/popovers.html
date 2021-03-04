@@ -1,0 +1,31 @@
+<template id="popovers">
+
+
+
+  <div class="popovers">
+    <p>共<span class="popovers__cartItems">{{cartsNum}}</span>件商品</p>
+    <p>總金額：NT$<span class="popovers__totalCost">{{cartsTotalMoney}}</span></p>
+    <div class="popovers__member">
+      總需點數：
+      <p>Ni <span>200</span></p>
+    </div>
+  </div>
+
+</template>
+
+
+
+<script>
+  Vue.component('popovers', {
+    template: '#popovers',
+    props: ['cartsNum', 'cartsTotalMoney'],
+    data() {
+      return {}
+    },
+    mounted() {
+
+
+    }
+
+  })
+</script>

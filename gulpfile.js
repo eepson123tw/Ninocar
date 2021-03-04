@@ -1,4 +1,10 @@
-const { src, series, dest, parallel, watch } = require('gulp');
+const {
+    src,
+    series,
+    dest,
+    parallel,
+    watch
+} = require('gulp');
 
 const concat = require('gulp-concat');
 const fileInclude = require('gulp-file-include');
@@ -53,6 +59,20 @@ function pageStyle() {
         .pipe(dest('dist/assets/css/pages/'));
 }
 
+
+function pluginStyle() {
+    return src('app/assets/style/plugin/bootstrap.scss')
+        .pipe(sourcemaps.init())
+        .pipe(
+            sass({
+                outputStyle: 'nested',
+            }).on('error', sass.logError)
+        )
+        .pipe(sourcemaps.write())
+        .pipe(dest('dist/assets/css/plugin/'));
+}
+exports.p = pluginStyle
+
 function includeHTML() {
     return src('app/*.html')
         .pipe(
@@ -76,7 +96,7 @@ function killDist() {
 }
 
 exports.kill = killDist;
-exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, includeHTML));
+exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includeHTML));
 
 exports.browser = function browsersync() {
     browserSync.init({
@@ -86,7 +106,7 @@ exports.browser = function browsersync() {
         // browser: "chrome",
         server: {
             baseDir: './dist', //跟目錄設定
-            index: 'factory.html', //需更改成自己頁面的名稱
+            index: 'product.html', //需更改成自己頁面的名稱
             injectChanges: false,
         },
     });
