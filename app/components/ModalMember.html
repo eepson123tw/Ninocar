@@ -9,6 +9,7 @@
             handleContentChange(targetContent) {
                 // this.content = targetContent;
                 this.$emit('update:content', targetContent);
+                this.$emit('update:isError', '');
             },
             handleLoginInform(account, password) {
                 this.$emit('login', account, password)
@@ -20,7 +21,7 @@
                 this.$emit('submit-token', token)
             },
             handleDoneAccountInform(account) {
-                this.$emit('done-account', account, password)
+                this.$emit('done-account', account)
             }
         },
     });
@@ -46,8 +47,8 @@
             <success-sign-up-content v-else-if="content === 'success-sign-up-content'"></success-sign-up-content>
             <log-out-content v-else-if="content === 'log-out-content'" @log-out="$emit('log-out')"
                 @close="handleModalClose" :btn-ui="uiState"></log-out-content>
-            <sign-up-content v-else-if="content === 'sign-up-content'" :btn-ui="uiState" @sign-up="handleSignUpInform"
-                @done-account="handleDoneAccountInform" @change="handleContentChange">
+            <sign-up-content v-else-if="content === 'sign-up-content'" :account-error="isError" :btn-ui="uiState"
+                @sign-up="handleSignUpInform" @done-account="handleDoneAccountInform" @change="handleContentChange">
             </sign-up-content>
             <confirm-token-content v-else-if="content === 'confirm-token-content'" :btn-ui="uiState"
                 :email="signUpAccount" :correct-token="signUpToken" @submit="handleSubmitTokenInform">

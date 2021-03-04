@@ -2,7 +2,7 @@
        Vue.component('sign-up-content', {
            template: '#signUp',
            mixins: [inputMixins],
-           props: ['btn-ui'],
+           props: ['accountError', 'btn-ui'],
            data() {
                return {
                    account: {
@@ -34,6 +34,13 @@
                    return [this.account, this.password, this.confirmPassword]
                }
            },
+           watch: {
+               accountError(message) {
+                   if (message) {
+                       this.handleErrorShow(this.account, message)
+                   }
+               },
+           },
            methods: {
                handleLoginShow() {
                    this.$emit('change', 'login-content');
@@ -45,12 +52,11 @@
                        this.policy.spanClass = "warning"
                    }
                    if (isAllCheck && this.policy.isAgree) {
-                       console.log('yes')
                        this.$emit('sign-up', this.account.text, this.password.text);
                    }
                },
                handleAccountDoubleCheck() {
-                   this.handleEmailCheck(account)
+                   this.handleEmailCheck(this.account)
                    if (this.account.remind === '') {
                        this.$emit('done-account', this.account.text);
                    }
