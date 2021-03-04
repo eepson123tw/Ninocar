@@ -15,6 +15,8 @@
         <vue-header></vue-header>
 
         @@include('./pages/ProductPage/ProductNav.html')
+
+        <page-filter></page-filter>
         <!-- your code here... -->
     </div>
 
@@ -22,10 +24,92 @@
     <script src="./assets/js/new.js"></script>
 
     <script>
+
+        Vue.component('page-filter',{
+
+            template:`<h1>1111</h1>`,
+
+
+        })
+
+
         new Vue({
             el: '#app',
             data: {
-                message: 'Hello, VueJS!',
+                arrayData:[{
+                    productName: 'Audi R8 奧迪小客車',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum:'01',
+                    pointProduct: false
+                },{
+                    productName: '馬自達cx-5',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
+                }],
+            
             },
         });
     </script>

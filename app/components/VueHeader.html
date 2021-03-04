@@ -1,6 +1,6 @@
-<!-- <script src="https://cdn.bootcss.com/qs/6.9.6/qs.min.js"></script> -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
-</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
 <script>
     Vue.component('vue-header', {
         template: `
@@ -97,7 +97,10 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-error="modalState['isError']" :content.sync="modalState['content']" @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut"/>
+            <modal-member v-if="isModalShow" :is-error.sync="modalState['isError']" :content.sync="modalState['content']"
+             :ui-state="modalState['uiState']" :sign-up-token="signUpInfo['token']" :sign-up-account="signUpInfo.account" 
+             @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" 
+             @submit-token="handleCompleteSignUp" @done-account="handleAccountIsValidCheck"/>
         </transition>
         <transition name="collapse">
             <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
@@ -106,30 +109,71 @@
     </header>`,
         data() {
             return {
-                username: '',
+                memberId: '',
+                secretKey: 'nino',
                 isLogin: false,
+                isModalShow: false,
+                isMenuShow: false,
                 modalState: {
                     isError: '',
                     content: 'login-content',
+                    uiState: '',
                 },
-                isModalShow: false,
-                isMenuShow: false,
+                signUpInfo: {
+                    account: '',
+                    password: '',
+                    token: '',
+                },
+            }
+        },
+        mounted() {
+            const storageMemberId = localStorage.getItem('memberId');
+            if (storageMemberId) {
+                const rawMemberId = CryptoJS.AES.decrypt(storageMemberId, this.secretKey).toString(CryptoJS.enc
+                    .Utf8);
+                this.isLogin = true;
+                console.log(rawMemberId)
+
             }
         },
         methods: {
+            handleModalClose() {
+                this.isModalShow = false;
+                this.modalState.isError = '';
+            },
+            handleAccountIsValidCheck(theAccount) {
+                this.modalState.isError = '';
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/getMemberInfo.php', {
+                        "account": theAccount,
+                    }, ).then(res => {
+                        console.log(res)
+                        if (Array.isArray(res.data)) {
+                            this.modalState.isError = '此帳號已被註冊';
+                        } else {
+                            this.modalState.isError = '';
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            },
+
             handleLogin(theAccount, thePassword) {
                 this.modalState.isError = '';
-                axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', {
+                this.modalState.uiState = 'loading';
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/login.php', {
                         "account": theAccount,
                         "password": thePassword
                     }, ).then(res => {
                         console.log(res)
+                        this.modalState.uiState = '';
+
                         if (Array.isArray(res.data)) {
                             this.modalState.content = 'success-login-content';
-                            this.isLogin = true;
+                            this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
                                 this.isModalShow = false;
-
                             }, 4000)
                         } else {
                             this.modalState.isError = res.data;
@@ -140,64 +184,102 @@
                     });
 
             },
-            // handleLogOutModalShow() {
-            //     this.isMenuShow = false;
-            //     this.modalState.content = 'log-out-content';
-            //     this.isModalShow = true;
-            // },
+            handleLoginKeep(rawMemberId) {
+                this.isLogin = true;
+                // crypto加密
+                this.memberId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
+                localStorage.setItem('memberId', this.memberId);
+            },
             handleLogOut() {
                 this.isMenuShow = false;
                 this.isLogin = false;
                 this.modalState.content = 'login-content';
+                localStorage.removeItem('memberId');
                 //會員頁寫判斷式回首頁
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
             },
-            handleModalClose() {
-                this.isModalShow = false;
-            },
+            handleSignUp(theAccount, thePassword) {
+                if (this.modalState.isError === '') {
+                    this.signUpInfo.account = theAccount;
+                    this.signUpInfo.password = thePassword;
+                    this.modalState.uiState = '傳送認證信中';
+                    let templateParams = {
+                        token: Math.floor(Math.random() * 1000),
+                        userMail: theAccount,
+                    }
 
-            sendMail() {
-                let templateParams = {
-                    token: "123",
-                    userMail: "chiwei991814@gmail.com",
+                    let service_id = "service_p77rlm2";
+                    let template_id = "template_8r123bp";
+                    let userID = "user_DeGKwX1jMT522C5BEPsyo"
+                    emailjs.send(service_id, template_id, templateParams, userID)
+                        .then((response) => {
+                            console.log('SUCCESS! 寄出驗證信');
+                            this.modalState.uiState = '';
+                            this.signUpInfo.token = templateParams.token;
+                            this.modalState.content = 'confirm-token-content'
+                        })
+                        .catch((error) => {
+                            console.log('FAILED...', error);
+                            this.modalState.isError = error;
+                        })
                 }
 
-                let service_id = "service_p77rlm2";
-                let template_id = "template_8r123bp";
-                let userID = "user_DeGKwX1jMT522C5BEPsyo"
-                emailjs.send(service_id, template_id, templateParams, userID)
-                    .then((response) => {
-                        console.log('SUCCESS!', response.status, response.text);
+            },
+            handleCompleteSignUp() {
+                this.modalState.uiState = 'loading';
+                axios.post('http://localhost:8080/nino-scss/dist/assets/php/signUp.php', {
+                        "account": this.signUpInfo.account,
+                        "password": this.signUpInfo.password
+                    }, ).then(res => {
+                        console.log(res)
+                        this.modalState.uiState = '';
+                        if (Array.isArray(res.data)) {
+                            this.modalState.content = 'success-sign-up-content';
+                            this.handleLoginKeep(res.data[0]['member_id']);
+                            setTimeout(() => {
+                                this.isModalShow = false;
+                            }, 4000)
+                        } else {
+                            this.modalState.isError = res.data;
+                            console.log(res.data)
+                        }
                     })
-                    .catch((error) => {
-                        console.log('FAILED...', error);
-                    })
-            }
-            // handleLogin(theAccount, thePassword) {
-            //     console.log(theAccount, thePassword)
-            //     const qs = QS;
-            //     const json = {
-            //         "account": theAccount,
-            //         "password": thePassword
-            //     }
-            //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
-            //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
-            //             transformRequest: [function (data) {
-            //                 return qs.stringify(data); //把資料轉化為QueryString
-            //             }]
-            //         }).then(res => {
-            //             console.log(res)
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //         });
-            //     console.log('parents')
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            },
+        }
+        // handleLogOutModalShow() {
+        //     this.isMenuShow = false;
+        //     this.modalState.content = 'log-out-content';
+        //     this.isModalShow = true;
+        // },
+        // handleLogin(theAccount, thePassword) {
+        //     console.log(theAccount, thePassword)
+        //     const qs = QS;
+        //     const json = {
+        //         "account": theAccount,
+        //         "password": thePassword
+        //     }
+        //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
+        //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
+        //             transformRequest: [function (data) {
+        //                 return qs.stringify(data); //把資料轉化為QueryString
+        //             }]
+        //         }).then(res => {
+        //             console.log(res)
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //         });
+        //     console.log('parents')
 
 
-            //     // this.isLogin = true;
-            //     // this.isModalShow = false
-            // },
-        },
+        //     // this.isLogin = true;
+        //     // this.isModalShow = false
+        // },
+
 
     });
 </script>

@@ -1,4 +1,6 @@
 <?php
+ try
+ {
     include("./Lib/Conn.php");
     $Util = new UtilClass();
 
@@ -9,7 +11,7 @@
     $mem_password = $data -> password;
   
 
-    $sql = "SELECT * FROM member WHERE  member_account = ? and member_pwd = ?";
+    $sql = "SELECT member_id FROM member WHERE  member_account = ? and member_pwd = ?";
     $statement = $Util->getPDO()->prepare($sql);
 
    
@@ -31,6 +33,11 @@
     }else{
         echo '帳號或密碼錯誤';
     }
+ }
+catch(PDOException $e)
+{
+    echo "Connection failed: ".$e->getMessage();
+}
     // }else if($data == [] && $data2 != []){
     //     echo '帳號或密碼錯誤';
     // }else if($data2 == []){

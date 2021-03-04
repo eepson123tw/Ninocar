@@ -13,6 +13,10 @@
             border: 2px solid $blue;
         }
 
+        &::placeholder {
+            font-size: 16px;
+        }
+
         &--warning {
             border: 2px solid $red;
 
@@ -86,6 +90,8 @@
     }
 
 
+
+
     &__input:checked~&__checkmark {
         background-color: $secondary;
     }
@@ -123,6 +129,10 @@
             height: 8px;
             border-radius: 50%;
             background: white;
+        }
+
+        &.warning {
+            border: 2px solid $red;
         }
     }
 

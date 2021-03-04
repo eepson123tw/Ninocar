@@ -1,7 +1,7 @@
 <script>
     Vue.component('modal-member', {
         template: '#modal-member',
-        props: ['is-error', 'content'],
+        props: ['is-error', 'content', 'ui-state', 'sign-up-token', 'sign-up-account'],
         methods: {
             handleModalClose() {
                 this.$emit('close');
@@ -9,9 +9,19 @@
             handleContentChange(targetContent) {
                 // this.content = targetContent;
                 this.$emit('update:content', targetContent);
+                this.$emit('update:isError', '');
             },
-            handleLoginInform(text, password) {
-                this.$emit('login', text, password)
+            handleLoginInform(account, password) {
+                this.$emit('login', account, password)
+            },
+            handleSignUpInform(account, password) {
+                this.$emit('sign-up', account, password)
+            },
+            handleSubmitTokenInform(token) {
+                this.$emit('submit-token', token)
+            },
+            handleDoneAccountInform(account) {
+                this.$emit('done-account', account)
             }
         },
     });
@@ -30,15 +40,19 @@
                         stroke-linecap="round" stroke-width="5" />
                 </g>
             </svg>
-            <login-content v-if="content === 'login-content'" :login-error="isError" @login="handleLoginInform"
-                @change="handleContentChange">
+            <login-content v-if="content === 'login-content'" :login-error="isError" :btn-ui="uiState"
+                @login="handleLoginInform" @change="handleContentChange">
             </login-content>
             <success-login-content v-else-if="content === 'success-login-content'"></success-login-content>
+            <success-sign-up-content v-else-if="content === 'success-sign-up-content'"></success-sign-up-content>
             <log-out-content v-else-if="content === 'log-out-content'" @log-out="$emit('log-out')"
-                @close="handleModalClose"></log-out-content>
-            <sign-up-content v-else-if="content === 'sign-up-content'" @sign-up="$emit('sign-up')"
-                @change="handleContentChange">
+                @close="handleModalClose" :btn-ui="uiState"></log-out-content>
+            <sign-up-content v-else-if="content === 'sign-up-content'" :account-error="isError" :btn-ui="uiState"
+                @sign-up="handleSignUpInform" @done-account="handleDoneAccountInform" @change="handleContentChange">
             </sign-up-content>
+            <confirm-token-content v-else-if="content === 'confirm-token-content'" :btn-ui="uiState"
+                :email="signUpAccount" :correct-token="signUpToken" @submit="handleSubmitTokenInform">
+            </confirm-token-content>
             <reset-password-content v-else-if="content === 'reset-password-content'" @reset="$emit('reset')"
                 @change="handleContentChange">
             </reset-password-content>
@@ -52,4 +66,6 @@
 @@include('./member/LogOutContent.html')
 @@include('./member/SignUpContent.html')
 @@include('./member/SuccessLoginContent.html')
+@@include('./member/SuccessSignUpContent.html')
+@@include('./member/ConfirmTokenContent.html')
 @@include('./member/ResetPasswordContent.html')

@@ -2,6 +2,7 @@
        Vue.component('sign-up-content', {
            template: '#signUp',
            mixins: [inputMixins],
+           props: ['accountError', 'btn-ui'],
            data() {
                return {
                    account: {
@@ -22,12 +23,23 @@
                        remind: '',
                        inputClass: '',
                    },
+                   policy: {
+                       isAgree: false,
+                       spanClass: '',
+                   },
                }
            },
            computed: {
                inputList() {
                    return [this.account, this.password, this.confirmPassword]
                }
+           },
+           watch: {
+               accountError(message) {
+                   if (message) {
+                       this.handleErrorShow(this.account, message)
+                   }
+               },
            },
            methods: {
                handleLoginShow() {
@@ -36,16 +48,26 @@
                handleSignUp() {
                    this.handlePasswordMatchCheck(this.password, this.confirmPassword);
                    const isAllCheck = this.handleRequiredCheck();
-                   if (isAllCheck) {
-                       console.log('yes')
-                       this.$emit('sign-up');
+                   if (!this.policy.isAgree) {
+                       this.policy.spanClass = "warning"
+                   } else if (isAllCheck && this.policy.isAgree) {
+                       this.$emit('sign-up', this.account.text, this.password.text);
                    }
+               },
+               handleAccountDoubleCheck() {
+                   this.handleEmailCheck(this.account)
+                   if (this.account.remind === '') {
+                       this.$emit('done-account', this.account.text);
+                   }
+               },
+               handlePolicyAgreeCheck() {
+                   this.policy.isAgree ? this.policy.spanClass = '' : ''
                }
            }
        });
    </script>
    <template id="signUp">
-       <form method="POST" action="assets/php/register.php">
+       <form method="POST" action="assets/php/register.php" @submit.prevent="handleSignUp">
            <h2 class="modal__title mb-5">
                註冊新帳號
            </h2>
@@ -53,24 +75,33 @@
                <label for="account" class="form__text">帳號</label><span v-if="account.remind!==''"
                    class="form__text form__text--warning">{{account.remind}}</span>
                <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
-                   @keyup.enter="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
-                   @change="handleEmailCheck(account)" name="account"/>
+                   @keydown.enter.prevent="$refs.signUpPassword.focus()" autocomplete="username"
+                   placeholder="abc@gmail.com" @change="handleAccountDoubleCheck" id="account" />
            </div>
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"
                    class="form__text form__text--warning">{{password.remind}}</span>
                <input type="password" ref="signUpPassword" :class="password.inputClass" v-model.lazy="password.text"
-                   @keyup.enter="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
-                   class="form__input" placeholder="***" name="password"/>
+                   @keydown.enter.prevent="$refs.signUpConfirmPassword.focus()" @change="handlePasswordCheck(password)"
+                   class="form__input" placeholder="請輸入6至12位大小寫字母和數字" autocomplete="new-password" id="password" />
            </div>
-           <div class="form__group mb-12">
-               <label for="password" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
+           <div class="form__group mb-4">
+               <label for="confirmPpassword" class="form__text">確認密碼</label><span v-if="confirmPassword.remind!==''"
                    class="form__text form__text--warning">{{confirmPassword.remind}}</span>
                <input type="password" ref="signUpConfirmPassword" :class="confirmPassword.inputClass"
-                   v-model.lazy="confirmPassword.text" @keyup.enter="$refs.signUpBtn.click()"
-                   @change="handlePasswordMatchCheck(password,confirmPassword)" class="form__input" placeholder="***" name="repassword"/>
+                   v-model.lazy="confirmPassword.text" @change="handlePasswordMatchCheck(password,confirmPassword)"
+                   class="form__input" placeholder="請確認密碼" autocomplete="new-password" id="confirmPpassword" />
            </div>
-           <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit" name="register">註冊</button>
-           <button class="btn btn--link" @click="handleLoginShow">回上一頁</button>
+           <div class="text-left">
+               <label class="custom-input mb-4 h5">同意<a href="./policy.html" target="blank"
+                       class="d-inbl link underline">資料使用政策與使用條款</a>
+                   <input type="checkbox" v-model="policy.isAgree" class="custom-input__input"
+                       @change="handlePolicyAgreeCheck">
+                   <span class="custom-input__checkmark" :class="policy.spanClass" ref="policyCheckbox"></span>
+               </label>
+           </div>
+           <button class="btn btn--fluid mb-4" ref="signUpBtn" type="submit" name="register"
+               @click.prevent="handleSignUp">{{btnUi || '註冊'}}</button>
+           <a href="#" class="btn btn--link" @click.prevent="handleLoginShow">回上一頁</a>
        </form>
    </template>

@@ -1,37 +1,53 @@
 <div class="container">
-    <div id="lightbox"></div>
     <div class="row">
-        <div class="col-7 col-lg-4 col-sm-1">
+        <div class="col-7 col-lg-6 col-sm-6">
             <div class="box">
                 <div class="breadcrumb">
                     <a href="product.html"> <p>全部商品</p> </a>><a href=""> <p>PREMIUM系</p> </a>>
                     <p>Audi R8</p>
                 </div>
                 <div class="car-name">{{list.productBrief}}</div>
-
-                <div id="lightbox-panel">
-                    <img :src="list.imgURL[0]" />
-                    <a id="close-panel" href="#">
-                        <div class="icon-close">
-                            <img src="./assets/img/icon/icon-close.svg" alt="" />
+                <div class="lightBox">
+                    <figure>
+                        <img @click="lightBox('car')" class="demo" src="./assets/img/pic/0.png" alt="" />
+                    </figure>
+                    <div :class="{'mask':mask}" v-if="mask">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="(item,index2) in showList">
+                                    <div class="swiper-zoom-container">
+                                        <img v-show="nowImg === 0" :src="list.car[0]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 1" :src="list.car[1]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 2" :src="list.car[2]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 3" :src="list.car[3]" alt="" class="lazyload" />
+                                        <img v-show="nowImg === 4" :src="list.car[4]" alt="" class="lazyload" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 燈箱照片下方swiper的點點 -->
+                            <div class="swiper-pagination swiper-pagination-white"></div>
+                            <!-- swiper套件的左右按鈕 -->
+                            <div @click="prevImg" class="swiper-button-prev"></div>
+                            <div @click="nextImg" class="swiper-button-next"></div>
+                            <button class="closeBtn" @click="lightBox('',true)">
+                                <i class="fa fa-times"></i>
+                            </button>
                         </div>
-                    </a>
-                </div>
-
-                <a id="show-panel" href="#"><img :src="list.imgURL[0]" /></a>
-                <div class="row d-flex justify-content-end">
-                    <div class="carID carID--lg bg-series-PM mr-10" style="margin-top: 30px">PM<span>01</span></div>
-                </div>
-                <div class="gallery">
-                    <img :src="list.imgURL[1]" />
-                    <img :src="list.imgURL[2]" />
-                    <img :src="list.imgURL[3]" />
-                    <img :src="list.imgURL[4]" />
-                    <img :src="list.imgURL[5]" />
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
+                    </div>
+                    <div class="gallery">
+                        <img :src="list.imgURL[1]" />
+                        <img :src="list.imgURL[2]" />
+                        <img :src="list.imgURL[3]" />
+                        <img :src="list.imgURL[4]" />
+                        <img :src="list.imgURL[5]" />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-5 col-lg-2 col-sm-3">
+        <div class="col-5 col-lg-6 col-sm-6">
             <div class="box-2">
                 <h2>{{list.productName}}</h2>
                 <h3>{{list.productBrief}}</h3>
@@ -41,9 +57,11 @@
                 </p>
 
                 <div class="row">
-                    <div class="tag">
-                        <span class="badge bg-series-PA">警車系</span>
-                        <span class="badge badge--primary">本月主打</span>
+                    <div class="col-12 col-lg-3 col-sm-3">
+                        <div class="tag">
+                            <span class="badge bg-series-PA">警車系</span>
+                            <span class="badge badge--primary">本月主打</span>
+                        </div>
                     </div>
                 </div>
                 <div class="item-price">NT$ {{list.price}}</div>
@@ -63,10 +81,10 @@
                     </select>
                 </div>
                 <div class="row mt-10 mb-10">
-                    <div class="col-12 col-lg-3 col-sm-2">
+                    <div class="col-12 col-lg-6 col-sm-6">
                         <button class="btn btn--fluid">加入購物車</button>
                     </div>
-                    <div class="col-12 col-lg-3 col-sm-2">
+                    <div class="col-12 col-lg-6 col-sm-6">
                         <button class="btn btn--fluid btn--outline">加入收藏</button>
                     </div>
                 </div>
@@ -109,85 +127,74 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-12 col-sm-1">
+        <div class="col-12 col-lg-12 col-sm-12">
             <div class="box-pink">
                 <h3>熱門推薦商品</h3>
             </div>
         </div>
-        <div class="col-3 col-lg-3 col-sm-2">
-            <div class="box-blue-1">
-                <div class="box box-blue">
-                    <div class="prev">
-                        <i class="fa fa-chevron-left"></i>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
                     </div>
-                    <img :src="list.imgURL[3]" />
-                    <div class="item-card">
-                        <div>{{list.productName}}</div>
-                        <div class="pandc">
-                            <div>NT {{list.price}}</div>
-                            <div>收藏</div>
-                        </div>
-                        <div class="row mt-10 mb-10">
-                            <div class="col-12 col-lg-3 col-sm-2">
-                                <button class="btn btn--fluid">加入購物車</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-3 col-lg-3 col-sm-2">
-            <div class="box-blue-2">
-                <div class="box box-blue">
-                    <img :src="list.imgURL[3]" />
-                    <div class="item-card">
-                        <div>{{list.productName}}</div>
-                        <div class="pandc">
-                            <div>NT {{list.price}}</div>
-                            <div>收藏</div>
-                        </div>
-                        <div class="row mt-10 mb-10">
-                            <div class="col-12 col-lg-3 col-sm-2">
-                                <button class="btn btn--fluid">加入購物車</button>
-                            </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-3 col-lg-3 col-sm-4">
-            <div class="box-blue-3">
-                <div class="box box-blue">
-                    <img :src="list.imgURL[3]" />
-                    <div class="item-card">
-                        <div>{{list.productName}}</div>
-                        <div class="pandc">
-                            <div>NT {{list.price}}</div>
-                            <div>收藏</div>
-                        </div>
-                        <div class="row mt-10 mb-10">
-                            <div class="col-12 col-lg-3 col-sm-2">
-                                <button class="btn btn--fluid">加入購物車</button>
-                            </div>
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-3 col-lg-3 col-sm-4">
-            <div class="box-blue-4">
-                <div class="box box-blue">
-                    <img :src="list.imgURL[3]" />
-                    <div class="item-card">
-                        <div>{{list.productName}}</div>
-                        <div class="pandc">
-                            <div>NT {{list.price}}</div>
-                            <div>收藏</div>
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
                         </div>
-                        <div class="row mt-10 mb-10">
-                            <div class="col-12 col-lg-3 col-sm-2">
-                                <button class="btn btn--fluid">加入購物車</button>
-                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
                         </div>
                     </div>
                 </div>
