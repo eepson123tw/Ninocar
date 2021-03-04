@@ -26,18 +26,14 @@
     height: 100px;
     border-bottom: 1px solid #e59807;
     line-height: 150px;
-    margin-bottom: 20px;
-}
-
-.box-green {
-    background-color: #dd8;
+    margin-bottom: 30px;
 }
 
 .gallery {
     width: 20%;
     height: 20%;
     display: flex;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .gallery img {
@@ -75,14 +71,6 @@
     justify-content: space-between;
 }
 
-.box-blue-1 {
-    position: relative;
-}
-
-.box-blue-4 {
-    position: relative;
-}
-
 .btn {
     margin-bottom: 30px;
 }
@@ -105,40 +93,47 @@
 
 @media (max-width: 1920px) {
     .car-name {
-        font-size: 8rem;
+        font-size: 8.5rem;
         z-index: 0;
         position: relative;
         -webkit-text-stroke: 2px #b57700;
         color: white;
     }
+    .lightBox {
+        margin-bottom: 75px;
+    }
+    .lightBox .demo {
+        width: auto;
+        height: 550px;
+        position: absolute;
+        top: 275px;
+        z-index: 1;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 768px) {
     .car-name {
-        font-size: 6rem;
+        font-size: 7.5rem;
+    }
+    .box-2 {
+        margin-top: 0;
+    }
+    .lightBox .demo {
+        height: 480px;
     }
 }
 
 @media (max-width: 414px) {
     .car-name {
-        font-size: 5.5rem;
+        font-size: 5rem;
+    }
+    .lightBox .demo {
+        height: 280px;
     }
 }
 
 //--------------------------光箱---------------------------
-.lightBox {
-    margin-bottom: 75px;
-}
-
-.lightBox .demo {
-    width: auto;
-    height: 50%;
-    // margin: 85px;
-    position: absolute;
-    top: 275px;
-    z-index: 1;
-    cursor: pointer;
-}
 
 .mask {
     position: fixed;
@@ -215,7 +210,8 @@
 }
 
 .mask .swiper-button-prev,
-.mask .swiper-container-rtl .swiper-button-next {
+.mask .swiper-container-rtl,
+.mask .swiper-button-next {
     /*去除預設的藍色外框*/
     outline: none;
 }
@@ -226,6 +222,7 @@
 .swiper-button-prev,
 .swiper-container-rtl .swiper-button-next {
     background-image: none;
+    outline: none;
 }
 
 .fa-angle-left,
