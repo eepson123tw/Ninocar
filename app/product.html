@@ -136,13 +136,13 @@
                 page() {
                     const vm = this;
                     let category = ''; 
-                    //     return vm.data.reduce((prev, curr) => {
-                    // if(curr.category !== category) {
-                    // prev.push(curr.category);
-                    // }
-                    // category = curr.category;
-                    //     return prev
-                    // },[])
+                        return vm.data.reduce((prev, curr) => {
+                    if(curr.category !== category) {
+                    prev.push(curr.category);
+                    }
+                    category = curr.category;
+                        return prev
+                    },[])
                 },
 
                 filterData() {
