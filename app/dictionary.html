@@ -44,7 +44,7 @@
       data: { //變數存放的地方
         productList: [],
         targetProduct: {},
-        myProductList: [],
+        myProductIdList: [],
         showProductList: [],
         memberHasPin: true,
         searchType: 'keyword',
@@ -104,12 +104,13 @@
         }).catch(error => {
           console.log(error)
         })
-
-        //拿使用者有的商品清單
       },
       computed: {
         seriesList() {
           return this.$store.state.seriesList
+        },
+        memberId() {
+          return this.$store.state.memberId
         },
         bgClass() {
           return `bg-series-${this.targetProduct.series}`
@@ -172,6 +173,13 @@
         },
         selectedLimitList() {
           this.getChangedProductList();
+        },
+        memberId(val) {
+          if (val) {
+            this.handleGetMemberOwnProductIdList();
+          } else {
+            this.myProductIdList.splice(0)
+          }
         },
       },
       methods: {
@@ -266,19 +274,17 @@
           this.showProductList = filteredProductList;
         },
         isPostPin(theProductId) {
-          return this.memberOwnProductIdList.indexOf(theProductId);
+          return this.myProductIdList.indexOf(theProductId);
         },
         handleGetMemberOwnProductIdList() {
-          axios.post('./assets/php/getMemberOwnProductList.php', {
-            "account": this.signUpInfo.account,
+          axios.post('./assets/php/getMemberOwnProductIdList.php', {
+            "memberId": this.memberId,
           }).then(res => {
-            console.log(res.data);
-            const productIdList = res.data;
-            if (productIdList != []) {
+            console.log(res);
+            if (res.data != []) {
               console.log('尚未有商品')
             } else {
-              this.myProductList = this.productList.filter(product => productIdList.indexOf(product
-                .productId));
+              this.myProductIdList = res.data
             }
           }).catch(error => {
             console.log(error)

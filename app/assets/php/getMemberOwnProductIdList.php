@@ -7,7 +7,7 @@
     //建立SQL
     $data = json_decode(file_get_contents("php://input"));
     // print_r($data);
-    $mem_id = $data -> account;
+    $mem_id = $data -> memberId;
 
 
     $sql = "SELECT product_id FROM `detail` where order_id in ( SELECT order_id FROM `order` WHERE member_id = ?)";
@@ -17,10 +17,11 @@
     $statement->bindValue(1, $mem_id);
     $statement->execute();
     $data = $statement->fetchAll();
- 
+    
     if($data != [] ){
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }else{
+        echo $data;
         echo '尚未擁有任何車車';
     }
     

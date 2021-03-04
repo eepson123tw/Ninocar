@@ -4,13 +4,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/MotionPathPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
 <script src="./assets/js/all.js"></script>
+<script src="./assets/js/utils.js"></script>
 <title>test</title>
 </head>
 <style>
@@ -32,7 +34,8 @@
 
 
 
-    <div class="box"> <img src="./assets/img/illust/illust-car-y.svg" style="width: 100px;height: 100px;position: absolute; left: -50%;"></div>
+    <div class="box"> <img src="./assets/img/illust/illust-car-y.svg"
+        style="width: 100px;height: 100px;position: absolute; left: -50%;"></div>
 
     <div class="container">
       <div class="row justify-content-center">
@@ -61,11 +64,7 @@
       <template #content>
         <!-- 自行決定要傳入什麼 -->
         <div>
-          <img
-            class="mx-auto "
-            src="./assets/img/illust/illust-showgirl.svg "
-            alt=" "
-          >
+          <img class="mx-auto " src="./assets/img/illust/illust-showgirl.svg " alt=" ">
         </div>
       </template>
       <template #maintext>
