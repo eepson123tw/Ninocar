@@ -6,9 +6,16 @@
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/MotionPathPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
 <script src="./assets/js/all.js"></script>
 <title>test</title>
 </head>
+<style>
+
+</style>
 
 <body>
   <div id="dictionary">
@@ -23,7 +30,30 @@
     </main>
 
 
-    <modal-custom-made v-show="isModalShow" @closemodal="closeHandler">
+
+
+    <div class="box"> <img src="./assets/img/illust/illust-car-y.svg" style="width: 100px;height: 100px;position: absolute; left: -50%;"></div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+
+        <div v-for='(item,index) of itemList' class="mb-20 col-3">
+
+          <h1>{{item.title}}</h1>
+          <h2>NT${{item.price}}</h2>
+          <p>{{item.text}}</p>
+          <button class="js-btn btn" @click="addCarts(item)">加入購物車</button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <popovers :carts-num="countNum" :carts-total-money="countTotalPrice"></popovers>
+
+
+
+    <modal-custom-made v-show=" isModalShow " @closemodal="closeHandler ">
       <template #header>
         <!-- 傳入文字 -->
         預設標題
@@ -32,20 +62,20 @@
         <!-- 自行決定要傳入什麼 -->
         <div>
           <img
-            class="mx-auto"
-            src="./assets/img/illust/illust-showgirl.svg"
-            alt=""
+            class="mx-auto "
+            src="./assets/img/illust/illust-showgirl.svg "
+            alt=" "
           >
         </div>
       </template>
       <template #maintext>
         <!-- 若有文字可以使用 ，也可以關掉-->
         <div>
-          <p class="modal__text--left">DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊</p>
+          <p class="modal__text--left ">DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊DEMO文字區塊</p>
         </div>
       </template>
       <template #footer>
-        <button class="btn btn--fluid mt-3">DEMO</button>
+        <button class="btn btn--fluid mt-3 ">DEMO</button>
       </template>
 
     </modal-custom-made>
@@ -54,15 +84,27 @@
 
 
   @@include('./components/VueHeader.html') @@include('./components/ModalNormal.html')
-
+  <!--  -->
+  @@include('./components/mixins/cartMixins.html')
+  <!--  -->
+  @@include('./components/popovers.html')
 
   <script>
     new Vue({
       el: '#dictionary',
+      mixins: [cartMixins],
       data() {
         return {
           isModalShow: false,
-
+          itemList: [{
+            title: '車車',
+            price: 300,
+            text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, vel.',
+          }, {
+            title: '車車',
+            price: 300,
+            text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, vel.',
+          }]
         }
       },
       methods: {
@@ -80,6 +122,19 @@
         }
 
       },
+      mounted() {
+
+        fetch(`./assets/php/getProductList.php`).then((item) => {
+
+          console.log(item);
+
+        })
+
+
+
+      }
+
+
 
     });
   </script>

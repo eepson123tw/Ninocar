@@ -375,7 +375,6 @@
         // 選擇payment
         selectPayment: "",
         // shipping methods
-
         selectShipping: "",
         discountPrice: 0,
         sendPrice: 0,
@@ -488,15 +487,10 @@
         for (let sendMethods in this.shippingList) {
 
           if (this.shippingList[sendMethods] == this.selectShipping && this.selectShipping == "宅配") {
-
             this.sendPrice = 80;
-
           } else {
-
             this.sendPrice = 0;
-
           }
-
         }
 
 
