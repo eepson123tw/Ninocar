@@ -206,16 +206,26 @@
   Vue.component('cartDone', {
 
     template: "#cartDone",
+    props: ['current'],
     data() {
 
       return {
         notShow: true,
+        currentdata: this.current,
         animationDisplay: 'cart__displayNone',
       }
 
 
     },
     methods: {
+
+      //   open() {
+
+      //     if (this.currentdata == 2) {
+      //       this.$emit('openWindow');
+      //     }
+
+      //   },
 
       collapseArea() {
         //收合選單
@@ -243,6 +253,22 @@
         discountPrice: state => state.discountPrice,
         sendPrice: state => state.sendPrice,
       }),
+    },
+    mounted() {
+
+
+
+
+      // if (this.isModalShow) {
+      //   this.isModalShow = false;
+      // } else {
+      //   this.isModalShow = true;
+      // }
+
+
+      this.$emit('open-window');
+
+
     }
 
   })

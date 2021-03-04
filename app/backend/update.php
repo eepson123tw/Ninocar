@@ -1,23 +1,56 @@
 <?php
-    include("head.php");
-    include 'LoginCheck.php';
+include("head.php");
+include 'LoginCheck.php';
 
-    //建立SQL
-    $sql = "SELECT * FROM team1.product";
+//建立SQL
+$sql = "SELECT * FROM team1.product";
 
-    //執行
-    $statement = $Util->getPDO()->prepare($sql);
+//執行
+$statement = $Util->getPDO()->prepare($sql);
 
-    //給值
-    $statement->execute();
-    $data = $statement->fetchAll();
+//給值
+$statement->execute();
+$data = $statement->fetchAll();
 ?>
 <title>上架頁</title>
 </head>
 
+<script type="text/javascript">
+    function doSubmit() {
+        if (document.getElementById('name').value == '') {
+            alert("請填寫[商品名稱]");
+            return false;
+        }
+        if (document.getElementById('img').value == '') {
+            alert("請選擇[商品圖片]");
+            return false;
+        }
+        if (document.getElementById('price').value == '') {
+            alert("請填寫[商品金額]");
+            return false;
+        }
+        if (document.getElementById('point').value == '') {
+            alert("請填寫[商品點數]");
+            return false;
+        }
+        if (document.getElementById('category').value == '') {
+            alert("請選擇[分類]");
+            return false;
+        }
+        if (document.getElementById('cateId').value == '') {
+            alert("未填入[商品分類編號]");
+            return false;
+        }
+        if (document.getElementById('category2').value == '') {
+            alert("請選擇[分類二]");
+            return false;
+        }
+    }
+</script>
+
 <body>
     <?php
-        include '../../app/pages/BackendPage/base.html';
+    include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <div class="block-responsive">
@@ -25,7 +58,7 @@
                 <form method="post" action="ProductCreateR.php" enctype="multipart/form-data">
                     <div class="update mb-3">
                         <p>商品名稱：</p>
-                        <input type="text" name="name">
+                        <input type="text" name="name" id="name">
                     </div>
                     <div class="update mb-3">
                         <p>商品名稱(英)：</p>
@@ -33,7 +66,7 @@
                     </div>
                     <div class="update mb-3">
                         <p>商品主圖：</p>
-                        <input type="file" name="img">
+                        <input type="file" name="img" id="img">
                     </div>
                     <div class="update mb-3">
                         <p>商品狀態：</p>
@@ -45,15 +78,15 @@
                     </div>
                     <div class="update mb-3">
                         <p>商品金額：</p>
-                        <input type="text" name="price">
+                        <input type="text" name="price" id="price">
                     </div>
                     <div class="update mb-3">
                         <p>商品點數：</p>
-                        <input type="text" name="point">
+                        <input type="text" name="point" id="point">
                     </div>
                     <div class="update mb-3">
                         <p>商品分類：</p>
-                        <select name="category" id="">
+                        <select name="category" id="category">
                             <option value="">請選擇</option>
                             <option value="1">工程系</option>
                             <option value="2">RV休旅系</option>
@@ -67,11 +100,11 @@
                     </div>
                     <div class="update mb-3">
                         <p>商品分類編號：</p>
-                        <input type="text" name="cateId">
+                        <input type="text" name="cateId" id="cateId">
                     </div>
                     <div class="update mb-3">
                         <p>商品分類二：</p>
-                        <select name="category2" id="">
+                        <select name="category2" id="category2">
                             <option value="">請選擇</option>
                             <option value="0">一般商品</option>
                             <option value="1">熱門商品</option>
@@ -95,7 +128,7 @@
                     </div>
 
                     <div class="update mb-5">
-                        <button type="submit" class="">送出</button>
+                        <button type="submit" class="" onclick="return doSubmit();">送出</button>
                     </div>
                 </form>
             </main>

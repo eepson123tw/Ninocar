@@ -23,7 +23,7 @@
             $productType = $_POST["productType"];   //商品狀態（0：預設 1：封鎖,未上架 2：刪除）
             $price = $_POST["price"];   //商品價格
             $point = $_POST["point"];   //點數售價
-            $category = $_POST["category"];   //商品分類（0：轎車系 1：工程系 2：RV休旅系 3：計程車系 4:巴士系 5:警車系 6：消防系 7：救護系 8：PREMIUM系
+            $category = $_POST["category"];   //商品分類（1：工程系 2：RV休旅系 3：計程車系 4:巴士系 5:警車系 6：消防救護系 7：轎車系 8：PREMIUM系）
             $cateId = $_POST["cateId"];   //分類編號
             $category2 = $_POST["category2"];   //特殊分類（0：一般商品 1：熱門商品  2：本月主打 3：最新商品 4:點數限定 5:客製化商品 ）
             $size = $_POST["size"];   //商品尺寸

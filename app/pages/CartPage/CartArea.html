@@ -141,7 +141,6 @@
 									disabled
 								>請選擇</option>
 								<option v-for="(payment,index) of paymentList">{{payment}}</option>
-
 							</select>
 						</div>
 						<label
@@ -472,7 +471,6 @@
         for (let key in this.cuponList) {
           if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
-
           }
           if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
@@ -483,7 +481,6 @@
           if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
           }
-
         }
       },
       countSendPrice() {

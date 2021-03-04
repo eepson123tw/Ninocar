@@ -99,25 +99,27 @@
 
 
 .othersWorks {
-    // outline: 3px solid firebrick;
-    overflow: hidden;
+//     // outline: 3px solid firebrick;
+//     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.grid-item{
-    float: left;
-    width: 466px;
-    // min-height: 835px;
-    margin-bottom: 10px;
-}
+// .grid-item{
+//     float: left;
+//     width: 466px;
+//     // min-height: 835px;
+//     margin-bottom: 10px;
+// }
 
-.grid-item--height1{
-    min-height: 830px;
-}
+// .grid-item--height1{
+//     min-height: 830px;
+// }
 
-.grid-item--height2{
+// .grid-item--height2{
 
-    min-height: 887px;
-}
+//     min-height: 887px;
+// }
 
 .mywork {
     display: none;

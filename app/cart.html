@@ -27,34 +27,40 @@
 
       <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
 
-      <cart-done v-if="current_section === 2" key="index-3"></cart-done>
+      <cart-done @open-window="openModal" v-if="current_section === 2" :current="current_section" key=" index-3 "></cart-done>
     </transition>
 
 
-
-
-
-
-
-    <!-- 
-        <div class="popovers">
-            <p>共<span class="popovers__cartItems"> 3</span>件商品</p>
-            <p>總金額：NT$<span class="popovers__totalCost">200</span></p>
-            <div class="popovers__member">
-                總需點數：
-                <p>Ni <span>200</span></p>
-            </div>
+    <modal-custom-made v-show="isModalShow " @closemodal="closeHandler ">
+      <template #header>
+        <!-- 傳入文字 -->
+        <h2 class="modal__title  mb-10  h3">訂單成立</h2>
+      </template>
+      <template #content>
+        <!-- 自行決定要傳入什麼 -->
+        <div>
+          <img
+            class="mx-auto "
+            src="./assets/img/icon/icon-good.svg"
+            alt=" "
+          >
         </div>
-        <div class="container">
-            <div class="row d-flex mt-20 justify-content-center">
-                <button class="btn btn--small  ml-20" data-js="js-popovers">Popovers</button>
-            </div>
+      </template>
+      <template #maintext>
+        <!-- 若有文字可以使用 ，也可以關掉-->
+        <div>
+          <p class="modal__text">訂單已成立，感謝您的購買！已寄一份訂單明細至您的信箱</p>
         </div>
-        <div class="container">
-            <div class="row d-flex mt-20 justify-content-center">
-                <button class="btn btn--small  ml-20" data-js="js-progress">Progress</button>
-            </div>
-        </div> -->
+      </template>
+      <template #footer>
+        <a href="./MemberPurchase.html"><button class="btn btn--fluid btn--outline mt-3 ">查看我的訂單</button></a>
+      </template>
+
+    </modal-custom-made>
+
+
+
+
 
 
 
@@ -67,6 +73,11 @@
   @@include('./pages/CartPage/CartInfo.html')
   <!--  -->
   @@include('./pages/CartPage/CartDone.html')
+  <!--  -->
+  @@include('./components/ModalNormal.html')
+
+  <!--  -->
+  @@include('./components/ModalNormal.html')
 
   <script>
     const store = new Vuex.Store({
@@ -75,9 +86,9 @@
         buyList: [],
         totalProductNum: null,
         totalPointCost: null,
-        selectCupon: "",
-        selectPayment: "",
-        selectShipping: "",
+        selectCupon: " ",
+        selectPayment: " ",
+        selectShipping: " ",
         finallyPrice: 0,
         discountPrice: 0,
         sendPrice: 0,
@@ -124,6 +135,7 @@
     new Vue({
       el: '#app',
       data: {
+
         list: [{
           productName: 'Audi R8 奧迪小客車',
           productBrief: 'Audi TT coupe 1980',
@@ -146,12 +158,26 @@
         }],
         listIsExist: true,
         current_section: 0,
+        isModalShow: false,
       },
       store,
       methods: {
         dataChange(val) {
           this.current_section = val;
+        },
+        // 若有要使用記得加上這個方法控制開關
+        openModal() {
+          if (this.isModalShow) {
+            this.isModalShow = false;
+          } else {
+            this.isModalShow = true;
+          }
+        },
+        closeHandler() {
+          this.isModalShow = false;
+
         }
+
       },
       computed: {
         ...Vuex.mapState({
@@ -180,6 +206,8 @@
               1)}是點數商品`)
           }
         };
+
+
       },
     });
   </script>

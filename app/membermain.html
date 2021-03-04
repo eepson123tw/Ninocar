@@ -11,35 +11,304 @@
 </head>
 
 <body>
-    <div id="app">
-        <vue-header></vue-header>
-        <member-bar></member-bar>
-        <!--  -->
-        @@include('pages/MemberPage/MemberData.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberCupon.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberAddress.html')
-        <!--  -->
-        @@include('pages/MemberPage/MemberPassword.html')
+  <div id="app">
+    <vue-header></vue-header>
+    <member-bar></member-bar>
+    <!--  -->
+    @@include('pages/MemberPage/MemberData.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberCupon.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberAddress.html')
+    <!--  -->
+    @@include('pages/MemberPage/MemberPassword.html')
+
+    <keep-alive>
+      <modal-custom-made v-show="isModalShow" @closemodal="closeHandler">
+
+        <template #header>
+          <h2 class="modal__title modal__title--left mb-10  h3">新增地址</h2>
+        </template>
+        <template #content>
+          <!-- 自行決定要傳入什麼 -->
+          <div class="form__group block ">
+            <label
+              for="receiverName"
+              class="form__text mb-2 "
+            >收件人姓名 </label>
+            <div class="form__section mb-5">
+              <input
+                id="receiverName"
+                type="text"
+                class=" cart__select form__input"
+                placeholder="王小明"
+                v-model="receiver.receiverName"
+              ></input>
+            </div>
+            <label
+              for="receiverPhone"
+              class="form__text mb-2 "
+            >聯絡電話</label>
+            <div class="form__section mb-5">
+              <input
+                id="receiverPhone"
+                type="text"
+                class="cart__select form__input"
+                placeholder="0910-123-456"
+                v-model="receiver.receiverPhone"
+              ></input>
+            </div>
+            <label
+              for="receiverAddresssCode"
+              class="form__text mb-2 "
+            >郵遞區號</label>
+            <div class="form__section mb-5">
+              <input
+                id="receiverAddresssCode"
+                type="email"
+                class="cart__select form__input"
+                placeholder="300"
+                v-model="receiver.receiverAddresssCode"
+              ></input>
+            </div>
+          </div>
+        </template>
+        <template #maintext>
+          <!-- 若有文字可以使用 ，也可以關掉-->
+          <div class="form__group ">
+            <label
+              for="address"
+              class="form__text "
+            >地址</label>
+            <div class="form__section mb-5">
+              <select
+                name=""
+                id=""
+                class="form__select "
+                v-model="receiver.receiverCity"
+              >
+                <option
+                  value=""
+                  disabled
+                >城市</option>
+                <option v-for="(num,index) of selectCity">{{num}}</option>
+              </select>
+              <select
+                name=""
+                id=""
+                class="form__select "
+                v-model="receiver.receiverTown"
+                @change="sameAddressCode"
+              >
+                <option
+                  value=""
+                  disabled
+                >鄉政區</option>
+                <option v-for="(num,index) of selectTown">{{num}}</option>
+              </select>
+            </div>
+            <input
+              type="text"
+              class="form__input  "
+              id="address"
+              v-model="receiver.receiverRoad"
+              placeholder="街/路/巷弄/樓層"
+            />
+          </div>
+        </template>
+        <template #footer>
+          <div class="d-flex justify-content-end mt-3">
+            <button
+              class="btn btn--ghost"
+              @click="closeHandler"
+            >取消</button>
+            <button
+              @click="saveAddress"
+              class="btn "
+            >完成</button>
+          </div>
+        </template>
+
+      </modal-custom-made>
+    </keep-alive>
 
 
-    </div>
+  </div>
 
 
 
 
-    @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html')
 
+  <script>
+    new Vue({
+      el: '#app',
+      mixins: [inputMixins],
+      data: {
+        isModalShow: false,
+        cuponList: [{
+          disCount: 9,
+          disCountText: '折',
+          cuponTitle: '【註冊新會員】',
+          cuponText: '全項商品不限金額結帳九折優惠',
+          cuponTime: '68:08:22',
+        }, {
+          disCount: null,
+          disCountText: '免運',
+          cuponTitle: '【黃金會員】',
+          cuponText: '宅配享一次免運優惠',
+          cuponTime: '2021/03/22',
+        }, {
+          disCount: null,
+          disCountText: '買一送一',
+          cuponTitle: '【白金會員】',
+          cuponText: '結帳享買一送一',
+          cuponTime: '2021/03/22',
+        }, {
+          disCount: null,
+          disCountText: '買一送一',
+          cuponTitle: '【生日優惠】',
+          cuponText: '全項商品不限金額結帳七折優惠',
+          cuponTime: '2021/03/22',
+        }],
+        user: {
+          name: '帳號',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        phone: {
+          name: '電話',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        userDetail: {
+          name: '生日、性別',
+          remind: '',
+          usersex: '',
+          userYear: '',
+          userMonth: '',
+          userDate: '',
+        },
+        sexList: ['男', '女'],
+        cityList: [],
+        receiver: {
+          name: '',
+          receiverPhone: '',
+          receiverName: '',
+          receiverCity: '',
+          receiverTown: '',
+          receiverRoad: '',
+          receiverAddresssCode: '',
+        },
+        password: {
+          name: '密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        newPassword: {
+          name: '新密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        confirmPassword: {
+          name: '確認密碼',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        receiverList: [],
+        defaultAddress: false,
+      },
+      methods: {
+        // 若有要使用記得加上這個方法控制開關
+        openModal() {
+          if (this.isModalShow) {
+            this.isModalShow = false;
+          } else {
+            this.isModalShow = true;
+          }
+        },
+        closeHandler() {
+          this.isModalShow = false;
+        },
+        handleInput() {
+          const isAllCheck = this.handleRequiredCheck();
+          if (isAllCheck) {
+            console.log('yes')
+          };
+        },
+        handlePasswordInput() {
+          this.handlePasswordMatchCheck(this.newPassword, this.confirmPassword);
+          this.handlePasswordCheck(this.password);
+        },
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello, VueJS!',
-            },
+        sameAddressCode() {
+          this.receiver.receiverAddresssCode = this.selectCode;
+        },
+        saveAddress() {
+          this.receiverList.push(this.receiver);
+          this.isModalShow = false;
+        },
+        defaultHandler() {
+
+          if (!this.defaultAddress) {
+            this.defaultAddress = true;
+          } else {
+            this.defaultAddress = false;
+          }
+        },
+        deleteAddress(val) {
+          this.receiverList.splice(val, 1)
+        }
+      },
+      computed: {
+        inputList() {
+          return [this.user, this.phone]
+        },
+        selectCity() {
+          let newCityList = [];
+          for (let cityNum in this.cityList) {
+            newCityList.push(this.cityList[cityNum]['name']);
+          }
+          return newCityList;
+        },
+        selectTown() {
+          let newTownList = [];
+          for (let cityNum in this.cityList) {
+            if (this.cityList[cityNum]['name'] == this.receiver.receiverCity) {
+              newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
+            }
+          }
+          return newTownList;
+        },
+        selectCode() {
+          let newCode = "";
+          for (let cityNum in this.cityList) {
+            if (this.cityList[cityNum]['name'] == this.receiver.receiverCity) {
+              newCode = this.cityList[cityNum]['districts'].filter((item) => item.name == this.receiver.receiverTown)
+            }
+          }
+          return newCode[0].zip;
+        }
+
+      },
+
+      mounted() {
+        fetch('./assets/js/taiwan_districts.json', {
+          method: "get"
+        }).then((res) => {
+          return res.json();
+        }).then((res) => {
+          this.cityList = res;
         });
-    </script>
+
+      }
+    });
+  </script>
 
 
 </body>

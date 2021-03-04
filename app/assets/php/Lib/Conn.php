@@ -1,14 +1,29 @@
 <?php
-  $db_host = "localhost";
-  $db_user = "root";
-  $db_pass = "";
-  $db_select = "team1";
+    class UtilClass {    
 
-  // //依個人電腦sql調整
-  // $dsn = "mysql:host=".$db_host.";dbname=".$db_select;
-  $dsn="mysql:host=localhost;port=3306;dbname=team1";
+        //取得欲放置的檔案路徑
+        function getFilePath(){
+            //Web根目錄真實路徑
+            $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
+            return $ServerRoot."/T1/dist";
+        }
 
-  // //建立PDO物件，並放入指定的相關資料
-  // $pdo = new PDO($dsn, $db_user, $db_pass);
-  $pdo = new PDO($dsn, $db_user);
+        //取得PDO物件
+        function getPDO(){
+            // $db_host = "127.0.0.1";
+            $db_host = "localhost";
+            $db_user = "root";
+            $db_pass = "";
+            $db_select = "team1";
+       
+            //建立資料庫連線物件
+            $dsn = "mysql:host=".$db_host.";dbname=".$db_select;
+       
+            //建立PDO物件，並放入指定的相關資料
+            $pdo = new PDO($dsn, $db_user);
+    
+            return $pdo;
+        }
+
+    }
 ?>
