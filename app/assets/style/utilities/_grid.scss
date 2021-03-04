@@ -26,16 +26,20 @@
 @mixin makeCol($breakpoint: null, $gutter:40px, $grid-column:12) {
   @for $i from 0 through $grid-column {
     @if ($i==0) {
-      .col {
-        padding-left: $gutter / 2;
-        padding-right: $gutter / 2;
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-        position: relative;
-      }
+      // .col {
+      //   padding-left: $gutter / 2;
+      //   padding-right: $gutter / 2;
+      //   flex-basis: 0;
+      //   flex-grow: 1;
+      //   max-width: 100%;
+      //   position: relative;
+      // }
 
-      .offset-#{$i} {
+      // .offset-#{$i} {
+      //   margin-left: 0;
+      // }
+
+      .offset-#{$breakpoint}#{$i} {
         margin-left: 0;
       }
     }

@@ -1,78 +1,31 @@
 <div class=" container">
-    <div class="row member__info">
-        <section class="member__data d-flex w-100">
-            <h2 id="memberCoupon">我的折價卷</h2>
-        </section>
+  <div class="row member__info">
+    <section class="member__data col-12 col-lg-6 col-xs-12">
+      <h2 class="block  block__header__title" id="memberCoupon">我的折價卷</h2>
+    </section>
+  </div>
+  <div class="row member__info d-flex justify-content-around py-10">
+    <div class="member__cupon  mt-5  col-5 col-lg-6" v-for="(item,index) of  cuponList">
+      <ul class="d-flex justify-content-center w-100 flex-xs-wrap">
+        <li class="member__cuponText">
+          <div class="member__cuponBackGround">
+            <span class="member__cuponText--big">{{item['disCount']}}</span>
+            </span class="member__cuponText--small">{{item['disCountText']}}</span>
+          </div>
+        </li>
+        <li class="member__cuponText">
+          <div class="member__cuponContent">
+            <p class="h5">{{item['cuponTitle']}}</p>
+            <p class="h4">{{item['cuponText']}}</p>
+            <p class=" h4 member__cuponContent--warning ">即將到期:剩下 <span> {{item.cuponTime}}</span></p>
+          </div>
+        </li>
+        <li class="member__cuponText">
+          <a class="member__cuponBtn" href="./product.html"><button class="btn btn--link   member__cuponBtn--black pb-5 ">去逛逛</button>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="row member__info">
-        <div class="member__cupon  mt-5  col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--big">9</span><span class="member__cuponText--small">折</span>
-                </li>
-                <li class=" pt-10 w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【註冊新會員】</li>
-                        <li class="h4">全項商品不限金額結帳九折優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">即將到期:剩下 <span> 68:08:22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black pb-5 ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon   mt-5   col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100 ">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--mid">免運</span>
-                </li>
-                <li class=" w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【黃金會員】</li>
-                        <li class="h4">宅配享一次免運優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon   mt-5   col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100 ">
-                <li class="member__cuponText member__cuponText--wrap">
-                    <span class="member__cuponText--middle">買一</span>
-                    <span class="member__cuponText--middle">送一</span>
-                </li>
-                <li class=" w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【白金會員】</li>
-                        <li class="h4">結帳享買一送一</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-        <div class="member__cupon  mt-5  col-5 col-lg-6">
-            <ul class="d-flex justify-content-around w-100">
-                <li class="member__cuponText">
-                    <span class="member__cuponText--big">8</span><span class="member__cuponText--small">折</span>
-                </li>
-                <li class=" pt-10 w-50">
-                    <ul class="member__cuponContent">
-                        <li class="h5">【生日優惠】</li>
-                        <li class="h4">全項商品不限金額結帳七折優惠</li>
-                        <li class=" h4 member__cuponContent--warning ">使用期限: <span>2021/03/22</span></li>
-                    </ul>
-                </li>
-                <li class="member__cuponBtn ">
-                    <button class="btn btn--link  member__cuponBtn--black pb-5 ">去逛逛</button>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+  </div>
 </div>

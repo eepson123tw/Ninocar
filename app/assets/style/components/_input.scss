@@ -10,22 +10,26 @@
         @extend h4;
 
         &:focus {
-            border: 1px solid $blue;
+            border: 2px solid $blue;
+        }
+
+        &::placeholder {
+            font-size: 16px;
         }
 
         &--warning {
-            border: 1px solid $red;
+            border: 2px solid $red;
 
             &:focus {
-                border: 1px solid $red;
+                border: 2px solid $red;
             }
         }
 
         &--success {
-            border: 1px solid $green;
+            border: 2px solid $green;
 
             &:focus {
-                border: 1px solid $green;
+                border: 2px solid $green;
             }
         }
     }
@@ -86,7 +90,9 @@
     }
 
 
-    &__input:checked ~&__checkmark {
+
+
+    &__input:checked~&__checkmark {
         background-color: $secondary;
     }
 
@@ -112,10 +118,11 @@
             transform: rotate(45deg);
         }
 
-        &--circle{
+        &--circle {
             border-radius: 50%;
         }
-        &--circle::after{
+
+        &--circle::after {
             top: 9px;
             left: 9px;
             width: 8px;
@@ -123,9 +130,13 @@
             border-radius: 50%;
             background: white;
         }
+
+        &.warning {
+            border: 2px solid $red;
+        }
     }
 
-    &__input:checked ~&__checkmark:after {
+    &__input:checked~&__checkmark:after {
         display: block;
     }
 

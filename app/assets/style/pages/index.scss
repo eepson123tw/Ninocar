@@ -41,6 +41,9 @@
     }
 
     .parking {
+        position: relative;
+        margin-bottom: -220px;
+
         &__car {
             position: absolute;
             width: 20%;
@@ -67,18 +70,23 @@
         }
 
         &__text {
-            position: absolute;
-            text-align: center;
-            bottom: 20px;
-            right: 0;
-            padding: 40px 40px 80px;
-            width: 40%;
+            position: relative;
+            top: -300px;
         }
     }
 
 
     .billboard {
+        // height: 0;
+        // padding-top: 56%;
+        // background-image: url('../../img/illust/illust-billboard.svg');
+        // background-size: cover;
+        // background-repeat: no-repeat;
+        // background-position: 0 0;
+
         &__screen {
+            // margin: 0 auto;
+
             position: absolute;
             width: 93%;
             height: 70.6%;
@@ -126,7 +134,6 @@
 
         &__road {
 
-            // width: 100%;
             @include rwd-lg {
                 height: 120px;
                 transform: translateX(-160px);
@@ -256,15 +263,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding-left: 80px;
 
-            @include rwd(1400px) {
-                padding-left: 40px;
-            }
-
-            @include rwd-xl {
-                padding-left: 0;
-            }
 
             @include rwd-lg {
                 margin: auto;
@@ -279,6 +278,7 @@
 
     .thumb {
         position: relative;
+        display: inline-block;
         animation: messageXShake 1s ease-in infinite;
 
         &--address {

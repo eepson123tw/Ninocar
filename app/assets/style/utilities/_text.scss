@@ -1,5 +1,6 @@
 /*----------------------------------------text color */
-@each $key,$value in $colors {
+@each $key,
+$value in $colors {
     .text-#{$key} {
         color: #{$value};
     }
@@ -19,6 +20,7 @@
         text-align: right;
     }
 }
+
 /* ----------------------------------------font weight */
 .font {
     &-light {
@@ -41,12 +43,16 @@
         font-weight: 900;
     }
 }
+
 /* ----------------------------------------line height */
-.lh-1{
+.lh-1 {
     line-height: 1;
 }
-.lh-2{
+
+.lh-2 {
     line-height: 2;
 }
 
-
+.underline {
+    text-decoration: underline;
+}

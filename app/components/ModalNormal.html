@@ -5,7 +5,7 @@
         class="po-ab h-100 w-100"
         @click="handleCloseModal"
       ></div>
-      <div class="modal__group modal__group--sm">
+      <div class="modal__group ">
         <svg
           role="button"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,11 +34,11 @@
             />
           </g>
         </svg>
-        <h2 class="modal__title mb-5">
-          <slot name="header">
 
-          </slot>
-        </h2>
+        <slot name="header">
+
+        </slot>
+
 
         <slot name="content">
 
@@ -72,6 +72,7 @@
       handleCloseModal() {
         this.$emit('closemodal');
       },
+
     },
     computed: {
       modalLoginClass() {
