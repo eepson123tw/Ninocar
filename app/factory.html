@@ -1651,30 +1651,66 @@
         //排序
         $('.filter').change(()=>{
             let filterText = $('.filter').val();
-            console.log(filterText)
+            // console.log(filterText)
+
+            let mainPostTime = $('.mainTime').text().split('小時前');
+            let mainTimeArr = mainPostTime.splice(0, mainPostTime.length - 1); //會是一個裝了字串的陣列
+            // console.log(mainTimeArr)
+            let newArr = []; //設一個空陣列，等等用來塞轉成數值後的時間
+
+            for(let l = 0; l < mainTimeArr.length; l++){
+                // console.log(parseInt(mainTimeArr[l]))
+                newArr.push(parseInt(mainTimeArr[l])) //遍歷mainTimeArr內的字串，轉為數值然後塞到newArr
+                // console.log(newArr)
+            }
+
+            newArrSort = newArr.sort(function(n1, n2){
+            return n1 < n2 ? -1 : 1;
+            });
+
 
             if(filterText == "按讚數多到少"){
                 console.log('多到少')
+
             }else if(filterText == "按作品新到舊"){
-                console.log('新到舊')
+                // console.log('新到舊')
+                //時間新到舊
+                for(let i = 0; i < newArr.length; i++){
+                    console.log(newArrSort[i])
+
+                    if(newArr[i] == 15){
+                        // console.log(newArr[i])
+                        console.log(i)
+                        $('.work:nth-child(1)').css({"order":i})
+                    }else if(newArr[i] == 26){
+                        console.log(i)
+                        $('.work:nth-child(6)').css({"order":i})
+                    }else if(newArr[i] == 7){
+                        console.log(i)
+                        $('.work:nth-child(4)').css({"order":i})
+                    }else if(newArr[i] == 4){
+                        console.log(i)
+                        $('.work:nth-child(3)').css({"order":i})
+                        $('.work:nth-child(5)').css({"order":i})
+                    }else if(newArr[i] == 1){
+                        console.log(i)
+                        $('.work:nth-child(2)').css({"order":i})
+                    }
+                }
+
+
+
+                // let workNum = $('.othersWorks .work').length
+
+                // for(let n = 1; n < workNum + 1; n++){  //未組織的語法錯???
+                //     let card = $(`.work:nth-child(${n}) .work_author .userContent .other .mainTime').attr('v-text)`)
+                //     console.log(card)
+                // }
+
+
+
             }else if(filterText == "按作品舊到新"){
                 console.log('舊到新')
-            }
-
-            
-            let mainPostTime = $('.mainTime').text().split('小時前');
-            let mainTimeArr = mainPostTime.splice(0, mainPostTime.length - 1);
-            console.log(mainTimeArr)
-            // console.log(mainTimeArr[0].length)
-            // console.log(mainTimeArr.sort())
-
-            for(i = 0; i < mainTimeArr.length; i++){
-                if(mainTimeArr[i].length > 1){
-                    // mainTimeArr.splice(i, 1)
-                    // mainTimeArr.push(mainTimeArr[i])
-                    console.log(mainTimeArr[i])
-                }
-                // console.log(i)
             }
             
 
