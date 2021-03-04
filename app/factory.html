@@ -323,12 +323,12 @@
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :post-time="15"></work-card>
-                        <work-card2></work-card2>                        
-                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15"></work-card >
-                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :post-time="7"></work-card >
-                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5"></work-card >
-                        <work-card :img="'./assets/img/pic/model05.png'" :post-time="26"></work-card>
+                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :post-time="15" value="450"></work-card>
+                        <work-card2 value="350"></work-card2>                        
+                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15" value="500"></work-card >
+                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :post-time="7" data-price="350"></work-card >
+                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5" data-price="350"></work-card >
+                        <work-card :img="'./assets/img/pic/model05.png'" :post-time="26" data-price="500"></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -399,6 +399,7 @@
                     default:4,
                     type:Number
                 },
+
             },
             data(){
                 return{
@@ -589,11 +590,25 @@
 
                     // ajax
                 },
-                openWorkModal(){ //進入彈窗、後面固定不給滾動
-                        $('.mask').css({"display": "block"});
-                        $('#factoryModal').css({"position": "fixed"});
-                        $('#factoryModal').css({"z-index": "2010"});
+                openWorkModal(e){ //進入彈窗、後面固定不給滾動
+                    $('.mask').css({"display": "block"});
+                    $('#factoryModal').css({"position": "fixed"});
+                    $('#factoryModal').css({"z-index": "2010"});
 
+                    let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
+                    // console.log(smallCardPicURL)
+                    $('.workPic--big').attr('src', smallCardPicURL)
+
+                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
+                    // console.log(smallCardGoodNum)
+                    $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
+
+                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
+                    $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+
+                    let smallCardPrice = $(this.$el).attr('value');
+                    // console.log(smallCardPrice)
+                    $('.work-priceNum').text(smallCardPrice)
                },
                openMoreReply(e){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
@@ -709,7 +724,7 @@
             },
             template: `<li class="work grid-item grid-item--height2 col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
-                                <img src="./assets/img/pic/model03.png" class="model">
+                                <img src="./assets/img/pic/model03.png" class="model" @click="openWorkModal">
                             </div>
 
                             <div class="work_author">
@@ -941,6 +956,26 @@
 
                     // ajax//這裡開始
                 },
+                openWorkModal(e){ //進入彈窗、後面固定不給滾動
+                    $('.mask').css({"display": "block"});
+                    $('#factoryModal').css({"position": "fixed"});
+                    $('#factoryModal').css({"z-index": "2010"});
+
+                    let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
+                    // console.log(smallCardPicURL)
+                    $('.workPic--big').attr('src', smallCardPicURL)
+
+                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
+                    // console.log(smallCardGoodNum)
+                    $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
+
+                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
+                    $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+
+                    let smallCardPrice = $(this.$el).attr('value');
+                    // console.log(smallCardPrice)
+                    $('.work-priceNum').text(smallCardPrice)
+               },
                 openMoreReply(){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').css({"display": "flex",});
@@ -1319,14 +1354,14 @@
                     default:"./assets/img/pic/model04.png",
                     type:String
                 },
-                goodNum:{
-                    default:0,
-                    type:Number
-                },
-                commentNum:{
-                    default:0,
-                    type:Number
-                },
+                // goodNum:{
+                //     default:0,
+                //     type:Number
+                // },
+                // commentNum:{
+                //     default:0,
+                //     type:Number
+                // },
             },
             data:{
                 is_icon_color:false,
@@ -1435,7 +1470,7 @@
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
-            let timeCalc = new Date() - Now();
+            // let timeCalc = new Date() - Now();
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
@@ -1454,7 +1489,7 @@
                                 <h2 class="workName h4">${typeNickName}</h2>
                                 <p class="userContent h5">${typeInspiration}</p>
                                 <div class="other">
-                                    <p class="postTime h6">${timeCalc}</p>
+                                    <p class="postTime h6">0小時前</p>
                                     <div class="other_right">
                                         <button class="btn btn--link h5 mr-4">編輯</button>
                                         <button class="btn btn--link h5">刪除</button>

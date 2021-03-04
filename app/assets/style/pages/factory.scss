@@ -230,7 +230,7 @@
     display: none;
 }
 
-.num {
+.num, .work-goodNum, .work-commentNum {
     font-weight: bold;
     color: #E59807;
 }
@@ -366,12 +366,14 @@
 }
 
 .closeIcon {
-    position: relative;
-    left: 33vw;
-    top: -2.36vw;
+    // position: relative;
+    // left: 33vw;
+    // top: -2.36vw;
     cursor: pointer;
     width: 20px;
     height: 20px;
+    float: right;
+    margin-top: -28px;
 }
 
 .frame {
@@ -719,10 +721,6 @@
     margin-bottom: 8px;
 }
 
-//應急處置
-// #factory .modal__group--sm {
-//     display: none;
-// }
 
 // ---------------------------------------
 // ----------------992-----------------------
@@ -747,6 +745,10 @@
     // .userName, .userContent,.workName,.replyerName{
     //     text-align: center;
     // }
+
+    .userContent{
+        width: 100%;
+    }
 
     .work_author .userPic{
         margin: 0;
