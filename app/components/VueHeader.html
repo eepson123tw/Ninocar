@@ -233,16 +233,16 @@
                     }, ).then(res => {
                         console.log(res)
                         this.modalState.uiState = '';
-                        if (Array.isArray(res.data)) {
-                            this.modalState.content = 'success-sign-up-content';
-                            this.handleLoginKeep(res.data[0]['member_id']);
-                            setTimeout(() => {
-                                this.isModalShow = false;
-                            }, 4000)
-                        } else {
-                            this.modalState.isError = res.data;
-                            console.log(res.data)
-                        }
+                        // if (Array.isArray(res.data)) {
+                        this.modalState.content = 'success-sign-up-content';
+                        this.handleLoginKeep(res.data[0]['member_id']);
+                        setTimeout(() => {
+                            this.isModalShow = false;
+                        }, 4000)
+                        // } else {
+                        //     this.modalState.isError = res.data;
+                        //     console.log(res.data)
+                        // }
                     })
                     .catch(error => {
                         console.log(error)

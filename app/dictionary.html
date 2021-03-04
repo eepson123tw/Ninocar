@@ -33,7 +33,9 @@
     @@include('./components/Footer.html')
   </div>
 
-  @@include('./components/VueHeader.html') @@include('./components/common/Pin.html') @@include('./pages/DictionaryPage/DictionaryPostItem.html') @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+  @@include('./components/VueHeader.html') @@include('./components/common/Pin.html')
+  @@include('./pages/DictionaryPage/DictionaryPostItem.html')
+  @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
   <script>
     new Vue({
@@ -42,9 +44,8 @@
       data: { //變數存放的地方
         productList: [],
         targetProduct: {},
-        myProducts: [],
+        myProductList: [],
         showProductList: [],
-        memberOwnProductIdList: ['300', '121'],
         memberHasPin: true,
         searchType: 'keyword',
         navClassName: {
@@ -61,50 +62,50 @@
         keywordText: '',
       },
       mounted() {
-        const getProductList = async() => {
-          const productList = await axios.get(
+        const getProductList = async () => {
+          const result = await axios.get(
             `./assets/php/getProductList.php`
           );
-          return productList;
+          return result;
         }
+        //拿所有商品清單
         getProductList().then(res => {
-            console.log(res.data);
-            const fetchProductList = res.data.map(product => {
-                // 系列數字轉名稱
-                let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
-                thisSeriesIndex.toString();
-                // 系列Id若是單位數，前面加0
-                let thisSeriesId;
-                if (product[`product_seriesid`].length === 1) {
-                  thisSeriesId = 0 + product[`product_seriesid`];
-                } else {
-                  thisSeriesId = product[`product_seriesid`];
-                }
-                return {
-                  name: product[`product_name`].trim(),
-                  eName: product['product_ename'].trim(),
-                  series: this.seriesList[thisSeriesIndex].eName,
-                  seriesIndex: thisSeriesIndex,
-                  seriesId: thisSeriesId,
-                  imgURL: product['product_img'],
-                  displayImgURL: product['product_img1'],
-                  productId: product['product_id'],
-                  year: product['product_year'],
-                  size: product['product_size'],
-                  description: product['product_des'],
-                  limitLabel: product['product_spec'],
-                }
-              })
-              // console.log(fetchProductList);
-            this.productList = fetchProductList;
-            this.showProductList = this.productList;
-            this.targetProduct = this.showProductList[0];
-          }).catch(error => {
-            console.log(error)
+          console.log(res.data);
+          const fetchProductList = res.data.map(product => {
+            // 系列數字轉名稱
+            let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
+            thisSeriesIndex.toString();
+            // 系列Id若是單位數，前面加0
+            let thisSeriesId;
+            if (product[`product_seriesid`].length === 1) {
+              thisSeriesId = 0 + product[`product_seriesid`];
+            } else {
+              thisSeriesId = product[`product_seriesid`];
+            }
+            return {
+              name: product[`product_name`].trim(),
+              eName: product['product_ename'].trim().toUpperCase(),
+              series: this.seriesList[thisSeriesIndex].eName,
+              seriesIndex: thisSeriesIndex,
+              seriesId: thisSeriesId,
+              imgURL: product['product_img'],
+              displayImgURL: product['product_img1'],
+              productId: product['product_id'],
+              year: product['product_year'],
+              size: product['product_size'],
+              description: product['product_des'],
+              limitLabel: product['product_spec'],
+            }
           })
-          // this.myProducts = this.productList.filter(product => this.memberOwnProductIdList.indexOf(product
-          //     .productId));
+          // console.log(fetchProductList);
+          this.productList = fetchProductList;
+          this.showProductList = this.productList;
+          this.targetProduct = this.showProductList[0];
+        }).catch(error => {
+          console.log(error)
+        })
 
+        //拿使用者有的商品清單
       },
       computed: {
         seriesList() {
@@ -267,6 +268,22 @@
         isPostPin(theProductId) {
           return this.memberOwnProductIdList.indexOf(theProductId);
         },
+        handleGetMemberOwnProductIdList() {
+          axios.post('./assets/php/getMemberOwnProductList.php', {
+            "account": this.signUpInfo.account,
+          }).then(res => {
+            console.log(res.data);
+            const productIdList = res.data;
+            if (productIdList != []) {
+              console.log('尚未有商品')
+            } else {
+              this.myProductList = this.productList.filter(product => productIdList.indexOf(product
+                .productId));
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+        }
       },
     })
   </script>

@@ -68,6 +68,7 @@
                 isDisplayPlay: false,
                 isCarNearGirl: false,
                 isCTAShow: false,
+                swiperMountain: null,
             },
             computed: {
                 seriesList() {
@@ -95,6 +96,11 @@
 
                         })
                     }
+                },
+                handleSlidNext(index) {
+                    if (this.swiperMountain) {
+                        this.swiperMountain.slideTo(index);
+                    }
                 }
 
             },
@@ -121,7 +127,7 @@
                         }
                         return {
                             name: product[`product_name`].trim(),
-                            eName: product['product_ename'].trim(),
+                            eName: product['product_ename'].trim().toUpperCase(),
                             series: this.seriesList[thisSeriesIndex].eName,
                             seriesIndex: thisSeriesIndex,
                             seriesId: thisSeriesId,
@@ -133,26 +139,30 @@
                         }
                     })
                     this.productList = fetchProductList;
+                    this.$nextTick(() => {
+                        this.swiperMountain = new Swiper('#swiperContainerMountain', {
+                            spaceBetween: 20,
+                            autoplay: {
+                                delay: 2000,
+                                disableOnInteraction: false
+                            },
+                            loop: true,
+                            // mousewheel: true,
+                            speed: 800,
+                            effect: 'fade',
+                            // navigation: {
+                            //     nextEl: '.swiper-button-next',
+                            //     prevEl: '.swiper-button-prev',
+                            // },
+                            // pagination: {
+                            //     el: '.swiper-pagination',
+                            //     clickable: true,
+                            // },
+                        });
 
-                    let swiperMountain = new Swiper('#swiperContainerMountain', {
-                        spaceBetween: 20,
-                        autoplay: {
-                            delay: 2000,
-                            disableOnInteraction: false
-                        },
-                        loop: true,
-                        // mousewheel: true,
-                        speed: 800,
-                        effect: 'fade',
-                        // navigation: {
-                        //     nextEl: '.swiper-button-next',
-                        //     prevEl: '.swiper-button-prev',
-                        // },
-                        // pagination: {
-                        //     el: '.swiper-pagination',
-                        //     clickable: true,
-                        // },
                     });
+
+
 
                 }).catch(error => {
                     console.log(error)
