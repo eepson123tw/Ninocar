@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>    
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/product.css">
 <title>product</title>
@@ -16,7 +18,7 @@
 
         @@include('./pages/ProductPage/ProductNav.html')
 
-        <page-filter></page-filter>
+        <!-- <page-filter></page-filter> -->
         <!-- your code here... -->
     </div>
 
@@ -24,14 +26,6 @@
     <script src="./assets/js/new.js"></script>
 
     <script>
-
-        Vue.component('page-filter',{
-
-            template:`<h1>1111</h1>`,
-
-
-        })
-
 
         new Vue({
             el: '#app',
@@ -108,13 +102,76 @@
                     img: " ./assets/img/pic/3.jpg ",
                     seriousNum: '01',
                     pointProduct: false
+                },{
+                    productName: '鈴木居米',
+                    price: 195,
+                    img: " ./assets/img/pic/3.jpg ",
+                    seriousNum: '01',
+                    pointProduct: false
                 }],
+                filter:'',
+                currentPage:0,
+                newData:[],
             
             },
-        });
+            methods: {
+                prev() {
+                    const vm = this;
+                    if(vm.currentPage === 0) {
+                    vm.currentPage = 0
+                    } else {
+                    vm.currentPage --
+                    }     
+                },
+                next() {
+                    const vm = this;
+                    if(vm.currentPage === vm.newData.length - 1) {
+                    vm.currentPage = vm.newData.length - 1
+                    } else {
+                    vm.currentPage ++
+                    }
+                }
+            },
+            computed:{
+                page() {
+                    const vm = this;
+                    let category = ''; 
+                    //     return vm.data.reduce((prev, curr) => {
+                    // if(curr.category !== category) {
+                    // prev.push(curr.category);
+                    // }
+                    // category = curr.category;
+                    //     return prev
+                    // },[])
+                },
+
+                filterData() {
+                    const vm = this;
+                    vm.currentPage = 0;
+                    let tempData = [];
+                    vm.newData = [];
+                    tempData = vm.arrayData.filter((item) => {
+                        if(vm.filter === '') {
+                            return vm.arrayData
+                            console.log(item)
+                        } else if(vm.filter === item.category){
+                            return item
+                        }
+                    });
+
+                    tempData.forEach((item, i) => {
+                        if(i % 2 == 0) {
+                        vm.newData.push([]);
+                        }
+                    const pagenum = parseInt(i/2);
+                    vm.newData[pagenum].push(item);
+                    })
+                    return vm.newData;
+                }
+            },
+        }); 
     </script>
+    
 
 </body>
-
-
 </html>
