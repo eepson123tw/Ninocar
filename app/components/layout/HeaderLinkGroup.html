@@ -1,11 +1,11 @@
 <script>
-    Vue.component('link-group', {
-        template: `
+  Vue.component('link-group', {
+    template: `
             <div class="container">
             <nav class="link-group">
                 <ul>
                     <li>
-                        <a href="cart.html" aria-label="cart">
+                        <a href="cart.html" aria-label="cart"  data-js="js-popovers">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -42,30 +42,30 @@
             </nav>
         </div>
             `,
-        data() {
-            return {
-                isTopBtnVisible: false,
-            }
-        },
-        methods: {
-            scrollTop() {
-                this.intervalId = setInterval(() => {
-                    if (window.pageYOffset === 0) {
-                        clearInterval(this.intervalId)
-                    }
-                    window.scroll(0, window.pageYOffset - 50)
-                }, 20)
-            },
-            scrollListener() {
-                this.isTopBtnVisible = window.scrollY > 100
-            }
-        },
-        mounted() {
-            window.addEventListener('scroll', this.scrollListener)
-        },
-        beforeDestroy() {
-            window.removeEventListener('scroll', this.scrollListener)
-        }
+    data() {
+      return {
+        isTopBtnVisible: false,
+      }
+    },
+    methods: {
+      scrollTop() {
+        this.intervalId = setInterval(() => {
+          if (window.pageYOffset === 0) {
+            clearInterval(this.intervalId)
+          }
+          window.scroll(0, window.pageYOffset - 50)
+        }, 20)
+      },
+      scrollListener() {
+        this.isTopBtnVisible = window.scrollY > 100
+      }
+    },
+    mounted() {
+      window.addEventListener('scroll', this.scrollListener)
+    },
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.scrollListener)
+    }
 
-    });
+  });
 </script>
