@@ -288,7 +288,7 @@
                             <input type="text" class="typeWorkName">
                             <div class="nameTip">
                                 <p>餘20字</p>
-                                <button class="btn btn--link randomName h5">隨機取名</button>
+                                <button type="button" class="btn btn--link randomName h5">隨機取名</button>
                             </div>
 
                             <input type="checkbox" name="" value="">公開此作品
@@ -1667,19 +1667,34 @@
                 $(e.target).parent().children('.textCount').text(`餘${textMax}字`)
                 this.commentNum_plus += 1
 
-                $('.hiddenReply .replyComment').click((e)=>{
-                    console.log('111')
-                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
-                    $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
-                })
+                // $('.hiddenReply .replyComment').click((e)=>{  //會跳針
+                //     console.log('111')
+                //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                //     $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+                // })
             }   
         })
 
 
-        $('.replyComment').click((e)=>{
-            console.log('0000000')
-            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
-            $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+        // $('.replyComment').on('click',function(e){ //對原本不存在的節點沒反應
+            // console.log('0000000')
+            // $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+            // $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+        // })
+
+        //要.replyComment *是因為，如果只有.replyComment的話，
+        // 點到.replyComment的子節點並不會判定那是.replyComment的一部分
+
+        //matches這段的意義是當點到document的時候會判定點到的東西是不是.replyComment或者他的子節點，
+        //如果是的話執行if內的程式
+        document.body.addEventListener('click',(e)=>{
+            const target = event.target
+            if(target.matches(`.replyComment, .replyComment *`)){ 
+                console.log('0000000')
+                $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').slideToggle();
+                $(e.target).parent().parent().parent().parent().parent().children('.typeSubReply').css({"display":"flex"});
+            }
+
         })
 
 
