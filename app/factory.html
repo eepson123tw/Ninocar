@@ -1771,11 +1771,7 @@
 
         })
 
-
-
-
         // ---------------------------------計算金額------------------------------------------------
-
         $('.selectShape').click(function() {
             let totalPriceInit = $('.totalPrice').text().split(' ')[1]
             // console.log("totalPriceInit: " + totalPriceInit)
@@ -1815,7 +1811,6 @@
 
 
         //計算零件的金額
-
         $('.selectAccessory').click(function() {
             let state4Price0 = $('.totalPrice').text().split(' ')[1]
             // console.log(state4Price0)
@@ -1884,13 +1879,6 @@
                 context.drawImage(pic1, 0, -100);
             })
         }
-
-        //疊上顏色        //移到Vue
-        // $('.selectShape').click(function() {
-        //     //抓取車型的index(用來判別顏色圖要貼甚麼)
-        //     shapeIndex = $(this).parent().index();
-        //     // console.log(shapeIndex)
-        // })
 
         $('.selectShape').click((e)=>{
             shapeIndex = $(e.target).parent().index();
@@ -2440,63 +2428,9 @@
             }
         })
 
-        // 瀑布流樣式控制
-        // $('.grid').masonry({
-        //   // options
-        //   horizontalOrder: true,
-        //   itemSelector: '.grid-item',
-        //   columnWidth: 466
-        // });
-
-        // $('.work:nth-child(2) .readMore').click(() =>{  //如何改成只有在該貼文有被隱藏的回覆時，打開隱藏回覆會把下面的.work推開?  //還沒改好，之後移到Vue
-        //     if(count2 % 2 == 1){
-        //         $('.work:nth-child(5)').animate({
-        //                 top: '+=155'
-        //         });
-        //     }else{
-        //         $('.work:nth-child(5)').animate({
-        //                 top: '-=155'
-        //         });
-        //     }
-        // })
-
-        // $('.readMore').click(() =>{  //還沒改好，之後移到Vue
-        //     if(count2 % 2 == 1){
-
-        //         let gridH = $('.grid').height()
-        //         $('.grid').height(gridH += 155)
-        //     }else{
-
-        //         let gridH = $('.grid').height()
-        //         $('.grid').height(gridH -= 155)
-        //     }
-        // })
-
-        // $('.work:nth-child(2) .moreReply').click(() =>{  //??還沒改好，之後移到Vue
-        //     // $('.work:nth-child(5)').css({"top": += 300})
-        //     if(count1 % 2 == 1){
-        //         $('.work:nth-child(5)').animate({
-        //                 top: '+=127'
-        //         });
-        //     }else{
-        //         $('.work:nth-child(5)').animate({
-        //                 top: '-=127'
-        //         });
-        //     }
-        // })
-
-
-
-        // $('.moreReply').click(() =>{ //還沒改好，之後移到Vue
-        //     if(count1 % 2 == 1){
-        //         let gridH = $('.grid').height()
-        //         $('.grid').height(gridH += 127)
-        //     }else{
-
-        //         let gridH = $('.grid').height()
-        //         $('.grid').height(gridH -= 127)
-        //     }
-        // })
+        $('.addToCart').click(() => {
+            console.log('加到購物車')
+        })
     </script>
 </body>
 
