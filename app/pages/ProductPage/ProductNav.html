@@ -74,13 +74,15 @@
                     </div>
                     <div id="app">
                         <nav aria-label="...">
-                            <ul class="pagination">
+                            <ul class=" d-flex pagination">
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click.prevent="prev">Previous</a>
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click.prevent="prev"><span
+                                        class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span></a>
                                 </li>
                                 <li class="page-item" :class="{active:currentPage === page - 1}" v-for="page in filterData.length"><a class="page-link" href="#"  @click.prevent="currentPage = (page - 1)">{{ page }}</a></li>
                                 <li class="page-item">
-                                    <a class="page-link" href="#" @click.prevent="next">Next</a>
+                                    <a class="page-link" href="#" @click.prevent="next"><span 
+                                        class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span></a>
                                 </li>
                             </ul>
                         </nav>
