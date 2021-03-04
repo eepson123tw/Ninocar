@@ -49,6 +49,12 @@
                        this.$emit('sign-up', this.account.text, this.password.text);
                    }
                },
+               handleAccountDoubleCheck() {
+                   this.handleEmailCheck(account)
+                   if (this.account.remind === '') {
+                       this.$emit('done-account', this.account.text);
+                   }
+               },
                handlePolicyAgreeCheck() {
                    this.policy.isAgree ? this.policy.spanClass = '' : ''
                }
@@ -65,7 +71,7 @@
                    class="form__text form__text--warning">{{account.remind}}</span>
                <input type="text" class="form__input" :class="account.inputClass" v-model.lazy="account.text"
                    @keydown.enter.prevent="$refs.signUpPassword.focus()" placeholder="abc@gmail.com"
-                   @change="handleEmailCheck(account)" name="account" />
+                   @change="handleAccountDoubleCheck" name="account" />
            </div>
            <div class="form__group mb-5">
                <label for="password" class="form__text">密碼</label><span v-if="password.remind!==''"

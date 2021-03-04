@@ -1,7 +1,7 @@
 <script>
     Vue.component('confirm-token-content', {
         template: '#confirmToken',
-        props: ['email', 'correct-token'],
+        props: ['email', 'correct-token', 'btnUi'],
         mixins: [inputMixins],
         data() {
             return {
@@ -38,9 +38,9 @@
         <div class="form__group mb-5">
             <label for="token" class="form__text">驗證碼</label><span v-if="token.remind!==''"
                 class="form__text form__text--warning">{{token.remind}}</span>
-            <input type="number" class="form__input" :class="token.inputClass" v-model.lazy="token.text" name="token" />
+            <input type="text" class="form__input" :class="token.inputClass" v-model.lazy="token.text" name="token" />
         </div>
-        <button class="btn btn--fluid mb-4" @click.prevent="handleTokenSubmit">送出</button>
+        <button class="btn btn--fluid mb-4" @click.prevent="handleTokenSubmit">{{btnUi || "送出"}}</button>
         <button class="btn btn--fluid btn--outline mb-4" @click.prevent="console.log('開發中')">重新寄驗證碼</button>
     </form>
 </template>
