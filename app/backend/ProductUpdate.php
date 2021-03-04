@@ -7,7 +7,7 @@ $sql = "SELECT * FROM `team1`.`product` WHERE `product_id` = ?";
 //執行
 $statement = $Util->getPDO()->prepare($sql);
 //給值
-$statement->bindValue(1, $_GET["product_id"]);
+$statement->bindValue(1, $_GET["PID"]);
 $statement->execute();
 $data = $statement->fetchAll();
 
