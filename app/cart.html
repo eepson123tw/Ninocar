@@ -159,7 +159,17 @@
         },
         closeHandler() {
           this.isModalShow = false;
-        }
+        },
+        // deleteOneItem(value) {
+
+        //   this.carts_list.splice(value, 1);
+
+        //   let cartJson = JSON.stringify(this.carts_list);
+        //   localStorage.setItem('cartsList', cartJson);
+        // @delete-one="deleteOneItem"
+
+        // }
+
       },
       computed: {
         ...Vuex.mapState({

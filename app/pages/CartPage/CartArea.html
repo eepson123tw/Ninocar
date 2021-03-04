@@ -451,11 +451,16 @@
       },
       deleteHandler(listIndex) {
         this.buyerList.splice(listIndex, 1);
+
+        let cartJson = JSON.stringify(this.buyerList);
+        localStorage.setItem('cartsList', cartJson);
         this.renew();
 
       },
       deleteAllHandler() {
-        this.buyerList = "";
+        this.list = "";
+        let cartJson = JSON.stringify(this.list);
+        localStorage.setItem('cartsList', cartJson);
         this.renew();
       },
       renew() {
@@ -517,8 +522,17 @@
         return final;
 
       },
-      buyerList() {
-        return this.list
+      buyerList: {
+
+        set(value) {
+
+          return this.buyerList = ""
+
+        },
+        get() {
+          return this.list
+        },
+
       },
       countGetPoints() {
 
