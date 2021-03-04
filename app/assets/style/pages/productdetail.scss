@@ -75,14 +75,6 @@
     justify-content: space-between;
 }
 
-.box-blue-1 {
-    position: relative;
-}
-
-.box-blue-4 {
-    position: relative;
-}
-
 .btn {
     margin-bottom: 30px;
 }
@@ -178,7 +170,7 @@
     opacity: 1;
 }
 
-/* 修改swipet樣式的部分 */
+/* 修改swiper樣式的部分 */
 
 .mask .swiper-zoom-container {
     height: 100vh;
@@ -220,7 +212,7 @@
     outline: none;
 }
 
-/*換新的CDN之後樣式設定的地方有改*/
+/*樣式設定的地方*/
 .swiper-button-next,
 .swiper-container-rtl .swiper-button-prev,
 .swiper-button-prev,
