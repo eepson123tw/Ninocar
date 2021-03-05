@@ -17,34 +17,34 @@
     <div id="factory">
         <vue-header></vue-header>
         <div class="container containerMain">
-
-            <div class="modal js-modal reportModal" data-modal="1">
-                <div class="modal__group">
-                    <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close" @click="closeModal">
-                                <g transform="translate(0 0.47)">
-                                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                </g>
-                                </svg>
-                    <h2 class="modal__title">
-                        新增地址
-                    </h2>
-                    <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
-                    <ul class="modal__textGroup">
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
-                    </ul>
-                    <button class="btn btn--ghost">取消</button>
-                    <button class="btn ml-5 finishReport" @click="openReportSuccessModal">完成</button>
+            <transition name="fade">
+                <div class="modal js-modal reportModal" data-modal="1" v-if="isModalShow">
+                    <div class="modal__group" >
+                        <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" class="icon modal__btn modal__btn--close" @click="closeModal">
+                                    <g transform="translate(0 0.47)">
+                                        <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                        <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                    </g>
+                                    </svg>
+                        <h2 class="modal__title">
+                            新增地址
+                        </h2>
+                        <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
+                        <ul class="modal__textGroup">
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
+                        </ul>
+                        <button class="btn btn--ghost" @click="isModalShow=false">取消</button>
+                        <button class="btn ml-5 finishReport" @click="isModalShow2=true, isModalShow=false">完成</button>
+                    </div>
                 </div>
-            </div>
-
+            </transition>
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
-                        <img src="./assets/img/pic/model.png" class="model">
+                        <img src="./assets/img/pic/model.png" class="model" @click="isModalShow=true">
                         <div class="lable">
                             <p class="h4">NT$</p>
                             <h2 class="emphasis">300</h2>
@@ -341,13 +341,13 @@
                 </div>
         </div>
         @@include('./components/Footer.html')
-        
+        @@include('./pages/FactoryPage/reportSuccessModal.html')
     </div>
 
 
     <div id="factoryModal">
         @@include('./pages/FactoryPage/FactoryModal.html')
-        @@include('./pages/FactoryPage/reportSuccessModal.html')
+        <!-- @@include('./pages/FactoryPage/reportSuccessModal.html') -->
 
     </div>
 
@@ -414,6 +414,7 @@
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
+                    isModalShow:false,
                     // workTitle_plus: this.workTitle,
                     
                 }
@@ -431,7 +432,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
-                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                        <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -469,7 +470,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -519,8 +520,9 @@
 
                 },
                 openReportModal(){
-                    $('.container .modal').addClass('modal-active');
-                    // console.log('report!')
+                    console.log('report!')
+
+                    this.isModalShow = true;
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -615,7 +617,7 @@
                                     <div class="other">
                                         <p class="postTime h6">3小時前</p>
                                         <div>                                
-                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                            <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                         </div>
                                     </div>
                                 </div>
@@ -661,6 +663,7 @@
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
+                    isModalShow:false,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -676,7 +679,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
-                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉A</button>
                                     </div>
                                 </div>
                             </div>
@@ -716,7 +719,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -744,7 +747,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -759,7 +762,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 
-                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -781,7 +784,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -826,7 +829,9 @@
                     this.is_icon_color = false
                 },
                 openReportModal(){
-                    $('.containerMain .modal').addClass('modal-active');
+                    console.log('檢舉彈窗打開')
+                    
+                    this.isModalShow = true;
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -908,6 +913,8 @@
                 docW: $(document).width(),
                 shapeIndex:-1,
                 circleIndex: -1,
+                isModalShow: false,
+                isModalShow2:false,
             },
             props:{
 
@@ -953,7 +960,7 @@
                 closeModal(){ //關掉彈窗
                     // console.log('關掉')
                     // $('.modal').removeClass('modal-active');
-                    $('.modal').css({"display":"none"});
+                    this.isModalShow = false;
                 },
                 // toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
@@ -1651,7 +1658,7 @@
                                     <p class="postTime h6">3小時前</p>
                                     <div>               
                                         <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                        <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
+                                        <button class="btn btn--link h5 report" @click="isModalShow=true">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -1731,7 +1738,7 @@
                                         <p class="postTime h6">3小時前</p>
                                         <div>               
                                             <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                            <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
+                                            <button class="btn btn--link h5 report" @click="isModalShow=true">檢舉</button>
                                         </div>
                                     </div>
                                 </div>
