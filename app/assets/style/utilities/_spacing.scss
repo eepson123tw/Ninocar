@@ -3,6 +3,11 @@
            .pt-#{$level} {
                padding-top: $space-unit * $level;
            }
+
+           .py-#{$level} {
+               padding-top: $space-unit * $level;
+               padding-bottom: $space-unit * $level;
+           }
        }
 
        @each $level in 30 {

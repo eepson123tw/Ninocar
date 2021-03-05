@@ -44,23 +44,23 @@
 					<div class="cart__group--dflex  cart__group__firstArea">
 						<div class="cart__groupImg">
 							<img
-								:src="item.img"
+								:src="item.imgURL"
 								alt=""
 							>
-							<p>{{item.seriousNum}}</p>
+							<p>{{item.series}} <br> {{item.seriesId}}</p>
 						</div>
 						<div class="cart__product">
-							<p>{{item.productName}}</p>
-							<p>{{item.productBrief}}</p>
+							<p>{{item.name}}</p>
+							<p>{{item.eName}}</p>
 						</div>
 					</div>
 					<div
-						v-if="item.pointProduct"
+						v-if="item.points"
 						class="cart__group--dflex "
 					>
 						<div class="cart__member">
 							<p>Ni</p>
-							<span>{{item.price}}</span>
+							<span>{{item.points}}</span>
 						</div>
 					</div>
 					<div
@@ -75,19 +75,19 @@
 						</select>
 					</div>
 					<div
-						v-if="item.pointProduct"
+						v-if="item.points"
 						class="cart__group--dflex"
 					>
 						<div class="cart__member">
 							<p>Ni</p>
-							<span>{{item.totalPrice}}</span>
+							<span>{{item.totalPointCost}}</span>
 						</div>
 					</div>
 					<div
 						v-else
 						class="cart__group--dflex"
 					>
-						<p class="font-black"> NT$<span>{{item.totalPrice}}</span></p>
+						<p class="font-black"> NT$<span>{{item.totalPointCost}}</span></p>
 					</div>
 					<div>
 						<button
