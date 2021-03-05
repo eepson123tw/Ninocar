@@ -418,8 +418,7 @@
                     
                 }
             },
-            template: `<li class="work grid-item grid-item--height1 col
-            -4 col-lg-2 col-sm-4">
+            template: `<li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="">
                             </div>
@@ -664,7 +663,7 @@
                     commentNum_plus: this.commentNum,
                 }
             },
-            template: `<li class="work grid-item grid-item--height2 col-4 col-lg-2 col-sm-4">
+            template: `<li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img :src="img" class="model" @click="openWorkModal">
                             </div>
@@ -953,7 +952,8 @@
                 },
                 closeModal(){ //關掉彈窗
                     // console.log('關掉')
-                    $('.modal').removeClass('modal-active');
+                    // $('.modal').removeClass('modal-active');
+                    $('.modal').css({"display":"none"});
                 },
                 // toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
@@ -1262,7 +1262,8 @@
                 },
                 closeModal(){
                     console.log('關掉喔')
-                    $('.modal').removeClass('modal-active');
+                    // $('.modal').removeClass('modal-active');
+                    $('.modal').css({"display":"none"});
                 }
             },
         });
