@@ -39,7 +39,8 @@
                         <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
                     </svg>
                     <!-- pin 收藏大師-->
-                    <pin :disabled="!isMemberHasPin(targetProduct.productId)" :series="targetProduct.series">
+                    <pin-svg :disabled="!isMemberHasSeriesPin(targetProduct.series)" :series="targetProduct.series">
+                    </pin-svg>
                 </div>
             </section>
             <svg role="button" aria-label="prev" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
