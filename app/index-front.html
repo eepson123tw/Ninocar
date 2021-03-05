@@ -93,7 +93,7 @@
                         })
                     }
                 },
-                handleSlidNext(index) {
+                handleSlideToIndex(index) {
                     if (this.swiperMountain) {
                         this.swiperMountain.slideTo(index);
                     }
@@ -102,7 +102,7 @@
             },
 
             mounted() {
-                //getProductList getIndexProductList.php
+
                 const getIndexProductList = async () => {
                     const productList = await axios.get(
                         `./assets/php/getIndexProductList.php`
