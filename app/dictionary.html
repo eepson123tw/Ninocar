@@ -25,8 +25,12 @@
         <transition name="collapse">
           @@include('./pages/DictionaryPage/DictionaryFilterForm.html')
         </transition>
+        <empty-state-div v-if="isLoginEmptyStateDivShow" class="block__body">
+          <template v-slot:details>此頁面為會員專屬功能，<br>
+            請先登入會員，以查看您的圖鑑和成就徽章</template>
+        </empty-state-div>
         <empty-state-div v-if="isMemberEmptyStateDivShow" class="block__body">
-          <template v-slot:details>尚未有個人的車車圖鑑，<br>
+          <template v-slot:details>尚未收集到圖鑑和成就，<br>
             完成訂單的車子，將在三天內匯入個人圖鑑</template>
           <template v-slot:link>
             <a href="./member.html" class="btn d-inbl text-center">查看訂單</a>
@@ -115,6 +119,49 @@
         seriesList() {
           return this.$store.state.seriesList
         },
+        memberSeriesGroupCountList() { //搭配isMemberHasSeriesPin // pin-svg :disabled使用//
+          if (this.myProductList.length === 0) {
+            return [];
+          } else {
+            //先把過濾成只剩系列名
+            const seriesList = this.myProductList.map(product => product.series);
+            //每系列擁有的個數，若是各一種的徽章，最多為１
+            const RVCount = seriesList.filter(series => series === "RV").length >= 1 ? 1 : 0;
+            const BSCount = seriesList.filter(series => series === "BS").length >= 1 ? 1 : 0;
+            const PACount = seriesList.filter(series => series === "PA").length >= 1 ? 1 : 0;
+            const CACount = seriesList.filter(series => series === "CA").length >= 1 ? 1 : 0;
+            const EMCount = seriesList.filter(series => series === "EM").length;
+            const PMCount = seriesList.filter(series => series === "PM").length;
+            const TACount = seriesList.filter(series => series === "TA").length;
+            const ENCount = seriesList.filter(series => series === "EN").length;
+
+            return [{
+              name: 'RV',
+              count: RVCount + BSCount,
+            }, {
+              name: 'BS',
+              count: RVCount + BSCount,
+            }, {
+              name: 'PA',
+              count: PACount + CACount,
+            }, {
+              name: 'CA',
+              count: PACount + CACount,
+            }, {
+              name: 'EM',
+              count: EMCount,
+            }, {
+              name: 'PM',
+              count: PMCount,
+            }, {
+              name: 'TA',
+              count: TACount
+            }, {
+              name: 'EN',
+              count: ENCount
+            }]
+          }
+        },
         bgClass() {
           return `bg-series-${this.targetProduct.series}`
         },
@@ -133,6 +180,8 @@
               text: '點數限定',
               className: 'badge bg-blue'
             };
+          } else {
+            return null
           }
         },
         myProductList() {
@@ -143,9 +192,16 @@
             return [];
           }
         },
+        isLoginEmptyStateDivShow() {
+          if (!this.memberId && this.activeNav === 'my') {
+            return true
+          } else {
+            return false
+          }
+        },
         isMemberEmptyStateDivShow() {
-          if (this.memberId !== '' && this.activeNav === 'my') {
-            this.myProductList.length === 0 ? true : false;
+          if (this.memberId && this.activeNav === 'my') {
+            return this.myProductList.length === 0 ? true : false;
           } else {
             return false;
           }
@@ -208,6 +264,19 @@
       methods: {
         isMemberHasPin(productId) {
           return this.myProductIdList.indexOf(productId) >= 0
+        },
+        isMemberHasSeriesPin(productSeriesName) {
+          if (!this.memberId) {
+            return false
+          }
+          const series = this.memberSeriesGroupCountList.find(series => series.name === productSeriesName);
+          const doubleList = ["RV", "BS", "PA", "CA"] //各一的徽章
+
+          if (doubleList.indexOf(productSeriesName) < 0) { //三個以上的徽章
+            return series.count >= 3;
+          } else { //各一的徽章
+            return series.count >= 2;
+          }
         },
         handleSearchTypeChange() {
           this.showProductList = this.productList;
