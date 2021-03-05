@@ -1,9 +1,9 @@
 const {
-    src,
-    series,
-    dest,
-    parallel,
-    watch
+  src,
+  series,
+  dest,
+  parallel,
+  watch
 } = require('gulp');
 
 const concat = require('gulp-concat');
@@ -61,15 +61,15 @@ function pageStyle() {
 
 
 function pluginStyle() {
-    return src('app/assets/style/plugin/bootstrap.scss')
-        .pipe(sourcemaps.init())
-        .pipe(
-            sass({
-                outputStyle: 'nested',
-            }).on('error', sass.logError)
-        )
-        .pipe(sourcemaps.write())
-        .pipe(dest('dist/assets/css/plugin/'));
+  return src('app/assets/style/plugin/bootstrap.scss')
+    .pipe(sourcemaps.init())
+    .pipe(
+      sass({
+        outputStyle: 'nested',
+      }).on('error', sass.logError)
+    )
+    .pipe(sourcemaps.write())
+    .pipe(dest('dist/assets/css/plugin/'));
 }
 exports.p = pluginStyle
 
@@ -106,7 +106,7 @@ exports.browser = function browsersync() {
     // browser: "chrome",
     server: {
       baseDir: './dist', //跟目錄設定
-      index: 'testModal.html', //需更改成自己頁面的名稱
+      index: 'factory.html', //需更改成自己頁面的名稱
       injectChanges: false,
     },
   });
