@@ -21,7 +21,6 @@
     if($data != [] ){
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }else{
-        echo $data;
         echo '尚未擁有任何車車';
     }
     

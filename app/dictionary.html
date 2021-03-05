@@ -25,20 +25,28 @@
         <transition name="collapse">
           @@include('./pages/DictionaryPage/DictionaryFilterForm.html')
         </transition>
+        <empty-state-div v-if="isMemberEmptyStateDivShow" class="block__body">
+          <template v-slot:details>尚未有個人的車車圖鑑，<br>
+            完成訂單的車子，將在三天內匯入個人圖鑑</template>
+          <template v-slot:link>
+            <a href="./member.html" class="btn d-inbl text-center">查看訂單</a>
+          </template>
+        </empty-state-div>
         @@include('./pages/DictionaryPage/DictionaryPostList.html')
       </section>
     </main>
     @@include('./components/Footer.html')
   </div>
 
-  @@include('./components/VueHeader.html') @@include('./components/Pin.html')
+  @@include('./components/VueHeader.html')
+  @@include('./components/PinSvg.html')
+  @@include('./components/EmptyStateDiv.html')
   @@include('./pages/DictionaryPage/DictionaryPostItem.html')
   @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
 
   <script>
     new Vue({
       el: '#dictionary',
-      store,
       data: { //變數存放的地方
         productList: [],
         targetProduct: {},
@@ -46,11 +54,7 @@
         myProductIdList: [],
         searchType: 'keyword',
         keywordText: '',
-        navClassName: {
-          'all': true,
-          'my': false
-        },
-        isNavbarShow: true,
+        activeNav: 'all',
         isModalShow: false,
         yearList: ['1970~1989', '1990~2009', '2010後'],
         limitList: ['無限定', '期間限定', '點數限定'],
@@ -102,13 +106,14 @@
           console.log(error)
         })
       },
+      store,
       computed: {
         //從store裡拿東西
-        seriesList() {
-          return this.$store.state.seriesList
-        },
         memberId() {
           return this.$store.state.memberId
+        },
+        seriesList() {
+          return this.$store.state.seriesList
         },
         bgClass() {
           return `bg-series-${this.targetProduct.series}`
@@ -128,6 +133,21 @@
               text: '點數限定',
               className: 'badge bg-blue'
             };
+          }
+        },
+        myProductList() {
+          if (this.productList && this.myProductIdList) {
+            return this.productList.filter(product => this.myProductIdList.indexOf(product
+              .productId) >= 0);
+          } else {
+            return [];
+          }
+        },
+        isMemberEmptyStateDivShow() {
+          if (this.memberId !== '' && this.activeNav === 'my') {
+            this.myProductList.length === 0 ? true : false;
+          } else {
+            return false;
           }
         },
         yearAllCheck: {
@@ -172,6 +192,11 @@
         selectedLimitList() {
           this.handleShowProductListChange();
         },
+        myProductList(list) {
+          if (this.activeNav === 'my') {
+            this.showProductList = this.myProductList;
+          }
+        },
         memberId(val) {
           if (val) {
             this.handleGetMemberOwnProductIdList();
@@ -183,6 +208,16 @@
       methods: {
         isMemberHasPin(productId) {
           return this.myProductIdList.indexOf(productId) >= 0
+        },
+        handleSearchTypeChange() {
+          this.showProductList = this.productList;
+          if (this.searchType === 'sort') {
+            this.searchType = 'keyword'
+            this.keywordText = ''
+          } else {
+            this.searchType = 'sort';
+            this.handleFilterAllCheck()
+          }
         },
         handleShowProductListChange() {
           const filterYearProductList = this.productList.filter(product => {
@@ -233,23 +268,15 @@
             theProductId)
           this.isModalShow = true;
         },
-        handleNavBarChange(filter) {
-          if (filter === 'my') {
-            this.showProductList = this.productList.filter(product => this.myProductIdList.indexOf(product
-              .productId) >= 0);
-            console.log(this.showProductList)
-            this.isNavbarShow = false;
-            this.navClassName = {
-              'all': false,
-              'my': true
-            };
-          } else if (filter === 'all') {
+        handleNavBarChange(state) {
+          if (state === 'my') {
+            this.activeNav = state;
+            this.showProductList = this.myProductList;
+          } else if (state === 'all') {
+            this.activeNav = state;
             this.showProductList = this.productList;
-            this.isNavbarShow = true;
-            this.navClassName = {
-              'all': true,
-              'my': false
-            };
+            this.searchType = 'keyword';
+            this.keywordText = '';
           }
         },
         handleModalProductChange(order) {
@@ -281,10 +308,10 @@
             "memberId": this.memberId,
           }).then(res => {
             console.log(res);
-            if (res.data != []) {
+            if (Array.isArray(res.data) && res.data != []) {
               this.myProductIdList = res.data.map(obj => obj['product_id'])
             } else {
-              console.log('尚未有商品')
+              console.log(res.data)
             }
           }).catch(error => {
             console.log(error)
