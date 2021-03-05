@@ -44,7 +44,7 @@
             </transition>
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
-                        <img src="./assets/img/pic/model.png" class="model" @click="isModalShow=true">
+                        <img src="./assets/img/pic/model.png" class="model">
                         <div class="lable">
                             <p class="h4">NT$</p>
                             <h2 class="emphasis">300</h2>
@@ -325,8 +325,8 @@
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" data-id="220203" data-board-id="1614917124264"></work-card>
-                        <work-card2 value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
+                        <work-card @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" data-id="220203" data-board-id="1614917124264"></work-card>
+                        <work-card2 @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
                         <work-card :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" data-id="55555" data-board-id="1614917124284"></work-card>
                         <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
                         <work-card :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
@@ -432,7 +432,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
-                                        <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -470,7 +470,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -521,8 +521,8 @@
                 },
                 openReportModal(){
                     console.log('report!')
-
                     this.isModalShow = true;
+                    this.$emit('report-emit', this.isModalShow)
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -617,7 +617,7 @@
                                     <div class="other">
                                         <p class="postTime h6">3小時前</p>
                                         <div>                                
-                                            <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                         </div>
                                     </div>
                                 </div>
@@ -679,7 +679,7 @@
                                     <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
                                     <div class="other">
                                         <p class="postTime mainTime h6" :v-text="postTime">{{postTime}}小時前</p>
-                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉A</button>
+                                        <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -719,7 +719,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -747,7 +747,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -762,7 +762,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 
-                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -784,7 +784,7 @@
                                             <p class="postTime h6">3小時前</p>
                                             <div>                                
                                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                                <button class="btn btn--link report h5" @click="isModalShow=true">檢舉</button>
+                                                <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                             </div>
                                         </div>
                                     </div>
@@ -830,8 +830,8 @@
                 },
                 openReportModal(){
                     console.log('檢舉彈窗打開')
-                    
                     this.isModalShow = true;
+                    this.$emit('report-emit', this.isModalShow);
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -921,7 +921,8 @@
             },
             methods: {
                 openReportSuccessModal(){ //出現檢舉成功的彈窗
-                    $('.reportSuccessModal').addClass('modal-active')
+                    // $('.reportSuccessModal').addClass('modal-active')
+                    console.log('kpkp')
                 },
                 showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
                     $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
@@ -1227,6 +1228,9 @@
                         }
                     }
                 },
+                openReportModal(isModalShow){
+                    this.isModalShow = isModalShow;
+                }
 
             },
         });
@@ -1658,7 +1662,7 @@
                                     <p class="postTime h6">3小時前</p>
                                     <div>               
                                         <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                        <button class="btn btn--link h5 report" @click="isModalShow=true">檢舉</button>
+                                        <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
                                     </div>
                                 </div>
                             </div>
@@ -1738,7 +1742,7 @@
                                         <p class="postTime h6">3小時前</p>
                                         <div>               
                                             <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-                                            <button class="btn btn--link h5 report" @click="isModalShow=true">檢舉</button>
+                                            <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
                                         </div>
                                     </div>
                                 </div>
