@@ -131,11 +131,13 @@
             if (storageMemberId) {
                 const rawMemberId = CryptoJS.AES.decrypt(storageMemberId, this.secretKey).toString(CryptoJS.enc
                     .Utf8);
-                this.isLogin = true;
                 console.log(rawMemberId)
-
+                this.memberId = rawMemberId;
+                this.isLogin = true;
+                this.$store.commit('setMemberId', rawMemberId);
             }
         },
+        store,
         methods: {
             handleModalClose() {
                 this.isModalShow = false;
@@ -186,14 +188,17 @@
             },
             handleLoginKeep(rawMemberId) {
                 this.isLogin = true;
+                this.memberId = rawMemberId;
                 // crypto加密
-                this.memberId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
-                localStorage.setItem('memberId', this.memberId);
+                const encryptedId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
+                localStorage.setItem('memberId', encryptedId);
+                this.$store.commit('setMemberId', rawMemberId);
             },
             handleLogOut() {
                 this.isMenuShow = false;
                 this.isLogin = false;
                 this.modalState.content = 'login-content';
+                this.$store.commit('setMemberId', '');
                 localStorage.removeItem('memberId');
                 //會員頁寫判斷式回首頁
                 //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'

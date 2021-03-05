@@ -4,9 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="./assets/js/all.js"></script>
+<script src="./assets/js/utils.js"></script>
 <title>test</title>
 </head>
 
@@ -17,24 +19,13 @@
       <h2>test</h2>
       <div class="modal js-modal" data-modal="2">
         <div class="modal__group modal__group--sm">
-          <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" class="icon modal__close js-close">
+          <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52"
+            class="icon modal__close js-close">
             <g transform="translate(0 0.47)">
-              <line
-                x1="33.493"
-                transform="translate(14.158 13.688) rotate(45)"
-                fill="none"
-                stroke="#522613"
-                stroke-linecap="round"
-                stroke-width="5"
-              />
-              <line
-                x1="33.493"
-                transform="translate(37.842 13.688) rotate(135)"
-                fill="none"
-                stroke="#522613"
-                stroke-linecap="round"
-                stroke-width="5"
-              />
+              <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613"
+                stroke-linecap="round" stroke-width="5" />
+              <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613"
+                stroke-linecap="round" stroke-width="5" />
             </g>
           </svg>
           <h2 class="modal__title mb-5">

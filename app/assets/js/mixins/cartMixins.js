@@ -1,4 +1,3 @@
-<script>
   let cartMixins = {
     data() {
       return {
@@ -134,6 +133,5 @@
       },
     },
 
-    // 問學長： 動畫bug 位置bug  購買流程加入購物車後傳值？   輪播動畫
+    // 問學長： 動畫bug 位置bug 購買流程加入購物車後傳值？ 輪播動畫
   }
-</script>
