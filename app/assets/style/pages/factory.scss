@@ -213,9 +213,13 @@
     &Context_top {
         width: 100%;
     }
-    &Name,
-    &Content {
+    &Name{
         margin-bottom: 16px;
+    }
+
+    &Content{
+        width: 100%;
+        @extend .userName;
     }
 }
 
@@ -253,6 +257,10 @@
     display: none;
 }
 
+.editTextArea{
+    display: none;
+}
+
 .work {
     &Info,
     &Info_reply,
@@ -272,13 +280,6 @@
     align-items: center;
     justify-content: space-between;
 
-
-    // &--type2{
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: space-between;
-    //     // width: 13vw;
-    // }
 
     &InModal{
     display: flex;
@@ -312,12 +313,9 @@
     padding: 12.5px;
 }
 
-.hiddenMR{
-    display: none;
-}
-
 .closeReply,
-.closeMore {
+.closeMore,
+.hiddenMR {
     display: none;
 }
 
@@ -340,9 +338,6 @@
     display: flex;
 }
 
-// .typeReply_left{
-//     margin-right: 28px;
-// }
 // ----------------彈窗-------------------
 
 .mask {
@@ -458,7 +453,6 @@
 
     &--able{
         cursor: pointer;
-        
     }
 
     &--active{
@@ -490,21 +484,29 @@
     margin-left: 60px;
 }
 
-.tipArea,
-.tipPrice {
-    display: flex;
+.tip{
+    &Price{
+        display: flex;
+    }
+
+    &Area{
+        @extend .tipPrice;
+        padding: 20px 0;
+        border-bottom: 1px solid #E59807;
+        background-color: #fff;
+
+        &_right{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &_left .invisible{
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
 }
 
-.tipArea {
-    padding: 20px 0;
-    border-bottom: 1px solid #E59807;
-    background-color: #fff;
-}
-
-.tipArea_right {
-    display: flex;
-    justify-content: space-between;
-}
 
 .pleaseSelect {
     display: none;
@@ -516,7 +518,7 @@
     border: 1px solid #E59807;
 }
 
-//放canvas區域
+// ----------------CANVAS區域-------------------
 .mainArea {
     display: flex;
     justify-content: center;
@@ -544,57 +546,48 @@
 
 
 // ----------------製作車子的選項區域-------------------
-.selectAreaOut {
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-}
+.select{
+    &Area{
+        position: relative;
+        display: flex;
+        margin-bottom: 20px;
 
-.selectArea {
-    position: relative;
-    display: flex;
-    //   left: 0;
-    margin-bottom: 20px;
-}
+        &Out{
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 
-.selectBtn {
-    width: 97%;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 360px;
-    z-index: 1;
+    &Btn{
+        width: 97%;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 360px;
+        z-index: 1;
+    }
 }
 
 .selectAreaOut-previous {
-    //   background-image: url("../../img/icon/icon-left.svg");
-    //   background-image: url("../app/assets/img/icon/icon-left.svg");
     display: inline-block;
     width: 60px;
     height: 60px;
-    //   position: relative;
-    //   top:220px;
-    //   left:0;
     z-index: 1;
     cursor: pointer;
 }
 
-.tipArea_left .invisible{
-    opacity: 0;
-    pointer-events: none;
-}
+// .canNotSee{
+//     display: none;
+// }
 
-.canNotSee{
-    display: none;
-}
+// .canSeeFlex{
+//     display: flex;
+// }
 
-.canSeeFlex{
-    display: flex;
-}
-
-.catSeeBlock{
-    display: block;
-}
+// .catSeeBlock{
+//     display: block;
+// }
 
 .selectAreaOut-next {
     // background-image: url("../../img/icon/icon-right.svg");
@@ -729,6 +722,22 @@
     margin-bottom: 8px;
 }
 
+// -----------------我的作品----------------------
+    .btn--publicMyWork{
+        border-radius: 8px;
+        color: #ffffff;
+        background-color: #E59807;
+        padding: 12px 0px;
+        white-space: nowrap;
+        cursor: pointer;
+
+        position: relative;
+        top: -710px;
+        min-width: 80px;
+        height: 30px;
+        line-height: 10px;
+    }
+
 
 // ---------------------------------------
 // ----------------992-----------------------
@@ -750,9 +759,6 @@
         margin: 0 auto;
         margin-right: 16px;
     }
-    // .userName, .userContent,.workName,.replyerName{
-    //     text-align: center;
-    // }
 
     .userContent{
         width: 100%;
