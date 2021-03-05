@@ -4,9 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/memberNew.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="./assets/js/all.js"></script>
+<script src="./assets/js/utils.js"></script>
 <title>memberMain</title>
 </head>
 
@@ -32,100 +34,45 @@
         <template #content>
           <!-- 自行決定要傳入什麼 -->
           <div class="form__group block ">
-            <label
-              for="receiverName"
-              class="form__text mb-2 "
-            >收件人姓名 </label>
+            <label for="receiverName" class="form__text mb-2 ">收件人姓名 </label>
             <div class="form__section mb-5">
-              <input
-                id="receiverName"
-                type="text"
-                class=" cart__select form__input"
-                placeholder="王小明"
-                v-model="receiver.receiverName"
-              ></input>
+              <input id="receiverName" type="text" class=" cart__select form__input" placeholder="王小明"
+                v-model="receiver.receiverName"></input>
             </div>
-            <label
-              for="receiverPhone"
-              class="form__text mb-2 "
-            >聯絡電話</label>
+            <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
             <div class="form__section mb-5">
-              <input
-                id="receiverPhone"
-                type="text"
-                class="cart__select form__input"
-                placeholder="0910-123-456"
-                v-model="receiver.receiverPhone"
-              ></input>
+              <input id="receiverPhone" type="text" class="cart__select form__input" placeholder="0910-123-456"
+                v-model="receiver.receiverPhone"></input>
             </div>
-            <label
-              for="receiverAddresssCode"
-              class="form__text mb-2 "
-            >郵遞區號</label>
+            <label for="receiverAddresssCode" class="form__text mb-2 ">郵遞區號</label>
             <div class="form__section mb-5">
-              <input
-                id="receiverAddresssCode"
-                type="email"
-                class="cart__select form__input"
-                placeholder="300"
-                v-model="receiver.receiverAddresssCode"
-              ></input>
+              <input id="receiverAddresssCode" type="email" class="cart__select form__input" placeholder="300"
+                v-model="receiver.receiverAddresssCode"></input>
             </div>
           </div>
         </template>
         <template #maintext>
           <!-- 若有文字可以使用 ，也可以關掉-->
           <div class="form__group ">
-            <label
-              for="address"
-              class="form__text "
-            >地址</label>
+            <label for="address" class="form__text ">地址</label>
             <div class="form__section mb-5">
-              <select
-                name=""
-                id=""
-                class="form__select "
-                v-model="receiver.receiverCity"
-              >
-                <option
-                  value=""
-                  disabled
-                >城市</option>
+              <select name="" id="" class="form__select " v-model="receiver.receiverCity">
+                <option value="" disabled>城市</option>
                 <option v-for="(num,index) of selectCity">{{num}}</option>
               </select>
-              <select
-                name=""
-                id=""
-                class="form__select "
-                v-model="receiver.receiverTown"
-                @change="sameAddressCode"
-              >
-                <option
-                  value=""
-                  disabled
-                >鄉政區</option>
+              <select name="" id="" class="form__select " v-model="receiver.receiverTown" @change="sameAddressCode">
+                <option value="" disabled>鄉政區</option>
                 <option v-for="(num,index) of selectTown">{{num}}</option>
               </select>
             </div>
-            <input
-              type="text"
-              class="form__input  "
-              id="address"
-              v-model="receiver.receiverRoad"
-              placeholder="街/路/巷弄/樓層"
-            />
+            <input type="text" class="form__input  " id="address" v-model="receiver.receiverRoad"
+              placeholder="街/路/巷弄/樓層" />
           </div>
         </template>
         <template #footer>
           <div class="d-flex justify-content-end mt-3">
-            <button
-              class="btn btn--ghost"
-              @click="closeHandler"
-            >取消</button>
-            <button
-              @click="saveAddress"
-              class="btn "
-            >完成</button>
+            <button class="btn btn--ghost" @click="closeHandler">取消</button>
+            <button @click="saveAddress" class="btn ">完成</button>
           </div>
         </template>
 
@@ -138,7 +85,8 @@
 
 
 
-  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
+  @@include('./components/ModalNormal.html')
 
   <script>
     new Vue({
@@ -289,7 +237,8 @@
           let newCode = "";
           for (let cityNum in this.cityList) {
             if (this.cityList[cityNum]['name'] == this.receiver.receiverCity) {
-              newCode = this.cityList[cityNum]['districts'].filter((item) => item.name == this.receiver.receiverTown)
+              newCode = this.cityList[cityNum]['districts'].filter((item) => item.name == this.receiver
+                .receiverTown)
             }
           }
           return newCode[0].zip;

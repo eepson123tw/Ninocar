@@ -1,3 +1,7 @@
+@import "../helpers/variables";
+@import "../helpers/mixin";
+@import "../helpers/rwd";
+@import "../base/font";
 .product {
     &__header {
         margin-top: 200px;
@@ -68,3 +72,68 @@
         color: #fff;
     }
 }
+
+.pagination{
+    border: 2px solid $secondary;
+    border-top-left-radius: 0.50rem;
+    border-bottom-left-radius: 0.50rem;
+    border-top-right-radius: 0.50rem;
+    border-bottom-right-radius: 0.50rem;
+    margin: 0px 200px 100px 200px;
+    
+}
+
+.page-link{
+    display: block;
+    box-sizing: border-box;
+    width: 50px;
+    height: 45px;
+    text-align: center;
+    line-height: 3;
+    
+    border-left: 2px solid $secondary;
+    
+
+} 
+    
+.page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    background-color: $gray-500;
+    overflow:visible;
+}
+
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0.40rem;
+    border-bottom-left-radius: 0.40rem;
+}
+
+.page-item:last-child .page-link {
+    margin-left: 0;
+    border-top-right-radius: 0.40rem;
+    border-bottom-right-radius: 0.40rem;
+}
+
+.d-flex .page-item:first-child a{
+    border-left: none;
+    
+}
+
+.material-icons{
+    color:$secondary;
+    font-weight: bolder;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color:$secondary;
+    
+}
+    
+
+
+
+
+

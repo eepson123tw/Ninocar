@@ -24,7 +24,6 @@
                 <p class="product__header_body">熱門商品</p>
                 <p class="product__header_body">本月主打</p>
                 <p class="product__header_body">點數限定</p>
-                <p class="product__header_body">點數限定</p>
             </div>
         </div>
     </div>
@@ -32,7 +31,7 @@
     <ul class="col-9" style="margin-top: 200px">
         <div class="row">
             <div class="col-9">
-                <select class="area" v-model="filterText">
+                <select class="area" v-model="filter">
                     <option value="" disabled>-- 請選擇 --</option>
                     <option value="依上架時間">最新上架</option>
                     <option value="依價格">依價格(由高至低)</option>
@@ -68,14 +67,29 @@
                 </div>
             </ul>
             <!---- 頁籤 ---->
-            <!-- <ul class="col-12">
+            <ul class="col-12">
                 <div class="row">
-                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center">
-                        <div class="page_btn_nb"></div>
+                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center" >
+                        <div class="page_btn_nb" ></div>
+                    </div>
+                    <div id="app">
+                        <nav aria-label="...">
+                            <ul class=" d-flex pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click.prevent="prev"><span
+                                        class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span></a>
+                                </li>
+                                <li class="page-item" :class="{active:currentPage === page - 1}" v-for="page in filterData.length"><a class="page-link" href="#"  @click.prevent="currentPage = (page - 1)">{{ page }}</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" @click.prevent="next"><span 
+                                        class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span></a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-            </ul> -->
-        
+            </ul>
+            
         </div>
     </ul>
 </div>

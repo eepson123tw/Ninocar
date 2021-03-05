@@ -16,8 +16,8 @@
             </div>
             <div class="row  block">
                 <ul class="d-flex w-100 cart__order">
-                    <li>訂單編號： <span>1231231231</span></li>
-                    <li>訂單金額： <span>{{finallyPrice}}</span></li>
+                    <li>訂單編號： <span>{{orderId}}</span></li>
+                    <li>訂單金額： <span>{{finallyPrice}} 元 </span></li>
                     <li>花費點數： <span>{{totalPointCost}}點</span></li>
                     <li>訂單狀態： <span>未付款，處理中</span></li>
                     <li>收貨方式： <span>{{selectShipping}}</span></li>
@@ -27,10 +27,7 @@
             <div class="row cart__topfix">
                 <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
                     <li class="block__header__title">購買明細</li>
-                    <li
-                        class="cart__collapse"
-                        @click="collapseArea"
-                    >
+                    <li class="cart__collapse">
                         <img
                             v-show="notShow"
                             src="./assets/img/icon/icon-down.svg"
@@ -55,23 +52,23 @@
                     <div class="cart__group--dflex  cart__group__firstArea">
                         <div class="cart__groupImg">
                             <img
-                                :src="item.img"
+                                :src="item.imgURL"
                                 alt=""
                             >
-                            <p>{{item.seriousNum}}</p>
+                            <p>{{item.series}} <br> {{item.seriesId}}</p>
                         </div>
                         <div class="cart__product">
-                            <p>{{item.productName}}</p>
-                            <p>{{item.productBrief}}</p>
+                            <p>{{item.name}}</p>
+                            <p>{{item.eName}}</p>
                         </div>
                     </div>
                     <div
-                        v-if="item.pointProduct"
+                        v-if="item.points"
                         class="cart__group--dflex "
                     >
                         <div class="cart__member">
                             <p>Ni</p>
-                            <span>{{item.price}}</span>
+                            <span>{{item.points}}</span>
                         </div>
                     </div>
                     <div
@@ -86,12 +83,12 @@
                         </select>
                     </div>
                     <div
-                        v-if="item.pointProduct"
+                        v-if="item.points"
                         class="cart__group--dflex"
                     >
                         <div class="cart__member">
                             <p>Ni</p>
-                            <span>{{item.totalPrice}}</span>
+                            <span>{{item.totalPointCost}}</span>
                         </div>
                     </div>
                     <div
@@ -159,7 +156,7 @@
                             <ul class="cart__moneyCount  w-50">
                                 <li>
                                     <p>商品總金額</p>
-                                    <p class="font-black">NT$<span>{{finallyPrice}}</span></p>
+                                    <p class="font-black">NT$<span>{{totalMoney}}</span></p>
                                 </li>
                                 <li>
                                     <p>運費總計</p>
@@ -212,29 +209,21 @@
       return {
         notShow: true,
         currentdata: this.current,
-        animationDisplay: 'cart__displayNone',
+        animationDisplay: "cart__displayShow",
       }
-
 
     },
     methods: {
 
-      //   open() {
-
-      //     if (this.currentdata == 2) {
-      //       this.$emit('openWindow');
-      //     }
-
-      //   },
 
       collapseArea() {
         //收合選單
         if (this.notShow) {
           this.notShow = false;
-          this.animationDisplay = "cart__displayShow";
+          this.animationDisplay = "cart__displayNone";
         } else {
           this.notShow = true;
-          this.animationDisplay = "cart__displayNone";
+          this.animationDisplay = "cart__displayShow";
         }
 
       },
@@ -252,7 +241,18 @@
         selectShipping: state => state.selectShipping,
         discountPrice: state => state.discountPrice,
         sendPrice: state => state.sendPrice,
+        totalMoney: state => state.totalMoney
       }),
+
+      orderId() {
+
+        return Math.floor(Math.random() * 10000000);
+
+
+      },
+
+
+
     },
     mounted() {
 
