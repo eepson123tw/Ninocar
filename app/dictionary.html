@@ -25,8 +25,12 @@
         <transition name="collapse">
           @@include('./pages/DictionaryPage/DictionaryFilterForm.html')
         </transition>
+        <empty-state-div v-if="isLoginEmptyStateDivShow" class="block__body">
+          <template v-slot:details>此頁面為會員專屬功能，<br>
+            請先登入會員，以查看您的圖鑑和成就徽章</template>
+        </empty-state-div>
         <empty-state-div v-if="isMemberEmptyStateDivShow" class="block__body">
-          <template v-slot:details>尚未有個人的車車圖鑑，<br>
+          <template v-slot:details>尚未收集到圖鑑和成就，<br>
             完成訂單的車子，將在三天內匯入個人圖鑑</template>
           <template v-slot:link>
             <a href="./member.html" class="btn d-inbl text-center">查看訂單</a>
@@ -133,6 +137,8 @@
               text: '點數限定',
               className: 'badge bg-blue'
             };
+          } else {
+            return null
           }
         },
         myProductList() {
@@ -143,9 +149,16 @@
             return [];
           }
         },
+        isLoginEmptyStateDivShow() {
+          if (!this.memberId && this.activeNav === 'my') {
+            return true
+          } else {
+            return false
+          }
+        },
         isMemberEmptyStateDivShow() {
-          if (this.memberId !== '' && this.activeNav === 'my') {
-            this.myProductList.length === 0 ? true : false;
+          if (this.memberId && this.activeNav === 'my') {
+            return this.myProductList.length === 0 ? true : false;
           } else {
             return false;
           }
