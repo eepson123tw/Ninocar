@@ -1,5 +1,6 @@
 const store = new Vuex.Store({ //global store
     state: { //類似 new Vue() 裡面的data
+        memberId: null,
         seriesList: [{
             name: '工程系',
             eName: 'EN',
@@ -28,7 +29,9 @@ const store = new Vuex.Store({ //global store
     },
     mutations: { //類似 new Vue() 裡面的methods
 
-
+        setMemberId(state, id) {
+            state.memberId = id;
+        },
         testVueXConnect() {
             console.log('connecting')
         }

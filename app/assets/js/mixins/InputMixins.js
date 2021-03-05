@@ -1,4 +1,3 @@
-<script>
     let inputMixins = {
         data() {
             return {
@@ -70,4 +69,3 @@
 
         }
     }
-</script>

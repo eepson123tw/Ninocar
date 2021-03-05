@@ -5,12 +5,13 @@
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/cart.css">
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js' integrity='sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.5.1/vuex.js' integrity='sha512-LRJP5e30Cahm/OH4lAao+BwWtz7gcz8GDWKQh4aVzHZnTG6RKpVthb17/nBEcBMK5aSgGkI6XjCNRPY221esvQ==' crossorigin='anonymous'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.js' integrity='sha512-TrDLNQyY4CpGTLPhaubDUMBqE0OExDKveL5wlIQYHCt0V1cxAJNQfDmW0w2kY/z/ed1UtfOF3ykis9uFkmcplQ==' crossorigin='anonymous'></script>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css' integrity='sha512-uA1+kHA/0O68FTSM4jeTzJNnRvNWxdCCSnE3gv8LaySXYxQT3nc5uPX9buMPtI1gxUBcxm0+5Lcw59jjl0nMDQ==' crossorigin='anonymous' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.5.1/vuex.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.js'></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css' />
 <script src="./assets/js/all.js"></script>
+<script src="./assets/js/utils.js"></script>
 <title>cart</title>
 </head>
 
@@ -23,11 +24,14 @@
 
 
     <transition name="fade" mode="out-in">
-      <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist" v-if="current_section === 0" key="index-1"></cart-area>
+      <cart-area @data-handler="dataChange" :list="list" :current="current_section" :is-Exist="listIsExist"
+        v-if="current_section === 0" key="index-1"></cart-area>
 
-      <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2"></cart-info>
+      <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2">
+      </cart-info>
 
-      <cart-done @open-window="openModal" v-if="current_section === 2" :current="current_section" key=" index-3 "></cart-done>
+      <cart-done @open-window="openModal" v-if="current_section === 2" :current="current_section" key=" index-3 ">
+      </cart-done>
     </transition>
 
 
@@ -39,11 +43,7 @@
       <template #content>
         <!-- 自行決定要傳入什麼 -->
         <div>
-          <img
-            class="mx-auto "
-            src="./assets/img/icon/icon-good.svg"
-            alt=" "
-          >
+          <img class="mx-auto " src="./assets/img/icon/icon-good.svg" alt=" ">
         </div>
       </template>
       <template #maintext>
