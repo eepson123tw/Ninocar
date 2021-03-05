@@ -35,8 +35,7 @@
 
 
 
-    <div class="box"> <img src="./assets/img/illust/illust-car-y.svg"
-        style="width: 100px;height: 100px;position: absolute; left: -50%;"></div>
+    <div class="box"> <img src="./assets/img/illust/illust-car-y.svg" style="width: 100px;height: 100px;position: absolute; left: -50%;"></div>
 
     <div class="container">
       <div class="row justify-content-center">
@@ -67,7 +66,11 @@
       <template #content>
         <!-- 自行決定要傳入什麼 -->
         <div>
-          <img class="mx-auto " src="./assets/img/illust/illust-showgirl.svg " alt=" ">
+          <img
+            class="mx-auto "
+            src="./assets/img/illust/illust-showgirl.svg "
+            alt=" "
+          >
         </div>
       </template>
       <template #maintext>
@@ -95,6 +98,7 @@
     new Vue({
       el: '#dictionary',
       mixins: [cartMixins],
+      store,
       data() {
         return {
           isModalShow: false,
@@ -113,6 +117,18 @@
         closeHandler() {
           this.isModalShow = false;
         }
+      },
+      computed: {
+
+
+        memberId() {
+
+          return this.$store.state.memberId
+
+        },
+
+
+
       },
       mounted() {
 
