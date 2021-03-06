@@ -99,27 +99,6 @@ exports.kill = killDist;
 exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includeHTML));
 
 exports.browser = function browsersync() {
-<<<<<<< HEAD
-    browserSync.init({
-        // files: "**",
-        // port: 3001,
-        // notify: false, //禁用瀏覽器的通知元素
-        // browser: "chrome",
-        server: {
-            baseDir: './dist', //跟目錄設定
-            index: 'itemdetail.html', //需更改成自己頁面的名稱
-            injectChanges: false,
-        },
-    });
-    //與browser同步
-    watch(['app/assets/style/**/*.scss', '!app/assets/style/pages/*.scss'], commonStyle).on('change', reload);
-    watch('app/assets/style/pages/*.scss', pageStyle).on('change', reload);
-    watch('app/**/*.html', includeHTML).on('change', reload);
-    watch('app/assets/img/**/*', moveImg).on('change', reload);
-    watch('app/assets/js/**/*.*', moveJS).on('change', reload);
-    watch('app/assets/php/**/*.php', movePHP).on('change', reload);
-    watch('app/backend/**/*.php', moveBackendFiles).on('change', reload);
-=======
   browserSync.init({
     // files: "**",
     // port: 3001,
@@ -127,7 +106,7 @@ exports.browser = function browsersync() {
     // browser: "chrome",
     server: {
       baseDir: './dist', //跟目錄設定
-      index: 'factory.html', //需更改成自己頁面的名稱
+      index: 'itemdetail.html', //需更改成自己頁面的名稱
       injectChanges: false,
     },
   });
@@ -139,7 +118,6 @@ exports.browser = function browsersync() {
   watch('app/assets/js/**/*.*', moveJS).on('change', reload);
   watch('app/assets/php/**/*.php', movePHP).on('change', reload);
   watch('app/backend/**/*.php', moveBackendFiles).on('change', reload);
->>>>>>> gulp
 };
 
 exports.w = function watchFiles() {

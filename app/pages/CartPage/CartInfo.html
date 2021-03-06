@@ -159,7 +159,6 @@
 									class="cart__select form__input"
 									placeholder="abc@gmail.com"
 									v-model.trim="email.text"
-									@blur="handleInput"
 									@change="emailCheck"
 								></input>
 							</div>
@@ -172,6 +171,10 @@
 								for="receiverName"
 								class="form__text mb-2 mr-3 "
 							>收件人姓名</label>
+							<span
+								v-if="receiver.remind!==''"
+								class="form__text form__text--warning"
+							>{{receiver.remind}}</span>
 							<div class="d-flex  cart__checkbox">
 								<input
 									type="checkbox"
@@ -190,20 +193,26 @@
 									type="text"
 									class="cart__select form__input"
 									placeholder="王小明"
-									v-model="receiverName"
+									:class="receiver.inputClass"
+									v-model.trim="receiver.text"
 								></input>
 							</div>
 							<label
 								for="receiverPhone"
 								class="form__text mb-2 "
 							>聯絡電話</label>
+							<span
+								v-if="receiverPhone.remind!==''"
+								class="form__text form__text--warning"
+							>{{receiverPhone.remind}}</span>
 							<div class="form__section mb-5">
 								<input
 									id="receiverPhone"
 									type="text"
 									class="cart__select form__input"
 									placeholder="0910-123-456"
-									v-model="receiverPhone"
+									:class="receiverPhone.inputClass"
+									v-model.trim="receiverPhone.text"
 								></input>
 							</div>
 							<div class="form__group ">
@@ -211,6 +220,10 @@
 									for="address"
 									class="form__text "
 								>地址</label>
+								<span
+									v-if="receiverRoad.remind!==''"
+									class="form__text form__text--warning"
+								>{{receiverRoad.remind}}</span>
 								<div class="form__section mb-5">
 									<select
 										name=""
@@ -239,10 +252,11 @@
 								</div>
 								<input
 									type="text"
-									class="form__input  "
-									id="address"
-									v-model="receiverRoad"
+									class="cart__select form__input"
 									placeholder="街/路/巷弄/樓層"
+									:class="receiverPhone.inputClass"
+									v-model.trim="receiverRoad.text"
+									id="address"
 								/>
 								<div class="d-flex  cart__checkbox mt-10 mb-10">
 									<input
@@ -277,11 +291,16 @@
 								for="cardName"
 								class="form__text mb-2 "
 							>信用卡卡號</label>
+							<span
+								v-if="cardNoConfirm"
+								class="form__text form__text--warning"
+							>此區塊必填</span>
 							<div class="form__section mb-5">
 								<input
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input"
+									:class="classList"
 									maxlength="4"
 									data-card="0"
 									@input="nextArea"
@@ -291,6 +310,7 @@
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
+									:class="classList"
 									maxlength="4"
 									data-card="1"
 									@input="nextArea"
@@ -300,6 +320,7 @@
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
+									:class="classList"
 									maxlength="4"
 									data-card="2"
 									@input="nextArea"
@@ -309,6 +330,7 @@
 									id="cardName"
 									type="text"
 									class="form__select cart__select--small cart__select--input "
+									:class="classList"
 									maxlength="4"
 									data-card="3"
 									@input="nextArea"
@@ -324,6 +346,7 @@
 									id="cardDate"
 									type="text"
 									class="form__select cart__select cart__select--input"
+									:class="classList"
 									placeholder="MM/YY"
 									v-model="cardDate"
 								></input>
@@ -337,6 +360,7 @@
 									id="cardCode"
 									type="email"
 									class="form__select cart__select cart__select--input"
+									:class="classList"
 									placeholder="123"
 									v-model="cardCode"
 								></input>
@@ -395,11 +419,26 @@
           remind: '',
           inputClass: '',
         },
-        receiverName: "",
-        receiverPhone: "",
+        receiver: {
+          name: '姓名',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
+        receiverPhone: {
+          name: '電話',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
         receiverCity: "",
         receiverTown: "",
-        receiverRoad: "",
+        receiverRoad: {
+          name: '地址',
+          text: '',
+          remind: '',
+          inputClass: '',
+        },
         receiverAddress: "",
         //fetch 到的東東
         cityList: [],
@@ -409,6 +448,10 @@
         cardTwoArea: "",
         cardThreeArea: "",
         cardFourArea: "",
+        cardNoConfirm: false,
+        classList: {
+          form__warning: false
+        },
         cardsValue: "",
         cardCode: "",
         cardDate: "",
@@ -418,9 +461,32 @@
     },
     methods: {
       pageHandler() {
-        this.currentdata += 1;
-        console.log(this.currentdata);
-        this.$emit('data-handler', this.currentdata);
+
+        if (this.receiver.text == "") {
+          this.handleInput();
+        } else if (this.receiverPhone.text == "") {
+          this.handleInput();
+        } else if (this.receiverRoad == "") {
+          this.handleInput();
+        } else if (this.selectPayment == "線上刷卡") {
+
+          if (this.cardCode == "") {
+            this.classList = {
+              form__warning: true
+            };
+            this.cardNoConfirm = true
+          } else {
+            this.currentdata += 1;
+            this.$emit('data-handler', this.currentdata);
+          }
+        } else {
+          this.currentdata += 1;
+          this.$emit('data-handler', this.currentdata);
+
+        }
+
+
+
       },
       collapseArea() {
         //收合選單
@@ -455,12 +521,12 @@
       },
 
       sameBuyer() {
-        this.receiverName = this.buyer.text;
-        this.receiverPhone = this.phone.text;
+        this.receiver.text = this.buyer.text;
+        this.receiverPhone.text = this.phone.text;
       },
       saveAddress() {
         let dataAddress;
-        dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad;
+        dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad.text;
         this.receiverAddress = dataAddress;
         let dataAddressJson = JSON.stringify(dataAddress);
         localStorage.setItem('receiverAddress', dataAddressJson);
@@ -481,9 +547,6 @@
       },
       emailCheck() {
         this.handleEmailCheck(this.email);
-
-
-
       },
     },
     computed: {
@@ -525,7 +588,7 @@
         return this.cardsValue;
       },
       inputList() {
-        return [this.buyer, this.phone, this.email]
+        return [this.buyer, this.phone, this.email, this.receiver, this.receiverPhone, this.receiverRoad]
       }
 
     },

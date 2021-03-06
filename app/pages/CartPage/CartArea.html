@@ -1,7 +1,7 @@
 <template id="cartArea">
 	<div
 		v-if="isExist"
-		class="py-10"
+		class="mb-10"
 	>
 		<div class="container cart">
 			<header class="row mt-20 block order-sm-1">
@@ -113,12 +113,15 @@
 						<label
 							for="productTake"
 							class="form__text mb-2 h5"
-						>選擇運送方式</label>
+						>選擇運送方式</label> <span
+							v-if="noConfirm"
+							class="form__text form__text--warning"
+						>皆為必填</span>
 						<div class="form__section mb-5">
 							<select
 								name=""
 								id="productTake"
-								class="form__select cart__select"
+								:class="classList"
 								v-model="selectShipping"
 								@change='countSendPrice'
 							>
@@ -136,7 +139,7 @@
 						<div class="form__section mb-5">
 							<select
 								id="paymentChoose"
-								class="form__select cart__select"
+								:class="classList"
 								v-model="selectPayment"
 							>
 								<option
@@ -153,7 +156,7 @@
 						<div class="form__section mb-5">
 							<select
 								id="coupon"
-								class="form__select cart__select"
+								:class="classList"
 								v-model="selectCupon"
 								@change='countDiscount'
 							>
@@ -309,8 +312,12 @@
 
 	</div>
 	<div v-else>
-		<main class="container cart cart--maginHalf">
-			<header class="row mt-20 mb-10 order-sm-1">
+		<main class="container cart  mb-15">
+			<header class="
+			row
+			mt-20
+			mb-10
+			order-sm-1">
 				<ul class="cart__title d-flex w-100">
 					<li>購物車</li>
 					<li>單價</li>
@@ -334,15 +341,15 @@
 					<div class="cart__empty--right">
 						<p>您的購物車是空的</p>
 						<p>推薦您可透過商品分類找到喜歡的車子,或查看熱門商品</p>
-						<p><button class='btn btn--small'>熱門商品</button></p>
+						<p><a href="./product.html"><button class='btn btn--small'>熱門商品</button></a></p>
 					</div>
 				</div>
 			</div>
 		</main>
 	</div>
+
+
 </template>
-
-
 
 
 
@@ -352,13 +359,12 @@
     template: "#cartArea",
     props: ['list', 'isExist', 'current'],
     data() {
-
       return {
         //購買清單
         // buyerList: this.list,
         // 初始全部金額
         totalProductNum: null,
-        totalPointCost: null,
+        totalPointCost: 0,
         totalMoneyCost: null,
         // 目前頁面
         currentdata: this.current,
@@ -372,6 +378,10 @@
         //  付款方式種類
         paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
         shippingList: ['自取', '宅配'],
+        classList: {
+          form__select: true,
+          cart__select: true,
+        },
         //選擇cupon
         selectCupon: "",
         // 選擇payment
@@ -381,7 +391,7 @@
         discountPrice: 0,
         sendPrice: 0,
         finallyPrice: 0,
-
+        noConfirm: false,
       }
     },
     mounted() {
@@ -418,26 +428,55 @@
       })
 
 
-
-
-
     },
     methods: {
       pageHandler() {
-        this.currentdata += 1;
-        confirm(`確認結帳!!`);
-        this.$emit('data-handler', this.currentdata);
-        //傳送更新 store 的值
-        this.$store.commit('selectCupon', this.selectCupon);
-        this.$store.commit('selectShipping', this.selectShipping);
-        this.$store.commit('selectPayment', this.selectPayment);
-        this.$store.commit('addBuyList', this.buyerList);
-        this.$store.commit('addBuyNum', this.totalProductNum);
-        this.$store.commit('addFinalPrice', this.finallyPrice);
-        this.$store.commit('addTotalPointCost', this.totalPointCost);
-        this.$store.commit('addDiscountPrice', this.discountPrice);
-        this.$store.commit('addSendPrice', this.sendPrice);
-        this.$store.commit('addTotalMoney', this.totalMoneyCost);
+
+        if (this.selectCupon == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else if (this.selectPayment == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else if (this.selectShipping == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else {
+          console.log(`ok`);
+          if (this.memberId == null) {
+            this.$emit('login-check', true);
+          } else {
+            this.currentdata += 1;
+            this.$emit('data-handler', this.currentdata);
+            //傳送更新 store 的值
+            this.$store.commit('selectCupon', this.selectCupon);
+            this.$store.commit('selectShipping', this.selectShipping);
+            this.$store.commit('selectPayment', this.selectPayment);
+            this.$store.commit('addBuyList', this.buyerList);
+            this.$store.commit('addBuyNum', this.totalProductNum);
+            this.$store.commit('addFinalPrice', this.finallyPrice);
+            this.$store.commit('addTotalPointCost', this.totalPointCost);
+            this.$store.commit('addDiscountPrice', this.discountPrice);
+            this.$store.commit('addSendPrice', this.sendPrice);
+            this.$store.commit('addTotalMoney', this.totalMoneyCost);
+            this.$store.commit('addGetPoints', this.countGetPoints);
+
+          }
+        };
+
+
       },
       changeNum(listIndex, e) {
 
@@ -538,11 +577,12 @@
 
       },
       countGetPoints() {
-
-
         return Math.floor(this.finallyPrice / 100 + this.totalPointCost / 100);
 
-      }
+      },
+      memberId() {
+        return this.$store.state.memberId
+      },
 
 
     }

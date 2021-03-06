@@ -37,8 +37,7 @@ const store = new Vuex.Store({ //global store
     discountPrice: 0,
     sendPrice: 0,
     totalMoney: 0,
-
-
+    getPoints: 0,
 
 
 
@@ -92,7 +91,11 @@ const store = new Vuex.Store({ //global store
     }, //totalprice
     addTotalMoney(state, val) {
       state.totalMoney = val;
-    }
+    }, //獲得點數
+    addGetPoints(state, val) {
+      state.getPoints = val;
+    },
+
 
   }
 });

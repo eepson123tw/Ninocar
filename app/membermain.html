@@ -147,7 +147,9 @@
     new Vue({
       el: '#app',
       mixins: [inputMixins],
+      store,
       data: {
+        userData: {},
         isModalShow: false,
         cuponList: [{
           disCount: 9,
@@ -354,7 +356,7 @@
 
 
         const params = new URLSearchParams()
-        params.append('ID', 1)
+        params.append('ID', this.memberId)
 
 
         axios({
@@ -366,8 +368,21 @@
           data: params,
         }).then((res) => {
           console.log(res.data)
-        }).catch((error) => {
+          let newData;
+          newData = res.data.map((item) => {
 
+            return {
+              name: item.member_account,
+              gender: item.member_gender,
+              address: item.member_address,
+              birthday: item.member_birthday,
+              phone: item.member_phone,
+              photo: item.member_photo,
+            }
+          });
+          this.userData = newData[0];
+
+        }).catch((error) => {
           console.log(error)
 
         })
