@@ -7,6 +7,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>memberMain</title>
@@ -34,45 +35,100 @@
         <template #content>
           <!-- 自行決定要傳入什麼 -->
           <div class="form__group block ">
-            <label for="receiverName" class="form__text mb-2 ">收件人姓名 </label>
+            <label
+              for="receiverName"
+              class="form__text mb-2 "
+            >收件人姓名 </label>
             <div class="form__section mb-5">
-              <input id="receiverName" type="text" class=" cart__select form__input" placeholder="王小明"
-                v-model="receiver.receiverName"></input>
+              <input
+                id="receiverName"
+                type="text"
+                class=" cart__select form__input"
+                placeholder="王小明"
+                v-model="receiver.receiverName"
+              ></input>
             </div>
-            <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
+            <label
+              for="receiverPhone"
+              class="form__text mb-2 "
+            >聯絡電話</label>
             <div class="form__section mb-5">
-              <input id="receiverPhone" type="text" class="cart__select form__input" placeholder="0910-123-456"
-                v-model="receiver.receiverPhone"></input>
+              <input
+                id="receiverPhone"
+                type="text"
+                class="cart__select form__input"
+                placeholder="0910-123-456"
+                v-model="receiver.receiverPhone"
+              ></input>
             </div>
-            <label for="receiverAddresssCode" class="form__text mb-2 ">郵遞區號</label>
+            <label
+              for="receiverAddresssCode"
+              class="form__text mb-2 "
+            >郵遞區號</label>
             <div class="form__section mb-5">
-              <input id="receiverAddresssCode" type="email" class="cart__select form__input" placeholder="300"
-                v-model="receiver.receiverAddresssCode"></input>
+              <input
+                id="receiverAddresssCode"
+                type="email"
+                class="cart__select form__input"
+                placeholder="300"
+                v-model="receiver.receiverAddresssCode"
+              ></input>
             </div>
           </div>
         </template>
         <template #maintext>
           <!-- 若有文字可以使用 ，也可以關掉-->
           <div class="form__group ">
-            <label for="address" class="form__text ">地址</label>
+            <label
+              for="address"
+              class="form__text "
+            >地址</label>
             <div class="form__section mb-5">
-              <select name="" id="" class="form__select " v-model="receiver.receiverCity">
-                <option value="" disabled>城市</option>
+              <select
+                name=""
+                id=""
+                class="form__select "
+                v-model="receiver.receiverCity"
+              >
+                <option
+                  value=""
+                  disabled
+                >城市</option>
                 <option v-for="(num,index) of selectCity">{{num}}</option>
               </select>
-              <select name="" id="" class="form__select " v-model="receiver.receiverTown" @change="sameAddressCode">
-                <option value="" disabled>鄉政區</option>
+              <select
+                name=""
+                id=""
+                class="form__select "
+                v-model="receiver.receiverTown"
+                @change="sameAddressCode"
+              >
+                <option
+                  value=""
+                  disabled
+                >鄉政區</option>
                 <option v-for="(num,index) of selectTown">{{num}}</option>
               </select>
             </div>
-            <input type="text" class="form__input  " id="address" v-model="receiver.receiverRoad"
-              placeholder="街/路/巷弄/樓層" />
+            <input
+              type="text"
+              class="form__input  "
+              id="address"
+              v-model="receiver.receiverRoad"
+              placeholder="街/路/巷弄/樓層"
+            />
           </div>
         </template>
         <template #footer>
           <div class="d-flex justify-content-end mt-3">
-            <button class="btn btn--ghost" @click="closeHandler">取消</button>
-            <button @click="saveAddress" class="btn ">完成</button>
+            <button
+              class="btn btn--ghost"
+              @click="closeHandler"
+            >取消</button>
+            <button
+              @click="saveAddress"
+              class="btn "
+            >完成</button>
           </div>
         </template>
 
@@ -85,8 +141,7 @@
 
 
 
-  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
-  @@include('./components/ModalNormal.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html')
 
   <script>
     new Vue({
@@ -242,7 +297,10 @@
             }
           }
           return newCode[0].zip;
-        }
+        },
+        memberId() {
+          return this.$store.state.memberId
+        },
 
       },
 
@@ -254,6 +312,69 @@
         }).then((res) => {
           this.cityList = res;
         });
+
+
+        //三種方法
+        // axios.post('./assets/php/getMemberInfoNofunction.php', {
+        //   ID: 1,
+        // }).then((res) => {
+        //   console.log(res);
+
+        // });
+
+
+        // async function wow(url) {
+        //   try {
+        //     let result = await axios.get( // any call like get
+        //       url, // your URL
+        //       { // data if post, put
+        //         ID: 1,
+        //       }
+        //     );
+        //     console.log(result.response.data);
+        //   } catch (error) {
+        //     console.error(error.response.data); // NOTE - use "error.response.data` (not "error")
+        //   }
+
+        // }
+
+        // wow('./assets/php/getMemberInfoNofunction.php');
+
+
+
+        // axios.post('./assets/php/getMemberInfoNofunction.php', {
+        //   ID: 1,
+        // }).then((res) => {
+        //   console.log(res);
+        // }).catch((error) => {
+        //   console.log(error);
+        // });
+
+
+
+
+        const params = new URLSearchParams()
+        params.append('ID', 1)
+
+
+        axios({
+          method: 'post',
+          url: 'assets/php/getMemberInfoNofunction.php',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          data: params,
+        }).then((res) => {
+          console.log(res.data)
+        }).catch((error) => {
+
+          console.log(error)
+
+        })
+
+
+
+
 
       }
     });
