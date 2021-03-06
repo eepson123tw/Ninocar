@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <div id="dictionary">
+  <div id="dictionary" v-cloak>
     <vue-header></vue-header>
     <main class="container pt-25 pb-15">
       <!-- display -->
@@ -47,17 +47,14 @@
   @@include('./components/EmptyStateDiv.html')
   @@include('./pages/DictionaryPage/DictionaryPostItem.html')
   @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+  <script src="./assets/js/mixins/productMixins.js"></script>
 
   <script>
     new Vue({
       el: '#dictionary',
+      mixins: [productMixins],
       data: { //變數存放的地方
-        productList: [],
-        targetProduct: {},
-        showProductList: [],
-        myProductIdList: [],
         searchType: 'keyword',
-        keywordText: '',
         activeNav: 'all',
         isModalShow: false,
         yearList: ['1970~1989', '1990~2009', '2010後'],
@@ -65,50 +62,6 @@
         selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
         selectedYearList: ['1970~1989', '1990~2009', '2010後'],
         selectedLimitList: ['無限定', '期間限定', '點數限定'],
-      },
-      mounted() {
-        const getProductList = async () => {
-          const result = await axios.get(
-            `./assets/php/getProductList.php`
-          );
-          return result;
-        }
-        //拿所有商品清單
-        getProductList().then(res => {
-          console.log(res.data);
-          const fetchProductList = res.data.map(product => {
-            // 系列數字轉名稱
-            let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
-            thisSeriesIndex.toString();
-            // 系列Id若是單位數，前面加0
-            let thisSeriesId;
-            if (product[`product_seriesid`].length === 1) {
-              thisSeriesId = 0 + product[`product_seriesid`];
-            } else {
-              thisSeriesId = product[`product_seriesid`];
-            }
-            return {
-              name: product[`product_name`].trim(),
-              eName: product['product_ename'].trim().toUpperCase(),
-              series: this.seriesList[thisSeriesIndex].eName,
-              seriesIndex: thisSeriesIndex,
-              seriesId: thisSeriesId,
-              imgURL: product['product_img'],
-              displayImgURL: product['product_img1'],
-              productId: product['product_id'],
-              year: product['product_year'],
-              size: product['product_size'],
-              description: product['product_des'],
-              limitLabel: product['product_spec'],
-            }
-          })
-          // console.log(fetchProductList);
-          this.productList = fetchProductList;
-          this.showProductList = this.productList;
-          this.targetProduct = this.showProductList[0];
-        }).catch(error => {
-          console.log(error)
-        })
       },
       store,
       computed: {
@@ -119,79 +72,7 @@
         seriesList() {
           return this.$store.state.seriesList
         },
-        memberSeriesGroupCountList() { //搭配isMemberHasSeriesPin // pin-svg :disabled使用//
-          if (this.myProductList.length === 0) {
-            return [];
-          } else {
-            //先把過濾成只剩系列名
-            const seriesList = this.myProductList.map(product => product.series);
-            //每系列擁有的個數，若是各一種的徽章，最多為１
-            const RVCount = seriesList.filter(series => series === "RV").length >= 1 ? 1 : 0;
-            const BSCount = seriesList.filter(series => series === "BS").length >= 1 ? 1 : 0;
-            const PACount = seriesList.filter(series => series === "PA").length >= 1 ? 1 : 0;
-            const CACount = seriesList.filter(series => series === "CA").length >= 1 ? 1 : 0;
-            const EMCount = seriesList.filter(series => series === "EM").length;
-            const PMCount = seriesList.filter(series => series === "PM").length;
-            const TACount = seriesList.filter(series => series === "TA").length;
-            const ENCount = seriesList.filter(series => series === "EN").length;
 
-            return [{
-              name: 'RV',
-              count: RVCount + BSCount,
-            }, {
-              name: 'BS',
-              count: RVCount + BSCount,
-            }, {
-              name: 'PA',
-              count: PACount + CACount,
-            }, {
-              name: 'CA',
-              count: PACount + CACount,
-            }, {
-              name: 'EM',
-              count: EMCount,
-            }, {
-              name: 'PM',
-              count: PMCount,
-            }, {
-              name: 'TA',
-              count: TACount
-            }, {
-              name: 'EN',
-              count: ENCount
-            }]
-          }
-        },
-        bgClass() {
-          return `bg-series-${this.targetProduct.series}`
-        },
-        pinClass() {
-          return this.myProductIdList.indexOf(this.targetProduct.productId) >= 0 ? 'pin' :
-            'pin pin--disabled'
-        },
-        limitLabel() {
-          if (this.targetProduct.limitLabel === '2') {
-            return {
-              text: '期間限定',
-              className: 'badge badge--primary'
-            };
-          } else if (this.targetProduct.limitLabel === '4') {
-            return {
-              text: '點數限定',
-              className: 'badge bg-blue'
-            };
-          } else {
-            return null
-          }
-        },
-        myProductList() {
-          if (this.productList && this.myProductIdList) {
-            return this.productList.filter(product => this.myProductIdList.indexOf(product
-              .productId) >= 0);
-          } else {
-            return [];
-          }
-        },
         isLoginEmptyStateDivShow() {
           if (!this.memberId && this.activeNav === 'my') {
             return true
@@ -253,31 +134,9 @@
             this.showProductList = this.myProductList;
           }
         },
-        memberId(val) {
-          if (val) {
-            this.handleGetMemberOwnProductIdList();
-          } else {
-            this.myProductIdList.splice(0)
-          }
-        },
+
       },
       methods: {
-        isMemberHasPin(productId) {
-          return this.myProductIdList.indexOf(productId) >= 0
-        },
-        isMemberHasSeriesPin(productSeriesName) {
-          if (!this.memberId) {
-            return false
-          }
-          const series = this.memberSeriesGroupCountList.find(series => series.name === productSeriesName);
-          const doubleList = ["RV", "BS", "PA", "CA"] //各一的徽章
-
-          if (doubleList.indexOf(productSeriesName) < 0) { //三個以上的徽章
-            return series.count >= 3;
-          } else { //各一的徽章
-            return series.count >= 2;
-          }
-        },
         handleSearchTypeChange() {
           this.showProductList = this.productList;
           if (this.searchType === 'sort') {
@@ -357,35 +216,10 @@
           }
         },
         handleKeywordSearch() {
-          const filteredProductList = this.productList.filter(product => {
-            const keyword = this.keywordText.toLowerCase().trim();
-            let isIncludeWord = false;
-            product.name.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.eName.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.series.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.series.toLowerCase().concat(product.seriesId).includes(keyword) ?
-              isIncludeWord = true : '';
-            return isIncludeWord;
-          })
+          const filteredProductList = this.getProductListByKeyword();
           this.showProductList = filteredProductList;
         },
-        handleGetMemberOwnProductIdList() {
-          axios.post('./assets/php/getMemberOwnProductIdList.php', {
-            "memberId": this.memberId,
-          }).then(res => {
-            console.log(res);
-            if (Array.isArray(res.data) && res.data != []) {
-              this.myProductIdList = res.data.map(obj => obj['product_id'])
-            } else {
-              console.log(res.data)
-            }
-          }).catch(error => {
-            console.log(error)
-          })
-        }
+
       },
     })
   </script>

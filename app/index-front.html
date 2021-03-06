@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <vue-header></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
@@ -51,16 +51,15 @@
     sayHi('index');
 </script> -->
 
+    <script src="./assets/js/mixins/productMixins.js"></script>
 
 
     <script>
         new Vue({
             el: '#app',
             store,
+            mixins: [productMixins],
             data: {
-                productList: null,
-                memberHasPin: true,
-                memberOwnProductIdList: ['300', '121'],
                 isDisplayPlay: false,
                 isCarNearGirl: false,
                 isCTAShow: false,
@@ -70,16 +69,19 @@
                 seriesList() {
                     return this.$store.state.seriesList
                 },
-
+                memberId() {
+                    return this.$store.state.memberId
+                },
+            },
+            watch: {
+                productList(list) {
+                    if (list && list.length) {
+                        console.log('a')
+                        this.handleInitMountainSwiper();
+                    }
+                },
             },
             methods: {
-                bgClass(productSeries) {
-                    return `bg-series-${productSeries}`
-                },
-                pinClass(productId) {
-                    return this.memberOwnProductIdList.indexOf(productId) ? 'pin' :
-                        'pin pin--disabled'
-                },
                 handleGirlClick() {
                     if (this.isCarNearGirl) {
                         this.isCTAShow = true;
@@ -97,44 +99,11 @@
                     if (this.swiperMountain) {
                         this.swiperMountain.slideTo(index);
                     }
-                }
-
-            },
-
-            mounted() {
-
-                const getIndexProductList = async () => {
-                    const productList = await axios.get(
-                        `./assets/php/getIndexProductList.php`
-                    );
-                    return productList;
-                }
-                getIndexProductList().then(res => {
-                    const fetchProductList = res.data.map(product => {
-                        // 系列數字轉名稱
-                        let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
-                        thisSeriesIndex.toString();
-                        // 系列Id若是單位數，前面加0
-                        let thisSeriesId;
-                        if (product[`product_seriesid`].length === 1) {
-                            thisSeriesId = 0 + product[`product_seriesid`];
-                        } else {
-                            thisSeriesId = product[`product_seriesid`];
-                        }
-                        return {
-                            name: product[`product_name`].trim(),
-                            eName: product['product_ename'].trim().toUpperCase(),
-                            series: this.seriesList[thisSeriesIndex].eName,
-                            seriesIndex: thisSeriesIndex,
-                            seriesId: thisSeriesId,
-                            displayImgURL: product['product_img1'],
-                            productId: product['product_id'],
-                            year: product['product_year'],
-                            size: product['product_size'],
-                            description: product['product_des'],
-                        }
-                    })
-                    this.productList = fetchProductList;
+                },
+                handleInitMountainSwiper() {
+                    const indexProductList = ['2', '27', '17', '22', '28'];
+                    this.showProductList = this.productList.filter(product => indexProductList.indexOf(product
+                        .productId) >= 0);
                     this.$nextTick(() => {
                         this.swiperMountain = new Swiper('#swiperContainerMountain', {
                             spaceBetween: 20,
@@ -143,26 +112,16 @@
                                 disableOnInteraction: false
                             },
                             loop: true,
-                            // mousewheel: true,
                             speed: 800,
                             effect: 'fade',
-                            // navigation: {
-                            //     nextEl: '.swiper-button-next',
-                            //     prevEl: '.swiper-button-prev',
-                            // },
-                            // pagination: {
-                            //     el: '.swiper-pagination',
-                            //     clickable: true,
-                            // },
                         });
 
                     });
 
+                }
+            },
 
-
-                }).catch(error => {
-                    console.log(error)
-                })
+            mounted() {
                 // --------------------------------------------swiper
                 let swiperBillboard = new Swiper('#swiperContainerBillboard', {
                     spaceBetween: 20,
@@ -294,10 +253,16 @@
                     },
                     ease: Linear.easeNone,
                     delay: 1,
+                }).to('.thumb--stop', 0, {
+                    opacity: 1,
+                    ease: Linear.easeNone,
+                }).to('.thumb--stop', 0, {
+                    opacity: 0,
+                    ease: Linear.easeNone,
+                    delay: 1.5,
                 }).to('.factory__car', 2, {
                     xPercent: -55,
                     ease: Linear.easeNone,
-                    delay: 1,
                 }).then(() => {
                     this.isCarNearGirl = true;
                 })
