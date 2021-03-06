@@ -304,8 +304,9 @@
                             <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration" name="inspiration"></textarea>
                             <p>餘100字</p>
 
-                            <input type="hidden" class="putDataId" value="" name="workPostTime">
-                            <input type="hidden" class="putPrice" value="" name="workPrice">
+                            <input type="hidden" class="putDataId" name="workPostTime" value="" >
+                            <input type="hidden" class="putPrice" name="workPrice" value="">
+                            <input type="hidden" class="putAllIndex" name="allIndex" value="">
                         </div>
                     </form>
                 </div>
@@ -1508,6 +1509,7 @@
                 } else if (countStep % 5 == 4) {
                     $('.putDataId').val(`${postTime}`)
                     $('.putPrice').val(`${stage4Price}`)
+                    $('.putAllIndex').val(`${allIndex}`)
 
                     // console.log(countStep)
                 

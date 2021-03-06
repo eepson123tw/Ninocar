@@ -5,7 +5,7 @@
   $inspiration = $_POST['inspiration'];
   $workPrice = $_POST['workPrice'];
   $workPostTime = $_POST['workPostTime'];
-  // $allIndex = $_POST['allIndex'];
+  $allIndex = $_POST['allIndex'];
 
   $Util = new UtilClass();
 
