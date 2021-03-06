@@ -284,8 +284,16 @@
         display: inline-block;
         animation: messageXShake 1s ease-in infinite;
 
-        &--address {
+        &--down {
             animation: messageYShake 1s ease-in infinite;
+        }
+
+        &--stop {
+            position: absolute;
+            right: -120px;
+            bottom: 0;
+            animation: none;
+            opacity: 0;
         }
 
         &__text {
@@ -297,14 +305,22 @@
             top: 12px;
         }
 
-        &__text--address {
+        &__text--down {
             left: 27px;
             top: 7px;
         }
 
-        &__svg--address {
+        &__text--stop {
+            left: 35px;
+            top: 5px;
+        }
+
+        &__svg--down,
+        &__svg--stop {
             transform: rotate(-90deg);
         }
+
+
 
     }
 
@@ -462,26 +478,29 @@
             }
         }
 
-        &__girl {
-            animation: girlShake 3s 1s ease-in-out infinite both;
+        &__illust {
             position: absolute;
             top: 30%;
             left: 55%;
             width: 80px;
 
-            @include rwd-md {
-                top: 28%;
-            }
+
         }
+
+        &__illust__girl {
+            animation: girlShake 3s 1s ease-in-out infinite both;
+        }
+
 
         &__road--extend {
             width: 100%;
-            position: absolute;
             bottom: 0px;
+            position: absolute;
 
             @include rwd(1400px) {
                 width: 94%;
                 bottom: -4px;
+                right: -1400px;
             }
 
             @include rwd-xl {

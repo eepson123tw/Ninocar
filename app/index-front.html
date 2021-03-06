@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <vue-header></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
@@ -294,10 +294,16 @@
                     },
                     ease: Linear.easeNone,
                     delay: 1,
+                }).to('.thumb--stop', 0, {
+                    opacity: 1,
+                    ease: Linear.easeNone,
+                }).to('.thumb--stop', 0, {
+                    opacity: 0,
+                    ease: Linear.easeNone,
+                    delay: 1.5,
                 }).to('.factory__car', 2, {
                     xPercent: -55,
                     ease: Linear.easeNone,
-                    delay: 1,
                 }).then(() => {
                     this.isCarNearGirl = true;
                 })
