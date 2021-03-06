@@ -30,7 +30,7 @@ const store = new Vuex.Store({ //global store
     buyList: [],
     totalProductNum: null,
     totalPointCost: null,
-    selectCupon: " ",
+    selectCoupon: " ",
     selectPayment: " ",
     selectShipping: " ",
     finallyPrice: 0,
@@ -66,8 +66,8 @@ const store = new Vuex.Store({ //global store
       state.totalProductNum = val;
     },
     // 選擇的折價卷
-    selectCupon(state, val) {
-      state.selectCupon = val;
+    selectCoupon(state, val) {
+      state.selectCoupon = val;
     },
     //選擇的付費方法
     selectPayment(state, val) {

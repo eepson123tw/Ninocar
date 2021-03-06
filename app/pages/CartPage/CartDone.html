@@ -138,7 +138,7 @@
                                 id="coupon"
                                 class="form__select cart__select"
                             >
-                                <option>{{selectCupon}}</option>
+                                <option>{{selectCoupon}}</option>
                             </select>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
 
       return {
         notShow: true,
-        currentdata: this.current,
+        currentData: this.current,
         animationDisplay: "cart__displayShow",
         payment: null,
       }
@@ -233,7 +233,7 @@
     computed: {
       // store 區塊
       ...Vuex.mapState({
-        selectCupon: state => state.selectCupon,
+        selectCoupon: state => state.selectCoupon,
         buyList: state => state.buyList,
         finallyPrice: state => state.finallyPrice,
         totalProductNum: state => state.totalProductNum,

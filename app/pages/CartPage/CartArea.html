@@ -157,14 +157,14 @@
 							<select
 								id="coupon"
 								:class="classList"
-								v-model="selectCupon"
+								v-model="selectCoupon"
 								@change='countDiscount'
 							>
 								<option
 									value=""
 									disabled
 								>請選擇</option>
-								<option v-for="(value,objvalue) of cuponList">{{value}}</option>
+								<option v-for="(value,objvalue) of couponList">{{value}}</option>
 							</select>
 						</div>
 					</div>
@@ -367,9 +367,9 @@
         totalPointCost: 0,
         totalMoneyCost: 0,
         // 目前頁面
-        currentdata: this.current,
+        currentData: this.current,
         // 折價卷種類
-        cuponList: {
+        couponList: {
           discountOne: "註冊新會員結帳享9折優惠！",
           discountTwo: "白金會員太牛了享8折優惠！",
           discountThree: "老闆跳樓拉免運費！",
@@ -383,7 +383,7 @@
           cart__select: true,
         },
         //選擇cupon
-        selectCupon: "",
+        selectCoupon: "",
         // 選擇payment
         selectPayment: "",
         // shipping methods
@@ -432,7 +432,7 @@
     methods: {
       pageHandler() {
 
-        if (this.selectCupon == "") {
+        if (this.selectCoupon == "") {
           this.classList = {
             form__select: false,
             cart__select: true,
@@ -458,10 +458,10 @@
           if (this.memberId == null) {
             this.$emit('login-check', true);
           } else {
-            this.currentdata += 1;
-            this.$emit('data-handler', this.currentdata);
+            this.currentData += 1;
+            this.$emit('data-handler', this.currentData);
             //傳送更新 store 的值
-            this.$store.commit('selectCupon', this.selectCupon);
+            this.$store.commit('selectCoupon', this.selectCoupon);
             this.$store.commit('selectShipping', this.selectShipping);
             this.$store.commit('selectPayment', this.selectPayment);
             this.$store.commit('addBuyList', this.buyerList);
@@ -482,9 +482,9 @@
 
         let chooseNum = e.target.value * 1 + 1;
         let totalPrice = this.buyerList[listIndex].price;
-        let totalpoint = this.buyerList[listIndex].points;
+        let totalPoint = this.buyerList[listIndex].points;
         let newTotalPrice = totalPrice * chooseNum;
-        let newTotalPoint = totalpoint * chooseNum;
+        let newTotalPoint = totalPoint * chooseNum;
         this.buyerList[listIndex].productNum = chooseNum;
         this.buyerList[listIndex].totalPrice = newTotalPrice;
         this.buyerList[listIndex].totalPointCost = newTotalPoint;
@@ -524,17 +524,17 @@
       },
       countDiscount() {
         // 折扣選取器
-        for (let key in this.cuponList) {
-          if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
+        for (let key in this.couponList) {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountOne') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountTwo') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
             this.sendPrice = 0;
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountFour') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
           }
         }

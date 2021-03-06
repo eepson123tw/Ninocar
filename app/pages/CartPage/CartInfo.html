@@ -397,7 +397,7 @@
     mixins: [inputMixins],
     data() {
       return {
-        currentdata: this.current,
+        currentData: this.current,
         notShow: true,
         animationDisplay: 'cart__displayNone',
         // 購買人跟收貨人區
@@ -476,12 +476,12 @@
             };
             this.cardNoConfirm = true
           } else {
-            this.currentdata += 1;
-            this.$emit('data-handler', this.currentdata);
+            this.currentData += 1;
+            this.$emit('data-handler', this.currentData);
           }
         } else {
-          this.currentdata += 1;
-          this.$emit('data-handler', this.currentdata);
+          this.currentData += 1;
+          this.$emit('data-handler', this.currentData);
 
         }
 
@@ -552,7 +552,7 @@
     computed: {
       // store 區塊
       ...Vuex.mapState({
-        selectCupon: state => state.selectCupon,
+        selectCoupon: state => state.selectCoupon,
         buyList: state => state.buyList,
         finallyPrice: state => state.finallyPrice,
         totalProductNum: state => state.totalProductNum,
