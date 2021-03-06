@@ -17,31 +17,31 @@
     <div id="factory">
         <vue-header></vue-header>
         <div class="container containerMain">
-
-            <div class="modal js-modal reportModal" data-modal="1">
-                <div class="modal__group">
-                    <svg role="button" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 52 52" class="icon modal__close js-close" @click="closeModal">
-                                <g transform="translate(0 0.47)">
-                                    <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                    <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                </g>
-                                </svg>
-                    <h2 class="modal__title">
-                        新增地址
-                    </h2>
-                    <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
-                    <ul class="modal__textGroup">
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
-                        <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
-                    </ul>
-                    <button class="btn btn--ghost">取消</button>
-                    <button class="btn ml-5 finishReport" @click="openReportSuccessModal">完成</button>
+            <transition name="fade">
+                <div class="modal js-modal reportModal" data-modal="1" v-if="isModalShow">
+                    <div class="modal__group" >
+                        <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" class="icon modal__btn modal__btn--close" @click="closeModal">
+                                    <g transform="translate(0 0.47)">
+                                        <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                        <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
+                                    </g>
+                                    </svg>
+                        <h2 class="modal__title">
+                            新增地址
+                        </h2>
+                        <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
+                        <ul class="modal__textGroup">
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
+                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
+                        </ul>
+                        <button class="btn btn--ghost" @click="isModalShow=false">取消</button>
+                        <button class="btn ml-5 finishReport" @click="isModalShow2=true, isModalShow=false">完成</button>
+                    </div>
                 </div>
-            </div>
-
+            </transition>
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
                         <img src="./assets/img/pic/model.png" class="model">
@@ -279,7 +279,7 @@
                                 <p class="totalPrice">NT$ 0</p>
                             </div>
                             <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-                            <button class="btn btn--disabled nextStep" @click="toNextStep">下一步</button>
+                            <button class="btn btn--disabled nextStep" >下一步</button>
                         </div>
                     </div>
 
@@ -325,12 +325,12 @@
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" data-id="001" data-board-id="1614917124264"></work-card>
-                        <work-card2 value="370" data-id="002" data-board-id="1614917124274"></work-card2>                        
-                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" data-id="003" data-board-id="1614917124284"></work-card>
-                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" data-id="004" data-board-id="1614917124294"></work-card >
-                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" data-id="005" data-board-id="1614917124299"></work-card >
-                        <work-card :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" data-id="006" ></work-card>
+                        <work-card @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" data-id="220203" data-board-id="1614917124264"></work-card>
+                        <work-card2 @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
+                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" data-id="55555" data-board-id="1614917124284"></work-card>
+                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
+                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
+                        <work-card :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" data-id="0033345" ></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -341,13 +341,13 @@
                 </div>
         </div>
         @@include('./components/Footer.html')
-        
+        @@include('./pages/FactoryPage/reportSuccessModal.html')
     </div>
 
 
     <div id="factoryModal">
         @@include('./pages/FactoryPage/FactoryModal.html')
-        @@include('./pages/FactoryPage/reportSuccessModal.html')
+        <!-- @@include('./pages/FactoryPage/reportSuccessModal.html') -->
 
     </div>
 
@@ -414,12 +414,12 @@
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
+                    isModalShow:false,
                     // workTitle_plus: this.workTitle,
                     
                 }
             },
-            template: `<li class="work grid-item grid-item--height1 col
-            -4 col-lg-2 col-sm-4">
+            template: `<li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="">
                             </div>
@@ -520,8 +520,9 @@
 
                 },
                 openReportModal(){
-                    $('.container .modal').addClass('modal-active');
-                    // console.log('report!')
+                    console.log('report!')
+                    this.isModalShow = true;
+                    this.$emit('report-emit', this.isModalShow)
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -662,9 +663,10 @@
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
+                    isModalShow:false,
                 }
             },
-            template: `<li class="work grid-item grid-item--height2 col-4 col-lg-2 col-sm-4">
+            template: `<li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic">
                                 <img :src="img" class="model" @click="openWorkModal">
                             </div>
@@ -827,7 +829,9 @@
                     this.is_icon_color = false
                 },
                 openReportModal(){
-                    $('.containerMain .modal').addClass('modal-active');
+                    console.log('檢舉彈窗打開')
+                    this.isModalShow = true;
+                    this.$emit('report-emit', this.isModalShow);
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
@@ -909,13 +913,16 @@
                 docW: $(document).width(),
                 shapeIndex:-1,
                 circleIndex: -1,
+                isModalShow: false,
+                isModalShow2:false,
             },
             props:{
 
             },
             methods: {
                 openReportSuccessModal(){ //出現檢舉成功的彈窗
-                    $('.reportSuccessModal').addClass('modal-active')
+                    // $('.reportSuccessModal').addClass('modal-active')
+                    console.log('kpkp')
                 },
                 showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
                     $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
@@ -953,139 +960,140 @@
                 },
                 closeModal(){ //關掉彈窗
                     // console.log('關掉')
-                    $('.modal').removeClass('modal-active');
+                    // $('.modal').removeClass('modal-active');
+                    this.isModalShow = false;
                 },
-                toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
-                    console.log("nextStep is clicked! countStep: "+ this.countStep)
-                    console.log(this.docW)
+                // toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
+                    // console.log("nextStep is clicked! countStep: "+ this.countStep)
+                    // console.log(this.docW)
                 
-                    if ($('.nextStep').hasClass('btn--disabled')) {
+                    // if ($('.nextStep').hasClass('btn--disabled')) {
                     
-                        $('.pleaseSelect').css({"display": "block"})
+                    //     $('.pleaseSelect').css({"display": "block"})
                     
-                        setTimeout(() => {
-                            $('.pleaseSelect').css({"display": "none"})
-                        }, 1000);
-                    } else {
-                        $('.previousStep').removeClass('invisible')
+                    //     setTimeout(() => {
+                    //         $('.pleaseSelect').css({"display": "none"})
+                    //     }, 1000);
+                    // } else {
+                    //     $('.previousStep').removeClass('invisible')
                     
-                        this.countStep += 1;
-                        $('.shapeCard').css({"display": "none"})
+                    //     this.countStep += 1;
+                    //     $('.shapeCard').css({"display": "none"})
                     
-                        if (this.countStep % 5 == 1) {
-                            console.log(this.countStep)
-                            $('.nextStep').addClass('btn--disabled')
+                    //     if (this.countStep % 5 == 1) {
+                    //         console.log(this.countStep)
+                    //         $('.nextStep').addClass('btn--disabled')
                         
-                            //進入選顏色
-                            $('.colorCards').css({"display": "flex"})
-                            $('.colorCard').css({"display": "block"})
+                    //         //進入選顏色
+                    //         $('.colorCards').css({"display": "flex"})
+                    //         $('.colorCard').css({"display": "block"})
                         
-                            //提醒內容變更
-                            $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
+                    //         //提醒內容變更
+                    //         $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
                         
-                            //進度條、圓圈變色
-                            $('.content:nth-child(2) .circle').addClass('circle--able')
-                            $('.content:nth-child(2) .circle').addClass('circle--active')
+                    //         //進度條、圓圈變色
+                    //         $('.content:nth-child(2) .circle').addClass('circle--able')
+                    //         $('.content:nth-child(2) .circle').addClass('circle--active')
                         
-                            if (this.docW > 1003) {
-                                $('.bar-front').width(240)
-                            } else if (this.docW <= 1003) {
-                                $('.bar-front').width(220)
-                            }
+                    //         if (this.docW > 1003) {
+                    //             $('.bar-front').width(240)
+                    //         } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(220)
+                    //         }
                         
-                        } else if (this.countStep % 5  == 2) {
-                            console.log(this.countStep)
+                    //     } else if (this.countStep % 5  == 2) {
+                    //         console.log(this.countStep)
                         
-                            $('.nextStep').addClass('btn--disabled')
+                    //         $('.nextStep').addClass('btn--disabled')
                         
-                            //進入選輪子
-                            $('.colorCard').css({"display": "none"})
+                    //         //進入選輪子
+                    //         $('.colorCard').css({"display": "none"})
                         
-                            $('.tireCards').css({"display": "flex"})
-                            $('.tireCard').css({"display": "block"})
+                    //         $('.tireCards').css({"display": "flex"})
+                    //         $('.tireCard').css({"display": "block"})
                         
-                            //提醒內容變更
-                            $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
+                    //         //提醒內容變更
+                    //         $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
                         
-                            //進度條變色
-                            $('.content:nth-child(3) .circle').addClass('circle--able')
-                            $('.content:nth-child(3) .circle').addClass('circle--active')
+                    //         //進度條變色
+                    //         $('.content:nth-child(3) .circle').addClass('circle--able')
+                    //         $('.content:nth-child(3) .circle').addClass('circle--active')
                         
-                            if (this.docW > 1003) {
-                                $('.bar-front').width(480)
-                            } else if (this.docW <= 1003) {
-                                $('.bar-front').width(440)
-                            }
+                    //         if (this.docW > 1003) {
+                    //             $('.bar-front').width(480)
+                    //         } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(440)
+                    //         }
                         
-                        } else if (this.countStep % 5  == 3) {
-                            if(this.shapeIndex != 0){
-                                console.log('讓尾翼不能選')
-                                $('.selectA6').addClass('btn--disabled')
-                                $('.selectA6').removeClass('btn--outline')
-                                $('.selectA6').css({"pointer-events":"none"})
-                            }
+                    //     } else if (this.countStep % 5  == 3) {
+                    //         if(this.shapeIndex != 0){
+                    //             console.log('讓尾翼不能選')
+                    //             $('.selectA6').addClass('btn--disabled')
+                    //             $('.selectA6').removeClass('btn--outline')
+                    //             $('.selectA6').css({"pointer-events":"none"})
+                    //         }
                         
-                            console.log(this.countStep)
+                    //         console.log(this.countStep)
                         
-                            $('.nextStep').addClass('btn--disabled')
+                    //         $('.nextStep').addClass('btn--disabled')
                         
-                            //進入選配件
-                            $('.tireCard').css({"display": "none"})
+                    //         //進入選配件
+                    //         $('.tireCard').css({"display": "none"})
                         
-                            //提醒內容變更
-                            $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
+                    //         //提醒內容變更
+                    //         $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
                         
-                            $('.accessoryCards').css({"display": "flex"})
-                            $('.accessoryCard').css({"display": "block"
-                            })
+                    //         $('.accessoryCards').css({"display": "flex"})
+                    //         $('.accessoryCard').css({"display": "block"
+                    //         })
                         
-                            //進度條、圓圈變色
-                            $('.content:nth-child(4) .circle').addClass('circle--able')
-                            $('.content:nth-child(4) .circle').addClass('circle--active')
+                    //         //進度條、圓圈變色
+                    //         $('.content:nth-child(4) .circle').addClass('circle--able')
+                    //         $('.content:nth-child(4) .circle').addClass('circle--active')
                         
                         
-                            if (this.docW > 1003) {
-                                $('.bar-front').width(730)
-                            } else if (this.docW <= 1003) {
-                                $('.bar-front').width(660)
-                            }
-                        } else if (this.countStep % 5 == 4) {
-                            console.log(this.countStep)
+                    //         if (this.docW > 1003) {
+                    //             $('.bar-front').width(730)
+                    //         } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(660)
+                    //         }
+                    //     } else if (this.countStep % 5 == 4) {
+                    //         console.log(this.countStep)
                         
-                            $('.nextStep').addClass('btn--disabled').text('完成')
-                            $('.nextStep').addClass('finish')
+                    //         $('.nextStep').addClass('btn--disabled').text('完成')
+                    //         $('.nextStep').addClass('finish')
                         
-                            $('.selectArea').css({"display": "none"})
+                    //         $('.selectArea').css({"display": "none"})
                         
-                            $('.giveName').css({
-                                "display": "flex",
-                                "justify-content": "space-between"
-                            })
+                    //         $('.giveName').css({
+                    //             "display": "flex",
+                    //             "justify-content": "space-between"
+                    //         })
                         
-                            //左右紐消失
-                            $('.selectBtn').css({"display": "none"})
+                    //         //左右紐消失
+                    //         $('.selectBtn').css({"display": "none"})
                         
-                            //提醒內容變更
-                            $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
+                    //         //提醒內容變更
+                    //         $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
                         
-                            //進度條、圓圈變色
-                            $('.content:nth-child(5) .circle').addClass('circle--able')
-                            $('.content:nth-child(5) .circle').addClass('circle--active')
+                    //         //進度條、圓圈變色
+                    //         $('.content:nth-child(5) .circle').addClass('circle--able')
+                    //         $('.content:nth-child(5) .circle').addClass('circle--active')
                         
-                            if(this.docW > 1003){
-                                $('.bar-front').width(960) 
-                            }else if(this.docW <= 1003){
-                                $('.bar-front').width(840) 
-                            }
-                            //base64
-                            dataURL = document.querySelector('.canvas').toDataURL();
-                            dataURLA1 = document.querySelector('.canvasA1').toDataURL();
-                            dataURLA2 = document.querySelector('.canvasA2').toDataURL();
-                            dataURLA3 = document.querySelector('.canvasA3').toDataURL();
-                            console.log(dataURL)
-                        }
-                    }
-                },
+                    //         if(this.docW > 1003){
+                    //             $('.bar-front').width(960) 
+                    //         }else if(this.docW <= 1003){
+                    //             $('.bar-front').width(840) 
+                    //         }
+                    //         //base64
+                    //         dataURL = document.querySelector('.canvas').toDataURL();
+                    //         dataURLA1 = document.querySelector('.canvasA1').toDataURL();
+                    //         dataURLA2 = document.querySelector('.canvasA2').toDataURL();
+                    //         dataURLA3 = document.querySelector('.canvasA3').toDataURL();
+                    //         console.log(dataURL)
+                    //     }
+                    // }
+                // },
                 toPreviousStep(){ //點上一步回上一步
                     this.countStep -= 1
                     console.log("previousStep is clicked! countStep: " + this.countStep)
@@ -1163,19 +1171,21 @@
                     this.countL += 1;
 
                     let distanceToLeft = $('.selectArea').position().left;
-                    // console.log(distanceToLeft)
+                    console.log(distanceToLeft)
 
                     if (this.docW <= 992) {
                         if (this.countStep < 3 && distanceToLeft > -900) {
+                            console.log('R1')
                             $('.selectArea').animate({left: '-=430'});
                         } else if (this.countStep == 3 && distanceToLeft > -2100) {
                         
                             $('.selectArea').animate({left: '-=410'});
                         }
                     } else {
-                        if (this.countStep < 3 && distanceToLeft > 15) {
+                        if (this.countStep < 3 && distanceToLeft > -420) {
+                            console.log('L1')
                             $('.selectArea').animate({left: '-=410'});
-                        } else if (this.countStep == 3 && distanceToLeft > -400) {
+                        } else if (this.countStep == 3 && distanceToLeft > -420) {
                             // console.log('再過去一點')
                             $('.selectArea').animate({left: '-=410'});
                         }
@@ -1218,6 +1228,9 @@
                         }
                     }
                 },
+                openReportModal(isModalShow){
+                    this.isModalShow = isModalShow;
+                }
 
             },
         });
@@ -1260,7 +1273,8 @@
                 },
                 closeModal(){
                     console.log('關掉喔')
-                    $('.modal').removeClass('modal-active');
+                    // $('.modal').removeClass('modal-active');
+                    $('.modal').css({"display":"none"});
                 }
             },
         });
@@ -1326,6 +1340,141 @@
             $('.pleaseSelect').css({"display": "none"})
         })
 
+        let countStep = 0;
+        let docW = $(document).width();
+
+        $('.nextStep').click(() => { //這裡
+            console.log("nextStep is clicked! countStep: "+ countStep)
+            console.log(docW)
+        
+            if ($('.nextStep').hasClass('btn--disabled')) {
+            
+                $('.pleaseSelect').css({"display": "block"})
+            
+                setTimeout(() => {
+                    $('.pleaseSelect').css({"display": "none"})
+                }, 1000);
+            } else {
+                $('.previousStep').removeClass('invisible')
+            
+                countStep += 1;
+                $('.shapeCard').css({"display": "none"})
+            
+                if (countStep % 5 == 1) {
+                    console.log(this.countStep)
+                    $('.nextStep').addClass('btn--disabled')
+                
+                    //進入選顏色
+                    $('.colorCards').css({"display": "flex"})
+                    $('.colorCard').css({"display": "block"})
+                
+                    //提醒內容變更
+                    $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
+                
+                    //進度條、圓圈變色
+                    $('.content:nth-child(2) .circle').addClass('circle--able')
+                    $('.content:nth-child(2) .circle').addClass('circle--active')
+                
+                    if (docW > 1003) {
+                        $('.bar-front').width(240)
+                    } else if (docW <= 1003) {
+                        $('.bar-front').width(220)
+                    }
+                
+                } else if (countStep % 5  == 2) {
+                    console.log(countStep)
+                
+                    $('.nextStep').addClass('btn--disabled')
+                
+                    //進入選輪子
+                    $('.colorCard').css({"display": "none"})
+                
+                    $('.tireCards').css({"display": "flex"})
+                    $('.tireCard').css({"display": "block"})
+                
+                    //提醒內容變更
+                    $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
+                
+                    //進度條變色
+                    $('.content:nth-child(3) .circle').addClass('circle--able')
+                    $('.content:nth-child(3) .circle').addClass('circle--active')
+                
+                    if (docW > 1003) {
+                        $('.bar-front').width(480)
+                    } else if (docW <= 1003) {
+                        $('.bar-front').width(440)
+                    }
+                
+                } else if (countStep % 5  == 3) {
+                    if(shapeIndex != 0){
+                        console.log('讓尾翼不能選')
+                        $('.selectA6').addClass('btn--disabled')
+                        $('.selectA6').removeClass('btn--outline')
+                        $('.selectA6').css({"pointer-events":"none"})
+                    }
+                
+                    console.log(countStep)
+                
+                    $('.nextStep').addClass('btn--disabled')
+                
+                    //進入選配件
+                    $('.tireCard').css({"display": "none"})
+                
+                    //提醒內容變更
+                    $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
+                
+                    $('.accessoryCards').css({"display": "flex"})
+                    $('.accessoryCard').css({"display": "block"
+                    })
+                
+                    //進度條、圓圈變色
+                    $('.content:nth-child(4) .circle').addClass('circle--able')
+                    $('.content:nth-child(4) .circle').addClass('circle--active')
+                
+                
+                    if (docW > 1003) {
+                        $('.bar-front').width(730)
+                    } else if (docW <= 1003) {
+                        $('.bar-front').width(660)
+                    }
+                } else if (countStep % 5 == 4) {
+                    console.log(countStep)
+                
+                    $('.nextStep').addClass('btn--disabled').text('完成')
+                    $('.nextStep').addClass('finish')
+                
+                    $('.selectArea').css({"display": "none"})
+                
+                    $('.giveName').css({
+                        "display": "flex",
+                        "justify-content": "space-between"
+                    })
+                
+                    //左右紐消失
+                    $('.selectBtn').css({"display": "none"})
+                
+                    //提醒內容變更
+                    $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
+                
+                    //進度條、圓圈變色
+                    $('.content:nth-child(5) .circle').addClass('circle--able')
+                    $('.content:nth-child(5) .circle').addClass('circle--active')
+                
+                    if(docW > 1003){
+                        $('.bar-front').width(960) 
+                    }else if(docW <= 1003){
+                        $('.bar-front').width(840) 
+                    }
+                    //base64
+                    dataURL = document.querySelector('.canvas').toDataURL();
+                    dataURLA1 = document.querySelector('.canvasA1').toDataURL();
+                    dataURLA2 = document.querySelector('.canvasA2').toDataURL();
+                    dataURLA3 = document.querySelector('.canvasA3').toDataURL();
+                    console.log(dataURL)
+                }
+            }
+        })
+
 
         //若沒有輸入所有資料跳出請完成資料輸入
         $('.nextStep').click(function() {
@@ -1336,11 +1485,11 @@
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
-            // let timeCalc = new Date() - Now();
+            let postTime = new Date().getTime();
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
-                let x = `<li class="work col-4 col-lg-2 col-sm-4">
+                let x = `<li class="work col-4 col-lg-2 col-sm-4" data-id=${allIndex} data-board-id=${postTime}>
                         <div class="work_pic">
                             <img src="data:image/png;${dataURL}" class="layer1">
                             <img src="data:image/png;${dataURLA1}" class="layer2">
@@ -1837,9 +1986,45 @@
         }
 
         $('.selectShape').click((e)=>{
-            shapeIndex = $(e.target).parent().index();
+            shapeIndex = $(e.target).parent().index()  //這裡
+            shapeIndex_str = $(e.target).parent().index().toString() 
             console.log(shapeIndex)
+            // console.log(shapeIndex_str)
         })
+
+        $('.selectColor').click((e) => {
+            colorIndex = shapeIndex_str + $(e.target).parent().index()
+            console.log(colorIndex)
+        })
+
+        $('.selectTire').click((e) => {
+            tireIndex = $(e.target).parent().index()
+            console.log("tireIndex: " + tireIndex)
+        })
+
+        let accIndexArr = [];
+        $('.selectAccessory').click((e) => {
+            accessoryIndex = $(e.target).parent().index()
+            
+            accIndexArr.push(accessoryIndex)
+            console.log(accIndexArr)
+            // console.log("accessoryIndex: " + accessoryIndex)
+
+            if(accIndexArr.length == 1){
+                allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0]
+                console.log("allIndex: " + allIndex)
+            }else if(accIndexArr.length == 2){
+                allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1]
+                console.log("allIndex: " + allIndex)
+            }else if(accIndexArr.length == 3){
+                allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1] + accIndexArr[2]
+                console.log("allIndex: " + allIndex)
+            }
+
+            
+        })
+
+        
 
         $('.selectWhite').click(function() { 
             let pic2 = new Image();
@@ -1983,7 +2168,7 @@
             pic3.src = './assets/img/pic/tire03.png'; //輪子3
             pic3.addEventListener('load', function() {
                 context.globalAlpha = 1;
-                context.drawImage(pic3, 0, -100);
+                context.drawImage(pic3, 0, -115);
             })
         })
 
@@ -2115,27 +2300,27 @@
 
             if(click6 % 2 == 1){
                 let pic4 = new Image();
-                // if (shapeIndex == 0) {
-                //     // console.log('shapeIndex = 0')
-                //     pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
-                //     pic4.addEventListener('load', function() {
-                //         contextA3.globalAlpha = 1;
-                //         contextA3.drawImage(pic4, 0, -100);
-                //     })
+                if (shapeIndex == 0) {
+                    // console.log('shapeIndex = 0')
+                    pic4.src = './assets/img/pic/accessory6.png'; //白尾翼
+                    pic4.addEventListener('load', function() {
+                        contextA3.globalAlpha = 1;
+                        contextA3.drawImage(pic4, 0, -100);
+                    })
                                      
-                //     $(this).removeClass('btn--outline')
-                //     $(this).text('取消此配件')//按了配件之後要變可以取消，字樣變取消配件
-                // }else{
-                //     // console.log('shapeIndex = 1 or 2')
-                //     $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display": "block"})
+                    $(this).removeClass('btn--outline')
+                    $(this).text('取消此配件')//按了配件之後要變可以取消，字樣變取消配件
+                }else{
+                    // console.log('shapeIndex = 1 or 2')
+                    $('.pleaseSelect').text('此車型不可搭配尾翼').css({"display": "block"})
 
-                //     $(this).addClass('btn--outline')
-                //     $('.nextStep').addClass('btn--disabled')
+                    $(this).addClass('btn--outline')
+                    $('.nextStep').addClass('btn--disabled')
 
-                //     setTimeout(function() {
-                //         $('.pleaseSelect').css({"display": "none"})
-                //     }, 1000);
-                // }
+                    setTimeout(function() {
+                        $('.pleaseSelect').css({"display": "none"})
+                    }, 1000);
+                }
             }else{
                 contextA3.clearRect(0, 50, 400, 150);
 

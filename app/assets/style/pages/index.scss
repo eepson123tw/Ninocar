@@ -169,9 +169,12 @@
             bottom: 250px;
             display: flex;
             justify-content: space-around;
-            width: 100%;
+            width: 200%;
             z-index: 50;
+            animation: carsRun 13s -10s linear infinite backwards;
         }
+
+
 
         &__car {
             position: absolute;
@@ -525,6 +528,7 @@
     }
 
     .car-shake {
+        cursor: pointer;
         animation: carShake .3s ease-in-out infinite;
     }
 
@@ -579,24 +583,16 @@
         }
     }
 
-    // @keyframes picShake {
-    //     0% {
-    //         transform: rotate(0deg);
-    //     }
+    @keyframes carsRun {
+        0% {
+            transform: translateX(0);
+        }
 
-    //     10% {
-    //         transform: rotate(5deg);
-    //     }
+        100% {
+            transform: translateX(-1920px);
+        }
 
-    //     20% {
-    //         transform: rotate(-5deg);
-    //     }
-
-    //     30% {
-    //         transform: rotate(0deg);
-    //     }
-
-    // }
+    }
 
     @keyframes girlShake {
         0% {

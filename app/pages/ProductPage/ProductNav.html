@@ -1,6 +1,63 @@
 <div class="row">
     <div class="col-3 d-lg-flex">
-        <div class="product__header">
+        <div class="item-menu">
+            <li class="item" id="all-items">
+                <a href="#all-items" class="menu-btn">全部商品</a>
+                <div class="smenu">
+                    <a href="#">轎車系</a>
+                    <a href="#">工程車系</a>
+                    <a href="#">RV休旅車系</a>
+                    <a href="#">計程車系</a>
+                    <a href="#">巴士系</a>
+                    <a href="#">警車系</a>
+                    <a href="#">消防系</a>
+                    <a href="#">救護系</a>
+                    <a href="#">Premium系</a>
+                </div>
+            </li>
+
+            <li class="item" id="year-items">
+                <a href="#year-items" class="menu-btn">年份分車</a>
+                <div class="smenu">
+                    <a href="#">1970</a>
+                    <a href="#">1990</a>
+                    <a href="#">2010</a>
+                </div>
+            </li>
+
+            <li class="item" id="new-items">
+                <a href="#new-items" class="menu-btn">最新商品</a>
+                <div class="smenu">
+                    <a href="#">Audi TT Coupe</a>
+                    <a href="#">Lamborghini Urus</a>
+                </div>
+            </li>
+
+            <li class="item" id="hot-items">
+                <a href="#hot-items" class="menu-btn">熱門商品</a>
+                <div class="smenu">
+                    <a href="#">Audi TT Coupe</a>
+                    <a href="#">Lamborghini Urus</a>
+                </div>
+            </li>
+
+            <li class="item" id="hightlight-items">
+                <a href="#hightlight-items" class="menu-btn">本月主打</a>
+                <div class="smenu">
+                    <a href="#">Audi TT Coupe</a>
+                    <a href="#">Lamborghini Urus</a>
+                </div>
+            </li>
+
+            <li class="item" id="point-items">
+                <a href="#point-items" class="menu-btn">點數限定</a>
+                <div class="smenu">
+                    <a href="#">Audi TT Coupe</a>
+                    <a href="#">Lamborghini Urus</a>
+                </div>
+            </li>
+        </div>
+        <!-- <div class="product__header">
             <div class="product__over">
                 <p class="product__header_body">全部商品</p>
                 <ul class="product__header_series">
@@ -25,7 +82,7 @@
                 <p class="product__header_body">本月主打</p>
                 <p class="product__header_body">點數限定</p>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <ul class="col-9" style="margin-top: 200px">
@@ -62,35 +119,52 @@
                         </a>
                     </li>
                     <!---->
-
-                    
                 </div>
             </ul>
             <!---- 頁籤 ---->
             <ul class="col-12">
                 <div class="row">
-                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center" >
-                        <div class="page_btn_nb" ></div>
+                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center">
+                        <div class="page_btn_nb"></div>
                     </div>
                     <div id="app">
                         <nav aria-label="...">
-                            <ul class=" d-flex pagination">
+                            <ul class="d-flex pagination">
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click.prevent="prev"><span
-                                        class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span></a>
+                                    <a
+                                        class="page-link"
+                                        href="#"
+                                        tabindex="-1"
+                                        aria-disabled="true"
+                                        @click.prevent="prev"
+                                        ><span
+                                            class="material-icons material-icons-md text-dark-primary text-left"
+                                            aria-hidden="true"
+                                            >chevron_left</span
+                                        ></a
+                                    >
                                 </li>
-                                <li class="page-item" :class="{active:currentPage === page - 1}" v-for="page in filterData.length"><a class="page-link" href="#"  @click.prevent="currentPage = (page - 1)">{{ page }}</a></li>
+                                <li
+                                    class="page-item"
+                                    :class="{active:currentPage === page - 1}"
+                                    v-for="page in filterData.length"
+                                >
+                                    <a class="page-link" href="#" @click.prevent="currentPage = (page - 1)"
+                                        >{{ page }}</a
+                                    >
+                                </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="#" @click.prevent="next"><span 
-                                        class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span></a>
+                                    <a class="page-link" href="#" @click.prevent="next"
+                                        ><span class="material-icons text-dark-primary text-left" aria-hidden="true"
+                                            >chevron_right</span
+                                        ></a
+                                    >
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </ul>
-            
         </div>
     </ul>
 </div>
-
