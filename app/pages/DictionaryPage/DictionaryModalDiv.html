@@ -20,12 +20,12 @@
                     {{targetProduct.series}}<span>{{targetProduct.seriesId}}</span>
                 </div>
             </header>
-            <section class="d-flex justify-content-between align-items-center flex-xs-wrap">
+            <section class="d-flex justify-content-between align-items-center flex-xs-wrap pb-5 pb-sm-0">
                 <div class="mb-xs-2 w-50 w-md-100">
                     <h2 class="h1 mb-1">{{targetProduct.name}}</h2>
                     <h3 class="h6 d-inbl mb-5">{{targetProduct.eName}} {{targetProduct.year}}<span
                             class="ml-5">尺寸：{{targetProduct.size}}</span></h3>
-                    <p class="h4 mb-5">{{targetProduct.description}}</p>
+                    <p class="display__description mb-5">{{targetProduct.description}}</p>
                     <span class="badge mr-2" :class="bgClass">{{seriesList[targetProduct.seriesIndex].name}}</span>
                     <span v-if="targetProduct.limitLabel=== '2' || targetProduct.limitLabel=== '4'"
                         :class="limitLabel.className">{{limitLabel.text}}</span>
