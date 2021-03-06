@@ -261,6 +261,10 @@
 
       this.$emit('open-window');
 
+      let newList = JSON.stringify(this.buyList);
+
+      localStorage.setItem('doneList', newList);
+
       localStorage.removeItem('cartsList');
 
 
