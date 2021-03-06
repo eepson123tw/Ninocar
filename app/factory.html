@@ -271,7 +271,7 @@
 
                     <div class="tipArea">
                         <div class="tipArea_left col-6 col-sm-4">
-                            <button class="btn btn--outline previousStep invisible" @click="toPreviousStep"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
+                            <button class="btn btn--outline previousStep invisible"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
                         </div>
                         <div class="tipArea_right col-6 col-sm-4">
                             <div class="tipPrice">
@@ -910,7 +910,7 @@
         const vm1 = new Vue({ //主體
             el: '#factory',
             data:{
-                countStep: 0,
+                // countStep: 0,
                 countR: 0,
                 countL: 0,
                 docW: $(document).width(),
@@ -1097,70 +1097,131 @@
                     //     }
                     // }
                 // },
-                toPreviousStep(){ //點上一步回上一步
-                    this.countStep -= 1
-                    // console.log("previousStep is clicked! countStep: " + this.countStep)
+                // toPreviousStep(){ //點上一步回上一步
+                    // this.countStep -= 1
+                    // // console.log("previousStep is clicked! countStep: " + this.countStep)
 
-                    if (this.countStep % 5 == 0) {
-                        $('.colorCards').css({"display": "none"})
-                        $('.shapeCards').css({"display": "flex"})
-                        $('.shapeCard').css({"display": "block"})
+                    // if (this.countStep % 5 == 1) {
+                    //     $('.colorCards').css({"display": "none"})
+                    //     $('.shapeCards').css({"display": "flex"})
+                    //     $('.shapeCard').css({"display": "block"})
                     
-                        $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+                    //     $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
                     
-                        $('.previousStep').addClass('invisible')
+                    //     $('.previousStep').addClass('invisible')
                     
-                        if (this.docW > 1003) {
-                                $('.bar-front').width(0)
-                        } else if (this.docW <= 1003) {
-                                $('.bar-front').width(0)
-                        }
-                    } else if (this.countStep % 5 == 1) {
-                        $('.tireCards').css({"display": "none"})
-                        $('.colorCards').css({"display": "flex"})
-                        $('.colorCard').css({"display": "block"})
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(0)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(0)
+                    //     }
+                    // } else if (this.countStep % 5 == 2) {
+                    //     $('.tireCards').css({"display": "none"})
+                    //     $('.colorCards').css({"display": "flex"})
+                    //     $('.colorCard').css({"display": "block"})
 
-                        $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
-                        $(this).removeClass('invisible')
+                    //     $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
+                    //     $(this).removeClass('invisible')
                     
-                        $('.nextStep').removeClass('btn--disabled')
+                    //     $('.nextStep').removeClass('btn--disabled')
                     
-                        if (this.docW > 1003) {
-                                $('.bar-front').width(240)
-                        } else if (this.docW <= 1003) {
-                                $('.bar-front').width(220)
-                        }
-                    } else if (this.countStep % 5 == 2) {
-                        $('.accessoryCards').css({"display": "none"})
-                        $('.tireCards').css({"display": "flex"})
-                        $('.tireCard').css({"display": "block"})
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(240)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(220)
+                    //     }
+                    // } else if (this.countStep % 5 == 3) {
+                    //     $('.accessoryCards').css({"display": "none"})
+                    //     $('.tireCards').css({"display": "flex"})
+                    //     $('.tireCard').css({"display": "block"})
                     
-                        $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
-                        $('.nextStep').removeClass('btn--disabled')
+                    //     $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
+                    //     $('.nextStep').removeClass('btn--disabled')
                     
-                        if (this.docW > 1003) {
-                                $('.bar-front').width(480)
-                        } else if (this.docW <= 1003) {
-                                $('.bar-front').width(440)
-                        }
-                    } else if (this.countStep % 5 == 3) {
-                        $('.giveName').css({"display": "none"})
-                        $('.selectArea').css({"display": "block"})
-                        $('.accessoryCards').css({"display": "flex"})
-                        $('.accessoryCard').css({"display": "block"})
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(480)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(440)
+                    //     }
+                    // } else if (this.countStep % 5 == 4) {
+                    //     $('.giveName').css({"display": "none"})
+                    //     $('.selectArea').css({"display": "block"})
+                    //     $('.accessoryCards').css({"display": "flex"})
+                    //     $('.accessoryCard').css({"display": "block"})
                     
-                        $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
-                        if (this.docW > 1003) {
-                                $('.bar-front').width(730)
-                        } else if (this.docW <= 1003) {
-                                $('.bar-front').width(660)
-                        }
-                    }else{//countStep % 5 == 4
-                        $('.giveName').css({"display": "none"})
-                        $('.selectArea').css({"display": "block"})
-                        $('.accessoryCards').css({"display": "block"})
-                    }
-                },
+                    //     $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(730)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(660)
+                    //     }
+                    // }else{//countStep % 5 == 4
+                    //     $('.giveName').css({"display": "none"})
+                    //     $('.selectArea').css({"display": "block"})
+                    //     $('.accessoryCards').css({"display": "block"})
+                    // }
+
+                        // 舊的
+                    // if (this.countStep % 5 == 0) {
+                    //     $('.colorCards').css({"display": "none"})
+                    //     $('.shapeCards').css({"display": "flex"})
+                    //     $('.shapeCard').css({"display": "block"})
+                    
+                    //     $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+                    
+                    //     $('.previousStep').addClass('invisible')
+                    
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(0)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(0)
+                    //     }
+                    // } else if (this.countStep % 5 == 1) {
+                    //     $('.tireCards').css({"display": "none"})
+                    //     $('.colorCards').css({"display": "flex"})
+                    //     $('.colorCard').css({"display": "block"})
+
+                    //     $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
+                    //     $(this).removeClass('invisible')
+                    
+                    //     $('.nextStep').removeClass('btn--disabled')
+                    
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(240)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(220)
+                    //     }
+                    // } else if (this.countStep % 5 == 2) {
+                    //     $('.accessoryCards').css({"display": "none"})
+                    //     $('.tireCards').css({"display": "flex"})
+                    //     $('.tireCard').css({"display": "block"})
+                    
+                    //     $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
+                    //     $('.nextStep').removeClass('btn--disabled')
+                    
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(480)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(440)
+                    //     }
+                    // } else if (this.countStep % 5 == 3) {
+                    //     $('.giveName').css({"display": "none"})
+                    //     $('.selectArea').css({"display": "block"})
+                    //     $('.accessoryCards').css({"display": "flex"})
+                    //     $('.accessoryCard').css({"display": "block"})
+                    
+                    //     $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
+                    //     if (this.docW > 1003) {
+                    //             $('.bar-front').width(730)
+                    //     } else if (this.docW <= 1003) {
+                    //             $('.bar-front').width(660)
+                    //     }
+                    // }else{//countStep % 5 == 4
+                    //     $('.giveName').css({"display": "none"})
+                    //     $('.selectArea').css({"display": "block"})
+                    //     $('.accessoryCards').css({"display": "block"})
+                    // }
+                // },
                 // getShapeIndex(e){
                     //抓取車型的index(用來判別顏色圖要貼甚麼)
                     // this.shapeIndex = $(e.target).parent().index();
@@ -1346,18 +1407,19 @@
         let countStep = 0;
         let docW = $(document).width();
 
-        $('.nextStep').click(() => { //這裡
-            console.log("nextStep is clicked! countStep: "+ countStep)
-            console.log(docW)
+        //到下一步
+        $('.nextStep').click(() => {
+            // console.log("nextStep is clicked! countStep: "+ countStep)
+            // console.log(docW)
         
-            if ($('.nextStep').hasClass('btn--disabled')) {
+            if ($('.nextStep').hasClass('btn--disabled')) { //如果下一步還是灰色的，提示出現，1秒後關掉提示
             
                 $('.pleaseSelect').css({"display": "block"})
             
                 setTimeout(() => {
                     $('.pleaseSelect').css({"display": "none"})
                 }, 1000);
-            } else {
+            } else {  //如果下一步可以按了
                 $('.previousStep').removeClass('invisible')
             
                 countStep += 1;
@@ -1410,9 +1472,7 @@
                 
                 } else if (countStep % 5  == 3) {
                     postTime = new Date().getTime();
-                    console.log(postTime)
-
-
+                    // console.log(postTime)
 
                     if(shapeIndex != 0){
                         console.log('讓尾翼不能選')
@@ -1421,7 +1481,7 @@
                         $('.selectA6').css({"pointer-events":"none"})
                     }
                 
-                    console.log(countStep)
+                    // console.log(countStep)
                 
                     $('.nextStep').addClass('btn--disabled')
                 
@@ -1496,8 +1556,6 @@
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
-            // postTime = new Date().getTime();
-            // console.log(postTime)
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
@@ -1625,6 +1683,71 @@
         })
 
 
+        //回上一步
+        $('.previousStep').click(() => { //移到這裡
+            countStep -= 1
+            // console.log("previousStep is clicked! countStep: " + this.countStep
+
+            if (countStep % 5 == 0) { //console.log(sountStep)
+                console.log('顏色消失，車型出現')
+                $('.colorCards').css({"display": "none"})
+                $('.shapeCards').css({"display": "flex"})
+                $('.shapeCard').css({"display": "block"})
+            
+                $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
+            
+                $('.previousStep').addClass('invisible')
+            
+                if (docW > 1003) {
+                        $('.bar-front').width(0)
+                } else if (docW <= 1003) {
+                        $('.bar-front').width(0)
+                }
+            } else if (countStep % 5 == 1) {
+                // console.log('輪子消失，顏色出現')
+                $('.tireCards').css({"display": "none"})
+                $('.colorCards').css({"display": "flex"})
+                $('.colorCard').css({"display": "block"})
+                $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
+                $(this).removeClass('invisible')
+            
+                $('.nextStep').removeClass('btn--disabled')
+            
+                if (docW > 1003) {
+                        $('.bar-front').width(240)
+                } else if (docW <= 1003) {
+                        $('.bar-front').width(220)
+                }
+            } else if (countStep % 5 == 2) {
+                // console.log('配件消失，輪子出現')
+                $('.accessoryCards').css({"display": "none"})
+                $('.tireCards').css({"display": "flex"})
+                $('.tireCard').css({"display": "block"})
+            
+                $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
+                $('.nextStep').removeClass('btn--disabled')
+            
+                if (docW > 1003) {
+                        $('.bar-front').width(480)
+                } else if (docW <= 1003) {
+                        $('.bar-front').width(440)
+                }
+            } else if (countStep % 5 == 3) {
+                // console.log('giveName消失，配件出現')
+                $('.giveName').css({"display": "none"})
+                $('.selectArea').css({"display": "block"})
+                $('.accessoryCards').css({"display": "flex"})
+                $('.accessoryCard').css({"display": "block"})
+            
+                $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
+                if (docW > 1003) {
+                        $('.bar-front').width(730)
+                } else if (docW <= 1003) {
+                        $('.bar-front').width(660)
+                }
+            }
+        })
+
         //完成資料輸入後按鈕自動變able、移除提示
         $('.giveName').change(function() {
             let typeWorkNameL = $('.typeWorkName').val().length;
@@ -1640,7 +1763,7 @@
         })
 
         //隨機取名
-        $('.randomName').click(function() {
+        $('.randomName').click(() => {
             let nameArr1 = ['地瓜', '蓮霧', '芋圓', '天竺鼠', '賓士貓', '長毛貓', '白襪貓', '短腿柯基', '犀牛', '脖子長長頸鹿']
             let nameArr2 = ['轎車', '跑車', '小客車', '巴士', '休旅車', '箱型車', '敞篷車', '公車', '警車', '消防車']
 
