@@ -266,7 +266,7 @@
           return this.myProductIdList.indexOf(productId) >= 0
         },
         isMemberHasSeriesPin(productSeriesName) {
-          if (!this.memberId) {
+          if (this.memberSeriesGroupCountList.length === 0) {
             return false
           }
           const series = this.memberSeriesGroupCountList.find(series => series.name === productSeriesName);

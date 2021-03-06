@@ -176,7 +176,7 @@
                             this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
                                 this.isModalShow = false;
-                            }, 4000)
+                            }, 3000)
                         } else {
                             this.modalState.isError = res.data;
                         }
@@ -235,25 +235,39 @@
                 axios.post('./assets/php/signUp.php', {
                         "account": this.signUpInfo.account,
                         "password": this.signUpInfo.password
-                    }, ).then(res => {
+                    }, )
+                    .then(res => {
                         console.log(res)
                         this.modalState.uiState = '';
-                        // if (Array.isArray(res.data)) {
-                        this.modalState.content = 'success-sign-up-content';
-                        this.handleLoginKeep(res.data[0]['member_id']);
-                        setTimeout(() => {
-                            this.isModalShow = false;
-                        }, 4000)
-                        // } else {
-                        //     this.modalState.isError = res.data;
-                        //     console.log(res.data)
-                        // }
+                        if (Array.isArray(res.data)) {
+                            this.modalState.content = 'success-sign-up-content';
+                            this.handleLoginKeep(res.data[0]['member_id']);
+                            setTimeout(() => {
+                                this.isModalShow = false;
+                            }, 3000)
+                            this.handleSendSuccessSignUpMail(this.signUpInfo.account);
+                        } else {
+                            this.modalState.isError = res.data;
+                            throw new Error(res.data);
+                        }
                     })
                     .catch(error => {
                         console.log(error)
                     });
+            },
+            handleSendSuccessSignUpMail(account) { //問老師寫在上面? //能讀data值嗎
+                axios.post(
+                    `./assets/php/sendSuccessSignUpMail.php`, {
+                        "account": account,
+                    }
+                ).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err);
+                })
 
             },
+
         }
         // handleLogOutModalShow() {
         //     this.isMenuShow = false;
