@@ -1,10 +1,9 @@
   <!-- mountain -->
   <section class="mountain mb-30">
-      <div class="container swiper-container" id="swiperContainerMountain">
+      <div class="mountain__container container swiper-container" id="swiperContainerMountain">
           <ul class="swiper-wrapper">
-              <li v-for="(product,index) in productList" class="swiper-slide bg-white py-15 py-xs-5">
+              <li v-for="(product,index) in showProductList" class="swiper-slide bg-white py-10 py-xs-5">
                   <div class="display">
-
                       <header class="display__cover">
                           <h2 class="display__title">{{product.eName}}</h2>
                           <img :src="product.displayImgURL" class="display__img">
@@ -30,7 +29,8 @@
                                   <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
                                   <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
                               </svg>
-                              <pin-svg :disabled="!memberHasPin" :series="product.series"></pin-svg>
+                              <pin-svg :disabled="!isMemberHasSeriesPin(product.series)" :series="product.series">
+                              </pin-svg>
                           </div>
                       </section>
 

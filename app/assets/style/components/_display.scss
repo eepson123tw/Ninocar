@@ -112,3 +112,9 @@
 
 
 }
+
+.index .display__title {
+    @include rwd-md {
+        min-height: 300px;
+    }
+}

@@ -159,6 +159,10 @@
             margin-top: -160px;
         }
 
+        &__container {
+            max-width: 1200px
+        }
+
         &__road {
             position: absolute;
             bottom: -20px;
