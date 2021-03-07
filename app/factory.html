@@ -2945,29 +2945,17 @@
         })
         // --------------------------------------AJAX-------------------------------------
         $('.nextStep').click((e) => {
+            let workNameV = $('.typeWorkName').attr('value')
             if($(e.target).hasClass('finish') && countStep % 5 == 0){
                 $.ajax({            
 		    		method: "POST",
 		    		url: "./assets/php/getCustomizeProduct.php",  //向後台請求的資料，用的是PHP
-		    		data:{ 
-		    				// Name:str  
-		    		},            
-		    		dataType: "JSON", //(回傳的)資料格式
-		    		success: function (response) {  //裡面寫成功時返回的資料
-		    				//更新html內容(專題用)
-		    				//此線以下是方法1
-		    				// let img = document.createElement("img")
-		    				// img.src= response.src;
-		    				// document.getElementById("result").appendChild(img);
-
-		    				//此線以下是方法2(專題用)
-		    				//  let result =  `<h1>${response.title}</h1>`;
-		    				//  result +=  `<h2>${response.price}</h2>`;
-		    				//  result +=  `<img src="${response.src}">`;
-		    				//  document.getElementById("result").innerHTML = result;
-
-		    				//  此線以下是原版
-		    				// document.getElementById("result").innerHTML = response;
+		    		data:{
+                        "workName":workNameV,
+                        // "userNickName":userNickName
+                    },            
+		    		success: function (result) {
+                        console.log(result)
                         alert('OK')
 		    		},
 		    		error: function(exception) {

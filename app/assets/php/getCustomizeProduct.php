@@ -1,25 +1,21 @@
 <?php
-  include("./Conn.php");//建立資料庫連線
-  $workName = $_POST['workName'];
-  $userNickName = $_POST['userNickName'];
-  $inspiration = $_POST['inspiration'];
-  $workPrice = $_POST['workPrice'];
-  $workPostTime = $_POST['workPostTime'];
-  $allIndex = $_POST['allIndex'];
-
+  include("./Lib/Conn.php");//建立資料庫連線
   $Util = new UtilClass();
+  // $data = $_POST;
+
+  //定義裝資料的陣列
+  // $dataArr = array(
+  //   ':workName' => $data['workName'],
+  // );
+
+  $workName = $_POST['workName'];
 
 
-  if($workName){
+  //建立SQL，將試著將資料寫入資料庫
+  $sql = 'INSERT INTO customize(product_id, board_id, member_id, product_name, product_img, product_price, product_des, product_type) VALUES (1, 9999, 1, :workName, "./assets/img/pic/model.png", 350, "好餓", 0)';
+  $statement=$Util->getPDO()->prepare($sql);//目前只輸入一項資料($workName)
+  $statement->execute();
 
-    //圖片位置先寫死的，需再改
-    // $sql = 'INSERT INTO customize(product_id, board_id, member_id, product_name, product_img, product_price, product_des, product_type) VALUES ($allIndex, $workPostTime, 111, $workName, "./assets/img/pic/model.png", $workPrice, $inspiration, 0)';
-    $sql = 'INSERT INTO customize(product_id, board_id, member_id, product_name, product_img, product_price, product_des, product_type) VALUES (999, 987654321, 111, "sweet potato", "./assets/img/pic/model.png", 350, "好餓", 0)';
-
-    // $statement = $pdo->prepare($sql);
-    $statement=$Util->getPDO()->prepare($sql);//目前只輸入一項資料($workName)
-    $statement->execute();
-
-    // header('Location:./topic.php'); //跳轉到哪
-  }
 ?>
+
+
