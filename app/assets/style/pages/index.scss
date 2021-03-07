@@ -650,7 +650,7 @@
 
 .grid-container {
     display: grid;
-    outline: 1px solid #f00;
+    // outline: 1px solid #f00;
     grid-gap: 40px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -669,43 +669,44 @@
     background-size: 400%;
 }
 
+
 .grid-3-4-1-2 {
     @include grid(3, 4, 1, 2)
 }
 
 .grid-1-3-1-3 {
-    // en03
+    // en
     @include grid(1, 3, 1, 3);
-    background-position: 0 40%;
+    background-position: 0 42.75%;
     animation: picPlay1313 10s infinite;
 }
 
 @keyframes picPlay1313 {
     0% {
-        background-position: 0 40%;
+        background-position: 0 42.75%;
     }
 
     20% {
-        background-position: 33.3% 40%;
+        background-position: 0% 28.5%;
     }
 
     40% {
-        background-position: 33.3% 60%;
+        background-position: 33.3% 28.5%;
     }
 
     60% {
-        background-position: 0% 60%;
+        background-position: 33.3% 42.75%;
     }
 
     100% {
-        background-position: 0 40%;
+        background-position: 0 42.75%;
     }
 }
 
 .grid-4-7-1-4 {
-    //bs03
+    //bs
     @include grid(4, 7, 1, 4);
-    background-position: 0 100%;
+    background-position: 33.3% 0;
     animation: picPlay4714 10s infinite;
 }
 
@@ -716,11 +717,11 @@
     }
 
     20% {
-        background-position: 33.3% 20%;
+        background-position: 33.3% 14.5%;
     }
 
     40% {
-        background-position: 0% 20%;
+        background-position: 0% 14.5%;
     }
 
     60% {
@@ -734,47 +735,43 @@
 
 }
 
-.grid-2-4-3-5 {
-    // ta06
-    @include grid(2, 4, 3, 5);
-    background-position: 100% 60%;
+.grid-5-7-4-6 {
+    // ta
+    @include grid(5, 7, 4, 6);
+    background-position: 100% 42.8%;
     animation: picPlay2435 10s infinite;
 }
 
 @keyframes picPlay2435 {
     0% {
-        background-position: 100% 60%;
+        background-position: 100% 42.8%;
     }
 
     20% {
-        background-position: 66.6% 60%;
+        background-position: 66.6% 42.8%;
     }
 
     40% {
-        background-position: 66.6% 40%;
+        background-position: 66.6% 28%;
     }
 
     60% {
-        background-position: 100% 40%;
+        background-position: 100% 28%;
     }
 
     100% {
-        background-position: 100% 60%;
+        background-position: 100% 42.8%;
     }
 }
 
-.grid-1-2-3-4 {
-    @include grid(1, 2, 3, 4)
+
+
+
+.grid-1-4-3-5 {
+    //text
+    @include grid(1, 4, 3, 5);
+
 }
-
-.grid-1-2-4-5 {
-    //TA06
-    @include grid(1, 2, 4, 5);
-
-}
-
-
-
 
 
 .grid-4-5-4-5 {
@@ -786,7 +783,7 @@
 }
 
 .grid-1-4-5-8 {
-    //pm03
+    //pm
     @include grid(1, 4, 5, 8);
     background-position: 66.6% 0;
     animation: picPlay1458 10s infinite;
@@ -798,11 +795,11 @@
     }
 
     20% {
-        background-position: 66.6% 20%;
+        background-position: 66.6% 14.5%;
     }
 
     40% {
-        background-position: 100% 20%;
+        background-position: 100% 14.5%;
     }
 
     60% {
@@ -818,40 +815,40 @@
     @include grid(6, 7, 5, 6)
 }
 
-.grid-4-5-6-7 {
-    @include grid(4, 5, 6, 7)
+.grid-6-7-6-7 {
+    @include grid(6, 7, 6, 7)
 }
 
-.grid-4-5-7-8 {
-    @include grid(4, 5, 7, 8)
+.grid-6-7-7-8 {
+    @include grid(6, 7, 7, 8)
 }
 
-.grid-5-7-6-8 {
-    //PA15
-    @include grid(5, 7, 6, 8);
-    background-position: 0 80%;
+.grid-4-6-6-8 {
+    //PA
+    @include grid(4, 6, 6, 8);
+    background-position: 0 57%;
     animation: picPlay5768 10s infinite;
 }
 
 @keyframes picPlay5768 {
     0% {
-        background-position: 0 80%;
+        background-position: 0 57%;
     }
 
     20% {
-        background-position: 33.3% 80%;
+        background-position: 33.3% 57%;
     }
 
     40% {
-        background-position: 33.3% 100%;
+        background-position: 33.3% 71.4%;
     }
 
     60% {
-        background-position: 0% 100%;
+        background-position: 0% 71.4%;
     }
 
     100% {
-        background-position: 0 80%;
+        background-position: 0 57%;
     }
 }
 
@@ -859,53 +856,103 @@
     @include grid(1, 2, 8, 9)
 }
 
-.grid-1-2-9-10 {
-    @include grid(1, 2, 9, 10)
+.grid-3-4-8-9 {
+    @include grid(3, 4, 8, 9)
 }
 
-.grid-2-4-8-10 {
-    //EM06
-    @include grid(2, 4, 8, 10);
-    background-position: 33.3% 80%;
+.grid-1-3-8-10 {
+    //em
+    @include grid(1, 3, 8, 10);
+    background-position: 100% 71.4%;
     animation: picPlay24810 10s infinite;
 }
 
 @keyframes picPlay24810 {
 
     0% {
-        background-position: 33.3% 80%;
+        background-position: 100% 71.4%;
     }
 
     20% {
-        background-position: 33.3% 100%;
+        background-position: 100% 57%;
     }
 
     40% {
-        background-position: 0% 100%;
+        background-position: 66.6% 57%;
     }
 
     60% {
-        background-position: 0 80%;
+        background-position: 66.6% 71.4%;
     }
 
     100% {
-        background-position: 33.3% 80%;
+        background-position: 100% 71.4%;
+    }
+}
+
+.grid-3-5-8-10 {
+    //rv
+    @include grid(3, 5, 8, 10);
+    background-position: 33.3% 100%;
+    animation: picPlay35810 10s infinite;
+}
+
+@keyframes picPlay35810 {
+
+    0% {
+        background-position: 33.3% 100%;
     }
 
+    20% {
+        background-position: 0% 100%;
+    }
 
+    40% {
+        background-position: 0% 85.7%;
+    }
+
+    60% {
+        background-position: 33.3% 85.7%;
+    }
+
+    100% {
+        background-position: 33.3% 100%;
+    }
 }
 
-.grid-4-5-8-9 {
-    @include grid(4, 5, 8, 9)
+.grid-5-7-8-10 {
+    //ca
+    @include grid(5, 7, 8, 10);
+    background-position: 66.6% 100%;
+    animation: picPlay57810 10s infinite;
 }
 
-.grid-5-6-8-9 {
-    @include grid(5, 6, 8, 9)
+@keyframes picPlay57810 {
+
+    0% {
+        background-position: 66.6% 100%;
+    }
+
+    20% {
+        background-position: 66.6% 85.7%;
+    }
+
+    40% {
+        background-position: 100% 85.7%;
+    }
+
+    60% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 66.6% 100%;
+    }
 }
 
-.grid-6-7-8-9 {
-    @include grid(6, 7, 8, 9)
-}
+
+
+
 
 .product {
     &__car {
@@ -913,6 +960,13 @@
         left: -1000px;
 
         z-index: 20;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
     }
 
     &__road--first {
@@ -953,7 +1007,7 @@
 
     &__road--end {
         position: absolute;
-        bottom: 0;
+        bottom: 20px;
         left: 10%;
 
         @include rwd-lg {
