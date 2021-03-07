@@ -61,10 +61,6 @@
       </template>
 
     </modal-custom-made>
-
-
-
-
     <modal-custom-made v-show="noLogin" @closemodal="closeHandler">
       <template #header>
         <!-- 傳入文字 -->
@@ -91,6 +87,8 @@
       </template> -->
 
     </modal-custom-made>
+
+
 
     @@include('./components/Footer.html')
 
@@ -192,20 +190,9 @@
           // data: params,
         }).then((res) => {
           console.log(res.data)
-
-
         }).catch((error) => {
           console.log(error)
-
         })
-
-
-
-
-
-
-
-
 
       },
     });
