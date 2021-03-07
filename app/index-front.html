@@ -27,8 +27,8 @@
         <vue-header></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
-            @@include('./pages/HomePage/HomeBillBoardSection.html')
             @@include('./pages/HomePage/HomeProductSection.html')
+            @@include('./pages/HomePage/HomeBillBoardSection.html')
             <!-- @@include('./pages/HomePage/HomeHighWaySection.html') -->
             @@include('./pages/HomePage/HomeMountainSection.html')
             @@include('./pages/HomePage/HomeFactorySection.html')
@@ -77,7 +77,6 @@
             watch: {
                 productList(list) {
                     if (list && list.length) {
-                        console.log('a')
                         this.handleInitMountainSwiper();
                     }
                 },
@@ -158,9 +157,55 @@
                     })
                     .addTo(controller);
 
+
+                // ----------------------product
+                gsap.registerPlugin(MotionPathPlugin);
+
+                let mvProduct = gsap.timeline();
+                mvProduct.to('.product__car', 3.5, {
+                    motionPath: {
+                        path: "#productFirstPath",
+                        align: "#productFirstPath",
+                        alignOrigin: [0.5, .5],
+                        autoRotate: -90,
+                        transformOrigin: "50% 50%",
+                    },
+                    ease: Linear.easeNone,
+
+                }).to('.product__car', 2, {
+                    motionPath: {
+                        path: "#productSecondPath",
+                        align: "#productSecondPath",
+                        alignOrigin: [0.5, .5],
+                        autoRotate: -90,
+                        transformOrigin: "50% 50%",
+                    },
+                    ease: Linear.easeNone,
+                    delay: .5,
+                }).to('.product__car', 6, {
+                    motionPath: {
+                        path: "#productEndPath",
+                        align: "#productEndPath",
+                        alignOrigin: [0.5, .5],
+                        autoRotate: -90,
+                        transformOrigin: "50% 50%",
+                    },
+                    ease: Linear.easeNone,
+                    delay: .5,
+                })
+                new ScrollMagic.Scene({
+                        triggerElement: '#triggerProduct',
+                        // reverse: false
+                    }).setTween(mvProduct)
+                    .addIndicators({
+                        name: 'keyProduct',
+                        colorStart: '#f20'
+
+                    })
+                    .addTo(controller)
                 // ----------------------billboard
                 let mvBillboard = gsap.to('.billboard__car', 3, {
-                    x: screenX + 250,
+                    x: -(screenX + 250),
                     ease: Linear.easeNone,
                 });
 
@@ -218,7 +263,8 @@
 
 
                 // ----------------------factory car
-                gsap.registerPlugin(MotionPathPlugin);
+
+
 
                 let mvFactory = gsap.timeline();
                 mvFactory.to('.factory__door', 2, {
