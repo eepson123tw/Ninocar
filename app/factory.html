@@ -2093,6 +2093,7 @@
             $('.bar-front').width(0) //將進度條歸0
             $('.circle').not(":first").removeClass('circle--active') //除了第一個circle以外其他都變無色
             $('.circle').not(":first").removeClass('circle--able') //除了第一個circle以外其他都變不能點
+            countStep = 0;
         }
 
         function buildCanvas(e) {
@@ -2942,9 +2943,29 @@
                     }
             }
         })
+        // --------------------------------------AJAX-------------------------------------
+        $('.nextStep').click((e) => {
+            let workNameV = $('.typeWorkName').attr('value')
+            if($(e.target).hasClass('finish') && countStep % 5 == 0){
+                $.ajax({            
+		    		method: "POST",
+		    		url: "./assets/php/getCustomizeProduct.php",  //向後台請求的資料，用的是PHP
+		    		data:{
+                        "workName":workNameV,
+                        // "userNickName":userNickName
+                    },            
+		    		success: function (result) {
+                        console.log(result)
+                        alert('OK')
+		    		},
+		    		error: function(exception) {
+		    				alert("發生錯誤: " + exception.status);
+		    		}
+		    	});
+            }
+            // function doQuery(str){
 
-        $('.addToCart').click(() => {
-            console.log('加到購物車')
+		    // }
         })
     </script>
 </body>
