@@ -187,7 +187,7 @@
         },
         phone: {
           name: '電話',
-          text: null,
+          text: '',
           remind: '',
           inputClass: '',
         },
@@ -237,6 +237,7 @@
           isShow: false,
         },
         addressShow: false,
+        previewImage: null,
       },
       methods: {
         // 若有要使用記得加上這個方法控制開關
@@ -250,6 +251,43 @@
         closeHandler() {
           this.isModalShow = false;
         },
+        uploadImage(e) {
+
+          console.log(event.target.files[0]);
+
+
+          const image = e.target.files[0];
+          const reader = new FileReader();
+          reader.readAsDataURL(image);
+          reader.onload = e => {
+            this.previewImage = e.target.result;
+            console.log(this.previewImage);
+            let img = document.querySelector('#img');
+
+            img.style.maxWidth = `300px`;
+            img.style.maxHeight = `300px`;
+            img.style.margin = `0 auto`;
+            img.style.borderRadius = `20px`;
+            img.style.marginBottom = `20px`;
+
+          };
+
+          // readFile.readAsDataURL(file); //必定發生load事件。
+
+          // readFile.addEventListener('load', function() {
+
+
+          //   let img = document.querySelector('.js__img');
+
+          //   img.src = readFile.result;
+          //   //設定寬高限制
+          //   img.style.maxWidth = `160px`;
+          //   img.style.maxHeight = `160px`;
+
+          // });
+
+        },
+
         handleInput() {
           const isAllCheck = this.handleRequiredCheck();
           if (isAllCheck) {

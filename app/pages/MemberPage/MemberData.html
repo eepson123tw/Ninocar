@@ -62,7 +62,6 @@
               disabled
             >月</option>
             <option v-for="(num,index) of 12">{{num}}</option>
-
           </select>
           <select id="day" class="member__input member__input--small" v-model="userDetail.userDate">
             <option
@@ -76,9 +75,13 @@
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <li class="member__circle"></li>
+        <li v-show="previewImage ==null" class="member__circle"></li>
+        <img id="img" :src="previewImage">
         <li> <label class="member__input--prettier">
-            <input type="file" />
+            <input
+              type="file"
+              @change="uploadImage"
+            />
             <span>選擇圖片</span>
           </label></li>
         <li>限制大小 300X300.jpg</li>
@@ -95,30 +98,31 @@
   <div class="row  member__info py-10 mb-5">
     <div class="member__baseData col-6 col-lg-6  order-lg-2">
       <ul>
-        <li class="member__baseData--list">
+        <li class="member__baseData--center   pl-5 pl-lg-1">
           <p>使用者編號 : <span class="member__text--small">NinoMember {{memberId}}</span></p>
         </li>
-        <li class="member__baseData--list">
+        <li class="member__baseData--center">
           <label for="accountName" class=" member__text member__text--right">帳號名稱: </label>
           <span>{{userData.name}}</span>
-          <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
+          <br>
+          <span class="member__text member__text--mid">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
         </li>
 
-        <li class="member__baseData--list">
+        <li class="member__baseData--center">
           <label for="email" class=" member__text member__text--right">電子郵件 :</label>
           <span>{{userData.account}}</span>
         </li>
-        <li class="member__baseData--list">
+        <li class="member__baseData--center">
           <label for="phone" class=" member__text member__text--right">電話號碼 : </label>
           <span>0{{userData.phone}}</span>
         </li>
-        <li class="member__baseData--list">
+        <li class="member__baseData--center">
           <label for="sex" class=" member__text member__text--right">性別 :</label>
           <span v-if="userData.gender==1">男</span>
           <span v-if="userData.gender==2">女</span>
           </select>
         </li>
-        <li class="member__baseData--list">
+        <li class="member__baseData--center">
           <label for="year" class=" member__text member__text--right">生日 :</label>
           <span>{{userData.birthday}}</span>
         </li>
