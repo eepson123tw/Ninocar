@@ -275,6 +275,12 @@
         this.payment = 3
       };
 
+      let productArray = [];
+      for (let num in this.buyList) {
+        productArray.push(parseInt(this.buyList[num].productId));
+      }
+
+
 
       const params = new URLSearchParams()
       params.append('ID', this.memberId)
@@ -283,6 +289,7 @@
       params.append('ORDER_POINTS', this.totalPointCost)
       params.append('ORDER_GAIN', this.getPoint)
       params.append('PAY_TYPE', this.payment)
+      params.append('PRODUCT_ARRAY', JSON.stringify(productArray))
 
       axios({
         method: 'post',
@@ -299,9 +306,6 @@
         console.log(error)
 
       })
-
-
-
 
 
 
