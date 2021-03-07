@@ -192,10 +192,12 @@
                     },
                     ease: Linear.easeNone,
                     delay: .5,
+                }).to('.product__car', 0, {
+                    opacity: 0,
                 })
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerProduct',
-                        // reverse: false
+                        reverse: false
                     }).setTween(mvProduct)
                     .addIndicators({
                         name: 'keyProduct',

@@ -78,8 +78,8 @@
         }
 
         &__text {
-            position: relative;
             top: -300px;
+            position: relative;
         }
     }
 
@@ -293,13 +293,14 @@
         animation: messageXShake 1s ease-in infinite;
 
         &--down {
+            top: -60px;
+            right: 0;
             animation: messageYShake 1s ease-in infinite;
         }
 
         &--stop {
-            position: absolute;
             right: -120px;
-            bottom: 0;
+            top: 120px;
             animation: none;
             opacity: 0;
         }
@@ -325,6 +326,7 @@
 
         &__svg--down,
         &__svg--stop {
+
             transform: rotate(-90deg);
         }
 
@@ -664,7 +666,7 @@
     grid-column-gap: 40px;
     grid-row-gap: 33px;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 9fr);
+    grid-template-rows: repeat(9, 1fr);
 
     @include rwd-xl {
         grid-column-gap: 28px;
@@ -674,6 +676,13 @@
     @include rwd-lg {
         grid-column-gap: 16px;
         grid-row-gap: 16px;
+    }
+
+    @include rwd-sm {
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
     }
 }
 
@@ -710,7 +719,23 @@
 
 
 .grid-3-4-1-2 {
-    @include grid(3, 4, 1, 2)
+    //em03
+    @include grid(3, 4, 1, 2);
+    background-position: 66.6% 71.4%;
+
+    @include rwd-sm {
+        @include grid(1, 2, 1, 2);
+    }
+}
+
+.grid-3-4-2-3 {
+    // pa16
+    @include grid(3, 4, 2, 3);
+    background-position: 33.3% 57%;
+
+    @include rwd-sm {
+        @include grid(2, 3, 1, 2);
+    }
 }
 
 .grid-1-3-1-3 {
@@ -725,6 +750,10 @@
 
     @include rwd-md {
         @include grid(1, 4, 1, 4);
+    }
+
+    @include rwd-sm {
+        @include grid(1, 2, 1, 2);
     }
 
 }
@@ -759,6 +788,10 @@
 
     &:before {
         content: '公車系';
+    }
+
+    @include rwd-sm {
+        @include grid(2, 3, 1, 2);
     }
 }
 
@@ -800,6 +833,10 @@
     @include rwd-md {
         @include grid(4, 7, 3, 5);
     }
+
+    @include rwd-sm {
+        @include grid(2, 3, 3, 4);
+    }
 }
 
 @keyframes picPlay2435 {
@@ -831,15 +868,28 @@
     //text
     @include grid(1, 4, 3, 5);
 
+    @include rwd-sm {
+        @include grid(1, 3, 2, 3);
+    }
 }
 
 
 .grid-4-5-4-5 {
-    @include grid(4, 5, 4, 5)
+    //em06
+    @include grid(4, 5, 4, 5);
+    background-position: 100% 71.4%;
+
+    @include rwd-sm {
+        @include grid(1, 2, 5, 6);
+    }
 }
 
-.grid-6-7-4-5 {
-    @include grid(6, 7, 4, 5)
+.grid-4-5-5-6 {
+    // bs06
+    @include grid(4, 5, 5, 6);
+    background-position: 0% 14.5%;
+
+
 }
 
 .grid-1-4-5-8 {
@@ -850,6 +900,10 @@
 
     &:before {
         content: 'PREMIUM系';
+    }
+
+    @include rwd-sm {
+        @include grid(1, 2, 3, 4);
     }
 }
 
@@ -875,16 +929,22 @@
     }
 }
 
-.grid-6-7-5-6 {
-    @include grid(6, 7, 5, 6)
-}
+
 
 .grid-6-7-6-7 {
-    @include grid(6, 7, 6, 7)
+    //pm05
+    @include grid(6, 7, 6, 7);
+    background-position: 100% 0%;
+
+
 }
 
 .grid-6-7-7-8 {
-    @include grid(6, 7, 7, 8)
+    //en06
+    @include grid(6, 7, 7, 8);
+    background-position: 0% 42.8%;
+
+
 }
 
 .grid-4-6-6-8 {
@@ -899,6 +959,10 @@
 
     @include rwd-md {
         @include grid(4, 7, 5, 8);
+    }
+
+    @include rwd-sm {
+        @include grid(1, 2, 4, 5);
     }
 }
 
@@ -924,14 +988,6 @@
     }
 }
 
-.grid-1-2-8-9 {
-    @include grid(1, 2, 8, 9)
-}
-
-.grid-3-4-8-9 {
-    @include grid(3, 4, 8, 9)
-}
-
 .grid-1-3-8-10 {
     //em
     @include grid(1, 3, 8, 10);
@@ -944,6 +1000,10 @@
 
     @include rwd-md {
         @include grid(1, 3, 7, 9);
+    }
+
+    @include rwd-sm {
+        @include grid(2, 3, 4, 5);
     }
 }
 
@@ -983,6 +1043,10 @@
     @include rwd-md {
         @include grid(3, 5, 7, 9);
     }
+
+    @include rwd-sm {
+        @include grid(1, 2, 5, 6);
+    }
 }
 
 @keyframes picPlay35810 {
@@ -1020,6 +1084,10 @@
 
     @include rwd-md {
         @include grid(5, 7, 7, 9);
+    }
+
+    @include rwd-sm {
+        @include grid(2, 3, 5, 6);
     }
 }
 
@@ -1072,14 +1140,13 @@
         right: 10%;
 
         @include rwd-xl {
-            right: -40%;
+            right: -500px;
             height: 120px;
         }
 
 
         @include rwd-md {
             height: 80px;
-            right: -100%;
         }
     }
 
@@ -1095,7 +1162,8 @@
 
 
         @include rwd-xl {
-            display: none;
+            opacity: 0;
+            right: -2000px;
         }
     }
 
@@ -1105,7 +1173,9 @@
         left: 10%;
 
         @include rwd-xl {
-            display: none;
+            opacity: 0;
+            left: -2000px;
+
         }
     }
 
@@ -1113,9 +1183,9 @@
         display: none;
         position: absolute;
         bottom: 20px;
-        left: -40%;
+        left: 0px;
         height: 120px;
-
+        left: -500px;
 
         @include rwd-xl {
             display: block;
@@ -1123,7 +1193,10 @@
 
         @include rwd-md {
             height: 80px;
-            left: -100%;
+        }
+
+        @include rwd-sm {
+            display: none;
         }
     }
 
