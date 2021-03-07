@@ -1,6 +1,6 @@
 <template id="cart-info">
 
-	<div>
+	<div class="mb-10">
 		<div class="container cart">
 			<div class="row cart__topfix">
 				<ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
@@ -461,7 +461,6 @@
     },
     methods: {
       pageHandler() {
-
         if (this.receiver.text == "") {
           this.handleInput();
         } else if (this.receiverPhone.text == "") {
@@ -484,9 +483,6 @@
           this.$emit('data-handler', this.currentData);
 
         }
-
-
-
       },
       collapseArea() {
         //收合選單
@@ -528,7 +524,12 @@
         let dataAddress;
         dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad.text;
         this.receiverAddress = dataAddress;
-        let dataAddressJson = JSON.stringify(dataAddress);
+        let addressObj = {
+          address: dataAddress,
+          name: this.receiver.text,
+          phone: this.receiverPhone.text,
+        };
+        let dataAddressJson = JSON.stringify(addressObj);
         localStorage.setItem('receiverAddress', dataAddressJson);
       },
       saveDefaultAddress() {

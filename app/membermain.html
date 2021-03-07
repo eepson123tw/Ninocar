@@ -71,7 +71,7 @@
                 type="email"
                 class="cart__select form__input"
                 placeholder="300"
-                v-model="receiver.receiverAddresssCode"
+                v-model="receiver.receiverAddressCode"
               ></input>
             </div>
           </div>
@@ -136,6 +136,9 @@
     </keep-alive>
 
 
+
+
+
   </div>
 
 
@@ -184,7 +187,7 @@
         },
         phone: {
           name: '電話',
-          text: '',
+          text: null,
           remind: '',
           inputClass: '',
         },
@@ -205,7 +208,7 @@
           receiverCity: '',
           receiverTown: '',
           receiverRoad: '',
-          receiverAddresssCode: '',
+          receiverAddressCode: '',
         },
         password: {
           name: '密碼',
@@ -226,7 +229,14 @@
           inputClass: '',
         },
         receiverList: [],
-        defaultAddress: false,
+        receiverNewList: [],
+        // local端
+        defaultReceiverList: [],
+        defaultAddress: {
+          index: '',
+          isShow: false,
+        },
+        addressShow: false,
       },
       methods: {
         // 若有要使用記得加上這個方法控制開關
@@ -243,7 +253,60 @@
         handleInput() {
           const isAllCheck = this.handleRequiredCheck();
           if (isAllCheck) {
-            console.log('yes')
+            // 更新會員資料
+            let gender = 0;
+            if (this.userDetail.usersex == "男") {
+              gender = 1
+            } else {
+              gender = 2;
+            };
+            let month;
+            if (this.userDetail.userMonth.length <= 1) {
+              month = `0${this.userDetail.userMonth}`;
+            } else {
+              month = this.userDetail.userMonth;
+            };
+            let day;
+            if (this.userDetail.userDate.length <= 1) {
+              day = `0${this.userDetail.userDate}`;
+            } else if (this.userDetail.userDate.length >= 2) {
+              day = this.userDetail.userDate;
+            };
+
+            let birthDay = parseInt(this.userDetail.userYear + month + day);
+
+            let phone = parseInt(this.phone.text);
+
+            phone = '0' + phone;
+
+            // console.log(phone); 
+
+            const params = new URLSearchParams();
+            params.append('ID', parseInt(this.memberId));
+            params.append('MEMBER_NAME', this.user.text);
+            params.append('MEMBER_PHONE', phone);
+            params.append('MEMBER_GENDER', gender);
+            params.append('MEMBER_BIRTHDAY', birthDay);
+            params.append('MEMBER_PHOTO', 'wow');
+
+            axios({
+              method: 'post',
+              url: 'assets/php/setMemberDetail.php',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              data: params,
+            }).then((res) => {
+              console.log(res.data)
+
+
+            }).catch((error) => {
+              console.log(error)
+
+            })
+
+
+
           };
         },
         handlePasswordInput() {
@@ -252,13 +315,22 @@
         },
 
         sameAddressCode() {
-          this.receiver.receiverAddresssCode = this.selectCode;
+          this.receiver.receiverAddressCode = this.selectCode;
         },
         saveAddress() {
           this.receiverList.push(this.receiver);
           this.isModalShow = false;
+          let newArray = this.receiverList.map((item) => {
+            return {
+              name: item.receiverName,
+              phone: item.receiverPhone,
+              address: item.receiverAddressCode + item.receiverCity + item.receiverTown + item.receiverRoad,
+            }
+          })
+          let loop = JSON.stringify(newArray);
+          localStorage.setItem('receiverNewAddress', loop);
         },
-        defaultHandler() {
+        defaultHandler(e, index) {
 
           if (!this.defaultAddress) {
             this.defaultAddress = true;
@@ -267,7 +339,16 @@
           }
         },
         deleteAddress(val) {
-          this.receiverList.splice(val, 1)
+          if (this.receiverList[val]) {
+            this.receiverList.splice(val, 1);
+            localStorage.setItem('receiverNewAddress', JSON.stringify(this.receiverList));
+          } else if (localStorage.getItem('receiverAddress') !== null) {
+            this.addressShow = false;
+            localStorage.removeItem('receiverAddress')
+          } else if (localStorage.getItem('receiverNewAddress') !== null) {
+            this.receiverNewList.splice(val, 1);
+            localStorage.setItem('receiverNewAddress', JSON.stringify(this.receiverNewList));
+          }
         }
       },
       computed: {
@@ -307,6 +388,19 @@
       },
 
       mounted() {
+        //local address
+        this.receiverNewList = JSON.parse(localStorage.getItem('receiverNewAddress')) || [];
+        this.defaultReceiverList = JSON.parse(localStorage.getItem('receiverAddress')) || [];
+        this.defaultAddress = JSON.parse(localStorage.getItem('receiverAddressDefault')) || false;
+
+        if (localStorage.getItem('receiverAddress') == null) {
+          this.addressShow = false;
+        } else {
+          this.addressShow = true;
+        };
+
+
+        //地址api
         fetch('./assets/js/taiwan_districts.json', {
           method: "get"
         }).then((res) => {
@@ -314,6 +408,7 @@
         }).then((res) => {
           this.cityList = res;
         });
+
 
 
         //三種方法
@@ -372,23 +467,24 @@
           newData = res.data.map((item) => {
 
             return {
-              name: item.member_account,
+              name: item.member_name,
+              account: item.member_account,
               gender: item.member_gender,
               address: item.member_address,
               birthday: item.member_birthday,
               phone: item.member_phone,
               photo: item.member_photo,
+              password: item.member_member_pwd,
             }
           });
           this.userData = newData[0];
 
         }).catch((error) => {
           console.log(error)
-
         })
 
 
-
+        console.log(this.userData.birthday !== null);
 
 
       }
