@@ -2093,6 +2093,7 @@
             $('.bar-front').width(0) //將進度條歸0
             $('.circle').not(":first").removeClass('circle--active') //除了第一個circle以外其他都變無色
             $('.circle').not(":first").removeClass('circle--able') //除了第一個circle以外其他都變不能點
+            countStep = 0;
         }
 
         function buildCanvas(e) {
@@ -2942,9 +2943,41 @@
                     }
             }
         })
+        // --------------------------------------AJAX-------------------------------------
+        $('.nextStep').click((e) => {
+            if($(e.target).hasClass('finish') && countStep % 5 == 0){
+                $.ajax({            
+		    		method: "POST",
+		    		url: "./assets/php/getCustomizeProduct.php",  //向後台請求的資料，用的是PHP
+		    		data:{ 
+		    				// Name:str  
+		    		},            
+		    		dataType: "JSON", //(回傳的)資料格式
+		    		success: function (response) {  //裡面寫成功時返回的資料
+		    				//更新html內容(專題用)
+		    				//此線以下是方法1
+		    				// let img = document.createElement("img")
+		    				// img.src= response.src;
+		    				// document.getElementById("result").appendChild(img);
 
-        $('.addToCart').click(() => {
-            console.log('加到購物車')
+		    				//此線以下是方法2(專題用)
+		    				//  let result =  `<h1>${response.title}</h1>`;
+		    				//  result +=  `<h2>${response.price}</h2>`;
+		    				//  result +=  `<img src="${response.src}">`;
+		    				//  document.getElementById("result").innerHTML = result;
+
+		    				//  此線以下是原版
+		    				// document.getElementById("result").innerHTML = response;
+                        alert('OK')
+		    		},
+		    		error: function(exception) {
+		    				alert("發生錯誤: " + exception.status);
+		    		}
+		    	});
+            }
+            // function doQuery(str){
+
+		    // }
         })
     </script>
 </body>
