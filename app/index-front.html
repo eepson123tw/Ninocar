@@ -137,34 +137,42 @@
 
 
                 // --------------------------------------------gsap
+
                 let controller = new ScrollMagic.Controller();
                 let screenX = document.body.clientWidth;
-
                 // ----------------------parking
-                let mvFirst = gsap.timeline();
-                mvFirst.fromTo("#hero", {
-                    y: -300
-                }, {
-                    y: 0,
-                    duration: 1,
-                    ease: "bounce"
-                }).fromTo(".parking__start", {
-                    opacity: 0,
-                    y: -200
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: .5,
-                    ease: "elastic"
-                }).fromTo(".parking__car", {
-                    opacity: 0,
-                    y: -200
-                }, {
-                    y: 0,
-                    opacity: 1,
-                    duration: .5,
-                    ease: "elastic"
-                });
+                window.onload = () => {
+                    let mvFirst = gsap.timeline();
+                    mvFirst.to("#hero", {
+                        opacity: 1,
+                        duration: 0,
+                        ease: "linear"
+                    }).fromTo("#hero", {
+                        y: -300
+                    }, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "bounce"
+                    }).fromTo(".parking__start", {
+                        opacity: 0,
+                        y: -200
+                    }, {
+                        opacity: 1,
+                        y: 0,
+                        duration: .5,
+                        ease: "elastic"
+                    }).fromTo(".parking__car", {
+                        opacity: 0,
+                        y: -200
+                    }, {
+                        y: 0,
+                        opacity: 1,
+                        duration: .5,
+                        ease: "elastic"
+                    });
+
+                }
 
                 let mvParking = gsap.timeline();
                 mvParking.to('.parking__car', 1.2, {
@@ -227,7 +235,7 @@
                 new ScrollMagic.Scene({
                         triggerElement: '#triggerProduct',
                         reverse: false,
-                        offset: 360,
+                        offset: 320,
                     }).setTween(mvProduct)
                     .addIndicators({
                         name: 'keyProduct',

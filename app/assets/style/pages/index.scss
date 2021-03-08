@@ -50,7 +50,7 @@
 
     .parking {
         position: relative;
-        margin-top: 120px;
+        margin-top: 80px;
         margin-bottom: 220px;
 
         @include rwd-lg {
@@ -60,7 +60,7 @@
         &__car {
             position: absolute;
             width: 20%;
-            top: 36%;
+            top: 42%;
             left: 44%;
             z-index: 30;
         }
@@ -70,28 +70,44 @@
             position: absolute;
             background-position: 0 0;
             background-size: 200%;
-            animation: indexHero 2s infinite steps(2) alternate;
         }
 
+
+
         &__call {
-            top: 16%;
+            top: 18%;
             right: 24%;
             @include size(30px, 80px);
             background: url('../../img/illust/illust-parking-call.svg');
+            animation: indexHero 2s infinite steps(2) alternate;
+
         }
 
         &__close {
-            top: 20%;
+            top: 28%;
             left: 25%;
             @include size(180px, 150px);
             background: url('../../img/illust/illust-parking-close.svg');
+            animation: indexHero 5s infinite steps(2) alternate;
+
         }
 
         &__delivery {
-            top: 31%;
+            top: 40%;
             left: 5%;
             @include size(187px, 180px);
             background: url('../../img/illust/illust-parking-delivery.svg');
+            animation: indexHero 3s infinite steps(2) alternate;
+
+        }
+
+        &__billboard {
+            position: absolute;
+            bottom: -22%;
+            right: 26%;
+            @include size(220px, 371.96px);
+            background: url('../../img/illust/illust-parking-billboard.svg');
+            animation: heroBillboard 6s infinite steps(7);
         }
 
 
@@ -105,74 +121,6 @@
 
 
     }
-
-
-    .billboard {
-
-
-        &__screen {
-
-            position: absolute;
-            width: 93%;
-            height: 70.6%;
-            top: 5.6%;
-            left: 51.5%;
-            transform: translateX(-50%);
-
-            @include rwd(1400px) {
-                width: 87%;
-            }
-
-            @include rwd-xl {
-                width: 86%;
-            }
-
-            @include rwd-lg {
-                width: 88%;
-            }
-
-            @include rwd-md {
-                width: 87%;
-                height: 400px;
-                bottom: 0;
-            }
-
-            @include rwd-sm {
-                width: 86.5%;
-                height: 70.3%;
-            }
-
-            @include rwd-xs {
-                width: 84%;
-            }
-        }
-
-        &__car {
-            position: absolute;
-            top: -20px;
-            right: -250px;
-
-            @include rwd(1400px) {
-                width: 280px;
-            }
-        }
-
-        &__road {
-
-            @include rwd-lg {
-                height: 120px;
-                transform: translateX(-160px);
-            }
-
-            @include rwd-md {
-                height: 80px;
-                transform: translateX(-440px);
-            }
-        }
-    }
-
-
-
 
     .mountain {
         position: relative;
@@ -1243,7 +1191,21 @@
     }
 }
 
+.opacity-0 {
+    opacity: 0;
+}
 
+
+
+@keyframes heroBillboard {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -700%;
+    }
+}
 
 @keyframes indexHero {
     from {
@@ -1261,6 +1223,6 @@
     }
 
     to {
-        background-position: 200%;
+        background-position: 700%;
     }
 }
