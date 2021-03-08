@@ -1,4 +1,4 @@
-<div class="container" v-if="userData.name == 'null' ">
+<div class="container" v-if="userData.name == '' ">
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
@@ -76,7 +76,7 @@
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
         <li v-show="previewImage ==null" class="member__circle"></li>
-        <img id="img" :src="previewImage">
+        <img id="img" style="max-width: 300px; max-height: 300px; margin: 0 auto; border-radius: 20px; margin-bottom: 20px;" :src="previewImage">
         <li> <label class="member__input--prettier">
             <input
               type="file"
@@ -130,11 +130,7 @@
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <li class="member__circle"></li>
-        <li> <label class="member__input--prettier">
-            <input type="file" />
-            <span>選擇圖片</span>
-          </label></li>
+        <img id="img" style="max-width: 300px; max-height: 300px; margin: 0 auto; border-radius: 20px; margin-bottom: 20px;" :src="userData.photo">
         <li>限制大小 300X300.jpg</li>
       </ul>
     </div>
@@ -158,7 +154,7 @@
               v-if="user.remind!==''"
               class="form__text form__text--warning"
             >{{user.remind}}</span></label>
-          <input v-model.trim="user.text" type="text" class="form__input" :class="user.inputClass" id="accountName" placeholder="請輸入名稱" />
+          <input v-model="user.text" type="text" class="form__input" :class="user.inputClass" id="accountName" placeholder="請輸入名稱" />
           <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
         </li>
 
