@@ -63,10 +63,10 @@
                 <!-- 製作車子的區域 -->
                 <div class="makeCar col-12 col-lg-6 col-sm-4">
                     <div class="mainArea">
-                        <canvas id="canvas" class="mainAreaPic canvas" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
-                        <canvas id="canvas" class="accessoryPic1 canvasA1" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
-                        <canvas id="canvas" class="accessoryPic2 canvasA2" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
-                        <canvas id="canvas" class="accessoryPic3 canvasA3" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
+                        <canvas id="canvas" class="mainAreaPic canvas" width="400" height="200"></canvas>
+                        <canvas id="canvas" class="accessoryPic1 canvasA1" width="400" height="200"></canvas>
+                        <canvas id="canvas" class="accessoryPic2 canvasA2" width="400" height="200"></canvas>
+                        <canvas id="canvas" class="accessoryPic3 canvasA3" width="400" height="200"></canvas>
                     </div>
                     <div id="progressBar" class="progressBar">
 
@@ -271,7 +271,7 @@
 
                     <div class="tipArea">
                         <div class="tipArea_left col-6 col-sm-4">
-                            <button class="btn btn--outline previousStep invisible"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
+                            <button class="btn btn--outline previousStep invisible" @click="toPreviousStep"><img src="./assets/img/icon/icon-double-left.svg" class="icon">上一步</button>
                         </div>
                         <div class="tipArea_right col-6 col-sm-4">
                             <div class="tipPrice">
@@ -279,7 +279,7 @@
                                 <p class="totalPrice">NT$ 0</p>
                             </div>
                             <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-                            <button class="btn btn--disabled nextStep" >下一步</button>
+                            <button class="btn btn--disabled nextStep" @click="toNextStep">下一步</button>
                         </div>
                     </div>
 
@@ -911,7 +911,7 @@
         const vm1 = new Vue({ //主體
             el: '#factory',
             data:{
-                // countStep: 0,
+                countStep: 0,
                 countR: 0,
                 countL: 0,
                 docW: $(document).width(),
@@ -967,7 +967,10 @@
                     // $('.modal').removeClass('modal-active');
                     this.isModalShow = false;
                 },
-                // toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
+                toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
+                    this.countStep += 1;
+                    console.log('下')
+                    console.log(this.countStep)
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
                     // console.log(this.docW)
                 
@@ -1097,9 +1100,11 @@
                     //         console.log(dataURL)
                     //     }
                     // }
-                // },
-                // toPreviousStep(){ //點上一步回上一步
-                    // this.countStep -= 1
+                },
+                toPreviousStep(){ //點上一步回上一步
+                    this.countStep -= 1;
+                    console.log('上')
+                    console.log(this.countStep)
                     // // console.log("previousStep is clicked! countStep: " + this.countStep)
 
                     // if (this.countStep % 5 == 1) {
@@ -1222,7 +1227,7 @@
                     //     $('.selectArea').css({"display": "block"})
                     //     $('.accessoryCards').css({"display": "block"})
                     // }
-                // },
+                },
                 // getShapeIndex(e){
                     //抓取車型的index(用來判別顏色圖要貼甚麼)
                     // this.shapeIndex = $(e.target).parent().index();
@@ -1236,22 +1241,23 @@
                     this.countL += 1;
 
                     let distanceToLeft = $('.selectArea').position().left;
-                    // console.log(distanceToLeft)
+                    console.log(distanceToLeft)
+                    console.log(this.countStep)
 
                     if (this.docW <= 992) {
                         if (this.countStep < 3 && distanceToLeft > -900) {
-                            // console.log('R1')
+                            console.log('R1')
                             $('.selectArea').animate({left: '-=430'});
                         } else if (this.countStep == 3 && distanceToLeft > -2100) {
-                        
+                            console.log('R2')
                             $('.selectArea').animate({left: '-=410'});
                         }
                     } else {
-                        if (this.countStep < 3 && distanceToLeft > -420) {
-                            // console.log('L1')
+                        if (this.countStep < 3 && distanceToLeft > 10) {
+                            console.log('L1')
                             $('.selectArea').animate({left: '-=410'});
-                        } else if (this.countStep == 3 && distanceToLeft > -420) {
-                            // console.log('再過去一點')
+                        } else if (this.countStep >= 3 && distanceToLeft > -500) {
+                            console.log('L2')
                             $('.selectArea').animate({left: '-=410'});
                         }
                     }
@@ -1448,7 +1454,7 @@
                     }
                 
                 } else if (countStep % 5  == 2) {
-                    console.log(countStep)
+                    // console.log(countStep)
                 
                     $('.nextStep').addClass('btn--disabled')
                 

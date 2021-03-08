@@ -785,6 +785,10 @@
     .intro {
         display: flex;
         flex-direction: column;
+
+        &_pic{
+            margin-bottom: -40px;
+        }
     }
     .emphasis {
         font-size: 44px;
@@ -798,6 +802,24 @@
     .progressBar {
         margin-top: 20px;
     }
+
+    .workBar{
+        display: flex;
+        flex-direction: column;
+
+        &_left{
+            margin-bottom: 20px;
+        }
+
+        &_right p{
+            margin-left: 40px;
+        }
+
+        &_right .filter{
+            width: 55vw;
+        }
+    }
+
     .bar {
         display: none;
     }
@@ -810,10 +832,12 @@
     }
     .content {
         margin-right: 8px;
-    }
-    .content:last-child {
+
+        &:last-child {
         margin-right: 0;
+        }
     }
+    .content
     .work {
         margin-bottom: 20px;
         
@@ -835,15 +859,18 @@
     .selectBtn {
         top: 420px;
     }
+
     .makeCar .giveName {
         // display: flex; //這個flex要動態改CSS
         display: none;
         flex-direction: column;
         padding: 20px;
     }
+
     .typeInspiration {
         width: 320px;
     }
+
     .selectArea {
         .colorCard,
         .accessoryCard {
@@ -869,4 +896,14 @@
             top: -413px;
         }
     }
+
+    // #factory .modal__group{
+    //     width: 90%;
+    // }
+
+    .replyerName{
+        margin-bottom: 4px;
+    }
+
+
 }
