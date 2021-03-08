@@ -1773,6 +1773,7 @@
             let ran2 = Math.floor(Math.random() * 10)
 
             $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
+            $('.typeWorkName').attr('value', nameArr1[ran1] + nameArr2[ran2])
         })
 
 
@@ -2943,15 +2944,15 @@
                     }
             }
         })
-        // --------------------------------------AJAX-------------------------------------
+        // --------------------------------------AJAX-------------------------------------doc
         $('.nextStep').click((e) => {
-            let workNameV = $('.typeWorkName').attr('value')
+            let workName = $('.typeWorkName').attr('value')
             if($(e.target).hasClass('finish') && countStep % 5 == 0){
                 $.ajax({            
 		    		method: "POST",
 		    		url: "./assets/php/getCustomizeProduct.php",  //向後台請求的資料，用的是PHP
 		    		data:{
-                        "workName":workNameV,
+                        "workName":workName,
                         // "userNickName":userNickName
                     },            
 		    		success: function (result) {
