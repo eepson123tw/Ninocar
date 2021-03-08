@@ -1684,6 +1684,16 @@
             }
         })
 
+        //在typeNickName、typeInspiration設置value
+            $('.typeNickName').keyup((e)=>{
+            let nickName =  $(e.target).val()
+            $(e.target).attr('value', nickName)
+        })
+
+        $('.typeInspiration').keyup((e)=>{
+            let inspiration =  $(e.target).val()
+            $(e.target).attr('value', inspiration)
+        })
 
         //回上一步
         $('.previousStep').click(() => { //移到這裡
@@ -2946,27 +2956,36 @@
         })
         // --------------------------------------AJAX-------------------------------------doc
         $('.nextStep').click((e) => {
-            let workName = $('.typeWorkName').attr('value')
             if($(e.target).hasClass('finish') && countStep % 5 == 0){
+                let workName = $('.typeWorkName').attr('value')
+                let userNickName = $('.typeNickName').attr('value')
+                let inspiration = $('.typeInspiration').attr('value')
+                let workPostTime = $('.putDataId').attr('value')
+                let workPrice = $('.putPrice').attr('value')
+                let allIndex = $('.putAllIndex').attr('value')
+
+
                 $.ajax({            
 		    		method: "POST",
 		    		url: "./assets/php/getCustomizeProduct.php",  //向後台請求的資料，用的是PHP
 		    		data:{
                         "workName":workName,
-                        // "userNickName":userNickName
+                        "userNickName":userNickName,
+                        "inspiration":inspiration,
+                        "workPostTime":workPostTime,
+                        "workPrice":workPrice,
+                        "allIndex":allIndex,
+
                     },            
 		    		success: function (result) {
                         console.log(result)
-                        alert('OK')
+                        // alert('OK')
 		    		},
 		    		error: function(exception) {
 		    				alert("發生錯誤: " + exception.status);
 		    		}
 		    	});
             }
-            // function doQuery(str){
-
-		    // }
         })
     </script>
 </body>
