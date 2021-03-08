@@ -1,10 +1,38 @@
 .logo {
-    background: url('https://github.com/hexschool/webLayoutTraining1st/blob/master/perfume-week6/d%E2%80%99Perfume@2x.png?raw=true')no-repeat center center / cover;
-    @include text-hide;
-    @include size(128px, 38px);
+    &__h1 {
 
+        @include text-hide;
+        @include size(0px, 0px);
+    }
+
+    &:hover &__child {
+
+        animation: childShake 1s ease-in-out infinite both;
+
+
+    }
 }
 
+@keyframes childShake {
+    0% {
+        transform: translateY(0px);
+    }
+
+    40% {
+        transform: translateY(-5px);
+
+    }
+
+    60% {
+        transform: translateY(-1px);
+    }
+
+    70% {
+        transform: translateY(0);
+
+    }
+
+}
 
 
 .icon {

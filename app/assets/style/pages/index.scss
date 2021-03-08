@@ -50,37 +50,30 @@
 
     .parking {
         position: relative;
-        margin-bottom: -220px;
+        margin-top: 120px;
+        margin-bottom: 220px;
+
+        @include rwd-lg {
+            margin-bottom: 120px;
+        }
 
         &__car {
             position: absolute;
             width: 20%;
-            top: 28%;
+            top: 36%;
             left: 44%;
             z-index: 30;
         }
 
-        &__road {
+        &__start {
             position: absolute;
-            width: 19.85%;
-            right: 1400px;
-            top: 0;
-            z-index: 10;
-
-            @include rwd(1400px) {
-                width: 18.67%;
-                right: calc(100% - 41px);
-            }
-
-            @include rwd(1280px) {
-                width: 18.5%;
-            }
+            bottom: 0;
+            left: 4%;
+            z-index: 40;
+            width: 25%;
         }
 
-        &__text {
-            top: -300px;
-            position: relative;
-        }
+
     }
 
 
