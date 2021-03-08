@@ -65,10 +65,40 @@
             z-index: 30;
         }
 
+        &--animation {
+            z-index: 40;
+            position: absolute;
+            background-position: 0 0;
+            background-size: 200%;
+            animation: indexHero 2s infinite steps(2) alternate;
+        }
+
+        &__call {
+            top: 16%;
+            right: 24%;
+            @include size(30px, 80px);
+            background: url('../../img/illust/illust-parking-call.svg');
+        }
+
+        &__close {
+            top: 20%;
+            left: 25%;
+            @include size(180px, 150px);
+            background: url('../../img/illust/illust-parking-close.svg');
+        }
+
+        &__delivery {
+            top: 31%;
+            left: 5%;
+            @include size(187px, 180px);
+            background: url('../../img/illust/illust-parking-delivery.svg');
+        }
+
+
         &__start {
             position: absolute;
             bottom: 0;
-            left: 4%;
+            left: 3%;
             z-index: 40;
             width: 25%;
         }
@@ -1210,5 +1240,27 @@
 .h4 {
     @include rwd-md {
         font-size: 16px;
+    }
+}
+
+
+
+@keyframes indexHero {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: 200%;
+    }
+}
+
+@-webkit-keyframes indexHero {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: 200%;
     }
 }
