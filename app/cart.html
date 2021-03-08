@@ -35,7 +35,7 @@
     </transition>
 
 
-    <modal-custom-made v-show="isModalShow " @closemodal="closeHandler ">
+    <modal-custom-made v-show="isModalShow " @close-modal="closeHandler ">
       <template #header>
         <!-- 傳入文字 -->
         <h2 class="modal__title  mb-10  h3">訂單成立</h2>
@@ -61,7 +61,7 @@
       </template>
 
     </modal-custom-made>
-    <modal-custom-made v-show="noLogin" @closemodal="closeHandler">
+    <modal-custom-made v-show="noLogin" @close-modal="closeHandler">
       <template #header>
         <!-- 傳入文字 -->
         <h2 class="modal__title  mb-10  h3">請先登入會員喔！</h2>

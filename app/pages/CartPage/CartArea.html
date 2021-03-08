@@ -370,10 +370,10 @@
         currentData: this.current,
         // 折價卷種類
         couponList: {
-          discountOne: "註冊新會員結帳享9折優惠！",
-          discountTwo: "白金會員太牛了享8折優惠！",
-          discountThree: "老闆跳樓拉免運費！",
-          discountFour: '本月壽星你最大享5折優惠！',
+          discountOne: "全項商品不限金額結帳九折優惠！",
+          discountTwo: "結帳享買一送一",
+          discountThree: "宅配享一次免運優惠！",
+          discountFour: '本月壽星你最大享五折優惠！',
         },
         //  付款方式種類
         paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
@@ -529,7 +529,7 @@
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
           }
           if (this.couponList[key] == this.selectCoupon && key == 'discountTwo') {
-            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
+            this.discountPrice = Math.round((this.totalMoneyCost + this.totalPointCost) / this.totalProductNum);
           }
           if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
             this.sendPrice = 0;
