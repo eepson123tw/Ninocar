@@ -6,7 +6,9 @@
                   <div class="display">
                       <header class="display__cover">
                           <h2 class="display__title">{{product.eName}}</h2>
-                          <img :src="product.displayImgURL" class="display__img">
+                          <a href="./dictionary.html">
+                              <img :src="product.displayImgURL" class="display__img">
+                          </a>
                           <div class="carID carID--lg display__carID" :class="bgClass(product.series)">
                               {{product.series}}<span>{{product.seriesId}}</span>
                           </div>
