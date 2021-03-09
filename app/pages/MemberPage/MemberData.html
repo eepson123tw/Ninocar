@@ -1,4 +1,4 @@
-<div class="container" v-if="userData.name == '匿名'|| userData.name =='' ">
+<div class="container" v-if="userData.name == '匿名' ">
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
@@ -89,7 +89,7 @@
     </div>
   </div>
 </div>
-<div class="container" v-else-if="userData.name">
+<div class="container" v-else-if="userData.birthday">
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
