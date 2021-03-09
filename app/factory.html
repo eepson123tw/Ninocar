@@ -308,6 +308,7 @@
                             <input type="hidden" class="putPrice" name="workPrice" value="">
                             <input type="hidden" class="putAllIndex" name="allIndex" value="">
                             <input type="hidden" class="putImgPath" name="imgPath" value="">
+                            <input type="hidden" class="putMemberId" name="memberId" value="">
                         </div>
                     </form>
                 </div>
@@ -970,8 +971,12 @@
                 },
                 toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
                     this.countStep += 1;
-                    console.log('下')
-                    console.log(this.countStep)
+                    // console.log('下')
+                    // console.log(this.countStep)
+
+                    if(this.countStep & 5 > 0){
+                        $('.putMemberId').val(this.$store.state.memberId)
+                    }
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
                     // console.log(this.docW)
                 
@@ -3014,6 +3019,7 @@
                 let workPrice = $('.putPrice').attr('value')
                 let allIndex = $('.putAllIndex').attr('value')
                 let imgPath = $('.putImgPath').attr('value')
+                let memberId = $('.putMemberId').attr('value')
 
 
                 $.ajax({            
@@ -3027,6 +3033,7 @@
                         "workPrice":workPrice,
                         "allIndex":allIndex,
                         "imgPath":imgPath,
+                        "memberId": memberId,
 
                     },            
 		    		success: function (result) {
