@@ -24,6 +24,9 @@
 
 <body>
     <div id="app" v-cloak>
+        <transition name="collapse-slow">
+            <loading-div v-if="isLoading" page="首頁"></loading-div>
+        </transition>
         <vue-header :modal-state-content.sync="modalStateContent"></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
@@ -40,6 +43,7 @@
 
 
     @@include('./components/VueHeader.html')
+    @@include('./components/LoadingDiv.html')
     @@include('./components/PinSvg.html')
 
     <script src="./assets/js/mixins/productMixins.js"></script>
@@ -49,6 +53,7 @@
             store,
             mixins: [productMixins],
             data: {
+                isLoading: true,
                 isDisplayPlay: false,
                 isCarNearGirl: false,
                 isCTAShow: false,
@@ -135,6 +140,8 @@
                 let screenX = document.body.clientWidth;
                 // ----------------------parking
                 window.onload = () => {
+                    this.isLoading = false;
+                    console.log('a');
                     let mvFirst = gsap.timeline();
                     mvFirst.to("#hero", {
                         opacity: 1,
