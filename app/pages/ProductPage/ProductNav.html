@@ -86,54 +86,6 @@
         </div> -->
         </div>
 
-<<<<<<< HEAD
-    <ul class="col-9" style="margin-top: 200px">
-        <div class="row">
-            <div class="col-9">
-                <select class="area" v-model="type">
-                    <option value="" disabled>-- 請選擇 --</option>
-                    <option value="依上架時間">最新上架</option>
-                    <option value="依價格" @click="sort = 'price', isReverse = !isReverse">依價格(由高至低)</option>
-                    <option value="依價格">依價格(由低至高)</option>
-                    <option value="依銷售度">熱門銷售</option>
-                </select>
-            </div>
-
-            <ul class="col-9">
-                <div class="row">
-                    <li class="col-4 col-xl-4 col-lg-6 col-sm-4" v-for="item in sortArray" >
-                        <!--card-->
-
-                        <a href="itemdetail.html" class="card">
-                            <div class="card__header" >
-                                <img :src="item.imgURL" />
-                                <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
-                                <span class="card__label">本月主打</span>
-                            </div>
-                            <div class="card__body">
-                                <h2 class="card__title">{{item.eName}}</h2>
-                                <div class="card__details">
-                                    <p class="card__price">NT$ <span>{{item.price}}</span></p>
-                                    <button class="card__link">收藏</button>
-                                </div>
-                            </div>
-                            <button class="btn btn--fluid btn--outline">加入購物車</button>
-                        </a>
-                    </li>
-                    <!---->
-
-                </div>
-            </ul>
-            <!---- 頁籤 ---->
-            <ul class="col-12">
-                <div class="row">
-                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center" >
-                        <div class="page_btn_nb" ></div>
-                    </div>
-                </ul>
-                <!---- 頁籤 ---->
-                 <ul class="col-12">
-=======
         <ul class="col-9" style="margin-top: 200px">
             <div class="row">
                 <div class="col-9">
@@ -172,25 +124,11 @@
                 </ul>
                 <!---- 頁籤 ---->
                 <ul class="col-12">
->>>>>>> gulp
                     <div class="row">
                         <div class="page col-4 col-lg-6 col-sm-12 justify-content-center">
                             <div class="page_btn_nb"></div>
                         </div>
                         <nav aria-label="...">
-<<<<<<< HEAD
-                            <ul class=" d-flex pagination">
-                                <li class="page-item disabled" v-bind:class="{'disabled': (currPage === 1)}" @click.prevent="setPage(currPage-1)">
-                                    <a class="page-link" href="#"><span
-                                        class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span></a>
-                                </li>
-                                <li class="page-item" v-for="n in totalPage"  v-bind:class="{'active': (currPage === (n))}" 
-                                    @click.prevent="setPage(n)"><a href="#">{{n}}</a></li>
-                                <li class="page-item" v-bind:class="{'disabled': (currPage === totalPage)}" 
-                                    @click.prevent="setPage(currPage+1)">
-                                    <a class="page-link" href="#"><span 
-                                        class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span></a>
-=======
                             <ul class="d-flex pagination">
                                 <li class="page-item disabled">
                                     <a
@@ -221,21 +159,12 @@
                                             >chevron_right</span
                                         ></a
                                     >
->>>>>>> gulp
                                 </li>
                             </ul>
                         </nav>
                     </div>
-<<<<<<< HEAD
-                </div>
-            </ul>
-        </div>
-    </ul>
-</div> 
-=======
                 </ul> 
             </div>
         </ul>
     </div>
 </div>
->>>>>>> gulp
