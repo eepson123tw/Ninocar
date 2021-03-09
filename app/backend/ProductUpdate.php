@@ -1,6 +1,7 @@
 <?php
 include("head.php");
 include 'LoginCheck.php';
+// $Util = new UtilClass();
 
 //建立SQL---->產品----------------------
 $sql = "SELECT * FROM `team1`.`product` WHERE `product_id` = ?";
@@ -31,10 +32,10 @@ $data = $statement->fetchAll();
             alert("請填寫[商品名稱]");
             return false;
         }
-        if (document.getElementById('img').value == '') {
-            alert("請選擇[商品圖片]");
-            return false;
-        }
+        // if (document.getElementById('img').value == '') {
+        //     alert("請選擇[商品圖片]");
+        //     return false;
+        // }
         if (document.getElementById('price').value == '') {
             alert("請填寫[商品金額]");
             return false;
@@ -43,18 +44,18 @@ $data = $statement->fetchAll();
             alert("請填寫[商品點數]");
             return false;
         }
-        if (document.getElementById('category').value == '') {
-            alert("請選擇[分類]");
-            return false;
-        }
-        if (document.getElementById('cateId').value == '') {
-            alert("未填入[商品分類編號]");
-            return false;
-        }
-        if (document.getElementById('category2').value == '') {
-            alert("請選擇[分類二]");
-            return false;
-        }
+        // if (document.getElementById('category').value == '') {
+        //     alert("請選擇[分類]");
+        //     return false;
+        // }
+        // if (document.getElementById('cateId').value == '') {
+        //     alert("未填入[商品分類編號]");
+        //     return false;
+        // }
+        // if (document.getElementById('category2').value == '') {
+        //     alert("請選擇[分類二]");
+        //     return false;
+        // }
     }
 </script>
 
@@ -64,11 +65,11 @@ $data = $statement->fetchAll();
     ?>
     <div class="content">
         <div class="block-responsive">
-            <main>
-                <form method="post" action="" enctype="multipart/form-data">
-                    <?php
-                    foreach ($data as $index => $row) {
-                    ?>
+            <?php
+            foreach ($data as $index => $row) {
+            ?>
+                <main>
+                    <form method="post" action="ProductUpdateR.php" enctype="multipart/form-data">
                         <div class="update mb-3">
                             <p>商品名稱：</p>
                             <input type="text" name="name" id="name" value="<?= $row["product_name"] ?>">
@@ -77,13 +78,28 @@ $data = $statement->fetchAll();
                             <p>商品名稱(英)：</p>
                             <input type="text" name="ename" value="<?= $row["product_ename"] ?>">
                         </div>
-                        <div class="update mb-3">
+                        <!-- <div class="update mb-3">
                             <p>商品主圖：</p>
-                            <input type="file" name="img" id="img">
-                        </div>
+                            <input type="hidden" name="img" id="img">
+                        </div> -->
                         <div class="update mb-3">
                             <p>商品狀態：</p>
-                            <select name="productType" id="" value="<?= $row["product_type"] ?>">
+                            <select name="productType" id="" value="">
+                                <?php
+                                $type = $row["product_type"];
+                                switch ($type) {
+                                    case '1':
+                                        $type = "未上架";
+                                        break;
+                                    case '2':
+                                        $type = "刪除";
+                                        break;
+                                    default:
+                                        $type = "預設";
+                                        break;
+                                }
+                                ?>
+                                <option value="<?= $row["product_type"] ?>"><?= $type ?></option>
                                 <option value="0">預設</option>
                                 <option value="1">未上架</option>
                                 <option value="2">刪除</option>
@@ -99,8 +115,37 @@ $data = $statement->fetchAll();
                         </div>
                         <div class="update mb-3">
                             <p>商品分類：</p>
-                            <select name="category" id="category" value="<?= $row["product_series"] ?>">
-                                <option value="">請選擇</option>
+                            <select name="category" id="category" value="">
+                                <?php
+                                $series = $row["product_series"];
+                                switch ($series) {
+                                    case '1':
+                                        $series = "工程系";
+                                        break;
+                                    case '2':
+                                        $series = "RV休旅系";
+                                        break;
+                                    case '3':
+                                        $series = "計程車系";
+                                        break;
+                                    case '4':
+                                        $series = "巴士系";
+                                        break;
+                                    case '5':
+                                        $series = "警車系";
+                                        break;
+                                    case '6':
+                                        $series = "消防救護系";
+                                        break;
+                                    case '7':
+                                        $series = "轎車系";
+                                        break;
+                                    default:
+                                        $series = "PREMIUM系";
+                                        break;
+                                }
+                                ?>
+                                <option value="<?= $row["product_series"] ?>"><?= $series ?></option>
                                 <option value="1">工程系</option>
                                 <option value="2">RV休旅系</option>
                                 <option value="3">計程車系</option>
@@ -117,8 +162,31 @@ $data = $statement->fetchAll();
                         </div>
                         <div class="update mb-3">
                             <p>商品分類二：</p>
-                            <select name="category2" id="category2" value="<?= $row["product_spec"] ?>">
-                                <option value="">請選擇</option>
+                            <select name="category2" id="category2" value="">
+                                <?php
+                                $series = $row["product_spec"];
+                                switch ($series) {
+                                    case '1':
+                                        $series = "熱門商品";
+                                        break;
+                                    case '2':
+                                        $series = "本月主打";
+                                        break;
+                                    case '3':
+                                        $series = "最新商品";
+                                        break;
+                                    case '4':
+                                        $series = "點數限定";
+                                        break;
+                                    case '5':
+                                        $series = "客製化商品";
+                                        break;
+                                    default:
+                                        $series = "一般商品";
+                                        break;
+                                }
+                                ?>
+                                <option value="<?= $row["product_spec"] ?>"><?= $series ?></option>
                                 <option value="0">一般商品</option>
                                 <option value="1">熱門商品</option>
                                 <option value="2">本月主打</option>
@@ -137,20 +205,34 @@ $data = $statement->fetchAll();
                         </div>
                         <div class="update mb-3">
                             <p>商品描述：</p>
-                            <textarea name="des" id="" cols="30" rows="10" value="<?= $row["product_des"] ?>"></textarea>
+                            <textarea name="des" id="" cols="30" rows="10" value="<?= $row["product_des"] ?>"><?= $row["product_des"] ?></textarea>
                         </div>
+                        <input type="hidden" name="PID" value="<?= $row["product_id"] ?>" />
+                        <input type="hidden" name="img" id="img">
 
                         <div class="update mb-5">
                             <button type="submit" class="" onclick="return doSubmit();">送出</button>
+                            <a href="ProductDelete.php?PID=<?= $row["product_id"] ?>" class="ml-5" onclick="javascript: if(confirm('確定刪除?')){ return true; } else { return false; }">刪除</a>
                         </div>
+                    </form>
+                </main>
+                <div class="img-preview">
+                    <!-- <img src="../assets/img/pic/userPic03.png"> -->
+                    <?php
+                    if ($row["product_price"] == 100 && $row["product_points"] == 0) {
+                    ?>
+                        <img src="../../upload/<?= $row['product_img'] ?>" alt="">
+                    <?php
+                    } else {
+                    ?>
+                        <img src="<?= $row['product_img'] ?>" alt="">
                     <?php
                     }
                     ?>
-                </form>
-            </main>
-            <div class="img-preview">
-                <img src="../assets/img/pic/userPic03.png">
-            </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </body>

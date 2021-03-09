@@ -138,7 +138,7 @@
                                 id="coupon"
                                 class="form__select cart__select"
                             >
-                                <option>{{selectCupon}}</option>
+                                <option>{{selectCoupon}}</option>
                             </select>
                         </div>
                     </div>
@@ -208,8 +208,9 @@
 
       return {
         notShow: true,
-        currentdata: this.current,
+        currentData: this.current,
         animationDisplay: "cart__displayShow",
+        payment: null,
       }
 
     },
@@ -232,7 +233,7 @@
     computed: {
       // store 區塊
       ...Vuex.mapState({
-        selectCupon: state => state.selectCupon,
+        selectCoupon: state => state.selectCoupon,
         buyList: state => state.buyList,
         finallyPrice: state => state.finallyPrice,
         totalProductNum: state => state.totalProductNum,
@@ -241,32 +242,72 @@
         selectShipping: state => state.selectShipping,
         discountPrice: state => state.discountPrice,
         sendPrice: state => state.sendPrice,
-        totalMoney: state => state.totalMoney
+        totalMoney: state => state.totalMoney,
+        getPoint: state => state.getPoints,
       }),
 
       orderId() {
-
         return Math.floor(Math.random() * 10000000);
-
-
       },
-
-
+      memberId() {
+        return this.$store.state.memberId
+      },
 
     },
     mounted() {
 
-
-
-
-      // if (this.isModalShow) {
-      //   this.isModalShow = false;
-      // } else {
-      //   this.isModalShow = true;
-      // }
-
-
       this.$emit('open-window');
+
+      let newList = JSON.stringify(this.buyList);
+
+      localStorage.setItem('doneList', newList);
+
+      localStorage.removeItem('cartsList');
+
+
+      if (this.selectPayment == "線上刷卡") {
+        this.payment = 1
+      } else if (this.selectPayment == "貨到付款") {
+        this.payment = 0
+      } else if (this.selectPayment == "門市結帳") {
+        this.payment = 2
+      } else {
+        this.payment = 3
+      };
+
+      let productArray = [];
+      for (let num in this.buyList) {
+        productArray.push(parseInt(this.buyList[num].productId));
+      }
+
+
+
+      const params = new URLSearchParams()
+      params.append('ID', this.memberId)
+      params.append('ORDER_ID', this.orderId)
+      params.append('ORDER_COST', this.finallyPrice)
+      params.append('ORDER_POINTS', this.totalPointCost)
+      params.append('ORDER_GAIN', this.getPoint)
+      params.append('PAY_TYPE', this.payment)
+      params.append('PRODUCT_ARRAY', JSON.stringify(productArray))
+
+      axios({
+        method: 'post',
+        url: 'assets/php/setOrder.php',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: params,
+      }).then((res) => {
+        console.log(res.data)
+
+
+      }).catch((error) => {
+        console.log(error)
+
+      })
+
+
 
 
     }

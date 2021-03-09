@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/pages/dictionary.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/MotionPathPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
+<script src="./assets/js/all.js"></script>
+<script src="./assets/js/utils.js"></script>
+<title>test</title>
+</head>
+<style>
+
+</style>
+
+<body>
+  <div id="dictionary">
+    <vue-header></vue-header>
+    <main class="container dictionary pt-25 pb-15">
+      <h2>modalTest</h2>
+      <div class="container">
+        <div class="row mt-20 ml-20">
+          <button class=" btn" @click="sendPoint">登入</button>
+        </div>
+      </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+    @@include('./components/Footer.html')
+  </div>
+
+
+  @@include('./components/VueHeader.html') @@include('./components/ModalNormal.html')
+  <!--  -->
+  <script src="./assets/js/mixins/cartMixins.js"></script>
+  <!--  -->
+
+
+  <script>
+    new Vue({
+      el: '#dictionary',
+      store,
+      data() {
+        return {}
+      },
+      methods: {
+
+        sendPoint() {
+          const params = new URLSearchParams()
+          params.append('ID', this.memberId)
+
+          axios({
+            method: 'post',
+            url: 'assets/php/setMemberCoupon.php',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: params,
+          }).then((res) => {
+            console.log(res);
+          }).catch((error) => {
+            console.log(error)
+
+          })
+        },
+
+      },
+      computed: {
+
+
+        memberId() {
+
+          return this.$store.state.memberId
+
+        },
+
+
+
+      },
+      mounted() {
+
+      },
+
+
+
+
+    });
+  </script>
+</body>
+
+</html>

@@ -7,6 +7,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>memberMain</title>
@@ -21,63 +22,227 @@
     <!--  -->
     @@include('pages/MemberPage/MemberCupon.html')
     <!--  -->
-    @@include('pages/MemberPage/MemberAddress.html')
+
+    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list.sync="receiverList" key="receiverList"></member_address>
     <!--  -->
     @@include('pages/MemberPage/MemberPassword.html')
 
-    <keep-alive>
-      <modal-custom-made v-show="isModalShow" @closemodal="closeHandler">
 
-        <template #header>
-          <h2 class="modal__title modal__title--left mb-10  h3">新增地址</h2>
-        </template>
-        <template #content>
-          <!-- 自行決定要傳入什麼 -->
-          <div class="form__group block ">
-            <label for="receiverName" class="form__text mb-2 ">收件人姓名 </label>
-            <div class="form__section mb-5">
-              <input id="receiverName" type="text" class=" cart__select form__input" placeholder="王小明"
-                v-model="receiver.receiverName"></input>
-            </div>
-            <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
-            <div class="form__section mb-5">
-              <input id="receiverPhone" type="text" class="cart__select form__input" placeholder="0910-123-456"
-                v-model="receiver.receiverPhone"></input>
-            </div>
-            <label for="receiverAddresssCode" class="form__text mb-2 ">郵遞區號</label>
-            <div class="form__section mb-5">
-              <input id="receiverAddresssCode" type="email" class="cart__select form__input" placeholder="300"
-                v-model="receiver.receiverAddresssCode"></input>
-            </div>
-          </div>
-        </template>
-        <template #maintext>
-          <!-- 若有文字可以使用 ，也可以關掉-->
-          <div class="form__group ">
-            <label for="address" class="form__text ">地址</label>
-            <div class="form__section mb-5">
-              <select name="" id="" class="form__select " v-model="receiver.receiverCity">
-                <option value="" disabled>城市</option>
-                <option v-for="(num,index) of selectCity">{{num}}</option>
-              </select>
-              <select name="" id="" class="form__select " v-model="receiver.receiverTown" @change="sameAddressCode">
-                <option value="" disabled>鄉政區</option>
-                <option v-for="(num,index) of selectTown">{{num}}</option>
-              </select>
-            </div>
-            <input type="text" class="form__input  " id="address" v-model="receiver.receiverRoad"
-              placeholder="街/路/巷弄/樓層" />
-          </div>
-        </template>
-        <template #footer>
-          <div class="d-flex justify-content-end mt-3">
-            <button class="btn btn--ghost" @click="closeHandler">取消</button>
-            <button @click="saveAddress" class="btn ">完成</button>
-          </div>
-        </template>
+    <modal-custom-made v-if="isModalShow" @close-modal="closeHandler">
 
-      </modal-custom-made>
-    </keep-alive>
+      <template #header>
+        <h2 class="modal__title modal__title--left mb-10  h3">新增地址</h2>
+      </template>
+      <template #content>
+        <!-- 自行決定要傳入什麼 -->
+        <div class="form__group block ">
+          <label
+            for="receiverName"
+            class="form__text mb-2 "
+          >收件人姓名 </label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverName"
+              type="text"
+              class=" cart__select form__input"
+              placeholder="王小明"
+              v-model="receiver.receiverName"
+            ></input>
+          </div>
+          <label
+            for="receiverPhone"
+            class="form__text mb-2 "
+          >聯絡電話</label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverPhone"
+              type="text"
+              class="cart__select form__input"
+              placeholder="0910-123-456"
+              v-model="receiver.receiverPhone"
+            ></input>
+          </div>
+          <label
+            for="receiverAddresssCode"
+            class="form__text mb-2 "
+          >郵遞區號</label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverAddresssCode"
+              type="email"
+              class="cart__select form__input"
+              placeholder="300"
+              v-model="receiver.receiverAddressCode"
+            ></input>
+          </div>
+        </div>
+      </template>
+      <template #maintext>
+        <!-- 若有文字可以使用 ，也可以關掉-->
+        <div class="form__group ">
+          <label
+            for="address"
+            class="form__text "
+          >地址</label>
+          <div class="form__section mb-5">
+            <select
+              name=""
+              id=""
+              class="form__select "
+              v-model="receiver.receiverCity"
+            >
+              <option
+                value=""
+                disabled
+              >城市</option>
+              <option v-for="(num,index) of selectCity">{{num}}</option>
+            </select>
+            <select
+              name=""
+              id=""
+              class="form__select "
+              v-model="receiver.receiverTown"
+              @change="sameAddressCode"
+            >
+              <option
+                value=""
+                disabled
+              >鄉政區</option>
+              <option v-for="(num,index) of selectTown">{{num}}</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            class="form__input  "
+            id="address"
+            v-model="receiver.receiverRoad"
+            placeholder="街/路/巷弄/樓層"
+          />
+        </div>
+      </template>
+      <template #footer>
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn--ghost"
+            @click="closeHandler"
+          >取消</button>
+          <button
+            @click="saveAddress"
+            class="btn"
+          >完成</button>
+        </div>
+      </template>
+    </modal-custom-made>
+
+
+    <modal-custom-made v-if="isUpdateModalShow" @close-modal="closeHandler">
+      <template #header>
+        <h2 class="modal__title modal__title--left mb-10  h3">編輯地址</h2>
+      </template>
+      <template #content>
+        <!-- 自行決定要傳入什麼 -->
+        <div class="form__group block ">
+          <label
+            for="receiverName"
+            class="form__text mb-2 "
+          >收件人姓名 </label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverName"
+              type="text"
+              class=" cart__select form__input"
+              placeholder="王小明"
+              v-model="receiver.receiverName"
+            ></input>
+          </div>
+          <label
+            for="receiverPhone"
+            class="form__text mb-2 "
+          >聯絡電話</label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverPhone"
+              type="text"
+              class="cart__select form__input"
+              placeholder="0910-123-456"
+              v-model="receiver.receiverPhone"
+            ></input>
+          </div>
+          <label
+            for="receiverAddresssCode"
+            class="form__text mb-2 "
+          >郵遞區號</label>
+          <div class="form__section mb-5">
+            <input
+              id="receiverAddresssCode"
+              type="email"
+              class="cart__select form__input"
+              placeholder="300"
+              v-model="receiver.receiverAddressCode"
+            ></input>
+          </div>
+        </div>
+      </template>
+      <template #maintext>
+        <!-- 若有文字可以使用 ，也可以關掉-->
+        <div class="form__group ">
+          <label
+            for="address"
+            class="form__text "
+          >地址</label>
+          <div class="form__section mb-5">
+            <select
+              name=""
+              id=""
+              class="form__select "
+              v-model="receiver.receiverCity"
+            >
+              <option
+                value=""
+                disabled
+              >城市</option>
+              <option v-for="(num,index) of selectCity">{{num}}</option>
+            </select>
+            <select
+              name=""
+              id=""
+              class="form__select "
+              v-model="receiver.receiverTown"
+              @change="sameAddressCode"
+            >
+              <option
+                value=""
+                disabled
+              >鄉政區</option>
+              <option v-for="(num,index) of selectTown">{{num}}</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            class="form__input  "
+            id="address"
+            v-model="receiver.receiverRoad"
+            placeholder="街/路/巷弄/樓層"
+          />
+        </div>
+      </template>
+      <template #footer>
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn--ghost"
+            @click="closeHandler"
+          >取消</button>
+          <button
+            @click="updateCurrentAddress"
+            class="btn"
+          >完成</button>
+        </div>
+      </template>
+
+    </modal-custom-made>
+
+
+
 
 
   </div>
@@ -85,15 +250,16 @@
 
 
 
-  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
-  @@include('./components/ModalNormal.html')
-
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html')
   <script>
     new Vue({
       el: '#app',
       mixins: [inputMixins],
+      store,
       data: {
+        userData: {},
         isModalShow: false,
+        isUpdateModalShow: false,
         cuponList: [{
           disCount: 9,
           disCountText: '折',
@@ -142,14 +308,14 @@
         sexList: ['男', '女'],
         cityList: [],
         receiver: {
-          name: '',
           receiverPhone: '',
           receiverName: '',
           receiverCity: '',
           receiverTown: '',
           receiverRoad: '',
-          receiverAddresssCode: '',
+          receiverAddressCode: '',
         },
+        propsReceiver: {},
         password: {
           name: '密碼',
           text: '',
@@ -169,49 +335,186 @@
           inputClass: '',
         },
         receiverList: [],
-        defaultAddress: false,
+        receiverNewList: [],
+        // local端
+        defaultReceiverList: [],
+        updateIndex: 0,
+        addressShow: false,
+        previewImage: null,
+        defaultIndex: 0,
       },
       methods: {
-        // 若有要使用記得加上這個方法控制開關
-        openModal() {
-          if (this.isModalShow) {
-            this.isModalShow = false;
-          } else {
-            this.isModalShow = true;
-          }
+        setDefaultIndex(val) {
+
+          this.defaultIndex = val;
         },
+        openTheModal(val) {
+          this.isModalShow = true;
+        },
+        // 若有要使用記得加上這個方法控制開關
         closeHandler() {
           this.isModalShow = false;
+          this.isUpdateModalShow = false;
+        },
+        uploadImage(e) {
+          let src = event.target.files[0].name;
+          const image = e.target.files[0];
+          const reader = new FileReader();
+          reader.readAsDataURL(image);
+          reader.onload = e => {
+            // this.previewImage = e.target.result;
+            this.previewImage = `./assets/img/pic/${src}`;
+            let img = document.querySelector('#img');
+          };
         },
         handleInput() {
           const isAllCheck = this.handleRequiredCheck();
           if (isAllCheck) {
-            console.log('yes')
+            // 更新會員資料
+            let gender = 0;
+            if (this.userDetail.usersex == "男") {
+              gender = 1
+            } else {
+              gender = 2;
+            };
+            let month;
+            if (this.userDetail.userMonth.length <= 1) {
+              month = `0${this.userDetail.userMonth}`;
+            } else {
+              month = this.userDetail.userMonth;
+            };
+            let day;
+            if (this.userDetail.userDate.length <= 1) {
+              day = `0${this.userDetail.userDate}`;
+            } else if (this.userDetail.userDate.length >= 2) {
+              day = this.userDetail.userDate;
+            };
+
+            let birthDay = parseInt(this.userDetail.userYear + month + day);
+
+            let phone = parseInt(this.phone.text);
+
+            phone = '0' + phone;
+
+            // console.log(phone); 
+
+            const params = new URLSearchParams();
+            params.append('ID', parseInt(this.memberId));
+            params.append('MEMBER_NAME', this.user.text);
+            params.append('MEMBER_PHONE', phone);
+            params.append('MEMBER_GENDER', gender);
+            params.append('MEMBER_BIRTHDAY', birthDay);
+            params.append('MEMBER_PHOTO', this.previewImage);
+
+            axios({
+              method: 'post',
+              url: 'assets/php/setMemberDetail.php',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              data: params,
+            }).then((res) => {
+              console.log(res.data)
+
+
+            }).catch((error) => {
+              console.log(error)
+
+            })
+
+
+
           };
         },
         handlePasswordInput() {
           this.handlePasswordMatchCheck(this.newPassword, this.confirmPassword);
           this.handlePasswordCheck(this.password);
+
+          if (this.password.text == this.userData.password) {
+
+            if (this.newPassword.text == this.confirmPassword.text) {
+
+
+              const params = new URLSearchParams()
+              params.append('ID', parseInt(this.memberId));
+              params.append('UPDATE_PASSWORD', this.confirmPassword.text);
+
+              axios({
+                method: 'post',
+                url: 'assets/php/upDateMemberPassword.php',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: params,
+              }).then((res) => {
+                console.log(res.data)
+
+
+              }).catch((error) => {
+                console.log(error)
+
+              })
+            }
+          }
+
         },
 
         sameAddressCode() {
-          this.receiver.receiverAddresssCode = this.selectCode;
+          this.receiver.receiverAddressCode = this.selectCode;
         },
         saveAddress() {
-          this.receiverList.push(this.receiver);
-          this.isModalShow = false;
-        },
-        defaultHandler() {
 
-          if (!this.defaultAddress) {
-            this.defaultAddress = true;
-          } else {
-            this.defaultAddress = false;
-          }
+
+          this.propsReceiver = JSON.parse(JSON.stringify(this.receiver));
+          this.receiverList.push(this.propsReceiver);
+          this.isModalShow = false;
+
+
+
+          let newArray = this.receiverList.map((item) => {
+
+            return {
+              name: item.receiverName,
+              phone: item.receiverPhone,
+              road: item.receiverAddressCode + item.receiverCity + item.receiverTown + item.receiverRoad,
+              defaultAddress: this.defaultIndex,
+            }
+
+
+          });
+
+          const params = new URLSearchParams()
+          params.append('ID', this.memberId)
+          params.append('ADDRESS_ARRAY', JSON.stringify(newArray))
+
+          axios({
+            method: 'post',
+            url: 'assets/php/setMemberAddress.php',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            data: params,
+          }).then((res) => {
+            console.log(res.data)
+
+
+          }).catch((error) => {
+            console.log(error)
+
+          })
+
+
+
+
         },
-        deleteAddress(val) {
-          this.receiverList.splice(val, 1)
-        }
+        updateAddress(index, val) {
+          this.isUpdateModalShow = val;
+          this.updateIndex = index;
+        },
+        updateCurrentAddress() {
+          this.receiverList[this.updateIndex] = JSON.parse(JSON.stringify(this.receiver));
+          this.isUpdateModalShow = false;
+        },
       },
       computed: {
         inputList() {
@@ -242,11 +545,20 @@
             }
           }
           return newCode[0].zip;
-        }
+        },
+        memberId() {
+          return this.$store.state.memberId
+        },
 
       },
 
       mounted() {
+        //local address
+        // this.receiverNewList = JSON.parse(localStorage.getItem('receiverNewAddress')) || [];
+        this.defaultReceiverList = JSON.parse(localStorage.getItem('receiverAddress')) || [];
+        this.defaultAddress = JSON.parse(localStorage.getItem('receiverAddressDefault')) || false;
+
+        //地址api
         fetch('./assets/js/taiwan_districts.json', {
           method: "get"
         }).then((res) => {
@@ -254,6 +566,83 @@
         }).then((res) => {
           this.cityList = res;
         });
+
+
+
+        //三種方法
+        // axios.post('./assets/php/getMemberInfoNofunction.php', {
+        //   ID: 1,
+        // }).then((res) => {
+        //   console.log(res);
+
+        // });
+
+
+        // async function wow(url) {
+        //   try {
+        //     let result = await axios.get( // any call like get
+        //       url, // your URL
+        //       { // data if post, put
+        //         ID: 1,
+        //       }
+        //     );
+        //     console.log(result.response.data);
+        //   } catch (error) {
+        //     console.error(error.response.data); // NOTE - use "error.response.data` (not "error")
+        //   }
+
+        // }
+
+        // wow('./assets/php/getMemberInfoNofunction.php');
+
+
+
+        // axios.post('./assets/php/getMemberInfoNofunction.php', {
+        //   ID: 1,
+        // }).then((res) => {
+        //   console.log(res);
+        // }).catch((error) => {
+        //   console.log(error);
+        // });
+
+
+
+
+        const params = new URLSearchParams()
+        params.append('ID', this.memberId)
+
+
+        axios({
+          method: 'post',
+          url: 'assets/php/getMemberInfoNofunction.php',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          data: params,
+        }).then((res) => {
+          // console.log(res.data)
+          let newData;
+          newData = res.data.map((item) => {
+
+            return {
+              name: item.member_name,
+              account: item.member_account,
+              gender: item.member_gender,
+              address: item.member_address,
+              birthday: item.member_birthday,
+              phone: item.member_phone,
+              photo: item.member_photo,
+              password: item.member_pwd,
+            }
+          });
+          this.userData = newData[0];
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // console.log(this.userData.birthday !== null);
+
 
       }
     });

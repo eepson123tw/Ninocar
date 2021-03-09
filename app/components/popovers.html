@@ -1,16 +1,13 @@
 <template id="popovers">
 
-
-
   <div class="popovers">
-    <p>共<span class="popovers__cartItems">{{cartsNum}}</span>件商品</p>
-    <p>總金額：NT$<span class="popovers__totalCost">{{cartsTotalMoney}}</span></p>
+    <p>共<span class="popovers__cartItems">{{countNum}}</span>件商品</p>
+    <p>總金額：NT$<span class="popovers__totalCost">{{countTotalPrice}}</span></p>
     <div class="popovers__member">
       總需點數：
-      <p>Ni <span>200</span></p>
+      <p>Ni <span>{{countTotalPoint}}</span></p>
     </div>
   </div>
-
 </template>
 
 
@@ -18,14 +15,13 @@
 <script>
   Vue.component('popovers', {
     template: '#popovers',
-    props: ['cartsNum', 'cartsTotalMoney'],
+    mixins: [cartMixins],
     data() {
       return {}
     },
     mounted() {
 
-
-    }
+    },
 
   })
 </script>

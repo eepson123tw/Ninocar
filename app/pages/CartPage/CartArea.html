@@ -1,7 +1,7 @@
 <template id="cartArea">
 	<div
 		v-if="isExist"
-		class="py-10"
+		class="mb-10"
 	>
 		<div class="container cart">
 			<header class="row mt-20 block order-sm-1">
@@ -113,12 +113,15 @@
 						<label
 							for="productTake"
 							class="form__text mb-2 h5"
-						>選擇運送方式</label>
+						>選擇運送方式</label> <span
+							v-if="noConfirm"
+							class="form__text form__text--warning"
+						>皆為必填</span>
 						<div class="form__section mb-5">
 							<select
 								name=""
 								id="productTake"
-								class="form__select cart__select"
+								:class="classList"
 								v-model="selectShipping"
 								@change='countSendPrice'
 							>
@@ -136,7 +139,7 @@
 						<div class="form__section mb-5">
 							<select
 								id="paymentChoose"
-								class="form__select cart__select"
+								:class="classList"
 								v-model="selectPayment"
 							>
 								<option
@@ -153,15 +156,15 @@
 						<div class="form__section mb-5">
 							<select
 								id="coupon"
-								class="form__select cart__select"
-								v-model="selectCupon"
+								:class="classList"
+								v-model="selectCoupon"
 								@change='countDiscount'
 							>
 								<option
 									value=""
 									disabled
 								>請選擇</option>
-								<option v-for="(value,objvalue) of cuponList">{{value}}</option>
+								<option v-for="(value,objvalue) of couponList">{{value}}</option>
 							</select>
 						</div>
 					</div>
@@ -309,8 +312,12 @@
 
 	</div>
 	<div v-else>
-		<main class="container cart cart--maginHalf">
-			<header class="row mt-20 mb-10 order-sm-1">
+		<main class="container cart  mb-15">
+			<header class="
+			row
+			mt-20
+			mb-10
+			order-sm-1">
 				<ul class="cart__title d-flex w-100">
 					<li>購物車</li>
 					<li>單價</li>
@@ -334,15 +341,15 @@
 					<div class="cart__empty--right">
 						<p>您的購物車是空的</p>
 						<p>推薦您可透過商品分類找到喜歡的車子,或查看熱門商品</p>
-						<p><button class='btn btn--small'>熱門商品</button></p>
+						<p><a href="./product.html"><button class='btn btn--small'>熱門商品</button></a></p>
 					</div>
 				</div>
 			</div>
 		</main>
 	</div>
+
+
 </template>
-
-
 
 
 
@@ -352,28 +359,31 @@
     template: "#cartArea",
     props: ['list', 'isExist', 'current'],
     data() {
-
       return {
         //購買清單
         // buyerList: this.list,
         // 初始全部金額
         totalProductNum: null,
-        totalPointCost: null,
-        totalMoneyCost: null,
+        totalPointCost: 0,
+        totalMoneyCost: 0,
         // 目前頁面
-        currentdata: this.current,
+        currentData: this.current,
         // 折價卷種類
-        cuponList: {
-          discountOne: "註冊新會員結帳享9折優惠！",
-          discountTwo: "白金會員太牛了享8折優惠！",
-          discountThree: "老闆跳樓拉免運費！",
-          discountFour: '本月壽星你最大享5折優惠！',
+        couponList: {
+          discountOne: "全項商品不限金額結帳九折優惠！",
+          discountTwo: "結帳享買一送一",
+          discountThree: "宅配享一次免運優惠！",
+          discountFour: '本月壽星你最大享五折優惠！',
         },
         //  付款方式種類
         paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
         shippingList: ['自取', '宅配'],
+        classList: {
+          form__select: true,
+          cart__select: true,
+        },
         //選擇cupon
-        selectCupon: "",
+        selectCoupon: "",
         // 選擇payment
         selectPayment: "",
         // shipping methods
@@ -381,7 +391,7 @@
         discountPrice: 0,
         sendPrice: 0,
         finallyPrice: 0,
-
+        noConfirm: false,
       }
     },
     mounted() {
@@ -418,34 +428,63 @@
       })
 
 
-
-
-
     },
     methods: {
       pageHandler() {
-        this.currentdata += 1;
-        confirm(`確認結帳!!`);
-        this.$emit('data-handler', this.currentdata);
-        //傳送更新 store 的值
-        this.$store.commit('selectCupon', this.selectCupon);
-        this.$store.commit('selectShipping', this.selectShipping);
-        this.$store.commit('selectPayment', this.selectPayment);
-        this.$store.commit('addBuyList', this.buyerList);
-        this.$store.commit('addBuyNum', this.totalProductNum);
-        this.$store.commit('addFinalPrice', this.finallyPrice);
-        this.$store.commit('addTotalPointCost', this.totalPointCost);
-        this.$store.commit('addDiscountPrice', this.discountPrice);
-        this.$store.commit('addSendPrice', this.sendPrice);
-        this.$store.commit('addTotalMoney', this.totalMoneyCost);
+
+        if (this.selectCoupon == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else if (this.selectPayment == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else if (this.selectShipping == "") {
+          this.classList = {
+            form__select: false,
+            cart__select: true,
+            form__warning: true
+          };
+          this.noConfirm = true;
+        } else {
+          console.log(`ok`);
+          if (this.memberId == null) {
+            this.$emit('login-check', true);
+          } else {
+            this.currentData += 1;
+            this.$emit('data-handler', this.currentData);
+            //傳送更新 store 的值
+            this.$store.commit('selectCoupon', this.selectCoupon);
+            this.$store.commit('selectShipping', this.selectShipping);
+            this.$store.commit('selectPayment', this.selectPayment);
+            this.$store.commit('addBuyList', this.buyerList);
+            this.$store.commit('addBuyNum', this.totalProductNum);
+            this.$store.commit('addFinalPrice', this.finallyPrice);
+            this.$store.commit('addTotalPointCost', this.totalPointCost);
+            this.$store.commit('addDiscountPrice', this.discountPrice);
+            this.$store.commit('addSendPrice', this.sendPrice);
+            this.$store.commit('addTotalMoney', this.totalMoneyCost);
+            this.$store.commit('addGetPoints', this.countGetPoints);
+
+          }
+        };
+
+
       },
       changeNum(listIndex, e) {
 
         let chooseNum = e.target.value * 1 + 1;
         let totalPrice = this.buyerList[listIndex].price;
-        let totalpoint = this.buyerList[listIndex].points;
+        let totalPoint = this.buyerList[listIndex].points;
         let newTotalPrice = totalPrice * chooseNum;
-        let newTotalPoint = totalpoint * chooseNum;
+        let newTotalPoint = totalPoint * chooseNum;
         this.buyerList[listIndex].productNum = chooseNum;
         this.buyerList[listIndex].totalPrice = newTotalPrice;
         this.buyerList[listIndex].totalPointCost = newTotalPoint;
@@ -485,17 +524,17 @@
       },
       countDiscount() {
         // 折扣選取器
-        for (let key in this.cuponList) {
-          if (this.cuponList[key] == this.selectCupon && key == 'discountOne') {
+        for (let key in this.couponList) {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountOne') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountTwo') {
-            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.8));
+          if (this.couponList[key] == this.selectCoupon && key == 'discountTwo') {
+            this.discountPrice = Math.round((this.totalMoneyCost + this.totalPointCost) / this.totalProductNum);
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountThree') {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
             this.sendPrice = 0;
           }
-          if (this.cuponList[key] == this.selectCupon && key == 'discountFour') {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountFour') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
           }
         }
@@ -538,11 +577,12 @@
 
       },
       countGetPoints() {
-
-
         return Math.floor(this.finallyPrice / 100 + this.totalPointCost / 100);
 
-      }
+      },
+      memberId() {
+        return this.$store.state.memberId
+      },
 
 
     }

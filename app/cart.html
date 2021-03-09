@@ -10,6 +10,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.5.1/vuex.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.js'></script>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>cart</title>
@@ -24,7 +25,7 @@
 
 
     <transition name="fade" mode="out-in" v-if="carts_list">
-      <cart-area @data-handler="dataChange" :list="carts_list" :current="current_section" :is-exist="listIsExist" v-if="current_section === 0" :key=" 'index-1' + listIsExist"></cart-area>
+      <cart-area @login-check="loginHandler" @data-handler="dataChange" :list="carts_list" :current="current_section" :is-exist="listIsExist" v-if="current_section === 0" :key=" 'index-1' + listIsExist"></cart-area>
 
       <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2">
       </cart-info>
@@ -34,7 +35,7 @@
     </transition>
 
 
-    <modal-custom-made v-show="isModalShow " @closemodal="closeHandler ">
+    <modal-custom-made v-show="isModalShow " @close-modal="closeHandler ">
       <template #header>
         <!-- 傳入文字 -->
         <h2 class="modal__title  mb-10  h3">訂單成立</h2>
@@ -52,7 +53,7 @@
       <template #maintext>
         <!-- 若有文字可以使用 ，也可以關掉-->
         <div>
-          <p class="modal__text">訂單已成立，感謝您的購買！已寄一份訂單明細至您的信箱</p>
+          <p class="modal__text">訂單已成立，感謝您的購買！已寄一份訂單明細至您的購買清單列表</p>
         </div>
       </template>
       <template #footer>
@@ -60,11 +61,36 @@
       </template>
 
     </modal-custom-made>
+    <modal-custom-made v-show="noLogin" @close-modal="closeHandler">
+      <template #header>
+        <!-- 傳入文字 -->
+        <h2 class="modal__title  mb-10  h3">請先登入會員喔！</h2>
+      </template>
+      <template #content>
+        <!-- 自行決定要傳入什麼 -->
+        <div>
+          <img
+            class="mx-auto "
+            src="./assets/img/icon/icon-good.svg"
+            alt=" "
+          >
+        </div>
+      </template>
+      <template #maintext>
+        <!-- 若有文字可以使用 ，也可以關掉-->
+        <div>
+          <p class="modal__text">請先右上角，登入會員方便結帳！</p>
+        </div>
+      </template>
+      <!-- <template #footer>
+        <a href="./MemberPurchase.html"><button class="btn btn--fluid btn--outline mt-3 "></button></a>
+      </template> -->
+
+    </modal-custom-made>
 
 
 
-
-
+    @@include('./components/Footer.html')
 
 
   </div>
@@ -79,8 +105,7 @@
   <!--  -->
   @@include('./components/ModalNormal.html')
 
-  <!--  -->
-  @@include('./components/ModalNormal.html')
+
 
   <script>
     new Vue({
@@ -89,6 +114,7 @@
         listIsExist: false,
         current_section: 0,
         isModalShow: false,
+        noLogin: false,
         carts_list: [],
       },
       store,
@@ -106,7 +132,11 @@
         },
         closeHandler() {
           this.isModalShow = false;
+          this.noLogin = false;
         },
+        loginHandler(val) {
+          this.noLogin = true;
+        }
         // deleteOneItem(value) {
 
         //   this.carts_list.splice(value, 1);
@@ -120,14 +150,15 @@
       },
       computed: {
         ...Vuex.mapState({
-          selectCupon: state => state.selectCupon,
+          selectCoupon: state => state.selectCoupon,
           buyList: state => state.buyList,
           finallyPrice: state => state.finallyPrice,
           totalProductNum: state => state.totalProductNum,
           selectPayment: state => state.selectPayment,
           totalPointCost: state => state.totalPointCost,
           selectShipping: state => state.selectShipping,
-        })
+          getPoint: state => state.getPoints,
+        }),
       },
       mounted() {
         //確認有無購買
@@ -148,6 +179,21 @@
               1)}是點數商品`)
           }
         };
+
+
+        axios({
+          method: 'get',
+          url: 'assets/php/getMemberCoupon.php',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          // data: params,
+        }).then((res) => {
+          console.log(res.data)
+        }).catch((error) => {
+          console.log(error)
+        })
+
       },
     });
   </script>
