@@ -12,17 +12,19 @@
 }
 
 .item-menu {
-    width: 150px;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
 }
 .item {
     overflow: hidden;
+    width: 100%;
+    margin-left: 25px;
 }
 
 .menu-btn {
     display: block;
-    padding: 16px 20px;
+    padding: 16px 10px;
     color: black;
     position: relative;
     font-weight: bold;
@@ -36,6 +38,7 @@
     overflow: hidden;
     transition: max-height 0.3s;
     max-height: 0;
+    width: 100%;
 }
 .smenu a {
     display: block;
@@ -103,7 +106,7 @@
 }
 
 .select-style {
-    width: 100%;
+    width: 150px;
 }
 
 .card_all {
@@ -185,4 +188,21 @@
     z-index: 1;
     color: #fff;
     background-color: $secondary;
+}
+
+@media (max-width: 1920px) {
+}
+
+@media (max-width: 768px) {
+    .item-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 414px) {
+    .menu-btn {
+        padding: 0;
+    }
 }
