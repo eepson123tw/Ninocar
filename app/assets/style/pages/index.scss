@@ -53,6 +53,10 @@
         margin-top: 80px;
         margin-bottom: 220px;
 
+        @include rwd(1400px) {
+            margin-top: 40px;
+        }
+
         @include rwd-lg {
             margin-bottom: 120px;
         }
@@ -60,9 +64,14 @@
         &__car {
             position: absolute;
             width: 20%;
-            top: 42%;
+            top: 40.5%;
             left: 44%;
             z-index: 30;
+
+            @include rwd-lg {
+                top: 42.5%;
+                width: 19%;
+            }
         }
 
         &--animation {
@@ -126,7 +135,7 @@
         &__billboard {
             position: absolute;
             bottom: -22%;
-            right: 26%;
+            right: 25%;
             z-index: 60;
             @include size(220px, 371.96px);
             background: url('../../img/illust/illust-parking-billboard.svg');
@@ -144,8 +153,8 @@
 
         &__start {
             position: absolute;
-            bottom: 0;
-            left: 3%;
+            bottom: 6%;
+            left: 7%;
             z-index: 40;
             width: 25%;
         }
@@ -161,6 +170,10 @@
 
         @include rwd-xl {
             margin-top: -160px;
+        }
+
+        @include rwd-xs {
+            padding-top: 200px;
         }
 
         &__container {
@@ -294,6 +307,11 @@
         transform: translateY(-40%);
         animation: messageXShake 1s ease-in infinite;
 
+        @include rwd-xs {
+            top: -10px;
+            right: -100px;
+        }
+
         &--down {
             top: -60px;
             right: 0;
@@ -350,6 +368,8 @@
 
             @include rwd-xs {
                 font-size: 16px;
+                top: 12px;
+                left: -7px;
             }
         }
 
@@ -475,6 +495,18 @@
             top: -480px;
         }
 
+        &__turn {
+            position: relative;
+
+            @include rwd(1024px) {
+                left: -80px;
+            }
+
+            @include rwd-md {
+                left: -145px;
+            }
+        }
+
         &__road {
             width: 100%;
 
@@ -491,11 +523,33 @@
             left: 55%;
             width: 80px;
 
+            @include rwd-xl {
+                left: 85%;
+            }
+
+
 
         }
 
         &__illust__girl {
+
             animation: girlShake 3s 1s ease-in-out infinite both;
+        }
+
+        &__path {
+            @include rwd-xl {
+                stroke-width: 140;
+            }
+
+            @include rwd(1024px) {
+                stroke-width: 120;
+
+            }
+
+            @include rwd-md {
+                stroke-width: 110;
+
+            }
         }
 
 
@@ -1142,7 +1196,7 @@
         right: 10%;
 
         @include rwd-xl {
-            right: -500px;
+            right: -480px;
             height: 120px;
         }
 
@@ -1172,7 +1226,7 @@
     &__road--end {
         position: absolute;
         bottom: 20px;
-        left: 10%;
+        left: 200px;
 
         @include rwd-xl {
             opacity: 0;
@@ -1187,7 +1241,7 @@
         bottom: 20px;
         left: 0px;
         height: 120px;
-        left: -500px;
+        left: -480px;
 
         @include rwd-xl {
             display: block;
