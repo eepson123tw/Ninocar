@@ -28,6 +28,7 @@
       <div class="container">
         <div class="row mt-20 ml-20">
           <button class=" btn" @click="sendPoint">登入</button>
+          <button class="btn">更新目前會員費狀態</button>
         </div>
       </div>
     </main>
@@ -56,6 +57,7 @@
     new Vue({
       el: '#dictionary',
       store,
+      mixins: [cartMixins],
       data() {
         return {}
       },
@@ -80,17 +82,14 @@
           })
         },
 
+
       },
       computed: {
 
 
         memberId() {
-
           return this.$store.state.memberId
-
         },
-
-
 
       },
       mounted() {

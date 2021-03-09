@@ -614,13 +614,13 @@
 
         axios({
           method: 'post',
-          url: 'assets/php/getMemberInfoNofunction.php',
+          url: 'assets/php/getMemberInfoNoFunction.php',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           data: params,
         }).then((res) => {
-          // console.log(res.data)
+          console.log(res.data)
           let newData;
           newData = res.data.map((item) => {
 

@@ -7,7 +7,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js' integrity='sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==' crossorigin='anonymous'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>factory</title>
@@ -308,6 +308,7 @@
                             <input type="hidden" class="putPrice" name="workPrice" value="">
                             <input type="hidden" class="putAllIndex" name="allIndex" value="">
                             <input type="hidden" class="putImgPath" name="imgPath" value="">
+                            <input type="hidden" class="putMemberId" name="memberId" value="">
                         </div>
                     </form>
                 </div>
@@ -970,8 +971,12 @@
                 },
                 toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
                     this.countStep += 1;
-                    console.log('下')
-                    console.log(this.countStep)
+                    // console.log('下')
+                    // console.log(this.countStep)
+
+                    if(this.countStep & 5 > 0){
+                        $('.putMemberId').val(this.$store.state.memberId)
+                    }
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
                     // console.log(this.docW)
                 
@@ -1527,12 +1532,12 @@
                     $('.putAllIndex').val(`${allIndex}`)
 
                     //在.putImgPath設置val，之後寫進product_img用  //2個==不是不會比較型別嗎?
-                    if(allIndex == '220203' || allIndex == '220230' || allIndex == '320203' || allIndex == '320230'){
+                    if(allIndex == '000023' || allIndex == '000032'){
                         $('.putImgPath').attr('value', './assets/img/pic/model001.png')
                     }else if(allIndex == '00401'){
                         // console.log('aaaaakoko')
                         $('.putImgPath').val('./assets/img/pic/model002.png')
-                    }else if(allIndex == '22233' || allIndex == '32233'){
+                    }else if(allIndex == '22234' || allIndex == '33234' || allIndex == '22243' || allIndex == '33243'){
                         $('.putImgPath').attr('value', './assets/img/pic/model003.png')
                     }
                 
@@ -3014,6 +3019,7 @@
                 let workPrice = $('.putPrice').attr('value')
                 let allIndex = $('.putAllIndex').attr('value')
                 let imgPath = $('.putImgPath').attr('value')
+                let memberId = $('.putMemberId').attr('value')
 
 
                 $.ajax({            
@@ -3027,6 +3033,7 @@
                         "workPrice":workPrice,
                         "allIndex":allIndex,
                         "imgPath":imgPath,
+                        "memberId": memberId,
 
                     },            
 		    		success: function (result) {

@@ -358,6 +358,7 @@
   Vue.component('cartArea', {
     template: "#cartArea",
     props: ['list', 'isExist', 'current'],
+    mixins: [cartMixins],
     data() {
       return {
         //購買清單
@@ -432,31 +433,34 @@
     methods: {
       pageHandler() {
 
-        if (this.selectCoupon == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
-        } else if (this.selectPayment == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
-        } else if (this.selectShipping == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
+        if (this.memberId == null) {
+          this.$emit('login-check', true);
+          return
+        }
+        if (this.memberCurrentPoint < this.countTotalPoint) {
+          alert(`您所擁有的會員點數不足！！！`);
         } else {
-          console.log(`ok`);
-          if (this.memberId == null) {
-            this.$emit('login-check', true);
+          if (this.selectCoupon == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectPayment == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectShipping == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
           } else {
             this.currentData += 1;
             this.$emit('data-handler', this.currentData);
@@ -476,8 +480,8 @@
           }
         };
 
-
       },
+
       changeNum(listIndex, e) {
 
         let chooseNum = e.target.value * 1 + 1;
@@ -583,7 +587,9 @@
       memberId() {
         return this.$store.state.memberId
       },
-
+      memberCurrentPoint() {
+        return this.$store.state.memberCurrentPoint
+      }
 
     }
 

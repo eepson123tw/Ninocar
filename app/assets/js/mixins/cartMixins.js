@@ -4,6 +4,7 @@ let cartMixins = {
       cartsList: [],
       productsList: [],
       cartNum: 0,
+      memberPoints: 0,
       selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
       seriesList: [{
         eName: "EN",
@@ -36,9 +37,16 @@ let cartMixins = {
 
   methods: {
     addCarts(val) {
+
+
+
+
       this.cartsList.push(val);
       let cartJson = JSON.stringify(this.cartsList);
       localStorage.setItem('cartsList', cartJson);
+
+
+
       //   const runcart = new TimelineMax({});
       //   runcart.to('.box', .3, {
       //     x: 500,
@@ -65,14 +73,17 @@ let cartMixins = {
       //   })
 
     },
-    addDiyCarts(val) {},
+    addDiyCarts(val) {
+
+
+    },
+    currentProduct() {},
   },
   computed: {
     countNum() {
       return this.cartsList.length;
     },
     countTotalPrice() {
-
       let total = 0;
       for (let num in this.cartsList) {
         total += this.cartsList[num].price;
@@ -86,7 +97,6 @@ let cartMixins = {
       }
       return total;
     },
-
   },
   mounted() {
 
@@ -130,6 +140,34 @@ let cartMixins = {
       this.productsList = newList;
     });
     this.cartsList = JSON.parse(localStorage.getItem('cartsList')) || [];
+
+
+
+    // 抓取會員現有點數
+    const params = new URLSearchParams()
+    params.append('ID', this.memberId)
+
+    axios({
+      method: 'post',
+      url: 'assets/php/getMemberPoints.php',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: params,
+
+    }).then((res) => {
+
+      let memberPoints = res.data[0]['member_points'];
+
+      this.memberPoints = parseInt(memberPoints);
+      console.log('目前會員點數', this.memberPoints);
+      this.$store.commit('setMemberPoint', this.memberPoints);
+
+    }).catch((error) => {
+      console.log(error)
+
+    })
+
   },
   watch: {
     cartsList: {

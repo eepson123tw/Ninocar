@@ -10,9 +10,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="./assets/css/all.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
+    <script src="./assets/js/all.js"></script>
     <script src="./assets/js/utils.js"></script>
+    <link rel="stylesheet" href="./assets/css/all.css">
     <link rel="stylesheet" href="./assets/css/pages/product.css">
     <title>product</title>
 </head>
@@ -22,185 +23,95 @@
     <div id="app">
         <vue-header></vue-header>
 
-        @@include('./pages/ProductPage/ProductNav.html')
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-        <!-- <page-filter></page-filter> -->
+    @@include('./pages/ProductPage/ProductNav.html')
+        
         <!-- your code here... -->
+    
     </div>
-
     @@include('./components/VueHeader.html')
-    <script src="./assets/js/new.js"></script>
-
+    <script src="./assets/js/mixins/cartMixins.js"></script>
+    
     <script>
-        Vue.component('page-filter', {
-
-            template: `<h1>1111</h1>`,
-
-
-        })
-
-
         new Vue({
             el: '#app',
+            mixins: [cartMixins],
             data: {
-                arrayData: [{
-                    productName: 'Audi R8 奧迪小客車',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '馬自達cx-5',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }, {
-                    productName: '鈴木居米',
-                    price: 195,
-                    img: " ./assets/img/pic/3.jpg ",
-                    seriousNum: '01',
-                    pointProduct: false
-                }],
-                filter: '',
-                currentPage: 0,
-                newData: [],
-
-            },
-            methods: {
-                prev() {
-                    const vm = this;
-                    if (vm.currentPage === 0) {
-                        vm.currentPage = 0
-                    } else {
-                        vm.currentPage--
-                    }
-                },
-                next() {
-                    const vm = this;
-                    if (vm.currentPage === vm.newData.length - 1) {
-                        vm.currentPage = vm.newData.length - 1
-                    } else {
-                        vm.currentPage++
-                    }
-                }
+                rows: [],
+                countOfPage: 10,
+                currPage: 1,
+                filter_name: '',
+                filter:'',
+                newData:[],
+                isReverse:false,
+                sort:'',
+                type:'',
             },
             computed: {
-                page() {
-                    const vm = this;
-                    let category = '';
-                    return vm.data.reduce((prev, curr) => {
-                        if (curr.category !== category) {
-                            prev.push(curr.category);
-                        }
-                        category = curr.category;
-                        return prev
-                    }, [])
+                filteredRows(){
+                var filter_name = this.filter_name.toLowerCase();
+
+                return ( this.filter_name.trim() !== '' ) ? 
+                this.rows.filter(function(d){ return d.name.toLowerCase().indexOf(filter_name) > -1; }) : 
+                this.rows;
+                },
+                pageStart(){
+                return (this.currPage - 1) * this.countOfPage;
+                },
+                totalPage(){
+                return Math.ceil(this.filteredRows.length / this.countOfPage);
+                },
+                
+                sortArray() {
+                let vm = this;
+                return vm.productsList.sort(function (a, b) {
+                    a = a[vm.sort];
+                    b = b[vm.sort];
+                    if (vm.isReverse) {
+                        return a - b;
+                    } else if (!vm.isReverse) {
+                        return b - a;
+                    } else {
+                        return;
+                    }
+                });
+    
+                }, //conputed
+
+                
+            },
+
+            methods: {
+                setPage(productId){
+                // if( index <= 0 || index > this.totalPage ){}
+                this.currPage = productId;
+                },
+                changeHandler(){    
+                    let i = this.sort;
+                    if(this.type == i){
+                        a - b;
+                    } else if(this.type == !i) {
+                        b - a;
+                    }
+
                 },
 
-                filterData() {
-                    const vm = this;
-                    vm.currentPage = 0;
-                    let tempData = [];
-                    vm.newData = [];
-                    tempData = vm.arrayData.filter((item) => {
-                        if (vm.filter === '') {
-                            return vm.arrayData
-                            console.log(item)
-                        } else if (vm.filter === item.category) {
-                            return item
-                        }
-                    });
+            
 
-                    tempData.forEach((item, i) => {
-                        <<
-                        <<
-                        << < HEAD
-                        if (i % 2 == 0) {
-                            vm.newData.push([]);
-                        }
-                        const pagenum = parseInt(i / 2);
-                        vm.newData[pagenum].push(item); ===
-                        ===
-                        =
-                        if (i % 6 == 0) {
-                            vm.newData.push([]);
-                        }
-                        const pagenum = parseInt(i / 6);
-                        vm.newData[pagenum].push(item); >>>
-                        >>>
-                        > bensoen
-                    })
-                    return vm.newData;
-                }
             },
-        });
+            created(){
+                let self = this;
+                $.get('productsList', function(res){
+                    self.rows = res;
+                });
+            },
+            watch:{
+
+                type:'changeHandler',
+
+            },
+            
+        })
+        
     </script>
 
 
