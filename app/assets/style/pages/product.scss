@@ -9,22 +9,6 @@
     font-family: sans-serif;
     list-style: none;
     text-decoration: none;
-<<<<<<< HEAD
-}
-
-.item-menu {
-    width: 150px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-.item {
-    overflow: hidden;
-}
-
-.menu-btn {
-    display: block;
-    padding: 16px 20px;
-=======
 }
 
 .item-menu {
@@ -41,7 +25,6 @@
 .menu-btn {
     display: block;
     padding: 16px 10px;
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
     color: black;
     position: relative;
     font-weight: bold;
@@ -55,10 +38,7 @@
     overflow: hidden;
     transition: max-height 0.3s;
     max-height: 0;
-<<<<<<< HEAD
-=======
     width: 100%;
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
 }
 .smenu a {
     display: block;
@@ -209,8 +189,6 @@
     color: #fff;
     background-color: $secondary;
 }
-<<<<<<< HEAD
-=======
 
 @media (max-width: 1920px) {
 }
@@ -232,4 +210,3 @@
         margin: 0px;
     }
 }
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
