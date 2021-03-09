@@ -8,14 +8,15 @@
   $inspiration = $_POST['inspiration']; //product_des OK
   $workPostTime = $_POST['workPostTime']; //board_id
   $workPrice = $_POST['workPrice']; //OK
-  // $userNickName = $_POST['userNickName'];
-  $imgPath = $_POST['imgPath'];
+  // $userNickName = $_POST['userNickName'];  //好像用不到?
+  $imgPath = $_POST['imgPath']; //OK
+  $memberId = $_POST['memberId'];//OK
 
 
 
   //建立SQL，將試著將資料寫入資料庫
   $sql0 = "INSERT INTO product(product_name, product_img, product_series, product_spec, product_seriesid, product_price, product_des, product_type) VALUES('".$workName."', '".$imgPath."', 8, 5, '".$allIndex."', '".$workPrice."', '".$inspiration."', 0)";
-  $sql = "INSERT INTO customize(product_id, board_id, member_id, product_name, product_img, product_price, product_des, product_type) VALUES (1, 9999, 1, '".$workName."','".$imgPath."', '".$workPrice."', '".$inspiration."', 0)";
+  $sql = "INSERT INTO customize(product_id, board_id, member_id, product_name, product_img, product_price, product_des, product_type) VALUES (1, 9999, '".$memberId."', '".$workName."','".$imgPath."', '".$workPrice."', '".$inspiration."', 0)";
 
   $statement0=$Util->getPDO()->prepare($sql0);
   $statement=$Util->getPDO()->prepare($sql);
