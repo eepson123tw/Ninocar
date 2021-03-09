@@ -1,7 +1,11 @@
 const store = new Vuex.Store({ //global store
   state: { //類似 new Vue() 裡面的data
     memberId: null,
+<<<<<<< HEAD
     memberCurrentPoint: null,
+=======
+    isLoginModalShow: false,
+>>>>>>> gulp
     seriesList: [{
       name: '工程系',
       eName: 'EN',
@@ -47,6 +51,9 @@ const store = new Vuex.Store({ //global store
 
     setMemberId(state, id) {
       state.memberId = id;
+    },
+    setLoginModalShow(state, order) {
+      state.isLoginModalShow = order;
     },
     testVueXConnect() {
       console.log('connecting')

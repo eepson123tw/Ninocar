@@ -24,7 +24,7 @@
 
 <body>
     <div id="app" v-cloak>
-        <vue-header></vue-header>
+        <vue-header :modal-state-content.sync="modalStateContent"></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
             @@include('./pages/HomePage/HomeProductSection.html')
@@ -53,6 +53,7 @@
                 isCarNearGirl: false,
                 isCTAShow: false,
                 swiperMountain: null,
+                modalStateContent: 'login-content'
             },
             computed: {
                 seriesList() {
@@ -70,6 +71,10 @@
                 },
             },
             methods: {
+                handleLoginModalShow() {
+                    this.modalStateContent = 'sign-up-content'
+                    this.$store.commit('setLoginModalShow', true);
+                },
                 handleGirlClick() {
                     if (this.isCarNearGirl) {
                         this.isCTAShow = true;
