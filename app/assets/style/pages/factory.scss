@@ -755,13 +755,14 @@
     {
         display: block;
     }
-    .userPic {
-        margin: 0 auto;
-        margin-right: 16px;
-    }
-
-    .userContent{
-        width: 100%;
+    .user{
+        &Pic{
+            margin: 0 auto;
+            margin-right: 12px;
+        }
+        &Content{
+            width: 100%;
+        }
     }
 
     .work_author .userPic{
@@ -776,6 +777,44 @@
         margin: 0 auto;
         display: flex;
         margin-bottom: 8px;
+    }
+
+    .editTextArea{
+        display: none;
+    }
+
+    .explanation, .circle{
+        margin-right: 120px;
+    }
+
+    .tipArea{
+        margin-bottom: 1px;
+    }
+
+    .layer{
+        &2{
+            top: -112px;
+        }
+
+        &3{
+            top:-225px;
+        }
+
+        &4{
+            top: -337px;
+        }
+    }
+
+    .btn--publicMyWork{
+        top: -440px;
+    }
+
+    .putMywork .work_pic{
+        margin-bottom: -69px;
+    }
+
+    .replyerName{
+        margin-bottom: 2px;
     }
 }
 
@@ -905,5 +944,9 @@
         margin-bottom: 4px;
     }
 
+    .previousStep{
+        display: flex;
+        align-items: center;
+    }
 
 }

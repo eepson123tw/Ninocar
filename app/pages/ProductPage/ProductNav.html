@@ -1,63 +1,64 @@
-<div class="row">
-    <div class="col-3 d-lg-flex">
-        <div class="item-menu">
-            <li class="item" id="all-items">
-                <a href="#all-items" class="menu-btn">全部商品</a>
-                <div class="smenu">
-                    <a href="#">轎車系</a>
-                    <a href="#">工程車系</a>
-                    <a href="#">RV休旅車系</a>
-                    <a href="#">計程車系</a>
-                    <a href="#">巴士系</a>
-                    <a href="#">警車系</a>
-                    <a href="#">消防系</a>
-                    <a href="#">救護系</a>
-                    <a href="#">Premium系</a>
-                </div>
-            </li>
+<div class="container">
+    <div class="row">
+        <div class="col-3 col-lg-6 col-sm-6">
+            <div class="item-menu">
+                <li class="item" id="all-items">
+                    <a href="#all-items" class="menu-btn">全部商品</a>
+                    <div class="smenu">
+                        <a href="#">轎車系</a>
+                        <a href="#">工程車系</a>
+                        <a href="#">RV休旅車系</a>
+                        <a href="#">計程車系</a>
+                        <a href="#">巴士系</a>
+                        <a href="#">警車系</a>
+                        <a href="#">消防系</a>
+                        <a href="#">救護系</a>
+                        <a href="#">Premium系</a>
+                    </div>
+                </li>
 
-            <li class="item" id="year-items">
-                <a href="#year-items" class="menu-btn">年份分車</a>
-                <div class="smenu">
-                    <a href="#">1970</a>
-                    <a href="#">1990</a>
-                    <a href="#">2010</a>
-                </div>
-            </li>
+                <li class="item" id="year-items">
+                    <a href="#year-items" class="menu-btn">年份分車</a>
+                    <div class="smenu">
+                        <a href="#">1970</a>
+                        <a href="#">1990</a>
+                        <a href="#">2010</a>
+                    </div>
+                </li>
 
-            <li class="item" id="new-items">
-                <a href="#new-items" class="menu-btn">最新商品</a>
-                <div class="smenu">
-                    <a href="#">Audi TT Coupe</a>
-                    <a href="#">Lamborghini Urus</a>
-                </div>
-            </li>
+                <li class="item" id="new-items">
+                    <a href="#new-items" class="menu-btn">最新商品</a>
+                    <div class="smenu">
+                        <a href="#">Audi TT Coupe</a>
+                        <a href="#">Lamborghini Urus</a>
+                    </div>
+                </li>
 
-            <li class="item" id="hot-items">
-                <a href="#hot-items" class="menu-btn">熱門商品</a>
-                <div class="smenu">
-                    <a href="#">Audi TT Coupe</a>
-                    <a href="#">Lamborghini Urus</a>
-                </div>
-            </li>
+                <li class="item" id="hot-items">
+                    <a href="#hot-items" class="menu-btn">熱門商品</a>
+                    <div class="smenu">
+                        <a href="#">Audi TT Coupe</a>
+                        <a href="#">Lamborghini Urus</a>
+                    </div>
+                </li>
 
-            <li class="item" id="hightlight-items">
-                <a href="#hightlight-items" class="menu-btn">本月主打</a>
-                <div class="smenu">
-                    <a href="#">Audi TT Coupe</a>
-                    <a href="#">Lamborghini Urus</a>
-                </div>
-            </li>
+                <li class="item" id="hightlight-items">
+                    <a href="#hightlight-items" class="menu-btn">本月主打</a>
+                    <div class="smenu">
+                        <a href="#">Audi TT Coupe</a>
+                        <a href="#">Lamborghini Urus</a>
+                    </div>
+                </li>
 
-            <li class="item" id="point-items">
-                <a href="#point-items" class="menu-btn">點數限定</a>
-                <div class="smenu">
-                    <a href="#">Audi TT Coupe</a>
-                    <a href="#">Lamborghini Urus</a>
-                </div>
-            </li>
-        </div>
-        <!-- <div class="product__header">
+                <li class="item" id="point-items">
+                    <a href="#point-items" class="menu-btn">點數限定</a>
+                    <div class="smenu">
+                        <a href="#">Audi TT Coupe</a>
+                        <a href="#">Lamborghini Urus</a>
+                    </div>
+                </li>
+            </div>
+            <!-- <div class="product__header">
             <div class="product__over">
                 <p class="product__header_body">全部商品</p>
                 <ul class="product__header_series">
@@ -83,51 +84,50 @@
                 <p class="product__header_body">點數限定</p>
             </div>
         </div> -->
-    </div>
+        </div>
 
-    <ul class="col-9" style="margin-top: 200px">
-        <div class="row">
-            <div class="col-9">
-                <select class="area" v-model="filter">
-                    <option value="" disabled>-- 請選擇 --</option>
-                    <option value="依上架時間">最新上架</option>
-                    <option value="依價格">依價格(由高至低)</option>
-                    <option value="依價格">依價格(由低至高)</option>
-                    <option value="依銷售度">熱門銷售</option>
-                </select>
-            </div>
-
-            <ul class="col-9">
-                <div class="row">
-                    <li class="col-4 col-xl-4 col-lg-6 col-sm-4" v-for="(item,index) in arrayData">
-                        <!--card-->
-
-                        <a href="itemdetail.html" class="card">
-                            <div class="card__header">
-                                <img :src="item.img" />
-                                <div class="card__carID bg-series-BS">BS<span>{{item.seriousNum}}</span></div>
-                                <span class="card__label">本月主打</span>
-                            </div>
-                            <div class="card__body">
-                                <h2 class="card__title">{{item.productName}}</h2>
-                                <div class="card__details">
-                                    <p class="card__price">NT$ <span>{{item.price}}</span></p>
-                                    <button class="card__link">收藏</button>
-                                </div>
-                            </div>
-                            <button class="btn btn--fluid btn--outline">加入購物車</button>
-                        </a>
-                    </li>
-                    <!---->
+        <ul class="col-9" style="margin-top: 200px">
+            <div class="row">
+                <div class="col-9">
+                    <select class="area" v-model="filter">
+                        <option value="" disabled>-- 請選擇 --</option>
+                        <option value="依上架時間">最新上架</option>
+                        <option value="依價格">依價格(由高至低)</option>
+                        <option value="依價格">依價格(由低至高)</option>
+                        <option value="依銷售度">熱門銷售</option>
+                    </select>
                 </div>
-            </ul>
-            <!---- 頁籤 ---->
-            <ul class="col-12">
-                <div class="row">
-                    <div class="page col-4 col-xl-12 col-lg-6 col-sm-12 justify-content-center">
-                        <div class="page_btn_nb"></div>
+
+                <ul class="col-9">
+                    <div class="row">
+                        <li class="col-4 col-xl-4 col-lg-6 col-sm-4" v-for="(item,index) in arrayData">
+                            <!--card-->
+
+                            <a href="itemdetail.html" class="card">
+                                <div class="card__header">
+                                    <img :src="item.img" />
+                                    <div class="card__carID bg-series-BS">BS<span>{{item.seriousNum}}</span></div>
+                                    <span class="card__label">本月主打</span>
+                                </div>
+                                <div class="card__body">
+                                    <h2 class="card__title">{{item.productName}}</h2>
+                                    <div class="card__details">
+                                        <p class="card__price">NT$ <span>{{item.price}}</span></p>
+                                        <button class="card__link">收藏</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn--fluid btn--outline">加入購物車</button>
+                            </a>
+                        </li>
+                        <!---->
                     </div>
-                    <div id="app">
+                </ul>
+                <!---- 頁籤 ---->
+                <!-- <ul class="col-12">
+                    <div class="row">
+                        <div class="page col-4 col-lg-6 col-sm-12 justify-content-center">
+                            <div class="page_btn_nb"></div>
+                        </div>
                         <nav aria-label="...">
                             <ul class="d-flex pagination">
                                 <li class="page-item disabled">
@@ -163,8 +163,8 @@
                             </ul>
                         </nav>
                     </div>
-                </div>
-            </ul>
-        </div>
-    </ul>
+                </ul> -->
+            </div>
+        </ul>
+    </div>
 </div>

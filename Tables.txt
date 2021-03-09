@@ -40,7 +40,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `team1`.`board`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `team1`.`board` (
-  `board_id` INT NOT NULL AUTO_INCREMENT COMMENT '留言板編號',
+  `board_id` INT NOT NULL COMMENT '留言板編號',
   `board_date` DATE NOT NULL COMMENT '發佈日期',
   `board_type` TINYINT NOT NULL DEFAULT '0' COMMENT '留言板狀態（0：預設 1：封鎖）',
   PRIMARY KEY (`board_id`))
@@ -170,9 +170,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`customize` (
     REFERENCES `team1`.`member` (`member_id`),
   CONSTRAINT `product_id3`
     FOREIGN KEY (`product_id`)
-    REFERENCES `team1`.`product` (`product_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `team1`.`product` (`product_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
