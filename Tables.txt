@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`member` (
   `member_account` VARCHAR(65) NOT NULL COMMENT '會員帳號（信箱）',
   `member_pwd` VARCHAR(15) NOT NULL COMMENT '會員密碼',
   `member_gender` INT NOT NULL DEFAULT '0' COMMENT '性別（0：預設 1：男 2：女）',
-  `member_phone` INT NULL DEFAULT NULL COMMENT '手機號碼',
+  `member_phone` INT NULL DEFAULT NULL COMMENT '聯絡號碼',
   `member_address` VARCHAR(200) NULL DEFAULT NULL COMMENT '聯絡地址',
   `member_cost` INT NULL DEFAULT NULL COMMENT '累積消費',
   `member_photo` VARCHAR(200) NULL DEFAULT NULL COMMENT '大頭貼',
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`member` (
   `member_birthday` DATE NULL DEFAULT NULL COMMENT '會員生日',
   `member_signdate` DATETIME NOT NULL COMMENT '註冊日期',
   `member_upgradedate` DATETIME NULL DEFAULT NULL COMMENT '最後升等日期',
-  `member_type` TINYINT NOT NULL DEFAULT '0' COMMENT '會員狀態（0：預設 1：封鎖）',
+  `member_type` TINYINT NOT NULL DEFAULT '0' COMMENT '會員狀態（0：開通 1：封鎖）',
   PRIMARY KEY (`member_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`comment` (
   `member_id` INT NOT NULL COMMENT '會員編號',
   `comment_content` VARCHAR(30) NOT NULL COMMENT '留言內容',
   `comment_date` DATETIME NOT NULL COMMENT '留言時間',
-  `comment_type` TINYINT NOT NULL DEFAULT '0' COMMENT '留言狀態（0：預設 1：封鎖）',
+  `comment_type` TINYINT NOT NULL DEFAULT '0' COMMENT '留言狀態（0：正常 1：封鎖）',
   PRIMARY KEY (`comment_id`),
   CONSTRAINT `board_id`
     FOREIGN KEY (`board_id`)
@@ -150,8 +150,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `team1`.`customize`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `team1`.`customize` (
-  `customize_id` INT NOT NULL AUTO_INCREMENT COMMENT '客製商品編號（無意義）',
-  `product_id` INT NOT NULL COMMENT '商品編號',
+  `customize_id` INT NOT NULL AUTO_INCREMENT COMMENT '客製商品編號',
   `board_id` INT NOT NULL COMMENT '留言板編號',
   `member_id` INT NOT NULL COMMENT '會員編號',
   `product_spec` TINYINT NOT NULL DEFAULT '5' COMMENT '特殊分類（0：一般商品 1：熱門商品  2：本月主打 3：最新商品 4:點數限定  5:客製化商品 ）',
@@ -159,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`customize` (
   `product_img` VARCHAR(500) NOT NULL COMMENT '商品圖（主）',
   `product_price` INT NULL DEFAULT NULL COMMENT '商品價格',
   `product_points` INT NULL DEFAULT NULL COMMENT '點數售價',
+  `customize_part` VARCHAR(500) NULL COMMENT '客製配件',
   `product_des` VARCHAR(200) NOT NULL COMMENT '商品描述',
   `product_type` TINYINT NOT NULL DEFAULT '0' COMMENT '商品狀態（0：預設 1：封鎖 2：刪除）',
   PRIMARY KEY (`customize_id`),
@@ -167,10 +167,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`customize` (
     REFERENCES `team1`.`board` (`board_id`),
   CONSTRAINT `member_id4`
     FOREIGN KEY (`member_id`)
-    REFERENCES `team1`.`member` (`member_id`),
-  CONSTRAINT `product_id3`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `team1`.`product` (`product_id`))
+    REFERENCES `team1`.`member` (`member_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -261,4 +258,20 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO `team1`.`admin`(`admin_account`, `admin_pwd`, `admin_signdate`) VALUES ('pdo','pdo',NOW());
+INSERT INTO `team1`.`admin`(`admin_id`, `admin_account`, `admin_pwd`, `admin_signdate`) VALUES ('1','demo','demo',NOW());
+
+INSERT INTO member
+(member_account, member_pwd, member_name, member_signdate)
+ VALUES ('jackjohnton789@gmail.com','1234567','匿名',NOW());
+
+INSERT INTO team1.board 
+(`board_id`, `board_date`)
+ VALUES (1,NOW());
+
+INSERT INTO team1.comment 
+(`member_id`, `board_id`, `comment_content`, `comment_date`)
+ VALUES ('1','1','渾蛋智障',NOW());
+
+INSERT INTO team1.order 
+(`member_id`, `order_cost`, `order_points`, `order_gain`, `pay_type`, `order_type` , `order_date`)
+ VALUES ('1','1000','0','1000','0','0',NOW());
