@@ -1,6 +1,7 @@
 const store = new Vuex.Store({ //global store
   state: { //類似 new Vue() 裡面的data
     memberId: null,
+    memberCurrentPoint: null,
     seriesList: [{
       name: '工程系',
       eName: 'EN',
@@ -50,6 +51,10 @@ const store = new Vuex.Store({ //global store
     testVueXConnect() {
       console.log('connecting')
     },
+    setMemberPoint(state, point) {
+      state.memberCurrentPoint = point;
+    },
+
 
 
     //cart購物車 store 
