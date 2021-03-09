@@ -15,5 +15,4 @@ $statement->bindValue(1, $PID);
 $statement->execute();
 
 //導頁
-//header("Location: Index.php");
 echo "<script>alert('商品已刪除!'); location.href = 'commodity.php';</script>";

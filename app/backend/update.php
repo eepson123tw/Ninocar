@@ -56,19 +56,19 @@ $data = $statement->fetchAll();
         <div class="block-responsive">
             <main>
                 <form method="post" action="ProductCreateR.php" enctype="multipart/form-data">
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品名稱：</p>
                         <input type="text" name="name" id="name">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品名稱(英)：</p>
                         <input type="text" name="ename">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品主圖：</p>
                         <input type="file" name="img" id="img">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品狀態：</p>
                         <select name="productType" id="">
                             <option value="0">預設</option>
@@ -76,15 +76,15 @@ $data = $statement->fetchAll();
                             <option value="2">刪除</option>
                         </select>
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品金額：</p>
                         <input type="text" name="price" id="price">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品點數：</p>
                         <input type="text" name="point" id="point">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品分類：</p>
                         <select name="category" id="category">
                             <option value="">請選擇</option>
@@ -98,11 +98,11 @@ $data = $statement->fetchAll();
                             <option value="8">PREMIUM系</option>
                         </select>
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品分類編號：</p>
                         <input type="text" name="cateId" id="cateId">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品分類二：</p>
                         <select name="category2" id="category2">
                             <option value="">請選擇</option>
@@ -114,15 +114,15 @@ $data = $statement->fetchAll();
                             <option value="5">客製化商品</option>
                         </select>
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品尺寸：</p>
                         <input type="text" name="size">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品年份：</p>
                         <input type="text" name="year">
                     </div>
-                    <div class="update mb-3">
+                    <div class="update mb-4">
                         <p>商品描述：</p>
                         <textarea name="des" id="" cols="30" rows="10"></textarea>
                     </div>
