@@ -397,8 +397,25 @@ td {
         cursor: pointer;
         background: $primary-light;
         color: $black;
+        transition: 0.5s;
         &:hover {
           background: $primary;
+        }
+      }
+      a {
+        font-size: 0.85rem;
+        text-align: center;
+        width: 5rem;
+        padding: 5px 15px;
+        border-radius: 50px;
+        border: 2px solid $black;
+        cursor: pointer;
+        background: transparent;
+        color: $black;
+        transition: 0.5s;
+        &:hover {
+          background: $gray-300;
+          border: 2px solid transparent;
         }
       }
     }

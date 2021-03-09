@@ -212,6 +212,7 @@ $data = $statement->fetchAll();
 
                         <div class="update mb-5">
                             <button type="submit" class="" onclick="return doSubmit();">送出</button>
+                            <a href="ProductDelete.php?PID=<?= $row["product_id"] ?>" class="ml-5" onclick="javascript: if(confirm('確定刪除?')){ return true; } else { return false; }">刪除</a>
                         </div>
                     </form>
                 </main>
