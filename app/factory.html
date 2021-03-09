@@ -307,6 +307,7 @@
                             <input type="hidden" class="putDataId" name="workPostTime" value="" >
                             <input type="hidden" class="putPrice" name="workPrice" value="">
                             <input type="hidden" class="putAllIndex" name="allIndex" value="">
+                            <input type="hidden" class="putImgPath" name="imgPath" value="">
                         </div>
                     </form>
                 </div>
@@ -1513,19 +1514,27 @@
                     //進度條、圓圈變色
                     $('.content:nth-child(4) .circle').addClass('circle--able')
                     $('.content:nth-child(4) .circle').addClass('circle--active')
-                
-                
+
                     if (docW > 1003) {
                         $('.bar-front').width(730)
                     } else if (docW <= 1003) {
                         $('.bar-front').width(660)
                     }
+
                 } else if (countStep % 5 == 4) {
                     $('.putDataId').val(`${postTime}`)
                     $('.putPrice').val(`${stage4Price}`)
                     $('.putAllIndex').val(`${allIndex}`)
 
-                    // console.log(countStep)
+                    //在.putImgPath設置val，之後寫進product_img用  //2個==不是不會比較型別嗎?
+                    if(allIndex == '220203' || allIndex == '220230' || allIndex == '320203' || allIndex == '320230'){
+                        $('.putImgPath').attr('value', './assets/img/pic/model001.png')
+                    }else if(allIndex == '00401'){
+                        // console.log('aaaaakoko')
+                        $('.putImgPath').val('./assets/img/pic/model002.png')
+                    }else if(allIndex == '22233' || allIndex == '32233'){
+                        $('.putImgPath').attr('value', './assets/img/pic/model003.png')
+                    }
                 
                     $('.nextStep').addClass('btn--disabled').text('完成')
                     $('.nextStep').addClass('finish')
@@ -3004,6 +3013,7 @@
                 let workPostTime = $('.putDataId').attr('value')
                 let workPrice = $('.putPrice').attr('value')
                 let allIndex = $('.putAllIndex').attr('value')
+                let imgPath = $('.putImgPath').attr('value')
 
 
                 $.ajax({            
@@ -3016,13 +3026,14 @@
                         "workPostTime":workPostTime,
                         "workPrice":workPrice,
                         "allIndex":allIndex,
+                        "imgPath":imgPath,
 
                     },            
 		    		success: function (result) {
                         // alert('OK')
 		    		},
 		    		error: function(exception) {
-		    			// alert("發生錯誤: " + exception.status);
+		    			alert("發生錯誤: " + exception.status);
 		    		}
 		    	});
             }
