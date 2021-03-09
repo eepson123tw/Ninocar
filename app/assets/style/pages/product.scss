@@ -12,17 +12,30 @@
 }
 
 .item-menu {
+<<<<<<< HEAD
     width: 150px;
+=======
+    width: 100%;
+>>>>>>> gulp
     border-radius: 8px;
     overflow: hidden;
 }
 .item {
     overflow: hidden;
+<<<<<<< HEAD
+=======
+    width: 100%;
+    margin-left: 25px;
+>>>>>>> gulp
 }
 
 .menu-btn {
     display: block;
+<<<<<<< HEAD
     padding: 16px 20px;
+=======
+    padding: 16px 10px;
+>>>>>>> gulp
     color: black;
     position: relative;
     font-weight: bold;
@@ -36,6 +49,10 @@
     overflow: hidden;
     transition: max-height 0.3s;
     max-height: 0;
+<<<<<<< HEAD
+=======
+    width: 100%;
+>>>>>>> gulp
 }
 .smenu a {
     display: block;
@@ -186,3 +203,27 @@
     color: #fff;
     background-color: $secondary;
 }
+<<<<<<< HEAD
+=======
+
+@media (max-width: 1920px) {
+}
+
+@media (max-width: 768px) {
+    .item-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 414px) {
+    .menu-btn {
+        padding: 0;
+    }
+
+    .item:first-child {
+        margin: 0px;
+    }
+}
+>>>>>>> gulp
