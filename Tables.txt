@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`order` (
   `order_gain` INT NOT NULL COMMENT '獲得點數',
   `pay_type` TINYINT NOT NULL COMMENT '付款方式（0： 貨到付款 1：綠界金流(線上刷卡)  2：門市結帳 3：ATM轉帳  ）',
   `order_type` TINYINT NOT NULL COMMENT '訂單狀態（0：成立 1：取消）',
-  `deliver_type` TINYINT NOT NULL COMMENT '貨物狀態（0：處理中 1：出貨中 2：已送達）',
+  `deliver_type` TINYINT NOT NULL DEFAULT 0 COMMENT '貨物狀態（0：處理中 1：出貨中 2：已送達）',
   `order_date` DATETIME NOT NULL COMMENT '訂單日期',
   `type_date` DATETIME NULL DEFAULT NULL COMMENT '貨物狀態日期',
   PRIMARY KEY (`order_id`),

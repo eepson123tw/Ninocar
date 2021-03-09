@@ -86,7 +86,7 @@
                         </a>
                     </li>
                     <li v-if="!isLogin">
-                        <button class="header__btn" @click="isModalShow=true">登入 / 註冊</button>
+                        <button class="header__btn" @click="handleLoginModalShow">登入 / 註冊</button>
                     </li>
                     <li class="ml-10 ml-sm-5 lh-1">
                         <svg role="button" aria-label="menu" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -114,9 +114,9 @@
         </div>
         <link-group />
         <transition name="fade">
-            <modal-member v-if="isModalShow" :is-error.sync="modalState['isError']" :content.sync="modalState['content']"
+            <modal-member v-if="isLoginModalShow" :is-error.sync="modalState['isError']" :content.sync="modalState['content']"
              :ui-state="modalState['uiState']" :sign-up-token="signUpInfo['token']" :sign-up-account="signUpInfo.account" 
-             @close="handleModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" 
+             @close="handleLoginModalClose" @login="handleLogin" @log-out="handleLogOut" @sign-up="handleSignUp" 
              @submit-token="handleCompleteSignUp" @done-account="handleAccountIsValidCheck"/>
         </transition>
         <transition name="collapse">
@@ -124,16 +124,16 @@
         </transition>
         <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
     </header>`,
+        props: ['modalStateContent'],
         data() {
             return {
                 memberId: '',
                 secretKey: 'nino',
                 isLogin: false,
-                isModalShow: false,
                 isMenuShow: false,
                 modalState: {
                     isError: '',
-                    content: 'login-content',
+                    content: this.modalStateContent || 'login-content',
                     uiState: '',
                 },
                 signUpInfo: {
@@ -155,10 +155,30 @@
             }
         },
         store,
+        watch: {
+            modalStateContent(val) {
+                this.modalState.content = val;
+            },
+
+        },
+        computed: {
+            isLoginModalShow() {
+                return this.$store.state.isLoginModalShow
+            },
+        },
         methods: {
-            handleModalClose() {
-                this.isModalShow = false;
+            handleLoginModalClose() {
+                this.$store.commit('setLoginModalShow', false);
                 this.modalState.isError = '';
+                if (this.modalStateContent) {
+                    console.log('update to login')
+                    this.$emit('update:modalStateContent', 'login-content')
+                } else {
+                    this.modalState.content = 'login-content'
+                }
+            },
+            handleLoginModalShow() {
+                this.$store.commit('setLoginModalShow', true);
             },
             handleAccountIsValidCheck(theAccount) {
                 this.modalState.isError = '';
@@ -192,7 +212,7 @@
                             this.modalState.content = 'success-login-content';
                             this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
-                                this.isModalShow = false;
+                                this.$store.commit('setLoginModalShow', false);
                             }, 3000)
                         } else {
                             this.modalState.isError = res.data;
@@ -260,7 +280,7 @@
                             this.modalState.content = 'success-sign-up-content';
                             this.handleLoginKeep(res.data[0]['member_id']);
                             setTimeout(() => {
-                                this.isModalShow = false;
+                                this.$store.commit('setLoginModalShow', false);
                             }, 3000)
                             this.handleSendSuccessSignUpMail(this.signUpInfo.account);
                         } else {
@@ -286,11 +306,7 @@
             },
 
         }
-        // handleLogOutModalShow() {
-        //     this.isMenuShow = false;
-        //     this.modalState.content = 'log-out-content';
-        //     this.isModalShow = true;
-        // },
+
         // handleLogin(theAccount, thePassword) {
         //     console.log(theAccount, thePassword)
         //     const qs = QS;
@@ -313,7 +329,7 @@
 
 
         //     // this.isLogin = true;
-        //     // this.isModalShow = false
+        //     // this.isLoginModalShow = false
         // },
 
 

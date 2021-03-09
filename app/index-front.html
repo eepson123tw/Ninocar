@@ -24,7 +24,10 @@
 
 <body>
     <div id="app" v-cloak>
-        <vue-header></vue-header>
+        <transition name="collapse-slow">
+            <loading-div v-if="isLoading" page="首頁"></loading-div>
+        </transition>
+        <vue-header :modal-state-content.sync="modalStateContent"></vue-header>
         <main class="pt-25 index">
             @@include('./pages/HomePage/HomeParkingHeader.html')
             @@include('./pages/HomePage/HomeProductSection.html')
@@ -40,6 +43,7 @@
 
 
     @@include('./components/VueHeader.html')
+    @@include('./components/LoadingDiv.html')
     @@include('./components/PinSvg.html')
 
     <script src="./assets/js/mixins/productMixins.js"></script>
@@ -49,10 +53,12 @@
             store,
             mixins: [productMixins],
             data: {
+                isLoading: true,
                 isDisplayPlay: false,
                 isCarNearGirl: false,
                 isCTAShow: false,
                 swiperMountain: null,
+                modalStateContent: 'login-content'
             },
             computed: {
                 seriesList() {
@@ -70,6 +76,10 @@
                 },
             },
             methods: {
+                handleLoginModalShow() {
+                    this.modalStateContent = 'sign-up-content'
+                    this.$store.commit('setLoginModalShow', true);
+                },
                 handleGirlClick() {
                     if (this.isCarNearGirl) {
                         this.isCTAShow = true;
@@ -130,6 +140,8 @@
                 let screenX = document.body.clientWidth;
                 // ----------------------parking
                 window.onload = () => {
+                    this.isLoading = false;
+                    console.log('a');
                     let mvFirst = gsap.timeline();
                     mvFirst.to("#hero", {
                         opacity: 1,

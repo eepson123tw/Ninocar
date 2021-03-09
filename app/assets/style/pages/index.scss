@@ -524,6 +524,10 @@
             width: 80px;
 
             @include rwd-xl {
+                left: 70%;
+            }
+
+            @include rwd-md {
                 left: 85%;
             }
 
