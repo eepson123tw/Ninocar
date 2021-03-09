@@ -16,22 +16,23 @@
             <header class="display__cover">
                 <h2 class="display__title">{{targetProduct.eName}}</h2>
                 <img :src="targetProduct.displayImgURL" class="display__img">
-                <div class="carID carID--lg display__carID" :class="bgClass">
+                <div class="carID carID--lg display__carID" :class="bgClass(targetProduct.series)">
                     {{targetProduct.series}}<span>{{targetProduct.seriesId}}</span>
                 </div>
             </header>
-            <section class="d-flex justify-content-between align-items-center flex-xs-wrap">
+            <section class="d-flex justify-content-between align-items-center flex-xs-wrap pb-5 pb-sm-0">
                 <div class="mb-xs-2 w-50 w-md-100">
                     <h2 class="h1 mb-1">{{targetProduct.name}}</h2>
                     <h3 class="h6 d-inbl mb-5">{{targetProduct.eName}} {{targetProduct.year}}<span
                             class="ml-5">尺寸：{{targetProduct.size}}</span></h3>
-                    <p class="h4 mb-5">{{targetProduct.description}}</p>
-                    <span class="badge mr-2" :class="bgClass">{{seriesList[targetProduct.seriesIndex].name}}</span>
+                    <p class="display__description mb-5">{{targetProduct.description}}</p>
+                    <span class="badge mr-2"
+                        :class="bgClass(targetProduct.series)">{{seriesList[targetProduct.seriesIndex].name}}</span>
                     <span v-if="targetProduct.limitLabel=== '2' || targetProduct.limitLabel=== '4'"
                         :class="limitLabel.className">{{limitLabel.text}}</span>
                 </div>
                 <div class="text-right mx-xs-auto">
-                    <svg :class="pinClass" width="120" height="120" viewBox="0 0 80 80">
+                    <svg :class="pinClass(targetProduct.productId)" width="120" height="120" viewBox="0 0 80 80">
                         <circle cx="40" cy="40" r="30" stroke-width="4" />
                         <circle cx="40" cy="40" r="25" stroke-width="2" />
                         <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
@@ -39,7 +40,8 @@
                         <text x="20" y="48" class="pin__text pin__text--lg">GET</text>
                     </svg>
                     <!-- pin 收藏大師-->
-                    <pin :disabled="!isMemberHasPin(targetProduct.productId)" :series="targetProduct.series">
+                    <pin-svg :disabled="!isMemberHasSeriesPin(targetProduct.series)" :series="targetProduct.series">
+                    </pin-svg>
                 </div>
             </section>
             <svg role="button" aria-label="prev" xmlns="http://www.w3.org/2000/svg" width="40" height="40"

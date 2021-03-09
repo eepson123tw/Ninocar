@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <div id="dictionary">
+  <div id="dictionary" v-cloak>
     <vue-header></vue-header>
     <main class="container pt-25 pb-15">
       <!-- display -->
@@ -25,8 +25,12 @@
         <transition name="collapse">
           @@include('./pages/DictionaryPage/DictionaryFilterForm.html')
         </transition>
+        <empty-state-div v-if="isLoginEmptyStateDivShow" class="block__body">
+          <template v-slot:details>此頁面為會員專屬功能，<br>
+            請先登入會員，以查看您的圖鑑和成就徽章</template>
+        </empty-state-div>
         <empty-state-div v-if="isMemberEmptyStateDivShow" class="block__body">
-          <template v-slot:details>尚未有個人的車車圖鑑，<br>
+          <template v-slot:details>尚未收集到圖鑑和成就，<br>
             完成訂單的車子，將在三天內匯入個人圖鑑</template>
           <template v-slot:link>
             <a href="./member.html" class="btn d-inbl text-center">查看訂單</a>
@@ -43,17 +47,14 @@
   @@include('./components/EmptyStateDiv.html')
   @@include('./pages/DictionaryPage/DictionaryPostItem.html')
   @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+  <script src="./assets/js/mixins/productMixins.js"></script>
 
   <script>
     new Vue({
       el: '#dictionary',
+      mixins: [productMixins],
       data: { //變數存放的地方
-        productList: [],
-        targetProduct: {},
-        showProductList: [],
-        myProductIdList: [],
         searchType: 'keyword',
-        keywordText: '',
         activeNav: 'all',
         isModalShow: false,
         yearList: ['1970~1989', '1990~2009', '2010後'],
@@ -61,50 +62,6 @@
         selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
         selectedYearList: ['1970~1989', '1990~2009', '2010後'],
         selectedLimitList: ['無限定', '期間限定', '點數限定'],
-      },
-      mounted() {
-        const getProductList = async () => {
-          const result = await axios.get(
-            `./assets/php/getProductList.php`
-          );
-          return result;
-        }
-        //拿所有商品清單
-        getProductList().then(res => {
-          console.log(res.data);
-          const fetchProductList = res.data.map(product => {
-            // 系列數字轉名稱
-            let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
-            thisSeriesIndex.toString();
-            // 系列Id若是單位數，前面加0
-            let thisSeriesId;
-            if (product[`product_seriesid`].length === 1) {
-              thisSeriesId = 0 + product[`product_seriesid`];
-            } else {
-              thisSeriesId = product[`product_seriesid`];
-            }
-            return {
-              name: product[`product_name`].trim(),
-              eName: product['product_ename'].trim().toUpperCase(),
-              series: this.seriesList[thisSeriesIndex].eName,
-              seriesIndex: thisSeriesIndex,
-              seriesId: thisSeriesId,
-              imgURL: product['product_img'],
-              displayImgURL: product['product_img1'],
-              productId: product['product_id'],
-              year: product['product_year'],
-              size: product['product_size'],
-              description: product['product_des'],
-              limitLabel: product['product_spec'],
-            }
-          })
-          // console.log(fetchProductList);
-          this.productList = fetchProductList;
-          this.showProductList = this.productList;
-          this.targetProduct = this.showProductList[0];
-        }).catch(error => {
-          console.log(error)
-        })
       },
       store,
       computed: {
@@ -115,37 +72,17 @@
         seriesList() {
           return this.$store.state.seriesList
         },
-        bgClass() {
-          return `bg-series-${this.targetProduct.series}`
-        },
-        pinClass() {
-          return this.myProductIdList.indexOf(this.targetProduct.productId) >= 0 ? 'pin' :
-            'pin pin--disabled'
-        },
-        limitLabel() {
-          if (this.targetProduct.limitLabel === '2') {
-            return {
-              text: '期間限定',
-              className: 'badge badge--primary'
-            };
-          } else if (this.targetProduct.limitLabel === '4') {
-            return {
-              text: '點數限定',
-              className: 'badge bg-blue'
-            };
-          }
-        },
-        myProductList() {
-          if (this.productList && this.myProductIdList) {
-            return this.productList.filter(product => this.myProductIdList.indexOf(product
-              .productId) >= 0);
+
+        isLoginEmptyStateDivShow() {
+          if (!this.memberId && this.activeNav === 'my') {
+            return true
           } else {
-            return [];
+            return false
           }
         },
         isMemberEmptyStateDivShow() {
-          if (this.memberId !== '' && this.activeNav === 'my') {
-            this.myProductList.length === 0 ? true : false;
+          if (this.memberId && this.activeNav === 'my') {
+            return this.myProductList.length === 0 ? true : false;
           } else {
             return false;
           }
@@ -197,18 +134,9 @@
             this.showProductList = this.myProductList;
           }
         },
-        memberId(val) {
-          if (val) {
-            this.handleGetMemberOwnProductIdList();
-          } else {
-            this.myProductIdList.splice(0)
-          }
-        },
+
       },
       methods: {
-        isMemberHasPin(productId) {
-          return this.myProductIdList.indexOf(productId) >= 0
-        },
         handleSearchTypeChange() {
           this.showProductList = this.productList;
           if (this.searchType === 'sort') {
@@ -288,35 +216,10 @@
           }
         },
         handleKeywordSearch() {
-          const filteredProductList = this.productList.filter(product => {
-            const keyword = this.keywordText.toLowerCase().trim();
-            let isIncludeWord = false;
-            product.name.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.eName.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.series.toLowerCase().includes(keyword) ?
-              isIncludeWord = true : '';
-            product.series.toLowerCase().concat(product.seriesId).includes(keyword) ?
-              isIncludeWord = true : '';
-            return isIncludeWord;
-          })
+          const filteredProductList = this.getProductListByKeyword();
           this.showProductList = filteredProductList;
         },
-        handleGetMemberOwnProductIdList() {
-          axios.post('./assets/php/getMemberOwnProductIdList.php', {
-            "memberId": this.memberId,
-          }).then(res => {
-            console.log(res);
-            if (Array.isArray(res.data) && res.data != []) {
-              this.myProductIdList = res.data.map(obj => obj['product_id'])
-            } else {
-              console.log(res.data)
-            }
-          }).catch(error => {
-            console.log(error)
-          })
-        }
+
       },
     })
   </script>

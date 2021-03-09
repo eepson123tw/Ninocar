@@ -42,6 +42,17 @@
         padding-left: 0px;
       }
     }
+    &--center {
+      margin-bottom: 40px;
+      // background-color: #000000;
+      align-items: center;
+      position: relative;
+      text-align: left;
+      padding-left: 20%;
+      @include rwd-md {
+        margin-bottom: 20px;
+      }
+    }
   }
   &__input {
     border: 1px solid $gray-900;
@@ -77,6 +88,10 @@
       width: 100%;
       margin-bottom: 5px;
     }
+    &--mid {
+      @extend .h5;
+      color: $gray-900;
+    }
     &--right {
       text-align: right;
       @include rwd-xl {
@@ -85,10 +100,15 @@
     }
     &--down {
       bottom: -30px;
-      right: 19%;
+      right: 18%;
       position: absolute;
       @extend .h5;
       color: $gray-900;
+      @include rwd-lg {
+        bottom: -40px;
+        left: 0;
+        width: 50%;
+      }
       @include rwd-md {
         bottom: -40px;
         right: 1%;

@@ -47,3 +47,7 @@ input,
 button:focus {
   outline: none;
 }
+
+[v-cloak] {
+  display: none;
+}

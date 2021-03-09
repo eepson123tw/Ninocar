@@ -1,4 +1,6 @@
 <?php
+ try
+ {
  include("./Lib/Conn.php");
  $Util = new UtilClass();
 
@@ -13,5 +15,8 @@
     if($data){
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-   
+ } catch(PDOException $e)
+ {
+     echo "Connection failed: ".$e->getMessage();
+ }
 ?>
