@@ -755,13 +755,14 @@
     {
         display: block;
     }
-    .userPic {
-        margin: 0 auto;
-        margin-right: 16px;
-    }
-
-    .userContent{
-        width: 100%;
+    .user{
+        &Pic{
+            margin: 0 auto;
+            margin-right: 16px;
+        }
+        &Content{
+            width: 100%;
+        }
     }
 
     .work_author .userPic{
@@ -776,6 +777,14 @@
         margin: 0 auto;
         display: flex;
         margin-bottom: 8px;
+    }
+
+    .explanation, .circle{
+        margin-right: 120px;
+    }
+
+    .tipArea{
+        margin-bottom: 1px;
     }
 }
 
@@ -905,5 +914,9 @@
         margin-bottom: 4px;
     }
 
+    .previousStep{
+        display: flex;
+        align-items: center;
+    }
 
 }
