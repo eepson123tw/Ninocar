@@ -31,7 +31,7 @@ $data = $statement->fetchAll();
                             <th>會員編號</th>
                             <th>會員等級</th>
                             <th>會員姓名</th>
-                            <th>累積消費</th>
+                            <th>會員狀態</th>
                             <th>註冊日期</th>
                             <th>詳細</th>
                         </tr>
@@ -60,7 +60,19 @@ $data = $statement->fetchAll();
                                     <?= $level ?>
                                 </td>
                                 <td><?= $row["member_name"] ?></td>
-                                <td><?= $row["member_cost"] ?></td>
+                                <td>
+                                    <?php
+                                    $type = $row["member_type"];
+                                    switch ($type) {
+                                        case '1':
+                                            $type = "封鎖";
+                                            break;
+                                        default:
+                                            $type = "開通";
+                                            break;
+                                    }
+                                    ?>
+                                    <?= $type ?></td>
                                 <td><?= $row["member_signdate"] ?></td>
                                 <td><a href="memberDetail.php?MID=<?= $row["member_id"] ?>">查看</a></td>
                             </tr>
