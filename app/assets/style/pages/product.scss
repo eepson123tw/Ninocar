@@ -9,7 +9,6 @@
     font-family: sans-serif;
     list-style: none;
     text-decoration: none;
-<<<<<<< HEAD
 }
 
 .item-menu {
@@ -24,24 +23,6 @@
 .menu-btn {
     display: block;
     padding: 16px 20px;
-=======
-}
-
-.item-menu {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-}
-.item {
-    overflow: hidden;
-    width: 100%;
-    margin-left: 25px;
-}
-
-.menu-btn {
-    display: block;
-    padding: 16px 10px;
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
     color: black;
     position: relative;
     font-weight: bold;
@@ -55,10 +36,6 @@
     overflow: hidden;
     transition: max-height 0.3s;
     max-height: 0;
-<<<<<<< HEAD
-=======
-    width: 100%;
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
 }
 .smenu a {
     display: block;
@@ -209,27 +186,3 @@
     color: #fff;
     background-color: $secondary;
 }
-<<<<<<< HEAD
-=======
-
-@media (max-width: 1920px) {
-}
-
-@media (max-width: 768px) {
-    .item-menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
-@media (max-width: 414px) {
-    .menu-btn {
-        padding: 0;
-    }
-
-    .item:first-child {
-        margin: 0px;
-    }
-}
->>>>>>> 1196afd14668b78f02a76a8ea9a5709ecd56ae8f
