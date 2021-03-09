@@ -5,12 +5,6 @@
 
                 <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
                     <li class="block__header__title">訂單明細</li>
-                    <li>
-                        <img
-                            src="./assets/img/icon/icon-up.svg"
-                            alt=""
-                        >
-                    </li>
                 </ul>
 
             </div>
@@ -27,18 +21,6 @@
             <div class="row cart__topfix">
                 <ul class="d-flex  block block__header  justify-content-between align-items-center w-100">
                     <li class="block__header__title">購買明細</li>
-                    <li class="cart__collapse">
-                        <img
-                            v-show="notShow"
-                            src="./assets/img/icon/icon-down.svg"
-                            alt=""
-                        >
-                        <img
-                            v-show="!notShow"
-                            src="./assets/img/icon/icon-up.svg"
-                            alt=""
-                        >
-                    </li>
                 </ul>
             </div>
             <div
@@ -281,7 +263,6 @@
       }
 
 
-
       const params = new URLSearchParams()
       params.append('ID', this.memberId)
       params.append('ORDER_ID', this.orderId)
@@ -305,9 +286,7 @@
       }).catch((error) => {
         console.log(error)
 
-      })
-
-
+      });
 
 
     }

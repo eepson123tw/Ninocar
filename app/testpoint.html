@@ -14,6 +14,8 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
 <title>test</title>
 </head>
 <style>
@@ -28,7 +30,8 @@
       <div class="container">
         <div class="row mt-20 ml-20">
           <button class=" btn" @click="sendPoint">登入</button>
-          <button class="btn">更新目前會員費狀態</button>
+          <button class="btn" @click="orderConfirm">訂單成立</button>
+          <button class="btn" @click="memberStatus">會員狀態變更</button>
         </div>
       </div>
     </main>
@@ -59,7 +62,9 @@
       store,
       mixins: [cartMixins],
       data() {
-        return {}
+        return {
+          userData: '',
+        }
       },
       methods: {
 
@@ -81,6 +86,26 @@
 
           })
         },
+        orderConfirm() {
+
+          let templateParams = {
+            "order_id": this.userData.birthday,
+            "userMail": this.userData.account,
+            "reply_to": "wow",
+          }
+          let service_id = "service_nc71unc";
+          let template_id = "template_n6r3opy";
+          let userID = "user_TzSSXb2sF6bb0qvrAeRv0";
+          emailjs.send(service_id, template_id, templateParams, userID)
+            .then((response) => {
+              console.log('SUCCESS! 寄出驗證信');
+            })
+            .catch((error) => {
+              console.log('FAILED...', error);
+            })
+
+        },
+        memberStatus() {},
 
 
       },
@@ -93,6 +118,39 @@
 
       },
       mounted() {
+
+        const params = new URLSearchParams()
+        params.append('ID', this.memberId)
+
+
+        axios({
+          method: 'post',
+          url: 'assets/php/getMemberInfoNoFunction.php',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          data: params,
+        }).then((res) => {
+          console.log(res.data)
+          let newData;
+          newData = res.data.map((item) => {
+
+            return {
+              name: item.member_name,
+              account: item.member_account,
+              gender: item.member_gender,
+              address: item.member_address,
+              birthday: item.member_birthday,
+              phone: item.member_phone,
+              photo: item.member_photo,
+              password: item.member_pwd,
+            }
+          });
+          this.userData = newData[0];
+
+        }).catch((error) => {
+          console.log(error)
+        })
 
       },
 
