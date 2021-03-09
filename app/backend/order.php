@@ -1,16 +1,16 @@
 <?php
-    include("head.php");
-    include 'LoginCheck.php';
+include("head.php");
+include 'LoginCheck.php';
 
-    //建立SQL
-    $sql = "SELECT * FROM `order`";
+//建立SQL
+$sql = "SELECT * FROM `order`";
 
-    //執行
-    $statement = $Util->getPDO()->prepare($sql);
+//執行
+$statement = $Util->getPDO()->prepare($sql);
 
-    //給值
-    $statement->execute();
-    $data = $statement->fetchAll();
+//給值
+$statement->execute();
+$data = $statement->fetchAll();
 
 ?>
 <title>訂單管理</title>
@@ -18,7 +18,7 @@
 
 <body>
     <?php
-        include '../../app/pages/BackendPage/base.html';
+    include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
         <!-- table -->
@@ -28,29 +28,44 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>訂單編號</th>
                             <th>訂單日期</th>
                             <th>會員編號</th>
                             <th>訂單金額</th>
                             <th>訂單點數</th>
+                            <th>貨物狀態</th>
                             <th>詳細</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                        foreach($data as $index => $row){
-                    ?>
-                        <tr>
-                            <td><?=$row["order_id"] ?></td>
-                            <td><?=$row["order_date"] ?></td>
-                            <td><?=$row["member_id"] ?></td>
-                            <td><?=$row["order_cost"] ?></td>
-                            <td><?=$row["order_points"] ?></td>
-                            <td><a href="orderCheck.php?PID=<?=$row["order_id"] ?>">查看</a></td>
-                        </tr>
-                    <?php   
+                        <?php
+                        foreach ($data as $index => $row) {
+                        ?>
+                            <tr>
+                                <td><?= $row["order_date"] ?></td>
+                                <td><?= $row["member_id"] ?></td>
+                                <td><?= $row["order_cost"] ?></td>
+                                <td><?= $row["order_points"] ?></td>
+                                <td>
+                                    <?php
+                                    $type = $row["deliver_type"];
+                                    switch ($type) {
+                                        case '1':
+                                            $type = "出貨中";
+                                            break;
+                                        case '2':
+                                            $type = "已送達";
+                                            break;
+                                        default:
+                                            $type = "處理中";
+                                            break;
+                                    }
+                                    ?>
+                                    <?= $type ?></td>
+                                <td><a href="orderDetail.php?OID=<?= $row["order_id"] ?>">查看</a></td>
+                            </tr>
+                        <?php
                         }
-                    ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
