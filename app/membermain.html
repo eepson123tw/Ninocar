@@ -23,7 +23,7 @@
     @@include('pages/MemberPage/MemberCupon.html')
     <!--  -->
 
-    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list.sync="receiverList" key="receiverList"></member_address>
+    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
     <!--  -->
     @@include('pages/MemberPage/MemberPassword.html')
 
@@ -46,7 +46,7 @@
               type="text"
               class=" cart__select form__input"
               placeholder="王小明"
-              v-model="receiver.receiverName"
+              v-model.trim="receiver.receiverName"
             ></input>
           </div>
           <label
@@ -58,7 +58,7 @@
               id="receiverPhone"
               type="text"
               class="cart__select form__input"
-              placeholder="0910-123-456"
+              placeholder="0910123456"
               v-model="receiver.receiverPhone"
             ></input>
           </div>
@@ -73,6 +73,7 @@
               class="cart__select form__input"
               placeholder="300"
               v-model="receiver.receiverAddressCode"
+              @change="findIndex"
             ></input>
           </div>
         </div>
@@ -89,7 +90,7 @@
               name=""
               id=""
               class="form__select "
-              v-model="receiver.receiverCity"
+              v-model.trim="receiver.receiverCity"
             >
               <option
                 value=""
@@ -101,7 +102,7 @@
               name=""
               id=""
               class="form__select "
-              v-model="receiver.receiverTown"
+              v-model.trim="receiver.receiverTown"
               @change="sameAddressCode"
             >
               <option
@@ -115,7 +116,7 @@
             type="text"
             class="form__input  "
             id="address"
-            v-model="receiver.receiverRoad"
+            v-model.trim="receiver.receiverRoad"
             placeholder="街/路/巷弄/樓層"
           />
         </div>
@@ -152,7 +153,7 @@
               type="text"
               class=" cart__select form__input"
               placeholder="王小明"
-              v-model="receiver.receiverName"
+              v-model="newReceiver.receiverName"
             ></input>
           </div>
           <label
@@ -165,7 +166,7 @@
               type="text"
               class="cart__select form__input"
               placeholder="0910-123-456"
-              v-model="receiver.receiverPhone"
+              v-model="newReceiver.receiverPhone"
             ></input>
           </div>
           <label
@@ -178,7 +179,7 @@
               type="email"
               class="cart__select form__input"
               placeholder="300"
-              v-model="receiver.receiverAddressCode"
+              v-model="newReceiver.receiverAddressCode"
             ></input>
           </div>
         </div>
@@ -195,7 +196,8 @@
               name=""
               id=""
               class="form__select "
-              v-model="receiver.receiverCity"
+              v-model="newReceiver.receiverCity"
+              v-show="receiver.receiverName !==''"
             >
               <option
                 value=""
@@ -207,8 +209,9 @@
               name=""
               id=""
               class="form__select "
-              v-model="receiver.receiverTown"
+              v-model="newReceiver.receiverTown"
               @change="sameAddressCode"
+              v-show="receiver.receiverName !== '' "
             >
               <option
                 value=""
@@ -221,7 +224,7 @@
             type="text"
             class="form__input  "
             id="address"
-            v-model="receiver.receiverRoad"
+            v-model="newReceiver.receiverRoad"
             placeholder="街/路/巷弄/樓層"
           />
         </div>
@@ -246,9 +249,6 @@
 
 
   </div>
-
-
-
 
   @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html')
   <script>
@@ -315,6 +315,14 @@
           receiverRoad: '',
           receiverAddressCode: '',
         },
+        newReceiver: {
+          receiverPhone: '',
+          receiverName: '',
+          receiverCity: '',
+          receiverTown: '',
+          receiverRoad: '',
+          receiverAddressCode: '',
+        },
         propsReceiver: {},
         password: {
           name: '密碼',
@@ -335,10 +343,8 @@
           inputClass: '',
         },
         receiverList: [],
-        receiverNewList: [],
         // local端
         defaultReceiverList: [],
-        updateIndex: 0,
         addressShow: false,
         previewImage: null,
         defaultIndex: 0,
@@ -465,56 +471,107 @@
         saveAddress() {
 
 
-          this.propsReceiver = JSON.parse(JSON.stringify(this.receiver));
-          this.receiverList.push(this.propsReceiver);
-          this.isModalShow = false;
+          // this.propsReceiver = JSON.parse(JSON.stringify(this.receiver));
 
+          let receiver = this.receiver;
+          let check;
 
+          for (let num in receiver) {
+            if (receiver[num] == "") {
+              console.log(`${num}不能為空`);
 
-          let newArray = this.receiverList.map((item) => {
+              check = false;
+            } else if (num == 'receiverPhone' && receiver['receiverPhone'].length > 10) {
 
-            return {
-              name: item.receiverName,
-              phone: item.receiverPhone,
-              road: item.receiverAddressCode + item.receiverCity + item.receiverTown + item.receiverRoad,
-              defaultAddress: this.defaultIndex,
+              alert(`電話請輸入正確資料,已超越長度`);
+              check = false;
+            } else if (num == 'receiverAddressCode' && receiver['receiverAddressCode'].length > 3) {
+              alert(`郵遞區號請輸入正確資料,已超越長度`);
+              check = false;
+            } else {
+              check = true;
             }
+          };
+
+          if (check == true) {
+            this.isModalShow = false;
+            this.receiverList.push(JSON.parse(JSON.stringify(this.receiver)));
+            localStorage.setItem('receiverList', JSON.stringify(this.receiverList));
+          };
 
 
-          });
+          // let newArray = this.receiverList.map((item) => {
 
-          const params = new URLSearchParams()
-          params.append('ID', this.memberId)
-          params.append('ADDRESS_ARRAY', JSON.stringify(newArray))
-
-          axios({
-            method: 'post',
-            url: 'assets/php/setMemberAddress.php',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            data: params,
-          }).then((res) => {
-            console.log(res.data)
+          //   return {
+          //     name: item.receiverName,
+          //     phone: item.receiverPhone,
+          //     road: item.receiverAddressCode + item.receiverCity + item.receiverTown + item.receiverRoad,
+          //     defaultAddress: this.defaultIndex,
+          //   }
 
 
-          }).catch((error) => {
-            console.log(error)
+          // });
 
-          })
+          // const params = new URLSearchParams()
+          // params.append('ID', this.memberId)
+          // params.append('ADDRESS_ARRAY', JSON.stringify(newArray))
+
+          // axios({
+          //   method: 'post',
+          //   url: 'assets/php/setMemberAddress.php',
+          //   headers: {
+          //     'Content-Type': 'application/x-www-form-urlencoded',
+          //   },
+          //   data: params,
+          // }).then((res) => {
+          //   console.log(res.data)
 
 
-
-
+          // }).catch((error) => {
+          //   console.log(error)
+          // })
         },
-        updateAddress(index, val) {
+        updateAddress(receiver, index, val) {
+
           this.isUpdateModalShow = val;
           this.updateIndex = index;
+          this.newReceiver = receiver;
+
+          console.log(receiver);
+
         },
         updateCurrentAddress() {
-          this.receiverList[this.updateIndex] = JSON.parse(JSON.stringify(this.receiver));
           this.isUpdateModalShow = false;
+          if (this.receiver.receiverCity == "") {
+            this.receiverList.push(this.newCityList);
+            // localStorage.setItem('receiverList', JSON.stringify(this.receiverList));
+          } else {
+            localStorage.setItem('receiverList', JSON.stringify(this.receiverList));
+          }
         },
+
+        findIndex() {
+
+          let codeNum = this.receiver.receiverAddressCode;
+
+          // console.log(codeNum);
+
+          for (let num in this.cityList) {
+
+            let data = this.cityList[num]['districts'];
+
+            for (let childNum in data) {
+
+              if (data[childNum]['zip'] == codeNum) {
+                this.receiver.receiverCity = this.cityList[num]['name'];
+                this.receiver.receiverTown = data[childNum]['name'];
+              }
+            }
+          }
+        },
+
+
+
       },
       computed: {
         inputList() {
