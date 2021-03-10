@@ -10,8 +10,8 @@ $db_select = "team1";
 $dsn = "mysql:host=".$db_host.";dbname=".$db_select;
 
 //建立PDO物件，並放入指定的相關資料
-$pdo = new PDO($dsn, $db_user, $db_pass);
-
+// $pdo = new PDO($dsn, $db_user, $db_pass);
+$pdo = new PDO($dsn, $db_user);
 
     $sql = "SELECT * FROM product";
 
