@@ -87,7 +87,7 @@ foreach ($data as $index => $row) {
 
   $mail->Body = '
   <div class="top" style="border-bottom:4px solid #E59807;margin:auto;text-align:center;width: 600px;padding:30px 0px">
-    <img src="https://s4.aconvert.com/convert/p3r68-cdx67/amcoy-88v1x.png">
+  <h1 class="logo__h1">NINO CAR</h1>
 </div>
 <div class="body" style="margin:auto;text-align:left;width:600px">
   <div class="title" style="padding:30px;padding-right:30px;font-size:20px;color:rgba(0,0,0,8);text-align:center;font-family:Microsoft JhengHei">
