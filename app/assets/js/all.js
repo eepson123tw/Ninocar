@@ -5,32 +5,9 @@
 window.onload = function() {
   console.log(document.title);
 
-  //popovers 
-  let popoversItem = document.querySelectorAll(`[data-js='js-popovers']`);
-  let popoversArea = document.querySelector(`.popovers`);
-
-  if (popoversItem) {
-    popoversItem.forEach((item) => {
-      item.addEventListener("mouseenter", (e) => {
-        // let target = e.target.getBoundingClientRect();
-        e.preventDefault();
-        // console.log(e.pageX, e.pageY)
-        const { pageX, pageY } = e;
-        popoversArea.style.top = `${pageY - 50}px`;
-        popoversArea.style.left = `${pageX - 250}px`;
-        popoversArea.style.display = "block";
-        popoversArea.style.opacity = 1;
-      })
-      item.addEventListener("mouseleave", (e) => {
-        popoversArea.style.display = "none";
-        popoversArea.style.opacity = 0;
-      })
-
-    })
 
 
-
-  }
+  // }
   //progress 進度條
 
   let progressBtn = document.querySelector(`[data-js='js-progress']`);

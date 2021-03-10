@@ -2,8 +2,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
 <script>
-    Vue.component('vue-header', {
-        template: `
+  Vue.component('vue-header', {
+    template: `
         <header class="header">
         <div class="container d-flex justify-content-between align-items-center po-re py-2">
             <div class="d-flex align-items-center">
@@ -124,219 +124,217 @@
         </transition>
         <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
     </header>`,
-        props: ['modalStateContent'],
-        data() {
-            return {
-                memberId: '',
-                secretKey: 'nino',
-                isLogin: false,
-                isMenuShow: false,
-                modalState: {
-                    isError: '',
-                    content: this.modalStateContent || 'login-content',
-                    uiState: '',
-                },
-                signUpInfo: {
-                    account: '',
-                    password: '',
-                    token: '',
-                },
-            }
+    props: ['modalStateContent'],
+    data() {
+      return {
+        memberId: '',
+        secretKey: 'nino',
+        isLogin: false,
+        isMenuShow: false,
+        modalState: {
+          isError: '',
+          content: this.modalStateContent || 'login-content',
+          uiState: '',
         },
-        mounted() {
-            const storageMemberId = localStorage.getItem('memberId');
-            if (storageMemberId) {
-                const rawMemberId = CryptoJS.AES.decrypt(storageMemberId, this.secretKey).toString(CryptoJS.enc
-                    .Utf8);
-                console.log(rawMemberId)
-                this.memberId = rawMemberId;
-                this.isLogin = true;
-                this.$store.commit('setMemberId', rawMemberId);
-            }
+        signUpInfo: {
+          account: '',
+          password: '',
+          token: '',
         },
-        store,
-        watch: {
-            modalStateContent(val) {
-                this.modalState.content = val;
-            },
+      }
+    },
+    mounted() {
+      const storageMemberId = localStorage.getItem('memberId');
+      if (storageMemberId) {
+        const rawMemberId = CryptoJS.AES.decrypt(storageMemberId, this.secretKey).toString(CryptoJS.enc
+          .Utf8);
+        console.log(rawMemberId)
+        this.memberId = rawMemberId;
+        this.isLogin = true;
+        this.$store.commit('setMemberId', rawMemberId);
+      }
+    },
+    store,
+    watch: {
+      modalStateContent(val) {
+        this.modalState.content = val;
+      },
 
-        },
-        computed: {
-            isLoginModalShow() {
-                return this.$store.state.isLoginModalShow
-            },
-        },
-        methods: {
-            handleLoginModalClose() {
+    },
+    computed: {
+      isLoginModalShow() {
+        return this.$store.state.isLoginModalShow
+      },
+    },
+    methods: {
+      handleLoginModalClose() {
+        this.$store.commit('setLoginModalShow', false);
+        this.modalState.isError = '';
+        if (this.modalStateContent) {
+          console.log('update to login')
+          this.$emit('update:modalStateContent', 'login-content')
+        } else {
+          this.modalState.content = 'login-content'
+        }
+      },
+      handleLoginModalShow() {
+        this.$store.commit('setLoginModalShow', true);
+      },
+      handleAccountIsValidCheck(theAccount) {
+        this.modalState.isError = '';
+        axios.post('./assets/php/getMemberInfo.php', {
+            "account": theAccount,
+          }).then(res => {
+            console.log(res)
+            if (Array.isArray(res.data)) {
+              this.modalState.isError = '此帳號已被註冊';
+            } else {
+              this.modalState.isError = '';
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          });
+
+      },
+
+      handleLogin(theAccount, thePassword) {
+        this.modalState.isError = '';
+        this.modalState.uiState = 'loading';
+        axios.post('./assets/php/login.php', {
+            "account": theAccount,
+            "password": thePassword
+          }).then(res => {
+            console.log(res)
+            this.modalState.uiState = '';
+
+            if (Array.isArray(res.data)) {
+              this.modalState.content = 'success-login-content';
+              this.handleLoginKeep(res.data[0]['member_id']);
+              setTimeout(() => {
                 this.$store.commit('setLoginModalShow', false);
-                this.modalState.isError = '';
-                if (this.modalStateContent) {
-                    console.log('update to login')
-                    this.$emit('update:modalStateContent', 'login-content')
-                } else {
-                    this.modalState.content = 'login-content'
-                }
-            },
-            handleLoginModalShow() {
-                this.$store.commit('setLoginModalShow', true);
-            },
-            handleAccountIsValidCheck(theAccount) {
-                this.modalState.isError = '';
-                axios.post('./assets/php/getMemberInfo.php', {
-                        "account": theAccount,
-                    }, ).then(res => {
-                        console.log(res)
-                        if (Array.isArray(res.data)) {
-                            this.modalState.isError = '此帳號已被註冊';
-                        } else {
-                            this.modalState.isError = '';
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
+              }, 3000)
+            } else {
+              this.modalState.isError = res.data;
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          });
 
-            },
+      },
+      handleLoginKeep(rawMemberId) {
+        this.isLogin = true;
+        this.memberId = rawMemberId;
+        // crypto加密
+        const encryptedId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
+        localStorage.setItem('memberId', encryptedId);
+        this.$store.commit('setMemberId', rawMemberId);
+      },
+      handleLogOut() {
+        this.isMenuShow = false;
+        this.isLogin = false;
+        this.modalState.content = 'login-content';
+        this.$store.commit('setMemberId', '');
+        localStorage.removeItem('memberId');
+        //會員頁寫判斷式回首頁
+        //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
+      },
+      handleSignUp(theAccount, thePassword) {
+        if (this.modalState.isError === '') {
+          this.signUpInfo.account = theAccount;
+          this.signUpInfo.password = thePassword;
+          this.modalState.uiState = '傳送認證信中';
+          let templateParams = {
+            token: Math.floor(Math.random() * 1000),
+            userMail: theAccount,
+          }
 
-            handleLogin(theAccount, thePassword) {
-                this.modalState.isError = '';
-                this.modalState.uiState = 'loading';
-                axios.post('./assets/php/login.php', {
-                        "account": theAccount,
-                        "password": thePassword
-                    }, ).then(res => {
-                        console.log(res)
-                        this.modalState.uiState = '';
-
-                        if (Array.isArray(res.data)) {
-                            this.modalState.content = 'success-login-content';
-                            this.handleLoginKeep(res.data[0]['member_id']);
-                            setTimeout(() => {
-                                this.$store.commit('setLoginModalShow', false);
-                            }, 3000)
-                        } else {
-                            this.modalState.isError = res.data;
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-
-            },
-            handleLoginKeep(rawMemberId) {
-                this.isLogin = true;
-                this.memberId = rawMemberId;
-                // crypto加密
-                const encryptedId = CryptoJS.AES.encrypt(rawMemberId, this.secretKey).toString()
-                localStorage.setItem('memberId', encryptedId);
-                this.$store.commit('setMemberId', rawMemberId);
-            },
-            handleLogOut() {
-                this.isMenuShow = false;
-                this.isLogin = false;
-                this.modalState.content = 'login-content';
-                this.$store.commit('setMemberId', '');
-                localStorage.removeItem('memberId');
-                //會員頁寫判斷式回首頁
-                //window.location = 'http://localhost:8080/nino-scss/dist/index-front.html'
-            },
-            handleSignUp(theAccount, thePassword) {
-                if (this.modalState.isError === '') {
-                    this.signUpInfo.account = theAccount;
-                    this.signUpInfo.password = thePassword;
-                    this.modalState.uiState = '傳送認證信中';
-                    let templateParams = {
-                        token: Math.floor(Math.random() * 1000),
-                        userMail: theAccount,
-                    }
-
-                    let service_id = "service_p77rlm2";
-                    let template_id = "template_8r123bp";
-                    let userID = "user_DeGKwX1jMT522C5BEPsyo"
-                    emailjs.send(service_id, template_id, templateParams, userID)
-                        .then((response) => {
-                            console.log('SUCCESS! 寄出驗證信');
-                            this.modalState.uiState = '';
-                            this.signUpInfo.token = templateParams.token;
-                            this.modalState.content = 'confirm-token-content'
-                        })
-                        .catch((error) => {
-                            console.log('FAILED...', error);
-                            this.modalState.isError = error;
-                        })
-                }
-
-            },
-            handleCompleteSignUp() {
-                this.modalState.uiState = 'loading';
-                axios.post('./assets/php/signUp.php', {
-                        "account": this.signUpInfo.account,
-                        "password": this.signUpInfo.password
-                    }, )
-                    .then(res => {
-                        console.log(res)
-                        this.modalState.uiState = '';
-                        if (Array.isArray(res.data)) {
-                            this.modalState.content = 'success-sign-up-content';
-                            this.handleLoginKeep(res.data[0]['member_id']);
-                            setTimeout(() => {
-                                this.$store.commit('setLoginModalShow', false);
-                            }, 3000)
-                            this.handleSendSuccessSignUpMail(this.signUpInfo.account);
-                        } else {
-                            this.modalState.isError = res.data;
-                            throw new Error(res.data);
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-            },
-            handleSendSuccessSignUpMail(account) { //問老師寫在上面? //能讀data值嗎
-                axios.post(
-                    `./assets/php/sendSuccessSignUpMail.php`, {
-                        "account": account,
-                    }
-                ).then(res => {
-                    console.log(res)
-                }).catch(err => {
-                    console.log(err);
-                })
-
-            },
-
+          let service_id = "service_p77rlm2";
+          let template_id = "template_8r123bp";
+          let userID = "user_DeGKwX1jMT522C5BEPsyo"
+          emailjs.send(service_id, template_id, templateParams, userID)
+            .then((response) => {
+              console.log('SUCCESS! 寄出驗證信');
+              this.modalState.uiState = '';
+              this.signUpInfo.token = templateParams.token;
+              this.modalState.content = 'confirm-token-content'
+            })
+            .catch((error) => {
+              console.log('FAILED...', error);
+              this.modalState.isError = error;
+            })
         }
 
-        // handleLogin(theAccount, thePassword) {
-        //     console.log(theAccount, thePassword)
-        //     const qs = QS;
-        //     const json = {
-        //         "account": theAccount,
-        //         "password": thePassword
-        //     }
-        //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
-        //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
-        //             transformRequest: [function (data) {
-        //                 return qs.stringify(data); //把資料轉化為QueryString
-        //             }]
-        //         }).then(res => {
-        //             console.log(res)
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //         });
-        //     console.log('parents')
+      },
+      handleCompleteSignUp() {
+        this.modalState.uiState = 'loading';
+        axios.post('./assets/php/signUp.php', {
+            "account": this.signUpInfo.account,
+            "password": this.signUpInfo.password
+          })
+          .then(res => {
+            console.log(res)
+            this.modalState.uiState = '';
+            if (Array.isArray(res.data)) {
+              this.modalState.content = 'success-sign-up-content';
+              this.handleLoginKeep(res.data[0]['member_id']);
+              setTimeout(() => {
+                this.$store.commit('setLoginModalShow', false);
+              }, 3000)
+              this.handleSendSuccessSignUpMail(this.signUpInfo.account);
+            } else {
+              this.modalState.isError = res.data;
+              throw new Error(res.data);
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      },
+      handleSendSuccessSignUpMail(account) { //問老師寫在上面? //能讀data值嗎
+        axios.post(
+          `./assets/php/sendSuccessSignUpMail.php`, {
+            "account": account,
+          }
+        ).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err);
+        })
+
+      },
+
+    }
+
+    // handleLogin(theAccount, thePassword) {
+    //     console.log(theAccount, thePassword)
+    //     const qs = QS;
+    //     const json = {
+    //         "account": theAccount,
+    //         "password": thePassword
+    //     }
+    //     axios.post('http://localhost:8080/nino-scss/app/assets/php/login.php', json, {
+    //             //配置`transformRequest` ，在向伺服器傳送前，修改請求資料，axios會根據修改後的資料，自動設定請求頭
+    //             transformRequest: [function (data) {
+    //                 return qs.stringify(data); //把資料轉化為QueryString
+    //             }]
+    //         }).then(res => {
+    //             console.log(res)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         });
+    //     console.log('parents')
 
 
-        //     // this.isLogin = true;
-        //     // this.isLoginModalShow = false
-        // },
+    //     // this.isLogin = true;
+    //     // this.isLoginModalShow = false
+    // },
 
 
-    });
+  });
 </script>
 
 
-@@include('./layout/HeaderLinkGroup.html')
-@@include('./layout/HeaderNavMenu.html')
-@@include('./MemberModalDiv.html')
+@@include('./layout/HeaderLinkGroup.html') @@include('./layout/HeaderNavMenu.html') @@include('./MemberModalDiv.html') @@include('./popovers.html')

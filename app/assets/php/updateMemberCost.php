@@ -58,7 +58,7 @@ try {
 
         $costNum = $member_new_cost[0];
 
-        if($costNum==""){
+        if($costNum == null){
 
             $costNum = 0;
 

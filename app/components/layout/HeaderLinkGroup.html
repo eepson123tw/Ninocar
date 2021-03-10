@@ -3,7 +3,7 @@
     template: `
             <div class="container">
             <nav class="link-group">
-                <ul>
+                <ul @mouseover="isPopover = true" @mouseenter="isPopover = false" >
                     <li>
                         <a href="cart.html" aria-label="cart"  data-js="js-popovers">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
@@ -38,6 +38,9 @@
                             </svg>
                         </a>
                     </li>
+                    <transition name="fade">  
+                    <popovers  v-if="isPopover"></popovers>
+                    </transition>
                 </ul>
             </nav>
         </div>
@@ -45,6 +48,7 @@
     data() {
       return {
         isTopBtnVisible: false,
+        isPopover: false
       }
     },
     methods: {

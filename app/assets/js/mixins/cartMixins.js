@@ -3,6 +3,7 @@ let cartMixins = {
     return {
       cartsList: [],
       productsList: [],
+      nowProducts: {},
       cartNum: 0,
       memberPoints: 0,
       selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
@@ -38,9 +39,6 @@ let cartMixins = {
   methods: {
     addCarts(val) {
 
-
-
-
       this.cartsList.push(val);
       let cartJson = JSON.stringify(this.cartsList);
       localStorage.setItem('cartsList', cartJson);
@@ -75,9 +73,27 @@ let cartMixins = {
     },
     addDiyCarts(val) {
 
+    },
+    nowProduct(val) {
+
+      console.log(val.productId);
+      const params = new URLSearchParams()
+      params.append('PRODUCT_ID', val.productId)
+      axios({
+        method: 'post',
+        url: 'assets/php/getCurrentProduct.php',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: params,
+      }).then((res) => {
+        console.log(res.data[0]);
+        this.nowProducts = res.data[0];
+      }).catch((error) => {
+        console.log(error)
+      })
 
     },
-    currentProduct() {},
   },
   computed: {
     countNum() {
@@ -111,7 +127,7 @@ let cartMixins = {
 
 
       let newList;
-      newList = item.map((product) => {
+      newList = filterProductList.map((product) => {
         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
         thisSeriesIndex.toString();
         let thisPoints = parseInt(product['product_points']);
