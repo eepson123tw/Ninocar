@@ -100,7 +100,7 @@ let cartMixins = {
   },
   mounted() {
 
-    axios.get(`./assets/php/nofunctionConnProduct.php`).then((item) => {
+    axios.get(`./assets/php/getProductList.php`).then((item) => {
       return item.data;
     }).then((item) => {
       let newList;
