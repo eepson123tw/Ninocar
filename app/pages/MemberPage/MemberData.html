@@ -75,16 +75,17 @@
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <li v-show="previewImage ==null" class="member__circle"></li>
-        <img id="img" style="max-width: 300px; max-height: 300px; margin: 0 auto; border-radius: 20px; margin-bottom: 20px;" :src="previewImage">
+        <li class="member__circle" style="overflow: hidden;">
+          <img id="img" style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);" :src="previewImage">
+        </li>
         <li> <label class="member__input--prettier">
             <input
               type="file"
               @change="uploadImage"
             />
-            <span>選擇圖片</span>
+            <span class="btn btn--ghost py-3 px-3">選擇圖片</span>
           </label></li>
-        <li>限制大小 300X300.jpg</li>
+        <li>限制大小 2MB以內</li>
       </ul>
     </div>
   </div>
@@ -95,7 +96,7 @@
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
     </section>
   </div>
-  <div class="row  member__info py-10 mb-5">
+  <div class="row  member__info py-10 py-xs-5 mb-5">
     <div class="member__baseData col-6 col-lg-6  order-lg-2">
       <ul>
         <li class="member__baseData--center   pl-5 pl-lg-1">
@@ -130,8 +131,10 @@
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <img id="img" style="max-width: 300px; max-height: 300px; margin: 0 auto; border-radius: 20px; margin-bottom: 20px;" :src="userData.photo">
-        <li>限制大小 300X300.jpg</li>
+        <li class="member__circle" style="overflow: hidden;">
+          <img id="img" style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);" :src="userData.photo">
+        </li>
+        <li>我的大頭貼</li>
       </ul>
     </div>
   </div>

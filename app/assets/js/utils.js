@@ -58,9 +58,6 @@ const store = new Vuex.Store({ //global store
     setMemberPoint(state, point) {
       state.memberCurrentPoint = point;
     },
-
-
-
     //cart購物車 store 
 
     //訂單比數跟詳細資料

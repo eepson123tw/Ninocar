@@ -100,7 +100,7 @@ let cartMixins = {
   },
   mounted() {
 
-    axios.get(`./assets/php/nofunctionConnProduct.php`).then((item) => {
+    axios.get(`./assets/php/getProductList.php`).then((item) => {
       return item.data;
     }).then((item) => {
       let newList;
@@ -158,14 +158,16 @@ let cartMixins = {
     }).then((res) => {
 
       let memberPoints = res.data[0]['member_points'];
-
-      this.memberPoints = parseInt(memberPoints);
-      console.log('目前會員點數', this.memberPoints);
-      this.$store.commit('setMemberPoint', this.memberPoints);
-
+      // console.log(memberPoints)
+      if (memberPoints == null) {
+        this.$store.commit('setMemberPoint', this.memberPoints);
+      } else {
+        memberPoints = memberPoints;
+        this.memberPoints = parseInt(memberPoints);
+        this.$store.commit('setMemberPoint', this.memberPoints);
+      };
     }).catch((error) => {
       console.log(error)
-
     })
 
   },
