@@ -53,6 +53,16 @@ foreach ($data as $index => $row) {
 
   $mail->SMTPSecure = 'ssl';
 
+  $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+  $mail->SMTPOptions = array(
+    'ssl' => array(
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+      'allow_self_signed' => true
+    )
+  );
+
   // 信件內容的編碼方式       
 
   $mail->CharSet = "utf-8";
@@ -83,6 +93,9 @@ foreach ($data as $index => $row) {
   // 收件人
 
   $mail->AddAddress($email, "會員"); //此為收件者的電子信箱及顯示名稱
+
+  //寄送
+  // $mail->Send()
 
   // 顯示訊息
 
