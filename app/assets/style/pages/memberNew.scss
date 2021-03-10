@@ -396,3 +396,18 @@
   text-decoration: none;
   color: #000000;
 }
+
+.fade {
+  &-enter {
+    opacity: 0;
+  }
+  &-leave-to {
+    opacity: 0;
+  }
+  &-enter-active {
+    transition: opacity 2s;
+  }
+  &-leave-active {
+    transition: opacity 2s;
+  }
+}

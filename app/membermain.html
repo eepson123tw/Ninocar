@@ -20,10 +20,14 @@
     <!--  -->
     @@include('pages/MemberPage/MemberData.html')
     <!--  -->
-    @@include('pages/MemberPage/MemberCupon.html')
+    <transition name="fade" mode="out-in">
+      <member_coupon></member_coupon>
+    </transition>
     <!--  -->
+    <transition name="fade" mode="out-in">
+      <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
+    </transition>
 
-    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
     <!--  -->
     @@include('pages/MemberPage/MemberPassword.html')
 
@@ -250,7 +254,7 @@
 
   </div>
 
-  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html') @@include('pages/MemberPage/MemberCupon.html')
   <script>
     new Vue({
       el: '#app',
@@ -260,31 +264,6 @@
         userData: {},
         isModalShow: false,
         isUpdateModalShow: false,
-        cuponList: [{
-          disCount: 9,
-          disCountText: '折',
-          cuponTitle: '【註冊新會員】',
-          cuponText: '全項商品不限金額結帳九折優惠',
-          cuponTime: '68:08:22',
-        }, {
-          disCount: null,
-          disCountText: '免運',
-          cuponTitle: '【黃金會員】',
-          cuponText: '宅配享一次免運優惠',
-          cuponTime: '2021/03/22',
-        }, {
-          disCount: null,
-          disCountText: '買一送一',
-          cuponTitle: '【白金會員】',
-          cuponText: '結帳享買一送一',
-          cuponTime: '2021/03/22',
-        }, {
-          disCount: null,
-          disCountText: '買一送一',
-          cuponTitle: '【生日優惠】',
-          cuponText: '全項商品不限金額結帳七折優惠',
-          cuponTime: '2021/03/22',
-        }],
         user: {
           name: '帳號',
           text: '',
@@ -616,7 +595,7 @@
         // this.receiverNewList = JSON.parse(localStorage.getItem('receiverNewAddress')) || [];
         this.defaultReceiverList = JSON.parse(localStorage.getItem('receiverAddress')) || [];
         this.defaultAddress = JSON.parse(localStorage.getItem('receiverAddressDefault')) || false;
-        this.receiverList = JSON.parse(localStorage.getItem('receiverList')) || [];
+        // this.receiverList = JSON.parse(localStorage.getItem('receiverList')) || [];
 
 
         //地址api
