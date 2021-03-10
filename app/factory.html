@@ -595,7 +595,7 @@
                                     <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                                     <div class="other">
                                         <p class="textCount"></p>
-                                        <button class="btn btn--small h5 comment">留言</button>
+                                        <button class="btn btn--small h5 comment" @click="postComment">留言</button>
                                     </div>
                                 </div>
                             </div>
@@ -616,7 +616,6 @@
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
-
                     // ajax
                 },
                 openWorkModal(e){ //進入彈窗、後面固定不給滾動
@@ -683,6 +682,15 @@
                             "transform": "rotate(0deg)",
                         })
                     }
+               },
+               postComment(e){
+                    let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+                    // let commentContentL = $(e.target).parent().parent().children('.textarea').text().length;
+                    // console.log(commentContentL)
+                    if(commentContentL > 0){
+                        this.commentNum_plus += 1;
+
+                    } 
                },
                postSubComment(e){ //PO回覆的回覆
                 //    console.log('subComment is clicked')
@@ -754,7 +762,7 @@
                     is_icon_color:false,
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
-                    isModalShow:false,
+                    isReportModalShow:false,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -920,9 +928,8 @@
                     this.is_icon_color = false
                 },
                 openReportModal(){
-                    console.log('檢舉彈窗打開')
-                    // this.isModalShow = true;
-                    // this.$emit('report-emit', this.isModalShow);
+                    console.log('report!')
+                    bus.$emit('report-emit')
                 },
                 addGoodNum(e){
                     this.goodNum_plus += 1;
