@@ -14,11 +14,7 @@ class UtilClass{
         // $db_host = "127.0.0.1";
         $db_host = "localhost";
         $db_user = "root";
-<<<<<<< HEAD
         $db_pass = "za0000";
-=======
-        $db_pass = "password";
->>>>>>> gulp
         $db_select = "team1";
 
         //建立資料庫連線物件
