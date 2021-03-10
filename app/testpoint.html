@@ -129,25 +129,41 @@
         },
         memberStatus2() {
 
+
+          // 抓取會員現有點數
           const params = new URLSearchParams()
           params.append('ID', this.memberId)
-          params.append('ORDER_ID', 1395662)
           axios({
             method: 'post',
-            url: 'assets/php/updateMemberCost.php',
+            url: 'assets/php/getMemberPoints.php',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
             data: params,
+
           }).then((res) => {
-            console.log(res);
+
+            let memberPoints = res.data[0]['member_points'];
+            // console.log(memberPoints)
+            if (memberPoints == null) {
+              memberPoints = 0;
+              console.log(memberPoints)
+              this.memberPoints = parseInt(memberPoints);
+              this.$store.commit('setMemberPoint', this.memberPoints);
+            } else {
+              memberPoints = memberPoints;
+              console.log(memberPoints)
+              this.memberPoints = parseInt(memberPoints);
+              this.$store.commit('setMemberPoint', this.memberPoints);
+            };
+            // console.log(memberPoints);
           }).catch((error) => {
             console.log(error)
 
           })
 
 
-        }
+        },
 
 
       },
