@@ -1,7 +1,7 @@
 <?php
  
  
- include("./Lib/UtilClass.php");
+ include("./Lib/Conn.php");
  $Util = new UtilClass();
    
 
@@ -20,7 +20,7 @@
     $statement->execute();
 
   // 註冊就是一般會員
-    $sql = "UPDATE `member` SET `member_level` = '1',`member_upgradedate`= now() 
+    $sql = "UPDATE `member` SET `member_level` = '0',`member_upgradedate`= now() 
     WHERE `member`.`member_id` = ?";
 
     $statement=$Util->getPDO()->prepare($sql);
@@ -56,7 +56,7 @@
         $statement->execute();
 
         // 會員狀態更新 至 黃金
-        $sql = "UPDATE `member` SET `member_level` = '2',`member_upgradedate`= now()  
+        $sql = "UPDATE `member` SET `member_level` = '1',`member_upgradedate`= now()  
         WHERE `member`.`member_id` = ?";
 
         $statement=$Util->getPDO()->prepare($sql);
@@ -79,7 +79,7 @@
 
 
         // 會員狀態更新 至 白金
-        $sql = "UPDATE `member` SET `member_level` = '3',`member_upgradedate`= now() 
+        $sql = "UPDATE `member` SET `member_level` = '2',`member_upgradedate`= now() 
          WHERE `member`.`member_id` = ?";
 
         $statement=$Util->getPDO()->prepare($sql);
