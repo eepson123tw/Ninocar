@@ -15,6 +15,15 @@ $data = $statement->fetchAll();
 ?>
 <title>留言管理</title>
 </head>
+<script type="text/javascript">
+    function doSubmit() {
+        if (confirm('確定寄送警告信?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
 <body>
     <?php
