@@ -3,7 +3,7 @@
 $db_host = "127.0.0.1";
 // $db_host = "localhost";
 $db_user = "root";
-$db_pass = "";
+$db_pass = "za0000";
 $db_select = "team1";
 
 //建立資料庫連線物件

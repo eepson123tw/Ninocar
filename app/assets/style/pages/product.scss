@@ -11,10 +11,27 @@
     text-decoration: none;
 }
 
+// .box-green {
+//     background-color: green;
+// }
+
+// .box-yellow {
+//     background-color: yellow;
+// }
+
+// .box-pink {
+//     background-color: pink;
+// }
+
+// .box-blue {
+//     background-color: blue;
+// }
+
 .item-menu {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
+    margin-top: 100px;
 }
 .item {
     overflow: hidden;
@@ -30,9 +47,6 @@
     font-weight: bold;
 }
 
-.menu-btn i {
-    margin-right: 10px;
-}
 .smenu {
     background: #fff;
     overflow: hidden;
@@ -42,7 +56,7 @@
 }
 .smenu a {
     display: block;
-    padding: 16px 26px;
+    padding: 16px 24px;
     color: black;
     font-size: 14px;
     margin: 4px 0;
@@ -194,11 +208,14 @@
 }
 
 @media (max-width: 768px) {
-    .item-menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    .container {
+        font-size: 0.7rem;
     }
+    // .item-menu {
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: space-between;
+    // }
 }
 
 @media (max-width: 414px) {
@@ -206,7 +223,7 @@
         padding: 0;
     }
 
-    .item:first-child {
+    .item {
         margin: 0px;
     }
 }
