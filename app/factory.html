@@ -713,7 +713,7 @@
                                     <p class="userContent h5">${commentContent}</p>
                                     
                                     <div class="other">
-                                        <p class="postTime h6">3小時前</p>
+                                        <p class="postTime h6">0小時前</p>
                                         <div>                                
                                             <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
                                         </div>
@@ -1990,14 +1990,14 @@
                 } else {
                     // console.log('okk')
                     $(e.target).parent().parent().children('.textarea').css({"border": "1px solid #000"})
-                    $(e.target).parent().parent().parent().parent().children(`.typeReply`).before(`<div class="work_reply">
+                    $(e.target).parent().parent().parent().parent().children(`.readMore`).before(`<div class="work_reply hiddenReply">
                             <div class="userContext">
                                 <img src="${replyerPic}"  class="userPic">
                                 <div class="userContext_top">
                                     <p class="userName h6">${replyerName}</p>
                                     <p class="userContent h5">${commentContent}</p>
                                     <div class="other">
-                                        <p class="postTime h6">3小時前</p>
+                                        <p class="postTime h6">0小時前</p>
                                         <div>               
                                             <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
                                             <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
