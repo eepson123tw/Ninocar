@@ -51,7 +51,38 @@ try {
 
   $mail->Subject = "註冊成功"; //信件主旨
 
-  $mail->Body = "恭喜註冊成功！";   //信件內容
+  $mail->Body = '
+  <div class="top" style="border-bottom:4px solid #E59807;margin:auto;text-align:center;width: 600px;padding:30px 0px">
+  <img src="https://s4.aconvert.com/convert/p3r68-cdx67/amcoy-88v1x.png">
+</div>
+<div class="body" style="margin:auto;text-align:left;width:600px">
+<div class="title" style="padding:30px;padding-right:30px;font-size:20px;color:rgba(0,0,0,8);text-align:center;font-family:Microsoft JhengHei">
+  <strong>註冊成功通知</strong>
+</div>
+<div class="text" style="font-size:16px;margin-bottom:30px;padding:30px;background-color:#ffffff">
+  恭喜你成為新會員。<br />
+  期望帶給您愉快的購物體驗，尋獲想要的商品。<br /><br />再次感謝您成為我們的新會員。
+</div>
+<hr style="background-color: #E59807;margin-bottom: 30px;">
+<div class="bottom" style="width:600px;margin:auto;background-color:white;color:rgba(0,0,0,0.8)">
+  <div style="padding:0px 30px 30px 30px;Font-size:14px">
+    如有任何問題，歡迎透過 NiNO CAR 客服信箱 ninocar2021@gmail.com 與我們連繫!<br />
+    敬祝 購物愉快<br />
+    NiNO CAR 購物網服務團隊
+  </div>
+</div>
+</div>
+<footer style="background-color:#E59807;width:600px;margin:auto;padding:30px 0px">
+<div class="button" style="text-align:center">
+  <span>
+    <a href="" style="text-decoration:none">
+      <img src="https://ci4.googleusercontent.com/proxy/pKg7MgyN-DcW4K8kJaxGhbPQwkyLvhedJp7pEU-HBwXF7dDYeePcZzYrviDDDjF9k8AaJ5zXomCSe0uzd8zsX-yKKheBPa8h3Wi8vF-IXKywvJYEBOGNprUGbin7u47OhgXxmcPDI2b_QcI=s0-d-e1-ft#https://cdn-static.tibame.com/defaultImages/email_format/Artboard%E2%80%93Home3%403x.png" width="26" height="26" class="CToWUd">
+      <strong style="Font-size:14px;Color:#ffffff;vertical-align:7px">NiNO CAR 官網</strong>
+    </a>
+  </span>
+</div>
+</footer>
+  ';   //信件內容
 
   $mail->IsHTML(true);
 
@@ -74,4 +105,3 @@ try {
 } catch (PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
-?>
