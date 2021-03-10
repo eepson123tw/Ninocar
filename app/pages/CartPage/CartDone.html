@@ -262,7 +262,7 @@
         productArray.push(parseInt(this.buyList[num].productId));
       }
 
-
+      //   送出訂單
       const params = new URLSearchParams()
       params.append('ID', this.memberId)
       params.append('ORDER_ID', this.orderId)
@@ -271,6 +271,8 @@
       params.append('ORDER_GAIN', this.getPoint)
       params.append('PAY_TYPE', this.payment)
       params.append('PRODUCT_ARRAY', JSON.stringify(productArray))
+
+
 
       axios({
         method: 'post',
@@ -287,6 +289,46 @@
         console.log(error)
 
       });
+
+
+      //更新點數
+      const params2 = new URLSearchParams()
+      params2.append('ID', this.memberId)
+      params2.append('ORDER_ID', this.orderId)
+      axios({
+        method: 'post',
+        url: 'assets/php/updateMemberPoint.php',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: params2,
+      }).then((res) => {
+        console.log(res);
+      }).catch((error) => {
+        console.log(error)
+
+      })
+
+      //更新消費
+      const params3 = new URLSearchParams()
+      params3.append('ID', this.memberId)
+      params3.append('ORDER_ID', this.orderId)
+      axios({
+        method: 'post',
+        url: 'assets/php/updateMemberCost.php',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: params3,
+      }).then((res) => {
+        console.log(res);
+      }).catch((error) => {
+        console.log(error)
+
+      })
+
+
+
 
 
     }

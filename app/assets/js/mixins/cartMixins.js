@@ -159,10 +159,15 @@ let cartMixins = {
 
       let memberPoints = res.data[0]['member_points'];
 
+      if (memberPoints == null) {
+
+        memberPoints = 0;
+      } else {
+        memberPoints = memberPoints;
+      };
       this.memberPoints = parseInt(memberPoints);
       console.log('目前會員點數', this.memberPoints);
       this.$store.commit('setMemberPoint', this.memberPoints);
-
     }).catch((error) => {
       console.log(error)
 
