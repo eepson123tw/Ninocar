@@ -65,6 +65,13 @@
                             class="member__page"
                             data-page="memberNotice"
                         >通知中心</a>
+                    </li>
+                    <li>
+                        <a
+                            href="MemberPurchase.html"
+                            class="member__page"
+                            data-page="memberPurchase"
+                        >購買清單</a>
                         <ul class="dropdown courses">
                             <li>
                                 <span class="code"></span>
@@ -91,13 +98,6 @@
                     </li>
                     <li>
                         <a
-                            href="MemberPurchase.html"
-                            class="member__page"
-                            data-page="memberPurchase"
-                        >購買清單</a>
-                    </li>
-                    <li>
-                        <a
                             href="member.html"
                             class="member__page"
                             data-page="memberCollection"
@@ -112,32 +112,31 @@
 </template>
 
 <script>
-    Vue.component('memberBar', {
+  Vue.component('memberBar', {
 
-        template: '#memberBar',
+    template: '#memberBar',
 
-        data() {
-            return {}
-        },
-        methods: {
+    data() {
+      return {}
+    },
+    methods: {
 
 
-        },
-        mounted() {
-            let nowPage = document.title;
-            let pageList = document.querySelectorAll('.member__page');
+    },
+    mounted() {
+      let nowPage = document.title;
+      let pageList = document.querySelectorAll('.member__page');
 
-            pageList.forEach((item) => {
-                let target = item.dataset.page;
-                if (target == nowPage) {
-
-                    item.classList.add('member__page--active')
-                }
-
-            })
-
+      pageList.forEach((item) => {
+        let target = item.dataset.page;
+        if (target == nowPage) {
+          item.classList.add('member__page--active')
         }
 
+      })
 
-    })
+    }
+
+
+  })
 </script>
