@@ -276,16 +276,11 @@ INSERT INTO team1.order
 (`member_id`, `order_cost`, `order_points`, `order_gain`, `pay_type`, `order_type` , `order_date`)
  VALUES ('1','1000','0','1000','0','0',NOW());
 
-
-
 INSERT INTO `coupon` (`coupon_id`, `coupon_name`, `coupon_des`) VALUES
 (0, '註冊新會員', '全項商品不限金額結帳九折優惠'),
 (1, '黃金會員', '宅配享一次免運優惠'),
 (2, '白金會員', '結帳享買一送一'),
 (3, '生日優惠', '全項商品不限金額結帳五折優惠');
-
-
-
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_ename`, `product_img`, `product_series`, `product_spec`, `product_seriesid`, `product_price`, `product_points`, `product_des`, `product_type`, `product_img1`, `product_img2`, `product_img3`, `product_img4`, `product_img5`, `product_size`, `product_year`) VALUES
 (1, '三菱夫桑 姬巴士', 'MITSUBISHI AEROQUEEN', 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/right-mini/right-1.png', 4, 0, 1, 300, 0, '專為女性設計的貼心旅遊巴士，主要行走九州地區觀光景點', 0, 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/nobg-mini/no-background-1.png', 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/cover-mini/cover-1.png', 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/back-mini/back-1.png', 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/front-mini/front-1.png', 'https://raw.githubusercontent.com/WeiLin18/nino-pic/master/box-mini/box-1.png', '1/156', '2010'),
