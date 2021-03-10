@@ -13,6 +13,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
+<script src="./assets/js/mixins/cartMixins.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
 <title>cart</title>
 </head>
 
@@ -30,7 +33,7 @@
       <cart-info @data-handler="dataChange" :current="current_section" v-if="current_section === 1" key="index-2">
       </cart-info>
 
-      <cart-done @open-window="openModal" v-if="current_section === 2" :current="current_section" key=" index-3 ">
+      <cart-done ref="order" @open-window="openModal" v-if="current_section === 2" :current="current_section" key=" index-3 ">
       </cart-done>
     </transition>
 
@@ -57,7 +60,10 @@
         </div>
       </template>
       <template #footer>
-        <a href="./MemberPurchase.html"><button class="btn btn--fluid btn--outline mt-3 ">查看我的訂單</button></a>
+        <a href="#"><button
+            class="btn btn--fluid btn--outline mt-3 "
+            @click="orderConfirm"
+          >查看我的訂單</button></a>
       </template>
 
     </modal-custom-made>
@@ -116,6 +122,7 @@
         isModalShow: false,
         noLogin: false,
         carts_list: [],
+        userData: '',
       },
       store,
       methods: {
@@ -136,7 +143,30 @@
         },
         loginHandler(val) {
           this.noLogin = true;
-        }
+        },
+        orderConfirm() {
+          // 訂單成立 寄一封信
+
+          let num = this.$refs.order.orderId;
+
+
+          let templateParams = {
+            "order_id": num,
+            "userMail": this.userData.account,
+            "reply_to": "wow",
+          }
+          let service_id = "service_nc71unc";
+          let template_id = "template_n6r3opy";
+          let userID = "user_TzSSXb2sF6bb0qvrAeRv0";
+          emailjs.send(service_id, template_id, templateParams, userID)
+            .then((response) => {
+              console.log('SUCCESS! 寄出訂單通知信');
+            })
+            .catch((error) => {
+              console.log('FAILED...', error);
+            })
+
+        },
         // deleteOneItem(value) {
 
         //   this.carts_list.splice(value, 1);
@@ -159,8 +189,49 @@
           selectShipping: state => state.selectShipping,
           getPoint: state => state.getPoints,
         }),
+        memberId() {
+          return this.$store.state.memberId
+        },
+
+
+
       },
       mounted() {
+
+        const params2 = new URLSearchParams()
+        params2.append('ID', this.memberId)
+
+        axios({
+          method: 'post',
+          url: 'assets/php/getMemberInfoNoFunction.php',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          data: params2,
+        }).then((res) => {
+          // console.log('123', res.data)
+          let newData;
+          newData = res.data.map((item) => {
+
+            return {
+              name: item.member_name,
+              account: item.member_account,
+              gender: item.member_gender,
+              address: item.member_address,
+              birthday: item.member_birthday,
+              phone: item.member_phone,
+              photo: item.member_photo,
+              password: item.member_pwd,
+            }
+          });
+          this.userData = newData[0];
+
+        }).catch((error) => {
+          console.log(error)
+        });
+
+
+
         //確認有無購買
 
         this.carts_list = JSON.parse(localStorage.getItem('cartsList')) || [];
@@ -180,19 +251,21 @@
           }
         };
 
+        // axios({
+        //   method: 'get',
+        //   url: 'assets/php/getMemberCoupon.php',
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded',
+        //   },
+        //   // data: params,
+        // }).then((res) => {
+        //   console.log(res.data)
+        // }).catch((error) => {
+        //   console.log(error)
+        // });
 
-        axios({
-          method: 'get',
-          url: 'assets/php/getMemberCoupon.php',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          // data: params,
-        }).then((res) => {
-          console.log(res.data)
-        }).catch((error) => {
-          console.log(error)
-        })
+
+
 
       },
     });

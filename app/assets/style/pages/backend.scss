@@ -356,6 +356,10 @@ td {
     width: 10rem;
     margin: auto;
   }
+  button {
+    background: transparent;
+    cursor: pointer;
+  }
 }
 
 // block
@@ -365,13 +369,13 @@ td {
   margin: 0 auto;
   padding: 2rem;
   border-radius: 10px;
-  background: $secondary;
+  background: $white;
   display: flex;
   main {
     width: 70%;
     display: flex;
     flex-direction: column;
-    color: $white;
+    color: $black;
     .update {
       display: flex;
       max-height: 2rem;
@@ -381,13 +385,17 @@ td {
       input {
         display: block;
         width: 70%;
+        // border: 1px solid $black;
         border: none;
+        background: $gray-300;
       }
       select,
       textarea {
         display: block;
         width: 70%;
+        // border: 1px solid $black;
         border: none;
+        background: $gray-300;
       }
       button {
         text-align: center;
@@ -395,11 +403,11 @@ td {
         padding: 5px 15px;
         border-radius: 50px;
         cursor: pointer;
-        background: $primary-light;
-        color: $black;
+        background: $secondary;
+        color: $white;
         transition: 0.5s;
         &:hover {
-          background: $primary;
+          background: $secondary-dark;
         }
       }
       a {
@@ -408,14 +416,13 @@ td {
         width: 5rem;
         padding: 5px 15px;
         border-radius: 50px;
-        border: 2px solid $black;
+        border: 2px solid $red;
         cursor: pointer;
         background: transparent;
-        color: $black;
+        color: $red;
         transition: 0.5s;
         &:hover {
           background: $gray-300;
-          border: 2px solid transparent;
         }
       }
     }

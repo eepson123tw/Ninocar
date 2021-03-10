@@ -85,6 +85,21 @@
                 <p class="product__header_body">點數限定</p>
             </div>
         </div> -->
+<<<<<<< HEAD
+=======
+        </div>
+
+    <ul class="col-9" style="margin-top: 200px">
+        <div class="row">
+            <div class="col-9">
+                <select class="area" v-model="type">
+                    <option value="" disabled>-- 請選擇 --</option>
+                    <option value="依上架時間">最新上架</option>
+                    <option value="依價格" @click="sort = 'price', isReverse = !isReverse">依價格(由高至低)</option>
+                    <option value="依價格">依價格(由低至高)</option>
+                    <option value="依銷售度">熱門銷售</option>
+                </select>
+>>>>>>> gulp
             </div>
         </div>
 
@@ -100,6 +115,7 @@
                             <option value="依銷售度">熱門銷售</option>
                         </select>
                     </div>
+<<<<<<< HEAD
                 </div>
             </div>
             <ul class="col-12 col-lg-6 col-sm-6">
@@ -175,3 +191,33 @@
         </div>
     </div>
 </div>
+=======
+                </ul>
+                <!---- 頁籤 ---->
+                <ul class="col-12">
+                    <div class="row">
+                        <div class="page col-4 col-lg-6 col-sm-12 justify-content-center">
+                            <div class="page_btn_nb"></div>
+                        </div>
+                        <nav aria-label="...">
+                            <ul class=" d-flex pagination">
+                                <li class="page-item disabled" v-bind:class="{'disabled': (currPage === 1)}" @click.prevent="setPage(currPage-1)">
+                                    <a class="page-link" href="#"><span
+                                        class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span></a>
+                                </li>
+                                <li class="page-item" v-for="n in totalPage"  v-bind:class="{'active': (currPage === (n))}" 
+                                    @click.prevent="setPage(n)"><a href="#">{{n}}</a></li>
+                                <li class="page-item" v-bind:class="{'disabled': (currPage === totalPage)}" 
+                                    @click.prevent="setPage(currPage+1)">
+                                    <a class="page-link" href="#"><span 
+                                        class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </ul>
+</div> 
+>>>>>>> gulp

@@ -151,7 +151,11 @@ let productMixins = {
         //拿所有商品清單
         getProductList().then(res => {
             console.log(res.data);
-            const fetchProductList = res.data.map(product => {
+            const filterProductList = res.data.filter(product => {
+
+                return product['product_spec'] !== '5'
+            })
+            fetchProductList = filterProductList.map(product => {
                 // 系列數字轉名稱
                 let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
                 thisSeriesIndex.toString();

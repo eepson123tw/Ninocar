@@ -30,23 +30,23 @@ $data = $statement->fetchAll();
       ?>
         <main>
           <form method="post" action="orderUpdateR.php" enctype="multipart/form-data">
-            <div class="update mb-3">
+            <div class="update mb-4">
               <p>訂單日期：</p>
-              <input type="text" name="date" id="name" value="<?= $row["order_date"] ?>">
+              <input disabled="disabled" type="text" name="date" id="name" value="<?= $row["order_date"] ?>">
             </div>
-            <div class="update mb-3">
+            <div class="update mb-4">
               <p>會員編號：</p>
-              <input type="text" name="MID" value="<?= $row["member_id"] ?>">
+              <input disabled="disabled" type="text" name="MID" value="<?= $row["member_id"] ?>">
             </div>
-            <div class="update mb-3">
+            <div class="update mb-4">
               <p>訂單金額：</p>
               <input type="text" name="price" value="<?= $row["order_cost"] ?>">
             </div>
-            <div class="update mb-3">
+            <div class="update mb-4">
               <p>訂單點數：</p>
               <input type="text" name="point" id="price" value="<?= $row["order_points"] ?>">
             </div>
-            <div class="update mb-3">
+            <div class="update mb-4">
               <p>貨物狀態：</p>
               <select name="deliverType" id="" value="">
                 <?php

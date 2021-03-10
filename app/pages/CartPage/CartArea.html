@@ -86,7 +86,10 @@
 							class="btn btn--link cart__link--small"
 						>刪除</button>
 					</div>
-					<p class="cart__cancel"><img
+					<p
+						class="cart__cancel"
+						@click="deleteHandler(listIndex)"
+					><img
 							src="./assets/img/icon/icon-close.svg"
 							alt=""
 						></p>
@@ -116,7 +119,7 @@
 						>選擇運送方式</label> <span
 							v-if="noConfirm"
 							class="form__text form__text--warning"
-						>皆為必填</span>
+						>皆為必選</span>
 						<div class="form__section mb-5">
 							<select
 								name=""
@@ -312,13 +315,13 @@
 
 	</div>
 	<div v-else>
-		<main class="container cart  mb-15">
+		<main class="container cart   mb-15">
 			<header class="
 			row
 			mt-20
 			mb-10
 			order-sm-1">
-				<ul class="cart__title d-flex w-100">
+				<ul class="cart__title d-flex   block w-100">
 					<li>購物車</li>
 					<li>單價</li>
 					<li>數量</li>
@@ -358,6 +361,7 @@
   Vue.component('cartArea', {
     template: "#cartArea",
     props: ['list', 'isExist', 'current'],
+    mixins: [cartMixins],
     data() {
       return {
         //購買清單
@@ -432,31 +436,34 @@
     methods: {
       pageHandler() {
 
-        if (this.selectCoupon == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
-        } else if (this.selectPayment == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
-        } else if (this.selectShipping == "") {
-          this.classList = {
-            form__select: false,
-            cart__select: true,
-            form__warning: true
-          };
-          this.noConfirm = true;
+        if (this.memberId == null) {
+          this.$emit('login-check', true);
+          return
+        }
+        if (this.memberCurrentPoint < this.countTotalPoint) {
+          alert(`您所擁有的會員點數不足！！！`);
         } else {
-          console.log(`ok`);
-          if (this.memberId == null) {
-            this.$emit('login-check', true);
+          if (this.selectCoupon == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectPayment == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectShipping == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
           } else {
             this.currentData += 1;
             this.$emit('data-handler', this.currentData);
@@ -476,8 +483,8 @@
           }
         };
 
-
       },
+
       changeNum(listIndex, e) {
 
         let chooseNum = e.target.value * 1 + 1;
@@ -532,7 +539,7 @@
             this.discountPrice = Math.round((this.totalMoneyCost + this.totalPointCost) / this.totalProductNum);
           }
           if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
-            this.sendPrice = 0;
+            this.discountPrice = this.sendPrice;
           }
           if (this.couponList[key] == this.selectCoupon && key == 'discountFour') {
             this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
@@ -583,7 +590,9 @@
       memberId() {
         return this.$store.state.memberId
       },
-
+      memberCurrentPoint() {
+        return this.$store.state.memberCurrentPoint
+      }
 
     }
 
