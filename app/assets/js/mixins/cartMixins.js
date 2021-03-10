@@ -103,6 +103,13 @@ let cartMixins = {
     axios.get(`./assets/php/getProductList.php`).then((item) => {
       return item.data;
     }).then((item) => {
+
+      const filterProductList = item.filter(product => {
+
+        return product['product_spec'] !== '5'
+      })
+
+
       let newList;
       newList = item.map((product) => {
         let thisSeriesIndex = parseInt(product[`product_series`]) - 1;
