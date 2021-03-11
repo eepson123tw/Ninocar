@@ -80,24 +80,7 @@ let cartMixins = {
             console.log(val.productId);
 
             localStorage.setItem('car', JSON.stringify(val.productId));
-            const params = new URLSearchParams();
-            params.append('PRODUCT_ID', val.productId);
-            axios({
-                method: 'post',
-                url: 'assets/php/getCurrentProduct.php',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                data: params,
-            })
-                .then((res) => {
-                    console.log(res.data[0]);
-                    this.nowProducts = res.data[0];
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-
+           
             //
         },
     },
