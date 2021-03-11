@@ -261,16 +261,18 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO `team1`.`admin`(`admin_id`, `admin_account`, `admin_pwd`, `admin_signdate`) VALUES ('1','demo','demo',NOW());
 
 INSERT INTO member
-(member_account, member_pwd, member_name, member_signdate)
- VALUES ('jackjohnton789@gmail.com','1234567','匿名',NOW());
+(member_account, member_pwd, member_name, member_signdate) VALUES
+('jackjohnton789@gmail.com','1234567','匿名',NOW()),
+('eepson123@gmail.com','12345678','施周杰',NOW());
 
 INSERT INTO team1.board 
 (`board_id`, `board_date`)
  VALUES (1,NOW());
 
 INSERT INTO team1.comment 
-(`member_id`, `board_id`, `comment_content`, `comment_date`)
- VALUES ('1','1','渾蛋智障',NOW());
+(`member_id`, `board_id`, `comment_content`, `comment_date`) VALUES
+('1','1','被檢舉留言',NOW()),
+('2','1','妨礙觀感',NOW());
 
 INSERT INTO team1.order 
 (`member_id`, `order_cost`, `order_points`, `order_gain`, `pay_type`, `order_type` , `order_date`)

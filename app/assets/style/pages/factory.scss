@@ -343,28 +343,31 @@
 .mask {
     width: 100vw;
     background-color: #0808084D;
-    // z-index: 2010;
+    z-index: 2010;
     // z-index: 1;
     position: absolute;
     left: 0;
     top: 0;
     position: fixed;
-    display: none;
+    // display: none;
 }
 
 .work_left {
-    // height: 880px;
-    height: 620px;
+
+    height: 90vh;
     background-color: #fff;
     // outline: 1px solid red;
 }
 
 .work_right {
     background-color: #fff;
-    // height: 880px;
-    height: 620px;
+    height: 90vh;
     overflow-y: scroll;
-    // outline: 1px solid green;
+
+}
+
+.factoryModalOut{
+    padding: 5vh 0;
 }
 
 .closeIcon {

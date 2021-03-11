@@ -43,7 +43,7 @@
         <div v-for='(item,index) of productsList' class="mb-20 col-3">
 
           <h1>{{item.name}}</h1>
-          <img :src="item.imgURL" alt="">
+          <img :src="item.imgURL" @click="nowProduct(item)" alt="">
           <h2 v-show="item.price !==0">NT${{item.price}}</h2>
           <p v-show="item.points !==0">point:{{item.points}}</p>
           <p>{{item.text}}</p>
@@ -53,9 +53,6 @@
 
       </div>
     </div>
-
-    <popovers></popovers>
-
 
 
     <modal-custom-made v-show=" isModalShow " @closemodal="closeHandler ">
@@ -94,7 +91,7 @@
   <!--  -->
   <script src="./assets/js/mixins/cartMixins.js"></script>
   <!--  -->
-  @@include('./components/popovers.html')
+
 
   <script>
     new Vue({

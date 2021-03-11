@@ -34,11 +34,15 @@
 
       <div
         class=" member__address member__info w-100 "
+        v-if="addressList"
         v-for=" (receiver,index) of addressList "
       >
         <div class=" member__address--right col-8 col-lg-6 ">
           <ul>
-            <li class=" h3 member__addressText mt-5 ">姓名: <span class=" h4 ml-5 ">{{receiver.receiverName}}</span> <span
+            <li
+              class=" h3 member__addressText mt-5 "
+              v-if="receiver.receiverName"
+            >姓名: <span class=" h4 ml-5 ">{{receiver.receiverName}}</span> <span
                 v-show="defaultAddress && defaultIndex == index "
                 class=" btn h5 member__cuponBtn--text "
               >預設</span></li>
@@ -69,11 +73,15 @@
 
       <div
         class=" member__address member__info w-100 "
+        v-if="localAddress"
         v-for=" (receiver,index) of localAddress "
       >
         <div class=" member__address--right col-8 col-lg-6 ">
           <ul>
-            <li class=" h3 member__addressText mt-5 ">姓名: <span class=" h4 ml-5 ">{{receiver.receiverName}}</span> <span
+            <li
+              class=" h3 member__addressText mt-5 "
+              v-if="receiver.receiverName"
+            >姓名: <span class=" h4 ml-5 ">{{receiver.receiverName}}</span> <span
                 v-show="defaultIndex == index "
                 class=" btn h5 member__cuponBtn--text "
               >預設</span></li>

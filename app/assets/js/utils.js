@@ -41,8 +41,6 @@ const store = new Vuex.Store({ //global store
     totalMoney: 0,
     getPoints: 0,
 
-
-
   },
   mutations: { //類似 new Vue() 裡面的methods
 

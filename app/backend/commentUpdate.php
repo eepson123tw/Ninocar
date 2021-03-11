@@ -1,143 +1,84 @@
 <?php
-include("LoginCheck.php");
+include("head.php");
+include 'LoginCheck.php';
 
-//取得POST過來的值
-$CID = $_POST["CID"];
-
-//建立SQL
-$sql = "UPDATE `team1`.`comment` set `comment_type` = 1 WHERE `comment_id` = ?";
-
+//建立SQL---->留言----------------------
+$sql = "SELECT * FROM `team1`.`comment` WHERE `comment_id` = ?";
 //執行
 $statement = $Util->getPDO()->prepare($sql);
-
 //給值
-$statement->bindValue(1, $CID);
+$statement->bindValue(1, $_GET["CID"]);
 $statement->execute();
-
-require_once("../assets/php/PHPMailer/PHPMailerAutoload.php");
-
-//取得POST過來的值
-$MID = $_POST["MID"];
-
-//建立SQL
-$sql = "SELECT * FROM member WHERE `member_id` = ?";
-
-//執行
-$statement = $Util->getPDO()->prepare($sql);
-
-//給值
-$statement->bindValue(1, $MID);
-$statement->execute();
-
 $data = $statement->fetchAll();
 
-foreach ($data as $index => $row) {
+?>
+<html>
 
-  $email = $row["member_account"];
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>留言詳細</title>
+</head>
 
-  // 產生 Mailer 實體
+<body>
+  <?php
+  include '../../app/pages/BackendPage/base.html';
+  ?>
+  <div class="content">
+    <div class="block-responsive">
+      <?php
+      foreach ($data as $index => $row) {
+      ?>
+        <main>
+          <form method="post" action="commentUpdateR.php" enctype="multipart/form-data">
+            <div class="update mb-4">
+              <p>留言時間：</p>
+              <input disabled="disabled" type="text" name="" id="" value="<?= $row["comment_date"] ?>">
+            </div>
+            <div class="update mb-4">
+              <p>留言板編號：</p>
+              <input disabled="disabled" type="text" name="" value="<?= $row["board_id"] ?>">
+            </div>
+            <div class="update mb-4">
+              <p>會員編號：</p>
+              <input disabled="disabled" type="text" name="" id="" value="<?= $row["member_id"] ?>">
+            </div>
+            <div class="update mb-4">
+              <p>留言內容：</p>
+              <input disabled="disabled" type="text" name="" id="" value="<?= $row["comment_content"] ?>">
+            </div>
+            <div class="update mb-4">
+              <p>留言狀態：</p>
+              <select name="memberType" name="commentType" id="" value="">
+                <?php
+                $type = $row["comment_type"];
+                switch ($type) {
+                  case '1':
+                    $type = "封鎖";
+                    break;
+                  default:
+                    $type = "正常";
+                    break;
+                }
+                ?>
+                <option value="<?= $type ?>"><?= $type ?></option>
+                <option value="0">正常</option>
+                <option value="1">封鎖</option>
+              </select>
 
-  $mail = new PHPMailer();
+            </div>
+            <input type="hidden" name="CID" value="<?= $row["comment_id"] ?>" />
 
-  // 設定為 SMTP 方式寄信
-
-  $mail->IsSMTP();
-
-  // SMTP 伺服器的設定，以及驗證資訊
-
-  $mail->Host = "smtp.gmail.com";
-
-  $mail->Port = 465;
-
-  $mail->SMTPAuth = true;
-
-  $mail->SMTPSecure = 'ssl';
-
-  $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-
-  $mail->SMTPOptions = array(
-    'ssl' => array(
-      'verify_peer' => false,
-      'verify_peer_name' => false,
-      'allow_self_signed' => true
-    )
-  );
-
-  // 信件內容的編碼方式       
-
-  $mail->CharSet = "utf-8";
-
-  // 信件處理的編碼方式
-
-  $mail->Encoding = "base64";
-
-  // SMTP 驗證的使用者資訊
-
-  $mail->Username = "ninocar2021@gmail.com";  //mail的帳號（需要完整的mail帳號，含@後都要填寫）
-
-  $mail->Password = "team1ninocar";  //密碼
-
-  // 信件內容設定  
-
-  $mail->From = "ninocar2021@gmail.com"; //需要與上述的使用者資訊相同mail
-
-  $mail->FromName = "NINO CAR"; //此顯示寄件者名稱
-
-  $mail->Subject = "警告"; //信件主旨
-
-  $mail->Body = '
-  <div class="top" style="border-bottom:4px solid #E59807;margin:auto;text-align:center;width: 600px;padding:30px 0px">
-    <img src="https://s4.aconvert.com/convert/p3r68-cdx67/amcoy-88v1x.png">
-</div>
-<div class="body" style="margin:auto;text-align:left;width:600px">
-  <div class="title" style="padding:30px;padding-right:30px;font-size:20px;color:rgba(0,0,0,8);text-align:center;font-family:Microsoft JhengHei">
-    <strong>警告信</strong>
-  </div>
-  <div class="text" style="font-size:16px;margin-bottom:30px;padding:30px;background-color:#ffffff">
-    您的留言已被封鎖。<br />
-    請注意不要發布攻擊性言語或妨礙他人觀感的留言。<br /><br />感謝配合。
-  </div>
-  <hr style="background-color: #E59807;margin-bottom: 30px;">
-  <div class="bottom" style="width:600px;margin:auto;background-color:white;color:rgba(0,0,0,0.8)">
-    <div style="padding:0px 30px 30px 30px;Font-size:14px">
-      如有任何問題，歡迎透過 NiNO CAR 客服信箱 ninocar2021@gmail.com 與我們連繫!<br />
-      敬祝 購物愉快<br />
-      NiNO CAR 購物網服務團隊
+            <div class="update mb-5">
+              <button type="submit" class="" onclick="return doSubmit();">修改</button>
+              <a href="sendAlert.php?MID=<?= $row["member_id"] ?>" class="ml-5" onclick="javascript: if(confirm('確定寄送警告信?')){ return true; } else { return false; }">警告</a>
+            </div>
+          </form>
+        </main>
+      <?php
+      }
+      ?>
     </div>
   </div>
-</div>
-<footer style="background-color:#E59807;width:600px;margin:auto;padding:30px 0px">
-  <div class="button" style="text-align:center">
-    <span>
-      <a href="" style="text-decoration:none">
-        <img src="https://ci4.googleusercontent.com/proxy/pKg7MgyN-DcW4K8kJaxGhbPQwkyLvhedJp7pEU-HBwXF7dDYeePcZzYrviDDDjF9k8AaJ5zXomCSe0uzd8zsX-yKKheBPa8h3Wi8vF-IXKywvJYEBOGNprUGbin7u47OhgXxmcPDI2b_QcI=s0-d-e1-ft#https://cdn-static.tibame.com/defaultImages/email_format/Artboard%E2%80%93Home3%403x.png" width="26" height="26" class="CToWUd">
-        <strong style="Font-size:14px;Color:#ffffff;vertical-align:7px">NiNO CAR 官網</strong>
-      </a>
-    </span>
-  </div>
-</footer>
-';   //信件內容
+</body>
 
-  $mail->IsHTML(true);
-
-
-  // 收件人
-
-  $mail->AddAddress($email, "會員"); //此為收件者的電子信箱及顯示名稱
-
-  //寄送
-  // $mail->Send()
-
-  // 顯示訊息
-
-  if (!$mail->Send()) {
-
-    echo "Mail error: " . $mail->ErrorInfo;
-  } else {
-
-    echo "Mail sent";
-  }
-}
-
-//導頁
-echo "<script>alert('已寄出警告信!'); location.href = 'comment.php';</script>";
+</html>
