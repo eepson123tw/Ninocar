@@ -263,6 +263,7 @@ INSERT INTO `team1`.`admin`(`admin_id`, `admin_account`, `admin_pwd`, `admin_sig
 INSERT INTO member
 (member_account, member_pwd, member_name, member_signdate) VALUES
 ('jackjohnton789@gmail.com','1234567','匿名',NOW()),
+('snake830102@gmail.com','1234567','匿名二',NOW()),
 ('eepson123@gmail.com','12345678','施周杰',NOW());
 
 INSERT INTO team1.board 
@@ -272,7 +273,9 @@ INSERT INTO team1.board
 INSERT INTO team1.comment 
 (`member_id`, `board_id`, `comment_content`, `comment_date`) VALUES
 ('1','1','被檢舉留言',NOW()),
-('2','1','妨礙觀感',NOW());
+('3','1','正常留言',NOW()),
+('2','1','測試留言',NOW()),
+('3','1','妨礙觀感',NOW());
 
 INSERT INTO team1.order 
 (`member_id`, `order_cost`, `order_points`, `order_gain`, `pay_type`, `order_type` , `order_date`)
