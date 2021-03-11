@@ -15,6 +15,15 @@ $data = $statement->fetchAll();
 ?>
 <title>留言管理</title>
 </head>
+<script type="text/javascript">
+    function doSubmit() {
+        if (confirm('確定寄送警告信?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
 <body>
     <?php
@@ -33,7 +42,7 @@ $data = $statement->fetchAll();
                             <th>會員編號</th>
                             <th>留言內容</th>
                             <th>留言狀態</th>
-                            <th>查看</th>
+                            <th>警告</th>
                         </tr>
                     </thead>
                     <form method="post" action="commentUpdate.php" enctype="multipart/form-data">
@@ -60,7 +69,9 @@ $data = $statement->fetchAll();
 
                                         ?>
                                         <?= $type ?></td>
-                                    <td><a href="commentUpdate.php?CID=<?= $row["comment_id"] ?>">查看</a></td>
+                                    <input type="hidden" name="CID" value="<?= $row["comment_id"] ?>" />
+                                    <input type="hidden" name="MID" value="<?= $row["member_id"] ?>" />
+                                    <td><button type="submit" class="" onclick="return doSubmit();"><i class="fas fa-exclamation-circle"></i></button></td>
                                 </tr>
                             <?php
                             }

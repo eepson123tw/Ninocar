@@ -108,7 +108,7 @@
                         <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in sortArray">
                             <!--card-->
 
-                            <a href="itemdetail.html" class="card">
+                            <a href="itemdetail.html" class="card" @click="nowProduct">
                                 <div class="card__header">
                                     <img :src="item.imgURL" />
                                     <div class="card__carID bg-series-BS">BS<span>{{item.seriesId}}</span></div>
