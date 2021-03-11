@@ -18,31 +18,8 @@
         <vue-header></vue-header>
         <div class="container containerMain">
             <report-modal></report-modal>
-            <!-- <report-success-modal></report-success-modal> -->
+            <report-success-modal></report-success-modal>
             <work-modal></work-modal>
-                <!-- <div class="modal js-modal reportModal" data-modal="1" v-if="isModalShow">
-                    <div class="modal__group" >
-                        <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" class="icon modal__btn modal__btn--close" @click="closeModal">
-                                    <g transform="translate(0 0.47)">
-                                        <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                        <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                    </g>
-                                    </svg>
-                        <h2 class="modal__title">
-                            新增地址
-                        </h2>
-                        <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
-                        <ul class="modal__textGroup">
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
-                        </ul>
-                        <button class="btn btn--ghost" @click="isModalShow=false">取消</button>
-                        <button class="btn ml-5 finishReport" @click="isModalShow2=true, isModalShow=false">完成</button>
-                    </div>
-                </div> -->
 
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -338,7 +315,7 @@
                         <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
                         <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
                         <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
-                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="550" data-id="0033345" ></work-card>
+                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" ></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -471,7 +448,6 @@
             mounted(){
                 bus.$on('success-emit',() => this.isReportSuccessModalShow = true);
             },
-            
         })
         
         //作品大彈窗
@@ -830,7 +806,6 @@
                 openWorkModal(e){ //進入彈窗、後面固定不給滾動
                     bus.$emit('work-modal-emit')
 
-                    // bus.$emit('send-work-img', this.workImgURL)//bus出去了可是work-modal 收不到值
                     // --------------------------------------------------------------
                     // console.log(vm1.$refs.workInfo1.img)  //model01.png
                     // console.log(vm1.$refs.workInfo1.workTotalPrice)  //450
@@ -842,24 +817,20 @@
                     // --------------------------------------------------------------
                     smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
                     // console.log(smallCardPicURL)
-                    // $('.workPic--big').attr('src', smallCardPicURL)
                     this.workImgURL = smallCardPicURL;
 
                     let smallCardPrice = $(this.$el).attr('value');
                     // console.log(smallCardPrice)
-                    $('.work-priceNum').text(smallCardPrice)
                     this.workPrice = smallCardPrice;
 
-                    //這邊先關掉
+                    /
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    console.log(smallCardGoodNum)
-                    // $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
+                    // console.log(smallCardGoodNum)
                     this.workGood = smallCardGoodNum
                     
 
                     let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
-                    console.log(smallCardCommentNum)
-                    // $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+                    // console.log(smallCardCommentNum)
                     this.workComment = smallCardCommentNum
 
 
@@ -1164,9 +1135,10 @@
                     // ajax
                 },
                 openWorkModal(e){ //進入彈窗、後面固定不給滾動
-                    $('.mask').css({"display": "block"});
-                    $('#factoryModal').css({"position": "fixed"});
-                    $('#factoryModal').css({"z-index": "2010"});
+                    // $('.mask').css({"display": "block"});
+                    // $('#factoryModal').css({"position": "fixed"});
+                    // $('#factoryModal').css({"z-index": "2010"});
+                    // ---------------------------此線以上不要了----------------------------
 
                     let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
                     $('.workPic--big').attr('src', smallCardPicURL)
@@ -1627,10 +1599,8 @@
                     this.isModalShow = isModalShow;
                 },
                 addgoodNum(){
-                    this.goodNum += 1; //這邊
+                    this.goodNum += 1;
                 },
-
-
             },
             store,
             computed:{
@@ -2275,17 +2245,10 @@
                     $(e.target).parent().parent().parent().children('.userContent').css({"display":"block"})
                     $(e.target).parent().parent().parent().children('.userContent').text(editContent)
                     $(e.target).parent().parent().parent().children('.editTextArea').css({"display":"none"})
-
-
                     $(e.target).text('編輯')
                 }
-
-
-                
             }
         })
-
-
 
         //排序
         $('.filter').change(()=>{
@@ -2448,10 +2411,8 @@
                 stage4Price = parseInt(state4Price1) - parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
-
             }
         })
-
         // -------------------------------------CANVAS--------------------------------------------
         //建立環境
         let canvas = document.querySelector('.canvas');
@@ -2517,30 +2478,6 @@
         })
 
         let accIndexArr = [];
-        $('.selectAccessory').click((e) => {
-            // accessoryIndex = $(e.target).parent().index() //移到.selectA1去
-            
-            // accIndexArr.push(accessoryIndex)
-            // console.log(accIndexArr)
-            // console.log("accessoryIndex: " + accessoryIndex)
-
-            
-            
-
-
-            // if(accIndexArr.length == 1){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0]
-            //     console.log("allIndex: " + allIndex)
-            // }else if(accIndexArr.length == 2){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1]
-            //     console.log("allIndex: " + allIndex)
-            // }else if(accIndexArr.length == 3){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1] + accIndexArr[2]
-            //     console.log("allIndex: " + allIndex)
-            // }
-        })
-
-        
 
         $('.selectWhite').click(function() { 
             let pic2 = new Image();
@@ -2556,7 +2493,6 @@
                     context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-
             } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = './assets/img/pic/color1C.png'; //白
                 pic2.addEventListener('load', function() {
@@ -3091,24 +3027,6 @@
                 }
             }        
         })
-
-        // -----------------------CANVAS取得base64---------------------------
-        // $('.nextStep').click(function() {  //移到Vue
-        //     if (countStep % 5 == 4) {
-        //         dataURL = document.querySelector('.canvas').toDataURL();
-        //         dataURLA1 = document.querySelector('.canvasA1').toDataURL();
-        //         dataURLA2 = document.querySelector('.canvasA2').toDataURL();
-        //         dataURLA3 = document.querySelector('.canvasA3').toDataURL();
-        //         // console.log(dataURL)
-        //     }
-        // })
-
-        //移到Vue
-        // $('.modal__close').click(() => {
-        //     console.log('關掉')
-        //     $('.modal').removeClass('modal-active');
-        // })
-
         //----------------------- 點圓圈進入、退到下一步驟 -----------------------
         $('.content:nth-child(1) .circle').click(() => {
             if(countStep % 5 == 1){
