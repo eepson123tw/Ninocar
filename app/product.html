@@ -1,120 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
-            rel="stylesheet"
-        />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"
-            integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ=="
-            crossorigin="anonymous"
-        ></script>
-        <script src="./assets/js/all.js"></script>
-        <script src="./assets/js/utils.js"></script>
-        <link rel="stylesheet" href="./assets/css/all.css" />
-        <link rel="stylesheet" href="./assets/css/pages/product.css" />
-        <title>product</title>
-    </head>
 
-    <body>
-        <div id="app">
-            <vue-header></vue-header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous"></script>
+  <script src="./assets/js/all.js"></script>
+  <script src="./assets/js/utils.js"></script>
+  <link rel="stylesheet" href="./assets/css/all.css" />
+  <link rel="stylesheet" href="./assets/css/pages/product.css" />
+  <title>product</title>
+</head>
 
-            @@include('./pages/ProductPage/ProductNav.html')
+<body>
+  <div id="app">
+    <vue-header></vue-header>
 
-            <!-- your code here... -->
-        </div>
-        @@include('./components/VueHeader.html')
-        <script src="./assets/js/mixins/productMixins.js"></script>
+    @@include('./pages/ProductPage/ProductNav.html')
 
-        <script>
-            new Vue({
-                el: '#app',
-                mixins: [productMixins],
-                store,
-                data: {
-                    // rows: [],
-                    countOfPage: 9,
-                    currPage: 1,
-                    // filter_name: '',
-                    filter: '',
-                    newData: [],
-                    sort: '',
-                    productsList:[],
-                    defaultArray:true,
-                },
-                computed: {
-                    seriesList() {
-                        return this.$store.state.seriesList;
-                    },
+    <!-- your code here... -->
+  </div>
+  @@include('./components/VueHeader.html')
+  <script src="./assets/js/mixins/productMixins.js"></script>
 
-                    // filteredRows() {
-                    //     var filter_name = this.filter_name.toLowerCase();
-                    //     // console.log(filter_name)
+  <script>
+    new Vue({
+      el: '#app',
+      mixins: [productMixins],
+      store,
+      data: {
+        // rows: [],
+        countOfPage: 9,
+        currPage: 1,
+        // filter_name: '',
+        filter: '',
+        newData: [],
+        sort: '',
+        productsList: [],
+        defaultArray: true,
+        cartList: [],
+        likeList: [],
+      },
+      computed: {
+        seriesList() {
+          return this.$store.state.seriesList;
+        },
 
-                    //     return this.filter_name.trim() !==''
-                    //         ? this.rows.filter(function (d) {
-                    //                 return d.name.toLowerCase().indexOf(filter_name) > -1;
-                    //             })
-                    //         :this.rows;
-                    // },
-                    // rows(){
-                    //     return this.showProductList ? this.showProductList : []
-                    // },
-                    pageStart() {
-                        return (this.currPage - 1) * this.countOfPage;
-                    },
-                    totalPage() {
-                        return Math.ceil(this.showProductList.length / this.countOfPage);
-                        // return Math.ceil(64 / this.countOfPage);
-                    },
+        // filteredRows() {
+        //     var filter_name = this.filter_name.toLowerCase();
+        //     // console.log(filter_name)
 
-                    sortArray() {
-                        let vm = this;
-                        const final = vm.showProductList.sort(function (a, b) {
-                            if(vm.sort === 'price' || vm.sort === 'price_reverse'){
-                                a = a.price;
-                                b = b.price;
-                                if (vm.sort === 'price_reverse') {
-                                    return a - b;
-                                } else if (vm.sort !== 'price_reverse') {
-                                    return b - a;
-                                } else {
-                                    return;
-                                }
-                            }
-                        });
-                        // console.log(final)
-                        return final
-                    },
-                },
+        //     return this.filter_name.trim() !==''
+        //         ? this.rows.filter(function (d) {
+        //                 return d.name.toLowerCase().indexOf(filter_name) > -1;
+        //             })
+        //         :this.rows;
+        // },
+        // rows(){
+        //     return this.showProductList ? this.showProductList : []
+        // },
+        pageStart() {
+          return (this.currPage - 1) * this.countOfPage;
+        },
+        totalPage() {
+          return Math.ceil(this.showProductList.length / this.countOfPage);
+          // return Math.ceil(64 / this.countOfPage);
+        },
 
-                methods: {
-                    setPage(index) {
-                        this.currPage = index;
-                    },
-                    nowProduct(){},
-                    changeArray(){
-                        this.defaultArray = false;
+        sortArray() {
+          let vm = this;
+          const final = vm.showProductList.sort(function(a, b) {
+            if (vm.sort === 'price' || vm.sort === 'price_reverse') {
+              a = a.price;
+              b = b.price;
+              if (vm.sort === 'price_reverse') {
+                return a - b;
+              } else if (vm.sort !== 'price_reverse') {
+                return b - a;
+              } else {
+                return;
+              }
+            }
+          });
+          // console.log(final)
+          return final
+        },
+      },
 
+      methods: {
+        setPage(index) {
+          this.currPage = index;
+        },
+        nowProduct(val) {
+          console.log(val.productId);
+          localStorage.setItem('car', JSON.stringify(val.productId));
+        },
+        changeArray() {
+          this.defaultArray = false;
+        },
+        // 加進購物車
+        addCarts(val) {
+          this.cartList.push(val);
 
-                    },
-                },
-                // created() {
-                //     // console.log(this.rows);
-                //     let self = this;
-                //     $.get(this.showProductList, res => self.rows = res);
-                // },
-                
-            });
-        </script>
-    </body>
+          let newArray = this.cartList.filter((item, index, arr) => {
+
+            return arr.indexOf(item) === index;
+
+          });
+
+          let cartJson = JSON.stringify(newArray);
+          localStorage.setItem('cartsList', cartJson);
+        },
+        likeCarts(val) {
+          this.likeList.push(val);
+          // 不重複
+          let newArray = this.likeList.filter((item, index, arr) => {
+
+            return arr.indexOf(item) === index;
+
+          })
+
+          console.log(newArray);
+
+          let likeCartJson = JSON.stringify(newArray);
+          localStorage.setItem('likeList', likeCartJson);
+
+        }
+
+      },
+      mounted() {
+        this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
+        this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
+      },
+      // created() {
+      //     // console.log(this.rows);
+      //     let self = this;
+      //     $.get(this.showProductList, res => self.rows = res);
+      // },
+
+    });
+  </script>
+</body>
+
 </html>
