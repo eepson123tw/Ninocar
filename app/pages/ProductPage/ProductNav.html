@@ -108,9 +108,9 @@
                         <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in sortArray">
                             <!--card-->
 
-                            <a href="itemdetail.html" class="card" @click="nowProduct">
+                            <a href="itemdetail.html" class="card" @click="nowProduct(item)">
                                 <div class="card__header">
-                                    <img :src="item.imgURL" />
+                                    <img :src="item.imgURL" alt="" />
                                     <div class="card__carID bg-series-BS">BS<span>{{item.seriesId}}</span></div>
                                     <span class="card__label">本月主打</span>
                                 </div>

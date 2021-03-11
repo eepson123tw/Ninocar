@@ -6,7 +6,11 @@
         <link rel="stylesheet" href="./assets/css/all.css" />
         <link rel="stylesheet" href="./assets/css/pages/productdetail.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"
+            integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ=="
+            crossorigin="anonymous"
+        ></script>
         <link rel="shortcut icon" type="image/png" href="image/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/css/swiper.css" rel="stylesheet" />
@@ -31,8 +35,10 @@
         <script>
             new Vue({
                 el: '#app',
+                mixins: [cartMixins],
                 data: {
                     //變數存放的地方
+                    currentProductList: {},
                     list: {
                         productName: 'Audi R8 奧迪小客車',
                         productBrief: 'Audi TT coupe',
@@ -95,6 +101,28 @@
                             return;
                         }
                     },
+                },
+                mounted() {
+                    let num = JSON.parse(localStorage.getItem('car')) || 0;
+
+                    const params = new URLSearchParams();
+                    params.append('PRODUCT_ID', num);
+                    axios({
+                        method: 'post',
+                        url: 'assets/php/getCurrentProduct.php',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        data: params,
+                    })
+                        .then((res) => {
+                            // console.log(res.data[0]);
+                            this.currentProductList = res.data[0];
+                            console.log(this.currentProductList);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 },
             });
         </script>
