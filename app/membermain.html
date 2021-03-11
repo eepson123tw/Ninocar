@@ -256,6 +256,8 @@
 
   @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html') @@include('pages/MemberPage/MemberCupon.html')
   <script>
+    const THREE_DAYS = 3 * 24 * 60 * 60;
+
     new Vue({
       el: '#app',
       mixins: [inputMixins],
