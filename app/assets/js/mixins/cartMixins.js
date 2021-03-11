@@ -72,6 +72,7 @@ let cartMixins = {
       //     ease: Linear.easeNone,
       //   })
 
+
     },
     addDiyCarts(val) {
 
@@ -100,6 +101,7 @@ let cartMixins = {
   },
   mounted() {
 
+
     axios.get(`./assets/php/getProductList.php`).then((item) => {
       return item.data;
     }).then((item) => {
@@ -116,28 +118,30 @@ let cartMixins = {
         } else {
           thisSeriesId = product[`product_seriesid`];
         }
-        return {
-          // 回傳之屬性跟值
-          name: product[`product_name`].trim(),
-          eName: product['product_ename'].trim(),
-          series: this.seriesList[thisSeriesIndex].eName,
-          seriesIndex: thisSeriesIndex,
-          seriesId: thisSeriesId,
-          imgURL: product['product_img'],
-          displayImgURL: product['product_img1'],
-          productId: product['product_id'],
-          year: product['product_year'],
-          size: product['product_size'],
-          price: thisPrice,
-          points: thisPoints,
-          description: product['product_des'],
-          limitLabel: product['product_spec'],
-          productNum: 1,
-          totalPrice: 0,
-          totalPointCost: 0,
-        }
+        
+          return {
+            // 回傳之屬性跟值
+            name: product[`product_name`] ? product[`product_name`].trim() : null,
+            eName: product['product_ename'] ? product['product_ename'].trim() : null,
+            series: this.seriesList[thisSeriesIndex].eName,
+            seriesIndex: thisSeriesIndex,
+            seriesId: thisSeriesId,
+            imgURL: product['product_img'],
+            displayImgURL: product['product_img1'],
+            productId: product['product_id'],
+            year: product['product_year'],
+            size: product['product_size'],
+            price: thisPrice,
+            points: thisPoints,
+            description: product['product_des'],
+            limitLabel: product['product_spec'],
+            productNum: 1,
+            totalPrice: 0,
+            totalPointCost: 0,
+          }
       })
       this.productsList = newList;
+      // this.rows = this.productsList
     });
     this.cartsList = JSON.parse(localStorage.getItem('cartsList')) || [];
 
