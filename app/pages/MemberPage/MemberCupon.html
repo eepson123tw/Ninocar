@@ -24,6 +24,8 @@
             <div class="member__cuponContent">
               <p class="h5">【{{item['couponTitle']}}】</p>
               <p class="h4">{{item['couponText']}}</p>
+              <p>1231231</p>
+              <h1>{{countTime}}</h1>
               <p class=" h4 member__cuponContent--warning ">即將到期:<span> {{item.couponDeadDate}}</span></p>
             </div>
           </li>
@@ -50,8 +52,6 @@
       return {
         couponList: [],
         count: null,
-
-
       }
     },
     mounted() {
@@ -83,21 +83,11 @@
             couponGetDate: coupon.type_date,
             couponDeadDate: coupon.dead_date,
             couponHightLine: hightLine,
-
           }
-
-
-
         })
-
-
       }).catch((error) => {
         console.log(error)
       })
-
-
-
-
 
     },
     methods: {},
@@ -111,36 +101,44 @@
       deadDate() {
         return Date.parse(this.couponList[0].couponDeadDate);
       },
+      countTime() {
+
+        let i = 0;
+        let diff;
+        setInterval(() => {
+            i += 1;
+            let future = this.deadDate;
+            let now = this.getDate + i;
+
+            diff = future - now;
+
+
+
+            let hours = Math.floor((diff / (1000 * 60 * 60)));
+            let min = Math.floor((diff / 60) % 60);
+            let secs = Math.floor(diff % 60);
+
+            // console.log(hours, min, secs)
+
+            return hours;
+
+          },
+          1000);
+
+      },
 
     },
     updated() {
 
+    },
+    watch: {
 
-      let i = 0;
-      let diff;
-      setInterval(() => {
-          i += 1;
-          let future = this.deadDate;
-          let now = this.getDate + i;
+      countTime(time) {
 
-          diff = future - now;
+        console.log(time);
 
 
-
-          let hours = Math.floor((diff / (1000 * 60 * 60)));
-          let min = Math.floor((diff / 60) % 60);
-          let secs = Math.floor(diff % 60);
-
-          console.log(hours, min, secs)
-
-
-
-        },
-        1000);
-
-
-
-
+      },
 
 
     }
