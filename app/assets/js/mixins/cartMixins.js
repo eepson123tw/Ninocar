@@ -1,47 +1,79 @@
 let cartMixins = {
-    data() {
-        return {
-            cartsList: [],
-            productsList: [],
-            nowProducts: {},
-            cartNum: 0,
-            memberPoints: 0,
-            selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-            seriesList: [
-                {
-                    eName: 'EN',
-                    name: '工程系',
-                },
-                {
-                    eName: 'RV',
-                    name: 'RV休旅系',
-                },
-                {
-                    eName: 'TA',
-                    name: '計程車系',
-                },
-                {
-                    eName: 'BS',
-                    name: '巴士系',
-                },
-                {
-                    eName: 'PA',
-                    name: '警車系',
-                },
-                {
-                    eName: 'EM',
-                    name: '消防救護系',
-                },
-                {
-                    eName: 'CA',
-                    name: '轎車系',
-                },
-                {
-                    eName: 'PM',
-                    name: 'PREMIUM系',
-                },
-            ],
-        };
+  data() {
+    return {
+      cartsList: [],
+      productsList: [],
+      nowProducts: {},
+      cartNum: 0,
+      memberPoints: 0,
+      selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
+      seriesList: [{
+        eName: "EN",
+        name: "工程系",
+      }, {
+        eName: "RV",
+        name: "RV休旅系",
+      }, {
+        eName: "TA",
+        name: "計程車系",
+      }, {
+        eName: "BS",
+        name: "巴士系",
+      }, {
+        eName: "PA",
+        name: "警車系",
+      }, {
+        eName: "EM",
+        name: "消防救護系",
+      }, {
+        eName: "CA",
+        name: "轎車系",
+      }, {
+        eName: "PM",
+        name: "PREMIUM系",
+      }],
+    }
+
+  },
+
+  methods: {
+    addCarts(val) {
+
+      this.cartsList.push(val);
+      let cartJson = JSON.stringify(this.cartsList);
+      localStorage.setItem('cartsList', cartJson);
+
+
+
+      //   const runcart = new TimelineMax({});
+      //   runcart.to('.box', .3, {
+      //     x: 500,
+      //     opacity: 0,
+      //     ease: Linear.easeNone,
+
+      //   }).to('.box', 1, {
+      //     x: 800,
+      //     opacity: 0.7,
+      //     delay: 1,
+      //     ease: Linear.easeNone,
+      //   }).to('.box', 2, {
+      //     x: 3000,
+      //     opacity: 1,
+      //     ease: Linear.easeNone,
+      //   }).to('.box', .1, {
+      //     x: 3001,
+      //     opacity: 0,
+      //     ease: Linear.easeNone,
+      //   }).to('.box', .1, {
+      //     x: 0,
+      //     opacity: 0,
+      //     ease: Linear.easeNone,
+      //   })
+
+
+    },
+    addDiyCarts(val) {
+
     },
 
     methods: {
