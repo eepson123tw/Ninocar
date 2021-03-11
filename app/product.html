@@ -33,45 +33,53 @@
             <!-- your code here... -->
         </div>
         @@include('./components/VueHeader.html')
-        <script src="./assets/js/mixins/cartMixins.js"></script>
+        <script src="./assets/js/mixins/productMixins.js"></script>
 
         <script>
             new Vue({
                 el: '#app',
-                mixins: [cartMixins],
+                mixins: [productMixins],
+                store,
                 data: {
-                    rows: [],
-                    countOfPage: 10,
+                    // rows: [],
+                    countOfPage: 9,
                     currPage: 1,
-                    filter_name: '',
+                    // filter_name: '',
                     filter: '',
                     newData: [],
                     sort: '',
+                    productsList:[],
+                    defaultArray:true,
                 },
                 computed: {
-                    filteredRows() {
-                        var filter_name = this.filter_name.toLowerCase();
-                        // console.log(this.rows)
+                    seriesList() {
+                        return this.$store.state.seriesList;
+                    },
 
-                        return this.filter_name.trim() !== ''
-                            ? this.rows.filter(function (d) {
-                                    return d.name.toLowerCase().indexOf(filter_name) > -1;
-                                })
-                            :this.rows;
-                    },
-                    rows(){
-                        return this.productsList ? this.productsList : []
-                    },
+                    // filteredRows() {
+                    //     var filter_name = this.filter_name.toLowerCase();
+                    //     // console.log(filter_name)
+
+                    //     return this.filter_name.trim() !==''
+                    //         ? this.rows.filter(function (d) {
+                    //                 return d.name.toLowerCase().indexOf(filter_name) > -1;
+                    //             })
+                    //         :this.rows;
+                    // },
+                    // rows(){
+                    //     return this.showProductList ? this.showProductList : []
+                    // },
                     pageStart() {
                         return (this.currPage - 1) * this.countOfPage;
                     },
                     totalPage() {
-                        return Math.ceil(this.filteredRows.length / this.countOfPage);
+                        return Math.ceil(this.showProductList.length / this.countOfPage);
+                        // return Math.ceil(64 / this.countOfPage);
                     },
 
                     sortArray() {
                         let vm = this;
-                        const final = vm.productsList.sort(function (a, b) {
+                        const final = vm.showProductList.sort(function (a, b) {
                             if(vm.sort === 'price' || vm.sort === 'price_reverse'){
                                 a = a.price;
                                 b = b.price;
@@ -90,17 +98,21 @@
                 },
 
                 methods: {
-                    setPage(productId) {
-                        // if( index <= 0 || index > this.totalPage ){}
-                        this.currPage = productId;
+                    setPage(index) {
+                        this.currPage = index;
+                    },
+                    nowProduct(){},
+                    changeArray(){
+                        this.defaultArray = false;
+
+
                     },
                 },
-                created() {
-                    let self = this;
-                    $.get('productsList', function (res) {
-                        self.rows = res;
-                    });
-                },
+                // created() {
+                //     // console.log(this.rows);
+                //     let self = this;
+                //     $.get(this.showProductList, res => self.rows = res);
+                // },
                 
             });
         </script>

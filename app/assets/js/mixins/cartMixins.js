@@ -122,10 +122,7 @@ let cartMixins = {
       return item.data;
     }).then((item) => {
 
-      const filterProductList = item.filter(product => {
-
-        return product['product_spec'] !== '5'
-      })
+      const filterProductList = item.filter(product =>  product['product_spec'] !== '5');
 
 
       let newList;

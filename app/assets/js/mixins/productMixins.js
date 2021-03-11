@@ -130,11 +130,11 @@ let productMixins = {
             axios.post('./assets/php/getMemberOwnProductIdList.php', {
                 "memberId": this.memberId,
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 if (Array.isArray(res.data) && res.data != []) {
                     this.myProductIdList = res.data.map(obj => obj['product_id'])
                 } else {
-                    console.log(res.data)
+                    // console.log(res.data)
                 }
             }).catch(error => {
                 console.log(error)
@@ -150,7 +150,7 @@ let productMixins = {
         }
         //拿所有商品清單
         getProductList().then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             const filterProductList = res.data.filter(product => {
 
                 return product['product_spec'] !== '5'
@@ -179,8 +179,11 @@ let productMixins = {
                     size: product['product_size'],
                     description: product['product_des'],
                     limitLabel: product['product_spec'],
+                    price:product['product_price'],
+                    point:product['product_points']
                 }
             })
+            // console.log('a')
             this.productList = fetchProductList;
             this.showProductList = this.productList;
             this.targetProduct = this.showProductList[0];
