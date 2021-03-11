@@ -33,79 +33,87 @@
             <!-- your code here... -->
         </div>
         @@include('./components/VueHeader.html')
-        <script src="./assets/js/mixins/cartMixins.js"></script>
+        <script src="./assets/js/mixins/productMixins.js"></script>
 
         <script>
             new Vue({
                 el: '#app',
-                mixins: [cartMixins],
+                mixins: [productMixins],
+                store,
                 data: {
-                    rows: [],
-                    countOfPage: 10,
+                    // rows: [],
+                    countOfPage: 9,
                     currPage: 1,
-                    filter_name: '',
+                    // filter_name: '',
                     filter: '',
                     newData: [],
-                    isReverse: false,
                     sort: '',
-                    type: '',
+                    productsList:[],
+                    defaultArray:true,
                 },
                 computed: {
-                    filteredRows() {
-                        var filter_name = this.filter_name.toLowerCase();
-
-                        return this.filter_name.trim() !== ''
-                            ? this.rows.filter(function (d) {
-                                  return d.name.toLowerCase().indexOf(filter_name) > -1;
-                              })
-                            : this.rows;
+                    seriesList() {
+                        return this.$store.state.seriesList;
                     },
+
+                    // filteredRows() {
+                    //     var filter_name = this.filter_name.toLowerCase();
+                    //     // console.log(filter_name)
+
+                    //     return this.filter_name.trim() !==''
+                    //         ? this.rows.filter(function (d) {
+                    //                 return d.name.toLowerCase().indexOf(filter_name) > -1;
+                    //             })
+                    //         :this.rows;
+                    // },
+                    // rows(){
+                    //     return this.showProductList ? this.showProductList : []
+                    // },
                     pageStart() {
                         return (this.currPage - 1) * this.countOfPage;
                     },
                     totalPage() {
-                        return Math.ceil(this.filteredRows.length / this.countOfPage);
+                        return Math.ceil(this.showProductList.length / this.countOfPage);
+                        // return Math.ceil(64 / this.countOfPage);
                     },
 
                     sortArray() {
                         let vm = this;
-                        return vm.productsList.sort(function (a, b) {
-                            a = a[vm.sort];
-                            b = b[vm.sort];
-                            if (vm.isReverse) {
-                                return a - b;
-                            } else if (!vm.isReverse) {
-                                return b - a;
-                            } else {
-                                return;
+                        const final = vm.showProductList.sort(function (a, b) {
+                            if(vm.sort === 'price' || vm.sort === 'price_reverse'){
+                                a = a.price;
+                                b = b.price;
+                                if (vm.sort === 'price_reverse') {
+                                    return a - b;
+                                } else if (vm.sort !== 'price_reverse') {
+                                    return b - a;
+                                } else {
+                                    return;
+                                }
                             }
                         });
-                    }, //conputed
+                        // console.log(final)
+                        return final
+                    },
                 },
 
                 methods: {
-                    setPage(productId) {
-                        // if( index <= 0 || index > this.totalPage ){}
-                        this.currPage = productId;
+                    setPage(index) {
+                        this.currPage = index;
                     },
-                    changeHandler() {
-                        let i = this.sort;
-                        if (this.type == i) {
-                            a - b;
-                        } else if (this.type == !i) {
-                            b - a;
-                        }
+                    nowProduct(){},
+                    changeArray(){
+                        this.defaultArray = false;
+
+
                     },
                 },
-                created() {
-                    let self = this;
-                    $.get('productsList', function (res) {
-                        self.rows = res;
-                    });
-                },
-                watch: {
-                    type: 'changeHandler',
-                },
+                // created() {
+                //     // console.log(this.rows);
+                //     let self = this;
+                //     $.get(this.showProductList, res => self.rows = res);
+                // },
+                
             });
         </script>
     </body>

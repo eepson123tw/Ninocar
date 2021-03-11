@@ -19,29 +19,7 @@
         <div class="container containerMain">
             <report-modal></report-modal>
             <report-success-modal></report-success-modal>
-                <!-- <div class="modal js-modal reportModal" data-modal="1" v-if="isModalShow">
-                    <div class="modal__group" >
-                        <svg role="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 52 52" class="icon modal__btn modal__btn--close" @click="closeModal">
-                                    <g transform="translate(0 0.47)">
-                                        <line x1="33.493" transform="translate(14.158 13.688) rotate(45)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                        <line x1="33.493" transform="translate(37.842 13.688) rotate(135)" fill="none" stroke="#522613" stroke-linecap="round" stroke-width="5"/>
-                                    </g>
-                                    </svg>
-                        <h2 class="modal__title">
-                            新增地址
-                        </h2>
-                        <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
-                        <ul class="modal__textGroup">
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad1"> <label for="bad1">中傷、歧視、謾罵等人身攻擊言論</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad2"> <label for="bad2">包含性騷擾或血腥恐怖等讓人不舒服之內容</label></li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad3"> <label for="bad3">文章內容空泛或明顯無意義內容</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad4"> <label for="bad4">涉及宗教、種族歧視或政治對立等言論</label> </li>
-                            <li class="modal__textGroupContent"> <input type="radio" name="check" id="bad5"> <label for="bad5">留言內容空泛或無關作品內容</label> </li>
-                        </ul>
-                        <button class="btn btn--ghost" @click="isModalShow=false">取消</button>
-                        <button class="btn ml-5 finishReport" @click="isModalShow2=true, isModalShow=false">完成</button>
-                    </div>
-                </div> -->
+            <work-modal></work-modal>
 
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -332,12 +310,12 @@
 
                 <div>
                     <ul class="othersWorks grid">
-                        <work-card @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" data-id="220203" data-board-id="1614917124264"></work-card>
-                        <work-card2 @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
-                        <work-card :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" data-id="55555" data-board-id="1614917124284"></work-card>
-                        <work-card :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
-                        <work-card :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
-                        <work-card :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" data-id="0033345" ></work-card>
+                        <work-card  ref="workInfo1" @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" :work-total-price="450" data-id="220203" data-board-id="1614917124264"></work-card>
+                        <work-card2  @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
+                        <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
+                        <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
+                        <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
+                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" ></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -353,7 +331,7 @@
 
 
     <div id="factoryModal">
-        @@include('./pages/FactoryPage/FactoryModal.html')
+        <!-- @@include('./pages/FactoryPage/FactoryModal.html') 這個也要做成組件-->
 
 
     </div>
@@ -470,10 +448,210 @@
             mounted(){
                 bus.$on('success-emit',() => this.isReportSuccessModalShow = true);
             },
-            
         })
+        
+        //作品大彈窗
+        Vue.component('work-modal',{
+            data(){
+                return{
+                    goodNum:null,
+                    commentNum:null,
+                    isWorkModalShow:false,
+                    is_icon_color:false,
+                    workImgURL:'',
+                    price:'',
+                    title:'',
+                    
+                }
+            },
+            template:`    
+            <div class="mask" v-if="isWorkModalShow">
+                <div class="container factoryModalOut">
+                    <div class="row">
+                        <div class="work_left col-6 col-lg-3">
+                            <div  class="frame">
+                            <img :src="workImgURL" class="workPic--big">
+                            </div>
+                    
+                            <p class="h2">{{title}}</p>
+                            <div class="otherInModal">
+                            <div class="price">
+                                <p class="h1">NT$</p>
+                                <p class="h1 work-priceNum">{{price}}</p>
+                            </div>
+                    
+                            <div class="col-6 col-lg-3 col-sm-1">
+                                <button class="btn btn--fluid btn--outline addToCart">加入購物車</button>
+                            </div>
+                            </div>
+                        </div>
+                    
+                        <div class="work_right col-6 col-lg-3">
+                            <img src="./assets/img/icon/icon-close.svg" class="closeIcon" @click="isWorkModalShow=false">
+                            <div class="work_author">
+                                <img src="./assets/img/pic/userPic.png"  class="userPic--big">
+                                <div class="userContent">
+                                    <p class="userName h6">矛盾的小女子</p>
+                                    <h2 class="workName h4">天栗鼠計程車</h2>
+                                    <p class="userContent h5">這是一隻天栗鼠，這不是一隻天栗鼠，這到底是不是一隻天栗鼠？</p>
+                                    <div class="otherInModal">
+                                        <p class="postTime h6">3小時前</p>
+                                        <button class="btn btn--link">檢舉</button>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="workInfo">
+                                <div class="workInfo_good">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon goodIcon" @mouseover="coloredIcon" @mouseout="noColorIcon" @click="addGoodNum">
+                                        <g transform="translate(-729 -275)">
+                                        <path d="M14.513,37.47l10.1.209c4.043,0,8.616-5.286,9.752-7.915,0,0,3.514-7.2,2.541-12.055-1.78-3.084-4.026-2.219-13.046-2.219l1.545-7,.052-.515a2.489,2.489,0,0,0-.713-1.743L23.013,4.5,12.194,15.43a3.3,3.3,0,0,0-.944,2.327V34.241A3.237,3.237,0,0,0,14.513,37.47Z" transform="translate(735.366 280.5)" fill="none" stroke="#E59807" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" :class="{'pin--secondary':is_icon_color === true}"/>
+                                        <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807" :class="{'pin--secondary':is_icon_color === true}"/>
+                                        </g>
+                                    </svg>
+                                    <p  class="work-goodNum h3" :v-text="goodNum">{{goodNum}}</p>
+                                </div>
+                                <div class="workInfo_reply">                                   
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
+                                        <g transform="translate(-396.868 -362.313)">
+                                        <path  d="M413.686,374.254c-8.888,0-16.12,6.165-16.12,13.743a12.384,12.384,0,0,0,3.545,8.634l0,0,0,0a5.214,5.214,0,0,1,1.473,3.662,6.52,6.52,0,0,1,2-.328,5.51,5.51,0,0,1,2.032.38h.006a18.861,18.861,0,0,0,7.058,1.389c8.888,0,16.12-6.165,16.12-13.745s-7.232-13.743-16.12-13.743m0-4.666c11.479,0,20.786,8.242,20.786,18.41s-9.307,18.411-20.786,18.411a23.417,23.417,0,0,1-8.774-1.716.893.893,0,0,0-.322-.055c-1.569,0-4.921,3.126-6.8,3.126a1.16,1.16,0,0,1-.7-.209c-1.973-1.66,1.569-6.761.7-7.646A17.091,17.091,0,0,1,392.9,388C392.9,377.83,402.206,369.588,413.686,369.588Z" transform="translate(8.967 -0.274)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(413 386)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(420 386)" fill="#E59807"/>
+                                        <circle cx="2.4" cy="2.4" r="2.4" transform="translate(427 386)" fill="#E59807"/>
+                                        </g>
+                                    </svg>
+                                    <p  class="work-commentNum h3" :v-text="commentNum">{{commentNum}}</p>
+                                </div>
+                            </div>
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="./assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="otherInModal">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="./assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="otherInModal">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="work_reply">
+                                <div class="userContext">
+                                    <img src="./assets/img/pic/userPic02.png"  class="userPic">
+                                    <div class="userContext_top">
+                                        <p class="userName h6">天婦羅好好吃</p>
+                                        <p class="userContent h5">天婦羅好好吃</p>
+                                        <div class="otherInModal">
+                                            <p class="postTime h6">3小時前</p>
+                                            <div>                                
+                                                <button class="btn btn--link mr-4">回覆</button>
+                                                <button class="btn btn--link">檢舉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="typeReply">
+                                <div class="typeReply_left mr-7">
+                                <img src="./assets/img/pic/userPic02.png" class="userPic--big">
+                                </div>
+                        
+                                <div class="typeReply_right">
+                                <p>沾醬大師</p>
+                                <textarea name="" id="" cols="60" rows="7" placeholder="讚美這個作品，或發表看法。"></textarea>
+                                <div class="otherInModal">
+                                    <p>餘100字</p>
+                                    <button class="btn btn--small">留言</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+            mounted(){
+                bus.$on('work-modal-emit', () => this.isWorkModalShow = true);
+
+                bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
+            },
+            updated() {
+                if(smallCardId == 220203){
+                    this.workImgURL = vm1.$refs.workInfo1.img;
+                    this.goodNum = vm1.$refs.workInfo1.workGood;
+                    this.commentNum = vm1.$refs.workInfo1.workComment;
+                    this.price = vm1.$refs.workInfo1.workTotalPrice;
+                    this.title = vm1.$refs.workInfo1.workTitle;
+                }
+                // else if(workIndex == 22310){
+
+                // }
+                else if(smallCardId == 55555){
+                    this.workImgURL = vm1.$refs.workInfo3.img;
+                    this.goodNum = vm1.$refs.workInfo3.workGood;
+                    this.commentNum = vm1.$refs.workInfo3.workComment;
+                    this.price = vm1.$refs.workInfo3.workTotalPrice;
+                    this.title = vm1.$refs.workInfo3.workTitle;
+                }
+                else if(smallCardId == 22111){
+                    this.workImgURL = vm1.$refs.workInfo4.img;
+                    this.goodNum = vm1.$refs.workInfo4.workGood;
+                    this.commentNum = vm1.$refs.workInfo4.workComment;
+                    this.price = vm1.$refs.workInfo4.workTotalPrice;
+                    this.title = vm1.$refs.workInfo4.workTitle;
+                }else if(smallCardId == 112303){
+                    this.workImgURL = vm1.$refs.workInfo5.img;
+                    this.goodNum = vm1.$refs.workInfo5.workGood;
+                    this.commentNum = vm1.$refs.workInfo5.workComment;
+                    this.price = vm1.$refs.workInfo5.workTotalPrice;
+                    this.title = vm1.$refs.workInfo5.workTitle;
+                }else if(smallCardId == 0033345){
+                    this.workImgURL = vm1.$refs.workInfo6.img;
+                    this.goodNum = vm1.$refs.workInfo6.workGood;
+                    this.commentNum = vm1.$refs.workInfo6.workComment;
+                    this.price = vm1.$refs.workInfo6.workTotalPrice;
+                    this.title = vm1.$refs.workInfo6.workTitle;
+                }
+
+
+            },
+            methods:{
+                coloredIcon(e){
+                    this.is_icon_color = true
+                },
+                noColorIcon(e){
+                    this.is_icon_color = false
+                },
+                addGoodNum(e){
+                    this.goodNum += 1;
+                },
+            }
+        })
+
         //大家的作品、我的作品的卡片
-        Vue.component('work-card',{
+        let comp1 = Vue.component('work-card',{
             props:{
                 workTitle:{
                     default:"天栗鼠計程車",
@@ -495,7 +673,14 @@
                     default:4,
                     type:Number
                 },
-
+                workTotalPrice:{
+                    default:100,
+                    type:Number
+                },
+                workIndex:{
+                    default:00000,
+                    type:Number
+                }
             },
             data(){
                 return{
@@ -505,13 +690,15 @@
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
                     isReportModalShow:false,
-                    // workTitle_plus: this.workTitle,
-                    
+                    workImgURL:'',
+                    workGood:null,
+                    workComment:null,
+                    workId:null,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
                             <div class="work_pic" @click="openWorkModal">
-                                <img :src="img" class="">
+                                <img :src="img" class="" :data-price="workTotalPrice" :data-index="workIndex">
                             </div>
 
                             <div class="work_author">
@@ -603,11 +790,9 @@
             methods: {
                 coloredIcon(e){
                     this.is_icon_color = true
-         
                 },
                 noColorIcon(e){
                     this.is_icon_color = false
-
                 },
                 openReportModal(){
                     console.log('report!')
@@ -619,27 +804,40 @@
                     // ajax
                 },
                 openWorkModal(e){ //進入彈窗、後面固定不給滾動
-                    $('.mask').css({"display": "block"});
-                    $('#factoryModal').css({"position": "fixed"});
-                    $('#factoryModal').css({"z-index": "2010"});
+                    bus.$emit('work-modal-emit')
 
-                    let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
+                    // --------------------------------------------------------------
+                    // console.log(vm1.$refs.workInfo1.img)  //model01.png
+                    // console.log(vm1.$refs.workInfo1.workTotalPrice)  //450
+                    // console.log(vm1.$refs.workInfo1.workTitle)  //白帥帥
+                    // console.log(vm1.$refs.workInfo1.goodNum)  //24
+                    // console.log(vm1.$refs.workInfo1.commentNum)  //1
+                    // console.log(vm1.$refs.workInfo1.workIndex) //220203
+
+                    // --------------------------------------------------------------
+                    smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
                     // console.log(smallCardPicURL)
-                    $('.workPic--big').attr('src', smallCardPicURL)
-
-                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    // console.log(smallCardGoodNum)
-                    $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
-
-                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
-                    $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+                    this.workImgURL = smallCardPicURL;
 
                     let smallCardPrice = $(this.$el).attr('value');
                     // console.log(smallCardPrice)
-                    $('.work-priceNum').text(smallCardPrice)
+                    this.workPrice = smallCardPrice;
 
-                    let smallCardId = $(this.$el).attr('data-id')
-                    $('.addToCart').attr('data-id', smallCardId)
+                    /
+                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
+                    // console.log(smallCardGoodNum)
+                    this.workGood = smallCardGoodNum
+                    
+
+                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
+                    // console.log(smallCardCommentNum)
+                    this.workComment = smallCardCommentNum
+
+
+                    smallCardId = $(this.$el).attr('data-id');
+                    console.log(smallCardId)
+                    // $('.addToCart').attr('data-id', smallCardId)
+                    // this.workId = smallCardId
                },
                openMoreReply(e){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
@@ -915,7 +1113,7 @@
                                     <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                                     <div class="other">
                                         <p class="textCount"></p>
-                                        <button class="btn btn--small h5 comment">留言</button>
+                                        <button class="btn btn--small h5 comment" @click="postComment">留言</button>
                                     </div>
                                 </div>
                             </div>
@@ -934,12 +1132,13 @@
                 addGoodNum(e){
                     this.goodNum_plus += 1;
 
-                    // ajax//這裡開始
+                    // ajax
                 },
                 openWorkModal(e){ //進入彈窗、後面固定不給滾動
-                    $('.mask').css({"display": "block"});
-                    $('#factoryModal').css({"position": "fixed"});
-                    $('#factoryModal').css({"z-index": "2010"});
+                    // $('.mask').css({"display": "block"});
+                    // $('#factoryModal').css({"position": "fixed"});
+                    // $('#factoryModal').css({"z-index": "2010"});
+                    // ---------------------------此線以上不要了----------------------------
 
                     let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
                     $('.workPic--big').attr('src', smallCardPicURL)
@@ -997,7 +1196,16 @@
                             "transform": "rotate(0deg)",
                         })
                     }
-               }
+               },
+               postComment(e){
+                    let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+                    // let commentContentL = $(e.target).parent().parent().children('.textarea').text().length;
+                    // console.log(commentContentL)
+                    if(commentContentL > 0){
+                        this.commentNum_plus += 1;
+
+                    } 
+               },
                 
             },
         })
@@ -1013,15 +1221,10 @@
                 circleIndex: -1,
                 isModalShow: false,
                 isModalShow2:false,
-            },
-            props:{
+                addGoodNum:null,
 
             },
             methods: {
-                openReportSuccessModal(){ //出現檢舉成功的彈窗
-                    // $('.reportSuccessModal').addClass('modal-active')
-
-                },
                 showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
                     $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
 
@@ -1326,11 +1529,6 @@
                     //     $('.accessoryCards').css({"display": "block"})
                     // }
                 },
-                // getShapeIndex(e){
-                    //抓取車型的index(用來判別顏色圖要貼甚麼)
-                    // this.shapeIndex = $(e.target).parent().index();
-                    // console.log(this.shapeIndex)
-                // },
                 getCircleIndex(e){
                     circleIndex = $(e.target).parent().index();
                     // console.log("circleIndex: " + circleIndex)
@@ -1399,8 +1597,10 @@
                 },
                 openReportModal(isModalShow){
                     this.isModalShow = isModalShow;
-                }
-
+                },
+                addgoodNum(){
+                    this.goodNum += 1;
+                },
             },
             store,
             computed:{
@@ -1408,7 +1608,8 @@
                 memberId(){
                     return this.$store.state.memberId
                 }
-            }
+            },
+
         });
 
         new Vue({ //主體
@@ -1627,7 +1828,6 @@
                     if(allIndex == '000023' || allIndex == '000032'){
                         $('.putImgPath').attr('value', './assets/img/pic/model001.png')
                     }else if(allIndex == '00401'){
-                        // console.log('aaaaakoko')
                         $('.putImgPath').val('./assets/img/pic/model002.png')
                     }else if(allIndex == '22234' || allIndex == '33234' || allIndex == '22243' || allIndex == '33243'){
                         $('.putImgPath').attr('value', './assets/img/pic/model003.png')
@@ -2045,17 +2245,10 @@
                     $(e.target).parent().parent().parent().children('.userContent').css({"display":"block"})
                     $(e.target).parent().parent().parent().children('.userContent').text(editContent)
                     $(e.target).parent().parent().parent().children('.editTextArea').css({"display":"none"})
-
-
                     $(e.target).text('編輯')
                 }
-
-
-                
             }
         })
-
-
 
         //排序
         $('.filter').change(()=>{
@@ -2218,10 +2411,8 @@
                 stage4Price = parseInt(state4Price1) - parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
-
             }
         })
-
         // -------------------------------------CANVAS--------------------------------------------
         //建立環境
         let canvas = document.querySelector('.canvas');
@@ -2270,7 +2461,7 @@
         }
 
         $('.selectShape').click((e)=>{
-            shapeIndex = $(e.target).parent().index()  //這裡
+            shapeIndex = $(e.target).parent().index()
             shapeIndex_str = $(e.target).parent().index().toString() 
             console.log(shapeIndex)
             // console.log(shapeIndex_str)
@@ -2287,30 +2478,6 @@
         })
 
         let accIndexArr = [];
-        $('.selectAccessory').click((e) => {
-            // accessoryIndex = $(e.target).parent().index() //移到.selectA1去
-            
-            // accIndexArr.push(accessoryIndex)
-            // console.log(accIndexArr)
-            // console.log("accessoryIndex: " + accessoryIndex)
-
-            
-            
-
-
-            // if(accIndexArr.length == 1){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0]
-            //     console.log("allIndex: " + allIndex)
-            // }else if(accIndexArr.length == 2){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1]
-            //     console.log("allIndex: " + allIndex)
-            // }else if(accIndexArr.length == 3){
-            //     allIndex = shapeIndex + colorIndex + tireIndex + accIndexArr[0] + accIndexArr[1] + accIndexArr[2]
-            //     console.log("allIndex: " + allIndex)
-            // }
-        })
-
-        
 
         $('.selectWhite').click(function() { 
             let pic2 = new Image();
@@ -2326,7 +2493,6 @@
                     context.globalAlpha = 1;
                     context.drawImage(pic2, 0, -100);
                 })
-
             } else if (shapeIndex == 2 || shapeIndex == 3) {
                 pic2.src = './assets/img/pic/color1C.png'; //白
                 pic2.addEventListener('load', function() {
@@ -2861,24 +3027,6 @@
                 }
             }        
         })
-
-        // -----------------------CANVAS取得base64---------------------------
-        // $('.nextStep').click(function() {  //移到Vue
-        //     if (countStep % 5 == 4) {
-        //         dataURL = document.querySelector('.canvas').toDataURL();
-        //         dataURLA1 = document.querySelector('.canvasA1').toDataURL();
-        //         dataURLA2 = document.querySelector('.canvasA2').toDataURL();
-        //         dataURLA3 = document.querySelector('.canvasA3').toDataURL();
-        //         // console.log(dataURL)
-        //     }
-        // })
-
-        //移到Vue
-        // $('.modal__close').click(() => {
-        //     console.log('關掉')
-        //     $('.modal').removeClass('modal-active');
-        // })
-
         //----------------------- 點圓圈進入、退到下一步驟 -----------------------
         $('.content:nth-child(1) .circle').click(() => {
             if(countStep % 5 == 1){
