@@ -6,21 +6,46 @@
                     <a href="product.html"> <p>全部商品</p> </a>><a href=""> <p>PREMIUM系</p> </a>>
                     <p>Audi R8</p>
                 </div>
-                <div class="car-name">{{list.productBrief}}</div>
+                <div class="car-name">{{currentProductList['product_ename']}}</div>
                 <div class="lightBox">
                     <figure>
-                        <img @click="lightBox('car')" class="demo" src="./assets/img/pic/0.png" alt="" />
+                        <img @click="lightBox('car')" class="demo" :src="currentProductList['product_img1']" alt="" />
                     </figure>
                     <div :class="{'mask':mask}" v-if="mask">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" v-for="(item,index2) in showList">
                                     <div class="swiper-zoom-container">
-                                        <img v-show="nowImg === 0" :src="list.car[0]" alt="" class="lazyload" />
-                                        <img v-show="nowImg === 1" :src="list.car[1]" alt="" class="lazyload" />
-                                        <img v-show="nowImg === 2" :src="list.car[2]" alt="" class="lazyload" />
-                                        <img v-show="nowImg === 3" :src="list.car[3]" alt="" class="lazyload" />
-                                        <img v-show="nowImg === 4" :src="list.car[4]" alt="" class="lazyload" />
+                                        <img
+                                            v-show="nowImg === 0"
+                                            :src="currentProductList['product_img']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 1"
+                                            :src="currentProductList['product_img2']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 2"
+                                            :src="currentProductList['product_img3']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 3"
+                                            :src="currentProductList['product_img4']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 4"
+                                            :src="currentProductList['product_img5']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -38,23 +63,20 @@
                         <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
                     </div>
                     <div class="gallery">
-                        <img :src="list.imgURL[1]" />
-                        <img :src="list.imgURL[2]" />
-                        <img :src="list.imgURL[3]" />
-                        <img :src="list.imgURL[4]" />
-                        <img :src="list.imgURL[5]" />
+                        <img :src="currentProductList['product_img']" />
+                        <img :src="currentProductList['product_img2']" />
+                        <img :src="currentProductList['product_img3']" />
+                        <img :src="currentProductList['product_img4']" />
+                        <img :src="currentProductList['product_img5']" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-5 col-lg-6 col-sm-6">
             <div class="box-2">
-                <h2>{{list.productName}}</h2>
-                <h3>{{list.productBrief}}</h3>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi saepe pariatur laudantium fuga
-                    inventore ipsa, dignissimos molestias quasi vel mollitia!
-                </p>
+                <h2>{{currentProductList['product_name']}}</h2>
+                <h3>{{currentProductList['product_ename']}}</h3>
+                <p>{{currentProductList['product_des']}}</p>
 
                 <div class="row">
                     <div class="col-12 col-lg-3 col-sm-3">
@@ -64,7 +86,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="item-price">NT$ {{list.price}}</div>
+                <!-- <div class="item-price">NT$ {{list.price}}</div> -->
+                <div class="item-price">
+                    <p>NT${{currentProductList['product_price']}}</p>
+                </div>
+
                 <div>數量</div>
                 <div class="select-style">
                     <select>
@@ -88,10 +114,6 @@
                         <button class="btn btn--fluid btn--outline">加入收藏</button>
                     </div>
                 </div>
-                <div>商品說明</div>
-                <hr />
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?</p>
 
                 <div class="info-buy">
                     <div>商品購買須知</div>

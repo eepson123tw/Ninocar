@@ -35,4 +35,8 @@ $(document).ready(function () {
     //     $('.lorem2').slideToggle();
     //     .css(('transform', 'rotate(180deg)'));
     // });
+
+    // localStorage.setItem('car', JSON.stringify());
+    // var car = JSON.parse(localStorage.getItem('car'));
+    // console.log(car);
 });
