@@ -19,13 +19,13 @@ $data = $statement->fetchAll();
 foreach ($data as $index => $row) {
 
   echo  '<tr>' . '<td>' . $row["product_name"] . '</td>';
-  echo  '<td>';
-  if ($row["product_price"] == 100 && $row["product_points"] == 0) {
+  echo  '<td>' . '<a href="ProductUpdate.php?PID=' . $row["product_id"] . '">';
+  if ($row["product_year"] == 2021) {
     echo  '<img src="../../upload/' . $row['product_img'] . '" alt="">';
   } else {
     echo  '<img src="' . $row['product_img'] . '" alt="">';
   }
-  echo '</td>';
+  echo  '</a>' . '</td>';
   // echo  '<td>' . '<img src="' . $row['product_img'] . '" alt="">' . '</td>';
   $series = $row["product_series"];
   switch ($series) {
@@ -57,5 +57,17 @@ foreach ($data as $index => $row) {
   echo  '<td>' . $series . '</td>';
   echo  '<td>' . $row["product_price"] . '</td>';
   echo  '<td>' . $row["product_points"] . '</td>';
-  echo  '<td>' . '<a href="ProductUpdate.php?PID=' . $row["product_id"] . '">查看</a>' . '</td>' . '</tr>';
+  $type = $row["product_type"];
+  switch ($type) {
+    case '1':
+      $type = "未上架";
+      break;
+    case '2':
+      $type = "刪除";
+      break;
+    default:
+      $type = "上架";
+      break;
+  }
+  echo  '<td>' . $type . '</td>' . '</tr>';
 }
