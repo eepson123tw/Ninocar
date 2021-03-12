@@ -60,7 +60,9 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-end">
-                        <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
+                        <div class="carID carID--lg bg-series-PM mr-8 mt-12">
+                            {{currentProductList['series']}}<span>{{currentProductList['seriesId']}}</span>
+                        </div>
                     </div>
                     <div class="gallery">
                         <img :src="currentProductList['img0']" />
