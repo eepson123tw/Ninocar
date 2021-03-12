@@ -315,7 +315,7 @@
                         <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
                         <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
                         <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
-                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" ></work-card>
+                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" data-board-id="1615519588220"></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -598,7 +598,7 @@
                 bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
             },
             updated() {
-                if(smallCardId == 220203){
+                if(smallCardId == '220203'){
                     this.workImgURL = vm1.$refs.workInfo1.img;
                     this.goodNum = vm1.$refs.workInfo1.workGood;
                     this.commentNum = vm1.$refs.workInfo1.workComment;
@@ -608,26 +608,26 @@
                 // else if(workIndex == 22310){
 
                 // }
-                else if(smallCardId == 55555){
+                else if(smallCardId == '55555'){
                     this.workImgURL = vm1.$refs.workInfo3.img;
                     this.goodNum = vm1.$refs.workInfo3.workGood;
                     this.commentNum = vm1.$refs.workInfo3.workComment;
                     this.price = vm1.$refs.workInfo3.workTotalPrice;
                     this.title = vm1.$refs.workInfo3.workTitle;
                 }
-                else if(smallCardId == 22111){
+                else if(smallCardId == '22111'){
                     this.workImgURL = vm1.$refs.workInfo4.img;
                     this.goodNum = vm1.$refs.workInfo4.workGood;
                     this.commentNum = vm1.$refs.workInfo4.workComment;
                     this.price = vm1.$refs.workInfo4.workTotalPrice;
                     this.title = vm1.$refs.workInfo4.workTitle;
-                }else if(smallCardId == 112303){
+                }else if(smallCardId == '112303'){
                     this.workImgURL = vm1.$refs.workInfo5.img;
                     this.goodNum = vm1.$refs.workInfo5.workGood;
                     this.commentNum = vm1.$refs.workInfo5.workComment;
                     this.price = vm1.$refs.workInfo5.workTotalPrice;
                     this.title = vm1.$refs.workInfo5.workTitle;
-                }else if(smallCardId == 0033345){
+                }else if(smallCardId == '0033345'){
                     this.workImgURL = vm1.$refs.workInfo6.img;
                     this.goodNum = vm1.$refs.workInfo6.workGood;
                     this.commentNum = vm1.$refs.workInfo6.workComment;
@@ -823,7 +823,7 @@
                     // console.log(smallCardPrice)
                     this.workPrice = smallCardPrice;
 
-                    /
+                    
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
                     // console.log(smallCardGoodNum)
                     this.workGood = smallCardGoodNum
