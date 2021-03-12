@@ -1894,13 +1894,15 @@
 
         //若沒有輸入所有資料跳出請完成資料輸入
         $('.nextStep').click(function() {
-            let typeWorkName = $('.typeWorkName').val()
+            typeWorkName = $('.typeWorkName').val() //設成全域，我的作品加入購物車時要抓
             let typeNickName = $('.typeNickName').val()
             let typeInspiration = $('.typeInspiration').val()
 
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
+
+            
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
@@ -2249,6 +2251,33 @@
             }
         })
 
+        //將我的作品加入購物車
+        document.body.addEventListener('click', (e) => {
+            const target = event.target
+            if(target.matches(`.addToCart`)){
+                console.log("把我的作品加到購物車 "+allIndex)
+                
+                let cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
+                console.log(cartList)
+
+                //這裡
+                if(allIndex == '000023' || allIndex == '000032'){
+                    imgSrc = './assets/img/pic/model001.png'
+                }else if(allIndex == '00401'){
+                    imgSrc = './assets/img/pic/model002.png'
+                }else if(allIndex == '22234' || allIndex == '33234' || allIndex == '22243' | allIndex == '33243'){
+                    imgSrc = './assets/img/pic/model003.png'
+                }
+
+                let productArr = {name:typeWorkName, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:imgSrc, price:stage4Price, productNum: 1, totalPrice: stage4Price, points:0, totalPointCost:0}
+                    
+                cartList.push(productArr)
+                let cartJson = JSON.stringify(cartList)
+                localStorage.setItem('cartsList', cartJson)
+
+            }
+        })
+
         //我的作品打開編輯框、編輯我的作品的作品敘述
         let count7 = 0;
         document.body.addEventListener('click',(e)=>{
@@ -2420,10 +2449,10 @@
                 // console.log("accessoryPrice: " + accessoryPrice);
                 
                 stage4Price = parseInt(state4Price0) + parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
-                // console.log("stage4:" + stage4Price)
+                console.log("stage4:" + stage4Price)
                 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`) 
-            
+                
                 
             }else{ //當從有選零件變成沒選零件時，扣掉原本加上去的錢
                 let state4Price1 = $('.totalPrice').text().split(' ')[1]
@@ -2432,6 +2461,7 @@
                 let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
                 
                 stage4Price = parseInt(state4Price1) - parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
+                console.log("stage4:" + stage4Price)
 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
             }
@@ -3309,9 +3339,6 @@
             }
         })
 
-        // ------------------------local storage----------------------------------
-        // let cartJson = JSON.stringify(newArray);
-        // localStorage.setItem('cartsList', cartJson);
     </script>
 </body>
 
