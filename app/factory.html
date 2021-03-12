@@ -461,7 +461,7 @@
                     workImgURL:'',
                     price:'',
                     title:'',
-                    
+                    cartList:[],
                 }
             },
             template:`    
@@ -481,7 +481,7 @@
                             </div>
                     
                             <div class="col-6 col-lg-3 col-sm-1">
-                                <button class="btn btn--fluid btn--outline addToCart">加入購物車</button>
+                                <button class="btn btn--fluid btn--outline addToCart" @click="addCartList">加入購物車</button>
                             </div>
                             </div>
                         </div>
@@ -596,6 +596,9 @@
                 bus.$on('work-modal-emit', () => this.isWorkModalShow = true);
 
                 bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
+
+
+                this.cartList = JSON.parse(localStorage.getItem('cartsList'))||[];
             },
             updated() {
                 if(smallCardId == '220203'){
@@ -638,7 +641,6 @@
                     this.title = vm1.$refs.workInfo6.workTitle;
                 }
 
-
             },
             methods:{
                 coloredIcon(e){
@@ -650,7 +652,17 @@
                 addGoodNum(e){
                     this.goodNum += 1;
                 },
+                addCartList(){
+                    let productArr = {name:this.title, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:this.workImgURL, price:this.price, productNum: 1, totalPrice: this.price, points:0, totalPointCost:0}
+                    
+                    this.cartList.push(productArr)
+
+                    let cartJson = JSON.stringify(this.cartList)
+
+                    localStorage.setItem('cartsList', cartJson)
+                },
             }
+            
         })
 
         //大家的作品、我的作品的卡片
@@ -966,6 +978,7 @@
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
                     isReportModalShow:false,
+
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -1137,7 +1150,6 @@
                 addGoodNum(e){
                     this.goodNum_plus += 1;
 
-                    // ajax
                 },
                 openWorkModal(e){ //這裡是work-card2
                     //進入彈窗、後面固定不給滾動
@@ -1189,8 +1201,8 @@
                             "transform": "rotate(0deg)",
                         })
                     }
-               }
-               ,openReadMore(){
+               },
+               openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
                     $(this.$el).children('.hiddenReply').css({"display": "block"});
 
@@ -1218,7 +1230,6 @@
 
                     } 
                },
-                
             },
         })
 
@@ -3297,6 +3308,10 @@
 		    	});
             }
         })
+
+        // ------------------------local storage----------------------------------
+        // let cartJson = JSON.stringify(newArray);
+        // localStorage.setItem('cartsList', cartJson);
     </script>
 </body>
 
