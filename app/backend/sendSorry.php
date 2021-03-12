@@ -5,7 +5,7 @@ include("LoginCheck.php");
 $CID = $_POST["CID"];
 
 //建立SQL
-$sql = "UPDATE `team1`.`comment` set `comment_type` = 1 WHERE `comment_id` = ?";
+$sql = "UPDATE `team1`.`comment` set `comment_type` = 0 WHERE `comment_id` = ?";
 
 //執行
 $statement = $Util->getPDO()->prepare($sql);
@@ -13,6 +13,45 @@ $statement = $Util->getPDO()->prepare($sql);
 //給值
 $statement->bindValue(1, $CID);
 $statement->execute();
+
+// try {
+//   //取得POST過來的值
+//   $CID = $_POST["CID"];
+
+//   //建立SQL
+//   $sql = "SELECT * FROM comment WHERE `comment_id` = ?";
+
+//   //執行
+//   $statement = $Util->getPDO()->prepare($sql);
+
+//   //給值
+//   $statement->bindValue(1, $CID);
+//   $statement->execute();
+//   $data = $statement->fetchAll();
+
+//   foreach ($data as $index => $row) {
+//     echo '<td>' . $row["board_id"] . '</td>';
+//     echo '<td>' . $row["member_id"] . '</td>';
+//     echo '<td>' . $row["comment_content"] . '</td>';
+//     $type = $row["comment_type"];
+//     switch ($type) {
+//       case '1':
+//         $type = "封鎖";
+//         break;
+//       default:
+//         $type = "正常";
+//         break;
+//     }
+
+//     echo '<tr>' . '<td>' . $type . '</td>';
+//     echo '<input type="hidden" name="CID" value="' . $row["comment_id"] . '"/>';
+//     echo '<input type="hidden" name="MID" value="' . $row["member_id"] . '"/>';
+//     echo '<td>' . '<button type="button" class="alert" id="' . $row["member_id"] . '">' . '<i class="fas fa-exclamation-circle">' . '</i>' . '</button>' . '</td>';
+//     echo '<td>' . '<a href="commentUpdate.php?CID=' . $row["comment_id"] . '">' . '查看' . '</a>' . '</td>' . '</tr>';
+//   }
+// } catch (PDOException $e) {
+//   echo 'Connection failed: ' . $e->getMessage();
+// }
 
 require_once("../assets/php/PHPMailer/PHPMailerAutoload.php");
 
@@ -83,7 +122,7 @@ foreach ($data as $index => $row) {
 
   $mail->FromName = "NINO CAR"; //此顯示寄件者名稱
 
-  $mail->Subject = "警告"; //信件主旨
+  $mail->Subject = "致歉"; //信件主旨
 
   $mail->Body = '
   <div class="top" style="border-bottom:4px solid #E59807;margin:auto;text-align:center;width: 600px;padding:30px 0px">
@@ -91,11 +130,11 @@ foreach ($data as $index => $row) {
 </div>
 <div class="body" style="margin:auto;text-align:left;width:600px">
   <div class="title" style="padding:30px;padding-right:30px;font-size:20px;color:rgba(0,0,0,8);text-align:center;font-family:Microsoft JhengHei">
-    <strong>警告信</strong>
+    <strong>通知信</strong>
   </div>
   <div class="text" style="font-size:16px;margin-bottom:30px;padding:30px;background-color:#ffffff">
-    您的留言已被封鎖。<br />
-    請注意不要發布攻擊性言語或妨礙他人觀感的留言。<br /><br />感謝配合。
+    您的留言經過審核確定並無違規，已經恢復正常。<br />
+    這可能是有些作業上的疏失或是人員操作的失誤導致，造成困擾與不便，再次向您表達誠摯的歉意。<br /><br />最後，懇請繼續支持我們的品牌。
   </div>
   <hr style="background-color: #E59807;margin-bottom: 30px;">
   <div class="bottom" style="width:600px;margin:auto;background-color:white;color:rgba(0,0,0,0.8)">
@@ -106,7 +145,7 @@ foreach ($data as $index => $row) {
     </div>
   </div>
 </div>
-<footer style="background-color:#E59807;width:600px;margin:auto;padding:30px 0px">
+<footer style="background-color:#E59807;width:600px;margin:auto;margin-bottom:50px;padding:30px 0px">
   <div class="button" style="text-align:center">
     <span>
       <a href="" style="text-decoration:none">
@@ -138,6 +177,3 @@ foreach ($data as $index => $row) {
     echo "Mail sent";
   }
 }
-
-//導頁
-echo "<script>alert('已寄出警告信!'); location.href = 'comment.php';</script>";

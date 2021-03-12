@@ -40,11 +40,11 @@ $data = $statement->fetchAll();
             </div>
             <div class="update mb-4">
               <p>訂單金額：</p>
-              <input type="text" name="price" value="<?= $row["order_cost"] ?>">
+              <input disabled="disabled" type="text" name="price" value="<?= $row["order_cost"] ?>">
             </div>
             <div class="update mb-4">
               <p>訂單點數：</p>
-              <input type="text" name="point" id="price" value="<?= $row["order_points"] ?>">
+              <input disabled="disabled" type="text" name="point" id="price" value="<?= $row["order_points"] ?>">
             </div>
             <div class="update mb-4">
               <p>貨物狀態：</p>

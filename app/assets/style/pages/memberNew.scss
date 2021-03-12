@@ -382,6 +382,9 @@
 
 .courses {
   min-width: 300px;
+  @include rwd-xs {
+    display: none;
+  }
 }
 
 .courses li {

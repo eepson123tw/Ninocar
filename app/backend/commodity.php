@@ -15,6 +15,52 @@ $data = $statement->fetchAll();
 ?>
 <title>商品管理</title>
 </head>
+<script>
+    //搜尋
+    // $('.searchButton').click(search);
+
+    // function search(str) {
+    //     alert();
+    //     let textbox = $('.searchTerm').val();
+    //     console.log();
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "search.php",
+    //         data: {
+    //             'textbox': $('.searchTerm').val()
+    //         },
+    //         dataType: "text",
+    //         success: function(response) {
+    //             //更新html內容
+    //             document.getElementsByClassName('tbody')[0].innerHTML = response;
+    //         },
+    //         error: function(exception) {
+    //             alert("發生錯誤: " + exception.status);
+    //         }
+    //     });
+    // };
+
+    $(document).on('click', '.searchButton', function() {
+        let textbox = $('.searchTerm').val();
+        console.log(textbox);
+        $.ajax({
+            url: "search.php",
+            method: "POST",
+            data: {
+                'textbox': textbox
+            },
+            dataType: "text",
+            success: function(response) {
+                //更新html內容
+                document.getElementsByClassName('tbody')[0].innerHTML = response;
+                // window.location.reload();
+            },
+            error: function(exception) {
+                alert("發生錯誤: " + exception.status);
+            }
+        });
+    });
+</script>
 
 <body>
     <?php
@@ -23,12 +69,19 @@ $data = $statement->fetchAll();
     <div class="content">
         <!-- update-button -->
         <div class="update_btn">
+            <div class="wrap">
+                <div class="search_bar">
+                    <input type="text" class="searchTerm" placeholder="搜尋">
+                </div>
+                <button type="text" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
             <button><a href="update.php"><i class="fas fa-upload"></i>上架商品</a></button>
         </div>
         <!-- table -->
         <div class="col-lg-9">
             <div class="table-responsive">
-                <!-- <button class="update_btn mb-3 ml-3"><i class="fas fa-upload"></i>上架商品</button> -->
                 <table>
                     <thead>
                         <tr>
@@ -40,7 +93,7 @@ $data = $statement->fetchAll();
                             <th>詳細</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="tbody">
                         <?php
                         foreach ($data as $index => $row) {
                         ?>

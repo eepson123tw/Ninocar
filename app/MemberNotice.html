@@ -9,31 +9,33 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>memberNotice</title>
 </head>
 
 <body>
-    <div id="app">
-        <vue-header></vue-header>
-        <member-bar></member-bar>
-        <!--  -->
+  <div id="app">
+    <vue-header></vue-header>
+    <member-bar></member-bar>
+    <!--  -->
+    <member_notices></member_notices>
 
-        @@include('./pages/MemberPage/MemberNotice.html')
-        <!-- your code here... -->
-    </div>
+
+    <!-- your code here... -->
+  </div>
 
 </body>
-@@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
+@@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./pages/MemberPage/MemberNotice.html')
 
 <script>
-    new Vue({
-        el: '#app',
-        data: {
-            message: 'Hello, VueJS!',
-        },
-    });
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello, VueJS!',
+    },
+  });
 </script>
 
 </html>

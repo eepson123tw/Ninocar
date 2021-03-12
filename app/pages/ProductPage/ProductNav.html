@@ -1,65 +1,65 @@
 <div class="container">
-    <div class="row">
-        <div class="col-3 col-lg-6 col-sm-6">
-            <div class="box-green">
-                <div class="item-menu">
-                    <li class="item" id="all-items">
-                        <a href="#all-items" class="menu-btn">全部商品</a>
-                        <div class="smenu">
-                            <a href="#">轎車系</a>
-                            <a href="#">工程車系</a>
-                            <a href="#">RV休旅車系</a>
-                            <a href="#">計程車系</a>
-                            <a href="#">巴士系</a>
-                            <a href="#">警車系</a>
-                            <a href="#">消防系</a>
-                            <a href="#">救護系</a>
-                            <a href="#">Premium系</a>
-                        </div>
-                    </li>
+  <div class="row">
+    <div class="col-3 col-lg-6 col-sm-6">
+      <div class="box-green">
+        <div class="item-menu">
+          <li class="item" id="all-items">
+            <a href="#all-items" class="menu-btn">全部商品</a>
+            <div class="smenu">
+              <a href="#">轎車系</a>
+              <a href="#">工程車系</a>
+              <a href="#">RV休旅車系</a>
+              <a href="#">計程車系</a>
+              <a href="#">巴士系</a>
+              <a href="#">警車系</a>
+              <a href="#">消防系</a>
+              <a href="#">救護系</a>
+              <a href="#">Premium系</a>
+            </div>
+          </li>
 
-                    <li class="item" id="year-items">
-                        <a href="#year-items" class="menu-btn">年份分車</a>
-                        <div class="smenu">
-                            <a href="#">1970</a>
-                            <a href="#">1990</a>
-                            <a href="#">2010</a>
-                        </div>
-                    </li>
+          <li class="item" id="year-items">
+            <a href="#year-items" class="menu-btn">年份分車</a>
+            <div class="smenu">
+              <a href="#">1970</a>
+              <a href="#">1990</a>
+              <a href="#">2010</a>
+            </div>
+          </li>
 
-                    <li class="item" id="new-items">
-                        <a href="#new-items" class="menu-btn">最新商品</a>
-                        <div class="smenu">
-                            <a href="#">Audi TT Coupe</a>
-                            <a href="#">Lamborghini Urus</a>
-                        </div>
-                    </li>
+          <li class="item" id="new-items">
+            <a href="#new-items" class="menu-btn">最新商品</a>
+            <div class="smenu">
+              <a href="#">Audi TT Coupe</a>
+              <a href="#">Lamborghini Urus</a>
+            </div>
+          </li>
 
-                    <li class="item" id="hot-items">
-                        <a href="#hot-items" class="menu-btn">熱門商品</a>
-                        <div class="smenu">
-                            <a href="#">Audi TT Coupe</a>
-                            <a href="#">Lamborghini Urus</a>
-                        </div>
-                    </li>
+          <li class="item" id="hot-items">
+            <a href="#hot-items" class="menu-btn">熱門商品</a>
+            <div class="smenu">
+              <a href="#">Audi TT Coupe</a>
+              <a href="#">Lamborghini Urus</a>
+            </div>
+          </li>
 
-                    <li class="item" id="hightlight-items">
-                        <a href="#hightlight-items" class="menu-btn">本月主打</a>
-                        <div class="smenu">
-                            <a href="#">Audi TT Coupe</a>
-                            <a href="#">Lamborghini Urus</a>
-                        </div>
-                    </li>
+          <li class="item" id="hightlight-items">
+            <a href="#hightlight-items" class="menu-btn">本月主打</a>
+            <div class="smenu">
+              <a href="#">Audi TT Coupe</a>
+              <a href="#">Lamborghini Urus</a>
+            </div>
+          </li>
 
-                    <li class="item" id="point-items">
-                        <a href="#point-items" class="menu-btn">點數限定</a>
-                        <div class="smenu">
-                            <a href="#">Audi TT Coupe</a>
-                            <a href="#">Lamborghini Urus</a>
-                        </div>
-                    </li>
-                </div>
-                <!-- <div class="product__header">
+          <li class="item" id="point-items">
+            <a href="#point-items" class="menu-btn">點數限定</a>
+            <div class="smenu">
+              <a href="#">Audi TT Coupe</a>
+              <a href="#">Lamborghini Urus</a>
+            </div>
+          </li>
+        </div>
+        <!-- <div class="product__header">
             <div class="product__over">
                 <p class="product__header_body">全部商品</p>
                 <ul class="product__header_series">
@@ -85,93 +85,107 @@
                 <p class="product__header_body">點數限定</p>
             </div>
         </div> -->
-            </div>
-        </div>
-
-        <div class="col-9 col-lg-6 col-sm-6" style="margin-top: 200px">
-            <div class="box-yellow">
-                <div class="row">
-                    <div class="col-12 col-lg-12 col-sm-12">
-                        <select class="area" v-model="filter">
-                            <option value="" disabled>-- 請選擇 --</option>
-                            <option value="依上架時間">最新上架</option>
-                            <option value="依價格">依價格(由高至低)</option>
-                            <option value="依價格">依價格(由低至高)</option>
-                            <option value="依銷售度">熱門銷售</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <ul class="col-12 col-lg-6 col-sm-6">
-                <div class="box-blue">
-                    <div class="row">
-                        <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in sortArray">
-                            <!--card-->
-
-                            <a href="itemdetail.html" class="card" @click="nowProduct(item)">
-                                <div class="card__header">
-                                    <img :src="item.imgURL" alt="" />
-                                    <div class="card__carID bg-series-BS">BS<span>{{item.seriesId}}</span></div>
-                                    <span class="card__label">本月主打</span>
-                                </div>
-                                <div class="card__body">
-                                    <h2 class="card__title">{{item.productName}}</h2>
-                                    <div class="card__details">
-                                        <p class="card__price">NT$ <span>{{item.price}}</span></p>
-                                        <button class="card__link">收藏</button>
-                                    </div>
-                                </div>
-                                <button class="btn btn--fluid btn--outline" @click="addCarts(item)">加入購物車</button>
-                            </a>
-                        </li>
-                        <!---->
-                    </div>
-                </div>
-            </ul>
-            <!---- 頁籤 ---->
-            <div class="row">
-                <ul class="col-12 col-lg-12 col-sm-12">
-                    <div class="box-pink">
-                        <div class="page col-4 col-lg-6 col-sm-4 justify-content-center">
-                            <div class="page_btn_nb"></div>
-                            <!-- <nav aria-label="...">
-                                <ul class="d-flex pagination">
-                                    <li class="page-item disabled">
-                                        <a
-                                            class="page-link"
-                                            href="#"
-                                            tabindex="-1"
-                                            aria-disabled="true"
-                                            @click.prevent="prev"
-                                            ><span
-                                                class="material-icons material-icons-md text-dark-primary text-left"
-                                                aria-hidden="true"
-                                                >chevron_left</span
-                                            ></a
-                                        >
-                                    </li> -->
-                            <!-- <li
-                                    class="page-item"
-                                    :class="{active:currentPage === page - 1}"
-                                    v-for="page in filterData.length"
-                                >
-                                    <a class="page-link" href="#" @click.prevent="currentPage = (page - 1)"
-                                        >{{ page }}</a
-                                    >
-                                </li> -->
-                            <!-- <li class="page-item">
-                                        <a class="page-link" href="#" @click.prevent="next"
-                                            ><span class="material-icons text-dark-primary text-left" aria-hidden="true"
-                                                >chevron_right</span
-                                            ></a
-                                        >
-                                    </li>
-                                </ul>
-                            </nav> -->
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="col-9 col-lg-6 col-sm-6" style="margin-top: 200px">
+      <div class="box-yellow">
+        <div class="row">
+          <div class="col-12 col-lg-12 col-sm-12">
+            <select class="area" v-model="sort" @change="changeArray">
+              <option
+                value=""
+                disabled
+              >-- 請選擇 --</option>
+              <option value="依上架時間">最新上架</option>
+              <option value="price">依價格(由高至低)</option>
+              <option value="price_reverse">依價格(由低至高)</option>
+              <option value="依銷售度">熱門銷售</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <ul class="col-12 col-lg-6 col-sm-6" v-if="defaultArray">
+        <div class="box-blue">
+          <ul class="row">
+            <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in showProductList.slice(pageStart, pageStart + countOfPage)">
+              <div class="card">
+                <div class="card__header">
+                  <a href="ItemDetail.html"><img @click="nowProduct(item)" :src="item.imgURL" /></a>
+                  <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
+                  <span class="card__label">本月主打</span>
+                </div>
+                <div class="card__body">
+                  <h2 class="card__title">{{item.name}}</h2>
+                  <div class="card__details" v-if="item.price !==0">
+                    <p class="card__price">NT$ <span>{{item.price}}</span></p>
+                    <button class="card__link" @click="likeCarts(item)">收藏</button>
+                  </div>
+                  <div class="card__details" v-else>
+                    <p class="card__price">NI <span>{{item.points}}</span></p>
+                    <button class="card__link" @click="likeCarts(item)">收藏</button>
+                  </div>
+                </div>
+                <button class="btn btn--fluid btn--outline" @click="addCarts(item)">加入購物車</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ul>
+      <ul class="col-12 col-lg-6 col-sm-6" v-else>
+        <div class="box-blue">
+          <ul class="row">
+            <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in sortArray">
+              <div class="card">
+                <div class="card__header">
+                  <a href="ItemDetail.html"><img @click="nowProduct(item)" :src="item.imgURL" /></a>
+                  <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
+                  <span class="card__label">本月主打</span>
+                </div>
+                <div class="card__body">
+                  <h2 class="card__title">{{item.name}}</h2>
+                  <div class="card__details" v-if="item.price !==0">
+                    <p class="card__price">NT$ <span>{{item.price}}</span></p>
+                    <button class="card__link" @click="likeCarts(item)">收藏</button>
+                  </div>
+                  <div class="card__details" v-else>
+                    <p class="card__price">NI <span>{{item.points}}</span></p>
+                    <button class="card__link" @click="likeCarts(item)">收藏</button>
+                  </div>
+                </div>
+                <button class="btn btn--fluid btn--outline" @click="addCarts(item)">加入購物車</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ul>
+      <!---- 頁籤 ---->
+      <div class="row">
+        <ul class="col-12 col-lg-12 col-sm-12">
+          <div class="box-pink">
+            <div class="page col-4 col-lg-6 col-sm-4 justify-content-center">
+              <div class="page_btn_nb"></div>
+              <nav aria-label="..." class="pagination">
+                <ul class="d-flex">
+                  <li :class="{'disabled': (currPage === 1)}" @click.prevent="setPage(currPage-1)">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                      <span class="material-icons material-icons-md text-dark-primary text-left" aria-hidden="true">chevron_left</span>
+                    </a>
+                  </li>
+                  <li v-for="page in totalPage" :class="{'active' : (currPage === (page))}" @click.prevent="setPage(page)">
+                    <a class="page-link" href="#">{{ page }}</a>
+                  </li>
+                  <li :class="{'disabled': (currPage === totalPage)}" @click.prevent="setPage(currPage+1)">
+                    <a class="page-link" href="#">
+                      <span class="material-icons text-dark-primary text-left" aria-hidden="true">chevron_right</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

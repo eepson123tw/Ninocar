@@ -13,7 +13,7 @@
         class="member__cupon  mt-5  col-5 col-lg-6"
         v-for="(item,index) of  couponList"
       >
-        <ul class="d-flex justify-content-center w-100 ">
+        <ul class="d-flex justify-content-center  w-100 ">
           <li class="member__cuponText">
             <div class="member__cuponBackGround">
               <!-- <span class="member__cuponText--big">{{item['couponHightLine']}}</span> -->
@@ -24,7 +24,14 @@
             <div class="member__cuponContent">
               <p class="h5">【{{item['couponTitle']}}】</p>
               <p class="h4">{{item['couponText']}}</p>
-              <p class=" h4 member__cuponContent--warning ">即將到期:<span> {{item.couponDeadDate}}</span></p>
+              <p
+                v-if="item.couponId =='0'"
+                class=" h4 member__cuponContent--warning "
+              >即將到期:<span> {{ timer | hoursMinutesAndSeconds }} </span></p>
+              <p
+                v-else
+                class=" h4 member__cuponContent--warning "
+              >即將到期:<span> {{item.couponDeadDate}}</span></p>
             </div>
           </li>
           <li class="member__cuponText">
@@ -50,8 +57,7 @@
       return {
         couponList: [],
         count: null,
-
-
+        timer: THREE_DAYS,
       }
     },
     mounted() {
@@ -75,32 +81,31 @@
 
           coupon.coupon_id == "0" ? hightLine = "九折" : coupon.coupon_id == "1" ? hightLine = "免運" : coupon.coupon_id == "2" ? hightLine = "買一送一" : coupon.coupon_id == "3" ? hightLine = "七折" : hightLine = "???"
 
+          const dateObject = new Date(coupon.dead_date);
+          const date = dateObject.getDate()
+          const month = dateObject.getMonth() + 1;
+          const year = dateObject.getFullYear()
           return {
             couponTitle: coupon.coupon_name,
             couponId: coupon.coupon_id,
             couponText: coupon.coupon_des,
             coupon_On: coupon.coupon_type,
             couponGetDate: coupon.type_date,
-            couponDeadDate: coupon.dead_date,
+            couponDeadDate: `${year}-${month}-${date}`,
             couponHightLine: hightLine,
-
           }
-
-
-
         })
-
-
       }).catch((error) => {
         console.log(error)
       })
 
 
-
-
+      setInterval(() => this.timer -= 1, 1000);
 
     },
-    methods: {},
+    methods: {
+
+    },
     computed: {
       memberId() {
         return this.$store.state.memberId
@@ -111,41 +116,20 @@
       deadDate() {
         return Date.parse(this.couponList[0].couponDeadDate);
       },
-
+      resetTime() {
+        return this.deadDate - this.getDate;
+      },
     },
-    updated() {
+    filters: {
+      hoursMinutesAndSeconds(value) {
+        // let hours = Math.floor(value / 60 * 60);
+        let hours = Math.floor(value / (60 * 60));
+        let minutes = Math.floor((value / 60) % 60);
+        let seconds = Math.floor(value % 60);
 
-
-      let i = 0;
-      let diff;
-      setInterval(() => {
-          i += 1;
-          let future = this.deadDate;
-          let now = this.getDate + i;
-
-          diff = future - now;
-
-
-
-          let hours = Math.floor((diff / (1000 * 60 * 60)));
-          let min = Math.floor((diff / 60) % 60);
-          let secs = Math.floor(diff % 60);
-
-          console.log(hours, min, secs)
-
-
-
-        },
-        1000);
-
-
-
-
-
-
-    }
-
-
+        return `${hours} : ${minutes} : ${seconds}`;
+      }
+    },
 
 
 

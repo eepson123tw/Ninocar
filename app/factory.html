@@ -311,11 +311,11 @@
                 <div>
                     <ul class="othersWorks grid">
                         <work-card  ref="workInfo1" @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" :work-total-price="450" data-id="220203" data-board-id="1614917124264"></work-card>
-                        <work-card2  @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
+                        <work-card2 ref="workInfo2" @report-emit="openReportModal" value="370" :work-total-price="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
                         <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
                         <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
                         <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
-                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" ></work-card>
+                        <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" data-board-id="1615519588220"></work-card>
 
                         <!-- ajax -->
                      </ul>
@@ -461,7 +461,7 @@
                     workImgURL:'',
                     price:'',
                     title:'',
-                    
+                    cartList:[],
                 }
             },
             template:`    
@@ -481,7 +481,7 @@
                             </div>
                     
                             <div class="col-6 col-lg-3 col-sm-1">
-                                <button class="btn btn--fluid btn--outline addToCart">加入購物車</button>
+                                <button class="btn btn--fluid btn--outline addToCart" @click="addCartList">加入購物車</button>
                             </div>
                             </div>
                         </div>
@@ -596,45 +596,49 @@
                 bus.$on('work-modal-emit', () => this.isWorkModalShow = true);
 
                 bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
+
+                this.cartList = JSON.parse(localStorage.getItem('cartsList'))||[];
             },
             updated() {
-                if(smallCardId == 220203){
+                if(smallCardId == '220203'){
                     this.workImgURL = vm1.$refs.workInfo1.img;
                     this.goodNum = vm1.$refs.workInfo1.workGood;
                     this.commentNum = vm1.$refs.workInfo1.workComment;
                     this.price = vm1.$refs.workInfo1.workTotalPrice;
                     this.title = vm1.$refs.workInfo1.workTitle;
                 }
-                // else if(workIndex == 22310){
-
-                // }
-                else if(smallCardId == 55555){
+                else if(smallCardId == '22310'){
+                    this.workImgURL = vm1.$refs.workInfo2.img;
+                    this.goodNum = vm1.$refs.workInfo2.workGood;
+                    this.commentNum = vm1.$refs.workInfo2.workComment;
+                    this.price = vm1.$refs.workInfo2.workTotalPrice;
+                    this.title = vm1.$refs.workInfo2.workTitle;
+                }else if(smallCardId == '55555'){                
                     this.workImgURL = vm1.$refs.workInfo3.img;
                     this.goodNum = vm1.$refs.workInfo3.workGood;
                     this.commentNum = vm1.$refs.workInfo3.workComment;
                     this.price = vm1.$refs.workInfo3.workTotalPrice;
                     this.title = vm1.$refs.workInfo3.workTitle;
                 }
-                else if(smallCardId == 22111){
+                else if(smallCardId == '22111'){
                     this.workImgURL = vm1.$refs.workInfo4.img;
                     this.goodNum = vm1.$refs.workInfo4.workGood;
                     this.commentNum = vm1.$refs.workInfo4.workComment;
                     this.price = vm1.$refs.workInfo4.workTotalPrice;
                     this.title = vm1.$refs.workInfo4.workTitle;
-                }else if(smallCardId == 112303){
+                }else if(smallCardId == '112303'){
                     this.workImgURL = vm1.$refs.workInfo5.img;
                     this.goodNum = vm1.$refs.workInfo5.workGood;
                     this.commentNum = vm1.$refs.workInfo5.workComment;
                     this.price = vm1.$refs.workInfo5.workTotalPrice;
                     this.title = vm1.$refs.workInfo5.workTitle;
-                }else if(smallCardId == 0033345){
+                }else if(smallCardId == '0033345'){
                     this.workImgURL = vm1.$refs.workInfo6.img;
                     this.goodNum = vm1.$refs.workInfo6.workGood;
                     this.commentNum = vm1.$refs.workInfo6.workComment;
                     this.price = vm1.$refs.workInfo6.workTotalPrice;
                     this.title = vm1.$refs.workInfo6.workTitle;
                 }
-
 
             },
             methods:{
@@ -647,7 +651,17 @@
                 addGoodNum(e){
                     this.goodNum += 1;
                 },
+                addCartList(){
+                    let productArr = {name:this.title, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:this.workImgURL, price:this.price, productNum: 1, totalPrice: this.price, points:0, totalPointCost:0}
+                    
+                    this.cartList.push(productArr)
+
+                    let cartJson = JSON.stringify(this.cartList)
+
+                    localStorage.setItem('cartsList', cartJson)
+                },
             }
+            
         })
 
         //大家的作品、我的作品的卡片
@@ -803,7 +817,8 @@
                     this.goodNum_plus += 1;
                     // ajax
                 },
-                openWorkModal(e){ //進入彈窗、後面固定不給滾動
+                openWorkModal(e){ 
+                    //進入彈窗、後面固定不給滾動
                     bus.$emit('work-modal-emit')
 
                     // --------------------------------------------------------------
@@ -823,7 +838,7 @@
                     // console.log(smallCardPrice)
                     this.workPrice = smallCardPrice;
 
-                    /
+                    
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
                     // console.log(smallCardGoodNum)
                     this.workGood = smallCardGoodNum
@@ -833,11 +848,8 @@
                     // console.log(smallCardCommentNum)
                     this.workComment = smallCardCommentNum
 
-
                     smallCardId = $(this.$el).attr('data-id');
-                    console.log(smallCardId)
-                    // $('.addToCart').attr('data-id', smallCardId)
-                    // this.workId = smallCardId
+                    // console.log(smallCardId)
                },
                openMoreReply(e){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
@@ -936,6 +948,10 @@
 
         Vue.component(('work-card2'),{
             props:{
+                workTitle:{
+                    default:"天栗鼠計程車",
+                    type:String
+                },
                 img:{
                     default:"./assets/img/pic/model06.png",
                     type:String
@@ -951,7 +967,11 @@
                 postTime:{
                     default:1,
                     type:Number
-                }
+                },
+                workTotalPrice:{
+                    default:100,
+                    type:Number
+                },
             },
             data(){
                 return{
@@ -961,10 +981,11 @@
                     goodNum_plus: this.goodNum,
                     commentNum_plus: this.commentNum,
                     isReportModalShow:false,
+
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
-                            <div class="work_pic">
+                            <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="model" @click="openWorkModal">
                             </div>
 
@@ -1132,28 +1153,34 @@
                 addGoodNum(e){
                     this.goodNum_plus += 1;
 
-                    // ajax
                 },
-                openWorkModal(e){ //進入彈窗、後面固定不給滾動
-                    // $('.mask').css({"display": "block"});
-                    // $('#factoryModal').css({"position": "fixed"});
-                    // $('#factoryModal').css({"z-index": "2010"});
-                    // ---------------------------此線以上不要了----------------------------
+                openWorkModal(e){ //這裡是work-card2
+                    //進入彈窗、後面固定不給滾動
+                    bus.$emit('work-modal-emit')
 
-                    let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
-                    $('.workPic--big').attr('src', smallCardPicURL)
-
-                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
-
-                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
-                    $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+                    // --------------------------------------------------------------
+                    smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
+                    // console.log(smallCardPicURL)
+                    this.workImgURL = smallCardPicURL;
 
                     let smallCardPrice = $(this.$el).attr('value');
-                    $('.work-priceNum').text(smallCardPrice)
+                    // console.log(smallCardPrice)
+                    this.workPrice = smallCardPrice;
 
-                    let smallCardId = $(this.$el).attr('data-id')
-                    $('.addToCart').attr('data-id', smallCardId)
+
+                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
+                    // console.log(smallCardGoodNum)
+                    this.workGood = smallCardGoodNum
+
+
+                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
+                    // console.log(smallCardCommentNum)
+                    this.workComment = smallCardCommentNum
+
+                    smallCardId = $(this.$el).attr('data-id');
+                    // console.log(smallCardId)
+                    // $('.addToCart').attr('data-id', smallCardId)
+                    // this.workId = smallCardId
                },
                 openMoreReply(){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
@@ -1177,8 +1204,8 @@
                             "transform": "rotate(0deg)",
                         })
                     }
-               }
-               ,openReadMore(){
+               },
+               openReadMore(){
                     $(this.$el).children('.hiddenReply').slideToggle();
                     $(this.$el).children('.hiddenReply').css({"display": "block"});
 
@@ -1203,10 +1230,8 @@
                     // console.log(commentContentL)
                     if(commentContentL > 0){
                         this.commentNum_plus += 1;
-
                     } 
                },
-                
             },
         })
 
@@ -1871,13 +1896,15 @@
 
         //若沒有輸入所有資料跳出請完成資料輸入
         $('.nextStep').click(function() {
-            let typeWorkName = $('.typeWorkName').val()
+            typeWorkName = $('.typeWorkName').val() //設成全域，我的作品加入購物車時要抓
             let typeNickName = $('.typeNickName').val()
             let typeInspiration = $('.typeInspiration').val()
 
             let typeWorkNameL = $('.typeWorkName').val().length;
             let typeNickNameL = $('.typeNickName').val().length;
             let typeInspirationL = $('.typeInspiration').val().length;
+
+            
 
             //如果作品名、作者暱稱、靈感皆不為空則PO文
             if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
@@ -2226,6 +2253,31 @@
             }
         })
 
+        //將我的作品加入購物車
+        document.body.addEventListener('click', (e) => {
+            const target = event.target
+            if(target.matches(`.addToCart`)){
+                // console.log("把我的作品加到購物車 " + allIndex)
+                
+                let cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
+
+                if(allIndex == '000023' || allIndex == '000032'){
+                    imgSrc = './assets/img/pic/model001.png'
+                }else if(allIndex == '00401'){
+                    imgSrc = './assets/img/pic/model002.png'
+                }else if(allIndex == '22234' || allIndex == '33234' || allIndex == '22243' | allIndex == '33243'){
+                    imgSrc = './assets/img/pic/model003.png'
+                }
+
+                let productArr = {name:typeWorkName, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:imgSrc, price:stage4Price, productNum: 1, totalPrice: stage4Price, points:0, totalPointCost:0}
+                    
+                cartList.push(productArr)
+                let cartJson = JSON.stringify(cartList)
+                localStorage.setItem('cartsList', cartJson)
+
+            }
+        })
+
         //我的作品打開編輯框、編輯我的作品的作品敘述
         let count7 = 0;
         document.body.addEventListener('click',(e)=>{
@@ -2397,10 +2449,10 @@
                 // console.log("accessoryPrice: " + accessoryPrice);
                 
                 stage4Price = parseInt(state4Price0) + parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
-                // console.log("stage4:" + stage4Price)
+                console.log("stage4:" + stage4Price)
                 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`) 
-            
+                
                 
             }else{ //當從有選零件變成沒選零件時，扣掉原本加上去的錢
                 let state4Price1 = $('.totalPrice').text().split(' ')[1]
@@ -2409,6 +2461,7 @@
                 let accessoryPrice = $(this).parent().children('.makeCar-price').text().split(' ')[1]
                 
                 stage4Price = parseInt(state4Price1) - parseInt(accessoryPrice) //設成全域，之後要設成.putPrice的value
+                console.log("stage4:" + stage4Price)
 
                 let finalPrice = $('.totalPrice').text(`NT$ ${stage4Price}`)
             }
@@ -3285,6 +3338,7 @@
 		    	});
             }
         })
+
     </script>
 </body>
 
