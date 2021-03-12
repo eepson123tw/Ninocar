@@ -1,43 +1,63 @@
 <div class="container">
-  <div class="row">
-    <div class="col-7 col-lg-6 col-sm-6">
-      <div class="box">
-        <div class="breadcrumb">
-          <a href="product.html">
-            <p>全部商品</p>
-          </a>>
-          <a href="">
-            <p>PREMIUM系</p>
-          </a>>
-          <p>{{currentProductList['name']}}</p>
-        </div>
-        <div class="car-name">{{currentProductList['eName']}}</div>
-        <div class="lightBox">
-          <figure>
-            <img @click="lightBox('car')" class="demo" :src="currentProductList['img1']" alt="" />
-          </figure>
-          <div :class="{'mask':mask}" v-if="mask">
-            <div class="swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(item,index2) in showList">
-                  <div class="swiper-zoom-container">
-                    <img v-show="nowImg === 0" :src="currentProductList['imgURL']" alt="" class="lazyload" />
-                    <img v-show="nowImg === 1" :src="currentProductList['img2']" alt="" class="lazyload" />
-                    <img v-show="nowImg === 2" :src="currentProductList['img3']" alt="" class="lazyload" />
-                    <img v-show="nowImg === 3" :src="currentProductList['img4']" alt="" class="lazyload" />
-                    <img v-show="nowImg === 4" :src="currentProductList['img5']" alt="" class="lazyload" />
-                  </div>
+    <div class="row">
+        <div class="col-7 col-lg-6 col-sm-6">
+            <div class="box">
+                <div class="breadcrumb">
+                    <a href="product.html"> <p>全部商品</p> </a>>
+                    <a href=""> <p>{{currentProductList['seriesTag']}}</p> </a>>
+                    <p>{{currentProductList['name']}}</p>
                 </div>
-              </div>
-              <!-- 燈箱照片下方swiper的點點 -->
-              <div class="swiper-pagination swiper-pagination-white"></div>
-              <!-- swiper套件的左右按鈕 -->
-              <div @click="prevImg" class="swiper-button-prev"></div>
-              <div @click="nextImg" class="swiper-button-next"></div>
-              <button class="closeBtn" @click="lightBox('',true)">
+                <div class="car-name">{{currentProductList['eName']}}</div>
+                <div class="lightBox">
+                    <figure>
+                        <img @click="lightBox('car')" class="demo" :src="currentProductList['img1']" alt="" />
+                    </figure>
+                    <div :class="{'mask':mask}" v-if="mask">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="(item,index2) in showList">
+                                    <div class="swiper-zoom-container">
+                                        <img
+                                            v-show="nowImg === 0"
+                                            :src="currentProductList['imgURL']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 1"
+                                            :src="currentProductList['img2']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 2"
+                                            :src="currentProductList['img3']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 3"
+                                            :src="currentProductList['img4']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                        <img
+                                            v-show="nowImg === 4"
+                                            :src="currentProductList['img5']"
+                                            alt=""
+                                            class="lazyload"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 燈箱照片下方swiper的點點 -->
+                            <div class="swiper-pagination swiper-pagination-white"></div>
+                            <!-- swiper套件的左右按鈕 -->
+                            <div @click="prevImg" class="swiper-button-prev"></div>
+                            <div @click="nextImg" class="swiper-button-next"></div>
+                            <button class="closeBtn" @click="lightBox('',true)">
                                 <i class="fa fa-times"></i>
                             </button>
-<<<<<<< HEAD
                         </div>
                     </div>
                     <div class="row d-flex justify-content-end">
@@ -46,52 +66,37 @@
                         </div>
                     </div>
                     <div class="gallery">
-                        <img :src="currentProductList['img0']" />
+                        <img :src="currentProductList['imgURL']" />
                         <img :src="currentProductList['img2']" />
                         <img :src="currentProductList['img3']" />
                         <img :src="currentProductList['img4']" />
                         <img :src="currentProductList['img5']" />
                     </div>
                 </div>
-=======
->>>>>>> gulp
             </div>
-          </div>
-          <div class="row d-flex justify-content-end">
-            <div class="carID carID--lg bg-series-PM mr-8 mt-12">PM<span>01</span></div>
-          </div>
-          <div class="gallery">
-            <img :src="currentProductList['imgURL']" />
-            <img :src="currentProductList['img2']" />
-            <img :src="currentProductList['img3']" />
-            <img :src="currentProductList['img4']" />
-            <img :src="currentProductList['img5']" />
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-5 col-lg-6 col-sm-6">
-      <div class="box-2">
-        <h2>{{currentProductList['name']}}</h2>
-        <h3>{{currentProductList['eName']}}</h3>
-        <p>{{currentProductList['description']}}</p>
+        <div class="col-5 col-lg-6 col-sm-6">
+            <div class="box-2">
+                <h2>{{currentProductList['name']}}</h2>
+                <h3>{{currentProductList['eName']}}</h3>
+                <p>{{currentProductList['description']}}</p>
 
-        <div class="row">
-          <div class="col-12 col-lg-3 col-sm-3">
-            <div class="tag">
-              <span class="badge bg-series-PA">警車系</span>
-              <span class="badge badge--primary">本月主打</span>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="item-price">NT$ {{list.price}}</div> -->
-        <div class="item-price">
-          <p>NT${{currentProductList['price']}}</p>
-        </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3 col-sm-3">
+                        <div class="tag">
+                            <span class="badge bg-series-PA">{{currentProductList['seriesTag']}}</span>
+                            <span class="badge badge--primary">本月主打</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="item-price">NT$ {{list.price}}</div> -->
+                <div class="item-price">
+                    <p>NT${{currentProductList['price']}}</p>
+                </div>
 
-        <div>數量</div>
-        <div class="select-style">
-          <select>
+                <div>數量</div>
+                <div class="select-style">
+                    <select>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -103,116 +108,122 @@
                         <option>9</option>
                         <option>10</option>
                     </select>
-        </div>
-        <div class="row mt-10 mb-10">
-          <div class="col-12 col-lg-6 col-sm-6">
-            <button class="btn btn--fluid" @click="addCurrentCar">加入購物車</button>
-          </div>
-          <div class="col-12 col-lg-6 col-sm-6">
-            <button class="btn btn--fluid btn--outline" @click="likeCarts">加入收藏</button>
-          </div>
-        </div>
+                </div>
+                <div class="row mt-10 mb-10">
+                    <div class="col-12 col-lg-6 col-sm-6">
+                        <button class="btn btn--fluid" @click="addCurrentCar">加入購物車</button>
+                    </div>
+                    <div class="col-12 col-lg-6 col-sm-6">
+                        <button class="btn btn--fluid btn--outline" @click="likeCarts">加入收藏</button>
+                    </div>
+                </div>
 
-        <div class="info-buy">
-          <div>商品購買須知</div>
-          <div class="icon-down">
-            <img src="./assets/img/icon/icon-down.svg" alt="" />
-          </div>
-        </div>
-        <hr />
-        <div class="lorem">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit
-            amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?
-          </p>
-        </div>
-        <div class="info-ship">
-          <div>運送相關須知</div>
-          <div class="icon-down2">
-            <img src="./assets/img/icon/icon-down.svg" alt="" />
-          </div>
-        </div>
-        <hr />
-        <div class="lorem2">
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit
-            amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-12 col-sm-12">
-      <div class="box-pink">
-        <h3>熱門推薦商品</h3>
-      </div>
-    </div>
-    <div class="col-3 col-lg-3 col-sm-4">
-      <div class="box-blue">
-        <img :src="list.imgURL[3]" />
-        <div class="item-card">
-          <div>{{list.productName}}</div>
-          <div class="pandc">
-            <div>NT {{list.price}}</div>
-            <div>收藏</div>
-          </div>
-          <div class="row mt-10 mb-10">
-            <div class="col-12 col-lg-12 col-sm-4">
-              <button class="btn btn--fluid">加入購物車</button>
+                <div class="info-buy">
+                    <div>商品購買須知</div>
+                    <div class="icon-down">
+                        <img src="./assets/img/icon/icon-down.svg" alt="" />
+                    </div>
+                </div>
+                <hr />
+                <div class="lorem">
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor
+                        sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Possimus, nesciunt?
+                    </p>
+                </div>
+                <div class="info-ship">
+                    <div>運送相關須知</div>
+                    <div class="icon-down2">
+                        <img src="./assets/img/icon/icon-down.svg" alt="" />
+                    </div>
+                </div>
+                <hr />
+                <div class="lorem2">
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor
+                        sit amet consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Possimus, nesciunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Possimus, nesciunt?
+                    </p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-3 col-lg-3 col-sm-4">
-      <div class="box-blue">
-        <img :src="list.imgURL[3]" />
-        <div class="item-card">
-          <div>{{list.productName}}</div>
-          <div class="pandc">
-            <div>NT {{list.price}}</div>
-            <div>收藏</div>
-          </div>
-          <div class="row mt-10 mb-10">
-            <div class="col-12 col-lg-12 col-sm-4">
-              <button class="btn btn--fluid">加入購物車</button>
+        <div class="col-12 col-lg-12 col-sm-12">
+            <div class="box-pink">
+                <h3>熱門推薦商品</h3>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-3 col-lg-3 col-sm-4">
-      <div class="box-blue">
-        <img :src="list.imgURL[3]" />
-        <div class="item-card">
-          <div>{{list.productName}}</div>
-          <div class="pandc">
-            <div>NT {{list.price}}</div>
-            <div>收藏</div>
-          </div>
-          <div class="row mt-10 mb-10">
-            <div class="col-12 col-lg-12 col-sm-4">
-              <button class="btn btn--fluid">加入購物車</button>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-3 col-lg-3 col-sm-4">
-      <div class="box-blue">
-        <img :src="list.imgURL[3]" />
-        <div class="item-card">
-          <div>{{list.productName}}</div>
-          <div class="pandc">
-            <div>NT {{list.price}}</div>
-            <div>收藏</div>
-          </div>
-          <div class="row mt-10 mb-10">
-            <div class="col-12 col-lg-12 col-sm-4">
-              <button class="btn btn--fluid">加入購物車</button>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 col-lg-3 col-sm-4">
+            <div class="box-blue">
+                <img :src="list.imgURL[3]" />
+                <div class="item-card">
+                    <div>{{list.productName}}</div>
+                    <div class="pandc">
+                        <div>NT {{list.price}}</div>
+                        <div>收藏</div>
+                    </div>
+                    <div class="row mt-10 mb-10">
+                        <div class="col-12 col-lg-12 col-sm-4">
+                            <button class="btn btn--fluid">加入購物車</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
