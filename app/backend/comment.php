@@ -101,7 +101,7 @@ $data = $statement->fetchAll();
                             ?>
                                 <tr>
                                     <td><?= $row["board_id"] ?></td>
-                                    <td><?= $row["member_id"] ?></td>
+                                    <td><a href="memberDetail.php?MID=<?= $row["member_id"] ?>"><?= $row["member_id"] ?><a></td>
                                     <td><?= $row["comment_content"] ?></td>
                                     <td>
                                         <?php

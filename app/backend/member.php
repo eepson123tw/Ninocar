@@ -15,12 +15,46 @@ $data = $statement->fetchAll();
 ?>
 <title>會員管理</title>
 </head>
+<script>
+    //會員名字搜尋
+    $(document).on('click', '.searchButton', function() {
+        let textbox = $('.searchTerm').val();
+        console.log(textbox);
+        $.ajax({
+            url: "searchMember.php",
+            method: "POST",
+            data: {
+                'textbox': textbox
+            },
+            dataType: "text",
+            success: function(response) {
+                //更新html內容
+                document.getElementsByClassName('tbody')[0].innerHTML = response;
+                // window.location.reload();
+            },
+            error: function(exception) {
+                alert("發生錯誤: " + exception.status);
+            }
+        });
+    });
+</script>
 
 <body>
     <?php
     include '../../app/pages/BackendPage/base.html';
     ?>
     <div class="content">
+        <!-- update-button -->
+        <div class="update_btn">
+            <div class="wrap">
+                <div class="search_bar">
+                    <input type="text" class="searchTerm" placeholder="搜尋">
+                </div>
+                <button type="text" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
         <!-- table -->
         <div class="col-lg-9">
             <div class="table-responsive">
@@ -36,7 +70,7 @@ $data = $statement->fetchAll();
                             <th>詳細</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="tbody">
                         <?php
                         foreach ($data as $index => $row) {
                         ?>

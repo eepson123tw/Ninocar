@@ -16,6 +16,24 @@ $data = $statement->fetchAll();
 </head>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#img").change(function() {
+            readURL(this);
+        });
+    });
+
     function doSubmit() {
         if (document.getElementById('name').value == '') {
             alert("請填寫[商品名稱]");
@@ -45,6 +63,10 @@ $data = $statement->fetchAll();
             alert("請選擇[分類二]");
             return false;
         }
+        if (document.getElementById('year').value == '') {
+            alert("請選擇[商品年份]");
+            return false;
+        }
     }
 </script>
 
@@ -55,7 +77,7 @@ $data = $statement->fetchAll();
     <div class="content">
         <div class="block-responsive">
             <main>
-                <form method="post" action="ProductCreateR.php" enctype="multipart/form-data">
+                <form method="post" action="productCreateR.php" enctype="multipart/form-data">
                     <div class="update mb-4">
                         <p>商品名稱：</p>
                         <input type="text" name="name" id="name">
@@ -66,12 +88,12 @@ $data = $statement->fetchAll();
                     </div>
                     <div class="update mb-4">
                         <p>商品主圖：</p>
-                        <input type="file" name="img" id="img">
+                        <input type="file" name="img" id="img" data-target="imgPreview">
                     </div>
                     <div class="update mb-4">
                         <p>商品狀態：</p>
                         <select name="productType" id="">
-                            <option value="0">預設</option>
+                            <option value="0">上架</option>
                             <option value="1">未上架</option>
                             <option value="2">刪除</option>
                         </select>
@@ -120,7 +142,7 @@ $data = $statement->fetchAll();
                     </div>
                     <div class="update mb-4">
                         <p>商品年份：</p>
-                        <input type="text" name="year">
+                        <input type="text" name="year" id="year">
                     </div>
                     <div class="update mb-4">
                         <p>商品描述：</p>
@@ -133,7 +155,7 @@ $data = $statement->fetchAll();
                 </form>
             </main>
             <div class="img-preview">
-                <img src="../assets/img/pic/userPic03.png">
+                <img id="imgPreview" src="">
             </div>
         </div>
     </div>

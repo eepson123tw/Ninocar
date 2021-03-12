@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `team1`.`product` (
   `product_price` INT NULL DEFAULT NULL COMMENT '商品價格',
   `product_points` INT NULL DEFAULT NULL COMMENT '點數售價',
   `product_des` VARCHAR(200) NULL DEFAULT NULL COMMENT '商品描述',
-  `product_type` TINYINT NOT NULL DEFAULT '0' COMMENT '商品狀態（0：預設 1：封鎖,未上架 2：刪除）',
+  `product_type` TINYINT NOT NULL DEFAULT '0' COMMENT '商品狀態（0：上架 1：封鎖,未上架 2：刪除）',
   `product_img1` VARCHAR(500) NULL DEFAULT NULL COMMENT '商品圖（去背）',
   `product_img2` VARCHAR(500) NULL DEFAULT NULL COMMENT '商品圖（cover）',
   `product_img3` VARCHAR(500) NULL DEFAULT NULL COMMENT '商品圖（back）',
