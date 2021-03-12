@@ -42,7 +42,7 @@ $data = $statement->fetchAll();
                         ?>
                             <tr>
                                 <td><?= $row["order_date"] ?></td>
-                                <td><?= $row["member_id"] ?></td>
+                                <td><a href="memberDetail.php?MID=<?= $row["member_id"] ?>"><?= $row["member_id"] ?><a></td>
                                 <td><?= $row["order_cost"] ?></td>
                                 <td><?= $row["order_points"] ?></td>
                                 <td>

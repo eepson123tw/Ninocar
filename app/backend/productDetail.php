@@ -69,7 +69,7 @@ $data = $statement->fetchAll();
             foreach ($data as $index => $row) {
             ?>
                 <main>
-                    <form method="post" action="ProductUpdateR.php" enctype="multipart/form-data">
+                    <form method="post" action="productUpdateR.php" enctype="multipart/form-data">
                         <div class="update mb-4">
                             <p>商品名稱：</p>
                             <input type="text" name="name" id="name" value="<?= $row["product_name"] ?>">
@@ -95,7 +95,7 @@ $data = $statement->fetchAll();
                                         $type = "刪除";
                                         break;
                                     default:
-                                        $type = "預設";
+                                        $type = "上架";
                                         break;
                                 }
                                 ?>
@@ -212,14 +212,14 @@ $data = $statement->fetchAll();
 
                         <div class="update mb-5">
                             <button type="submit" class="" onclick="return doSubmit();">送出</button>
-                            <a href="ProductDelete.php?PID=<?= $row["product_id"] ?>" class="ml-5" onclick="javascript: if(confirm('確定刪除?')){ return true; } else { return false; }">刪除</a>
+                            <a href="productDelete.php?PID=<?= $row["product_id"] ?>" class="ml-5" onclick="javascript: if(confirm('確定刪除?')){ return true; } else { return false; }">刪除</a>
                         </div>
                     </form>
                 </main>
                 <div class="img-preview">
                     <!-- <img src="../assets/img/pic/userPic03.png"> -->
                     <?php
-                    if ($row["product_price"] == 100 && $row["product_points"] == 0) {
+                    if ($row["product_year"] == 2021) {
                     ?>
                         <img src="../../upload/<?= $row['product_img'] ?>" alt="">
                     <?php

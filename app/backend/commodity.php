@@ -16,35 +16,12 @@ $data = $statement->fetchAll();
 <title>商品管理</title>
 </head>
 <script>
-    //搜尋
-    // $('.searchButton').click(search);
-
-    // function search(str) {
-    //     alert();
-    //     let textbox = $('.searchTerm').val();
-    //     console.log();
-    //     $.ajax({
-    //         method: "POST",
-    //         url: "search.php",
-    //         data: {
-    //             'textbox': $('.searchTerm').val()
-    //         },
-    //         dataType: "text",
-    //         success: function(response) {
-    //             //更新html內容
-    //             document.getElementsByClassName('tbody')[0].innerHTML = response;
-    //         },
-    //         error: function(exception) {
-    //             alert("發生錯誤: " + exception.status);
-    //         }
-    //     });
-    // };
-
+    //商品名搜尋
     $(document).on('click', '.searchButton', function() {
         let textbox = $('.searchTerm').val();
         console.log(textbox);
         $.ajax({
-            url: "search.php",
+            url: "searchProduct.php",
             method: "POST",
             data: {
                 'textbox': textbox
@@ -77,7 +54,7 @@ $data = $statement->fetchAll();
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <button><a href="update.php"><i class="fas fa-upload"></i>上架商品</a></button>
+            <button><a href="productCreate.php"><i class="fas fa-upload"></i>上架商品</a></button>
         </div>
         <!-- table -->
         <div class="col-lg-9">
@@ -90,7 +67,7 @@ $data = $statement->fetchAll();
                             <th>商品分類</th>
                             <th>商品金額</th>
                             <th>商品點數</th>
-                            <th>詳細</th>
+                            <th>商品狀態</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
@@ -99,18 +76,19 @@ $data = $statement->fetchAll();
                         ?>
                             <tr>
                                 <td><?= $row["product_name"] ?></td>
-                                <td>
-                                    <?php
-                                    if ($row["product_price"] == 100 && $row["product_points"] == 0) {
-                                    ?>
-                                        <img src="../../upload/<?= $row['product_img'] ?>" alt="">
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <img src="<?= $row['product_img'] ?>" alt="">
-                                    <?php
-                                    }
-                                    ?>
+                                <td><a href="productDetail.php?PID=<?= $row["product_id"] ?>">
+                                        <?php
+                                        if ($row["product_year"] == 2021) {
+                                        ?>
+                                            <img src="../../upload/<?= $row['product_img'] ?>" alt="">
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <img src="<?= $row['product_img'] ?>" alt="">
+                                        <?php
+                                        }
+                                        ?>
+                                    </a>
                                 </td>
                                 <td>
                                     <?php
@@ -145,7 +123,22 @@ $data = $statement->fetchAll();
                                     ?><?= $series ?></td>
                                 <td><?= $row["product_price"] ?></td>
                                 <td><?= $row["product_points"] ?></td>
-                                <td><a href="ProductUpdate.php?PID=<?= $row["product_id"] ?>">查看</a></td>
+                                <td>
+                                    <?php
+                                    $type = $row["product_type"];
+                                    switch ($type) {
+                                        case '1':
+                                            $type = "未上架";
+                                            break;
+                                        case '2':
+                                            $type = "刪除";
+                                            break;
+                                        default:
+                                            $type = "上架";
+                                            break;
+                                    }
+                                    ?><?= $type ?>
+                                </td>
                             </tr>
                         <?php
                         }
