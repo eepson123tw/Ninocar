@@ -311,7 +311,7 @@
                 <div>
                     <ul class="othersWorks grid">
                         <work-card  ref="workInfo1" @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" :work-total-price="450" data-id="220203" data-board-id="1614917124264"></work-card>
-                        <work-card2  @report-emit="openReportModal" value="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
+                        <work-card2 ref="workInfo2" @report-emit="openReportModal" value="370" :work-total-price="370" data-id="22310" data-board-id="1614917124274"></work-card2>                        
                         <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
                         <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card >
                         <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card >
@@ -605,10 +605,13 @@
                     this.price = vm1.$refs.workInfo1.workTotalPrice;
                     this.title = vm1.$refs.workInfo1.workTitle;
                 }
-                // else if(workIndex == 22310){
-
-                // }
-                else if(smallCardId == '55555'){
+                else if(smallCardId == '22310'){
+                    this.workImgURL = vm1.$refs.workInfo2.img;
+                    this.goodNum = vm1.$refs.workInfo2.workGood;
+                    this.commentNum = vm1.$refs.workInfo2.workComment;
+                    this.price = vm1.$refs.workInfo2.workTotalPrice;
+                    this.title = vm1.$refs.workInfo2.workTitle;
+                }else if(smallCardId == '55555'){                
                     this.workImgURL = vm1.$refs.workInfo3.img;
                     this.goodNum = vm1.$refs.workInfo3.workGood;
                     this.commentNum = vm1.$refs.workInfo3.workComment;
@@ -803,7 +806,8 @@
                     this.goodNum_plus += 1;
                     // ajax
                 },
-                openWorkModal(e){ //進入彈窗、後面固定不給滾動
+                openWorkModal(e){ 
+                    //進入彈窗、後面固定不給滾動
                     bus.$emit('work-modal-emit')
 
                     // --------------------------------------------------------------
@@ -833,11 +837,8 @@
                     // console.log(smallCardCommentNum)
                     this.workComment = smallCardCommentNum
 
-
                     smallCardId = $(this.$el).attr('data-id');
-                    console.log(smallCardId)
-                    // $('.addToCart').attr('data-id', smallCardId)
-                    // this.workId = smallCardId
+                    // console.log(smallCardId)
                },
                openMoreReply(e){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
@@ -951,7 +952,11 @@
                 postTime:{
                     default:1,
                     type:Number
-                }
+                },
+                workTotalPrice:{
+                    default:100,
+                    type:Number
+                },
             },
             data(){
                 return{
@@ -964,7 +969,7 @@
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
-                            <div class="work_pic">
+                            <div class="work_pic" @click="openWorkModal">
                                 <img :src="img" class="model" @click="openWorkModal">
                             </div>
 
@@ -1134,26 +1139,33 @@
 
                     // ajax
                 },
-                openWorkModal(e){ //進入彈窗、後面固定不給滾動
-                    // $('.mask').css({"display": "block"});
-                    // $('#factoryModal').css({"position": "fixed"});
-                    // $('#factoryModal').css({"z-index": "2010"});
-                    // ---------------------------此線以上不要了----------------------------
+                openWorkModal(e){ //這裡是work-card2
+                    //進入彈窗、後面固定不給滾動
+                    bus.$emit('work-modal-emit')
 
-                    let smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
-                    $('.workPic--big').attr('src', smallCardPicURL)
-
-                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    $('.workInfo_good').children('.work-goodNum').text(smallCardGoodNum)
-
-                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
-                    $('.workInfo_reply').children('.work-commentNum').text(smallCardCommentNum)
+                    // --------------------------------------------------------------
+                    smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
+                    // console.log(smallCardPicURL)
+                    this.workImgURL = smallCardPicURL;
 
                     let smallCardPrice = $(this.$el).attr('value');
-                    $('.work-priceNum').text(smallCardPrice)
+                    // console.log(smallCardPrice)
+                    this.workPrice = smallCardPrice;
 
-                    let smallCardId = $(this.$el).attr('data-id')
-                    $('.addToCart').attr('data-id', smallCardId)
+
+                    let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
+                    // console.log(smallCardGoodNum)
+                    this.workGood = smallCardGoodNum
+
+
+                    let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
+                    // console.log(smallCardCommentNum)
+                    this.workComment = smallCardCommentNum
+
+                    smallCardId = $(this.$el).attr('data-id');
+                    // console.log(smallCardId)
+                    // $('.addToCart').attr('data-id', smallCardId)
+                    // this.workId = smallCardId
                },
                 openMoreReply(){
                     $(this.$el).children('.work_reply').children('.hiddenSubReply').slideToggle();
