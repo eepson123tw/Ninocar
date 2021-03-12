@@ -20,20 +20,29 @@
               </span class="member__cuponText--small">{{item['couponHightLine']}}</span>
             </div>
           </li>
+
           <li class="member__cuponText">
             <div class="member__cuponContent">
               <p class="h5">【{{item['couponTitle']}}】</p>
               <p class="h4">{{item['couponText']}}</p>
-              <p
-                v-if="item.couponId =='0'"
-                class=" h4 member__cuponContent--warning "
-              >即將到期:<span> {{ timer | hoursMinutesAndSeconds }} </span></p>
-              <p
-                v-else
-                class=" h4 member__cuponContent--warning "
-              >即將到期:<span> {{item.couponDeadDate}}</span></p>
+              <transition
+                name="fade"
+                mode="out-in"
+              >
+                <p
+                  v-if="item.couponId =='0'"
+                  class=" h4 member__cuponContent--warning "
+                  key="p1"
+                >即將到期:<span> {{ timer | hoursMinutesAndSeconds }} </span></p>
+                <p
+                  v-else
+                  class=" h4 member__cuponContent--warning "
+                  key="p2"
+                >即將到期:<span> {{item.couponDeadDate}}</span></p>
+              </transition>
             </div>
           </li>
+
           <li class="member__cuponText">
             <a
               class="member__cuponBtn"

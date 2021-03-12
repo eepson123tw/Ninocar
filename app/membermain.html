@@ -20,13 +20,13 @@
     <!--  -->
     @@include('pages/MemberPage/MemberData.html')
     <!--  -->
-    <transition name="fade" mode="out-in">
-      <member_coupon></member_coupon>
-    </transition>
+
+    <member_coupon></member_coupon>
+
     <!--  -->
-    <transition name="fade" mode="out-in">
-      <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
-    </transition>
+
+    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
+
 
     <!--  -->
     @@include('pages/MemberPage/MemberPassword.html')

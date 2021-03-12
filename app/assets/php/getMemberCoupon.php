@@ -28,7 +28,7 @@
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
  
 
-    if($data != [] ){
+  if($data != [] ){
       echo json_encode($data, JSON_UNESCAPED_UNICODE);
   }else{
     echo '此帳號未註冊';

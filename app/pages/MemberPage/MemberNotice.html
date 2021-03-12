@@ -29,9 +29,16 @@
         </ul>
       </div>
     </div>
-    <div class="row member__info d-flex justify-content-around py-10">
+    <div
+      class="row member__info d-flex justify-content-around py-10"
+      v-if="orderList !=='尚未擁有任何車車'"
+    >
       <div
-        class="member__cupon  mt-5  col-5 col-lg-6"
+        class="
+      member__cupon
+      mt-5
+      col-5
+      col-lg-6"
         v-for="(item,index) of  orderList"
       >
         <ul class="d-flex justify-content-center w-100 ">
@@ -44,7 +51,7 @@
           <li class="member__cuponText">
             <div class="member__cuponContent">
               <p class="h5"> 您的訂單{{item.order_id}}已成立！</p>
-              <p class="h4">詳情請前往購買清查看！</p>
+              <p class="h4">詳情請前往購買清單查看！</p>
               <p class="h5 ">成立時間:<span> {{item.order_date}}</span></p>
               <p class="h5 "> 消費金額為：{{item.order_cost}}元！</p>
             </div>
