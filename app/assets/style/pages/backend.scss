@@ -2,6 +2,70 @@
 @import "../helpers/mixin";
 @import "../helpers/rwd";
 
+/* menu icon */
+
+.menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+  .navicon {
+    background: #333;
+    display: block;
+    height: 3px;
+    position: relative;
+    transition: background 0.2s ease-out;
+    width: 18px;
+    &::before,
+    &::after {
+      background: #333;
+      content: "";
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all 0.2s ease-out;
+      width: 100%;
+    }
+  }
+}
+
+.navicon:before {
+  top: 5px;
+}
+
+.navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.menu-btn {
+  display: none;
+}
+
+.menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
 //login
 
 .login-body {
@@ -249,7 +313,7 @@ label #sidebar_btn {
 
   .content {
     margin-left: 0;
-    margin-top: 3rem;
+    margin-top: 10rem;
     padding: 10px 20px;
     transition: 0s;
     width: 100%;
@@ -262,12 +326,14 @@ label #sidebar_btn {
   .mobile_nav {
     display: block;
     width: calc(100% - 0%);
+    position: fixed;
+    top: 70px;
   }
 
   .nav_bar {
     background: $gray-300;
     width: 100%;
-    margin-top: 70px;
+    // margin-top: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -292,6 +358,7 @@ label #sidebar_btn {
   }
 
   .mobile_nav_items {
+    opacity: 0.9;
     background: $gray-300;
     display: none;
     a {

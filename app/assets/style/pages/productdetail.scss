@@ -91,25 +91,23 @@
     display: block;
 }
 
-@media (max-width: 1920px) {
-    .car-name {
-        font-size: 8.5rem;
-        z-index: 0;
-        position: relative;
-        -webkit-text-stroke: 2px #b57700;
-        color: white;
-    }
-    .lightBox {
-        margin-bottom: 75px;
-    }
-    .lightBox .demo {
-        width: auto;
-        height: 550px;
-        position: absolute;
-        top: 275px;
-        z-index: 1;
-        cursor: pointer;
-    }
+.car-name {
+    font-size: 8.5rem;
+    z-index: 0;
+    position: relative;
+    -webkit-text-stroke: 2px #b57700;
+    color: white;
+}
+.lightBox {
+    margin-bottom: 75px;
+}
+.lightBox .demo {
+    width: auto;
+    height: 530px;
+    position: absolute;
+    top: 250px;
+    z-index: 1;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
