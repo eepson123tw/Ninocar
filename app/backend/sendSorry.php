@@ -14,44 +14,44 @@ $statement = $Util->getPDO()->prepare($sql);
 $statement->bindValue(1, $CID);
 $statement->execute();
 
-try {
-  //取得POST過來的值
-  $CID = $_POST["CID"];
+// try {
+//   //取得POST過來的值
+//   $CID = $_POST["CID"];
 
-  //建立SQL
-  $sql = "SELECT * FROM comment WHERE `comment_id` = ?";
+//   //建立SQL
+//   $sql = "SELECT * FROM comment WHERE `comment_id` = ?";
 
-  //執行
-  $statement = $Util->getPDO()->prepare($sql);
+//   //執行
+//   $statement = $Util->getPDO()->prepare($sql);
 
-  //給值
-  $statement->bindValue(1, $CID);
-  $statement->execute();
-  $data = $statement->fetchAll();
+//   //給值
+//   $statement->bindValue(1, $CID);
+//   $statement->execute();
+//   $data = $statement->fetchAll();
 
-  foreach ($data as $index => $row) {
-    echo '<td>' . $row["board_id"] . '</td>';
-    echo '<td>' . $row["member_id"] . '</td>';
-    echo '<td>' . $row["comment_content"] . '</td>';
-    $type = $row["comment_type"];
-    switch ($type) {
-      case '1':
-        $type = "封鎖";
-        break;
-      default:
-        $type = "正常";
-        break;
-    }
+//   foreach ($data as $index => $row) {
+//     echo '<td>' . $row["board_id"] . '</td>';
+//     echo '<td>' . $row["member_id"] . '</td>';
+//     echo '<td>' . $row["comment_content"] . '</td>';
+//     $type = $row["comment_type"];
+//     switch ($type) {
+//       case '1':
+//         $type = "封鎖";
+//         break;
+//       default:
+//         $type = "正常";
+//         break;
+//     }
 
-    echo '<tr>' . '<td>' . $type . '</td>';
-    echo '<input type="hidden" name="CID" value="' . $row["comment_id"] . '"/>';
-    echo '<input type="hidden" name="MID" value="' . $row["member_id"] . '"/>';
-    echo '<td>' . '<button type="button" class="alert" id="' . $row["member_id"] . '">' . '<i class="fas fa-exclamation-circle">' . '</i>' . '</button>' . '</td>';
-    echo '<td>' . '<a href="commentUpdate.php?CID=' . $row["comment_id"] . '">' . '查看' . '</a>' . '</td>' . '</tr>';
-  }
-} catch (PDOException $e) {
-  echo 'Connection failed: ' . $e->getMessage();
-}
+//     echo '<tr>' . '<td>' . $type . '</td>';
+//     echo '<input type="hidden" name="CID" value="' . $row["comment_id"] . '"/>';
+//     echo '<input type="hidden" name="MID" value="' . $row["member_id"] . '"/>';
+//     echo '<td>' . '<button type="button" class="alert" id="' . $row["member_id"] . '">' . '<i class="fas fa-exclamation-circle">' . '</i>' . '</button>' . '</td>';
+//     echo '<td>' . '<a href="commentUpdate.php?CID=' . $row["comment_id"] . '">' . '查看' . '</a>' . '</td>' . '</tr>';
+//   }
+// } catch (PDOException $e) {
+//   echo 'Connection failed: ' . $e->getMessage();
+// }
 
 require_once("../assets/php/PHPMailer/PHPMailerAutoload.php");
 

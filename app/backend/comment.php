@@ -32,8 +32,9 @@ $data = $statement->fetchAll();
                 dataType: "text",
                 success: function(response) {
                     //更新html內容
-                    document.getElementById('comment')[1].innerHTML = response;
-                    console.log(response);
+                    // document.getElementById('comment')[1].innerHTML = response;
+                    // console.log(response);
+                    window.location.reload();
                 },
                 error: function(exception) {
                     alert("發生錯誤: " + exception.status);
@@ -59,8 +60,9 @@ $data = $statement->fetchAll();
                 dataType: "text",
                 success: function(response) {
                     //更新html內容
-                    document.getElementById('comment')[1].innerHTML = response;
-                    console.log(response);
+                    // document.getElementById('comment')[1].innerHTML = response;
+                    // console.log(response);
+                    window.location.reload();
                 },
                 error: function(exception) {
                     alert("發生錯誤: " + exception.status);
