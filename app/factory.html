@@ -597,7 +597,6 @@
 
                 bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
 
-
                 this.cartList = JSON.parse(localStorage.getItem('cartsList'))||[];
             },
             updated() {
@@ -949,6 +948,10 @@
 
         Vue.component(('work-card2'),{
             props:{
+                workTitle:{
+                    default:"天栗鼠計程車",
+                    type:String
+                },
                 img:{
                     default:"./assets/img/pic/model06.png",
                     type:String
@@ -1227,7 +1230,6 @@
                     // console.log(commentContentL)
                     if(commentContentL > 0){
                         this.commentNum_plus += 1;
-
                     } 
                },
             },
@@ -2255,12 +2257,10 @@
         document.body.addEventListener('click', (e) => {
             const target = event.target
             if(target.matches(`.addToCart`)){
-                console.log("把我的作品加到購物車 "+allIndex)
+                // console.log("把我的作品加到購物車 " + allIndex)
                 
                 let cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
-                console.log(cartList)
 
-                //這裡
                 if(allIndex == '000023' || allIndex == '000032'){
                     imgSrc = './assets/img/pic/model001.png'
                 }else if(allIndex == '00401'){
