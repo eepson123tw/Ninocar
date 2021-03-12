@@ -1,4 +1,4 @@
-<div class="container" v-if="userData.name == '匿名' ">
+<div class="container" v-if="userData.gender == '0' ">
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
@@ -143,7 +143,7 @@
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
-      <button class="btn btn-small" @click="handleInput">儲存</button>
+      <button class="btn btn-small btn--disabled">請先登入</button>
     </section>
   </div>
   <div class="row  member__info py-10 mb-5">

@@ -329,6 +329,10 @@
         addressShow: false,
         previewImage: null,
         defaultIndex: 0,
+        checkLogin: {
+          text: '儲存',
+          class: 'btn btn-small',
+        },
       },
       methods: {
         setDefaultIndex(val) {
@@ -683,7 +687,16 @@
           console.log(error)
         })
 
-        // console.log(this.userData.birthday !== null);
+        if (this.memberId == null) {
+
+          this.checkLogin = {
+
+            text: '請先登入',
+            class: 'btn btn-small btn--disabled',
+
+          };
+
+        }
 
 
       }

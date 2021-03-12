@@ -216,6 +216,12 @@
 							</ul>
 						</div>
 						<button
+							v-if="memberId == null"
+							@click="pageHandler"
+							class="btn  btn--fluid btn--disabled mb-5"
+						>請先登入</button>
+						<button
+							v-else
 							@click="pageHandler"
 							class="btn  btn--fluid mb-5"
 						>確認結帳</button>

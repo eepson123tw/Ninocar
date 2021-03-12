@@ -5,7 +5,7 @@
       <section class="member__data d-flex w-100">
         <h2 id="memberAddress">我的地址</h2>
         <button
-          class="btn btn-small"
+          :class="checkLogin"
           @click="openModal"
         >{{btn}}</button>
       </section>
@@ -131,12 +131,15 @@
         defaultIndex: 0,
         localAddress: null,
         btn: '新增地址',
+        checkLogin: "btn btn-small",
       }
     },
     methods: {
       openModal() {
 
-
+        if (this.memberId == null) {
+          return
+        }
         if (this.addressList.length == 3) {
           this.btn = `地址不得超過3筆`;
           return
@@ -144,9 +147,6 @@
         } else {
           this.$emit('open-handler', true);
         }
-
-
-
       },
       defaultHandler(e, index) {
         this.defaultIndex = index;
@@ -185,7 +185,10 @@
       }
     },
     mounted() {
-
+      if (this.memberId == null) {
+        this.btn = `請先登入`;
+        this.checkLogin = `btn btn-small btn--disabled`;
+      }
 
       // const params = new URLSearchParams()
       // params.append('ID', this.memberId)
