@@ -180,6 +180,8 @@ label #sidebar_btn {
     overflow-x: auto;
     margin: 0 auto;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
     button {
       border-radius: 5px;
       cursor: pointer;
@@ -192,6 +194,24 @@ label #sidebar_btn {
       &:hover {
         background: $secondary-dark;
       }
+    }
+  }
+}
+.wrap {
+  display: flex;
+  .search_bar {
+    input {
+      padding: 0.7rem 1rem;
+      border: $gray-300;
+      background: $gray-300;
+      font-size: 0.9rem;
+    }
+  }
+  button {
+    padding: 0.5rem 0.8rem !important;
+    i {
+      margin-right: 0 !important;
+      font-size: 1rem;
     }
   }
 }
@@ -473,5 +493,19 @@ td {
         }
       }
     }
+  }
+
+  .update_btn {
+    .wrap {
+      margin-bottom: 1rem;
+      .search_bar {
+        flex-grow: 100;
+        input {
+          width: 100%;
+        }
+      }
+    }
+    // flex-wrap: wrap;
+    flex-flow: column;
   }
 }
