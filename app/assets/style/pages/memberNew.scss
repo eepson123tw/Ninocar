@@ -308,8 +308,55 @@
   }
   &__orderImg {
     width: 100%;
+    display: flex;
+    align-items: center;
+    &--mid {
+      width: 20%;
+      margin-left: 20%;
+      margin-right: 10%;
+    }
+  }
+  &__orderListImg {
+    width: 200px;
     height: 200px;
-    padding-left: 30%;
+    border-radius: 20px;
+  }
+  &__blockLeft {
+    background-color: $primary;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    @include rwd-xs {
+      background-color: #fff
+    }
+  }
+  &__orderListText {
+    @extend .h3;
+    &--small {
+      @extend .h4;
+      color: $gray-700;
+    }
+    &--mid {
+      @extend .h4;
+      color: $gray-900;
+    }
+  }
+  &__blockMid {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__blockRight {
+    @include rwd-xs {
+      background-color: #fff
+    }
+    background-color:$gray-300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
 
