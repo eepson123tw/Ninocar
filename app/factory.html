@@ -19,7 +19,7 @@
         <div class="container containerMain">
             <report-modal></report-modal>
             <report-success-modal></report-success-modal>
-            <work-modal></work-modal>
+            <work-modal ref="workInfoF"></work-modal>
 
                 <div class="intro">
                     <div class="intro_pic col-7 col-lg-4 col-sm-3">
@@ -495,7 +495,7 @@
                         </div>
                     
                         <div class="work_right col-6 col-lg-3">
-                            <img src="./assets/img/icon/icon-close.svg" class="closeIcon" @click="isWorkModalShow=false, click=0">
+                            <img src="./assets/img/icon/icon-close.svg" class="closeIcon" @click="closeWorkModal">
                             <div class="work_author">
                                 <img src="./assets/img/pic/userPic.png"  class="userPic--big">
                                 <div class="userContent">
@@ -612,10 +612,8 @@
             },
              //就是這裡，如果沒有if(this.click < 1)會一直把this.goodNum +=1洗掉，但加了之後
              //變成點讚之後打開另一個work-card的work-modal會走不進this.click < 1
-             //完成了
             updated() {
                 if(smallCardId == '220203'){
-                    // this.click = 0
                     if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo1.img;
                         this.goodNum = vm1.$refs.workInfo1.workGood;
@@ -673,27 +671,44 @@
             },
             methods:{
                 coloredIcon(e){
-                    this.is_icon_color = true
+                    this.is_icon_color = true;
                 },
                 noColorIcon(e){
-                    this.is_icon_color = false
+                    this.is_icon_color = false;
                 },
                 addGoodNum(e){
-                    this.click += 1
+                    this.click += 1;
 
-                    this.goodNum += 1
-                    console.log(this.goodNum)
-                    
-                    
+                    this.goodNum += 1;
                 },
                 addCartList(){
-                    let productArr = {name:this.title, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:this.workImgURL, price:this.price, productNum: 1, totalPrice: this.price, points:0, totalPointCost:0}
+                    let productArr = {name:this.title, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:this.workImgURL, price:this.price, productNum: 1, totalPrice: this.price, points:0, totalPointCost:0};
                     
-                    this.cartList.push(productArr)
+                    this.cartList.push(productArr);
 
-                    let cartJson = JSON.stringify(this.cartList)
+                    let cartJson = JSON.stringify(this.cartList);
 
-                    localStorage.setItem('cartsList', cartJson)
+                    localStorage.setItem('cartsList', cartJson);
+                },
+                closeWorkModal(){
+                    console.log('close work-modal')
+                    this.isWorkModalShow = false;
+                    this.click = 0;
+                    // 這裡
+
+                    if(this.title == '白帥帥'){
+                        vm1.$refs.workInfo1.goodNum_plus = this.goodNum;
+                    }else if(this.title == '天栗鼠計程車'){
+                        vm1.$refs.workInfo2.goodNum_plus = this.goodNum;
+                    }else if(this.title == '賣紫薯的車'){
+                        vm1.$refs.workInfo3.goodNum_plus = this.goodNum;
+                    }else if(this.title == '西瓜轎車'){
+                        vm1.$refs.workInfo4.goodNum_plus = this.goodNum;
+                    }else if(this.title == '賣橘子的車'){
+                        vm1.$refs.workInfo5.goodNum_plus = this.goodNum;
+                    }else if(this.title == '賣地瓜的車'){
+                        vm1.$refs.workInfo6.goodNum_plus = this.goodNum;
+                    }
                 },
             }
             
@@ -856,16 +871,8 @@
                     // ajax
                 },
                 openWorkModal(e){ 
-                    //進入彈窗、後面固定不給滾動
+                    //進入彈窗
                     bus.$emit('work-modal-emit')
-
-                    // --------------------------------------------------------------
-                    // console.log(vm1.$refs.workInfo1.img)  //model01.png
-                    // console.log(vm1.$refs.workInfo1.workTotalPrice)  //450
-                    // console.log(vm1.$refs.workInfo1.workTitle)  //白帥帥
-                    // console.log(vm1.$refs.workInfo1.goodNum)  //24
-                    // console.log(vm1.$refs.workInfo1.commentNum)  //1
-                    // console.log(vm1.$refs.workInfo1.workIndex) //220203
 
                     // --------------------------------------------------------------
                     smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
@@ -879,14 +886,14 @@
                     
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
                     // console.log(smallCardGoodNum)
-                    // this.workGood = smallCardGoodNum
-                    this.workGood = parseInt(smallCardGoodNum)//這裡
+                    this.workGood = parseInt(smallCardGoodNum)
                     
 
                     let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
                     // console.log(smallCardCommentNum)
                     this.workComment = smallCardCommentNum
 
+                    //全域變數，用來判定打開work-modal時要帶入哪個work-card的資料
                     smallCardId = $(this.$el).attr('data-id');
                     // console.log(smallCardId)
                },
@@ -1194,8 +1201,8 @@
 
                 },
                 openWorkModal(e){ //這是work-card2
-                    //進入彈窗、後面固定不給滾動
-                    bus.$emit('work-modal-emit')
+                    //進入彈窗
+                    bus.$emit('work-modal-emit');
 
                     // --------------------------------------------------------------
                     smallCardPicURL = $(this.$el).children('.work_pic').children('img').attr('src');
@@ -1208,13 +1215,13 @@
 
 
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    console.log(smallCardGoodNum)
-                    this.workGood = parseInt(smallCardGoodNum)
+                    // console.log(smallCardGoodNum)
+                    this.workGood = parseInt(smallCardGoodNum);
 
 
                     let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
                     // console.log(smallCardCommentNum)
-                    this.workComment = smallCardCommentNum
+                    this.workComment = smallCardCommentNum;
 
                     smallCardId = $(this.$el).attr('data-id');
                     // console.log(smallCardId)
@@ -1290,334 +1297,83 @@
             },
             methods: {
                 showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
-                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"});
 
-                    $('.workButton').not(e.target).css({"background": "none"})
+                    $('.workButton').not(e.target).css({"background": "none"});
 
-                    $('.othersWorks').css({"display": "flex"})
-                    $('.mywork').css({"display": "none"})
+                    $('.othersWorks').css({"display": "flex"});
+                    $('.mywork').css({"display": "none"});
                 },
                 showMywork(e){ //點選我的作品時會標示在哪裡，我的作品會出現、大家作品會隱藏
-                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"})
+                    $(e.target).css({"background": "linear-gradient(transparent 60%, #FADD61 60%)"});
 
-                    $('.workButton').not(e.target).css({"background": "none"})
+                    $('.workButton').not(e.target).css({"background": "none"});
 
-                    $('.othersWorks').css({"display": "none"})
-                    $('.mywork').css({"display": "block"})
+                    $('.othersWorks').css({"display": "none"});
+                    $('.mywork').css({"display": "block"});
                 },
                 make(e){ //點開始製作後出現製作區域、順便清空整個canvas
-                    $('.previousStep').addClass('invisible')
+                    $('.previousStep').addClass('invisible');
 
-                    $('.progressBar').css({"display": "block"})
+                    $('.progressBar').css({"display": "block"});
 
-                    $('.circle:first').css({"background-color": "#E59807"})
+                    $('.circle:first').css({"background-color": "#E59807"});
 
-                    $('.intro').css({"display": "none"})
+                    $('.intro').css({"display": "none"});
 
-                    $('.makeCar').css({"display": "block"})
+                    $('.makeCar').css({"display": "block"});
 
                     // console.log('清空空')
-                    context.clearRect(0, 0, 400, 200)
-                    contextA1.clearRect(0, 0, 400, 200)
-                    contextA2.clearRect(0, 0, 400, 200)
-                    contextA3.clearRect(0, 0, 400, 200)
-                    $(e.target).removeClass('finish')
+                    context.clearRect(0, 0, 400, 200);
+                    contextA1.clearRect(0, 0, 400, 200);
+                    contextA2.clearRect(0, 0, 400, 200);
+                    contextA3.clearRect(0, 0, 400, 200);
+                    $(e.target).removeClass('finish');
                 },
                 closeModal(){ //關掉彈窗
                     // console.log('關掉')
-                    // $('.modal').removeClass('modal-active');
                     this.isModalShow = false;
                 },
                 toNextStep(){ //點下一步進到下一個步驟、最後一步時生成base64
                     this.countStep += 1;
-                    // console.log('下')
                     // console.log(this.countStep)
 
                     if(this.countStep & 5 > 0){
-                        $('.putMemberId').val(this.$store.state.memberId)
+                        $('.putMemberId').val(this.$store.state.memberId);
                     }
                     // console.log("nextStep is clicked! countStep: "+ this.countStep)
-                    // console.log(this.docW)
-                
-                    // if ($('.nextStep').hasClass('btn--disabled')) {
-                    
-                    //     $('.pleaseSelect').css({"display": "block"})
-                    
-                    //     setTimeout(() => {
-                    //         $('.pleaseSelect').css({"display": "none"})
-                    //     }, 1000);
-                    // } else {
-                    //     $('.previousStep').removeClass('invisible')
-                    
-                    //     this.countStep += 1;
-                    //     $('.shapeCard').css({"display": "none"})
-                    
-                    //     if (this.countStep % 5 == 1) {
-                    //         console.log(this.countStep)
-                    //         $('.nextStep').addClass('btn--disabled')
-                        
-                    //         //進入選顏色
-                    //         $('.colorCards').css({"display": "flex"})
-                    //         $('.colorCard').css({"display": "block"})
-                        
-                    //         //提醒內容變更
-                    //         $('.pleaseSelect').text('請先選擇烤漆才能進入下一步喔')
-                        
-                    //         //進度條、圓圈變色
-                    //         $('.content:nth-child(2) .circle').addClass('circle--able')
-                    //         $('.content:nth-child(2) .circle').addClass('circle--active')
-                        
-                    //         if (this.docW > 1003) {
-                    //             $('.bar-front').width(240)
-                    //         } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(220)
-                    //         }
-                        
-                    //     } else if (this.countStep % 5  == 2) {
-                    //         console.log(this.countStep)
-                        
-                    //         $('.nextStep').addClass('btn--disabled')
-                        
-                    //         //進入選輪子
-                    //         $('.colorCard').css({"display": "none"})
-                        
-                    //         $('.tireCards').css({"display": "flex"})
-                    //         $('.tireCard').css({"display": "block"})
-                        
-                    //         //提醒內容變更
-                    //         $('.pleaseSelect').text('請先選擇輪胎才能進入下一步喔')
-                        
-                    //         //進度條變色
-                    //         $('.content:nth-child(3) .circle').addClass('circle--able')
-                    //         $('.content:nth-child(3) .circle').addClass('circle--active')
-                        
-                    //         if (this.docW > 1003) {
-                    //             $('.bar-front').width(480)
-                    //         } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(440)
-                    //         }
-                        
-                    //     } else if (this.countStep % 5  == 3) {
-                    //         if(this.shapeIndex != 0){
-                    //             console.log('讓尾翼不能選')
-                    //             $('.selectA6').addClass('btn--disabled')
-                    //             $('.selectA6').removeClass('btn--outline')
-                    //             $('.selectA6').css({"pointer-events":"none"})
-                    //         }
-                        
-                    //         console.log(this.countStep)
-                        
-                    //         $('.nextStep').addClass('btn--disabled')
-                        
-                    //         //進入選配件
-                    //         $('.tireCard').css({"display": "none"})
-                        
-                    //         //提醒內容變更
-                    //         $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
-                        
-                    //         $('.accessoryCards').css({"display": "flex"})
-                    //         $('.accessoryCard').css({"display": "block"
-                    //         })
-                        
-                    //         //進度條、圓圈變色
-                    //         $('.content:nth-child(4) .circle').addClass('circle--able')
-                    //         $('.content:nth-child(4) .circle').addClass('circle--active')
-                        
-                        
-                    //         if (this.docW > 1003) {
-                    //             $('.bar-front').width(730)
-                    //         } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(660)
-                    //         }
-                    //     } else if (this.countStep % 5 == 4) {
-                    //         console.log(this.countStep)
-                        
-                    //         $('.nextStep').addClass('btn--disabled').text('完成')
-                    //         $('.nextStep').addClass('finish')
-                        
-                    //         $('.selectArea').css({"display": "none"})
-                        
-                    //         $('.giveName').css({
-                    //             "display": "flex",
-                    //             "justify-content": "space-between"
-                    //         })
-                        
-                    //         //左右紐消失
-                    //         $('.selectBtn').css({"display": "none"})
-                        
-                    //         //提醒內容變更
-                    //         $('.pleaseSelect').text('請先填寫完資料才能完成作品喔')
-                        
-                    //         //進度條、圓圈變色
-                    //         $('.content:nth-child(5) .circle').addClass('circle--able')
-                    //         $('.content:nth-child(5) .circle').addClass('circle--active')
-                        
-                    //         if(this.docW > 1003){
-                    //             $('.bar-front').width(960) 
-                    //         }else if(this.docW <= 1003){
-                    //             $('.bar-front').width(840) 
-                    //         }
-                    //         //base64
-                    //         dataURL = document.querySelector('.canvas').toDataURL();
-                    //         dataURLA1 = document.querySelector('.canvasA1').toDataURL();
-                    //         dataURLA2 = document.querySelector('.canvasA2').toDataURL();
-                    //         dataURLA3 = document.querySelector('.canvasA3').toDataURL();
-                    //         console.log(dataURL)
-                    //     }
-                    // }
                 },
                 toPreviousStep(){ //點上一步回上一步
                     this.countStep -= 1;
-                    console.log('上')
-                    console.log(this.countStep)
+                    // console.log('上');
+                    console.log(this.countStep);
                     // // console.log("previousStep is clicked! countStep: " + this.countStep)
-
-                    // if (this.countStep % 5 == 1) {
-                    //     $('.colorCards').css({"display": "none"})
-                    //     $('.shapeCards').css({"display": "flex"})
-                    //     $('.shapeCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
-                    
-                    //     $('.previousStep').addClass('invisible')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(0)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(0)
-                    //     }
-                    // } else if (this.countStep % 5 == 2) {
-                    //     $('.tireCards').css({"display": "none"})
-                    //     $('.colorCards').css({"display": "flex"})
-                    //     $('.colorCard').css({"display": "block"})
-
-                    //     $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
-                    //     $(this).removeClass('invisible')
-                    
-                    //     $('.nextStep').removeClass('btn--disabled')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(240)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(220)
-                    //     }
-                    // } else if (this.countStep % 5 == 3) {
-                    //     $('.accessoryCards').css({"display": "none"})
-                    //     $('.tireCards').css({"display": "flex"})
-                    //     $('.tireCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
-                    //     $('.nextStep').removeClass('btn--disabled')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(480)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(440)
-                    //     }
-                    // } else if (this.countStep % 5 == 4) {
-                    //     $('.giveName').css({"display": "none"})
-                    //     $('.selectArea').css({"display": "block"})
-                    //     $('.accessoryCards').css({"display": "flex"})
-                    //     $('.accessoryCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(730)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(660)
-                    //     }
-                    // }else{//countStep % 5 == 4
-                    //     $('.giveName').css({"display": "none"})
-                    //     $('.selectArea').css({"display": "block"})
-                    //     $('.accessoryCards').css({"display": "block"})
-                    // }
-
-                        // 舊的
-                    // if (this.countStep % 5 == 0) {
-                    //     $('.colorCards').css({"display": "none"})
-                    //     $('.shapeCards').css({"display": "flex"})
-                    //     $('.shapeCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(2) .circle').css({"background-color": "#D8D8D8"})
-                    
-                    //     $('.previousStep').addClass('invisible')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(0)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(0)
-                    //     }
-                    // } else if (this.countStep % 5 == 1) {
-                    //     $('.tireCards').css({"display": "none"})
-                    //     $('.colorCards').css({"display": "flex"})
-                    //     $('.colorCard').css({"display": "block"})
-
-                    //     $('.content:nth-child(3) .circle').css({"background-color": "#D8D8D8"})
-                    //     $(this).removeClass('invisible')
-                    
-                    //     $('.nextStep').removeClass('btn--disabled')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(240)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(220)
-                    //     }
-                    // } else if (this.countStep % 5 == 2) {
-                    //     $('.accessoryCards').css({"display": "none"})
-                    //     $('.tireCards').css({"display": "flex"})
-                    //     $('.tireCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(4) .circle').css({"background-color": "#D8D8D8"})
-                    //     $('.nextStep').removeClass('btn--disabled')
-                    
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(480)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(440)
-                    //     }
-                    // } else if (this.countStep % 5 == 3) {
-                    //     $('.giveName').css({"display": "none"})
-                    //     $('.selectArea').css({"display": "block"})
-                    //     $('.accessoryCards').css({"display": "flex"})
-                    //     $('.accessoryCard').css({"display": "block"})
-                    
-                    //     $('.content:nth-child(5) .circle').css({"background-color": "#D8D8D8"})
-                    //     if (this.docW > 1003) {
-                    //             $('.bar-front').width(730)
-                    //     } else if (this.docW <= 1003) {
-                    //             $('.bar-front').width(660)
-                    //     }
-                    // }else{//countStep % 5 == 4
-                    //     $('.giveName').css({"display": "none"})
-                    //     $('.selectArea').css({"display": "block"})
-                    //     $('.accessoryCards').css({"display": "block"})
-                    // }
                 },
                 getCircleIndex(e){
                     circleIndex = $(e.target).parent().index();
-                    // console.log("circleIndex: " + circleIndex)
+                    // console.log("circleIndex: " + circleIndex);
                 },
                 moveRight(){
                     this.countL += 1;
 
                     let distanceToLeft = $('.selectArea').position().left;
-                    console.log(distanceToLeft)
-                    console.log(this.countStep)
+                    console.log(distanceToLeft);
+                    console.log(this.countStep);
 
                     if (this.docW <= 992) {
                         if (this.countStep < 3 && distanceToLeft > -430) {
-                            console.log('R1')
+                            // console.log('R1');
                             $('.selectArea').animate({left: '-=430'});
                         } else if (this.countStep == 3 && distanceToLeft > -2100) {
-                            console.log('R2')
+                            // console.log('R2');
                             $('.selectArea').animate({left: '-=410'});
                         }
                     } else {
                         if (this.countStep < 3 && distanceToLeft > 10) {
-                            console.log('L1')
+                            // console.log('L1')
                             $('.selectArea').animate({left: '-=410'});
                         } else if (this.countStep >= 3 && distanceToLeft > -500) {
-                            console.log('L2')
+                            // console.log('L2')
                             $('.selectArea').animate({left: '-=410'});
                         }
                     }
@@ -1627,15 +1383,15 @@
                     // console.log('countR: '+ this.countR);
                     // console.log('docW: '+ docW)
 
-                    let shapeLength = $('.shapeCard').length
+                    let shapeLength = $('.shapeCard').length;
                     // console.log(shapeLength)
 
-                    let colorLength = $('.selectColor').length
+                    let colorLength = $('.selectColor').length;
                     // console.log(colorLength)
                     // console.log("countStep:  " + countStep)
 
                     let distanceToLeft = $('.selectArea').position().left;
-                    console.log(distanceToLeft)
+                    console.log(distanceToLeft);
 
                     if (this.docW <= 992) {
                         if (this.countStep == 0 && distanceToLeft < 3) {
@@ -1670,7 +1426,7 @@
             computed:{
                 //從store裡拿東西出來
                 memberId(){
-                    return this.$store.state.memberId
+                    return this.$store.state.memberId;
                 }
             },
 
@@ -1713,7 +1469,7 @@
                     // ajax
                 },
                 closeModal(){
-                    console.log('關掉喔')
+                    // console.log('關掉喔')
                     // $('.modal').removeClass('modal-active');
                     $('.modal').css({"display":"none"});
                 }
