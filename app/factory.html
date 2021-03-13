@@ -495,7 +495,7 @@
                         </div>
                     
                         <div class="work_right col-6 col-lg-3">
-                            <img src="./assets/img/icon/icon-close.svg" class="closeIcon" @click="isWorkModalShow=false">
+                            <img src="./assets/img/icon/icon-close.svg" class="closeIcon" @click="isWorkModalShow=false, click=0">
                             <div class="work_author">
                                 <img src="./assets/img/pic/userPic.png"  class="userPic--big">
                                 <div class="userContent">
@@ -615,27 +615,24 @@
              //完成了
             updated() {
                 if(smallCardId == '220203'){
+                    // this.click = 0
                     if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo1.img;
                         this.goodNum = vm1.$refs.workInfo1.workGood;
                         this.commentNum = vm1.$refs.workInfo1.workComment;
                         this.price = vm1.$refs.workInfo1.workTotalPrice;
                         this.title = vm1.$refs.workInfo1.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
                     }
                 }
                 else if(smallCardId == '22310'){
-                    
                     if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo2.img;
                         this.goodNum = vm1.$refs.workInfo2.workGood;
                         this.commentNum = vm1.$refs.workInfo2.workComment;
                         this.price = vm1.$refs.workInfo2.workTotalPrice;
                         this.title = vm1.$refs.workInfo2.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
                     }
+
                 }else if(smallCardId == '55555'){       
                     if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo3.img;
@@ -643,48 +640,36 @@
                         this.commentNum = vm1.$refs.workInfo3.workComment;
                         this.price = vm1.$refs.workInfo3.workTotalPrice;
                         this.title = vm1.$refs.workInfo3.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
-                    }         
+                    }
 
                 }
                 else if(smallCardId == '22111'){
-                    if(click < 1){
+                    if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo4.img;
                         this.goodNum = vm1.$refs.workInfo4.workGood;
                         this.commentNum = vm1.$refs.workInfo4.workComment;
                         this.price = vm1.$refs.workInfo4.workTotalPrice;
                         this.title = vm1.$refs.workInfo4.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
                     }
 
                 }else if(smallCardId == '112303'){
-                    if(click < 1){
+                    if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo5.img;
                         this.goodNum = vm1.$refs.workInfo5.workGood;
                         this.commentNum = vm1.$refs.workInfo5.workComment;
                         this.price = vm1.$refs.workInfo5.workTotalPrice;
                         this.title = vm1.$refs.workInfo5.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
                     }
 
                 }else if(smallCardId == '0033345'){
-                    if(click < 1){
+                    if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo6.img;
                         this.goodNum = vm1.$refs.workInfo6.workGood;
                         this.commentNum = vm1.$refs.workInfo6.workComment;
                         this.price = vm1.$refs.workInfo6.workTotalPrice;
                         this.title = vm1.$refs.workInfo6.workTitle;
-                    }else if(this.click > 0){
-                        this.click = 0
                     }
-
                 }
-
-                // console.log(this.goodNum)
-
             },
             methods:{
                 coloredIcon(e){
