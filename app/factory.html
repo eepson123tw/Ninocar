@@ -624,7 +624,6 @@
                     }else if(this.click > 0){
                         this.click = 0
                     }
-                    console.log('as')
                 }
                 else if(smallCardId == '22310'){
                     
@@ -634,13 +633,9 @@
                         this.commentNum = vm1.$refs.workInfo2.workComment;
                         this.price = vm1.$refs.workInfo2.workTotalPrice;
                         this.title = vm1.$refs.workInfo2.workTitle;
-                        console.log('<1')
                     }else if(this.click > 0){
                         this.click = 0
-                        console.log('>0')
                     }
-                    console.log('ad')
-
                 }else if(smallCardId == '55555'){       
                     if(this.click < 1){
                         this.workImgURL = vm1.$refs.workInfo3.img;
@@ -654,23 +649,38 @@
 
                 }
                 else if(smallCardId == '22111'){
-                    this.workImgURL = vm1.$refs.workInfo4.img;
-                    this.goodNum = vm1.$refs.workInfo4.workGood;
-                    this.commentNum = vm1.$refs.workInfo4.workComment;
-                    this.price = vm1.$refs.workInfo4.workTotalPrice;
-                    this.title = vm1.$refs.workInfo4.workTitle;
+                    if(click < 1){
+                        this.workImgURL = vm1.$refs.workInfo4.img;
+                        this.goodNum = vm1.$refs.workInfo4.workGood;
+                        this.commentNum = vm1.$refs.workInfo4.workComment;
+                        this.price = vm1.$refs.workInfo4.workTotalPrice;
+                        this.title = vm1.$refs.workInfo4.workTitle;
+                    }else if(this.click > 0){
+                        this.click = 0
+                    }
+
                 }else if(smallCardId == '112303'){
-                    this.workImgURL = vm1.$refs.workInfo5.img;
-                    this.goodNum = vm1.$refs.workInfo5.workGood;
-                    this.commentNum = vm1.$refs.workInfo5.workComment;
-                    this.price = vm1.$refs.workInfo5.workTotalPrice;
-                    this.title = vm1.$refs.workInfo5.workTitle;
+                    if(click < 1){
+                        this.workImgURL = vm1.$refs.workInfo5.img;
+                        this.goodNum = vm1.$refs.workInfo5.workGood;
+                        this.commentNum = vm1.$refs.workInfo5.workComment;
+                        this.price = vm1.$refs.workInfo5.workTotalPrice;
+                        this.title = vm1.$refs.workInfo5.workTitle;
+                    }else if(this.click > 0){
+                        this.click = 0
+                    }
+
                 }else if(smallCardId == '0033345'){
-                    this.workImgURL = vm1.$refs.workInfo6.img;
-                    this.goodNum = vm1.$refs.workInfo6.workGood;
-                    this.commentNum = vm1.$refs.workInfo6.workComment;
-                    this.price = vm1.$refs.workInfo6.workTotalPrice;
-                    this.title = vm1.$refs.workInfo6.workTitle;
+                    if(click < 1){
+                        this.workImgURL = vm1.$refs.workInfo6.img;
+                        this.goodNum = vm1.$refs.workInfo6.workGood;
+                        this.commentNum = vm1.$refs.workInfo6.workComment;
+                        this.price = vm1.$refs.workInfo6.workTotalPrice;
+                        this.title = vm1.$refs.workInfo6.workTitle;
+                    }else if(this.click > 0){
+                        this.click = 0
+                    }
+
                 }
 
                 // console.log(this.goodNum)
