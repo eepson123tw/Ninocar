@@ -452,9 +452,16 @@
         
         //作品大彈窗
         Vue.component('work-modal',{
+            props:{
+                goodN:{
+                    default:0,
+                    type:Number
+                }
+            },
             data(){
                 return{
                     goodNum:null,
+                    // goodNum:this.goodN,
                     commentNum:null,
                     isWorkModalShow:false,
                     is_icon_color:false,
@@ -462,6 +469,7 @@
                     price:'',
                     title:'',
                     cartList:[],
+                    click:null,
                 }
             },
             template:`    
@@ -509,7 +517,7 @@
                                         <path d="M3.375,15.75H8.87V34.982H3.375Z" transform="translate(733.625 282.987)" fill="#E59807" :class="{'pin--secondary':is_icon_color === true}"/>
                                         </g>
                                     </svg>
-                                    <p  class="work-goodNum h3" :v-text="goodNum">{{goodNum}}</p>
+                                    <p  class="work-goodNum h3" >{{goodNum}}</p>
                                 </div>
                                 <div class="workInfo_reply">                                   
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 52 52" class="icon commentIcon">
@@ -598,27 +606,52 @@
                 bus.$on('send-work-img', () => this.workImgURL = comp1.workImgURL);
 
                 this.cartList = JSON.parse(localStorage.getItem('cartsList'))||[];
+
+                // this.click = vm1.$refs.workInfo1.clickN;
+                
             },
+             //就是這裡，如果沒有if(this.click < 1)會一直把this.goodNum +=1洗掉，但加了之後
+             //變成點讚之後打開另一個work-card的work-modal會走不進this.click < 1
+             //完成了
             updated() {
                 if(smallCardId == '220203'){
-                    this.workImgURL = vm1.$refs.workInfo1.img;
-                    this.goodNum = vm1.$refs.workInfo1.workGood;
-                    this.commentNum = vm1.$refs.workInfo1.workComment;
-                    this.price = vm1.$refs.workInfo1.workTotalPrice;
-                    this.title = vm1.$refs.workInfo1.workTitle;
+                    if(this.click < 1){
+                        this.workImgURL = vm1.$refs.workInfo1.img;
+                        this.goodNum = vm1.$refs.workInfo1.workGood;
+                        this.commentNum = vm1.$refs.workInfo1.workComment;
+                        this.price = vm1.$refs.workInfo1.workTotalPrice;
+                        this.title = vm1.$refs.workInfo1.workTitle;
+                    }else if(this.click > 0){
+                        this.click = 0
+                    }
+                    console.log('as')
                 }
                 else if(smallCardId == '22310'){
-                    this.workImgURL = vm1.$refs.workInfo2.img;
-                    this.goodNum = vm1.$refs.workInfo2.workGood;
-                    this.commentNum = vm1.$refs.workInfo2.workComment;
-                    this.price = vm1.$refs.workInfo2.workTotalPrice;
-                    this.title = vm1.$refs.workInfo2.workTitle;
-                }else if(smallCardId == '55555'){                
-                    this.workImgURL = vm1.$refs.workInfo3.img;
-                    this.goodNum = vm1.$refs.workInfo3.workGood;
-                    this.commentNum = vm1.$refs.workInfo3.workComment;
-                    this.price = vm1.$refs.workInfo3.workTotalPrice;
-                    this.title = vm1.$refs.workInfo3.workTitle;
+                    
+                    if(this.click < 1){
+                        this.workImgURL = vm1.$refs.workInfo2.img;
+                        this.goodNum = vm1.$refs.workInfo2.workGood;
+                        this.commentNum = vm1.$refs.workInfo2.workComment;
+                        this.price = vm1.$refs.workInfo2.workTotalPrice;
+                        this.title = vm1.$refs.workInfo2.workTitle;
+                        console.log('<1')
+                    }else if(this.click > 0){
+                        this.click = 0
+                        console.log('>0')
+                    }
+                    console.log('ad')
+
+                }else if(smallCardId == '55555'){       
+                    if(this.click < 1){
+                        this.workImgURL = vm1.$refs.workInfo3.img;
+                        this.goodNum = vm1.$refs.workInfo3.workGood;
+                        this.commentNum = vm1.$refs.workInfo3.workComment;
+                        this.price = vm1.$refs.workInfo3.workTotalPrice;
+                        this.title = vm1.$refs.workInfo3.workTitle;
+                    }else if(this.click > 0){
+                        this.click = 0
+                    }         
+
                 }
                 else if(smallCardId == '22111'){
                     this.workImgURL = vm1.$refs.workInfo4.img;
@@ -640,6 +673,8 @@
                     this.title = vm1.$refs.workInfo6.workTitle;
                 }
 
+                // console.log(this.goodNum)
+
             },
             methods:{
                 coloredIcon(e){
@@ -649,7 +684,12 @@
                     this.is_icon_color = false
                 },
                 addGoodNum(e){
-                    this.goodNum += 1;
+                    this.click += 1
+
+                    this.goodNum += 1
+                    console.log(this.goodNum)
+                    
+                    
                 },
                 addCartList(){
                     let productArr = {name:this.title, eName: `CUSTOMIZED PRODUCT`, series: "CU", seriesId: "01", imgURL:this.workImgURL, price:this.price, productNum: 1, totalPrice: this.price, points:0, totalPointCost:0}
@@ -708,6 +748,7 @@
                     workGood:null,
                     workComment:null,
                     workId:null,
+                    clickN: 0,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -814,7 +855,9 @@
                     bus.$emit('report-emit')
                 },
                 addGoodNum(e){
+                    // console.log('345345')
                     this.goodNum_plus += 1;
+                    // console.log(this.goodNum_plus)
                     // ajax
                 },
                 openWorkModal(e){ 
@@ -841,7 +884,8 @@
                     
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
                     // console.log(smallCardGoodNum)
-                    this.workGood = smallCardGoodNum
+                    // this.workGood = smallCardGoodNum
+                    this.workGood = parseInt(smallCardGoodNum)//這裡
                     
 
                     let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
@@ -1154,7 +1198,7 @@
                     this.goodNum_plus += 1;
 
                 },
-                openWorkModal(e){ //這裡是work-card2
+                openWorkModal(e){ //這是work-card2
                     //進入彈窗、後面固定不給滾動
                     bus.$emit('work-modal-emit')
 
@@ -1169,8 +1213,8 @@
 
 
                     let smallCardGoodNum = $(this.$el).children('.workInfo').children('.workInfo_good').children('.num').text();
-                    // console.log(smallCardGoodNum)
-                    this.workGood = smallCardGoodNum
+                    console.log(smallCardGoodNum)
+                    this.workGood = parseInt(smallCardGoodNum)
 
 
                     let smallCardCommentNum = $(this.$el).children('.workInfo').children('.workInfo_reply').children('.num').text();
