@@ -151,6 +151,16 @@
                                 thisSeriesIndex.toString();
                                 let thisPoints = parseInt(product['product_points']);
                                 let thisPrice = parseInt(product['product_price']);
+
+                                                        
+                                let img =product['product_img'];
+                                if(product['product_year']=='2021'){
+                                    img = `../upload/${img}`;
+                                }else{
+                                    img =img;
+                                };
+
+
                                 // 系列Id若是單位數，前面加0
                                 let thisSeriesId;
                                 if (product[`product_seriesid`].length === 1) {
@@ -166,7 +176,7 @@
                                     series: this.seriesList[thisSeriesIndex].eName,
                                     seriesTag: this.seriesList[thisSeriesIndex].name,
                                     seriesId: thisSeriesId,
-                                    imgURL: product['product_img'],
+                                    imgURL: img,
                                     img1: product['product_img1'],
                                     img2: product['product_img2'],
                                     img3: product['product_img3'],
