@@ -163,7 +163,13 @@ let productMixins = {
           // 將字串型別轉換數值
           let thisPoints = parseInt(product['product_points']);
           let thisPrice = parseInt(product['product_price']);
-
+         
+          let img =product['product_img'];
+          if(product['product_year']=='2021'){
+            img = `../upload/${img}`;
+          }else{
+            img =img;
+          };
 
           let thisSeriesId;
           if (product[`product_seriesid`].length === 1) {
@@ -177,7 +183,7 @@ let productMixins = {
             series: this.seriesList[thisSeriesIndex].eName,
             seriesIndex: thisSeriesIndex,
             seriesId: thisSeriesId,
-            imgURL: product['product_img'],
+            imgURL: img,
             displayImgURL: product['product_img1'],
             productId: product['product_id'],
             year: product['product_year'],

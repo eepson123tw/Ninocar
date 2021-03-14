@@ -116,6 +116,15 @@ let cartMixins = {
           } else {
             thisSeriesId = product[`product_seriesid`];
           }
+
+          let img =product['product_img'];
+          if(product['product_year']=='2021'){
+            img = `../upload/${img}`;
+          }else{
+            img =img;
+          };
+
+
           return {
             // 回傳之屬性跟值
             name: product[`product_name`].trim(),
@@ -123,7 +132,7 @@ let cartMixins = {
             series: this.seriesList[thisSeriesIndex].eName,
             seriesIndex: thisSeriesIndex,
             seriesId: thisSeriesId,
-            imgURL: product['product_img'],
+            imgURL: img,
             displayImgURL: product['product_img1'],
             productId: product['product_id'],
             year: product['product_year'],
