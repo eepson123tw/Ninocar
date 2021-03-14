@@ -61,14 +61,20 @@
 .box-blue img {
     width: 100%;
 }
-
 .item-card {
     margin-top: 10px;
-}
-
-.pandc {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.product-collect {
+    display: flex;
+    justify-content: space-between;
+}
+
+.collect {
+    cursor: pointer;
 }
 
 .btn {

@@ -40,7 +40,9 @@
                     //變數存放的地方
                     cartList: [],
                     likeList: [],
+                    recommendProductList: [],
                     currentProductList: {},
+
                     list: {
                         productName: 'Audi R8 奧迪小客車',
                         productBrief: 'Audi TT coupe',
@@ -125,6 +127,9 @@
                         let likeCartJson = JSON.stringify(newArray);
                         localStorage.setItem('likeList', likeCartJson);
                     },
+                    // showProducts() {
+                    //     console.log(this.productsList);
+                    // },
                 },
                 mounted() {
                     let num = JSON.parse(localStorage.getItem('car')) || 0;
@@ -200,6 +205,30 @@
                     this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
 
                     this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
+                },
+                beforeUpdate() {
+                    for (let i = 0; i < 4; i++) {
+                        let b = Math.random() * 64;
+                        // console.log(b);
+                        let c = Math.floor(b);
+                        // console.log(c);
+                        let a = this.productsList;
+                        let num = Math.floor(Math.random() * 64);
+                        console.log(num);
+                        console.log(a[c].imgURL);
+                        console.log(a[c].name);
+                        console.log(a[c].price);
+
+                        let changeList = {
+                            img: a[c].imgURL,
+
+                            name: a[c].name,
+
+                            price: a[c].price,
+                        };
+
+                        this.recommendProductList.push(changeList);
+                    }
                 },
             });
         </script>
