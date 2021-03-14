@@ -68,7 +68,25 @@ $data = $statement->fetchAll();
                 <option value="1">出貨中</option>
                 <option value="2">已送達</option>
               </select>
-
+            </div>
+            <div class="update mb-4">
+              <p>貨物狀態：</p>
+              <select name="orderType" id="" value="">
+                <?php
+                $type = $row["order_type"];
+                switch ($type) {
+                  case '1':
+                    $type = "取消";
+                    break;
+                  default:
+                    $type = "成立";
+                    break;
+                }
+                ?>
+                <option value="<?= $row["order_type"] ?>"><?= $type ?></option>
+                <option value="0">成立</option>
+                <option value="1">取消</option>
+              </select>
             </div>
             <input type="hidden" name="OID" value="<?= $row["order_id"] ?>" />
 

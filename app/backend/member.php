@@ -37,6 +37,54 @@ $data = $statement->fetchAll();
             }
         });
     });
+
+    //封鎖 解鎖
+    $(document).on('click', '.alert', function() {
+        let MID = $(this).parents('tr').children('input')[0].value;
+        console.log(MID);
+        if (confirm("確定封鎖該會員?")) {
+            $.ajax({
+                url: "sendBan.php",
+                method: "POST",
+                data: {
+                    'MID': MID,
+                },
+                dataType: "text",
+                success: function(response) {
+                    //更新html內容
+                    window.location.reload();
+                },
+                error: function(exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+    $(document).on('click', '.return', function() {
+        let MID = $(this).parents('tr').children('input')[0].value;
+        // console.log(MID);
+        if (confirm("確定恢復狀態?")) {
+            $.ajax({
+                url: "sendUnlock.php",
+                method: "POST",
+                data: {
+                    'MID': MID,
+                },
+                dataType: "text",
+                success: function(response) {
+                    //更新html內容
+                    window.location.reload();
+                },
+                error: function(exception) {
+                    alert("發生錯誤: " + exception.status);
+                }
+            });
+        } else {
+            return false;
+        }
+    });
 </script>
 
 <body>
@@ -62,12 +110,12 @@ $data = $statement->fetchAll();
                 <table>
                     <thead>
                         <tr>
-                            <th>會員編號</th>
                             <th>會員等級</th>
                             <th>會員姓名</th>
                             <th>會員狀態</th>
                             <th>註冊日期</th>
-                            <th>詳細</th>
+                            <th>封鎖</th>
+                            <th>解鎖</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
@@ -75,7 +123,6 @@ $data = $statement->fetchAll();
                         foreach ($data as $index => $row) {
                         ?>
                             <tr>
-                                <td><?= $row["member_id"] ?></td>
                                 <td>
                                     <?php
                                     $level = $row["member_level"];
@@ -93,7 +140,7 @@ $data = $statement->fetchAll();
                                     ?>
                                     <?= $level ?>
                                 </td>
-                                <td><?= $row["member_name"] ?></td>
+                                <td><a href="memberDetail.php?MID=<?= $row["member_id"] ?>"><?= $row["member_name"] ?></a></td>
                                 <td>
                                     <?php
                                     $type = $row["member_type"];
@@ -108,7 +155,9 @@ $data = $statement->fetchAll();
                                     ?>
                                     <?= $type ?></td>
                                 <td><?= $row["member_signdate"] ?></td>
-                                <td><a href="memberDetail.php?MID=<?= $row["member_id"] ?>">查看</a></td>
+                                <input type="hidden" name="MID" value="<?= $row["member_id"] ?>" />
+                                <td><button type="button" class="alert" id="<?= $row["member_id"] ?>"><i class="fas fa-ban"></i></button></td>
+                                <td><button type="button" class="return" id="<?= $row["member_id"] ?>"><i class="fas fa-unlock"></i></button></td>
                             </tr>
                         <?php
                         }
