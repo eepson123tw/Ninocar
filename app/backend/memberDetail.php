@@ -48,7 +48,7 @@ $data = $statement->fetchAll();
             </div>
             <div class="update mb-4">
               <p>會員狀態：</p>
-              <select name="memberType" id="" value="">
+              <select disabled="disabled" name="memberType" id="" value="">
                 <?php
                 $type = $row["member_type"];
                 switch ($type) {
