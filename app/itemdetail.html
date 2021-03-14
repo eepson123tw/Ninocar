@@ -127,6 +127,11 @@
                         let likeCartJson = JSON.stringify(newArray);
                         localStorage.setItem('likeList', likeCartJson);
                     },
+                    nowProduct(val) {
+                        console.log(val.id);
+                        localStorage.setItem('car', JSON.stringify(val.id));
+                        window.location.href = `./itemdetail.html`;
+                    },
                     // showProducts() {
                     //     console.log(this.productsList);
                     // },
@@ -152,14 +157,12 @@
                                 let thisPoints = parseInt(product['product_points']);
                                 let thisPrice = parseInt(product['product_price']);
 
-                                                        
-                                let img =product['product_img'];
-                                if(product['product_year']=='2021'){
+                                let img = product['product_img'];
+                                if (product['product_year'] == '2021') {
                                     img = `../upload/${img}`;
-                                }else{
-                                    img =img;
-                                };
-
+                                } else {
+                                    img = img;
+                                }
 
                                 // 系列Id若是單位數，前面加0
                                 let thisSeriesId;
@@ -214,10 +217,12 @@
                         // console.log(c);
                         let a = this.productsList;
                         let num = Math.floor(Math.random() * 64);
-                        console.log(num);
-                        console.log(a[c].imgURL);
-                        console.log(a[c].name);
-                        console.log(a[c].price);
+
+                        // console.log(num);
+                        // console.log(a[c].imgURL);
+                        // console.log(a[c].name);
+                        // console.log(a[c].price);
+                        // console.log(a[c].productId);
 
                         let changeList = {
                             img: a[c].imgURL,
@@ -225,6 +230,8 @@
                             name: a[c].name,
 
                             price: a[c].price,
+
+                            id: a[c].productId,
                         };
 
                         this.recommendProductList.push(changeList);
