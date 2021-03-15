@@ -333,6 +333,7 @@
           text: '儲存',
           class: 'btn btn-small',
         },
+        previewImageNow: null,
       },
       methods: {
         setDefaultIndex(val) {
@@ -353,10 +354,28 @@
           const reader = new FileReader();
           reader.readAsDataURL(image);
           reader.onload = e => {
-            // this.previewImage = e.target.result;
-            this.previewImage = `./assets/img/pic/${src}`;
+            this.previewImage = e.target.result;
+            // this.previewImage = `./assets/img/pic/${src}`;
             let img = document.querySelector('#img');
           };
+
+          console.log(image);
+
+          let formData = new FormData();
+          // // 向 formData 物件中新增檔案
+          formData.append('file', image);
+
+          axios({
+            method: 'POST',
+            url: "assets/php/sendimg.php",
+            data: formData,
+            mimeType: 'multipart/form-data',
+          }).then((res) => {
+            console.log(res.data)
+            this.previewImageNow = res.data;
+          }).catch((e) => {
+            console.log(e)
+          })
         },
         handleInput() {
           const isAllCheck = this.handleRequiredCheck();
@@ -395,7 +414,7 @@
             params.append('MEMBER_PHONE', phone);
             params.append('MEMBER_GENDER', gender);
             params.append('MEMBER_BIRTHDAY', birthDay);
-            params.append('MEMBER_PHOTO', this.previewImage);
+            params.append('MEMBER_PHOTO', this.previewImageNow);
 
             axios({
               method: 'post',

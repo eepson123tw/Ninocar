@@ -81,16 +81,21 @@
         <li> <label class="member__input--prettier">
             <input
               type="file"
+              name="file"
               @change="uploadImage"
             />
-            <span class="btn btn--ghost py-3 px-3">選擇圖片</span>
+            <input
+              type="submit"
+              class="btn  py-3 px-3"
+            >選擇圖片</input>
           </label></li>
         <li>限制大小 2MB以內</li>
       </ul>
     </div>
   </div>
 </div>
-<div class="container" v-else-if="userData.birthday">
+<div class="
+              container" v-else-if="userData.birthday">
   <div class="row  mt-xs-1 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
       <h2 id="memberData" class="block  block__header__title">基本資料</h2>
