@@ -163,17 +163,7 @@
         margin: 40px;
     }
 
-    &__progbarall {
-        border: 1px solid #ccc;
-        padding: 5px;
-    }
 
-    &__progbar {
-        width: 5px;
-        height: 15px;
-        background-color: #ccc;
-        margin-right: 3px;
-    }
 
 
     &__data {
@@ -377,5 +367,23 @@
         border-left: none;
         vertical-align: middle;
 
+    }
+}
+
+.level-progress {
+    display: flex;
+    align-items: center;
+    border: 1px solid $gray-500;
+    padding: 8px;
+
+    &__col {
+        width: 5px;
+        height: 15px;
+        background-color: #ccc;
+        margin-right: 3px;
+    }
+
+    &__col--active {
+        background-color: $blue;
     }
 }

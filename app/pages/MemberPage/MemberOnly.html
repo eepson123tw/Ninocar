@@ -6,17 +6,19 @@
         </header>
         <section class="block__body d-flex justify-content-center align-items-center py-20 py-lg-10">
             <div class="mr-30 mr-lg-20 mr-md-0 w-md-100 mb-md-10 text-center">
-                <img src="./assets/img/illust/illust-member-normal.svg" alt="member" class="d-inbl  mb-2">
-                <h2 class="h3">一般會員</h2>
+                <img :src="memberLevel.imgURL" alt="member" class="d-inbl  mb-2">
+                <h2 class="h3">{{memberLevel.name}}</h2>
             </div>
             <ul class="h4">
-                <li class="mb-7 mb-md-4">會員等級： <span class="ml-6">一般會員</span></li>
-                <li class="mb-7 mb-md-4">會員點數： <span class="ml-6">200點</span></li>
-                <li class="mb-7 mb-md-4">註冊日期： <span class="ml-6">2021 / 03 / 13</span></li>
+                <li class="mb-7 mb-md-4">會員等級： <span class="ml-6">{{memberLevel.name}}</span></li>
+                <li class="mb-7 mb-md-4">會員點數： <span class="ml-6">{{totalPoints || 0}} 點</span></li>
+                <li class="mb-7 mb-md-4">註冊日期： <span class="ml-6">{{signUpDate}}</span></li>
                 <li class="d-flex flex-sm-column">距離升等：
-                    <div class="only__progbarall d-flex align-item-center ml-6 ml-sm-0 mt-sm-2">
-                        <div v-for='item in 30' class="only__progbar"></div>
-                        <span class="font-s ml-2">$400 / $2000</span>
+                    <div class="level-progress ml-6 ml-sm-0 mt-sm-2">
+                        <div v-for='item in activeAmountCol' class="level-progress__col level-progress__col--active">
+                        </div>
+                        <div v-for='item in (30-activeAmountCol)' class="level-progress__col"></div>
+                        <span class="font-s ml-2">${{totalAmount || 0}} / {{memberLevel.levelAmount}}</span>
                     </div>
                 </li>
             </ul>
