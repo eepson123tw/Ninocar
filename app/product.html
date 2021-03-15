@@ -113,6 +113,17 @@
           localStorage.setItem('likeList', likeCartJson);
 
         },
+        check_test(){
+          const check = this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
+
+          if(check.length > 0){
+            return check
+          }else{
+            this.currPage = 1
+            return this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
+          }
+
+        },
 
         productArray(val){
             this.showProductList = this.productList;

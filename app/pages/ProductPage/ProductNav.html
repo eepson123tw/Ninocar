@@ -84,7 +84,7 @@
       <ul class="col-12 col-lg-6 col-sm-6">
         <div class="box-blue">
           <ul class="row">
-            <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in showProductList.slice(pageStart, pageStart + countOfPage)">
+            <li class="col-4 col-lg-6 col-sm-4" v-for="(item,index) in check_test()">
               <div class="card">
                 <div class="card__header">
                   <a href="ItemDetail.html"><img @click="nowProduct(item)" :src="item.imgURL" /></a>
