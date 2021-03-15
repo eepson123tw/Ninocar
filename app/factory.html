@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div id="factory">
+    <div id="factory" ref="memInfo">
         <vue-header></vue-header>
         <div class="container containerMain">
             <report-modal></report-modal>
@@ -582,7 +582,7 @@
                                 </div>
                             </div>
             
-                            <div class="typeReply">
+                            <div class="typeReply" >
                                 <div class="typeReply_left mr-7">
                                 <img src="./assets/img/pic/userPic02.png" class="userPic--big">
                                 </div>
@@ -744,6 +744,10 @@
                 workIndex:{
                     default:00000,
                     type:Number
+                },
+                isIdExist:{
+                    default:false,
+                    type:Boolean
                 }
             },
             data(){
@@ -759,6 +763,8 @@
                     workComment:null,
                     workId:null,
                     clickN: 0,
+                    isMemberIdExist:this.isIdExist,
+                    memId:null,
                 }
             },
             template: `<li class="work col-4 col-lg-2 col-sm-4">
@@ -817,7 +823,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="typeSubReply">
+                                <div class="typeSubReply" v-if="this.memberId != null && this.memberId != ''">
                                     <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
     
                                     <div class="typeReply_right">
@@ -839,7 +845,7 @@
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                             </div>
 
-                            <div class="typeReply">
+                            <div class="typeReply" v-if="this.memberId != null && this.memberId != ''">
                                 <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
 
                                 <div class="typeReply_right">
@@ -983,11 +989,29 @@
                    }
 
                    //PO完後關掉回覆的回覆
-                   $('.typeSubReply').css({"display":"none"})
+                   $('.typeSubReply').css({"display":"none"});
                    
                    //PO完後出現「X則回覆」
-                   $(e.target).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"})
-               },
+                   $(e.target).parent().parent().parent().parent().parent().children('.hiddenMR').css({"display":"flex"});
+                },
+
+            },
+            mounted(){//這裡
+                // console.log(this.isMemberIdExist)
+                // console.log('aaa')
+
+            },
+            updated() {
+                // this.isMemberIdExist = true;
+                console.log('bbb')
+            },
+            store,
+            computed:{
+                //從store裡拿東西出來
+                memberId(){
+                    return this.$store.state.memberId;
+                    
+                }
             },
 
         })
@@ -1089,7 +1113,7 @@
                                     </div>
                                 </div>
 
-                                <div class="typeSubReply">
+                                <div class="typeSubReply" v-if="this.memberId != null && this.memberId != ''">
                                     <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
     
                                     <div class="typeReply_right">
@@ -1154,7 +1178,7 @@
                                     </div>
                                 </div>
 
-                                <div class="typeSubReply">
+                                <div class="typeSubReply" >
                                     <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
     
                                     <div class="typeReply_right">
@@ -1172,7 +1196,7 @@
                                 <p class="h5 readMoreWord text-coffee">閱讀更多</p>
                                 <img src="./assets/img/icon/icon-down.svg" class="icon toggleIcon2">
                             </div>
-                            <div class="typeReply">
+                            <div class="typeReply" v-if="this.memberId != null && this.memberId != ''">
                                 <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
 
                                 <div class="typeReply_right">
@@ -1279,10 +1303,24 @@
                     } 
                },
             },
+            store,
+            computed:{
+                //從store裡拿東西出來
+                memberId(){
+                    return this.$store.state.memberId;
+                    
+                }
+            },
         })
 
         const vm1 = new Vue({ //主體
             el: '#factory',
+            props:{
+                memberid_exist:{
+                    defautl: false,
+                    type:Boolean
+                }
+            },
             data:{
                 countStep: 0,
                 countR: 0,
@@ -1427,8 +1465,19 @@
                 //從store裡拿東西出來
                 memberId(){
                     return this.$store.state.memberId;
+                    
                 }
             },
+            mounted(){ //這裡
+                if(this.$store.state.memberId != null){
+                    this.memberid_exist = true;
+                    // console.log('ddd')
+                }
+            },
+            updated() {
+                
+            },
+
 
         });
 
@@ -1933,55 +1982,6 @@
             $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
             $('.typeWorkName').attr('value', nameArr1[ran1] + nameArr2[ran2])
         })
-
-
-        // $('.comment').click((e)=>{
-        //     let textLength = $(e.target).parent().parent().children('.textarea').val().length;
-        //     let commentContent = $(e.target).parent().parent().children('.textarea').val();
-        //     let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
-        //     // console.log(replyerPic)
-        //     let replyerName = $(e.target).parent().parent().children('.replyerName').text();
-        //     // console.log(replyerName
-        //     if (textLength < 1) {
-        //         console.log('no text')
-        //         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid red"})
-        //     } else {
-        //         // console.log('ok')
-        //         $(e.target).parent().parent().children('.textarea').css({"border": "1px solid #000"})
-        //         $(e.target).parent().parent().parent().parent().children(`.readMore`).before(`<div class="work_reply hiddenReply">
-        //                 <div class="userContext">
-        //                     <img src="${replyerPic}"  class="userPic">
-        //                     <div class="userContext_top">
-        //                         <p class="userName h6">${replyerName}</p>
-        //                         <p class="userContent h5">${commentContent}</p>
-        //                         <div class="other">
-        //                             <p class="postTime h6">3小時前</p>
-        //                             <div>               
-        //                                 <button class="btn btn--link mr-4 h5 replyComment">回覆</button>
-        //                                 <button class="btn btn--link h5 report" @click="openReportModal">檢舉</button>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-
-        //                 <div class="typeSubReply">
-        //                     <img src="./assets/img/pic/userPic.png" class="userPic replyerPic">
-        //                     <div class="typeReply_right">
-        //                         <p class="replyerName">沾醬大師</p>
-        //                         <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
-        //                         <div class="other">
-        //                             <p class="textCount"></p>
-        //                             <button class="btn btn--small h5 subComment" @click="postSubComment">回覆</button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>`)
-                
-        //         $(e.target).parent().parent().children('.textarea').val('');
-        //         $(e.target).parent().children('.textCount').text(`餘${textMax}字`)
-        //         this.commentNum_plus += 1
-        //     }   
-        // })
 
         //matches這段的意義是當點到document的時候會判定點到的東西是不是.replyComment或者他的子節點，
         //如果是的話執行if內的程式
