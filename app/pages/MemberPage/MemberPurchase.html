@@ -30,6 +30,20 @@
           <button class="btn btn--link   member__cuponBtn--red ml-10 pb-5 ">取消訂單</button>
         </div>
       </div>
+      <div
+        class="row block member__order"
+        v-show="buyList"
+      >
+        <div class="member__orderImg">
+          <img
+            class="member__orderImg--mid"
+            src="./assets/img/illust/illust-empty.png"
+          >
+          <p>
+            沒有處理中的訂單
+          </p>
+        </div>
+      </div>
     </div>
     <div class="container mt-20">
       <div class="row member__info ">
@@ -149,7 +163,7 @@
         </div>
         <div
           class="row block member__order"
-          v-show="index==0"
+          v-show="item.deliver_type !=='已送達' && index== (buyList.length-1) "
         >
           <div class="member__orderImg">
             <img

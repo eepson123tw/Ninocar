@@ -207,6 +207,9 @@
     display: flex;
     align-items: center;
     padding: 10px;
+    @include rwd-xs {
+      flex-grow: 0;
+    }
     &--big {
       font-size: 72px;
     }
@@ -232,6 +235,9 @@
     &--warning {
       color: $red;
       font-weight: 700;
+      @include rwd-xs {
+        font-size: 12px;
+      }
     }
   }
   &__cuponBtn {
@@ -300,6 +306,9 @@
   &__orderList {
     padding: 20px;
     @extend .h3;
+    @include rwd-xs {
+      padding: 5px;
+    }
   }
   &__order_btn {
     display: flex;

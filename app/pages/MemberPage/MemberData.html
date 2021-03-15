@@ -1,8 +1,17 @@
-<div class="container" v-if="userData.gender == '0' ">
-  <div class="row  mt-xs-1 member__info mt-15">
+<div
+  class="container"
+  v-if="userData.gender == '0' "
+>
+  <div class="row  mt-xs-5 member__info mt-20">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
-      <h2 id="memberData" class="block  block__header__title">基本資料</h2>
-      <button class="btn btn-small" @click="handleInput">儲存</button>
+      <h2
+        id="memberData"
+        class="block  block__header__title"
+      >基本資料</h2>
+      <button
+        class="btn btn-small"
+        @click="handleInput"
+      >儲存</button>
     </section>
   </div>
   <div class="row  member__info py-10 mb-5">
@@ -12,33 +21,69 @@
           <p>使用者編號 : <span class="member__text--small">NinoMember {{memberId}}</span></p>
         </li>
         <li class="member__baseData--list">
-          <label for="accountName" class=" member__text member__text--right">帳號名稱: <span
+          <label
+            for="accountName"
+            class=" member__text member__text--right"
+          >帳號名稱: <span
               v-if="user.remind!==''"
               class="form__text form__text--warning"
             >{{user.remind}}</span></label>
-          <input v-model="user.text" type="text" class="form__input" :class="user.inputClass" id="accountName" placeholder="請輸入名稱" />
+          <input
+            v-model="user.text"
+            type="text"
+            class="form__input"
+            :class="user.inputClass"
+            id="accountName"
+            placeholder="請輸入名稱"
+          />
           <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
         </li>
 
         <li class="member__baseData--list">
-          <label for="email" class=" member__text member__text--right">電子郵件 :</label>
-          <input type="text" class="form__input" id="email" disabled :placeholder="userData.account" />
+          <label
+            for="email"
+            class=" member__text member__text--right"
+          >電子郵件 :</label>
+          <input
+            type="text"
+            class="form__input"
+            id="email"
+            disabled
+            :placeholder="userData.account"
+          />
         </li>
         <li class="member__baseData--list">
-          <label for="phone" class=" member__text member__text--right">電話號碼 : <span
+          <label
+            for="phone"
+            class=" member__text member__text--right"
+          >電話號碼 : <span
               v-if="phone.remind!==''"
               class="form__text form__text--warning"
             >{{phone.remind}}</span></label>
-          <input v-model="phone.text" type="text" class="form__input" :class="phone.inputClass" id="phone" placeholder="請輸入電話號碼" />
+          <input
+            v-model="phone.text"
+            type="text"
+            class="form__input"
+            :class="phone.inputClass"
+            id="phone"
+            placeholder="請輸入電話號碼"
+          />
         </li>
         <li class="member__baseData--list">
-          <label for="sex" class=" member__text member__text--right">性別 :
+          <label
+            for="sex"
+            class=" member__text member__text--right"
+          >性別 :
             <span
               v-if="userDetail.remind!==''"
               class="form__text form__text--warning"
             >{{userDetail.remind}}</span>
           </label>
-          <select id="sex" class="member__input member__input--small" v-model="userDetail.usersex">
+          <select
+            id="sex"
+            class="member__input member__input--small"
+            v-model="userDetail.usersex"
+          >
             <option
               value=""
               disabled
@@ -47,8 +92,15 @@
           </select>
         </li>
         <li class="member__baseData--list">
-          <label for="year" class=" member__text member__text--right">生日 :</label>
-          <select id="year" class="member__input member__input--small" v-model="userDetail.userYear">
+          <label
+            for="year"
+            class=" member__text member__text--right"
+          >生日 :</label>
+          <select
+            id="year"
+            class="member__input member__input--small"
+            v-model="userDetail.userYear"
+          >
             <option
               value=""
               disabled
@@ -56,14 +108,22 @@
             <option v-for="(num,index) of 50">{{2022- num}}</option>
 
           </select>
-          <select id="mon" class="member__input member__input--small" v-model="userDetail.userMonth">
+          <select
+            id="mon"
+            class="member__input member__input--small"
+            v-model="userDetail.userMonth"
+          >
             <option
               value=""
               disabled
             >月</option>
             <option v-for="(num,index) of 12">{{num}}</option>
           </select>
-          <select id="day" class="member__input member__input--small" v-model="userDetail.userDate">
+          <select
+            id="day"
+            class="member__input member__input--small"
+            v-model="userDetail.userDate"
+          >
             <option
               value=""
               disabled
@@ -75,8 +135,15 @@
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <li class="member__circle" style="overflow: hidden;">
-          <img id="img" style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);" :src="previewImage">
+        <li
+          class="member__circle"
+          style="overflow: hidden;"
+        >
+          <img
+            id="img"
+            style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);"
+            :src="previewImage"
+          >
         </li>
         <li> <label class="member__input--prettier">
             <input
@@ -94,11 +161,17 @@
     </div>
   </div>
 </div>
-<div class="
-              container" v-else-if="userData.birthday">
-  <div class="row  mt-xs-1 member__info mt-15">
+<div
+  class="
+              container"
+  v-else-if="userData.birthday"
+>
+  <div class="row  mt-xs-5 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
-      <h2 id="memberData" class="block  block__header__title">基本資料</h2>
+      <h2
+        id="memberData"
+        class="block  block__header__title"
+      >基本資料</h2>
     </section>
   </div>
   <div class="row  member__info py-10 py-xs-5 mb-5">
@@ -108,46 +181,74 @@
           <p>使用者編號 : <span class="member__text--small">NinoMember {{memberId}}</span></p>
         </li>
         <li class="member__baseData--center">
-          <label for="accountName" class=" member__text member__text--right">帳號名稱: </label>
+          <label
+            for="accountName"
+            class=" member__text member__text--right"
+          >帳號名稱: </label>
           <span>{{userData.name}}</span>
           <br>
           <span class="member__text member__text--mid">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
         </li>
 
         <li class="member__baseData--center">
-          <label for="email" class=" member__text member__text--right">電子郵件 :</label>
+          <label
+            for="email"
+            class=" member__text member__text--right"
+          >電子郵件 :</label>
           <span>{{userData.account}}</span>
         </li>
         <li class="member__baseData--center">
-          <label for="phone" class=" member__text member__text--right">電話號碼 : </label>
+          <label
+            for="phone"
+            class=" member__text member__text--right"
+          >電話號碼 : </label>
           <span>0{{userData.phone}}</span>
         </li>
         <li class="member__baseData--center">
-          <label for="sex" class=" member__text member__text--right">性別 :</label>
+          <label
+            for="sex"
+            class=" member__text member__text--right"
+          >性別 :</label>
           <span v-if="userData.gender==1">男</span>
           <span v-if="userData.gender==2">女</span>
           </select>
         </li>
         <li class="member__baseData--center">
-          <label for="year" class=" member__text member__text--right">生日 :</label>
+          <label
+            for="year"
+            class=" member__text member__text--right"
+          >生日 :</label>
           <span>{{userData.birthday}}</span>
         </li>
       </ul>
     </div>
     <div class="member__baseImg col-6 col-lg-6 order-lg-1">
       <ul>
-        <li class="member__circle" style="overflow: hidden;">
-          <img id="img" style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);" :src="userData.photo">
+        <li
+          class="member__circle"
+          style="overflow: hidden;"
+        >
+          <img
+            id="img"
+            style="max-width: 300px; max-height: 300px; transform: translate(-20%,0%);"
+            :src="userData.photo"
+          >
         </li>
         <li>我的大頭貼</li>
       </ul>
     </div>
   </div>
 </div>
-<div class="container" v-else>
-  <div class="row  mt-xs-1 member__info mt-15">
+<div
+  class="container"
+  v-else
+>
+  <div class="row  mt-xs-5 member__info mt-15">
     <section class="member__data  col-12 col-lg-6 col-xs-12 ">
-      <h2 id="memberData" class="block  block__header__title">基本資料</h2>
+      <h2
+        id="memberData"
+        class="block  block__header__title"
+      >基本資料</h2>
       <button class="btn btn-small btn--disabled">請先登入</button>
     </section>
   </div>
@@ -158,33 +259,69 @@
           <p>使用者編號 : <span class="member__text--small">NinoMember {{memberId}}</span></p>
         </li>
         <li class="member__baseData--list">
-          <label for="accountName" class=" member__text member__text--right">帳號名稱: <span
+          <label
+            for="accountName"
+            class=" member__text member__text--right"
+          >帳號名稱: <span
               v-if="user.remind!==''"
               class="form__text form__text--warning"
             >{{user.remind}}</span></label>
-          <input v-model="user.text" type="text" class="form__input" :class="user.inputClass" id="accountName" placeholder="請輸入名稱" />
+          <input
+            v-model="user.text"
+            type="text"
+            class="form__input"
+            :class="user.inputClass"
+            id="accountName"
+            placeholder="請輸入名稱"
+          />
           <span class="member__text--down">使用者暱稱將會被引用於網站上公開留言及相關連結</span>
         </li>
 
         <li class="member__baseData--list">
-          <label for="email" class=" member__text member__text--right">電子郵件 :</label>
-          <input type="text" class="form__input" id="email" disabled :placeholder="userData.account" />
+          <label
+            for="email"
+            class=" member__text member__text--right"
+          >電子郵件 :</label>
+          <input
+            type="text"
+            class="form__input"
+            id="email"
+            disabled
+            :placeholder="userData.account"
+          />
         </li>
         <li class="member__baseData--list">
-          <label for="phone" class=" member__text member__text--right">電話號碼 : <span
+          <label
+            for="phone"
+            class=" member__text member__text--right"
+          >電話號碼 : <span
               v-if="phone.remind!==''"
               class="form__text form__text--warning"
             >{{phone.remind}}</span></label>
-          <input v-model.number="phone.text" type="text" class="form__input" :class="phone.inputClass" id="phone" placeholder="請輸入電話號碼" />
+          <input
+            v-model.number="phone.text"
+            type="text"
+            class="form__input"
+            :class="phone.inputClass"
+            id="phone"
+            placeholder="請輸入電話號碼"
+          />
         </li>
         <li class="member__baseData--list">
-          <label for="sex" class=" member__text member__text--right">性別 :
+          <label
+            for="sex"
+            class=" member__text member__text--right"
+          >性別 :
             <span
               v-if="userDetail.remind!==''"
               class="form__text form__text--warning"
             >{{userDetail.remind}}</span>
           </label>
-          <select id="sex" class="member__input member__input--small" v-model="userDetail.usersex">
+          <select
+            id="sex"
+            class="member__input member__input--small"
+            v-model="userDetail.usersex"
+          >
             <option
               value=""
               disabled
@@ -193,8 +330,15 @@
           </select>
         </li>
         <li class="member__baseData--list">
-          <label for="year" class=" member__text member__text--right">生日 :</label>
-          <select id="year" class="member__input member__input--small" v-model="userDetail.userYear">
+          <label
+            for="year"
+            class=" member__text member__text--right"
+          >生日 :</label>
+          <select
+            id="year"
+            class="member__input member__input--small"
+            v-model="userDetail.userYear"
+          >
             <option
               value=""
               disabled
@@ -202,7 +346,11 @@
             <option v-for="(num,index) of 50">{{2022- num}}</option>
 
           </select>
-          <select id="mon" class="member__input member__input--small" v-model="userDetail.userMonth">
+          <select
+            id="mon"
+            class="member__input member__input--small"
+            v-model="userDetail.userMonth"
+          >
             <option
               value=""
               disabled
@@ -210,7 +358,11 @@
             <option v-for="(num,index) of 12">{{num}}</option>
 
           </select>
-          <select id="day" class="member__input member__input--small" v-model="userDetail.userDate">
+          <select
+            id="day"
+            class="member__input member__input--small"
+            v-model="userDetail.userDate"
+          >
             <option
               value=""
               disabled
