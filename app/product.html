@@ -26,7 +26,7 @@
 
     <!-- your code here... -->
   </div>
-  @@include('./components/VueHeader.html')
+  @@include('./components/Footer.html') @@include('./components/VueHeader.html')
   <script src="./assets/js/mixins/productMixins.js"></script>
 
   <script>
@@ -112,10 +112,13 @@
 
             return arr.indexOf(item) === index;
 
+
           });
 
           let cartJson = JSON.stringify(newArray);
           localStorage.setItem('cartsList', cartJson);
+
+
         },
         likeCarts(val) {
           this.likeList.push(val);
@@ -124,12 +127,15 @@
 
             return arr.indexOf(item) === index;
 
+
+
           })
 
           console.log(newArray);
-
           let likeCartJson = JSON.stringify(newArray);
           localStorage.setItem('likeList', likeCartJson);
+
+
 
         }
 
