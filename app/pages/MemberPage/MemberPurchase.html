@@ -79,7 +79,7 @@
         </div>
         <div
           class="row block member__order"
-          v-show="item.order_type == '取消' && index== (buyList.length-1)"
+          v-show="buyList.length == 0"
         >
           <div class="member__orderImg">
             <img
@@ -122,7 +122,7 @@
       </div>
       <div
         class="row block member__order"
-        v-show="buyList"
+        v-show="buyList.length == 0"
       >
         <div class="member__orderImg">
           <img
@@ -163,7 +163,7 @@
         </div>
         <div
           class="row block member__order"
-          v-show="item.deliver_type !=='已送達' && index== (buyList.length-1) "
+          v-show="buyList.length == 0"
         >
           <div class="member__orderImg">
             <img
@@ -270,33 +270,30 @@
         "memberId": this.memberId,
       }).then(res => {
 
-        this.buyList = res.data.map((list) => {
+        console.log(res);
+        if (res.data == "尚未擁有任何車車") {
+          return
+        } else {
 
-          let deliver = list.deliver_type == "0" ? '處理中' : list.deliver_type == "1" ? '出貨中' : list.deliver_type == "2" ? '已送達' : '請稍等我們客服查詢中';
-          let pay = list.pay_type == "0" ? '貨到付款' : list.pay_type == "1" ? '線上刷卡' : list.pay_type == "2" ? '門市結帳' : list.pay_type == "3" ? 'ATM轉帳' : '請稍等我們客服查詢中';
-          let type = list.order_type == "0" ? '成立' : list.order_type == "1" ? '取消' : '請稍等我們客服查詢中';
+          this.buyList = res.data.map((list) => {
 
-          return {
+            let deliver = list.deliver_type == "0" ? '處理中' : list.deliver_type == "1" ? '出貨中' : list.deliver_type == "2" ? '已送達' : '請稍等我們客服查詢中';
+            let pay = list.pay_type == "0" ? '貨到付款' : list.pay_type == "1" ? '線上刷卡' : list.pay_type == "2" ? '門市結帳' : list.pay_type == "3" ? 'ATM轉帳' : '請稍等我們客服查詢中';
+            let type = list.order_type == "0" ? '成立' : list.order_type == "1" ? '取消' : '請稍等我們客服查詢中';
 
-            deliver_type: deliver,
-            member_id: list.member_id,
-            order_cost: list.order_cost,
-            order_id: list.order_id,
-            order_points: list.order_points,
-            order_type: type,
-            pay_type: pay,
+            return {
 
-          }
+              deliver_type: deliver,
+              member_id: list.member_id,
+              order_cost: list.order_cost,
+              order_id: list.order_id,
+              order_points: list.order_points,
+              order_type: type,
+              pay_type: pay,
+            }
+          });
 
-
-
-        });
-
-
-
-
-
-
+        }
 
       }).catch(error => {
         console.log(error)
