@@ -17,7 +17,7 @@
             // $db_pass = "password";
             $db_select = "team1";
 
-            // 將資料庫轉移至周杰的網域
+            //將資料庫轉移至周杰的網域
             // $db_host = "10.2.0.202";
             // $db_user = "test";
             // $db_pass = "12345678";

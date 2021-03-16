@@ -18,7 +18,7 @@ class UtilClass{
         $db_select = "team1";
         
 
-        // 將資料庫轉移至周杰的網域
+        // //將資料庫轉移至周杰的網域
         // $db_host = "10.2.0.202";
         // $db_user = "test";
         // $db_pass = "12345678";
@@ -29,8 +29,8 @@ class UtilClass{
         $dsn = "mysql:host=" . $db_host . ";dbname=" . $db_select;
 
         //建立PDO物件，並放入指定的相關資料
-        // $pdo = new PDO($dsn, $db_user, $db_pass); // 後台
-        $pdo = new PDO($dsn, $db_user); 
+        $pdo = new PDO($dsn, $db_user, $db_pass); // 後台
+        // $pdo = new PDO($dsn, $db_user); 
 
         return $pdo;
     }
