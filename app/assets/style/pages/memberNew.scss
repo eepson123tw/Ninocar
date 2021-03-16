@@ -2,17 +2,21 @@
 @import "../helpers/mixin";
 @import "../helpers/rwd";
 @import "../base/font";
+
 .member {
   padding-top: 100px;
+
   &__bar {
     display: flex;
     justify-content: space-around;
     background-color: $white;
     @extend .h4;
   }
+
   &__info {
     background-color: $white;
   }
+
   &__data {
     padding: 10px 30px;
     align-items: center;
@@ -21,31 +25,38 @@
     justify-content: space-between;
     border-bottom: 1px solid $secondary;
     font-weight: 700;
+
     @include rwd-xs {
       margin-top: 20px;
       padding: 10px 30px;
     }
   }
+
   &__baseData {
     padding-left: 20px;
     line-height: 2;
     @extend .h3;
+
     &--list {
       margin-bottom: 40px;
       // background-color: #000000;
       align-items: center;
       display: flex;
       position: relative;
+
       @include rwd-xl {
         flex-wrap: wrap;
       }
     }
+
     &--listone {
       padding-left: 20px;
+
       @include rwd-lg {
         padding-left: 0px;
       }
     }
+
     &--center {
       margin-bottom: 40px;
       // background-color: #000000;
@@ -53,111 +64,137 @@
       position: relative;
       text-align: left;
       padding-left: 20%;
+
       @include rwd-md {
         margin-bottom: 20px;
       }
+
       @include rwd-xs {
         margin-bottom: 5px;
         padding-left: 5%;
       }
     }
   }
+
   &__input {
     border: 1px solid $gray-900;
     border-radius: 5px;
     padding: 10px 10px;
     width: 80%;
     @extend .h4;
+
     &:focus {
       border: 1px solid $blue;
     }
+
     &--small {
       width: 20%;
       margin-right: 20px;
+
       select {
         border: none;
         outline: none;
       }
+
       &:focus {
         outline: none;
         border: 1px solid $blue;
       }
     }
+
     &--prettier {
       input {
         display: none;
       }
     }
   }
+
   &__text {
     margin-right: 20px;
     width: 20%;
+
     @include rwd-xl {
       width: 100%;
       margin-bottom: 5px;
     }
+
     &--mid {
       @extend .h5;
       color: $gray-900;
+
       @include rwd-xs {
         font-size: 12px;
       }
     }
+
     &--right {
       text-align: right;
+
       @include rwd-xl {
         text-align: left;
       }
     }
+
     &--down {
       bottom: -30px;
       right: 18%;
       position: absolute;
       @extend .h5;
       color: $gray-900;
+
       @include rwd-lg {
         bottom: -40px;
         left: 0;
         width: 50%;
       }
+
       @include rwd-md {
         bottom: -40px;
         right: 1%;
         width: 100%;
       }
+
       @include rwd-xs {
         bottom: -40px;
         right: 1%;
         width: 100%;
         font-size: 12px;
       }
+
       @include rwd(655px) {
         font-size: 12px;
       }
     }
+
     &--small {
       @extend .h4;
     }
   }
+
   &__baseImg {
     width: 50%;
     text-align: center;
     @extend .h3;
+
     li {
       margin-bottom: 20px;
     }
+
     @include rwd-xl {
       width: 40%;
       margin: 20px auto;
     }
+
     @include rwd-xs {
       margin: 0px auto;
       justify-content: center;
+
       li {
         margin-bottom: 5px;
       }
     }
   }
+
   &__circle {
     width: 160px;
     height: 160px;
@@ -165,19 +202,23 @@
     margin: 0 auto;
     border-radius: 50%;
   }
+
   &__cupon {
     padding: 20px 20px;
     background-color: $white;
     box-shadow: 1px 1px 5px $gray-500;
     line-height: 2;
+
     @include rwd(1116px) {
       margin: 20px 40px 0px 40px;
     }
+
     @include rwd-lg {
       margin: 0px;
       margin-top: 20px;
     }
   }
+
   &__cuponBackGround {
     width: 120px;
     height: 120px;
@@ -188,6 +229,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     &::before {
       position: absolute;
       display: block;
@@ -201,155 +243,195 @@
       transform: translate(-50%, -50%);
     }
   }
+
   &__cuponText {
     flex-grow: 1;
     text-align: left;
     display: flex;
     align-items: center;
     padding: 10px;
+
     @include rwd-xs {
       flex-grow: 0;
     }
+
     &--big {
       font-size: 72px;
     }
+
     &--small {
       font-size: 27px;
     }
+
     &--mid {
       font-size: 33px;
     }
+
     &--middle {
       font-size: 28px;
     }
+
     &--wrap {
       display: flex;
       flex-direction: column;
     }
   }
+
   &__cuponContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+
     &--warning {
       color: $red;
       font-weight: 700;
+
       @include rwd-xs {
         font-size: 12px;
       }
     }
   }
+
   &__cuponBtn {
     display: flex;
     align-self: flex-end;
+
     &--black {
       color: $black;
     }
+
     &--red {
       color: $red;
     }
+
     &--text {
       margin-left: 20px;
       padding: 3px 10px;
     }
   }
+
   &__address {
     padding: 20px 20px;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
+
     &--left {
       display: flex;
       width: 100%;
       justify-content: space-around;
+
       @include rwd-lg {
         margin-top: 20px;
         width: 100%;
       }
+
       @include rwd-xs {
         width: 100%;
         padding-left: 50%;
       }
     }
   }
+
   &__addressText {
     padding-left: 50px;
+
     @include rwd-lg {
       padding: 0;
     }
   }
+
   &__password {
     margin-right: 20px;
     @extend .h3;
+
     &--pr {
       margin-right: 25px;
     }
   }
+
   &__page {
     width: 100%;
+    line-height: 40px;
+
     &:hover {
       background-image: linear-gradient(transparent 60%, #FADD61 60%);
     }
+
     &--active {
       background-image: linear-gradient(transparent 60%, #FADD61 60%);
     }
   }
+
   &__order {
     padding: 30px 30px;
     border-bottom: 1px solid $gray-500;
   }
+
   &__orderDetail {
     display: flex;
     flex-wrap: wrap;
   }
+
   &__orderList {
     padding: 20px;
     @extend .h3;
+
     @include rwd-xs {
       padding: 5px;
     }
   }
+
   &__order_btn {
     display: flex;
     justify-content: center;
     @extend .h4;
   }
+
   &__orderImg {
     width: 100%;
     display: flex;
     align-items: center;
+
     &--mid {
       width: 20%;
       margin-left: 20%;
       margin-right: 10%;
     }
   }
+
   &__orderListImg {
     width: 200px;
     height: 200px;
     border-radius: 20px;
   }
+
   &__blockLeft {
     background-color: $primary;
     display: flex;
     align-items: center;
     padding: 10px;
+
     @include rwd-xs {
       background-color: #fff
     }
   }
+
   &__orderListText {
     @extend .h3;
+
     &--small {
       @extend .h4;
       color: $gray-700;
     }
+
     &--mid {
       @extend .h4;
       color: $gray-900;
     }
   }
+
   &__blockMid {
     padding: 20px;
     display: flex;
@@ -357,10 +439,12 @@
     align-items: center;
     flex-direction: column;
   }
+
   &__blockRight {
     @include rwd-xs {
       background-color: #fff
     }
+
     background-color:$gray-300;
     display: flex;
     justify-content: center;
@@ -385,6 +469,7 @@
   font-weight: 700;
   z-index: 10;
   @extend .h4;
+
   @include rwd-lg {
     padding: 0px;
     margin: 1px;
@@ -411,6 +496,7 @@
   will-change: opacity;
   display: none;
   z-index: 10;
+
   @include rwd-lg {
     display: none;
   }
@@ -424,6 +510,7 @@
   opacity: 1;
   background-color: $white;
   border: 1px solid $secondary;
+
   @include rwd-lg {
     display: none;
   }
@@ -443,6 +530,7 @@
   justify-content: center;
   opacity: 0;
   z-index: 10;
+
   @include rwd-lg {
     display: none;
   }
@@ -451,6 +539,7 @@
 .arrow {
   border-top: 1px #FFAC55 solid;
   border-left: 1px #FFAC55 solid;
+
   @include rwd-lg {
     display: none;
   }
@@ -458,6 +547,7 @@
 
 .dropdownBackground.open {
   opacity: 1;
+
   @include rwd-lg {
     opacity: 0;
   }
@@ -471,6 +561,7 @@
   background: white;
   transform: translateY(-50%) rotate(45deg);
   z-index: 10;
+
   @include rwd-lg {
     display: none;
   }
@@ -478,6 +569,7 @@
 
 .courses {
   min-width: 250px;
+
   @include rwd-lg {
     display: none;
   }
@@ -489,6 +581,7 @@
   border-bottom: 1px solid #E59807;
   text-align: center;
   z-index: 10;
+
   @include rwd-lg {
     display: none;
   }
@@ -503,12 +596,15 @@
   &-enter {
     opacity: 0;
   }
+
   &-leave-to {
     opacity: 0;
   }
+
   &-enter-active {
     transition: opacity 2s;
   }
+
   &-leave-active {
     transition: opacity 2s;
   }
