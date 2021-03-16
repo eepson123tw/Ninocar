@@ -10,7 +10,7 @@
             @click="handleSearchTypeChange">切換搜尋方式</button>
         <div class="d-inbl" v-show="searchType === 'sort'">
             <button class="btn btn--outline mr-8 mr-sm-1" @click="handleFilterReset">清空</button>
-            <button class="btn btn--outline mr-8 mr-sm-1" @click="handleFilterAllCheck">全選</button>
+            <!-- <button class="btn btn--outline mr-8 mr-sm-1" @click="handleFilterAllCheck">全選</button> -->
         </div>
         <form class="search-bar" v-show="searchType === 'keyword'">
             <img src="./assets/img/icon/icon-search.svg" alt="search" class="search-bar__icon">
