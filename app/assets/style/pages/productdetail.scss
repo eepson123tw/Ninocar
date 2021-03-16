@@ -34,6 +34,11 @@
     // height: 20%;
     display: flex;
     margin-top: 50px;
+    @include rwd(460px) {
+        display: flex;
+        width: 20%;
+        height: 50px;
+    }
 }
 
 .gallery img {
