@@ -160,7 +160,7 @@
 .page-link {
     display: block;
     box-sizing: border-box;
-    width: 50px;
+    width: 30px;
     height: 45px;
     text-align: center;
     line-height: 3;
@@ -220,4 +220,10 @@
     .item {
         margin: 0px;
     }
+
+    .page {
+        margin: 100px 35px -20px;
+    }
+
+
 }

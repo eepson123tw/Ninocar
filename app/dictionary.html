@@ -59,9 +59,9 @@
         isModalShow: false,
         yearList: ['1970~1989', '1990~2009', '2010後'],
         limitList: ['無限定', '期間限定', '點數限定'],
-        selectedSeriesList: ['BS', 'EN', 'TA', 'EM', 'PM', 'PA', 'RV', 'CA'],
-        selectedYearList: ['1970~1989', '1990~2009', '2010後'],
-        selectedLimitList: ['無限定', '期間限定', '點數限定'],
+        selectedSeriesList: [],
+        selectedYearList: [],
+        selectedLimitList: [],
       },
       store,
       computed: {
@@ -134,7 +134,13 @@
             this.showProductList = this.myProductList;
           }
         },
-
+        searchType(type) {
+          if (type === 'sort') {
+            this.selectedSeriesList.splice(0);
+            this.selectedYearList.splice(0);
+            this.selectedLimitList.splice(0);
+          }
+        },
       },
       methods: {
         handleSearchTypeChange() {
@@ -148,8 +154,12 @@
           }
         },
         handleShowProductListChange() {
+
           const filterYearProductList = this.productList.filter(product => {
             let isYearInclude = false;
+            if (this.selectedYearList.length === 0) {
+              isYearInclude = true
+            }
             this.selectedYearList.includes('1970~1989') && product.year <= 1989 ?
               isYearInclude =
               true : '';
@@ -162,11 +172,19 @@
             }
             return isYearInclude;
           })
+
+
           const filterSeriesProductList = filterYearProductList.filter(product => {
+            if (this.selectedSeriesList.length === 0) {
+              return true
+            }
             return this.selectedSeriesList.includes(product.series);
           })
           const filterLimitProductList = filterSeriesProductList.filter(product => {
             let isLimitInclude = false;
+            if (this.selectedLimitList.length === 0) {
+              isLimitInclude = true
+            }
             this.selectedLimitList.includes('期間限定') && product.limitLabel === '2' ?
               isLimitInclude =
               true : '';

@@ -242,7 +242,7 @@
                                     </div>
                                     <p class="makeCar-name">白色尾翼</p>
                                     <p class="makeCar-price">NT$ 100</p>
-                                    <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
+                                    <button class="btn btn--fluid btn--outline selectAccessory selectA6">新增此配件</button>
                                 </li>
                             </div>
                         </ul>
@@ -386,7 +386,7 @@
                                     </g>
                                     </svg>
                         <h2 class="modal__title">
-                            新增地址
+                            檢舉
                         </h2>
                         <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
                         <ul class="modal__textGroup">
@@ -996,14 +996,12 @@
                 },
 
             },
-            mounted(){//這裡
-                // console.log(this.isMemberIdExist)
-                // console.log('aaa')
+            mounted(){
 
             },
             updated() {
                 // this.isMemberIdExist = true;
-                console.log('bbb')
+
             },
             store,
             computed:{
@@ -1331,7 +1329,7 @@
                 isModalShow: false,
                 isModalShow2:false,
                 addGoodNum:null,
-
+                filterContext:null,
             },
             methods: {
                 showWorks(e){ //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
@@ -1459,6 +1457,48 @@
                 addgoodNum(){
                     this.goodNum += 1;
                 },
+                // sort(){
+                //     this.filterContext = $('.filter').val();
+                //     // console.log(this.filterContext)
+                //     let timeArr = [];
+                //     for(let i = 0; i < $('.work').length; i++){
+                //             let option = $(`.work:eq(${i})`).children('.work_author').children('.userContent').children('.other').children('.mainTime').text().split('小時前')[0];
+                //             optionF = parseInt(option)
+                //             // console.log(optionF)
+
+                //             timeArr.push(optionF)
+                //             newArrSort = timeArr.sort(function(n1, n2){
+                //                 return n1 < n2 ? -1 : 1;
+                //             }); //最終結果為[1,4,4,7,15,26]
+                //             // console.log(newArrSort)
+
+                //             index = newArrSort.indexOf(newArrSort[i])
+                //             // console.log(index)
+
+                //             if(this.filterContext == '按作品新到舊'){
+                //                 $('.work')
+                //             }
+                //     }
+
+                //     if(this.filterContext == '按作品新到舊'){
+                //         $('.work')
+
+                //         // if(index == 0){
+                //         //     $(`.work:eq(${index})`).css({"order":5}) //15
+                //         // }else if(index == 1){
+                //         //     $(`.work:eq(${index})`).css({"order":1}) //1
+                //         // }else if(index == 2){
+                //         //     $(`.work:eq(${index})`).css({"order":3}) //4
+                //         // }else if(index == 3){
+                //         //     $(`.work:eq(${index})`).css({"order":4}) //7
+                //         // }else if(index == 4){
+                //         //     $(`.work:eq(${index})`).css({"order":2}) //4
+                //         // }else if(index == 5){
+                //         //     $(`.work:eq(${index})`).css({"order":6}) //26
+                //         // }
+                //     }
+
+                // }
             },
             store,
             computed:{

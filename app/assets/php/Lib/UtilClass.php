@@ -6,7 +6,7 @@ class UtilClass{
     {
         //Web根目錄真實路徑
         $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
-        return $ServerRoot . "/T1/upload/";
+        return $ServerRoot . "/ninocar/upload/";
     }
 
     //取得PDO物件
