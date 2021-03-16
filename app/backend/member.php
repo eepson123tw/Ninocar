@@ -106,7 +106,6 @@ $data = $statement->fetchAll();
         <!-- table -->
         <div class="col-lg-9">
             <div class="table-responsive">
-                <!-- <button class="update_btn mb-3 ml-3"><i class="fas fa-upload"></i>上架商品</button> -->
                 <table>
                     <thead>
                         <tr>
