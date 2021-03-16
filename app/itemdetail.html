@@ -108,26 +108,20 @@
 
           let newArray = this.cartList.filter((item, index, arr) => {
             return arr.indexOf(item) === index;
-
           });
           let cartJson = JSON.stringify(newArray);
           localStorage.setItem('cartsList', cartJson);
-
-
         },
         likeCarts() {
           this.likeList.push(this.currentProductList);
           // 不重複
           let newArray = this.likeList.filter((item, index, arr) => {
             return arr.indexOf(item) === index;
-
           });
 
           console.log(newArray);
           let likeCartJson = JSON.stringify(newArray);
           localStorage.setItem('likeList', likeCartJson);
-
-
         },
         nowProduct(val) {
           console.log(val.id);

@@ -54,283 +54,336 @@
         </div>
 
 
-        <div class="selectAreaOut">
-          <div class="selectBtn">
-            <div class="selectAreaOut-previous" @click="moveLeft"><img src="./assets/img/icon/icon-left.svg" alt=""></div>
-            <div class="selectAreaOut-next" @click="moveRight"><img src="./assets/img/icon/icon-right.svg" alt=""></div>
-          </div>
-
-          <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
-            <!-- 車型 -->
-            <div class="shapeCards">
-              <li class="shapeCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/shape01.png" class="shape">
-                </div>
-
-                <p class="makeCar-name">Audi R8小客車</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-              </li>
-
-              <li class="shapeCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/shape02.png" class="shape">
-                </div>
-                <p class="makeCar-name">Audi R8小客車</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-              </li>
-
-              <li class="shapeCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/shape03.png" class="shape">
-                </div>
-                <p class="makeCar-name">Audi R8小客車</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-              </li>
-
-              <li class="shapeCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/shape03.png" class="shape">
-                </div>
-                <p class="makeCar-name">Audi R8小客車</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
-              </li>
+        <!-- 配件 -->
+        <div class="accessoryCards">
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory1.png" class="accessory">
             </div>
+            <p class="makeCar-name">圓形燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory  selectA1">新增此配件</button>
+          </li>
 
-            <!-- 顏色 -->
-            <div class="colorCards">
-              <li class="colorCard col-3 col-lg-2 col-sm-3">
-                <div class="color">
-                  <div class="white"></div>
-                </div>
-                <p class="makeCar-name">白</p>
-                <p class="makeCar-price">NT$ 50</p>
-                <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
-              </li>
-
-              <li class="colorCard col-3 col-lg-2 col-sm-3">
-                <div class="color">
-                  <div class="red"></div>
-                </div>
-                <p class="makeCar-name">紅</p>
-                <p class="makeCar-price">NT$ 50</p>
-                <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
-              </li>
-
-              <li class="colorCard col-3 col-lg-2 col-sm-3">
-                <div class="color ">
-                  <div class="orange"></div>
-                </div>
-                <p class="makeCar-name">橙</p>
-                <p class="makeCar-price">NT$ 50</p>
-                <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
-              </li>
-
-              <li class="colorCard col-3 col-lg-2 col-sm-3">
-                <div class="color ">
-                  <div class="yellow"></div>
-                </div>
-                <p class="makeCar-name">黃</p>
-                <p class="makeCar-price">NT$ 70</p>
-                <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
-              </li>
-
-              <li class="colorCard col-3 col-lg-2 col-sm-3">
-                <div class="color ">
-                  <div class="purple"></div>
-                </div>
-                <p class="makeCar-name">紫</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectColor selectPurple">選擇此烤漆</button>
-              </li>
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory2.png" class="accessory">
             </div>
+            <p class="makeCar-name">方形藍色燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA2">新增此配件</button>
+          </li>
 
-
-            <!-- 輪子 -->
-            <div class="tireCards">
-              <li class="tireCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/tire01.png" class="tire">
-                </div>
-                <p class="makeCar-name">酷炫款輪子</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
-              </li>
-
-              <li class="tireCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/tire02.png" class="tire">
-                </div>
-                <p class="makeCar-name">懷舊款輪子</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
-              </li>
-
-              <li class="tireCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/tire03.png" class="tire">
-                </div>
-                <p class="makeCar-name">經典款輪子</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
-              </li>
-
-              <li class="tireCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/tire04.png" class="tire">
-                </div>
-                <p class="makeCar-name">時尚款輪子</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectTire selectT4">選擇此車輪</button>
-              </li>
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory3.png" class="accessory">
             </div>
+            <p class="makeCar-name">紅藍色燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA3">新增此配件</button>
+          </li>
 
-
-            <!-- 配件 -->
-            <div class="accessoryCards">
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory1.png" class="accessory">
-                </div>
-                <p class="makeCar-name">圓形燈飾</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory  selectA1">新增此配件</button>
-              </li>
-
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory2.png" class="accessory">
-                </div>
-                <p class="makeCar-name">方形藍色燈飾</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory selectA2">新增此配件</button>
-              </li>
-
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory3.png" class="accessory">
-                </div>
-                <p class="makeCar-name">紅藍色燈飾</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory selectA3">新增此配件</button>
-              </li>
-
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory4.png" class="accessory">
-                </div>
-                <p class="makeCar-name">可愛動物車貼</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory selectA4">新增此配件</button>
-              </li>
-
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory5.png" class="accessory">
-                </div>
-                <p class="makeCar-name">雙馬車貼</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory selectA5">新增此配件</button>
-              </li>
-
-              <li class="accessoryCard col-3 col-lg-2 col-sm-3">
-                <div class="cardOut">
-                  <img src="./assets/img/pic/accessory6.png" class="accessory">
-                </div>
-                <p class="makeCar-name">白色尾翼</p>
-                <p class="makeCar-price">NT$ 100</p>
-                <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
-              </li>
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory4.png" class="accessory">
             </div>
-          </ul>
+            <p class="makeCar-name">可愛動物車貼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA4">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory5.png" class="accessory">
+            </div>
+            <p class="makeCar-name">雙馬車貼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA5">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory6.png" class="accessory">
+            </div>
+            <p class="makeCar-name">白色尾翼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA6">新增此配件</button>
+          </li>
         </div>
-
-        <div class="tipArea">
-          <div class="tipArea_left col-6 col-sm-4">
-            <button class="btn btn--outline previousStep invisible" @click="toPreviousStep"><img
-                src="./assets/img/icon/icon-double-left.svg"
-                class="icon"
-              >上一步</button>
-          </div>
-          <div class="tipArea_right col-6 col-sm-4">
-            <div class="tipPrice">
-              <p class="h4">總金額</p>
-              <p class="totalPrice">NT$ 0</p>
-            </div>
-            <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
-            <button class="btn btn--disabled nextStep" @click="toNextStep">下一步</button>
-          </div>
-        </div>
-
-
-        <form class="giveName">
-          <div class="giveName_left">
-            <p class="description">幫您的作品取個名字</p>
-            <input type="text" class="typeWorkName" name="workName">
-            <div class="nameTip">
-              <p>餘20字</p>
-              <button type="button" class="btn btn--link randomName h5">隨機取名</button>
-            </div>
-
-            <input type="checkbox" name="" value="">公開此作品
-
-            <p class="description">使用者暱稱</p>
-            <input type="text" class="typeNickName" name="userNickName">
-            <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
-          </div>
-          <div class="giveName_right">
-            <p class="description">描述您的創作靈感</p>
-            <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration" name="inspiration"></textarea>
-            <p>餘100字</p>
-
-            <input type="hidden" class="putDataId" name="workPostTime" value="">
-            <input type="hidden" class="putPrice" name="workPrice" value="">
-            <input type="hidden" class="putAllIndex" name="allIndex" value="">
-            <input type="hidden" class="putImgPath" name="imgPath" value="">
-            <input type="hidden" class="putMemberId" name="memberId" value="">
-          </div>
-        </form>
-      </div>
-
-      <div class="workBar col-12 col-lg-6 col-sm-4">
-        <div class="workBar_left">
-          <button class="workButton h2 works" @click="showWorks">大家的作品</button>
-          <button class="workButton h2 myworks" @click="showMywork">我的作品</button>
-        </div>
-        <div class="workBar_right">
-          <p class="h4 mr-4">排序</p>
-          <select name="" id="" class="filter h4">
-            <option class="goodFirst">按讚數多到少</option>
-            <option class="newFirst">按作品新到舊</option>
-            <option class="OldFirst">按作品舊到新</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div>
-        <ul class="othersWorks grid">
-          <work-card ref="workInfo1" @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" :work-total-price="450" data-id="220203" data-board-id="1614917124264"></work-card>
-          <work-card2 ref="workInfo2" @report-emit="openReportModal" value="370" :work-total-price="370" data-id="22310" data-board-id="1614917124274"></work-card2>
-          <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
-          <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card>
-          <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card>
-          <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" data-board-id="1615519588220"></work-card>
-
-          <!-- ajax -->
         </ul>
+      </div>
 
-        <div class="mywork" id="mywork">
-          <empty-state></empty-state>
+      <ul class="selectArea col-12 col-lg-6 col-sm-4" style="left: 0px;">
+        <!-- 車型 -->
+        <div class="shapeCards">
+          <li class="shapeCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/shape01.png" class="shape">
+            </div>
+
+            <p class="makeCar-name">Audi R8小客車</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+          </li>
+
+          <li class="shapeCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/shape02.png" class="shape">
+            </div>
+            <p class="makeCar-name">Audi R8小客車</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+          </li>
+
+          <li class="shapeCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/shape03.png" class="shape">
+            </div>
+            <p class="makeCar-name">Audi R8小客車</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+          </li>
+
+          <li class="shapeCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/shape03.png" class="shape">
+            </div>
+            <p class="makeCar-name">Audi R8小客車</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectShape">選擇此車型</button>
+          </li>
         </div>
+
+        <!-- 顏色 -->
+        <div class="colorCards">
+          <li class="colorCard col-3 col-lg-2 col-sm-3">
+            <div class="color">
+              <div class="white"></div>
+            </div>
+            <p class="makeCar-name">白</p>
+            <p class="makeCar-price">NT$ 50</p>
+            <button class="btn btn--fluid btn--outline selectColor selectWhite">選擇烤漆</button>
+          </li>
+
+          <li class="colorCard col-3 col-lg-2 col-sm-3">
+            <div class="color">
+              <div class="red"></div>
+            </div>
+            <p class="makeCar-name">紅</p>
+            <p class="makeCar-price">NT$ 50</p>
+            <button class="btn btn--fluid btn--outline selectColor selectRed">選擇此烤漆</button>
+          </li>
+
+          <li class="colorCard col-3 col-lg-2 col-sm-3">
+            <div class="color ">
+              <div class="orange"></div>
+            </div>
+            <p class="makeCar-name">橙</p>
+            <p class="makeCar-price">NT$ 50</p>
+            <button class="btn btn--fluid btn--outline selectColor selectOrange">選擇此烤漆</button>
+          </li>
+
+          <li class="colorCard col-3 col-lg-2 col-sm-3">
+            <div class="color ">
+              <div class="yellow"></div>
+            </div>
+            <p class="makeCar-name">黃</p>
+            <p class="makeCar-price">NT$ 70</p>
+            <button class="btn btn--fluid btn--outline selectColor selectYellow">選擇此烤漆</button>
+          </li>
+
+          <li class="colorCard col-3 col-lg-2 col-sm-3">
+            <div class="color ">
+              <div class="purple"></div>
+            </div>
+            <p class="makeCar-name">紫</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectColor selectPurple">選擇此烤漆</button>
+          </li>
+        </div>
+
+
+        <!-- 輪子 -->
+        <div class="tireCards">
+          <li class="tireCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/tire01.png" class="tire">
+            </div>
+            <p class="makeCar-name">酷炫款輪子</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectTire selectT1">選擇此車輪</button>
+          </li>
+
+          <li class="tireCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/tire02.png" class="tire">
+            </div>
+            <p class="makeCar-name">懷舊款輪子</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectTire selectT2">選擇此車輪</button>
+          </li>
+
+          <li class="tireCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/tire03.png" class="tire">
+            </div>
+            <p class="makeCar-name">經典款輪子</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectTire selectT3">選擇此車輪</button>
+          </li>
+
+          <li class="tireCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/tire04.png" class="tire">
+            </div>
+            <p class="makeCar-name">時尚款輪子</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectTire selectT4">選擇此車輪</button>
+          </li>
+        </div>
+
+
+        <!-- 配件 -->
+        <div class="accessoryCards">
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory1.png" class="accessory">
+            </div>
+            <p class="makeCar-name">圓形燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory  selectA1">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory2.png" class="accessory">
+            </div>
+            <p class="makeCar-name">方形藍色燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA2">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory3.png" class="accessory">
+            </div>
+            <p class="makeCar-name">紅藍色燈飾</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA3">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory4.png" class="accessory">
+            </div>
+            <p class="makeCar-name">可愛動物車貼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA4">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory5.png" class="accessory">
+            </div>
+            <p class="makeCar-name">雙馬車貼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA5">新增此配件</button>
+          </li>
+
+          <li class="accessoryCard col-3 col-lg-2 col-sm-3">
+            <div class="cardOut">
+              <img src="./assets/img/pic/accessory6.png" class="accessory">
+            </div>
+            <p class="makeCar-name">白色尾翼</p>
+            <p class="makeCar-price">NT$ 100</p>
+            <button class="btn btn--fluid btn--outline selectAccessory selectA6">選擇此配件</button>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <div class="tipArea">
+      <div class="tipArea_left col-6 col-sm-4">
+        <button class="btn btn--outline previousStep invisible" @click="toPreviousStep"><img
+            src="./assets/img/icon/icon-double-left.svg"
+            class="icon"
+          >上一步</button>
+      </div>
+      <div class="tipArea_right col-6 col-sm-4">
+        <div class="tipPrice">
+          <p class="h4">總金額</p>
+          <p class="totalPrice">NT$ 0</p>
+        </div>
+        <div class="pleaseSelect">請先選擇車款才能進行下一步喔</div>
+        <button class="btn btn--disabled nextStep" @click="toNextStep">下一步</button>
       </div>
     </div>
-    @@include('./components/Footer.html')
-    <!-- @@include('./pages/FactoryPage/reportSuccessModal.html') 做成組件了，不用這個了-->
+
+
+    <form class="giveName">
+      <div class="giveName_left">
+        <p class="description">幫您的作品取個名字</p>
+        <input type="text" class="typeWorkName" name="workName">
+        <div class="nameTip">
+          <p>餘20字</p>
+          <button type="button" class="btn btn--link randomName h5">隨機取名</button>
+        </div>
+
+        <input type="checkbox" name="" value="">公開此作品
+
+        <p class="description">使用者暱稱</p>
+        <input type="text" class="typeNickName" name="userNickName">
+        <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
+      </div>
+      <div class="giveName_right">
+        <p class="description">描述您的創作靈感</p>
+        <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration" name="inspiration"></textarea>
+        <p>餘100字</p>
+
+        <input type="hidden" class="putDataId" name="workPostTime" value="">
+        <input type="hidden" class="putPrice" name="workPrice" value="">
+        <input type="hidden" class="putAllIndex" name="allIndex" value="">
+        <input type="hidden" class="putImgPath" name="imgPath" value="">
+        <input type="hidden" class="putMemberId" name="memberId" value="">
+      </div>
+    </form>
+  </div>
+
+  <div class="workBar col-12 col-lg-6 col-sm-4">
+    <div class="workBar_left">
+      <button class="workButton h2 works" @click="showWorks">大家的作品</button>
+      <button class="workButton h2 myworks" @click="showMywork">我的作品</button>
+    </div>
+    <div class="workBar_right">
+      <p class="h4 mr-4">排序</p>
+      <select name="" id="" class="filter h4">
+        <option class="goodFirst">按讚數多到少</option>
+        <option class="newFirst">按作品新到舊</option>
+        <option class="OldFirst">按作品舊到新</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div>
+    <ul class="othersWorks grid">
+      <work-card ref="workInfo1" @report-emit="openReportModal" :img="'./assets/img/pic/model01.png'" :good-num="24" :work-title="'白帥帥'" :post-time="15" value="450" :work-total-price="450" data-id="220203" data-board-id="1614917124264"></work-card>
+      <work-card2 ref="workInfo2" @report-emit="openReportModal" value="370" :work-total-price="370" data-id="22310" data-board-id="1614917124274"></work-card2>
+      <work-card ref="workInfo3" :img="'./assets/img/pic/model02.png'" :good-num="15" :work-title="'賣紫薯的車'" value="500" :work-total-price="500" data-id="55555" data-board-id="1614917124284"></work-card>
+      <work-card ref="workInfo4" :img="'./assets/img/pic/model03.png'" :good-num="13" :work-title="'西瓜轎車'" :post-time="7" data-price="350" :work-total-price="350" data-id="22111" data-board-id="1614917124294"></work-card>
+      <work-card ref="workInfo5" :img="'./assets/img/pic/model04.png'" :good-num="5" :work-title="'賣橘子的車'" data-price="350" :work-total-price="350" data-id="112303" data-board-id="1614917124299"></work-card>
+      <work-card ref="workInfo6" :img="'./assets/img/pic/model05.png'" :work-title="'賣地瓜的車'" :post-time="26" data-price="500" :work-total-price="500" data-id="0033345" data-board-id="1615519588220"></work-card>
+
+      <!-- ajax -->
+    </ul>
+
+    <div class="mywork" id="mywork">
+      <empty-state></empty-state>
+    </div>
+  </div>
+  </div>
+  @@include('./components/Footer.html')
+  <!-- @@include('./pages/FactoryPage/reportSuccessModal.html') 做成組件了，不用這個了-->
   </div>
 
 
@@ -390,7 +443,7 @@
                                     </g>
                                     </svg>
                         <h2 class="modal__title">
-                            新增地址
+                            檢舉
                         </h2>
                         <p class="modal__content--left">檢舉留言這篇留言的原因?</p>
                         <ul class="modal__textGroup">
@@ -1017,14 +1070,12 @@
         },
 
       },
-      mounted() { //這裡
-        // console.log(this.isMemberIdExist)
-        // console.log('aaa')
+      mounted() {
 
       },
       updated() {
         // this.isMemberIdExist = true;
-        console.log('bbb')
+
       },
       store,
       computed: {
@@ -1336,6 +1387,306 @@
 
         }
       },
+    })
+
+    const vm1 = new Vue({ //主體
+          el: '#factory',
+          props: {
+            memberid_exist: {
+              defautl: false,
+              type: Boolean
+            }
+          },
+          data: {
+            countStep: 0,
+            countR: 0,
+            countL: 0,
+            docW: $(document).width(),
+            shapeIndex: -1,
+            circleIndex: -1,
+            isModalShow: false,
+            isModalShow2: false,
+            addGoodNum: null,
+            filterContext: null,
+          },
+          methods: {
+            showWorks(e) { //點選大家的作品時會標示在哪裡，大家作品會出現、我的作品會隱藏
+              $(e.target).css({
+                "background": "linear-gradient(transparent 60%, #FADD61 60%)"
+              });
+
+              $('.workButton').not(e.target).css({
+                "background": "none"
+              });
+
+              $('.othersWorks').css({
+                "display": "flex"
+              });
+              $('.mywork').css({
+                "display": "none"
+              });
+            },
+            showMywork(e) { //點選我的作品時會標示在哪裡，我的作品會出現、大家作品會隱藏
+              $(e.target).css({
+                "background": "linear-gradient(transparent 60%, #FADD61 60%)"
+              });
+
+              $('.workButton').not(e.target).css({
+                "background": "none"
+              });
+
+              $('.othersWorks').css({
+                "display": "none"
+              });
+              $('.mywork').css({
+                "display": "block"
+              });
+            },
+            make(e) { //點開始製作後出現製作區域、順便清空整個canvas
+              $('.previousStep').addClass('invisible');
+
+              $('.progressBar').css({
+                "display": "block"
+              });
+
+              $('.circle:first').css({
+                "background-color": "#E59807"
+              });
+
+              $('.intro').css({
+                "display": "none"
+              });
+
+              $('.makeCar').css({
+                "display": "block"
+              });
+
+              // console.log('清空空')
+              context.clearRect(0, 0, 400, 200);
+              contextA1.clearRect(0, 0, 400, 200);
+              contextA2.clearRect(0, 0, 400, 200);
+              contextA3.clearRect(0, 0, 400, 200);
+              $(e.target).removeClass('finish');
+            },
+            closeModal() { //關掉彈窗
+              // console.log('關掉')
+              this.isModalShow = false;
+            },
+            toNextStep() { //點下一步進到下一個步驟、最後一步時生成base64
+              this.countStep += 1;
+              // console.log(this.countStep)
+
+              if (this.countStep & 5 > 0) {
+                $('.putMemberId').val(this.$store.state.memberId);
+              }
+              // console.log("nextStep is clicked! countStep: "+ this.countStep)
+            },
+            toPreviousStep() { //點上一步回上一步
+              this.countStep -= 1;
+              // console.log('上');
+              console.log(this.countStep);
+              // // console.log("previousStep is clicked! countStep: " + this.countStep)
+            },
+            getCircleIndex(e) {
+              circleIndex = $(e.target).parent().index();
+              // console.log("circleIndex: " + circleIndex);
+            },
+            moveRight() {
+              this.countL += 1;
+
+              let distanceToLeft = $('.selectArea').position().left;
+              console.log(distanceToLeft);
+              console.log(this.countStep);
+
+              if (this.docW <= 992) {
+                if (this.countStep < 3 && distanceToLeft > -430) {
+                  // console.log('R1');
+                  $('.selectArea').animate({
+                    left: '-=430'
+                  });
+                } else if (this.countStep == 3 && distanceToLeft > -2100) {
+                  // console.log('R2');
+                  $('.selectArea').animate({
+                    left: '-=410'
+                  });
+                }
+              } else {
+                if (this.countStep < 3 && distanceToLeft > 10) {
+                  // console.log('L1')
+                  $('.selectArea').animate({
+                    left: '-=410'
+                  });
+                } else if (this.countStep >= 3 && distanceToLeft > -500) {
+                  // console.log('L2')
+                  $('.selectArea').animate({
+                    left: '-=410'
+                  });
+                }
+              }
+            },
+            moveLeft() {
+              this.countR += 1;
+              // console.log('countR: '+ this.countR);
+              // console.log('docW: '+ docW)
+
+              let shapeLength = $('.shapeCard').length;
+              // console.log(shapeLength)
+
+              let colorLength = $('.selectColor').length;
+              // console.log(colorLength)
+              // console.log("countStep:  " + countStep)
+
+              let distanceToLeft = $('.selectArea').position().left;
+              console.log(distanceToLeft);
+
+              if (this.docW <= 992) {
+                if (this.countStep == 0 && distanceToLeft < 3) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 1 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 2 && distanceToLeft < 3 && distanceToLeft > (-1300)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-2100)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                }
+              } else {
+                if (this.countStep == 0 && distanceToLeft < 14) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 1 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 2 && distanceToLeft < 14 && distanceToLeft > (-400)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                } else if (this.countStep == 3 && distanceToLeft < 14 && distanceToLeft > (-920)) {
+                  $('.selectArea').animate({
+                    left: '+=410'
+                  });
+                }
+              }
+            },
+            openReportModal(isModalShow) {
+              this.isModalShow = isModalShow;
+            },
+            addgoodNum() {
+              this.goodNum += 1;
+            },
+            // sort(){
+            //     this.filterContext = $('.filter').val();
+            //     // console.log(this.filterContext)
+            //     let timeArr = [];
+            //     for(let i = 0; i < $('.work').length; i++){
+            //             let option = $(`.work:eq(${i})`).children('.work_author').children('.userContent').children('.other').children('.mainTime').text().split('小時前')[0];
+            //             optionF = parseInt(option)
+            //             // console.log(optionF)
+
+            //             timeArr.push(optionF)
+            //             newArrSort = timeArr.sort(function(n1, n2){
+            //                 return n1 < n2 ? -1 : 1;
+            //             }); //最終結果為[1,4,4,7,15,26]
+            //             // console.log(newArrSort)
+
+            //             index = newArrSort.indexOf(newArrSort[i])
+            //             // console.log(index)
+
+            //             if(this.filterContext == '按作品新到舊'){
+            //                 $('.work')
+            //             }
+            //     }
+
+            //     if(this.filterContext == '按作品新到舊'){
+            //         $('.work')
+
+            //         // if(index == 0){
+            //         //     $(`.work:eq(${index})`).css({"order":5}) //15
+            //         // }else if(index == 1){
+            //         //     $(`.work:eq(${index})`).css({"order":1}) //1
+            //         // }else if(index == 2){
+            //         //     $(`.work:eq(${index})`).css({"order":3}) //4
+            //         // }else if(index == 3){
+            //         //     $(`.work:eq(${index})`).css({"order":4}) //7
+            //         // }else if(index == 4){
+            //         //     $(`.work:eq(${index})`).css({"order":2}) //4
+            //         // }else if(index == 5){
+            //         //     $(`.work:eq(${index})`).css({"order":6}) //26
+            //         // }
+            //     }
+
+            // }
+          },
+          store,
+          computed: {
+            //從store裡拿東西出來
+            memberId() {
+              return this.$store.state.memberId;
+
+            }
+          },
+          mounted() { //這裡
+            if (this.$store.state.memberId != null) {
+              this.memberid_exist = true;
+              // console.log('ddd')
+            }
+          },
+          updated() {
+
+          },
+
+          $(this.$el).children('.moreReply').children('.toggleIcon1').css({
+            "transform": "rotate(0deg)",
+          })
+        }
+      },
+      openReadMore() {
+        $(this.$el).children('.hiddenReply').slideToggle();
+        $(this.$el).children('.hiddenReply').css({
+          "display": "block"
+        });
+
+        this.count2 += 1;
+        // console.log(count2);
+
+        if (this.count2 % 2 == 1) {
+          $(this.$el).children('.readMore').children('.readMoreWord').text('關閉更多');
+          $(this.$el).children('.readMore').children('.toggleIcon2').css({
+            "transform": "rotate(180deg)",
+          })
+        } else {
+          $(this.$el).children('.readMore').children('.readMoreWord').text('閱讀更多');
+          $(this.$el).children('.readMore').children('.toggleIcon2').css({
+            "transform": "rotate(0deg)",
+          })
+        }
+      },
+      postComment(e) {
+        let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+        // let commentContentL = $(e.target).parent().parent().children('.textarea').text().length;
+        // console.log(commentContentL)
+        if (commentContentL > 0) {
+          this.commentNum_plus += 1;
+        }
+      },
+    },
+    store,
+    computed: {
+    //從store裡拿東西出來
+    memberId() {
+      return this.$store.state.memberId;
+
+    }
+    },
     })
 
     const vm1 = new Vue({ //主體

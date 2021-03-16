@@ -17,7 +17,6 @@ $statement->execute();
 $data = $statement->fetchAll();
 
 foreach ($data as $index => $row) {
-  echo '<tr>' . '<td>' . $row["member_id"] . '</td>';
   $level = $row["member_level"];
   switch ($level) {
     case '1':
@@ -31,7 +30,7 @@ foreach ($data as $index => $row) {
       break;
   }
   echo '<td>' . $level . '</td>';
-  echo '<td>' . $row["member_name"] . '</td>';
+  echo '<td>' . '<a href="memberDetail.php?MID=' . $row["member_id"] . '">' . $row["member_name"] . '</a>' . '</td>';
   $type = $row["member_type"];
   switch ($type) {
     case '1':
@@ -42,6 +41,8 @@ foreach ($data as $index => $row) {
       break;
   }
   echo '<td>' . $type . '</td>';
-  echo '<td>'.'<button type="button" class="alert" id="'. $row["member_id"] .'">'.'<i class="fas fa-ban"></i></button></td>';
-  echo '<td>'.'<button type="button" class="return" id="'. $row["member_id"] .'">'.'<i class="fas fa-unlock"></i></button></td>'.'</tr>';
+  echo '<td>' . $row["member_signdate"] . '</td>';
+  echo '<input type="hidden" name="MID" value="' . $row["member_id"] . '" />';
+  echo '<td>' . '<button type="button"' . ' class="alert" id="' . $row["member_id"] . '">' . '<i class="fas fa-ban"></i>' . '</button></td>';
+  echo '<td>' . '<button type="button"' . ' class="return" id="' . $row["member_id"] . '">' . '<i class="fas fa-unlock"></i>' . '</button></td>' . '</tr>';
 }
