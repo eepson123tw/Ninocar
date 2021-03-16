@@ -11,6 +11,10 @@
        }
 
        @each $level in 30 {
+           .mr-#{$level} {
+               margin-right: $space-unit * $level;
+           }
+
            .mt-#{$level} {
                margin-top: $space-unit * $level;
            }

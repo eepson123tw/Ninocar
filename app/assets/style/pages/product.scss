@@ -32,11 +32,11 @@
     margin-top: 200px;
 }
 
-// .item {
-//     overflow: hidden;
-//     width: 100%;
-//     margin-left: 25px;
-// }
+.item {
+    overflow: hidden;
+    width: 100%;
+    margin-left: 25px;
+}
 
 .menu-btn {
     display: block;
@@ -46,13 +46,13 @@
     font-weight: bold;
 }
 
-// .smenu {
-//     background: #fff;
-//     overflow: hidden;
-//     transition: max-height 0.3s;
-//     max-height: 0;
-//     width: 100%;
-// }
+.smenu {
+    background: #fff;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    max-height: 0;
+    width: 100%;
+}
 
 .smenu a {
     display: block;
@@ -79,9 +79,9 @@
     opacity: 1;
 }
 
-// .item:target .smenu {
-//     max-height: 30em;
-// }
+.item:target .smenu {
+    max-height: 30em;
+}
 
 // .product {
 //     &__header {
@@ -160,7 +160,7 @@
 .page-link {
     display: block;
     box-sizing: border-box;
-    width: 50px;
+    width: 30px;
     height: 45px;
     text-align: center;
     line-height: 3;
@@ -220,4 +220,10 @@
     .item {
         margin: 0px;
     }
+
+    .page {
+        margin: 100px 35px -20px;
+    }
+
+
 }

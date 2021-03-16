@@ -6,14 +6,14 @@
 <div class="container">
     <div class="row w-100">
         <section class=" cart__payment cart__payment--nopt w-100">
-            <div class=" d-flex ml-20" >
+            <div class=" d-flex flex-wrap ml-20">
                 <div class="cart__comment col-3 col-lg-6" v-for="(item,index) in arrayData">
                     <div class="cart__imgGroup">
-                        <img :src="item.img">
-                        <p>{{item.seriousNum}}</p>
+                        <img :src="item.imgURL">
+                        <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
                     </div>
                     <div class="cart__textGroup">
-                        <h3>{{item.productName}}</h3>
+                        <h3>{{item.eName}}</h3>
                         <p>NT$ <span>{{item.price}}</span></p>
                         <button class="btn btn--ghost btn--small">收藏</button>
                     </div>
@@ -22,4 +22,4 @@
             </div>
         </section>
     </div>
-    </div
+</div

@@ -164,7 +164,13 @@
             })
             .catch((error) => {
               console.log('FAILED...', error);
-            })
+            });
+
+
+          setTimeout(() => {
+            window.location.href = 'MemberPurchase.html';
+          }, 2000)
+
 
         },
         // deleteOneItem(value) {
