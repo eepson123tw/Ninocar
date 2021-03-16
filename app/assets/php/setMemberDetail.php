@@ -1,7 +1,8 @@
 <?php
  
- 
- include("./Lib/Conn.php");
+ try{
+
+    include("./Lib/Conn.php");
  $Util = new UtilClass();
    
 
@@ -38,6 +39,12 @@
 
 
     echo'新增成功';
+
+
+ }catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+  }
+ 
    
     
 

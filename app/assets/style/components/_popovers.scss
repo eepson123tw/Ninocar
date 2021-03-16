@@ -36,6 +36,27 @@
         margin: 5px;
         margin-left: 10px;
       }
+      &__num {
+        position: absolute;
+        @extend.h5;
+        color: white;
+        top: 0px;
+        left: 0px;
+        z-index: 102;
+        &::after {
+          position: absolute;
+          content: "";
+          display: block;
+          width: 20px;
+          height: 20px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: red;
+          border-radius: 50%;
+          z-index: -1;
+        }
+      }
       &__member {
         display: flex;
         p {

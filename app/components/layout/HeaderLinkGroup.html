@@ -6,6 +6,7 @@
                 <ul>
                     <li>
                         <a href="cart.html" aria-label="cart"  @mouseenter="isPopover = false">
+                          <span v-if="carts_list.length>=1" class="popovers__num">{{carts_list.length}}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 80 80" class="icon">
                                 <g transform="translate(-715 -383)">
                                     <circle cx="40" cy="40" r="37" transform="translate(715 383)" fill="#fadd61"  stroke="#ffffff" stroke-width="3"/>
@@ -18,10 +19,11 @@
                                     </g>
                                 </g>
                             </svg>
-                            <transition name="fade">  
+                    <transition name="fade">  
                     <popovers  v-if="isPopover"></popovers>
                     </transition>
                         </a>
+
                     </li>
                     <li>
                         <a href="#" aria-label="top" v-show="isTopBtnVisible" @click.prevent="scrollTop">
@@ -48,7 +50,8 @@
     data() {
       return {
         isTopBtnVisible: false,
-        isPopover: false
+        isPopover: false,
+        carts_list: [],
       }
     },
     methods: {
@@ -62,10 +65,18 @@
       },
       scrollListener() {
         this.isTopBtnVisible = window.scrollY > 100
-      }
+      },
+      checkCarts_list() {
+        setInterval(() => {
+          this.carts_list = JSON.parse(localStorage.getItem('cartsList')) || [];
+        }, 100);
+
+      },
+
     },
     mounted() {
-      window.addEventListener('scroll', this.scrollListener)
+      window.addEventListener('scroll', this.scrollListener);
+      this.checkCarts_list();
     },
     beforeDestroy() {
       window.removeEventListener('scroll', this.scrollListener)

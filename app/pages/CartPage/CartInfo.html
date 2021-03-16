@@ -278,6 +278,11 @@
 										class="form__text"
 									>儲存至我的地址</label>
 								</div>
+
+								<button
+									class="btn btn--fluid mb-xs-5  mb-5"
+									@click="pageHandler"
+								>確認付款</button>
 							</div>
 						</div>
 					</section>
@@ -378,12 +383,6 @@
 							<p>{{paymentContent}}</p>
 						</div>
 					</section>
-					<div class="col-6 col-lg-6 col-xs-12 block mt-5">
-						<button
-							class="btn btn--fluid mb-xs-5 "
-							@click="pageHandler"
-						>確認付款</button>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -604,10 +603,18 @@
       // 檢查是否選擇刷卡
       if (this.selectPayment == "線上刷卡") {
         this.cardAreaIsShow = true;
-      }
+      } else if (this.selectPayment == "ATM轉帳") {
+
+        let payNum = (Math.random().toFixed(12) * 1000000000000);
+
+        this.paymentContent = `請領取您的轉帳號碼:- ${payNum}-`;
+
+        return;
+
+      };
       if (this.selectShipping == "自取") {
         this.paymentContent = '請收到到貨通知後,至門市櫃檯結帳';
-      } else {
+      } else if (this.selectShipping == "宅配") {
         this.paymentContent = '收到通知信後,請稍做等待2~3日運送時程';
       }
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2021 年 03 月 16 日 10:06
+-- 產生時間： 2021 年 03 月 16 日 18:39
 -- 伺服器版本： 10.4.17-MariaDB
 -- PHP 版本： 8.0.2
 
@@ -151,6 +151,14 @@ CREATE TABLE `detail` (
   `product_id` int(11) NOT NULL COMMENT '商品編號'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 傾印資料表的資料 `detail`
+--
+
+INSERT INTO `detail` (`order_id`, `product_id`) VALUES
+(6346633, 1),
+(6346633, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -182,10 +190,10 @@ CREATE TABLE `member` (
 INSERT INTO `member` (`member_id`, `member_name`, `member_account`, `member_pwd`, `member_gender`, `member_phone`, `member_address`, `member_cost`, `member_photo`, `member_level`, `member_points`, `member_birthday`, `member_signdate`, `member_upgradedate`, `member_type`) VALUES
 (1, '匿名', 'jackjohnton789@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2021-03-12 15:52:54', NULL, 0),
 (2, '匿名', 'snake830102@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2021-03-12 15:52:54', NULL, 0),
-(3, 'eepson123', 'eepson123@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, '2021-02-03', '2021-03-12 15:52:54', '2021-03-16 13:54:17', 0),
-(5, 'sdasdasd', 'silvia.huang@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, '2020-03-04', '2021-03-16 13:52:18', '2021-03-16 13:52:18', 0),
+(3, '匿名', 'eepson123@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2021-03-12 15:52:54', '2021-03-16 17:12:42', 0),
+(5, '匿名', 'silvia.huang@gmail.com', '1234567', 0, NULL, NULL, NULL, NULL, 0, NULL, '2020-03-04', '2021-03-16 13:52:18', '2021-03-16 13:52:18', 0),
 (6, '汪汪', 'yubi840528@gmail.com', 'wang275186', 0, NULL, NULL, NULL, NULL, 0, NULL, '2010-10-19', '2021-03-16 13:52:29', '2021-03-16 13:52:29', 0),
-(7, '匿名', 'chiwei991814@gmail.com', 'Love6671', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2021-03-16 13:52:29', '2021-03-16 13:52:29', 0),
+(7, '匿名', 'chiwei991814@gmail.com', 'Love6671', 0, NULL, NULL, 477, NULL, 0, 4, NULL, '2021-03-16 13:52:29', '2021-03-16 13:52:29', 0),
 (8, '匿名', 'huhantin@gmail.com', 'qweasdzxc', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2021-03-16 14:07:08', '2021-03-16 14:07:08', 0);
 
 -- --------------------------------------------------------
@@ -212,7 +220,8 @@ INSERT INTO `member_coupon` (`member_cid`, `member_id`, `coupon_id`, `type_date`
 (16, 7, 0, '2021-03-16 13:52:29', '2021-03-19 13:52:29', 1),
 (17, 6, 0, '2021-03-16 13:52:29', '2021-03-19 13:52:29', 1),
 (19, 8, 0, '2021-03-16 14:07:08', '2021-03-19 14:07:08', 1),
-(20, 5, 3, '2021-03-16 15:55:41', '2022-03-11 15:55:41', 1);
+(20, 5, 3, '2021-03-16 15:55:41', '2022-03-11 15:55:41', 1),
+(21, 3, 0, '2021-03-16 17:12:42', '2021-03-19 17:12:42', 1);
 
 -- --------------------------------------------------------
 
@@ -232,6 +241,13 @@ CREATE TABLE `order` (
   `order_date` datetime NOT NULL COMMENT '訂單日期',
   `type_date` datetime DEFAULT NULL COMMENT '貨物狀態日期'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `order`
+--
+
+INSERT INTO `order` (`order_id`, `member_id`, `order_cost`, `order_points`, `order_gain`, `pay_type`, `order_type`, `deliver_type`, `order_date`, `type_date`) VALUES
+(6346633, 7, 477, 0, 4, 3, 0, 0, '2021-03-16 23:46:38', '2021-03-16 23:46:38');
 
 -- --------------------------------------------------------
 
@@ -470,7 +486,7 @@ ALTER TABLE `member`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member_coupon`
 --
 ALTER TABLE `member_coupon`
-  MODIFY `member_cid` int(11) NOT NULL AUTO_INCREMENT COMMENT '（無意義）', AUTO_INCREMENT=21;
+  MODIFY `member_cid` int(11) NOT NULL AUTO_INCREMENT COMMENT '（無意義）', AUTO_INCREMENT=22;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `order`

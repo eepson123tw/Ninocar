@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/dictionary.css">
+<link rel="shortcut icon" href="./assets/img/loho-icon.ico" />
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
@@ -33,7 +34,10 @@
           <template v-slot:details>尚未收集到圖鑑和成就，<br>
             完成訂單的車子，將在三天內匯入個人圖鑑</template>
           <template v-slot:link>
-            <a href="./member.html" class="btn d-inbl text-center">查看訂單</a>
+            <a
+              href="./member.html"
+              class="btn d-inbl text-center"
+            >查看訂單</a>
           </template>
         </empty-state-div>
         @@include('./pages/DictionaryPage/DictionaryPostList.html')
@@ -42,11 +46,7 @@
     @@include('./components/Footer.html')
   </div>
 
-  @@include('./components/VueHeader.html')
-  @@include('./components/PinSvg.html')
-  @@include('./components/EmptyStateDiv.html')
-  @@include('./pages/DictionaryPage/DictionaryPostItem.html')
-  @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
+  @@include('./components/VueHeader.html') @@include('./components/PinSvg.html') @@include('./components/EmptyStateDiv.html') @@include('./pages/DictionaryPage/DictionaryPostItem.html') @@include('./pages/DictionaryPage/DictionaryPostPinSvg.html')
   <script src="./assets/js/mixins/productMixins.js"></script>
 
   <script>

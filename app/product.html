@@ -7,6 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
+  <link rel="shortcut icon" href="./assets/img/loho-icon.ico" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet" />
@@ -15,12 +16,12 @@
   <script src="./assets/js/utils.js"></script>
   <link rel="stylesheet" href="./assets/css/all.css" />
   <link rel="stylesheet" href="./assets/css/pages/product.css" />
-  <title>product</title>
+  <title>Product</title>
 </head>
 
 <body>
   <div id="app">
-    <vue-header></vue-header>
+    <vue-header @search_item="search"></vue-header>
 
     @@include('./pages/ProductPage/ProductNav.html')
 
@@ -29,7 +30,7 @@
   @@include('./components/Footer.html') @@include('./components/VueHeader.html')
   <script src="./assets/js/mixins/productMixins.js"></script>
 
-<script>
+  <script>
     new Vue({
       el: '#app',
       mixins: [productMixins],
@@ -60,6 +61,14 @@
       },
 
       methods: {
+        search(val) {
+
+          console.log(val);
+          this.keywordText = val;
+          const filteredProductList = this.getProductListByKeyword();
+          this.showProductList = filteredProductList;
+
+        },
         setPage(index) {
           this.currPage = index;
         },
@@ -83,7 +92,7 @@
             }
           });
           // console.log(final)
-          this.showProductList= final ;
+          this.showProductList = final;
         },
         // 加進購物車
         addCarts(val) {
@@ -117,42 +126,41 @@
           localStorage.setItem('likeList', likeCartJson);
 
         },
-        check_test(){
+        check_test() {
           const check = this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
 
-          if(check.length > 0){
+          if (check.length > 0) {
             return check
-          }else{
+          } else {
             this.currPage = 1
             return this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
           }
 
         },
 
-        productArray(val){
-            this.showProductList = this.productList;
-            this.showProductList = this.showProductList.filter((item)=>{
+        productArray(val) {
+          this.showProductList = this.productList;
+          this.showProductList = this.showProductList.filter((item) => {
 
-                return item.series == val;    
-            });
+            return item.series == val;
+          });
         },
 
-        timeArray(val){
-            this.showProductList = this.productList;
-            this.showProductList = this.showProductList.filter((item)=>{
+        timeArray(val) {
+          this.showProductList = this.productList;
+          this.showProductList = this.showProductList.filter((item) => {
 
-                return item.year == val;
-            });
+            return item.year == val;
+          });
         },
 
         mounted() {
-            this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
-            this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
+          this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
+          this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
         },
       }
     });
-
-</script>
+  </script>
 </body>
 
 </html>

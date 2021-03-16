@@ -233,92 +233,6 @@
 				</section>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row mt-10">
-				<section class=" cart__payment  w-100">
-					<h2 class="block__header block__header__title  block  mb-5">熱門推薦商品</h2>
-					<a
-						href="#"
-						class="cart__choose cart__choose--left"
-					><img
-							src="./assets/img/icon/icon-left.svg"
-							alt=""
-						></a>
-					<div class="d-flex  px-5 cart--overhidden  swiper-container">
-						<div class="swiper-wrapper">
-							<div class="cart__comment block  col-3 col-lg-6  swiper-slide">
-								<div class="cart__imgGroup ">
-									<img
-										src="./assets/img/pic/3.jpg"
-										alt=""
-									>
-									<p>BS 01</p>
-								</div>
-								<div class="cart__textGroup ">
-									<h3>Audi R8 奧迪小客車</h3>
-									<p>NT$ <span>195</span></p>
-									<button class="btn btn--ghost btn--small">收藏</button>
-								</div>
-								<button class="btn btn--outline btn--fluid ">加進購物車</button>
-							</div>
-							<div class="cart__comment block col-3 col-lg-6  swiper-slide">
-								<div class="cart__imgGroup">
-									<img
-										src="./assets/img/pic/3.jpg"
-										alt=""
-									>
-									<p>BS 02</p>
-								</div>
-								<div class="cart__textGroup ">
-									<h3>Audi R8 奧迪小客車</h3>
-									<p>NT$ <span>195</span></p>
-									<button class="btn btn--ghost btn--small">收藏</button>
-								</div>
-								<button class="btn btn--outline btn--fluid ">加進購物車</button>
-							</div>
-							<div class="cart__comment  block col-3 col-lg-6 swiper-slide ">
-								<div class="cart__imgGroup">
-									<img
-										src="./assets/img/pic/3.jpg"
-										alt=""
-									>
-									<p>BS 03</p>
-								</div>
-								<div class="cart__textGroup ">
-									<h3>Audi R8 奧迪小客車</h3>
-									<p>NT$ <span>195</span></p>
-									<button class="btn btn--ghost btn--small">收藏</button>
-								</div>
-								<button class="btn btn--outline btn--fluid ">加進購物車</button>
-							</div>
-							<div class="cart__comment block col-3 col-lg-6 swiper-slide ">
-								<div class="cart__imgGroup">
-									<img
-										src="./assets/img/pic/3.jpg"
-										alt=""
-									>
-									<p>BS 04</p>
-								</div>
-								<div class="cart__textGroup ">
-									<h3>Audi R8 奧迪小客車</h3>
-									<p>NT$ <span>195</span></p>
-									<button class="btn btn--ghost btn--small">收藏</button>
-								</div>
-								<button class="btn btn--outline btn--fluid ">加進購物車</button>
-							</div>
-						</div>
-					</div>
-					<a
-						href="#"
-						class="cart__choose cart__choose--right"
-					><img
-							src="./assets/img/icon/icon-right.svg"
-							alt=""
-						></a>
-				</section>
-			</div>
-		</div>
-
 	</div>
 	<div v-else>
 		<main class="container cart   mb-15">
@@ -364,248 +278,232 @@
 
 
 <script>
-	Vue.component('cartArea', {
-		template: "#cartArea",
-		props: ['list', 'isExist', 'current'],
-		mixins: [cartMixins],
-		data() {
-			return {
-				//購買清單
-				// buyerList: this.list,
-				// 初始全部金額
-				totalProductNum: null,
-				totalPointCost: 0,
-				totalMoneyCost: 0,
-				// 目前頁面
-				currentData: this.current,
-				// 折價卷種類
-				couponList: {
-					discountOne: "全項商品不限金額結帳九折優惠！",
-					discountTwo: "結帳享買一送一",
-					discountThree: "宅配享一次免運優惠！",
-					discountFour: '本月壽星你最大享五折優惠！',
-				},
-				//  付款方式種類
-				paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
-				shippingList: ['自取', '宅配'],
-				classList: {
-					form__select: true,
-					cart__select: true,
-				},
-				//選擇cupon
-				selectCoupon: "",
-				// 選擇payment
-				selectPayment: "",
-				// shipping methods
-				selectShipping: "",
-				discountPrice: 0,
-				sendPrice: 0,
-				finallyPrice: 0,
-				noConfirm: false,
-			}
-		},
-		mounted() {
+  Vue.component('cartArea', {
+    template: "#cartArea",
+    props: ['list', 'isExist', 'current'],
+    mixins: [cartMixins],
+    data() {
+      return {
+        //購買清單
+        // buyerList: this.list,
+        // 初始全部金額
+        totalProductNum: null,
+        totalPointCost: 0,
+        totalMoneyCost: 0,
+        // 目前頁面
+        currentData: this.current,
+        // 折價卷種類
+        couponList: {
+          discountOne: "全項商品不限金額結帳九折優惠！",
+          discountTwo: "結帳享買一送一",
+          discountThree: "宅配享一次免運優惠！",
+          discountFour: '本月壽星你最大享五折優惠！',
+        },
+        //  付款方式種類
+        paymentList: ["線上刷卡", "ATM轉帳", "門市結帳", "貨到付款"],
+        shippingList: ['自取', '宅配'],
+        classList: {
+          form__select: true,
+          cart__select: true,
+        },
+        //選擇cupon
+        selectCoupon: "",
+        // 選擇payment
+        selectPayment: "",
+        // shipping methods
+        selectShipping: "",
+        discountPrice: 0,
+        sendPrice: 0,
+        finallyPrice: 0,
+        noConfirm: false,
+      }
+    },
+    mounted() {
 
 
-			//  資料傳入時先渲染
+      //  資料傳入時先渲染
 
-			for (let listNum in this.list) {
+      for (let listNum in this.list) {
 
-				this.list[listNum].totalPointCost = this.list[listNum].points;
-				this.list[listNum].totalPrice = this.list[listNum].price;
-				this.totalProductNum = parseInt(this.list.length);
-				if (this.list[listNum].points !== 0) {
-					this.totalPointCost += parseInt(this.list[listNum].points);
-				}
-				if (this.list[listNum].points == 0) {
-					this.totalMoneyCost += parseInt(this.list[listNum].price);
-				}
-			};
+        this.list[listNum].totalPointCost = this.list[listNum].points;
+        this.list[listNum].totalPrice = this.list[listNum].price;
+        this.totalProductNum = parseInt(this.list.length);
+        if (this.list[listNum].points !== 0) {
+          this.totalPointCost += parseInt(this.list[listNum].points);
+        }
+        if (this.list[listNum].points == 0) {
+          this.totalMoneyCost += parseInt(this.list[listNum].price);
+        }
+      };
 
-			this.$nextTick(() => {
+    },
+    methods: {
+      pageHandler() {
 
-				const swiper = new Swiper('.swiper-container', {
-					slidesPerView: 4,
-					spaceBetween: 30,
-					slidesPerGroup: 1,
-					loop: true,
-					loopFillGroupWithBlank: true,
-					navigation: {
-						nextEl: '.cart__choose--left',
-						prevEl: '.cart__choose--right',
-					},
-				});
-			})
+        if (this.memberId == null) {
+          this.$emit('login-check', true);
+          return
+        }
+        if (this.memberCurrentPoint < this.countTotalPoint) {
+          alert(`您所擁有的會員點數不足！！！`);
+        } else {
+          if (this.selectCoupon == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectPayment == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else if (this.selectShipping == "") {
+            this.classList = {
+              form__select: false,
+              cart__select: true,
+              form__warning: true
+            };
+            this.noConfirm = true;
+          } else {
+            this.currentData += 1;
+            this.$emit('data-handler', this.currentData);
+            //傳送更新 store 的值
+            this.$store.commit('selectCoupon', this.selectCoupon);
+            this.$store.commit('selectShipping', this.selectShipping);
+            this.$store.commit('selectPayment', this.selectPayment);
+            this.$store.commit('addBuyList', this.buyerList);
+            this.$store.commit('addBuyNum', this.totalProductNum);
+            this.$store.commit('addFinalPrice', this.finallyPrice);
+            this.$store.commit('addTotalPointCost', this.totalPointCost);
+            this.$store.commit('addDiscountPrice', this.discountPrice);
+            this.$store.commit('addSendPrice', this.sendPrice);
+            this.$store.commit('addTotalMoney', this.totalMoneyCost);
+            this.$store.commit('addGetPoints', this.countGetPoints);
 
+          }
+        };
 
-		},
-		methods: {
-			pageHandler() {
+      },
 
-				if (this.memberId == null) {
-					this.$emit('login-check', true);
-					return
-				}
-				if (this.memberCurrentPoint < this.countTotalPoint) {
-					alert(`您所擁有的會員點數不足！！！`);
-				} else {
-					if (this.selectCoupon == "") {
-						this.classList = {
-							form__select: false,
-							cart__select: true,
-							form__warning: true
-						};
-						this.noConfirm = true;
-					} else if (this.selectPayment == "") {
-						this.classList = {
-							form__select: false,
-							cart__select: true,
-							form__warning: true
-						};
-						this.noConfirm = true;
-					} else if (this.selectShipping == "") {
-						this.classList = {
-							form__select: false,
-							cart__select: true,
-							form__warning: true
-						};
-						this.noConfirm = true;
-					} else {
-						this.currentData += 1;
-						this.$emit('data-handler', this.currentData);
-						//傳送更新 store 的值
-						this.$store.commit('selectCoupon', this.selectCoupon);
-						this.$store.commit('selectShipping', this.selectShipping);
-						this.$store.commit('selectPayment', this.selectPayment);
-						this.$store.commit('addBuyList', this.buyerList);
-						this.$store.commit('addBuyNum', this.totalProductNum);
-						this.$store.commit('addFinalPrice', this.finallyPrice);
-						this.$store.commit('addTotalPointCost', this.totalPointCost);
-						this.$store.commit('addDiscountPrice', this.discountPrice);
-						this.$store.commit('addSendPrice', this.sendPrice);
-						this.$store.commit('addTotalMoney', this.totalMoneyCost);
-						this.$store.commit('addGetPoints', this.countGetPoints);
+      changeNum(listIndex, e) {
 
-					}
-				};
+        let chooseNum = e.target.value * 1 + 1;
+        let totalPrice = this.buyerList[listIndex].price;
+        let totalPoint = this.buyerList[listIndex].points;
+        let newTotalPrice = totalPrice * chooseNum;
+        let newTotalPoint = totalPoint * chooseNum;
+        this.buyerList[listIndex].productNum = chooseNum;
+        this.buyerList[listIndex].totalPrice = newTotalPrice;
+        this.buyerList[listIndex].totalPointCost = newTotalPoint;
+        this.renew();
 
-			},
+      },
+      deleteHandler(listIndex) {
+        this.buyerList.splice(listIndex, 1);
 
-			changeNum(listIndex, e) {
+        let cartJson = JSON.stringify(this.buyerList);
+        localStorage.setItem('cartsList', cartJson);
+        this.renew();
 
-				let chooseNum = e.target.value * 1 + 1;
-				let totalPrice = this.buyerList[listIndex].price;
-				let totalPoint = this.buyerList[listIndex].points;
-				let newTotalPrice = totalPrice * chooseNum;
-				let newTotalPoint = totalPoint * chooseNum;
-				this.buyerList[listIndex].productNum = chooseNum;
-				this.buyerList[listIndex].totalPrice = newTotalPrice;
-				this.buyerList[listIndex].totalPointCost = newTotalPoint;
-				this.renew();
+      },
+      deleteAllHandler() {
+        this.list = "";
+        let cartJson = JSON.stringify(this.list);
+        localStorage.setItem('cartsList', cartJson);
+        this.renew();
+      },
+      renew() {
+        // 重render畫面
+        this.totalProductNum = 0;
+        this.totalPointCost = 0;
+        this.totalMoneyCost = 0;
 
-			},
-			deleteHandler(listIndex) {
-				this.buyerList.splice(listIndex, 1);
+        for (let listNum in this.buyerList) {
+          this.totalProductNum += this.buyerList[listNum].productNum;
+          if (this.buyerList[listNum].points > 0) {
+            this.totalPointCost += this.buyerList[listNum].totalPointCost;
+          }
+          if (!this.buyerList[listNum].pointProduct) {
+            this.totalMoneyCost += this.buyerList[listNum].totalPrice;
+          }
 
-				let cartJson = JSON.stringify(this.buyerList);
-				localStorage.setItem('cartsList', cartJson);
-				this.renew();
+        };
+      },
+      countDiscount() {
+        // 折扣選取器
+        for (let key in this.couponList) {
+          if (this.couponList[key] == this.selectCoupon && key == 'discountOne') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
+          }
+          if (this.couponList[key] == this.selectCoupon && key == 'discountTwo') {
+            this.discountPrice = Math.round((this.totalMoneyCost + this.totalPointCost) / this.totalProductNum);
+          }
+          if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
+            this.discountPrice = this.sendPrice;
+          }
+          if (this.couponList[key] == this.selectCoupon && key == 'discountFour') {
+            this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
+          }
+        }
+      },
+      countSendPrice() {
+        // 運費選取
+        for (let sendMethods in this.shippingList) {
 
-			},
-			deleteAllHandler() {
-				this.list = "";
-				let cartJson = JSON.stringify(this.list);
-				localStorage.setItem('cartsList', cartJson);
-				this.renew();
-			},
-			renew() {
-				// 重render畫面
-				this.totalProductNum = 0;
-				this.totalPointCost = 0;
-				this.totalMoneyCost = 0;
-
-				for (let listNum in this.buyerList) {
-					this.totalProductNum += this.buyerList[listNum].productNum;
-					if (this.buyerList[listNum].points > 0) {
-						this.totalPointCost += this.buyerList[listNum].totalPointCost;
-					}
-					if (!this.buyerList[listNum].pointProduct) {
-						this.totalMoneyCost += this.buyerList[listNum].totalPrice;
-					}
-
-				};
-			},
-			countDiscount() {
-				// 折扣選取器
-				for (let key in this.couponList) {
-					if (this.couponList[key] == this.selectCoupon && key == 'discountOne') {
-						this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.9));
-					}
-					if (this.couponList[key] == this.selectCoupon && key == 'discountTwo') {
-						this.discountPrice = Math.round((this.totalMoneyCost + this.totalPointCost) / this.totalProductNum);
-					}
-					if (this.couponList[key] == this.selectCoupon && key == 'discountThree') {
-						this.discountPrice = this.sendPrice;
-					}
-					if (this.couponList[key] == this.selectCoupon && key == 'discountFour') {
-						this.discountPrice = Math.round(this.totalMoneyCost - (this.totalMoneyCost * 0.5));
-					}
-				}
-			},
-			countSendPrice() {
-				// 運費選取
-				for (let sendMethods in this.shippingList) {
-
-					if (this.shippingList[sendMethods] == this.selectShipping && this.selectShipping == "宅配") {
-						this.sendPrice = 80;
-					} else {
-						this.sendPrice = 0;
-					}
-				}
+          if (this.shippingList[sendMethods] == this.selectShipping && this.selectShipping == "宅配") {
+            this.sendPrice = 80;
+          } else {
+            this.sendPrice = 0;
+          }
+        }
 
 
-			},
+      },
 
 
-		},
-		computed: {
+    },
+    computed: {
 
-			totalCount() {
+      totalCount() {
 
-				let final = this.totalMoneyCost - this.discountPrice + this.sendPrice;
-				this.finallyPrice = final;
-				return final;
+        let final = this.totalMoneyCost - this.discountPrice + this.sendPrice;
+        this.finallyPrice = final;
+        return final;
 
-			},
-			buyerList: {
+      },
+      buyerList: {
 
-				set(value) {
+        set(value) {
 
-					return this.buyerList = ""
+          return this.buyerList = ""
 
-				},
-				get() {
-					return this.list
-				},
+        },
+        get() {
+          return this.list
+        },
 
-			},
-			countGetPoints() {
-				return Math.floor(this.finallyPrice / 100 + this.totalPointCost / 100);
+      },
+      countGetPoints() {
+        return Math.floor(this.finallyPrice / 100 + this.totalPointCost / 100);
 
-			},
-			memberId() {
-				return this.$store.state.memberId
-			},
-			memberCurrentPoint() {
-				return this.$store.state.memberCurrentPoint
-			},
-			leastPoint() {
-				let point = this.memberCurrentPoint - this.countTotalPoint;
-				return point;
-			}
+      },
+      memberId() {
+        return this.$store.state.memberId
+      },
+      memberCurrentPoint() {
+        return this.$store.state.memberCurrentPoint
+      },
+      leastPoint() {
+        let point = this.memberCurrentPoint - this.countTotalPoint;
+        return point;
+      }
 
 
-		}
+    }
 
-	})
+  })
 </script>

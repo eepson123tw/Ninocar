@@ -5,13 +5,14 @@
 <link rel="stylesheet" href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/pages/member.css">
 <link rel="stylesheet" href="./assets/css/pages/memberNew.css">
+<link rel="shortcut icon" href="./assets/img/loho-icon.ico" />
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
-<title>memberMain</title>
+<title>MemberMain</title>
 </head>
 
 <body>
@@ -338,7 +339,18 @@
       },
       methods: {
 
-        checkInput() {},
+        checkInput(val) {
+
+          if (val == 'name') {
+            console.log(val);
+            this.handleSuccessShow(this.user);
+          } else {
+            console.log(val);
+            this.handleSuccessShow(this.phone);
+          }
+
+
+        },
 
         setDefaultIndex(val) {
 
@@ -383,61 +395,85 @@
         },
         handleInput() {
           const isAllCheck = this.handleRequiredCheck();
+
           if (isAllCheck) {
             // 更新會員資料
             let gender = 0;
             if (this.userDetail.usersex == "男") {
-              gender = 1
+              gender = '1'
+            } else if (this.userDetail.usersex == "女") {
+              gender = '2';
             } else {
-              gender = 2;
+              gender = '0';
             };
-            let month;
-            if (this.userDetail.userMonth.length <= 1) {
-              month = `0${this.userDetail.userMonth}`;
-            } else {
-              month = this.userDetail.userMonth;
-            };
+
+            let birthDay;
+            let phone;
             let day;
-            if (this.userDetail.userDate.length <= 1) {
-              day = `0${this.userDetail.userDate}`;
-            } else if (this.userDetail.userDate.length >= 2) {
-              day = this.userDetail.userDate;
+            let month;
+
+
+            if (this.userDetail.usersex == "") {
+              const params = new URLSearchParams();
+              params.append('ID', parseInt(this.memberId));
+              params.append('MEMBER_NAME', this.user.text);
+              params.append('MEMBER_PHONE', parseInt(this.phone.text));
+              params.append('MEMBER_GENDER', gender);
+              axios({
+                method: 'post',
+                url: 'assets/php/setMemberDetail.php',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: params,
+              }).then((res) => {
+                console.log(res.data)
+              }).catch((error) => {
+                console.log(error)
+              })
+            } else {
+              if (this.userDetail.userMonth.length <= 1) {
+                month = `0${this.userDetail.userMonth}`;
+              } else {
+                month = this.userDetail.userMonth;
+              };
+
+              if (this.userDetail.userDate.length <= 1) {
+                day = `0${this.userDetail.userDate}`;
+              } else if (this.userDetail.userDate.length >= 2) {
+                day = this.userDetail.userDate;
+              };
+
+              birthDay = parseInt(this.userDetail.userYear + month + day);
+
+              phone = parseInt(this.phone.text);
+
+
+              const params = new URLSearchParams();
+              params.append('ID', parseInt(this.memberId));
+              params.append('MEMBER_NAME', this.user.text);
+              params.append('MEMBER_PHONE', phone);
+              params.append('MEMBER_GENDER', gender);
+              params.append('MEMBER_BIRTHDAY', birthDay);
+              params.append('MEMBER_PHOTO', this.previewImageNow);
+
+              axios({
+                method: 'post',
+                url: 'assets/php/setMemberDetail.php',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: params,
+              }).then((res) => {
+                console.log(res.data)
+
+
+              }).catch((error) => {
+                console.log(error)
+
+              })
             };
-
-            let birthDay = parseInt(this.userDetail.userYear + month + day);
-
-            let phone = parseInt(this.phone.text);
-
-            // console.log(phone); 
-
-            const params = new URLSearchParams();
-            params.append('ID', parseInt(this.memberId));
-            params.append('MEMBER_NAME', this.user.text);
-            params.append('MEMBER_PHONE', phone);
-            params.append('MEMBER_GENDER', gender);
-            params.append('MEMBER_BIRTHDAY', birthDay);
-            params.append('MEMBER_PHOTO', this.previewImageNow);
-
-            axios({
-              method: 'post',
-              url: 'assets/php/setMemberDetail.php',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-              },
-              data: params,
-            }).then((res) => {
-              console.log(res.data)
-
-
-            }).catch((error) => {
-              console.log(error)
-
-            })
-
             window.location.href = 'membermain.html';
-
-
-
           };
         },
         handlePasswordInput() {
@@ -477,8 +513,6 @@
           this.receiver.receiverAddressCode = this.selectCode;
         },
         saveAddress() {
-
-
           // this.propsReceiver = JSON.parse(JSON.stringify(this.receiver));
 
           let receiver = this.receiver;
@@ -487,10 +521,8 @@
           for (let num in receiver) {
             if (receiver[num] == "") {
               console.log(`${num}不能為空`);
-
               check = false;
             } else if (num == 'receiverPhone' && receiver['receiverPhone'].length > 10) {
-
               alert(`電話請輸入正確資料,已超越長度`);
               check = false;
             } else if (num == 'receiverAddressCode' && receiver['receiverAddressCode'].length > 3) {
@@ -626,14 +658,17 @@
         },
       },
       mounted() {
+
+
         if (this.memberId === null) {
           window.location.replace('./index-front.html')
         }
 
         //local address
-        // this.receiverNewList = JSON.parse(localStorage.getItem('receiverNewAddress')) || [];
+
         this.defaultReceiverList = JSON.parse(localStorage.getItem('receiverAddress')) || [];
         this.defaultAddress = JSON.parse(localStorage.getItem('receiverAddressDefault')) || false;
+
         // this.receiverList = JSON.parse(localStorage.getItem('receiverList')) || [];
 
 
@@ -702,6 +737,9 @@
           console.log(res.data)
           let newData;
           newData = res.data.map((item) => {
+
+
+
 
             return {
               name: item.member_name,

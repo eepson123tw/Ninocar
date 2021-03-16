@@ -8,7 +8,11 @@
                 </div>
                 <ul class="cool member__bar block w-100">
                     <li>
-                        <a data-page="memberMain" href="membermain.html" class="member__page ">我的帳戶</a>
+                        <a
+                            data-page="MemberMain"
+                            href="membermain.html"
+                            class="member__page "
+                        >我的帳戶</a>
                         <ul class="dropdown courses">
                             <li>
                                 <span class="code"></span>
@@ -30,7 +34,11 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="MemberOnly.html" class="member__page" data-page="memberOnly">會員中心</a>
+                        <a
+                            href="MemberOnly.html"
+                            class="member__page"
+                            data-page="MemberDetail"
+                        >會員中心</a>
                         <ul class="dropdown courses">
                             <li>
                                 <span class="code"></span>
@@ -48,10 +56,18 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="MemberNotice.html" class="member__page" data-page="memberNotice">通知中心</a>
+                        <a
+                            href="MemberNotice.html"
+                            class="member__page"
+                            data-page="MemberNotice"
+                        >通知中心</a>
                     </li>
                     <li>
-                        <a href="MemberPurchase.html" class="member__page" data-page="memberPurchase">購買清單</a>
+                        <a
+                            href="MemberPurchase.html"
+                            class="member__page"
+                            data-page="MemberPurchase"
+                        >購買清單</a>
                         <ul class="dropdown courses">
                             <li>
                                 <span class="code"></span>
@@ -77,7 +93,11 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="member.html" class="member__page" data-page="memberCollection">收藏商品清單</a>
+                        <a
+                            href="member.html"
+                            class="member__page"
+                            data-page="MemberCollection"
+                        >收藏商品清單</a>
                     </li>
                 </ul>
             </nav>
@@ -88,31 +108,31 @@
 </template>
 
 <script>
-    Vue.component('memberBar', {
+  Vue.component('memberBar', {
 
-        template: '#memberBar',
+    template: '#memberBar',
 
-        data() {
-            return {}
-        },
-        methods: {
+    data() {
+      return {}
+    },
+    methods: {
 
 
-        },
-        mounted() {
-            let nowPage = document.title;
-            let pageList = document.querySelectorAll('.member__page');
+    },
+    mounted() {
+      let nowPage = document.title;
+      let pageList = document.querySelectorAll('.member__page');
 
-            pageList.forEach((item) => {
-                let target = item.dataset.page;
-                if (target == nowPage) {
-                    item.classList.add('member__page--active')
-                }
-
-            })
-
+      pageList.forEach((item) => {
+        let target = item.dataset.page;
+        if (target == nowPage) {
+          item.classList.add('member__page--active')
         }
 
+      })
 
-    })
+    }
+
+
+  })
 </script>

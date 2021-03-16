@@ -1,7 +1,4 @@
-<script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
-></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
 <script>
@@ -31,7 +28,7 @@
                     <h1 class="logo__h1">NINO CAR</h1>
                 </a>
                 <form class="d-md-none ml-5 po-re">
-                    <input type="text" class="search-bar__input" placeholder="想找什麼車？" />
+                    <input type="text" class="search-bar__input" placeholder="想找什麼車？"  v-model='searchItem' />
                     <button class="search-bar__btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 52 52" class="icon">
                             <g>
@@ -123,7 +120,7 @@
              @submit-token="handleCompleteSignUp" @done-account="handleAccountIsValidCheck"/>
         </transition>
         <transition name="collapse">
-            <nav-menu v-if="isMenuShow" :login="isLogin" @log-out="handleLogOut"></nav-menu>
+            <nav-menu v-if="isMenuShow" @search_props_item="searchChange"  :login="isLogin" @log-out="handleLogOut"></nav-menu>
         </transition>
         <div class="modal-active" v-if="isMenuShow" @click="isMenuShow=false"></div>
     </header>`,
@@ -144,6 +141,7 @@
           password: '',
           token: '',
         },
+        searchItem: '',
       }
     },
     mounted() {
@@ -162,7 +160,9 @@
       modalStateContent(val) {
         this.modalState.content = val;
       },
-
+      searchItem(val) {
+        this.$emit('search_item', val);
+      },
     },
     computed: {
       isLoginModalShow() {
@@ -170,6 +170,10 @@
       },
     },
     methods: {
+      searchChange(val) {
+        this.$emit('search_item', val);
+
+      },
       handleLoginModalClose() {
         this.$store.commit('setLoginModalShow', false);
         this.modalState.isError = '';
@@ -186,15 +190,15 @@
       handleAccountIsValidCheck(theAccount) {
         this.modalState.isError = '';
         axios.post('./assets/php/getMemberInfo.php', {
-          "account": theAccount,
-        }).then(res => {
-          console.log(res)
-          if (Array.isArray(res.data)) {
-            this.modalState.isError = '此帳號已被註冊';
-          } else {
-            this.modalState.isError = '';
-          }
-        })
+            "account": theAccount,
+          }).then(res => {
+            console.log(res)
+            if (Array.isArray(res.data)) {
+              this.modalState.isError = '此帳號已被註冊';
+            } else {
+              this.modalState.isError = '';
+            }
+          })
           .catch(error => {
             console.log(error)
           });
@@ -291,9 +295,9 @@
       handleCompleteSignUp() {
         this.modalState.uiState = 'loading';
         axios.post('./assets/php/signUp.php', {
-          "account": this.signUpInfo.account,
-          "password": this.signUpInfo.password
-        })
+            "account": this.signUpInfo.account,
+            "password": this.signUpInfo.password
+          })
           .then(res => {
             console.log(res)
             this.modalState.uiState = '';
@@ -334,8 +338,8 @@
       handleSendSuccessSignUpMail(account) { //問老師寫在上面? //能讀data值嗎
         axios.post(
           `./assets/php/sendSuccessSignUpMail.php`, {
-          "account": account,
-        }
+            "account": account,
+          }
         ).then(res => {
           console.log(res)
         }).catch(err => {
@@ -376,5 +380,4 @@
 </script>
 
 
-@@include('./layout/HeaderLinkGroup.html') @@include('./layout/HeaderNavMenu.html') @@include('./MemberModalDiv.html')
-@@include('./popovers.html')
+@@include('./layout/HeaderLinkGroup.html') @@include('./layout/HeaderNavMenu.html') @@include('./MemberModalDiv.html') @@include('./popovers.html')
