@@ -42,6 +42,6 @@ foreach ($data as $index => $row) {
       break;
   }
   echo '<td>' . $type . '</td>';
-  echo '<td>' . $row["member_signdate"] . '</td>';
-  echo '<td>' . '<a href="memberDetail.php?MID=' . $row["member_id"] . '">' . '查看' . '</a>' . '</td>' . '</tr>';
+  echo '<td>'.'<button type="button" class="alert" id="'. $row["member_id"] .'">'.'<i class="fas fa-ban"></i></button></td>';
+  echo '<td>'.'<button type="button" class="return" id="'. $row["member_id"] .'">'.'<i class="fas fa-unlock"></i></button></td>'.'</tr>';
 }
