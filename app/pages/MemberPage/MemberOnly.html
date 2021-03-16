@@ -14,7 +14,7 @@
                 <li class="mb-7 mb-md-4">會員點數： <span class="ml-6">{{totalPoints || 0}} 點</span></li>
                 <li class="mb-7 mb-md-4">註冊日期： <span class="ml-6">{{signUpDate}}</span></li>
                 <li class="d-flex flex-sm-column">距離升等：
-                    <div class="level-progress ml-6 ml-sm-0 mt-sm-2">
+                    <div class="level-progress ml-6 ml-sm-0">
                         <div v-for='item in activeAmountCol' class="level-progress__col level-progress__col--active">
                         </div>
                         <div v-for='item in (30-activeAmountCol)' class="level-progress__col"></div>
@@ -79,258 +79,143 @@
                 圖鑑成就 <span class="h5 ml-5 vertical-middle">滿一個成就送會員點數50點</span>
             </h2>
         </header>
-        <section class="block__body py-20 d-flex justify-content-center align-items-center">
-            <ul class="d-flex justify-content-around w-100">
-                <li class="only__front">
-                    <svg class="pin" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">救火英雄</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 :<span class="badge bg-series-EM ml-5">消防救護系</span> <span
-                                    class="only__smalltitle ml-2">累積3輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 3 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
+        <section class="block__body py-10">
+            <ul class="d-flex flex-wrap">
+                <li class="d-flex align-items-center w-50  w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('EM')" series="EM"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-EM ml-5 mr-2">消防救護系</span>
+                            累積3輛</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[4])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[4]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[4].count : 0}}
+                                    /
+                                    3輛</span>
+                            </div>
+                        </div>
                     </div>
-                <li class="only__last">
-                    <svg class="pin pin--gray" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">收藏大師</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 :<span class="badge bg-series-PM ml-5">PREMIUM系</span><span
-                                    class="only__smalltitle ml-2">累積3輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 3 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
-                    </div>
-                <li class="only__front">
-                    <svg class="pin pin--green" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">旅行達人</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 : <span class="badge bg-series-RV ml-5">RV休旅系</span><span
-                                    class="badge bg-series-BS ml-2">巴士系</span><span
-                                    class="only__smalltitle ml-2">各累積1輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 2 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
-                    </div>
+                </li>
 
-                <li class="only__last">
-                    <svg class="pin pin--yellow" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">小黃大帝</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 :<span class="badge bg-series-TA ml-5">計程車系</span><span
-                                    class="only__smalltitle ml-2">累積3輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 3 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
+                <li class="d-flex  align-items-center w-50  w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('PM')" series="PM"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-PM ml-5 mr-2">PREMIUM系</span>
+                            累積3輛
+                        </div>
+                        <div class="d-flex align-items-center  mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[5])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[5]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[5].count : 0}}
+                                    /
+                                    3輛</span>
+                            </div>
+                        </div>
                     </div>
-
-                <li class="only__front">
-                    <svg class="pin pin--blue" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">小鎮守衛</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 :<span class="badge bg-series-PA ml-5">警車系</span><span
-                                    class="badge bg-series-CA ml-2">轎車系</span><span
-                                    class="only__smalltitle ml-2">各累積1輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 3 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
+                </li>
+                <li class="d-flex  align-items-center w-50  w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('RV')" series="RV"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-RV ml-5 mr-2">RV休旅系</span><span
+                                class="badge bg-series-BS mr-2">巴士系</span>各累積 1 輛
+                        </div>
+                        <div class="d-flex align-items-center  mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[0])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[0]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[0].count : 0}}
+                                    /
+                                    2輛</span>
+                            </div>
+                        </div>
                     </div>
-                <li class="only__last">
-                    <svg class="pin pin--coffee" width="120" height="120" viewbox="0 0 80 80">
-                        <circle cx="40" cy="40" r="30" stroke-width="4" />
-                        <path d="M 18.4,27.5 A 25,25 0 0 1 61.6,27.5" stroke-width="2" />
-                        <path d="M 18.4,52.5 A 25,25 0 0 0 61.6,52.5" stroke-width="2" />
-                        <path d="M 23,30 A 20,20 0 0 1 57,30" stroke-width="1" />
-                        <path d="M 23,50 A 20,20 0 0 0 57,50" stroke-width="1" />
-                        <text x="15" y="45" class="pin__text">工程大王</text>
-                    </svg>
-                    <div class="row">
-                        <ul class="only__smallall">
-                            <li>達成條件 : <span class="badge bg-series-EN ml-5">工程車系</span><span
-                                    class="only__smalltitle ml-2">累積3輛</span></li>
-                            <li class="only__progbarfoot">
-                                累積進度 :
-                                <ol class="only__progbarfootall">
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbarfootin"></li>
-                                    <li class="only__progbardigital">1 / 3 輛</li>
-                                </ol>
-                            </li>
-                        </ul>
+                </li>
+                <li class="d-flex  align-items-center w-50 w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('TA')" series="TA"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-TA ml-5 mr-2">計程車系</span> 累積3輛</span>
+                        </div>
+                        <div class="d-flex align-items-center  mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[6])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[6]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[6].count : 0}}
+                                    /
+                                    3輛</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="d-flex  align-items-center w-50 w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('PA')" series="PA"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-PA ml-5 mr-2">警車系</span><span
+                                class="badge bg-series-CA mr-2">轎車系</span>各累積 1 輛
+                        </div>
+                        <div class="d-flex align-items-center  mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[3])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[3]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[3].count : 0}}
+                                    /
+                                    2輛</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="d-flex  align-items-center w-50 w-md-100 pl-5 pl-sm-0">
+                    <pin-svg :disabled="!isMemberHasSeriesPin('EN')" series="EN"></pin-svg>
+                    <div class="ml-5">
+                        <div class="h5 mb-2">達成條件 :<span class="badge bg-series-EN ml-5 mr-2">工程系</span>累積3輛
+                        </div>
+                        <div class="d-flex align-items-center  mb-2">
+                            <span class="mr-5 mb-2">累積進度 :</span>
+                            <div class="level-progress">
+                                <div v-for='item in activePinCol(memberSeriesGroupCountList[7])'
+                                    class="level-progress__col level-progress__col--active">
+                                </div>
+                                <div v-for='item in (24-activePinCol(memberSeriesGroupCountList[7]))'
+                                    class="level-progress__col"></div>
+                                <span
+                                    class="font-s ml-2">{{memberSeriesGroupCountList.length>0?memberSeriesGroupCountList[7].count : 0}}
+                                    /
+                                    3輛</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+
         </section>
     </section>
 

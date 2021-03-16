@@ -26,6 +26,7 @@
     </div>
 
 </body>
+@@include('./components/PinSvg.html')
 @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
 <script src="./assets/js/mixins/productMixins.js"></script>
 <script>
@@ -34,10 +35,9 @@
         mixins: [productMixins],
         store,
         data: {
-            message: 'Hello, VueJS!',
-            totalAmount: 200,
+            totalAmount: 0,
             totalPoints: 0,
-            signUpDate: null,
+            signUpDate: '2020-12-31',
         },
         computed: {
             memberId() {
@@ -77,11 +77,14 @@
                     return Math.floor(this.totalAmount / 2000 * 30)
                 }
             }
+
         },
         watch: {
             memberId(val) {
                 if (val) {
                     this.handleGetMemberState();
+                } else if (val === '') {
+                    window.location.replace('./index-front.html')
                 }
             },
         },
@@ -106,7 +109,23 @@
                         console.log(error);
                     });
             },
+            activePinCol(memberSeriesGroupCount) {
+                if (this.memberSeriesGroupCountList.length === 0) {
+                    return 0
+                }
+                const doubleList = ['RV', 'BS', 'PA', 'CA'];
+                if (doubleList.indexOf(memberSeriesGroupCount.name) >= 0) {
+                    return memberSeriesGroupCount.count / 2 * 24
+                } else {
+                    return memberSeriesGroupCount.count / 3 * 24
+                }
+            },
         },
+        mounted() {
+            if (this.memberId === null) {
+                window.location.replace('./index-front.html')
+            }
+        }
     });
 </script>
 

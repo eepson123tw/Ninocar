@@ -7,7 +7,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js' integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js'
+  integrity='sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ=='
+  crossorigin='anonymous'></script>
 <script src="./assets/js/all.js"></script>
 <script src="./assets/js/utils.js"></script>
 <title>memberMain</title>
@@ -25,7 +27,8 @@
 
     <!--  -->
 
-    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress" :list="receiverList" key="receiverList"></member_address>
+    <member_address ref="child1" @default="setDefaultIndex" @open-handler="openTheModal" @update="updateAddress"
+      :list="receiverList" key="receiverList"></member_address>
 
 
     <!--  -->
@@ -40,101 +43,45 @@
       <template #content>
         <!-- 自行決定要傳入什麼 -->
         <div class="form__group block ">
-          <label
-            for="receiverName"
-            class="form__text mb-2 "
-          >收件人姓名 </label>
+          <label for="receiverName" class="form__text mb-2 ">收件人姓名 </label>
           <div class="form__section mb-5">
-            <input
-              id="receiverName"
-              type="text"
-              class=" cart__select form__input"
-              placeholder="王小明"
-              v-model.trim="receiver.receiverName"
-            ></input>
+            <input id="receiverName" type="text" class=" cart__select form__input" placeholder="王小明"
+              v-model.trim="receiver.receiverName"></input>
           </div>
-          <label
-            for="receiverPhone"
-            class="form__text mb-2 "
-          >聯絡電話</label>
+          <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
           <div class="form__section mb-5">
-            <input
-              id="receiverPhone"
-              type="text"
-              class="cart__select form__input"
-              placeholder="0910123456"
-              v-model="receiver.receiverPhone"
-            ></input>
+            <input id="receiverPhone" type="text" class="cart__select form__input" placeholder="0910123456"
+              v-model="receiver.receiverPhone"></input>
           </div>
-          <label
-            for="receiverAddresssCode"
-            class="form__text mb-2 "
-          >郵遞區號</label>
+          <label for="receiverAddresssCode" class="form__text mb-2 ">郵遞區號</label>
           <div class="form__section mb-5">
-            <input
-              id="receiverAddresssCode"
-              type="email"
-              class="cart__select form__input"
-              placeholder="300"
-              v-model="receiver.receiverAddressCode"
-              @change="findIndex"
-            ></input>
+            <input id="receiverAddresssCode" type="email" class="cart__select form__input" placeholder="300"
+              v-model="receiver.receiverAddressCode" @change="findIndex"></input>
           </div>
         </div>
       </template>
       <template #maintext>
         <!-- 若有文字可以使用 ，也可以關掉-->
         <div class="form__group ">
-          <label
-            for="address"
-            class="form__text "
-          >地址</label>
+          <label for="address" class="form__text ">地址</label>
           <div class="form__section mb-5">
-            <select
-              name=""
-              id=""
-              class="form__select "
-              v-model.trim="receiver.receiverCity"
-            >
-              <option
-                value=""
-                disabled
-              >城市</option>
+            <select name="" id="" class="form__select " v-model.trim="receiver.receiverCity">
+              <option value="" disabled>城市</option>
               <option v-for="(num,index) of selectCity">{{num}}</option>
             </select>
-            <select
-              name=""
-              id=""
-              class="form__select "
-              v-model.trim="receiver.receiverTown"
-              @change="sameAddressCode"
-            >
-              <option
-                value=""
-                disabled
-              >鄉政區</option>
+            <select name="" id="" class="form__select " v-model.trim="receiver.receiverTown" @change="sameAddressCode">
+              <option value="" disabled>鄉政區</option>
               <option v-for="(num,index) of selectTown">{{num}}</option>
             </select>
           </div>
-          <input
-            type="text"
-            class="form__input  "
-            id="address"
-            v-model.trim="receiver.receiverRoad"
-            placeholder="街/路/巷弄/樓層"
-          />
+          <input type="text" class="form__input  " id="address" v-model.trim="receiver.receiverRoad"
+            placeholder="街/路/巷弄/樓層" />
         </div>
       </template>
       <template #footer>
         <div class="d-flex justify-content-end mt-3">
-          <button
-            class="btn btn--ghost"
-            @click="closeHandler"
-          >取消</button>
-          <button
-            @click="saveAddress"
-            class="btn"
-          >完成</button>
+          <button class="btn btn--ghost" @click="closeHandler">取消</button>
+          <button @click="saveAddress" class="btn">完成</button>
         </div>
       </template>
     </modal-custom-made>
@@ -147,102 +94,47 @@
       <template #content>
         <!-- 自行決定要傳入什麼 -->
         <div class="form__group block ">
-          <label
-            for="receiverName"
-            class="form__text mb-2 "
-          >收件人姓名 </label>
+          <label for="receiverName" class="form__text mb-2 ">收件人姓名 </label>
           <div class="form__section mb-5">
-            <input
-              id="receiverName"
-              type="text"
-              class=" cart__select form__input"
-              placeholder="王小明"
-              v-model="newReceiver.receiverName"
-            ></input>
+            <input id="receiverName" type="text" class=" cart__select form__input" placeholder="王小明"
+              v-model="newReceiver.receiverName"></input>
           </div>
-          <label
-            for="receiverPhone"
-            class="form__text mb-2 "
-          >聯絡電話</label>
+          <label for="receiverPhone" class="form__text mb-2 ">聯絡電話</label>
           <div class="form__section mb-5">
-            <input
-              id="receiverPhone"
-              type="text"
-              class="cart__select form__input"
-              placeholder="0910-123-456"
-              v-model="newReceiver.receiverPhone"
-            ></input>
+            <input id="receiverPhone" type="text" class="cart__select form__input" placeholder="0910-123-456"
+              v-model="newReceiver.receiverPhone"></input>
           </div>
-          <label
-            for="receiverAddresssCode"
-            class="form__text mb-2 "
-          >郵遞區號</label>
+          <label for="receiverAddresssCode" class="form__text mb-2 ">郵遞區號</label>
           <div class="form__section mb-5">
-            <input
-              id="receiverAddresssCode"
-              type="email"
-              class="cart__select form__input"
-              placeholder="300"
-              v-model="newReceiver.receiverAddressCode"
-            ></input>
+            <input id="receiverAddresssCode" type="email" class="cart__select form__input" placeholder="300"
+              v-model="newReceiver.receiverAddressCode"></input>
           </div>
         </div>
       </template>
       <template #maintext>
         <!-- 若有文字可以使用 ，也可以關掉-->
         <div class="form__group ">
-          <label
-            for="address"
-            class="form__text "
-          >地址</label>
+          <label for="address" class="form__text ">地址</label>
           <div class="form__section mb-5">
-            <select
-              name=""
-              id=""
-              class="form__select "
-              v-model="newReceiver.receiverCity"
-              v-show="receiver.receiverName !==''"
-            >
-              <option
-                value=""
-                disabled
-              >城市</option>
+            <select name="" id="" class="form__select " v-model="newReceiver.receiverCity"
+              v-show="receiver.receiverName !==''">
+              <option value="" disabled>城市</option>
               <option v-for="(num,index) of selectCity">{{num}}</option>
             </select>
-            <select
-              name=""
-              id=""
-              class="form__select "
-              v-model="newReceiver.receiverTown"
-              @change="sameAddressCode"
-              v-show="receiver.receiverName !== '' "
-            >
-              <option
-                value=""
-                disabled
-              >鄉政區</option>
+            <select name="" id="" class="form__select " v-model="newReceiver.receiverTown" @change="sameAddressCode"
+              v-show="receiver.receiverName !== '' ">
+              <option value="" disabled>鄉政區</option>
               <option v-for="(num,index) of selectTown">{{num}}</option>
             </select>
           </div>
-          <input
-            type="text"
-            class="form__input  "
-            id="address"
-            v-model="newReceiver.receiverRoad"
-            placeholder="街/路/巷弄/樓層"
-          />
+          <input type="text" class="form__input  " id="address" v-model="newReceiver.receiverRoad"
+            placeholder="街/路/巷弄/樓層" />
         </div>
       </template>
       <template #footer>
         <div class="d-flex justify-content-end mt-3">
-          <button
-            class="btn btn--ghost"
-            @click="closeHandler"
-          >取消</button>
-          <button
-            @click="updateCurrentAddress"
-            class="btn"
-          >完成</button>
+          <button class="btn btn--ghost" @click="closeHandler">取消</button>
+          <button @click="updateCurrentAddress" class="btn">完成</button>
         </div>
       </template>
 
@@ -254,7 +146,9 @@
 
   </div>
 
-  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html') @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html') @@include('pages/MemberPage/MemberCupon.html')
+  @@include('./components/VueHeader.html') @@include('pages/MemberPage/MemberBar.html')
+  @@include('./components/ModalNormal.html') @@include('pages/MemberPage/MemberAddress.html')
+  @@include('pages/MemberPage/MemberCupon.html')
   <script>
     const THREE_DAYS = 3 * 24 * 60 * 60;
 
@@ -431,6 +325,8 @@
               console.log(error)
 
             })
+
+            window.location.href = 'membermain.html';
 
 
 
@@ -614,8 +510,18 @@
         },
 
       },
-
+      watch: {
+        memberId(val) {
+          if (val === '') {
+            window.location.replace('./index-front.html')
+          }
+        },
+      },
       mounted() {
+        if (this.memberId === null) {
+          window.location.replace('./index-front.html')
+        }
+
         //local address
         // this.receiverNewList = JSON.parse(localStorage.getItem('receiverNewAddress')) || [];
         this.defaultReceiverList = JSON.parse(localStorage.getItem('receiverAddress')) || [];

@@ -1,4 +1,7 @@
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
 <script>
@@ -183,15 +186,15 @@
       handleAccountIsValidCheck(theAccount) {
         this.modalState.isError = '';
         axios.post('./assets/php/getMemberInfo.php', {
-            "account": theAccount,
-          }).then(res => {
-            console.log(res)
-            if (Array.isArray(res.data)) {
-              this.modalState.isError = '此帳號已被註冊';
-            } else {
-              this.modalState.isError = '';
-            }
-          })
+          "account": theAccount,
+        }).then(res => {
+          console.log(res)
+          if (Array.isArray(res.data)) {
+            this.modalState.isError = '此帳號已被註冊';
+          } else {
+            this.modalState.isError = '';
+          }
+        })
           .catch(error => {
             console.log(error)
           });
@@ -202,25 +205,43 @@
         this.modalState.isError = '';
         this.modalState.uiState = 'loading';
         axios.post('./assets/php/login.php', {
-            "account": theAccount,
-            "password": thePassword
-          }).then(res => {
-            console.log(res)
-            this.modalState.uiState = '';
+          "account": theAccount,
+          "password": thePassword
+        }).then(res => {
+          console.log(res)
+          this.modalState.uiState = '';
 
-            if (Array.isArray(res.data)) {
-              this.modalState.content = 'success-login-content';
-              this.handleLoginKeep(res.data[0]['member_id']);
-              setTimeout(() => {
-                this.$store.commit('setLoginModalShow', false);
-              }, 3000)
-            } else {
-              this.modalState.isError = res.data;
-            }
-          })
-          .catch(error => {
-            console.log(error)
-          });
+          if (Array.isArray(res.data)) {
+            this.modalState.content = 'success-login-content';
+            this.handleLoginKeep(res.data[0]['member_id']);
+            setTimeout(() => {
+              this.$store.commit('setLoginModalShow', false);
+            }, 3000)
+
+            const params = new URLSearchParams()
+            params.append('ID', res.data[0]['member_id'])
+
+            axios({
+              method: 'post',
+              url: 'assets/php/setMemberCoupon.php',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              data: params,
+            }).then((res) => {
+              console.log(res);
+            }).catch((error) => {
+              console.log(error)
+
+            })
+
+
+          } else {
+            this.modalState.isError = res.data;
+          }
+        }).catch(error => {
+          console.log(error)
+        });
 
       },
       handleLoginKeep(rawMemberId) {
@@ -270,9 +291,9 @@
       handleCompleteSignUp() {
         this.modalState.uiState = 'loading';
         axios.post('./assets/php/signUp.php', {
-            "account": this.signUpInfo.account,
-            "password": this.signUpInfo.password
-          })
+          "account": this.signUpInfo.account,
+          "password": this.signUpInfo.password
+        })
           .then(res => {
             console.log(res)
             this.modalState.uiState = '';
@@ -283,6 +304,24 @@
                 this.$store.commit('setLoginModalShow', false);
               }, 3000)
               this.handleSendSuccessSignUpMail(this.signUpInfo.account);
+
+              const params = new URLSearchParams()
+              params.append('ID', res.data[0]['member_id'])
+
+              axios({
+                method: 'post',
+                url: 'assets/php/setMemberCoupon.php',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: params,
+              }).then((res) => {
+                console.log(res);
+              }).catch((error) => {
+                console.log(error)
+
+              })
+
             } else {
               this.modalState.isError = res.data;
               throw new Error(res.data);
@@ -295,8 +334,8 @@
       handleSendSuccessSignUpMail(account) { //問老師寫在上面? //能讀data值嗎
         axios.post(
           `./assets/php/sendSuccessSignUpMail.php`, {
-            "account": account,
-          }
+          "account": account,
+        }
         ).then(res => {
           console.log(res)
         }).catch(err => {
@@ -337,4 +376,5 @@
 </script>
 
 
-@@include('./layout/HeaderLinkGroup.html') @@include('./layout/HeaderNavMenu.html') @@include('./MemberModalDiv.html') @@include('./popovers.html')
+@@include('./layout/HeaderLinkGroup.html') @@include('./layout/HeaderNavMenu.html') @@include('./MemberModalDiv.html')
+@@include('./popovers.html')
