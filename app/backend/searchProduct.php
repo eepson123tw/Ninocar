@@ -5,13 +5,14 @@ include("LoginCheck.php");
 $textbox = $_POST["textbox"];
 
 //建立SQL
-$sql = "SELECT * FROM `team1`.`product` WHERE `product_name` like ?";
+$sql = "SELECT * FROM `team1`.`product` WHERE (`product_name` like ?) OR (`product_ename` like ?)";
 
 //執行
 $statement = $Util->getPDO()->prepare($sql);
 
 //給值
 $statement->bindValue(1, '%' . $textbox . '%');
+$statement->bindValue(2, '%' . $textbox . '%');
 $statement->execute();
 
 $data = $statement->fetchAll();

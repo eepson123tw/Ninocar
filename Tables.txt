@@ -258,7 +258,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO `team1`.`admin`(`admin_id`, `admin_account`, `admin_pwd`, `admin_signdate`) VALUES ('1','demo','demo',NOW());
+INSERT INTO `team1`.`admin`(`admin_id`, `admin_account`, `admin_pwd`, `admin_signdate`) VALUES ('1','ninocar','ninocar',NOW());
 
 INSERT INTO member
 (member_account, member_pwd, member_name, member_signdate) VALUES

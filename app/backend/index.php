@@ -15,12 +15,12 @@
 
                     <div class="form-input mb-3">
                         <!-- <span><i class="fas fa-envelope"></i></span> -->
-                        <input type="account" name="account" placeholder="帳號" value="pdo" tabindex="10" required>
+                        <input type="account" name="account" placeholder="帳號" value="demo" tabindex="10" required>
                     </div>
 
                     <div class="form-input mb-6">
                         <!-- <span><i class="fas fa-key"></i></span> -->
-                        <input type="password" name="pwd" placeholder="密碼" value="pdo" tabindex="10" required>
+                        <input type="password" name="pwd" placeholder="密碼" value="demo" tabindex="10" required>
                     </div>
 
                     <div class="mb-5">
