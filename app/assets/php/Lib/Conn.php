@@ -14,7 +14,7 @@
 
             // $db_host = "localhost";
             $db_user = "root";
-            $db_pass = "za0000";
+            // $db_pass = "za0000";
             // $db_pass = "password";
             $db_select = "team1";
 

@@ -34,79 +34,15 @@
     new Vue({
         el: '#app',
         data: {
-            arrayData: [{
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }, {
-                productName: 'Audi R8 奧迪小客車',
-                price: '$195',
-                img: " ./assets/img/pic/3.jpg ",
-                seriousNum: 'BS 01',
-                pointProduct: false
-            }],
+            likeList:[],
+        },
+        mounted() {
+            this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
+            
+        },
+
+        methods: {
+            
         },
     });
 </script>

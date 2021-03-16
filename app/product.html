@@ -29,42 +29,27 @@
   @@include('./components/Footer.html') @@include('./components/VueHeader.html')
   <script src="./assets/js/mixins/productMixins.js"></script>
 
-  <script>
+<script>
     new Vue({
       el: '#app',
       mixins: [productMixins],
       store,
       data: {
-        // rows: [],
-        countOfPage: 9,
+        countOfPage: 12,
         currPage: 1,
         // filter_name: '',
         filter: '',
         newData: [],
         sort: '',
         productsList: [],
-        defaultArray: true,
         cartList: [],
         likeList: [],
       },
+
       computed: {
         seriesList() {
           return this.$store.state.seriesList;
         },
-
-        // filteredRows() {
-        //     var filter_name = this.filter_name.toLowerCase();
-        //     // console.log(filter_name)
-
-        //     return this.filter_name.trim() !==''
-        //         ? this.rows.filter(function (d) {
-        //                 return d.name.toLowerCase().indexOf(filter_name) > -1;
-        //             })
-        //         :this.rows;
-        // },
-        // rows(){
-        //     return this.showProductList ? this.showProductList : []
-        // },
         pageStart() {
           return (this.currPage - 1) * this.countOfPage;
         },
@@ -72,8 +57,17 @@
           return Math.ceil(this.showProductList.length / this.countOfPage);
           // return Math.ceil(64 / this.countOfPage);
         },
+      },
 
-        sortArray() {
+      methods: {
+        setPage(index) {
+          this.currPage = index;
+        },
+        nowProduct(val) {
+          console.log(val.productId);
+          localStorage.setItem('car', JSON.stringify(val.productId));
+        },
+        changeArray() {
           let vm = this;
           const final = vm.showProductList.sort(function(a, b) {
             if (vm.sort === 'price' || vm.sort === 'price_reverse') {
@@ -89,20 +83,7 @@
             }
           });
           // console.log(final)
-          return final
-        },
-      },
-
-      methods: {
-        setPage(index) {
-          this.currPage = index;
-        },
-        nowProduct(val) {
-          console.log(val.productId);
-          localStorage.setItem('car', JSON.stringify(val.productId));
-        },
-        changeArray() {
-          this.defaultArray = false;
+          this.showProductList= final ;
         },
         // 加進購物車
         addCarts(val) {
@@ -135,23 +116,43 @@
           let likeCartJson = JSON.stringify(newArray);
           localStorage.setItem('likeList', likeCartJson);
 
+        },
+        check_test(){
+          const check = this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
 
+          if(check.length > 0){
+            return check
+          }else{
+            this.currPage = 1
+            return this.showProductList.slice(this.pageStart, this.pageStart + this.countOfPage)
+          }
 
-        }
+        },
 
-      },
-      mounted() {
-        this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
-        this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
-      },
-      // created() {
-      //     // console.log(this.rows);
-      //     let self = this;
-      //     $.get(this.showProductList, res => self.rows = res);
-      // },
+        productArray(val){
+            this.showProductList = this.productList;
+            this.showProductList = this.showProductList.filter((item)=>{
 
+                return item.series == val;    
+            });
+        },
+
+        timeArray(val){
+            this.showProductList = this.productList;
+            this.showProductList = this.showProductList.filter((item)=>{
+
+                return item.year == val;
+            });
+        },
+
+        mounted() {
+            this.cartList = JSON.parse(localStorage.getItem('cartsList')) || [];
+            this.likeList = JSON.parse(localStorage.getItem('likeList')) || [];
+        },
+      }
     });
-  </script>
+
+</script>
 </body>
 
 </html>

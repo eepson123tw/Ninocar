@@ -83,6 +83,8 @@
             memberId(val) {
                 if (val) {
                     this.handleGetMemberState();
+                } else if (val === '') {
+                    window.location.replace('./index-front.html')
                 }
             },
         },
@@ -119,6 +121,11 @@
                 }
             },
         },
+        mounted() {
+            if (this.memberId === null) {
+                window.location.replace('./index-front.html')
+            }
+        }
     });
 </script>
 
