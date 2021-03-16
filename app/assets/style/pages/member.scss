@@ -387,3 +387,16 @@
         background-color: $blue;
     }
 }
+
+.navBar {
+    min-width: 500px;
+    // height: 40px;
+    width: 100%;
+    background-color: #fff;
+}
+
+@include rwd-sm {
+    .overflow-md-sm {
+        overflow: scroll;
+    }
+}

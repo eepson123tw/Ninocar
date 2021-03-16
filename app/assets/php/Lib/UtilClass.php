@@ -6,7 +6,7 @@ class UtilClass{
     {
         //Web根目錄真實路徑
         $ServerRoot = $_SERVER["DOCUMENT_ROOT"];
-        return $ServerRoot . "/T1/upload/";
+        return $ServerRoot . "/ninocar/upload/";
     }
 
     //取得PDO物件
@@ -18,7 +18,7 @@ class UtilClass{
         $db_select = "team1";
         
 
-        // 將資料庫轉移至周杰的網域
+        // //將資料庫轉移至周杰的網域
         // $db_host = "10.2.0.202";
         // $db_user = "test";
         // $db_pass = "12345678";

@@ -19,7 +19,7 @@ $data = $statement->fetchAll();
 foreach ($data as $index => $row) {
 
   echo  '<tr>' . '<td>' . $row["product_name"] . '</td>';
-  echo  '<td>' . '<a href="ProductUpdate.php?PID=' . $row["product_id"] . '">';
+  echo  '<td>' . '<a href="productDetail.php?PID=' . $row["product_id"] . '">';
   if ($row["product_year"] == 2021) {
     echo  '<img src="../../upload/' . $row['product_img'] . '" alt="">';
   } else {
