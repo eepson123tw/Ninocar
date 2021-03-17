@@ -279,12 +279,13 @@
             <input type="checkbox" name="" value="">公開此作品
 
             <p class="description">使用者暱稱</p>
-            <input type="text" class="typeNickName" name="userNickName">
+            <input type="text" class="typeNickName" name="userNickName" value="一位不知名的旅人">
             <p class="notice">使用者暱稱將會被引用於網站相關留言及連結</p>
           </div>
           <div class="giveName_right">
             <p class="description">描述您的創作靈感</p>
-            <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration" name="inspiration"></textarea>
+            <!-- <textarea name="" id="" cols="50" rows="10" placeholder="這是我的第一個作品" class="typeInspiration" name="inspiration"></textarea> -->
+            <textarea name="" id="" cols="50" rows="10" class="typeInspiration" name="inspiration"></textarea>
             <p>餘100字</p>
 
             <input type="hidden" class="putDataId" name="workPostTime" value="">
@@ -1140,7 +1141,7 @@
                                         <textarea name="" id="" cols="24" rows="5" placeholder="讚美這個作品，或發表看法。" class="textarea"></textarea>
                                         <div class="other">
                                             <p class="textCount"></p>
-                                            <button class="btn btn--small h5 subComment">回覆</button>
+                                            <button class="btn btn--small h5 subComment" @click="postSubReply">回覆</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1325,6 +1326,46 @@
             this.commentNum_plus += 1;
           }
         },
+        postSubReply(e){
+          let commentContentL = $(e.target).parent().parent().children('.textarea').val().length;
+          let commentContent = $(e.target).parent().parent().children('.textarea').val();
+
+          let replyerPic = $(e.target).parent().parent().parent().children('.replyerPic').attr('src');
+
+          let replyerName = $(e.target).parent().parent().children('.replyerName').text();
+
+          if (commentContentL > 0) {
+            $(e.target).parent().parent().parent().parent().children('.subUserContext:last-child').after(`
+                            <div class="subUserContext hiddenSubReply">
+                                <img src="${replyerPic}"  class="userPic">
+                                <div class="userContext_top">
+                                    <p class="userName h6">${replyerName}</p>
+                                    <p class="userContent h5">${commentContent}</p>
+                                    
+                                    <div class="other">
+                                        <p class="postTime h6">0小時前</p>
+                                        <div>                                
+                                            <button class="btn btn--link report h5" @click="openReportModal">檢舉</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+
+            $(e.target).parent().parent().children('.textarea').val('');
+            // $(e.target).parent().children('.textCount').text(`餘${textMax}字`);
+          }
+
+          //PO完後關掉回覆的回覆
+          $('.typeSubReply').css({
+            "display": "none"
+          });
+
+          //PO完後出現「X則回覆」
+          $(e.target).parent().parent().parent().parent().parent().children('.hiddenMR').css({
+            "display": "flex"
+          });
+        }
       },
       store,
       computed: {
@@ -1811,24 +1852,19 @@
             })
           }
 
-          // console.log(countStep)
-
           $('.nextStep').addClass('btn--disabled')
 
           //進入選配件
-          $('.tireCard').css({
-            "display": "none"
-          })
+          $('.tireCard').css({"display": "none"})
 
           //提醒內容變更
           $('.pleaseSelect').text('請先選擇配件才能進入下一步喔')
 
-          $('.accessoryCards').css({
-            "display": "flex"
-          })
-          $('.accessoryCard').css({
-            "display": "block"
-          })
+          $('.accessoryCards').css({"display": "flex"})
+          $('.accessoryCard').css({"display": "block"})
+
+          //設置textarea預設文字
+          $('.typeInspiration').text('這是我的第一個作品')
 
           //進度條、圓圈變色
           $('.content:nth-child(4) .circle').addClass('circle--able')
@@ -2163,16 +2199,26 @@
       let typeWorkNameL = $('.typeWorkName').val().length;
       let typeNickNameL = $('.typeNickName').val().length;
       let typeInspirationL = $('.typeInspiration').val().length;
-      // console.log(typeWorkNameL)
-      // console.log(typeNickNameL)
-      // console.log(typeInspirationL)
+
+      console.log(typeWorkNameL)
+      console.log(typeNickNameL)
+      console.log(typeInspirationL)
 
       if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
-        $('.pleaseSelect').css({
-          "display": "none"
-        })
+        $('.pleaseSelect').css({"display": "none"})
         $('.finish').removeClass('btn--disabled')
       }
+    })
+
+    //點到input裡面的字消失
+    $('.typeNickName').click((e) => {
+      $(e.target).val('')
+      $('.finish').addClass('btn--disabled')
+    })
+
+    $('.typeInspiration').click((e) => {
+      $(e.target).text('')
+      $('.finish').addClass('btn--disabled')
     })
 
     //隨機取名
@@ -2185,6 +2231,20 @@
 
       $('.typeWorkName').val(nameArr1[ran1] + nameArr2[ran2])
       $('.typeWorkName').attr('value', nameArr1[ran1] + nameArr2[ran2])
+
+      let typeWorkNameL = $('.typeWorkName').val().length;
+      let typeNickNameL = $('.typeNickName').val().length;
+      let typeInspirationL = $('.typeInspiration').val().length;
+
+      console.log(typeWorkNameL)
+      console.log(typeNickNameL)
+      console.log(typeInspirationL)
+      console.log('uuu')
+
+      if (typeWorkNameL > 0 && typeNickNameL > 0 && typeInspirationL > 0) {
+        $('.pleaseSelect').css({"display": "none"})
+        $('.finish').removeClass('btn--disabled')
+      }
     })
 
     //matches這段的意義是當點到document的時候會判定點到的東西是不是.replyComment或者他的子節點，
