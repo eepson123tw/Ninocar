@@ -421,7 +421,7 @@
     background-color: #D8D8D8;
     position: relative;
     top: 30px;
-    left: 110px;
+    left: 200px;
     z-index: -1;
 }
 
@@ -742,7 +742,36 @@
     }
 
 
-// ---------------------------------------
+// -----------------1440 & 1280----------------------
+
+@media screen and (max-width:1440px) {
+    .bar{
+        left: 220px;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .bar{
+        left: 110px;
+    }
+    .btn--publicMyWork{
+        top: -570px;
+    }
+
+    .layer{
+        &2{
+            top: -145px;
+        }
+
+        &3{
+            top: -291px;
+        }
+
+        &4{
+            top: -436px;
+        }
+    }
+}
 // ----------------992-----------------------
 @media screen and (max-width:992px) {
     .bar {
