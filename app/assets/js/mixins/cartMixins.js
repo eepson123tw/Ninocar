@@ -99,9 +99,12 @@ let cartMixins = {
         return item.data;
       })
       .then((item) => {
+
+        console.log(item)
         const filterProductList = item.filter((product) => {
-          return product['product_spec'] !== '5';
+          return product['product_spec'] !== '5' && product['product_type'] == '0';
         });
+
 
         let newList;
         newList = filterProductList.map((product) => {
@@ -117,11 +120,11 @@ let cartMixins = {
             thisSeriesId = product[`product_seriesid`];
           }
 
-          let img =product['product_img'];
-          if(product['product_year']=='2021'){
+          let img = product['product_img'];
+          if (product['product_year'] == '2021') {
             img = `../upload/${img}`;
-          }else{
-            img =img;
+          } else {
+            img = img;
           };
 
 
@@ -139,6 +142,7 @@ let cartMixins = {
             size: product['product_size'],
             price: thisPrice,
             points: thisPoints,
+            type: product['product_type'],
             description: product['product_des'],
             limitLabel: product['product_spec'],
             productNum: 1,
