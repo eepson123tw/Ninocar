@@ -257,6 +257,21 @@
         this.cancelList.push(val);
 
       },
+      handleCancel() {
+
+        for (let num in this.buyList) {
+
+          if (this.buyList[num]['order_type'] == "取消") {
+
+            this.cancelList.push(this.buyList[num]);
+
+
+          }
+
+
+        }
+
+      },
 
     },
     computed: {
@@ -307,7 +322,15 @@
 
       this.nowOrderId = JSON.parse(localStorage.getItem('buyListId')) || '';
 
+
+      setTimeout(() => {
+        this.handleCancel();
+      }, 100)
+
+
+
     }
+
 
 
 
