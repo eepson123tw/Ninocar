@@ -158,7 +158,7 @@ let productMixins = {
     getProductList()
       .then((res) => {
 
-        console.log(res.data);
+        // console.log(res.data);
 
         const filterProductList = res.data.filter((product) => {
           return product['product_spec'] !== '5' && product['product_type'] == '0';

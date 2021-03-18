@@ -100,7 +100,7 @@ let cartMixins = {
       })
       .then((item) => {
 
-        console.log(item)
+        // console.log(item)
         const filterProductList = item.filter((product) => {
           return product['product_spec'] !== '5' && product['product_type'] == '0';
         });
