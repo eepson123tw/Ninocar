@@ -131,11 +131,23 @@
               let thisPrice = parseInt(list['product_price']);
               // 系列Id若是單位數，前面加0
               let thisSeriesId;
+              let url; //新增商品路徑
               if (list[`product_seriesid`].length === 1) {
                 thisSeriesId = 0 + list[`product_seriesid`];
               } else {
                 thisSeriesId = list[`product_seriesid`];
               };
+              if (list['product_year'] == '2021') {
+
+                url = `../upload/${list['product_img']}`;
+
+              } else {
+
+                url = list['product_img'];
+
+              };
+
+
               return {
                 deliver_type: deliver,
                 member_id: list.member_id,
@@ -149,7 +161,7 @@
                 eName: list['product_ename'].trim(),
                 seriesIndex: thisSeriesIndex,
                 seriesId: thisSeriesId,
-                imgURL: list['product_img'],
+                imgURL: url,
                 displayImgURL: list['product_img1'],
                 productId: list['product_id'],
                 year: list['product_year'],
