@@ -47,7 +47,7 @@
 								:src="item.imgURL"
 								alt=""
 							>
-							<p>{{item.series}} <br> {{item.seriesId}}</p>
+							<p :class=" bgClass(item['series']) ">{{item.series}} <br> {{item.seriesId}}</p>
 						</div>
 						<div class="cart__product">
 							<p>{{item.name}}</p>
@@ -390,233 +390,236 @@
 </template>
 
 <script>
-  Vue.component('cart-info', {
-    template: '#cart-info',
-    props: ['current'],
-    mixins: [inputMixins],
-    data() {
-      return {
-        currentData: this.current,
-        notShow: true,
-        animationDisplay: 'cart__displayNone',
-        // 購買人跟收貨人區
-        buyer: {
-          name: '姓名',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        phone: {
-          name: '電話',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        email: {
-          name: '信箱',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        receiver: {
-          name: '姓名',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        receiverPhone: {
-          name: '電話',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        receiverCity: "",
-        receiverTown: "",
-        receiverRoad: {
-          name: '地址',
-          text: '',
-          remind: '',
-          inputClass: '',
-        },
-        receiverAddress: "",
-        //fetch 到的東東
-        cityList: [],
+	Vue.component('cart-info', {
+		template: '#cart-info',
+		props: ['current'],
+		mixins: [inputMixins],
+		data() {
+			return {
+				currentData: this.current,
+				notShow: true,
+				animationDisplay: 'cart__displayNone',
+				// 購買人跟收貨人區
+				buyer: {
+					name: '姓名',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				phone: {
+					name: '電話',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				email: {
+					name: '信箱',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				receiver: {
+					name: '姓名',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				receiverPhone: {
+					name: '電話',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				receiverCity: "",
+				receiverTown: "",
+				receiverRoad: {
+					name: '地址',
+					text: '',
+					remind: '',
+					inputClass: '',
+				},
+				receiverAddress: "",
+				//fetch 到的東東
+				cityList: [],
 
-        // 信用卡區塊
-        cardOneArea: "",
-        cardTwoArea: "",
-        cardThreeArea: "",
-        cardFourArea: "",
-        cardNoConfirm: false,
-        classList: {
-          form__warning: false
-        },
-        cardsValue: "",
-        cardCode: "",
-        cardDate: "",
-        cardAreaIsShow: false,
-        paymentContent: "",
-      }
-    },
-    methods: {
-      pageHandler() {
-        if (this.receiver.text == "") {
-          this.handleInput();
-        } else if (this.receiverPhone.text == "") {
-          this.handleInput();
-        } else if (this.receiverRoad == "") {
-          this.handleInput();
-        } else if (this.selectPayment == "線上刷卡") {
+				// 信用卡區塊
+				cardOneArea: "",
+				cardTwoArea: "",
+				cardThreeArea: "",
+				cardFourArea: "",
+				cardNoConfirm: false,
+				classList: {
+					form__warning: false
+				},
+				cardsValue: "",
+				cardCode: "",
+				cardDate: "",
+				cardAreaIsShow: false,
+				paymentContent: "",
+			}
+		},
+		methods: {
+			bgClass(productSeries) {
+				return `bg-series-${productSeries}`;
+			},
+			pageHandler() {
+				if (this.receiver.text == "") {
+					this.handleInput();
+				} else if (this.receiverPhone.text == "") {
+					this.handleInput();
+				} else if (this.receiverRoad == "") {
+					this.handleInput();
+				} else if (this.selectPayment == "線上刷卡") {
 
-          if (this.cardCode == "") {
-            this.classList = {
-              form__warning: true
-            };
-            this.cardNoConfirm = true
-          } else {
-            this.currentData += 1;
-            this.$emit('data-handler', this.currentData);
-          }
-        } else {
-          this.currentData += 1;
-          this.$emit('data-handler', this.currentData);
+					if (this.cardCode == "") {
+						this.classList = {
+							form__warning: true
+						};
+						this.cardNoConfirm = true
+					} else {
+						this.currentData += 1;
+						this.$emit('data-handler', this.currentData);
+					}
+				} else {
+					this.currentData += 1;
+					this.$emit('data-handler', this.currentData);
 
-        }
-      },
-      collapseArea() {
-        //收合選單
-        if (this.notShow) {
-          this.notShow = false;
-          this.animationDisplay = "cart__displayShow";
-        } else {
-          this.notShow = true;
-          this.animationDisplay = "cart__displayNone";
-        }
+				}
+			},
+			collapseArea() {
+				//收合選單
+				if (this.notShow) {
+					this.notShow = false;
+					this.animationDisplay = "cart__displayShow";
+				} else {
+					this.notShow = true;
+					this.animationDisplay = "cart__displayNone";
+				}
 
-      },
-      nextArea(e) {
-        // 信用卡區塊 前後
-        const cardInputList = document.querySelectorAll('[data-card]');
-        const array = [];
-        let cardValue = parseInt(e.target.value.length);
-        if (cardValue >= 4) {
-          if (e.target.nextElementSibling !== null) {
-            e.target.nextElementSibling.focus();
-          } else {
-            return
-          }
+			},
+			nextArea(e) {
+				// 信用卡區塊 前後
+				const cardInputList = document.querySelectorAll('[data-card]');
+				const array = [];
+				let cardValue = parseInt(e.target.value.length);
+				if (cardValue >= 4) {
+					if (e.target.nextElementSibling !== null) {
+						e.target.nextElementSibling.focus();
+					} else {
+						return
+					}
 
-        } else if (cardValue == 0) {
-          if (e.target.previousElementSibling !== null) {
-            e.target.previousElementSibling.focus();
-          } else {
-            return
-          }
-        }
-      },
+				} else if (cardValue == 0) {
+					if (e.target.previousElementSibling !== null) {
+						e.target.previousElementSibling.focus();
+					} else {
+						return
+					}
+				}
+			},
 
-      sameBuyer() {
-        this.receiver.text = this.buyer.text;
-        this.receiverPhone.text = this.phone.text;
-      },
-      saveAddress() {
-        let dataAddress;
-        dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad.text;
-        this.receiverAddress = dataAddress;
-        let addressObj = {
-          address: dataAddress,
-          name: this.receiver.text,
-          phone: this.receiverPhone.text,
-        };
-        let dataAddressJson = JSON.stringify(addressObj);
-        localStorage.setItem('receiverAddress', dataAddressJson);
-      },
-      saveDefaultAddress() {
-        let defaultAddress;
-        defaultAddress = true;
-        if (defaultAddress) {
-          let dataAddressDefault = JSON.stringify(defaultAddress);
-          localStorage.setItem('receiverAddressDefault', dataAddressDefault);
-        }
-      },
-      handleInput() {
-        const isAllCheck = this.handleRequiredCheck();
-        if (isAllCheck) {
-          console.log('yes')
-        };
-      },
-      emailCheck() {
-        this.handleEmailCheck(this.email);
-      },
-    },
-    computed: {
-      // store 區塊
-      ...Vuex.mapState({
-        selectCoupon: state => state.selectCoupon,
-        buyList: state => state.buyList,
-        finallyPrice: state => state.finallyPrice,
-        totalProductNum: state => state.totalProductNum,
-        selectPayment: state => state.selectPayment,
-        totalPointCost: state => state.totalPointCost,
-        selectShipping: state => state.selectShipping,
-      }),
-      selectCity() {
-        let newCityList = [];
+			sameBuyer() {
+				this.receiver.text = this.buyer.text;
+				this.receiverPhone.text = this.phone.text;
+			},
+			saveAddress() {
+				let dataAddress;
+				dataAddress = this.receiverCity + this.receiverTown + this.receiverRoad.text;
+				this.receiverAddress = dataAddress;
+				let addressObj = {
+					address: dataAddress,
+					name: this.receiver.text,
+					phone: this.receiverPhone.text,
+				};
+				let dataAddressJson = JSON.stringify(addressObj);
+				localStorage.setItem('receiverAddress', dataAddressJson);
+			},
+			saveDefaultAddress() {
+				let defaultAddress;
+				defaultAddress = true;
+				if (defaultAddress) {
+					let dataAddressDefault = JSON.stringify(defaultAddress);
+					localStorage.setItem('receiverAddressDefault', dataAddressDefault);
+				}
+			},
+			handleInput() {
+				const isAllCheck = this.handleRequiredCheck();
+				if (isAllCheck) {
+					console.log('yes')
+				};
+			},
+			emailCheck() {
+				this.handleEmailCheck(this.email);
+			},
+		},
+		computed: {
+			// store 區塊
+			...Vuex.mapState({
+				selectCoupon: state => state.selectCoupon,
+				buyList: state => state.buyList,
+				finallyPrice: state => state.finallyPrice,
+				totalProductNum: state => state.totalProductNum,
+				selectPayment: state => state.selectPayment,
+				totalPointCost: state => state.totalPointCost,
+				selectShipping: state => state.selectShipping,
+			}),
+			selectCity() {
+				let newCityList = [];
 
-        for (let cityNum in this.cityList) {
+				for (let cityNum in this.cityList) {
 
-          newCityList.push(this.cityList[cityNum]['name']);
+					newCityList.push(this.cityList[cityNum]['name']);
 
-        }
+				}
 
-        return newCityList;
+				return newCityList;
 
-      },
-      selectTown() {
-        let newTownList = [];
+			},
+			selectTown() {
+				let newTownList = [];
 
-        for (let cityNum in this.cityList) {
-          if (this.cityList[cityNum]['name'] == this.receiverCity) {
-            newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
-          }
+				for (let cityNum in this.cityList) {
+					if (this.cityList[cityNum]['name'] == this.receiverCity) {
+						newTownList = this.cityList[cityNum]['districts'].map((item) => item.name)
+					}
 
-        }
-        return newTownList;
-      },
-      cardsTotal() {
-        this.cardsValue = this.cardOneArea + this.cardTwoArea + this.cardThreeArea + this.cardFourArea;
-        return this.cardsValue;
-      },
-      inputList() {
-        return [this.buyer, this.phone, this.email, this.receiver, this.receiverPhone, this.receiverRoad]
-      }
+				}
+				return newTownList;
+			},
+			cardsTotal() {
+				this.cardsValue = this.cardOneArea + this.cardTwoArea + this.cardThreeArea + this.cardFourArea;
+				return this.cardsValue;
+			},
+			inputList() {
+				return [this.buyer, this.phone, this.email, this.receiver, this.receiverPhone, this.receiverRoad]
+			}
 
-    },
-    mounted() {
-      fetch('./assets/js/taiwan_districts.json', {
-        method: "get"
-      }).then((res) => {
-        return res.json();
-      }).then((res) => {
-        this.cityList = res;
-      });
-      // 檢查是否選擇刷卡
-      if (this.selectPayment == "線上刷卡") {
-        this.cardAreaIsShow = true;
-      } else if (this.selectPayment == "ATM轉帳") {
+		},
+		mounted() {
+			fetch('./assets/js/taiwan_districts.json', {
+				method: "get"
+			}).then((res) => {
+				return res.json();
+			}).then((res) => {
+				this.cityList = res;
+			});
+			// 檢查是否選擇刷卡
+			if (this.selectPayment == "線上刷卡") {
+				this.cardAreaIsShow = true;
+			} else if (this.selectPayment == "ATM轉帳") {
 
-        let payNum = (Math.random().toFixed(12) * 1000000000000);
+				let payNum = (Math.random().toFixed(12) * 1000000000000);
 
-        this.paymentContent = `請領取您的轉帳號碼:- ${payNum}-`;
+				this.paymentContent = `請領取您的轉帳號碼:- ${payNum}-`;
 
-        return;
+				return;
 
-      };
-      if (this.selectShipping == "自取") {
-        this.paymentContent = '請收到到貨通知後,至門市櫃檯結帳';
-      } else if (this.selectShipping == "宅配") {
-        this.paymentContent = '收到通知信後,請稍做等待2~3日運送時程';
-      }
-    }
-  })
+			};
+			if (this.selectShipping == "自取") {
+				this.paymentContent = '請收到到貨通知後,至門市櫃檯結帳';
+			} else if (this.selectShipping == "宅配") {
+				this.paymentContent = '收到通知信後,請稍做等待2~3日運送時程';
+			}
+		}
+	})
 </script>

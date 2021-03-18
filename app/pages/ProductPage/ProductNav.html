@@ -88,7 +88,7 @@
               <div class="card">
                 <div class="card__header">
                   <a href="ItemDetail.html"><img @click="nowProduct(item)" :src="item.imgURL" /></a>
-                  <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
+                  <div class="card__carID " :class="bgClass(item['series'])">{{item.series}}<span>{{item.seriesId}}</span></div>
                   <span class="card__label">本月主打</span>
                 </div>
                 <div class="card__body">
@@ -98,7 +98,10 @@
                     <button class="card__link" @click="likeCarts(item)">收藏</button>
                   </div>
                   <div class="card__details" v-else>
-                    <p class="card__price">NI <span>{{item.points}}</span></p>
+                    <div class="cart__member">
+                      <p>Ni</p>
+                      <span>{{item.points}}</span>
+                    </div>
                     <button class="card__link" @click="likeCarts(item)">收藏</button>
                   </div>
                 </div>
