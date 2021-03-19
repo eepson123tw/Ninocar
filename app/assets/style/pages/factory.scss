@@ -851,7 +851,7 @@
 }
 
 // ---------------------------------------
-// -----------------576----------------------
+// -----------------576 & 414----------------------
 @media screen and (max-width:576px) {
     .intro {
         display: flex;
@@ -981,4 +981,52 @@
         align-items: center;
     }
 
+    .otherInModal{
+        // justify-content: initial;
+
+        .btn{
+            width: auto;
+        }
+
+        .price{
+            margin-right: 10px;
+        }
+    }
+
+    .mask .row{
+        display: flex;
+        flex-direction: column;
+        // flex-flow:row initial;
+        // height: 100vh;
+    }
+
+    .workPic--big{
+        width: 70%;
+    }
+
+    .frame{
+        justify-content: center;
+    }
+
+    .work_left .h2, .work_left .otherInModal{
+        margin-bottom: 8px;
+    }
+
+    .row .work_left, .row .work_right{
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .userPic--big{
+        margin: 0;
+        margin-right: 8px;
+    }
+
+    .workInfo{
+        justify-content: space-between;
+    }
+
+    .work_author{
+        display: auto;
+    }
 }
