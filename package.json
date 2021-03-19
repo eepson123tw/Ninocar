@@ -46,8 +46,10 @@
         "node-sass": "^5.0.0"
     },
     "dependencies": {
+        "crypto-js": "^4.0.0",
         "jquery": "^3.5.1",
         "swiper": "^6.4.11",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "vuex": "^3.6.2"
     }
 }

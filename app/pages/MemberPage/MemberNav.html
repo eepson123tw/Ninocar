@@ -1,255 +1,35 @@
-<div class="container ">
-    <div class="row member w-100">
-        <nav class="top w-100">
-            <div class="dropdownBackground">
-                <span class="arrow"></span>
-            </div>
-            <ul class="cool member__bar w-100">
-                <li>
-                    <a href="#">我的帳戶</a>
-                    <ul class="dropdown courses">
-                        <li>
-                            <span class="code"></span>
-                            <a href="#memberData">基本資料</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#memberCoupon">我的折價券</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">我的資料</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">更改密碼</a>
-                        </li>
+<div class="favorites mb-10">
+  <h2>收藏商品清單</h2>
+  <div class="favorites_link"></div>
+</div>
 
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">會員中心</a>
-                    <ul class="dropdown courses">
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">會員狀態</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">點數兌換紀錄</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">會員機制</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">圖鑒成就</a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">通知中心</a>
-                    <ul class="dropdown courses">
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">尚未付款</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">處理中</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">已出貨</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">已完成</a>
-                        </li>
-                        <li>
-                            <span class="code"></span>
-                            <a href="#">已取消</a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">購買清單</a>
-                </li>
-                <li>
-                    <a href="#">收藏商品清單</a>
-                </li>
-            </ul>
-        </nav>
+<div class="container mb-10 block">
+  <div class="row w-100">
+    <section class=" cart__payment cart__payment--nopt w-100">
+      <div class=" d-flex flex-wrap  ml-xs-3 ml-20">
+        <div class="cart__comment col-3 col-lg-6" v-for="(item,index) in likeList">
+          <div class="cart__imgGroup">
+            <img :src="item.imgURL">
+            <div class="card__carID bg-series-BS">{{item.series}}<span>{{item.seriesId}}</span></div>
+          </div>
+          <div class="cart__textGroup">
+            <h3>{{item.eName}}</h3>
+            <p v-if="item.price !==0">NT$ <span>{{item.price}}</span></p>
+            <p v-else>NI <span>{{item.points}}</span></p>
+            <button class="btn btn--ghost btn--small" @click="deleteCurrent(item)">取消收藏</button>
+          </div>
+          <a href="product.html"> <button class="btn btn--outline btn--fluid ">加進購物車</button></a>
+        </div>
+      </div>
+    </section>
+    <div class="row   w-100" v-show="likeList.length<1">
+      <div class="member__orderImg col-12 col-lg-6">
+        <img class="member__orderImg--mid" src="./assets/img/illust/illust-empty.png">
+        <p>
+          沒有收藏中的車車
+        </p>
+      </div>
     </div>
 
-
-</div>
-</div>
-
-<div class="favorites">
-    <h2>收藏商品清單</h2>
-    <div class="favorites_link"></div>
-</div>
-
-<div class="container">
-    <div class="row w-100">
-        <section class=" cart__payment cart__payment--nopt w-100">
-            <div class="d-flex">
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
-
-                <div class="cart__comment col-3 col-lg-6">
-                    <div class="cart__imgGroup">
-                        <img src="./assets/img/pic/3.jpg" alt="">
-                        <p>BS 01</p>
-                    </div>
-                    <div class="cart__textGroup">
-                        <h3>Audi R8 奧迪小客車</h3>
-                        <p>NT$ <span>195</span></p>
-                        <button class="btn btn--ghost btn--small">收藏</button>
-                    </div>
-                    <button class="btn btn--outline btn--fluid ">加進購物車</button>
-                </div>
+  </div>
+  </div

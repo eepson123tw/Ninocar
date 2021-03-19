@@ -7,18 +7,24 @@
     padding-bottom: 8px;
 }
 
-.searchbar__input,.header__btn{
+.search-bar__input,
+.header__btn {
     color: $coffee;
     background-color: transparent;
     border-radius: 8px;
     border: 2px solid $coffee;
-    
 }
 
-.searchbar {
+
+.search-bar {
     &__input {
-        font-size: 24px;
-        padding: 8px 16px;
+        font-size: 20px;
+        padding: 12px 16px;
+
+        &::placeholder {
+            color: lighten($coffee, 10%);
+            font-size: 20px;
+        }
     }
 
     &__btn {
@@ -26,16 +32,16 @@
         position: absolute;
         right: 6px;
         top: 50%;
-        transform:translate(0,-50%);
+        transform: translate(0, -50%);
     }
 }
 
-.close-icon{
+.close-icon {
     position: relative;
     z-index: 2500;
 }
 
-.menu{
+.menu {
     top: 0;
     width: 100%;
     padding-bottom: 40px;
@@ -43,9 +49,9 @@
     background-color: $primary;
     z-index: 2001;
 
- 
 
-    &__link{
+
+    &__link {
         display: block;
         width: 100%;
         @extend .h3;
@@ -81,8 +87,10 @@
 }
 
 .footer {
+    position: relative;
     background-color: $primary;
     color: $coffee;
+    z-index: 55;
 
     &__title {
         @extend .h3;

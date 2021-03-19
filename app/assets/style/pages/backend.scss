@@ -2,17 +2,81 @@
 @import "../helpers/mixin";
 @import "../helpers/rwd";
 
+/* menu icon */
+
+.menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+  .navicon {
+    background: #333;
+    display: block;
+    height: 3px;
+    position: relative;
+    transition: background 0.2s ease-out;
+    width: 18px;
+    &::before,
+    &::after {
+      background: #333;
+      content: "";
+      display: block;
+      height: 100%;
+      position: absolute;
+      transition: all 0.2s ease-out;
+      width: 100%;
+    }
+  }
+}
+
+.navicon:before {
+  top: 5px;
+}
+
+.navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.menu-btn {
+  display: none;
+}
+
+.menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
 //login
 
-.login-body{
+.login-body {
   margin: 0 auto;
   margin-top: 5rem;
   padding: 2.5rem;
   background: $primary;
   border-radius: 10px;
   color: $secondary-dark;
-  .form-input{
-    input{
+  .form-input {
+    input {
       width: 100%;
       height: 2.5rem;
       padding-left: 1rem;
@@ -26,20 +90,19 @@
       font-size: larger;
       background: $white;
       color: $secondary-dark;
-      &::placeholder{
+      &::placeholder {
         color: $secondary-dark;
       }
     }
   }
-  a{
+  a {
     text-align: right;
   }
 }
 
-
 // base
 
-header{
+header {
   z-index: 1;
   position: fixed;
   background: $primary;
@@ -49,41 +112,46 @@ header{
   // height: 30px;
 }
 
-.left_area h3{
-  color: $white;
+.left_area h3 {
+  color: $black;
   margin: 0;
   text-transform: uppercase;
   font-size: 22px;
   font-weight: 900;
 }
 
-.logout_btn{
-  padding: 5px;
-  background: $secondary;
+.logout_btn {
+  // padding: 5px;
+  text-align: center;
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid $black;
   text-decoration: none;
   float: right;
   margin-top: -30px;
   margin-right: 40px;
-  border-radius: 2px;
   font-size: 15px;
   font-weight: 600;
-  color: $white;
+  color: $black;
   transition: 0.5s;
-  transition-property: background;
-  &:hover{
-    background: $secondary-dark;
+  // transition-property: background;
+  &:hover {
+    background: $gray-300;
   }
 }
 
-.btn_active{
+.btn_active {
   background: $secondary-dark;
 }
 
-.sidebar{
+.sidebar {
   z-index: 1;
   top: 0;
-  background: $secondary;
-  margin-top: 70px;
+  background: $gray-300;
+  margin-top: 75px;
   padding-top: 30px;
   position: fixed;
   left: 0;
@@ -94,28 +162,28 @@ header{
   overflow-y: auto;
 }
 
-.profile_info{
+.profile_info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.sidebar .profile_info .profile_image{
+.sidebar .profile_info .profile_image {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   margin-bottom: 10px;
 }
 
-.sidebar .profile_info h4{
-  color: $white;
+.sidebar .profile_info h4 {
+  color: $black;
   margin-top: 0;
   margin-bottom: 20px;
 }
 
-.sidebar a{
-  color: $white;
+.sidebar a {
+  color: $black;
   display: block;
   width: 100%;
   line-height: 60px;
@@ -124,16 +192,16 @@ header{
   box-sizing: border-box;
   transition: 0.5s;
   // transition-property: background;
-  &:hover{
-    background: $secondary-dark;
+  &:hover {
+    background: $primary;
   }
 }
 
-.sidebar i{
+.sidebar i {
   padding-right: 10px;
 }
 
-label #sidebar_btn{
+label #sidebar_btn {
   z-index: 1;
   color: $secondary;
   position: fixed;
@@ -143,7 +211,7 @@ label #sidebar_btn{
   margin: 5px 0;
   transition: 0.5s;
   transition-property: color;
-  &:hover{
+  &:hover {
     color: $secondary-dark;
   }
 }
@@ -162,33 +230,52 @@ label #sidebar_btn{
 //   width: 100%;
 // }
 
-.content{
+.content {
   width: calc(100% - 250px);
   margin-top: 7rem;
   padding: 20px;
   margin-left: 250px;
-  // background: url(background.png) no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
   transition: 0.5s;
-  .update_btn{
+  .update_btn {
     width: 90%;
     overflow-x: auto;
     margin: 0 auto;
     margin-bottom: 1rem;
-    button{
-      border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    button {
+      border-radius: 5px;
       cursor: pointer;
       padding: 0.6rem 1rem;
       background: $secondary;
       color: $white;
-      i{
-        margin-right: .5rem;
+      i {
+        margin-right: 0.5rem;
       }
-      &:hover{
+      &:hover {
         background: $secondary-dark;
       }
+    }
+  }
+}
+.wrap {
+  display: flex;
+  .search_bar {
+    input {
+      padding: 0.7rem 1rem;
+      border: $gray-300;
+      background: $gray-300;
+      font-size: 0.9rem;
+    }
+  }
+  button {
+    padding: 0.5rem 0.8rem !important;
+    i {
+      margin-right: 0 !important;
+      font-size: 1rem;
     }
   }
 }
@@ -205,29 +292,28 @@ label #sidebar_btn{
 //   display: none;
 // }
 
-.mobile_nav{
+.mobile_nav {
   display: none;
 }
-
 
 /* Responsive */
 
 @include rwd-md {
-  .sidebar{
+  .sidebar {
     display: none;
   }
 
-  #sidebar_btn{
+  #sidebar_btn {
     display: none;
   }
 
-  .logout_btn{
+  .logout_btn {
     margin-right: 0;
   }
 
-  .content{
+  .content {
     margin-left: 0;
-    margin-top: 3rem;
+    margin-top: 10rem;
     padding: 10px 20px;
     transition: 0s;
     width: 100%;
@@ -237,65 +323,65 @@ label #sidebar_btn{
   //   margin-left: 0;
   // }
 
-  .mobile_nav{
+  .mobile_nav {
     display: block;
     width: calc(100% - 0%);
+    position: fixed;
+    top: 70px;
   }
 
-  .nav_bar{
-    background: $secondary;
+  .nav_bar {
+    background: $gray-300;
     width: 100%;
-    margin-top: 70px;
+    // margin-top: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
   }
 
-  .nav_bar .mobile_profile_image{
+  .nav_bar .mobile_profile_image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
 
-  .nav_bar .nav_btn{
-    color: $white;
+  .nav_bar .nav_btn {
+    color: $black;
     font-size: 22px;
     cursor: pointer;
     transition: 0.5s;
     transition-property: color;
+    &:hover {
+      color: $primary;
+    }
   }
 
-  .nav_bar .nav_btn:hover{
-    color: $secondary-dark;
-  }
-
-  .mobile_nav_items{
-    background: $secondary;
+  .mobile_nav_items {
+    opacity: 0.9;
+    background: $gray-300;
     display: none;
+    a {
+      color: $black;
+      display: block;
+      text-align: center;
+      letter-spacing: 1px;
+      line-height: 60px;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: 0.5s;
+      // transition-property: background;
+      &:hover {
+        background: $primary;
+      }
+    }
   }
 
-  .mobile_nav_items a{
-    color: $white;
-    display: block;
-    text-align: center;
-    letter-spacing: 1px;
-    line-height: 60px;
-    text-decoration: none;
-    box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: background;
-  }
-
-  .mobile_nav_items a:hover{
-    background: $secondary-dark;
-  }
-
-  .mobile_nav_items i{
+  .mobile_nav_items i {
     padding-right: 10px;
   }
 
-  .active{
+  .active {
     display: block;
   }
 }
@@ -307,106 +393,147 @@ label #sidebar_btn{
   // box-shadow: 0px 2px 5px 0px rgb(0,0,0,10%);
   display: block;
   width: 90%;
-  overflow-x: auto;
+  height: 30rem;
+  overflow: auto;
   margin: 0 auto;
 }
 
-table{
+table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
   border-collapse: collapse;
-  thead{
-    th{
-      background: $secondary;
+  thead {
+    th {
+      background: $white;
       font-size: 16px;
-      color: $white;
+      color: $black;
       vertical-align: middle;
       font-weight: 400;
       text-transform: capitalize;
       line-height: 1;
       padding: 22px 40px;
       white-space: nowrap;
+      border-bottom: 3px solid $primary;
     }
   }
-  tbody{
+  tbody {
     box-sizing: border-box;
     tr:nth-of-type(odd) {
-      background-color: $primary-light;
+      background-color: $white;
     }
     tr:nth-of-type(even) {
-      background-color: $primary;
-    }
-  }   
-}
-
-td{
-  padding: 12px 40px;
-  // padding: 1.5rem;
-  white-space: nowrap;
-  text-align: center;
-  a{
-    &:hover{
-      color: $gray-900;
+      background-color: $gray-300;
     }
   }
-  img{
+}
+
+td {
+  padding: 12px 40px;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  a {
+    &:hover {
+      // color: $gray-900;
+      opacity: 0.7;
+    }
+  }
+  img {
     width: 10rem;
     margin: auto;
   }
+  button {
+    background: transparent;
+    cursor: pointer;
+  }
 }
-
 
 // block
 
-.block-responsive{
-  // display: block;
-  // overflow-x: auto;
+.block-responsive {
   width: 90%;
   margin: 0 auto;
   padding: 2rem;
   border-radius: 10px;
-  background: $secondary;
+  background: $white;
   display: flex;
-  // flex-direction: column;
-  main{
+  main {
     width: 70%;
     display: flex;
     flex-direction: column;
-    color: $white;
-    // align-items: flex-end;
-    .update{
-      display: flex; 
+    color: $black;
+    .update {
+      display: flex;
       max-height: 2rem;
-      p{
+      p {
         width: 20%;
       }
-      input{
+      input {
         display: block;
         width: 70%;
+        // border: 1px solid $black;
         border: none;
-        // cursor: pointer;
+        background: $gray-300;
+      }
+      select,
+      textarea {
+        display: block;
+        width: 70%;
+        // border: 1px solid $black;
+        border: none;
+        background: $gray-300;
+      }
+      button {
+        text-align: center;
+        width: 5rem;
+        padding: 5px 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        background: $secondary;
+        color: $white;
+        transition: 0.5s;
+        &:hover {
+          background: $secondary-dark;
+        }
+      }
+      a {
+        font-size: 0.85rem;
+        text-align: center;
+        width: 5rem;
+        padding: 5px 15px;
+        border-radius: 50px;
+        border: 2px solid $red;
+        cursor: pointer;
+        background: transparent;
+        color: $red;
+        transition: 0.5s;
+        &:hover {
+          background: $gray-300;
+        }
       }
     }
   }
-  .img-preview{
+  .img-preview {
     width: 30%;
   }
 }
 
-
 @include rwd-lg {
-  .block-responsive{
+  .block-responsive {
     display: block;
-    main{
+    main {
       width: 100%;
       margin-bottom: 2rem;
-      .update{
-        p{
+      .update {
+        p {
           width: 50%;
         }
-        input{
+        input {
+          width: 150%;
+        }
+        select {
           width: 150%;
         }
       }
@@ -414,7 +541,7 @@ td{
     .img-preview {
       margin: 0 auto;
       width: 80%;
-      img{
+      img {
         // max-width: none;
         width: 100%;
       }
@@ -423,13 +550,30 @@ td{
 }
 
 @include rwd-sm {
-  .block-responsive{
-    main{
-      .update{
-        input{
+  .block-responsive {
+    main {
+      .update {
+        input {
+          width: 60%;
+        }
+        select {
           width: 60%;
         }
       }
     }
+  }
+
+  .update_btn {
+    .wrap {
+      margin-bottom: 1rem;
+      .search_bar {
+        flex-grow: 100;
+        input {
+          width: 100%;
+        }
+      }
+    }
+    // flex-wrap: wrap;
+    flex-flow: column;
   }
 }
