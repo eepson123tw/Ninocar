@@ -17,10 +17,7 @@
 [trello](https://trello.com/chouallen1/boards)
 <br>
 [格線系統](https://codepen.io/JaniceLIN/pen/RwobYvm)
-### 開發前務必先熟悉
 <br>
-
-## 2/16 靜態頁面 與 個人頁面 需完成
 ## breakpoints
 <br>$break-point-xs: 414px;  //mobile-xs
 <br>$break-point-sm: 576px;  //mobile
