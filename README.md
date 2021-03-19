@@ -27,9 +27,6 @@
 <br>$break-point-md: 768px;  //pad
 <br>$break-point-lg: 992px;  //pad-pro
 <br>$break-point-xl: 1200px; //notebook
-<<<<<<< HEAD:README.md
-=======
 
->>>>>>> allen:使用說明書.md
 
 
