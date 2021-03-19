@@ -1,5 +1,5 @@
 # Ninocar
-專題火速建造中...
+最終版本釋出
 
 ## Collaborator
 |git帳號|名字|
