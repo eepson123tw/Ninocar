@@ -35,6 +35,10 @@ function moveBackendFiles() {
   return src('app/backend/**/*.php').pipe(dest('dist/backend'));
 }
 
+function moveUploadFiles() {
+  return src('app/upload/**/*').pipe(dest('dist/upload'));
+}
+
 function commonStyle() {
   return src('app/assets/style/all.scss')
     .pipe(sourcemaps.init())
@@ -96,7 +100,7 @@ function killDist() {
 }
 
 exports.kill = killDist;
-exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includeHTML));
+exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveUploadFiles, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includeHTML));
 
 exports.browser = function browsersync() {
   browserSync.init({

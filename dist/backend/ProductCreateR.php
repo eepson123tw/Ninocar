@@ -11,7 +11,9 @@
         $filePath_Temp = $_FILES["img"]["tmp_name"];
 
         //欲放置的檔案路徑
-        $filePath = $Util->getFilePath().$_FILES["img"]["name"];
+        // $filePath = $Util->getFilePath().$_FILES["img"]["name"];
+
+        $filePath = "../upload/".$_FILES["img"]["name"];
 
         //將暫存檔搬移到正確位置
         if(copy($filePath_Temp, $filePath)){
