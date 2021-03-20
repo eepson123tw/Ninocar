@@ -16,23 +16,23 @@ const browserSync = require('browser-sync').create();
 const reload = browserSync.reload; //browser的方法 更新後~
 
 function moveImg() {
-  return src('app/assets/img/**/*').pipe(dest('./assets/img/'));
+  return src('app/assets/img/**/*').pipe(dest('dist/assets/img/'));
 }
 
 function concatJSAndMove() {
-  return src('app/assets/js/**/*.js').pipe(concat('all.js')).pipe(dest('./assets/js/'));
+  return src('app/assets/js/**/*.js').pipe(concat('all.js')).pipe(dest('dist/assets/js/'));
 }
 
 function moveJS() {
-  return src('app/assets/js/**/*.*').pipe(dest('./assets/js/'));
+  return src('app/assets/js/**/*.*').pipe(dest('dist/assets/js/'));
 }
 
 function movePHP() {
-  return src('app/assets/php/**/*.php').pipe(dest('./assets/php/'));
+  return src('app/assets/php/**/*.php').pipe(dest('dist/assets/php/'));
 }
 
 function moveBackendFiles() {
-  return src('app/backend/**/*.php').pipe(dest('./backend'));
+  return src('app/backend/**/*.php').pipe(dest('dist/backend'));
 }
 
 function commonStyle() {
@@ -44,7 +44,7 @@ function commonStyle() {
       }).on('error', sass.logError)
     )
     .pipe(sourcemaps.write())
-    .pipe(dest('./assets/css/'));
+    .pipe(dest('dist/assets/css/'));
 }
 
 function pageStyle() {
@@ -56,7 +56,7 @@ function pageStyle() {
       }).on('error', sass.logError)
     )
     .pipe(sourcemaps.write())
-    .pipe(dest('./assets/css/pages/'));
+    .pipe(dest('dist/assets/css/pages/'));
 }
 
 
@@ -69,7 +69,7 @@ function pluginStyle() {
       }).on('error', sass.logError)
     )
     .pipe(sourcemaps.write())
-    .pipe(dest('./assets/css/plugin/'));
+    .pipe(dest('dist/assets/css/plugin/'));
 }
 exports.p = pluginStyle
 
@@ -81,7 +81,7 @@ function includeHTML() {
         basepath: '@file',
       })
     )
-    .pipe(dest('./'));
+    .pipe(dest('dist/'));
 }
 
 function killDist() {

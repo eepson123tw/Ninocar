@@ -722,17 +722,8 @@
 
 
 
-        const params = new URLSearchParams()
-        params.append('ID', this.memberId)
-
-
-        axios({
-          method: 'post',
-          url: 'assets/php/getMemberInfoNoFunction.php',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          data: params,
+        axios.post('./assets/php/getMemberAll.php', {
+          "memberId": this.memberId,
         }).then((res) => {
           console.log(res.data)
           let newData;

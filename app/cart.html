@@ -203,18 +203,12 @@
       },
       mounted() {
 
-        const params2 = new URLSearchParams()
-        params2.append('ID', this.memberId)
 
-        axios({
-          method: 'post',
-          url: 'assets/php/getMemberInfoNoFunction.php',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          data: params2,
+        axios.post('./assets/php/getMemberAll.php', {
+          "memberId": this.memberId,
         }).then((res) => {
           // console.log('123', res.data)
+
           let newData;
           newData = res.data.map((item) => {
 
@@ -248,11 +242,11 @@
           };
           // //確認是否為點數商品
           if (this.carts_list[listNum].product_points !== "0") {
-            console.log(`${(listNum
-              *
-              1
-              +
-              1)}是點數商品`)
+            // console.log(`${(listNum
+            //   *
+            //   1
+            //   +
+            //   1)}是點數商品`)
           }
         };
 
