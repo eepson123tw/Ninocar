@@ -175,7 +175,7 @@ let productMixins = {
 
           let img = product['product_img'];
           if (product['product_year'] == '2021') {
-            img = `./upload/${img}`;
+            img = `../upload/${img}`;
           } else {
             img = img;
           }
