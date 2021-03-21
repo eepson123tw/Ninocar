@@ -54,19 +54,19 @@ let productMixins = {
           },
           {
             name: 'EM',
-            count: EMCount,
+            count: EMCount > 3 ? 3 : EMCount,
           },
           {
             name: 'PM',
-            count: PMCount,
+            count: PMCount > 3 ? 3 : PMCount,
           },
           {
             name: 'TA',
-            count: TACount,
+            count: TACount > 3 ? 3 : TACount,
           },
           {
             name: 'EN',
-            count: ENCount,
+            count: ENCount > 3 ? 3 : ENCount,
           },
         ];
       }

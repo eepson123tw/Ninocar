@@ -19,14 +19,14 @@ class UtilClass{
         
 
         // //將資料庫轉移至周杰的網域
-        // $db_host = "10.2.0.202";
-        // $db_user = "test";
-        // $db_pass = "12345678";
-        // $db_select = "team1";
-        $db_host = "localhost";
-        $db_user = "tibamefe_ted102";
-        $db_pass = "qweasdzxc123";
-        $db_select = "tibamefe_ted102_g1";
+        $db_host = "10.2.0.202";
+        $db_user = "test";
+        $db_pass = "12345678";
+        $db_select = "team1";
+        // $db_host = "localhost";
+        // $db_user = "tibamefe_ted102";
+        // $db_pass = "qweasdzxc123";
+        // $db_select = "tibamefe_ted102_g1";
 
         //建立資料庫連線物件
         $dsn = "mysql:host=" . $db_host . ";dbname=" . $db_select;
