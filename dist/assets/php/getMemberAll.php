@@ -2,7 +2,7 @@
  try
  {
     include("./Lib/Conn.php");
- $Util = new UtilClass();
+    $Util = new UtilClass();
 
     //建立SQL
     $data = json_decode(file_get_contents("php://input"));
@@ -21,7 +21,7 @@
     if($data != [] ){
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }else{
-        echo '此帳號未註冊';
+        echo '此帳號未註冊!!';
     }
     
  }
