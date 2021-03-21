@@ -75,7 +75,7 @@ $data = $statement->fetchAll();
 </script>
 
 <body>
-     @@include('../../app/pages/BackendPage/base.html')
+     @@include('./base.html')
     <div class="content">
         <!-- table -->
         <div class="col-lg-9">

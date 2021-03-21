@@ -17,7 +17,7 @@ $data = $statement->fetchAll();
 </head>
 
 <body>
-     <!-- <input type="checkbox" id="check"> -->
+<!-- <input type="checkbox" id="check"> -->
 <!--header area start-->
 <header>
   <!-- <label for="check">

@@ -20,8 +20,7 @@ $data = $statement->fetchAll();
 </head>
 
 <body>
-
-     @@include('../../app/pages/BackendPage/base.html')
+@@include('./base.html')
   <div class="content">
     <div class="block-responsive">
       <?php
