@@ -104,7 +104,7 @@
       }
     }
     &--right {
-      text-align: right;
+      // text-align: right;
       @include rwd-xl {
         text-align: left;
       }

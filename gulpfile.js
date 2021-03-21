@@ -88,6 +88,20 @@ function includeHTML() {
     .pipe(dest('dist/'));
 }
 
+function includePHP() {
+  return src('app/backend/*')
+    .pipe(
+      fileInclude({
+        prefix: '@@',
+        basepath: '@file',
+      })
+    )
+    .pipe(dest('dist/backend'));
+}
+
+
+
+
 function killDist() {
   return src('dist', {
     read: false,
@@ -100,7 +114,8 @@ function killDist() {
 }
 
 exports.kill = killDist;
-exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveUploadFiles, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includeHTML));
+
+exports.u = series(killDist, parallel(moveImg, moveJS, movePHP, moveUploadFiles, moveBackendFiles, commonStyle, pageStyle, pluginStyle, includePHP, includeHTML));
 
 exports.browser = function browsersync() {
   browserSync.init({

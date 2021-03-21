@@ -40,9 +40,8 @@ $data = $statement->fetchAll();
 </script>
 
 <body>
-    <?php
- include '../../app/pages/BackendPage/base.html';
-    ?>
+
+     @@include('../../app/pages/BackendPage/base.html')
     <div class="content">
         <!-- update-button -->
         <div class="update_btn">

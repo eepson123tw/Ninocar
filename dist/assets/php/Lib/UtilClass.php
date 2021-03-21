@@ -24,6 +24,11 @@ class UtilClass{
         $db_pass = "12345678";
         $db_select = "team1";
 
+        // $db_host = "ftp.tibamef2e.com";
+        // $db_user = "tibamefe_ted102";
+        // $db_pass = "qweasdzxc123";
+        // $db_select = "tibamefe_ted102_g1";
+
 
         //建立資料庫連線物件
         $dsn = "mysql:host=" . $db_host . ";dbname=" . $db_select;

@@ -60,9 +60,7 @@ $data = $statement->fetchAll();
 </script>
 
 <body>
-    <?php
- include '../../app/pages/BackendPage/base.html';
-    ?>
+     @@include('../../app/pages/BackendPage/base.html')
     <div class="content">
         <div class="block-responsive">
             <?php

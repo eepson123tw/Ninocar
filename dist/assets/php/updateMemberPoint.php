@@ -68,7 +68,6 @@ try {
 
     // // 抓取會員擁有點數
 
- 
     $sql = "SELECT member_points FROM member 
 
     where member_id=?";
