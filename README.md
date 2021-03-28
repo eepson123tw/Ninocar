@@ -1,6 +1,8 @@
 # Ninocar
 最終版本釋出
-
+```
+僅用來做為學習用途，不做任何商業用途，若有任何疑問，請聯繫eepson123@gmail.com或任一 Collaborator。
+```
 ## Collaborator
 |git帳號|名字|
 |---|---|
@@ -24,6 +26,9 @@
 <br>$break-point-md: 768px;  //pad
 <br>$break-point-lg: 992px;  //pad-pro
 <br>$break-point-xl: 1200px; //notebook
-
+# leading_page
+```
+火爆女郎的熱烈歡迎。
+```
 
 
