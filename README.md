@@ -30,5 +30,5 @@
 ```
 火爆女郎的熱烈歡迎。
 ```
-!images(https://github.com/eepson123tw/Ninocar/blob/dev/ninocar%20enter.gif)
+!(image)[https://github.com/eepson123tw/Ninocar/blob/dev/ninocar%20enter.gif]
 
