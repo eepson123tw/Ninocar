@@ -37,4 +37,9 @@
 技術：Gsap TweenMax 格線 Ajax 。
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/index.gif)
+# index(Homepage) by @bensoen
+```
+技術：Vuex compoent  array操作。 功能：搜尋 類別變更
+```
+![image](https://github.com/eepson123tw/Ninocar/blob/dev/product.gif)
 
