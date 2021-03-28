@@ -57,4 +57,10 @@
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/factory.gif)
 
+# Cart(Buy item) by @eepson123tw
+```
+技術：Vuex compoent  Ajax PHPAPI。 功能：購物車 表單驗證 正則
+```
+![image](https://github.com/eepson123tw/Ninocar/blob/dev/cart.gif)
+
 
