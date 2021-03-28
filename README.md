@@ -37,9 +37,15 @@
 技術：Gsap TweenMax 格線 Ajax 。
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/index.gif)
-# product(Itempage) by @bensoen
+# Product(Itempage) by @bensoen
 ```
 技術：Vuex compoent  array操作。 功能：搜尋 類別變更
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/product.gif)
+# Detail(ItemDetail) by @Meitaku0519
+```
+技術：Vuex compoent  PHPApi Ajax  array操作。 功能：單一商品 收合選單 導頁跳轉
+```
+![image](https://github.com/eepson123tw/Ninocar/blob/dev/itemDetail.gif)
+
 
