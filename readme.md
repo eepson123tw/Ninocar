@@ -35,7 +35,7 @@
 
 # Index(Homepage) by @Wei Lin
 ```
-技術：Gsap TweenMax 格線 Ajax 。
+技術：GSAP TweenMax 格線 Ajax 。
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/index.gif)
 
