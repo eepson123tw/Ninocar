@@ -41,13 +41,13 @@
 
 # Product(Itempage) by @bensoen
 ```
-技術：Vuex component  array操作。 功能：搜尋 類別變更
+技術：VueX component  array操作。 功能：搜尋 類別變更
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/product.gif)
 
 # Detail(ItemDetail) by @Meitaku0519
 ```
-技術：Vuex component  PHPApi Ajax  array操作。 功能：單一商品 收合選單 導頁跳轉
+技術：VueX component  PHPApi Ajax  array操作。 功能：單一商品 收合選單 導頁跳轉
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/itemDetail.gif)
 
@@ -59,7 +59,7 @@
 
 # Cart(Buy item) by @eepson123tw
 ```
-技術：Vuex component  Ajax PHPAPI。 功能：購物車 表單驗證 正則
+技術：VueX component  Ajax PHPAPI。 功能：購物車 表單驗證 正則
 ```
 ![image](https://github.com/eepson123tw/Ninocar/blob/dev/cart.gif)
 
